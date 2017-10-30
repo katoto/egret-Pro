@@ -1,0 +1,114 @@
+{
+	"groups": [
+		{
+			"keys": "bg_jpg,description_json,btn-recharge_png,btn-past_png,rule_png,chat_png,btn-1000_png,btn-500_png,btn-100_png,pop-game_png,text-over_png,text-begin_png,back_png,bg-time_png,bg-court_png,bg-court4_png,team-01_jpg,team-02_jpg,bg-avatar_png",
+			"name": "preload"
+		},
+		{
+			"keys": "btn_jpg",
+			"name": "test"
+		}
+	],
+	"resources": [
+		{
+			"name": "bg_jpg",
+			"type": "image",
+			"url": "assets/bg.jpg"
+		},
+		{
+			"name": "description_json",
+			"type": "json",
+			"url": "config/description.json"
+		},
+		{
+			"name": "btn-recharge_png",
+			"type": "image",
+			"url": "assets/btn-recharge.png"
+		},
+		{
+			"name": "btn-past_png",
+			"type": "image",
+			"url": "assets/btn-past.png"
+		},
+		{
+			"name": "rule_png",
+			"type": "image",
+			"url": "assets/rule.png"
+		},
+		{
+			"name": "chat_png",
+			"type": "image",
+			"url": "assets/chat.png"
+		},
+		{
+			"name": "btn-1000_png",
+			"type": "image",
+			"url": "assets/btn-1000.png"
+		},
+		{
+			"name": "btn-500_png",
+			"type": "image",
+			"url": "assets/btn-500.png"
+		},
+		{
+			"name": "btn-100_png",
+			"type": "image",
+			"url": "assets/btn-100.png"
+		},
+		{
+			"name": "pop-game_png",
+			"type": "image",
+			"url": "assets/pop-game.png"
+		},
+		{
+			"name": "text-over_png",
+			"type": "image",
+			"url": "assets/text-over.png"
+		},
+		{
+			"name": "text-begin_png",
+			"type": "image",
+			"url": "assets/text-begin.png"
+		},
+		{
+			"name": "back_png",
+			"type": "image",
+			"url": "assets/back.png"
+		},
+		{
+			"name": "bg-time_png",
+			"type": "image",
+			"url": "assets/bg-time.png"
+		},
+		{
+			"name": "bg-court_png",
+			"type": "image",
+			"url": "assets/bg-court.png"
+		},
+		{
+			"name": "bg-court4_png",
+			"type": "image",
+			"url": "assets/bg-court4.png"
+		},
+		{
+			"name": "team-01_jpg",
+			"type": "image",
+			"url": "assets/team-01.jpg"
+		},
+		{
+			"name": "team-02_jpg",
+			"type": "image",
+			"url": "assets/team-02.jpg"
+		},
+		{
+			"name": "btn_jpg",
+			"type": "image",
+			"url": "assets/btn.jpg"
+		},
+		{
+			"name": "bg-avatar_png",
+			"type": "image",
+			"url": "assets/bg-avatar.png"
+		}
+	]
+}
