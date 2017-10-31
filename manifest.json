@@ -6,6 +6,7 @@
 		"libs/modules/tween/tween.js",
 		"libs/modules/res/res.js",
 		"libs/modules/eui/eui.js",
+		"libs/modules/socket/socket.js",
 		"promise/bin/promise.js"
 	],
 	"game": [
@@ -14,7 +15,7 @@
 		"bin-debug/Header.js",
 		"bin-debug/HelloTime.js",
 		"bin-debug/LoadingUI.js",
-		"bin-debug/Main.js",
+		"bin-debug/Main2.js",
 		"bin-debug/Test.js",
 		"bin-debug/Top.js",
 		"bin-debug/userImage.js"

@@ -48,4 +48,3 @@ var Header = (function (_super) {
     return Header;
 }(egret.DisplayObjectContainer));
 __reflect(Header.prototype, "Header");
-//# sourceMappingURL=Header.js.map

@@ -113,4 +113,3 @@ var HelloTime = (function (_super) {
     return HelloTime;
 }(egret.DisplayObjectContainer));
 __reflect(HelloTime.prototype, "HelloTime");
-//# sourceMappingURL=HelloTime.js.map
