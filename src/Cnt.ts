@@ -14,7 +14,7 @@ class Cnt extends egret.DisplayObjectContainer{
         wrap.y = 0;
         this.addChild(wrap);
 
-         // 背景 
+        // 背景 
         let bg:egret.Bitmap = new egret.Bitmap(RES.getRes('bg_jpg'));
         bg.anchorOffsetX = anWidth;
         bg.x = anWidth;
@@ -47,6 +47,13 @@ class Cnt extends egret.DisplayObjectContainer{
         timer.x = anWidth;
         timer.y = 0;
         bgCourtWrap.addChild(timer);
+
+        //文字说明区域
+        let textT:TextTips = new TextTips();
+        textT.anchorOffsetX = textT.width/2;
+        textT.x = anWidth;
+        textT.y = 66;
+        bgCourtWrap.addChild(textT);
 
         //生成四个足球场，1/4比赛  485为小球场宽度，应该可以在构造函数里设置，需要优化
         for(let i=0;i<4;i++){

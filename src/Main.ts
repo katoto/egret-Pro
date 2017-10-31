@@ -169,7 +169,6 @@ class Main extends egret.DisplayObjectContainer {
         bottom.alpha = 0.6;
         this.addChild(bottom);
 
-
         //内容区实例
         let cnt:Cnt = new Cnt(Width,Height,anWidth,anHeight);
         cnt.x = 0;
@@ -229,6 +228,7 @@ class Main extends egret.DisplayObjectContainer {
         result.texture = texture;
         return result;
     }
+    
 }
 
 

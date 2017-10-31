@@ -47,22 +47,10 @@ var Foot = (function (_super) {
             console.log('聊天弹窗');
         }, this);
         //三个投注按钮
-        var btn100 = new egret.Bitmap(RES.getRes('btn-100_png'));
-        btn100.x = 120;
-        btn100.y = 11;
-        bottom.addChild(btn100);
-        var btn500 = new egret.Bitmap(RES.getRes('btn-500_png'));
-        btn500.anchorOffsetX = btn500.width / 2;
-        btn500.x = Width / 2;
-        btn500.y = 7;
-        bottom.addChild(btn500);
-        var btn1000 = new egret.Bitmap(RES.getRes('btn-1000_png'));
-        btn1000.anchorOffsetX = btn1000.width;
-        btn1000.x = Width - 118;
-        btn1000.y = 11;
-        bottom.addChild(btn1000);
-        btn1000.touchEnabled = true;
-        btn1000.addEventListener(egret.TouchEvent.TOUCH_TAP, this.hignColor, this);
+        var btn = new FootBtn(10000);
+        btn.x = bottom.width / 2;
+        btn.y = bottom.height / 2;
+        bottom.addChild(btn);
     };
     Foot.prototype.hignColor = function () {
         // var color:number = 0xffd02f;        /// 光晕的颜色，十六进制，不包含透明度
@@ -76,7 +64,6 @@ var Foot = (function (_super) {
         // var glowFilter:egret.GlowFilter = new egret.GlowFilter( color, alpha, blurX, blurY,strength, quality, inner, knockout );
         // obj.filters = [ glowFilter ];
         // console.log(222)
-        var obj;
     };
     return Foot;
 }(egret.DisplayObjectContainer));
