@@ -3,7 +3,8 @@ class Cnt extends egret.DisplayObjectContainer{
         super();
         this.drawCnt(Width,Height,anWidth,anHeight);
     }
-    
+    // 缩放系数
+    private scale:number = 0.85;
     private drawCnt(Width,Height,anWidth,anHeight){
         // 内容区
         let wrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
@@ -27,6 +28,9 @@ class Cnt extends egret.DisplayObjectContainer{
         bgCourtWrap.anchorOffsetY = bgCourtWrap.height/2;
         bgCourtWrap.x = anWidth;
         bgCourtWrap.y = anHeight;
+        //问题，测试屏幕大小进行缩放
+        bgCourtWrap.scaleX=this.scale;
+        bgCourtWrap.scaleY=this.scale;
         wrap.addChild(bgCourtWrap);
         
 

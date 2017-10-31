@@ -75,7 +75,8 @@ var Foot = (function (_super) {
         // var knockout:boolean = false;            /// 指定对象是否具有挖空效果，暂未实现
         // var glowFilter:egret.GlowFilter = new egret.GlowFilter( color, alpha, blurX, blurY,strength, quality, inner, knockout );
         // obj.filters = [ glowFilter ];
-        console.log(222);
+        // console.log(222)
+        var obj;
     };
     return Foot;
 }(egret.DisplayObjectContainer));

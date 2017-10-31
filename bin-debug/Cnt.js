@@ -15,6 +15,7 @@ var Cnt = (function (_super) {
     __extends(Cnt, _super);
     function Cnt(Width, Height, anWidth, anHeight) {
         var _this = _super.call(this) || this;
+        _this.scale = 0.85;
         _this.drawCnt(Width, Height, anWidth, anHeight);
         return _this;
     }
@@ -40,6 +41,8 @@ var Cnt = (function (_super) {
         bgCourtWrap.anchorOffsetY = bgCourtWrap.height / 2;
         bgCourtWrap.x = anWidth;
         bgCourtWrap.y = anHeight;
+        bgCourtWrap.scaleX = this.scale;
+        bgCourtWrap.scaleY = this.scale;
         wrap.addChild(bgCourtWrap);
         // 背景 桌子
         var bgCourt = new egret.Bitmap(RES.getRes('bg-court_png'));
