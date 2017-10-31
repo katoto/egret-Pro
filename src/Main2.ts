@@ -262,19 +262,6 @@ class Main extends egret.DisplayObjectContainer {
         }
 
 
-
-
-
-
-       
-
-
-        
-
-
-
-
-
         // //竞猜弹窗：开始或者结束,层级最高 ,这里思考是否可以优化，使用构造函数
         // let popGame:egret.Bitmap = new egret.Bitmap(RES.getRes('pop-game_png'));
         // popGame.anchorOffsetX = popGame.width/2;
@@ -305,7 +292,6 @@ class Main extends egret.DisplayObjectContainer {
         // this.setChildIndex(wrap,1)
         this.setChildIndex(top,3)
         this.setChildIndex(bottom,2)
-
 
 
 
