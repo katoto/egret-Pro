@@ -34,6 +34,6 @@ class FootBtn extends egret.DisplayObjectContainer{
     private btnDown(){
         this.scaleX = 1;
         this.scaleY = 1;
-        this.drawBtn.
+        // this.drawBtn.
     }
 }

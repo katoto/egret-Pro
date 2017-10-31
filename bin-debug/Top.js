@@ -21,22 +21,20 @@ var Top = (function (_super) {
     }
     Top.prototype.drawTop = function (Width) {
         //    左上角标题
-        var textTitle = '欧洲杯1/4决赛';
-        var title = new egret.TextField();
-        title.text = textTitle;
-        title.textColor = 0xffffff;
-        title.size = 30;
-        title.x = 20;
-        title.y = 14;
-        this.addChild(title);
-        var textDate = '当日第55期';
-        var date = new egret.TextField();
-        date.text = textDate;
-        date.textColor = 0xffffff;
-        date.size = 18;
-        date.x = 20;
-        date.y = 54;
-        this.addChild(date);
+        this.textTitle = new egret.TextField();
+        this.textTitle.text = '欧洲杯1/4决赛';
+        this.textTitle.textColor = 0xffffff;
+        this.textTitle.size = 30;
+        this.textTitle.x = 20;
+        this.textTitle.y = 14;
+        this.addChild(this.textTitle);
+        this.textDate = new egret.TextField();
+        this.textDate.text = '当日第55期';
+        this.textDate.textColor = 0xffffff;
+        this.textDate.size = 18;
+        this.textDate.x = 20;
+        this.textDate.y = 54;
+        this.addChild(this.textDate);
         // 右上角充值与往期
         var btnPast = new egret.Bitmap(RES.getRes('btn-past_png'));
         btnPast.x = Width - 163;
@@ -54,6 +52,14 @@ var Top = (function (_super) {
         btnRecharge.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             console.log('充值弹窗');
         }, this);
+    };
+    /* 更新头部杯赛 */
+    Top.prototype.setTextTitle = function (title) {
+        this.textTitle.text = title;
+    };
+    /* 更新头部期数 */
+    Top.prototype.setTextDate = function (title) {
+        this.textDate.text = title;
     };
     return Top;
 }(egret.DisplayObjectContainer));

@@ -168,8 +168,7 @@ class Main extends egret.DisplayObjectContainer {
         bottom.y = Height;
         bottom.alpha = 0.6;
         this.addChild(bottom);
-
-        //内容区实例
+        // 内容区实例
         let cnt:Cnt = new Cnt(Width,Height,anWidth,anHeight);
         cnt.x = 0;
         cnt.y = 0;
@@ -207,10 +206,9 @@ class Main extends egret.DisplayObjectContainer {
 
         // 层级控制
         // this.setChildIndex(header,0)
-        this.setChildIndex(cnt,1)
+        // this.setChildIndex(cnt,1)
         this.setChildIndex(top,2)
         this.setChildIndex(bottom,3)
-
 
 
 
