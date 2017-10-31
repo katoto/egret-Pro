@@ -68,4 +68,4 @@ var userImage = (function (_super) {
     return userImage;
 }(eui.UILayer));
 __reflect(userImage.prototype, "userImage");
-//# sourceMappingURL=UserImage.js.map
+//# sourceMappingURL=userImage.js.map

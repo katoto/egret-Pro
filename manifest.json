@@ -12,7 +12,11 @@
 	"game": [
 		"bin-debug/Test.js",
 		"bin-debug/Cnt.js",
+<<<<<<< HEAD
 		"bin-debug/FootballField.js",
+=======
+		"bin-debug/footballField.js",
+>>>>>>> c375c866d6f60545abcd204dcba3ea385b5b596b
 		"bin-debug/FootBtn.js",
 		"bin-debug/Header.js",
 		"bin-debug/HelloTime.js",
@@ -22,7 +26,7 @@
 		"bin-debug/TextTips.js",
 		"bin-debug/Timer.js",
 		"bin-debug/Top.js",
-		"bin-debug/UserImage.js",
+		"bin-debug/userImage.js",
 		"bin-debug/adapter/AssetAdapter.js",
 		"bin-debug/adapter/ThemeAdapter.js",
 		"bin-debug/utils/Http.js"
