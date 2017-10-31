@@ -10,6 +10,7 @@ class FootBtn extends egret.DisplayObjectContainer{
         this.touchEnabled = true;
         this.addEventListener(egret.TouchEvent.TOUCH_TAP,this.btnDown,this)
     }
+    private btn:egret.Bitmap;
     private drawBtn(n){
         let wrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
         wrap.width = 157;
@@ -17,8 +18,8 @@ class FootBtn extends egret.DisplayObjectContainer{
         wrap.x = 0;
         wrap.y = 0;
         this.addChild(wrap);
-        let btn:egret.Bitmap = new egret.Bitmap(RES.getRes('btn_png'));
-        wrap.addChild(btn);
+        this.btn = new egret.Bitmap(RES.getRes('btn_png'));
+        wrap.addChild(this.btn);
         // 投注金额
         let betMoney:egret.TextField = new egret.TextField();
         betMoney.text = n;
@@ -40,7 +41,7 @@ class FootBtn extends egret.DisplayObjectContainer{
         }else{
             this.scaleX = 1;
             this.scaleY = 1;
-            this.drawBtn.btn.texture = RES.getRes('btnOn_png');
+            this.btn.texture = RES.getRes('btnOn_png');
         }
         
         // 点击更换背景图片,不会

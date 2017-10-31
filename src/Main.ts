@@ -35,6 +35,11 @@ class Main extends egret.DisplayObjectContainer {
      */
     private loadingView: LoadingUI;
 
+    /**
+     * websocket
+     */
+    private webSocket:egret.WebSocket;
+
     public constructor() {
         super();
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
@@ -221,6 +226,15 @@ class Main extends egret.DisplayObjectContainer {
         // 1.图片合并，使用纹理集
 
         
+        // websocket
+        this.webSocket = new egret.WebSocket();
+        this.webSocket.addEventListener( egret.ProgressEvent.SOCKET_DATA , this.onReceiveMess ,this );
+        this.webSocket.addEventListener( egret.Event.CONNECT ,this.onSocketOpen ,this );
+        this.webSocket.addEventListener( egret.IOErrorEvent.IO_ERROR ,this.onIOError ,this );
+        this.webSocket.addEventListener( egret.Event.CLOSE ,this.onCloseSock ,this );
+
+        this.webSocket.connectByUrl("ws://192.168.81.240:7777/ws");
+
 
     }
 
@@ -231,7 +245,31 @@ class Main extends egret.DisplayObjectContainer {
         result.texture = texture;
         return result;
     }
+
+    /**
+     *  onReceiveMess  websock 接收消息
+     */
+    private onReceiveMess():void{
+
+    }
+
     
+    /**
+     *  onReceiveMess  websock 接收消息
+     */
+    private onReceiveMess():void{
+        
+    }
+
+    
+    /**
+     *  onReceiveMess  websock 接收消息
+     */
+    private onReceiveMess():void{
+        
+    }
+
+
 }
 
 
