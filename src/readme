@@ -30,4 +30,14 @@ utils 是工具类函数 全局的
 ## 转场（ 带上期号和 ） 4,2,1
 
 
+#
+ Header 头部 返回区域，隐藏不需要
+ Top   顶部文字区域
+ Foot  底部按钮区域
+ Cnt   内容区 
+	 Timer 倒计时区域
+	 FootballField  足球场
+	 UserImage 用户头像
+
+
 

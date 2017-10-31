@@ -58,3 +58,4 @@ var Top = (function (_super) {
     return Top;
 }(egret.DisplayObjectContainer));
 __reflect(Top.prototype, "Top");
+//# sourceMappingURL=Top.js.map
