@@ -219,12 +219,19 @@ var Main = (function (_super) {
             _field.y = 188 + 200 * i;
             wrap.addChild(_field);
         }
-        // 其他用户 头像实例 ,（名字，头像，金币）,位置为数组中的随机一个{x=15,y=155/250/345/440}
-        for (var i = 0; i < 4; i++) {
+        var _loop_1 = function (i) {
             var userImg = new userImage('飞翔小七', 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4182536181,630612655&fm=173&s=EC7819C7026A2D1399FD589D0300C084&w=218&h=146&img.JPEG', '23万');
             userImg.x = 15;
             userImg.y = 155 + 222 * i;
             wrap.addChild(userImg);
+            setTimeout(function () {
+                console.log('start');
+                userImg.setMyGold('100');
+            }, 3000);
+        };
+        // 其他用户 头像实例 ,（名字，头像，金币）,位置为数组中的随机一个{x=15,y=155/250/345/440}
+        for (var i = 0; i < 4; i++) {
+            _loop_1(i);
         }
         // //竞猜弹窗：开始或者结束,层级最高 ,这里思考是否可以优化，使用构造函数
         // let popGame:egret.Bitmap = new egret.Bitmap(RES.getRes('pop-game_png'));

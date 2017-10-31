@@ -253,7 +253,14 @@ class Main extends egret.DisplayObjectContainer {
             userImg.x = 15;
             userImg.y = 155+222*i;
             wrap.addChild(userImg)
+
+        setTimeout(()=>{
+            console.log('start')
+            userImg.setMyGold('100')
+        },3000)
+
         }
+
 
 
 
