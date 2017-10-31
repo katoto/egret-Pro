@@ -58,6 +58,12 @@ var Cnt = (function (_super) {
         timer.x = anWidth;
         timer.y = 0;
         bgCourtWrap.addChild(timer);
+        //文字说明区域
+        var textT = new TextTips();
+        textT.anchorOffsetX = textT.width / 2;
+        textT.x = anWidth;
+        textT.y = 66;
+        bgCourtWrap.addChild(textT);
         //生成四个足球场，1/4比赛  485为小球场宽度，应该可以在构造函数里设置，需要优化
         for (var i = 0; i < 4; i++) {
             var _field4 = new Field4(485, anWidth, 'team-01_jpg', '克罗地亚', 3.78, 'team-02_jpg', '德国', 1.26);
