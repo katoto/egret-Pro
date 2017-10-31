@@ -39,7 +39,7 @@ class Main extends egret.DisplayObjectContainer {
         super();
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
     }
-    private timer:egret.Timer;
+   
     private onAddToStage(event: egret.Event) {
         egret.lifecycle.addLifecycleListener((context) => {
             // custom lifecycle plugin
@@ -128,12 +128,8 @@ class Main extends egret.DisplayObjectContainer {
 
 
     private textfield:egret.TextField;
-    private createBitmapByName(name: string): egret.Bitmap {
-        let result = new egret.Bitmap();
-        let texture: egret.Texture = RES.getRes(name);
-        result.texture = texture;
-        return result;
-    }
+    
+    
 
 
     private position:Array<number> =  [];
@@ -146,7 +142,8 @@ class Main extends egret.DisplayObjectContainer {
         const Width = this.stage.stageWidth;
         const Height = this.stage.stageHeight;
         const anWidth = Width/2;
-        const wrapHeight = (Height-80)/2;
+        // const wrapHeight = (Height-80)/2;
+        const anHeight = Height/2;
 
         // let sky = this.createBitmapByName("btn-500_png");
         // this.addChild(sky)
@@ -230,14 +227,14 @@ class Main extends egret.DisplayObjectContainer {
         wrapTimer.addChild(textSS);
 
        
-        this.timer = new egret.Timer(3000,5);
-        this.timer.addEventListener(egret.TimerEvent.TIMER,()=>{
-           textSS.text = "开始了";
-        },this);
-        this.timer.addEventListener(egret.TimerEvent.TIMER_COMPLETE,()=>{
-              console.log(2)
-        },this);
-        this.timer.start();
+        // this.timer = new egret.Timer(3000,5);
+        // this.timer.addEventListener(egret.TimerEvent.TIMER,()=>{
+        //    textSS.text = "开始了";
+        // },this);
+        // this.timer.addEventListener(egret.TimerEvent.TIMER_COMPLETE,()=>{
+        //       console.log(2)
+        // },this);
+        // this.timer.start();
 
 
 
@@ -260,6 +257,16 @@ class Main extends egret.DisplayObjectContainer {
         },3000)
 
         }
+
+        //内容区实例
+        // let cnt:Cnt = new Cnt(Width,Height,anWidth,anHeight);
+        // cnt.x = 0;
+        // cnt.y = 0;
+        // this.addChild(cnt);
+
+        
+       
+
 
 
         // //竞猜弹窗：开始或者结束,层级最高 ,这里思考是否可以优化，使用构造函数
@@ -289,15 +296,25 @@ class Main extends egret.DisplayObjectContainer {
 
         // 层级控制
         // this.setChildIndex(header,0)
-        // this.setChildIndex(wrap,1)
-        this.setChildIndex(top,3)
-        this.setChildIndex(bottom,2)
+        // this.setChildIndex(cnt,1)
+        this.setChildIndex(top,2)
+        this.setChildIndex(bottom,3)
 
 
 
         // 优化：
         // 1.图片合并，使用纹理集
 
+        
+
+    }
+
+    // 函数：生成图片
+    private createBitmapByName(name: string): egret.Bitmap {
+        let result = new egret.Bitmap();
+        let texture: egret.Texture = RES.getRes(name);
+        result.texture = texture;
+        return result;
     }
 }
 
