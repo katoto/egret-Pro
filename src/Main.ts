@@ -257,7 +257,7 @@ class Main extends egret.DisplayObjectContainer {
     /**
      *  onReceiveMess  websock 接收消息
      */
-    private onReceiveMess():void{
+    private onSocketOpen():void{
         
     }
 
@@ -265,7 +265,13 @@ class Main extends egret.DisplayObjectContainer {
     /**
      *  onReceiveMess  websock 接收消息
      */
-    private onReceiveMess():void{
+    private onIOError():void{
+        
+    }
+    /**
+     *  onReceiveMess  websock 接收消息
+     */
+    private onCloseSock():void{
         
     }
 
