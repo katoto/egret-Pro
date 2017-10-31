@@ -9,6 +9,7 @@
 		"promise/bin/promise.js"
 	],
 	"game": [
+		"bin-debug/Cnt.js",
 		"bin-debug/Foot.js",
 		"bin-debug/footballField.js",
 		"bin-debug/Header.js",
