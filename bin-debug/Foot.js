@@ -80,3 +80,4 @@ var Foot = (function (_super) {
     return Foot;
 }(egret.DisplayObjectContainer));
 __reflect(Foot.prototype, "Foot");
+//# sourceMappingURL=Foot.js.map

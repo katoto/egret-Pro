@@ -4,24 +4,29 @@ class Top extends egret.DisplayObjectContainer{
         super();
         this.drawTop(Width);
     }
+
+
+    private textTitle:egret.TextField;
+    private textDate:egret.TextField;
+
     private drawTop(Width){
+
         //    左上角标题
-        let textTitle:string = '欧洲杯1/4决赛';
-        let title:egret.TextField = new egret.TextField();
-        title.text = textTitle;
-        title.textColor = 0xffffff;
-        title.size = 30;
-        title.x = 20;
-        title.y = 14;
-        this.addChild(title);
-        let textDate:string = '当日第55期';
-        let date:egret.TextField = new egret.TextField();
-        date.text = textDate;
-        date.textColor = 0xffffff;
-        date.size = 18;
-        date.x = 20;
-        date.y = 54;
-        this.addChild(date);
+        this.textTitle = new egret.TextField();
+        this.textTitle.text = '欧洲杯1/4决赛';
+        this.textTitle.textColor = 0xffffff;
+        this.textTitle.size = 30;
+        this.textTitle.x = 20;
+        this.textTitle.y = 14;
+        this.addChild(this.textTitle);
+
+        this.textDate= new egret.TextField();
+        this.textDate.text = '当日第55期';
+        this.textDate.textColor = 0xffffff;
+        this.textDate.size = 18;
+        this.textDate.x = 20;
+        this.textDate.y = 54;
+        this.addChild(this.textDate);
         // 右上角充值与往期
         let btnPast:egret.Bitmap = new egret.Bitmap(RES.getRes('btn-past_png'));
         btnPast.x = Width - 163;
@@ -40,4 +45,14 @@ class Top extends egret.DisplayObjectContainer{
             console.log('充值弹窗')
         },this)
     }
+
+    /* 更新头部杯赛 */
+    public setTextTitle( title:string ){
+        this.textTitle.text = title;
+    }
+    /* 更新头部期数 */
+    public setTextDate( title:string ){
+        this.textDate.text = title;
+    }
+    
 }
