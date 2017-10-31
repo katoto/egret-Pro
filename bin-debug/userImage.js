@@ -20,11 +20,6 @@ var userImage = (function (_super) {
         _this.addToStage(name, src, gold);
         return _this;
     }
-    // private _source:Array<string> =  [ 
-    //     "https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4182536181,630612655&fm=173&s=EC7819C7026A2D1399FD589D0300C084&w=218&h=146&img.JPEG",
-    //     "https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=2602004849,1504397654&fm=173&s=B180DB1548E33B0925B8B884030070E1&w=218&h=146&img.JPEG",
-    //     "https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3999684790,170950214&fm=173&s=B79DAC6C62F3002704A160180300C09A&w=218&h=146&img.JPEG"
-    // ];
     userImage.prototype.addToStage = function (name, src, gold) {
         var bg = new egret.DisplayObjectContainer();
         bg.width = 88;
@@ -54,19 +49,22 @@ var userImage = (function (_super) {
         img.y = 28;
         this.addChild(img);
         // 金币
-        var myGold = new egret.TextField();
-        myGold.text = gold;
-        myGold.size = 20;
-        myGold.textColor = 0xf2aa20;
-        myGold.bold = true;
-        myGold.width = 88;
-        myGold.height = 32;
-        myGold.y = 90;
-        myGold.textAlign = egret.HorizontalAlign.CENTER;
-        myGold.verticalAlign = egret.VerticalAlign.MIDDLE;
-        this.addChild(myGold);
+        this.myGold = new egret.TextField();
+        this.myGold.text = gold;
+        this.myGold.size = 20;
+        this.myGold.textColor = 0xf2aa20;
+        this.myGold.bold = true;
+        this.myGold.width = 88;
+        this.myGold.height = 32;
+        this.myGold.y = 90;
+        this.myGold.textAlign = egret.HorizontalAlign.CENTER;
+        this.myGold.verticalAlign = egret.VerticalAlign.MIDDLE;
+        this.addChild(this.myGold);
+    };
+    /* 更新金币数 */
+    userImage.prototype.setMyGold = function (currGold) {
+        this.myGold.text = currGold;
     };
     return userImage;
 }(eui.UILayer));
 __reflect(userImage.prototype, "userImage");
-//# sourceMappingURL=userImage.js.map

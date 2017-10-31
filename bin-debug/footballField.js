@@ -65,4 +65,3 @@ var Field4 = (function (_super) {
     return Field4;
 }(egret.DisplayObjectContainer));
 __reflect(Field4.prototype, "Field4");
-//# sourceMappingURL=footballField.js.map

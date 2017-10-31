@@ -6,18 +6,27 @@
 		"libs/modules/tween/tween.js",
 		"libs/modules/res/res.js",
 		"libs/modules/eui/eui.js",
+		"libs/modules/socket/socket.js",
 		"promise/bin/promise.js"
 	],
 	"game": [
+<<<<<<< HEAD
 		"bin-debug/Cnt.js",
 		"bin-debug/Foot.js",
+=======
+>>>>>>> b211791ec8e01446f7d0a3f62ef736d7c485f82b
 		"bin-debug/footballField.js",
+		"bin-debug/Test.js",
 		"bin-debug/Header.js",
 		"bin-debug/HelloTime.js",
 		"bin-debug/LoadingUI.js",
-		"bin-debug/Main.js",
+		"bin-debug/Main2.js",
 		"bin-debug/Test.js",
+		"bin-debug/Foot.js",
 		"bin-debug/Top.js",
-		"bin-debug/userImage.js"
+		"bin-debug/userImage.js",
+		"bin-debug/adapter/AssetAdapter.js",
+		"bin-debug/adapter/ThemeAdapter.js",
+		"bin-debug/utils/Http.js"
 	]
 }
