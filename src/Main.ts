@@ -40,6 +40,9 @@ class Main extends egret.DisplayObjectContainer {
      */
     private webSocket:egret.WebSocket;
 
+    //  头部lei
+    private top
+
     public constructor() {
         super();
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
@@ -161,10 +164,10 @@ class Main extends egret.DisplayObjectContainer {
         // this.addChild(header);
 
         //头部实例2
-        let top:Top = new Top(Width);
-        top.x = 0;
-        top.y = 0;
-        this.addChild(top);
+        this.top = new Top(Width);
+        this.top.x = 0;
+        this.top.y = 0;
+        this.addChild(this.top);
 
         // 底部实例
         let bottom:Foot = new Foot(Width,Height);
@@ -217,7 +220,7 @@ class Main extends egret.DisplayObjectContainer {
         // 层级控制
         // this.setChildIndex(header,0)
         // this.setChildIndex(cnt,1)
-        this.setChildIndex(top,2)
+        this.setChildIndex(this.top,2)
         this.setChildIndex(bottom,3)
 
 
@@ -250,6 +253,33 @@ class Main extends egret.DisplayObjectContainer {
      *  onReceiveMess  websock 接收消息
      */
     private onReceiveMess():void{
+        var msg = this.webSocket.readUTF();
+        if(~msg.indexOf('You said')|| !~msg.indexOf('{')){
+            console.log(msg)
+        }else{
+            //  后台数据  分发
+            var msgObj = JSON.parse( msg );
+            var i = 1;
+            setInterval(()=>{
+                i = i+1;
+                if( msgObj && msgObj.body && msgObj.body.room_info && msgObj.body.room_info.desc ){
+                    msgObj.body.room_info.desc = '第'+(i+1) +'期目';
+                }
+                msgObj.body.room_info.title = '欧洲杯赛'+(i+1)+'期目';
+
+            switch ( msgObj.messageid ) {
+                case '2000':
+                    // 进程的数据
+                    this.top.setTextDate(  msgObj.body.room_info.desc )
+                    this.top.setTextTitle(  msgObj.body.room_info.title )
+                    ;break;
+            }
+
+
+            },3000)
+            console.log( msgObj )
+
+        }
 
     }
 
@@ -258,7 +288,17 @@ class Main extends egret.DisplayObjectContainer {
      *  onReceiveMess  websock 接收消息
      */
     private onSocketOpen():void{
-        
+        var start = {
+            "msg_type":"user_join",
+            "msg_id":"123",
+            "data":{
+                "uid":"1002922"
+            }               
+        }
+        this.webSocket.writeUTF(JSON.stringify(start))
+        this.webSocket.writeUTF('x')
+
+        // this.webSocket.flush();
     }
 
     
@@ -266,7 +306,7 @@ class Main extends egret.DisplayObjectContainer {
      *  onReceiveMess  websock 接收消息
      */
     private onIOError():void{
-        
+        console.error('linsten error')
     }
     /**
      *  onReceiveMess  websock 接收消息
