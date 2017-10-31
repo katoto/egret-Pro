@@ -47,10 +47,15 @@ var Foot = (function (_super) {
             console.log('聊天弹窗');
         }, this);
         //三个投注按钮
-        var btn = new FootBtn(10000);
-        btn.x = bottom.width / 2;
-        btn.y = bottom.height / 2;
-        bottom.addChild(btn);
+        var btn100 = new FootBtn(100);
+        var btn500 = new FootBtn(500);
+        var btn1000 = new FootBtn(1000);
+        btn100.x = 188;
+        btn500.x = Width / 2;
+        btn1000.x = 560;
+        bottom.addChild(btn100);
+        bottom.addChild(btn500);
+        bottom.addChild(btn1000);
     };
     Foot.prototype.hignColor = function () {
         // var color:number = 0xffd02f;        /// 光晕的颜色，十六进制，不包含透明度

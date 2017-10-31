@@ -6,6 +6,7 @@ class FootBtn extends egret.DisplayObjectContainer{
         this.anchorOffsetY = this.height/2;
         this.scaleX = 0.9;
         this.scaleY = 0.9;
+        this.y= 45;
         this.touchEnabled = true;
         this.addEventListener(egret.TouchEvent.TOUCH_TAP,this.btnDown,this)
     }
@@ -32,8 +33,16 @@ class FootBtn extends egret.DisplayObjectContainer{
         wrap.addChild(betMoney);
     }
     private btnDown(){
-        this.scaleX = 1;
-        this.scaleY = 1;
-        // this.drawBtn.
+        if(this.scaleX==1){
+            this.scaleX = 0.9;
+            this.scaleY = 0.9;
+           
+        }else{
+            this.scaleX = 1;
+            this.scaleY = 1;
+            this.drawBtn.btn.texture = RES.getRes('btnOn_png');
+        }
+        
+        // 点击更换背景图片,不会
     }
 }

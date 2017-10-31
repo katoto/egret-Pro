@@ -84,7 +84,7 @@ var Cnt = (function (_super) {
             userImg.y = 80 + 220 * i;
             bgCourtWrap.addChild(userImg);
         }
-        // //自己的头像
+        //自己的头像
         var myImg = new userImage('飞翔小七', 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4182536181,630612655&fm=173&s=EC7819C7026A2D1399FD589D0300C084&w=218&h=146&img.JPEG', '23万');
         myImg.anchorOffsetX = 44;
         myImg.anchorOffsetY = 124;

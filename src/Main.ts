@@ -174,8 +174,13 @@ class Main extends egret.DisplayObjectContainer {
         cnt.y = 0;
         this.addChild(cnt);
 
-        
-       
+        //test
+        let btn:egret.Bitmap = new egret.Bitmap(RES.getRes('btn_png'));
+        this.addChild(btn);
+        btn.touchEnabled=true;
+        btn.addEventListener(egret.TouchEvent.TOUCH_TAP,()=>{
+            btn.texture = RES.getRes('btnOn_png');
+        },this)
 
 
 

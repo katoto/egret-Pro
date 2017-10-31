@@ -25,8 +25,10 @@ var Field4 = (function (_super) {
         var court4 = new egret.Bitmap(RES.getRes('bg-court4_png'));
         this.addChild(court4);
         var leftTeam = new egret.Bitmap(RES.getRes(leftImg));
+        leftTeam.width = 62;
+        leftTeam.height = 62;
         leftTeam.x = 25;
-        leftTeam.y = 54;
+        leftTeam.y = 60;
         this.addChild(leftTeam);
         var leftTitle = new egret.TextField();
         leftTitle.text = leftT;
@@ -42,8 +44,10 @@ var Field4 = (function (_super) {
         this.addChild(leftOdds);
         // 右边位置有误
         var rightTeam = new egret.Bitmap(RES.getRes(rightImg));
+        rightTeam.width = 62;
+        rightTeam.height = 62;
         rightTeam.x = 400;
-        rightTeam.y = 54;
+        rightTeam.y = 58;
         this.addChild(rightTeam);
         var rightTitle = new egret.TextField();
         rightTitle.text = rightT;
@@ -51,7 +55,7 @@ var Field4 = (function (_super) {
         rightTitle.textAlign = egret.HorizontalAlign.RIGHT;
         rightTitle.size = 22;
         rightTitle.x = 250;
-        rightTitle.y = 60;
+        rightTitle.y = 58;
         this.addChild(rightTitle);
         var rightOdds = new egret.TextField();
         rightOdds.text = rightO;

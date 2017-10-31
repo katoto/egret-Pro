@@ -11,8 +11,10 @@ class Field4 extends egret.DisplayObjectContainer{
         this.addChild(court4);
 
         let leftTeam:egret.Bitmap = new egret.Bitmap(RES.getRes(leftImg));
+        leftTeam.width = 62;
+        leftTeam.height = 62;
         leftTeam.x = 25;
-        leftTeam.y = 54;
+        leftTeam.y = 60;
         this.addChild(leftTeam);
 
         let leftTitle:egret.TextField = new egret.TextField();
@@ -32,8 +34,10 @@ class Field4 extends egret.DisplayObjectContainer{
 
         // 右边位置有误
         let rightTeam:egret.Bitmap = new egret.Bitmap(RES.getRes(rightImg));
+        rightTeam.width = 62;
+        rightTeam.height = 62;
         rightTeam.x = 400;
-        rightTeam.y = 54;
+        rightTeam.y = 58;
         this.addChild(rightTeam);
 
         let rightTitle:egret.TextField = new egret.TextField();
@@ -42,7 +46,7 @@ class Field4 extends egret.DisplayObjectContainer{
         rightTitle.textAlign = egret.HorizontalAlign.RIGHT;
         rightTitle.size = 22;
         rightTitle.x = 250;
-        rightTitle.y = 60;
+        rightTitle.y = 58;
         this.addChild(rightTitle);
 
         let rightOdds:egret.TextField = new egret.TextField();
@@ -53,6 +57,5 @@ class Field4 extends egret.DisplayObjectContainer{
         rightOdds.x = 250;
         rightOdds.y = 94;
         this.addChild(rightOdds);
-
     }
 }

@@ -36,10 +36,16 @@ class Foot extends egret.DisplayObjectContainer{
          },this)
         
         //三个投注按钮
-        let btn:FootBtn = new FootBtn(10000);
-        btn.x = bottom.width/2;
-        btn.y = bottom.height/2;
-        bottom.addChild(btn);
+        let btn100:FootBtn = new FootBtn(100);
+        let btn500:FootBtn = new FootBtn(500);
+        let btn1000:FootBtn = new FootBtn(1000);
+        btn100.x = 188;
+        btn500.x = Width/2;
+        btn1000.x = 560;
+        bottom.addChild(btn100);
+        bottom.addChild(btn500);
+        bottom.addChild(btn1000);
+
     }
     private hignColor(){
         // var color:number = 0xffd02f;        /// 光晕的颜色，十六进制，不包含透明度

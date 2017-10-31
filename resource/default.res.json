@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "bg_jpg,description_json,btn-recharge_png,btn-past_png,rule_png,chat_png,btn-1000_png,btn-500_png,btn-100_png,pop-game_png,text-over_png,text-begin_png,back_png,bg-time_png,bg-court_png,bg-court4_png,team-01_jpg,team-02_jpg,bg-avatar_png,bg-textTips_png,btnOn_png,btn_png",
+			"keys": "bg_jpg,description_json,btn-recharge_png,btn-past_png,rule_png,chat_png,pop-game_png,text-over_png,text-begin_png,back_png,bg-time_png,bg-court_png,bg-court4_png,team-01_jpg,team-02_jpg,bg-avatar_png,bg-textTips_png,btnOn_png,btn_png",
 			"name": "preload"
 		}
 	],
@@ -35,21 +35,6 @@
 			"name": "chat_png",
 			"type": "image",
 			"url": "assets/chat.png"
-		},
-		{
-			"name": "btn-1000_png",
-			"type": "image",
-			"url": "assets/btn-1000.png"
-		},
-		{
-			"name": "btn-500_png",
-			"type": "image",
-			"url": "assets/btn-500.png"
-		},
-		{
-			"name": "btn-100_png",
-			"type": "image",
-			"url": "assets/btn-100.png"
 		},
 		{
 			"name": "pop-game_png",
