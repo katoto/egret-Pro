@@ -18,3 +18,17 @@ function randomArray( len ){
     }
     return arr;
 }
+/**
+ *  金币处理
+ *  @param money
+ */
+function formateGold(num) {
+    num = Number(num)
+    if (num < 10000) {
+        return num
+    } else if (num < 100000000) {
+        return Math.round(num / 10000 * 10) / 10 + '万'
+    } else {
+        return Math.round(num / 100000000 * 10) / 10 + '亿'
+    }
+}

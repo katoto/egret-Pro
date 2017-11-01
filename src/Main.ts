@@ -1,31 +1,6 @@
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
+/**
+ *  虚拟杯
+ */
 
 class Main extends egret.DisplayObjectContainer {
 
@@ -44,6 +19,17 @@ class Main extends egret.DisplayObjectContainer {
     private top;
     private cnt;
 
+
+    private textfield:egret.TextField;
+    
+    private Width;
+    private Height;
+    private anWidth;
+    private anHeight;
+
+
+    private position:Array<number> =  [];
+
     public constructor() {
         super();
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
@@ -52,7 +38,6 @@ class Main extends egret.DisplayObjectContainer {
     private onAddToStage(event: egret.Event) {
         egret.lifecycle.addLifecycleListener((context) => {
             // custom lifecycle plugin
-
             context.onUpdate = () => {
             }
         })
@@ -64,8 +49,6 @@ class Main extends egret.DisplayObjectContainer {
         egret.lifecycle.onResume = () => {
             egret.ticker.resume();
         }
-
-
         //设置加载进度界面
         //Config to load process interface
         this.loadingView = new LoadingUI();
@@ -136,23 +119,16 @@ class Main extends egret.DisplayObjectContainer {
     }
 
 
-    private textfield:egret.TextField;
-    
-    
-
-
-    private position:Array<number> =  [];
-
     /**
      * 创建游戏场景
      * Create a game scene
      */
     private createGameScene() {
-        const Width = this.stage.stageWidth;
-        const Height = this.stage.stageHeight;
-        const anWidth = Width/2;
+        this.Width = this.stage.stageWidth;
+        this.Height = this.stage.stageHeight;
+        this.anWidth = this.Width/2;
         // const wrapHeight = (Height-80)/2;
-        const anHeight = Height/2;
+        const anHeight = this.Height/2;
 
         this.initStage();
         console.log( window['store'] )
@@ -166,20 +142,20 @@ class Main extends egret.DisplayObjectContainer {
         // this.addChild(header);
 
         //头部实例2
-        this.top = new Top(Width);
+        this.top = new Top(this.Width);
         this.top.x = 0;
         this.top.y = 0;
         this.addChild(this.top);
 
         // 底部实例
-        let bottom:Foot = new Foot(Width,Height);
+        let bottom:Foot = new Foot(this.Width,this.Height);
         bottom.anchorOffsetY = 90;
         bottom.x = 0;
-        bottom.y = Height;
+        bottom.y = this.Height;
         bottom.alpha = 0.6;
         this.addChild(bottom);
         // 内容区实例
-        this.cnt = new Cnt(Width,Height,anWidth,anHeight);
+        this.cnt = new Cnt(this.Width,this.Height,this.anWidth,anHeight);
         this.cnt.x = 0;
         this.cnt.y = 0;
         this.addChild(this.cnt);
@@ -240,7 +216,6 @@ class Main extends egret.DisplayObjectContainer {
 
         this.webSocket.connectByUrl("ws://192.168.81.240:7777/ws");
 
-
     }
 
     /**
@@ -249,7 +224,7 @@ class Main extends egret.DisplayObjectContainer {
     private initStage(){
         // 桌子缩放计算 
         window['store'].scale = 0.91;
-        // 取ck 打算按src+ck 的形式，防止串号
+        // 取ck 按src+ck 的形式，防止串号
         window['store']['orderObj'].ck = egret.localStorage.getItem('ck');
         // platform
         window['store']['platform'] = egret.localStorage.getItem('platform'); 
@@ -277,6 +252,7 @@ class Main extends egret.DisplayObjectContainer {
         }else{
             //  后台数据  分发
             var msgObj = JSON.parse( msg );
+            console.log( msgObj );
             var i = 1;
             setInterval(()=>{
                 i = i+1;
@@ -290,6 +266,11 @@ class Main extends egret.DisplayObjectContainer {
                     // 进程的数据
                     this.top.setTextDate(  msgObj.body.room_info.desc )
                     this.top.setTextTitle(  msgObj.body.room_info.title )
+
+                    if( msgObj.body && msgObj.body.user_info ){
+                        window['store'].user_info =  msgObj.body.user_info ;
+                        this.cnt.initUserImage( this.anWidth );
+                    }
                     ;break;
             }
 
@@ -342,7 +323,8 @@ window['store'] = {
     'src':'off',
     'platform':'',
     'userPosition':[],  //  随机数组
-
+    'userPositionID':[],  // 头像的uid
+    'user_info':[],
     'orderObj':{
         // 下单
         'ck':null,
@@ -360,40 +342,40 @@ window['store'] = {
     'userPositionObj':[
         //  位置坐标    
         {
-            'x':'44',
-            'y':'124'
+            'x':null,
+            'y':null
         },
         {
-            'x':'15',
-            'y':'80'
+            'x':15,
+            'y':80
         },
         {
-            'x':'15',
-            'y':'300'
+            'x':15,
+            'y':300
         },
         {
-            'x':'15',
-            'y':'520'
+            'x':15,
+            'y':520
         },
         {
-            'x':'15',
-            'y':'740'
+            'x':15,
+            'y':740
         },
         {
-            'x':'104',
-            'y':'80'
+            'x':104,
+            'y':80
         },
         {
-            'x':'104',
-            'y':'300'
+            'x':104,
+            'y':300
         },
         {
-            'x':'104',
-            'y':'520'
+            'x':104,
+            'y':520
         },
         {
-            'x':'104',
-            'y':'740'
+            'x':104,
+            'y':740
         }
     ], 
     'commit':function(key,val){

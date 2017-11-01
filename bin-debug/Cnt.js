@@ -79,29 +79,56 @@ var Cnt = (function (_super) {
         //     this.bgCourtWrap.addChild(userImg);
         // }
         // // 右边其他用户 头像实例 ,（名字，头像，金币）,位置为数组中的随机一个{x=15,y=80+220*i} 
-        for (var i = 0; i < 4; i++) {
-            var userImg = new userImage('飞翔小七', 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4182536181,630612655&fm=173&s=EC7819C7026A2D1399FD589D0300C084&w=218&h=146&img.JPEG', '23万');
-            userImg.x = Width - 104;
-            userImg.y = 80 + 220 * i;
-            console.log(userImg.y);
-            this.bgCourtWrap.addChild(userImg);
-        }
+        // for(let i=0;i<4;i++){
+        //     let userImg:userImage = new userImage('飞翔小七','https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4182536181,630612655&fm=173&s=EC7819C7026A2D1399FD589D0300C084&w=218&h=146&img.JPEG','23万');
+        //     userImg.x = Width-104;
+        //     userImg.y = 80+220*i;
+        //     console.log( userImg.y )
+        //     this.bgCourtWrap.addChild(userImg);
+        // }
         //自己的头像
-        var myImg = new userImage('飞翔小七', 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4182536181,630612655&fm=173&s=EC7819C7026A2D1399FD589D0300C084&w=218&h=146&img.JPEG', '23万');
-        myImg.anchorOffsetX = 44;
-        myImg.anchorOffsetY = 124;
-        myImg.x = anWidth;
-        myImg.y = this.bgCourtWrap.height;
-        this.bgCourtWrap.addChild(myImg);
+        // let myImg:userImage = new userImage('飞翔小七','https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4182536181,630612655&fm=173&s=EC7819C7026A2D1399FD589D0300C084&w=218&h=146&img.JPEG','23万');
+        // myImg.anchorOffsetX = 44;
+        // myImg.anchorOffsetY = 124;
+        // myImg.x = anWidth;
+        // myImg.y = this.bgCourtWrap.height;
+        // this.bgCourtWrap.addChild(myImg);
     };
-    Cnt.prototype.createUserImage = function (len) {
-        console.log('create');
-        for (var i = 0; i < 4; i++) {
-            var userImg = new userImage('飞翔小七', 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4182536181,630612655&fm=173&s=EC7819C7026A2D1399FD589D0300C084&w=218&h=146&img.JPEG', '23万');
-            userImg.x = 15;
-            userImg.y = 80 + 220 * i;
+    // 初始化场地 
+    Cnt.prototype.initUserImage = function (anWidth) {
+        var len = window['store']['user_info'].length;
+        if (!len || len === undefined) {
+            len = 0;
+        }
+        for (var i = 0; i < len; i++) {
+            if (window['store']['user_info'][i] && window['store']['user_info'][i].photo === '') {
+                window['store']['user_info'][i].photo = 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4182536181,630612655&fm=173&s=EC7819C7026A2D1399FD589D0300C084&w=218&h=146&img.JPEG';
+            }
+            if (window['store']['user_info'][i].uid) {
+                window['store']['userPositionID'].push(window['store']['user_info'][i].uid);
+            }
+            else {
+                console.error('无uid');
+            }
+            var userImg = new userImage(window['store']['user_info'][i].username, window['store']['user_info'][i].photo, window['formateGold'](window['store']['user_info'][i].total));
+            if (i === 0) {
+                userImg.anchorOffsetX = 44;
+                userImg.anchorOffsetY = 124;
+                userImg.x = anWidth;
+                userImg.y = 1035;
+            }
+            else {
+                userImg.x = window['store']['userPositionObj'][i].x;
+                userImg.y = window['store']['userPositionObj'][i].y;
+            }
             this.bgCourtWrap.addChild(userImg);
         }
+    };
+    // 进入用户 
+    Cnt.prototype.addUserImage = function () {
+    };
+    // 离开用户 
+    Cnt.prototype.removeUserImage = function () {
     };
     return Cnt;
 }(egret.DisplayObjectContainer));
