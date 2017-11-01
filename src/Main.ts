@@ -41,7 +41,8 @@ class Main extends egret.DisplayObjectContainer {
     private webSocket:egret.WebSocket;
 
     //  头部lei
-    private top
+    private top;
+    private cnt;
 
     public constructor() {
         super();
@@ -153,9 +154,10 @@ class Main extends egret.DisplayObjectContainer {
         // const wrapHeight = (Height-80)/2;
         const anHeight = Height/2;
 
+        this.initStage();
+        console.log( window['store'] )
         // let sky = this.createBitmapByName("btn-500_png");
         // this.addChild(sky)
-        
 
         // 头部实例
         // let header:Header = new Header(Width);
@@ -177,10 +179,10 @@ class Main extends egret.DisplayObjectContainer {
         bottom.alpha = 0.6;
         this.addChild(bottom);
         // 内容区实例
-        let cnt:Cnt = new Cnt(Width,Height,anWidth,anHeight);
-        cnt.x = 0;
-        cnt.y = 0;
-        this.addChild(cnt);
+        this.cnt = new Cnt(Width,Height,anWidth,anHeight);
+        this.cnt.x = 0;
+        this.cnt.y = 0;
+        this.addChild(this.cnt);
 
         //test
         let btn:egret.Bitmap = new egret.Bitmap(RES.getRes('btn_png'));
@@ -241,6 +243,20 @@ class Main extends egret.DisplayObjectContainer {
 
     }
 
+    /**
+     * 常用数据初始化
+     */
+    private initStage(){
+        // 桌子缩放计算 
+        window['store'].scale = 0.91;
+        // 取ck 打算按src+ck 的形式，防止串号
+        window['store']['orderObj'].ck = egret.localStorage.getItem('ck');
+        // platform
+        window['store']['platform'] = egret.localStorage.getItem('platform'); 
+
+    }
+
+
     // 函数：生成图片
     private createBitmapByName(name: string): egret.Bitmap {
         let result = new egret.Bitmap();
@@ -277,7 +293,8 @@ class Main extends egret.DisplayObjectContainer {
 
 
             },3000)
-            console.log( msgObj )
+            console.log( this.cnt )
+
 
         }
 
@@ -285,7 +302,7 @@ class Main extends egret.DisplayObjectContainer {
 
     
     /**
-     *  onReceiveMess  websock 接收消息
+     *  onSocketOpen  websock 接收消息
      */
     private onSocketOpen():void{
         var start = {
@@ -303,13 +320,13 @@ class Main extends egret.DisplayObjectContainer {
 
     
     /**
-     *  onReceiveMess  websock 接收消息
+     *  onIOError  websock 接收消息
      */
     private onIOError():void{
         console.error('linsten error')
     }
     /**
-     *  onReceiveMess  websock 接收消息
+     *  onCloseSock  websock 接收消息
      */
     private onCloseSock():void{
         
@@ -318,4 +335,27 @@ class Main extends egret.DisplayObjectContainer {
 
 }
 
+window['store'] = { 
+    'scale': 1,  // 桌子缩放
+    'src':'off',
+    'platform':'',
+    'orderObj':{
+        // 下单
+        'ck':null,
+        'golds':null,
+        'matchid':null,
+        'expect':null,
+        'odds':null,
+        'homeid':null,
+        'awayid':null,
+        'stageid':null,
+        'selection':null,
+        'roomid':null,
+        'node':null,
+    },
+    'commit':function(key,val){
+        console.log(key)
+        console.log(val)
 
+    }
+} 
