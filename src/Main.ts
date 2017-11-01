@@ -253,7 +253,9 @@ class Main extends egret.DisplayObjectContainer {
         window['store']['orderObj'].ck = egret.localStorage.getItem('ck');
         // platform
         window['store']['platform'] = egret.localStorage.getItem('platform'); 
-
+        // 头像随机的位置
+        window['store']['userPosition'] = window['randomArray']( 9 )
+        console.log( window['store']['userPosition'] )
     }
 
 
@@ -339,6 +341,8 @@ window['store'] = {
     'scale': 1,  // 桌子缩放
     'src':'off',
     'platform':'',
+    'userPosition':[],  //  随机数组
+
     'orderObj':{
         // 下单
         'ck':null,
@@ -353,6 +357,45 @@ window['store'] = {
         'roomid':null,
         'node':null,
     },
+    'userPositionObj':[
+        //  位置坐标    
+        {
+            'x':'44',
+            'y':'124'
+        },
+        {
+            'x':'15',
+            'y':'80'
+        },
+        {
+            'x':'15',
+            'y':'300'
+        },
+        {
+            'x':'15',
+            'y':'520'
+        },
+        {
+            'x':'15',
+            'y':'740'
+        },
+        {
+            'x':'104',
+            'y':'80'
+        },
+        {
+            'x':'104',
+            'y':'300'
+        },
+        {
+            'x':'104',
+            'y':'520'
+        },
+        {
+            'x':'104',
+            'y':'740'
+        }
+    ], 
     'commit':function(key,val){
         console.log(key)
         console.log(val)

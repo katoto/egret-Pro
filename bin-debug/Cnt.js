@@ -71,17 +71,19 @@ var Cnt = (function (_super) {
             this.bgCourtWrap.addChild(_field4);
         }
         // 左边其他用户 头像实例 ,（名字，头像，金币）,位置为数组中的随机一个{x=15,y=80+220*i} 
-        for (var i = 0; i < 4; i++) {
-            var userImg = new userImage('飞翔小七', 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4182536181,630612655&fm=173&s=EC7819C7026A2D1399FD589D0300C084&w=218&h=146&img.JPEG', '23万');
-            userImg.x = 15;
-            userImg.y = 80 + 220 * i;
-            this.bgCourtWrap.addChild(userImg);
-        }
-        // 右边其他用户 头像实例 ,（名字，头像，金币）,位置为数组中的随机一个{x=15,y=80+220*i} 
+        // for(let i=0;i<4;i++){
+        //     let userImg:userImage = new userImage('飞翔小七','https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4182536181,630612655&fm=173&s=EC7819C7026A2D1399FD589D0300C084&w=218&h=146&img.JPEG','23万');
+        //     userImg.x = 15;
+        //     userImg.y = 80+220*i;
+        //     console.log( userImg.y  )
+        //     this.bgCourtWrap.addChild(userImg);
+        // }
+        // // 右边其他用户 头像实例 ,（名字，头像，金币）,位置为数组中的随机一个{x=15,y=80+220*i} 
         for (var i = 0; i < 4; i++) {
             var userImg = new userImage('飞翔小七', 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4182536181,630612655&fm=173&s=EC7819C7026A2D1399FD589D0300C084&w=218&h=146&img.JPEG', '23万');
             userImg.x = Width - 104;
             userImg.y = 80 + 220 * i;
+            console.log(userImg.y);
             this.bgCourtWrap.addChild(userImg);
         }
         //自己的头像
@@ -92,8 +94,14 @@ var Cnt = (function (_super) {
         myImg.y = this.bgCourtWrap.height;
         this.bgCourtWrap.addChild(myImg);
     };
-    Cnt.prototype.createUserImage = function () {
+    Cnt.prototype.createUserImage = function (len) {
         console.log('create');
+        for (var i = 0; i < 4; i++) {
+            var userImg = new userImage('飞翔小七', 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4182536181,630612655&fm=173&s=EC7819C7026A2D1399FD589D0300C084&w=218&h=146&img.JPEG', '23万');
+            userImg.x = 15;
+            userImg.y = 80 + 220 * i;
+            this.bgCourtWrap.addChild(userImg);
+        }
     };
     return Cnt;
 }(egret.DisplayObjectContainer));
