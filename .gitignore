@@ -1,6 +1,8 @@
-# Created by .ignore support plugin (hsz.mobi)
+
 bin-debug/
 bin-release/
 .wing/
 libs/
 .idea/
+/bin-debug/
+/bin-release/

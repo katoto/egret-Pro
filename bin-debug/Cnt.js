@@ -153,7 +153,6 @@ var Cnt = (function (_super) {
             this[choseUserImg].x = window['store']['stage_Width'] - window['store']['userPositionObj'][window['store']['userPosition'][userI] - 1].x;
             this[choseUserImg].y = window['store']['userPositionObj'][window['store']['userPosition'][userI] - 1].y;
         }
-        console.log(window['store']['emptyUserPosition']);
         window['store']['userPositionID'].push(uid);
         this.bgCourtWrap.addChild(this[choseUserImg]);
     };
@@ -170,10 +169,6 @@ var Cnt = (function (_super) {
             console.error('not find uid');
             return false;
         }
-        console.log(delIndex);
-        console.log(delIndex);
-        console.log(delIndex);
-        console.log(delIndex);
         delIndex = delIndex + 1;
         if (delIndex) {
             var choseUserImg = 'userImg' + (delIndex - 1);
@@ -185,7 +180,6 @@ var Cnt = (function (_super) {
             this.bgCourtWrap.removeChild(this[choseUserImg]);
             // this.bgCourtWrap.removeChild(this[choseUserImg]);
         }
-        console.log(delIndex);
         console.log(window['store']['userPosition'][delIndex]);
     };
     return Cnt;
