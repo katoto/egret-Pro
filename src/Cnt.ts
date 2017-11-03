@@ -165,7 +165,6 @@ class Cnt extends egret.DisplayObjectContainer{
             this[choseUserImg].y = window['store']['userPositionObj'][window['store']['userPosition'][userI]-1].y;
         }
         
-        console.log( window['store']['emptyUserPosition'] )
         window['store']['userPositionID'].push( uid )
         this.bgCourtWrap.addChild(this[choseUserImg]);
     }
@@ -182,10 +181,6 @@ class Cnt extends egret.DisplayObjectContainer{
             console.error( 'not find uid');
             return false;
         }
-        console.log(delIndex)
-        console.log(delIndex)
-        console.log(delIndex)
-        console.log(delIndex)
         delIndex = delIndex + 1;
         if( delIndex ){
             let choseUserImg = 'userImg'+ ( delIndex -1 ) ;
@@ -197,7 +192,6 @@ class Cnt extends egret.DisplayObjectContainer{
             this.bgCourtWrap.removeChild(this[choseUserImg]);
             // this.bgCourtWrap.removeChild(this[choseUserImg]);
         }
-        console.log(delIndex)
         console.log(window['store']['userPosition'][delIndex])
     }
 }
