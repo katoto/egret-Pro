@@ -154,6 +154,7 @@ class Main extends egret.DisplayObjectContainer {
         bottom.y = this.Height;
         bottom.alpha = 0.6;
         this.addChild(bottom);
+
         // 内容区实例
         this.cnt = new Cnt(this.Width,this.Height,this.anWidth,anHeight);
         this.cnt.x = 0;
@@ -161,12 +162,20 @@ class Main extends egret.DisplayObjectContainer {
         this.addChild(this.cnt);
 
         //test
-        let btn:egret.Bitmap = new egret.Bitmap(RES.getRes('btn_png'));
-        this.addChild(btn);
-        btn.touchEnabled=true;
-        btn.addEventListener(egret.TouchEvent.TOUCH_TAP,()=>{
-            btn.texture = RES.getRes('btnOn_png');
-        },this)
+        
+        let gold = new Gold();
+        gold.x = this.anWidth;
+        gold.y = this.cnt.bgCourtWrap.height;
+        gold.anchorOffsetX = gold.width/2;
+        gold.anchorOffsetY = gold.height/2;
+        this.cnt.addChild(gold);
+        this.cnt.stage.addEventListener( egret.TouchEvent.TOUCH_BEGIN, ( evt:egret.TouchEvent )=>{
+               gold.x = evt.localX ;
+               gold.y = evt.localY ;
+        }, this );
+
+
+
 
 
 
@@ -197,14 +206,18 @@ class Main extends egret.DisplayObjectContainer {
 
         // 层级控制
         // this.setChildIndex(header,0)
-        // this.setChildIndex(cnt,1)
+        this.setChildIndex(this.cnt,1)
         this.setChildIndex(this.top,2)
         this.setChildIndex(bottom,3)
 
 
-
-        // 优化：
-        // 1.图片合并，使用纹理集
+        /*
+        优化：
+        1.图片合并，使用纹理集
+        2. 函数
+        xx.anchorOffsetX = xx.width/2;
+        xx.anchorOffsetY = xx.height/2;
+        */
 
         
         // websocket
@@ -213,8 +226,7 @@ class Main extends egret.DisplayObjectContainer {
         this.webSocket.addEventListener( egret.Event.CONNECT ,this.onSocketOpen ,this );
         this.webSocket.addEventListener( egret.IOErrorEvent.IO_ERROR ,this.onIOError ,this );
         this.webSocket.addEventListener( egret.Event.CLOSE ,this.onCloseSock ,this );
-
-        this.webSocket.connectByUrl("ws://192.168.81.240:7777/ws");
+        // this.webSocket.connectByUrl("ws://192.168.81.240:7777/ws");
 
     }
 
@@ -234,13 +246,13 @@ class Main extends egret.DisplayObjectContainer {
     }
 
 
-    // 函数：生成图片
-    private createBitmapByName(name: string): egret.Bitmap {
-        let result = new egret.Bitmap();
-        let texture: egret.Texture = RES.getRes(name);
-        result.texture = texture;
-        return result;
-    }
+        // 函数：生成图片
+        private createBitmapByName(name: string): egret.Bitmap {
+            let result = new egret.Bitmap();
+            let texture: egret.Texture = RES.getRes(name);
+            result.texture = texture;
+            return result;
+        }
 
     /**
      *  onReceiveMess  websock 接收消息

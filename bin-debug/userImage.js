@@ -28,6 +28,11 @@ var userImage = (function (_super) {
         // 插入灰色背景
         var bgBlack = new egret.Bitmap(RES.getRes('bg-avatar_png'));
         this.addChild(bgBlack);
+        // 插入遮罩层
+        var bgMask = new egret.Bitmap(RES.getRes('bg-user_png'));
+        bgMask.x = 13;
+        bgMask.y = 28;
+        this.addChild(bgMask);
         //用户姓名
         var myName = new egret.TextField();
         myName.text = name;
@@ -48,6 +53,7 @@ var userImage = (function (_super) {
         img.x = 13;
         img.y = 28;
         this.addChild(img);
+        img.mask = bgMask;
         // 金币
         this.myGold = new egret.TextField();
         this.myGold.text = gold;

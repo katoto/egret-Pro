@@ -65,8 +65,9 @@ var Cnt = (function (_super) {
         textT.y = 66;
         this.bgCourtWrap.addChild(textT);
         //生成四个足球场，1/4比赛  485为小球场宽度，应该可以在构造函数里设置，需要优化
+        //参数分辨是 x,x，左边球队icon，队名，赔率，总投注，我的投注，右边~
         for (var i = 0; i < 4; i++) {
-            var _field4 = new Field4(485, anWidth, 'team-01_jpg', '克罗地亚', 3.78, 'team-02_jpg', '德国', 1.26);
+            var _field4 = new Field4(485, anWidth, 'team-01_jpg', '克罗地亚', 3.78, '10万', '10.09万', 'team-02_jpg', '德国', 1.26, '23万', '10.09万');
             _field4.y = 120 + 202 * i;
             this.bgCourtWrap.addChild(_field4);
         }
@@ -86,13 +87,13 @@ var Cnt = (function (_super) {
         //     console.log( userImg.y )
         //     this.bgCourtWrap.addChild(userImg);
         // }
-        //自己的头像
-        // let myImg:userImage = new userImage('飞翔小七','https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4182536181,630612655&fm=173&s=EC7819C7026A2D1399FD589D0300C084&w=218&h=146&img.JPEG','23万');
-        // myImg.anchorOffsetX = 44;
-        // myImg.anchorOffsetY = 124;
-        // myImg.x = anWidth;
-        // myImg.y = this.bgCourtWrap.height;
-        // this.bgCourtWrap.addChild(myImg);
+        //  自己的头像
+        var myImg = new userImage('飞翔小七', 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4182536181,630612655&fm=173&s=EC7819C7026A2D1399FD589D0300C084&w=218&h=146&img.JPEG', '23万');
+        myImg.anchorOffsetX = 44;
+        myImg.anchorOffsetY = 124;
+        myImg.x = anWidth;
+        myImg.y = this.bgCourtWrap.height;
+        this.bgCourtWrap.addChild(myImg);
     };
     // 初始化场地 
     Cnt.prototype.initUserImage = function () {

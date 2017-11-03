@@ -37,13 +37,11 @@ class FootBtn extends egret.DisplayObjectContainer{
         if(this.scaleX==1){
             this.scaleX = 0.9;
             this.scaleY = 0.9;
-           
+           this.btn.texture = RES.getRes('btn_png');
         }else{
             this.scaleX = 1;
             this.scaleY = 1;
             this.btn.texture = RES.getRes('btnOn_png');
         }
-        
-        // 点击更换背景图片,不会
     }
 }
