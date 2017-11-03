@@ -24,11 +24,27 @@ function randomArray( len ){
  */
 function formateGold(num) {
     num = Number(num)
+    if( num === null ){
+        console.error( 'formateGold error' )
+    }
     if (num < 10000) {
         return num
     } else if (num < 100000000) {
         return Math.round(num / 10000 * 10) / 10 + '万'
     } else {
         return Math.round(num / 100000000 * 10) / 10 + '亿'
+    }
+}
+
+/**
+ *  用户名处理
+ *  @param name
+ */
+function formateName(name) {
+    if( typeof name === 'string' ){
+        if( name.length >= 5 ){
+            return name.slice(0,5)+'...'
+        }
+        return name
     }
 }

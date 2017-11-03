@@ -95,11 +95,17 @@ var Cnt = (function (_super) {
         // this.bgCourtWrap.addChild(myImg);
     };
     // 初始化场地 
-    Cnt.prototype.initUserImage = function (anWidth) {
+    Cnt.prototype.initUserImage = function () {
         var len = window['store']['user_info'].length;
         if (!len || len === undefined) {
             len = 0;
         }
+        for (var i = 0; i < 9; i++) {
+            if (i >= len) {
+                window['store']['emptyUserPosition'].push(i + 1);
+            }
+        }
+        console.log(window['store']['emptyUserPosition']);
         for (var i = 0; i < len; i++) {
             if (window['store']['user_info'][i] && window['store']['user_info'][i].photo === '') {
                 window['store']['user_info'][i].photo = 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4182536181,630612655&fm=173&s=EC7819C7026A2D1399FD589D0300C084&w=218&h=146&img.JPEG';
@@ -110,25 +116,77 @@ var Cnt = (function (_super) {
             else {
                 console.error('无uid');
             }
-            var userImg = new userImage(window['store']['user_info'][i].username, window['store']['user_info'][i].photo, window['formateGold'](window['store']['user_info'][i].total));
+            var choseUserImg = 'userImg' + (i + 1);
+            this[choseUserImg] = new userImage(window['formateName'](window['store']['user_info'][i].username), window['store']['user_info'][i].photo, window['formateGold'](window['store']['user_info'][i].total));
             if (i === 0) {
-                userImg.anchorOffsetX = 44;
-                userImg.anchorOffsetY = 124;
-                userImg.x = anWidth;
-                userImg.y = 1035;
+                this[choseUserImg].anchorOffsetX = 44;
+                this[choseUserImg].anchorOffsetY = 124;
+                this[choseUserImg].x = window['store']['stage_anWidth'];
+                this[choseUserImg].y = 1035;
+            }
+            else if ((window['store']['userPosition'][i] - 1) < 5) {
+                this[choseUserImg].x = window['store']['userPositionObj'][window['store']['userPosition'][i] - 1].x;
+                this[choseUserImg].y = window['store']['userPositionObj'][window['store']['userPosition'][i] - 1].y;
             }
             else {
-                userImg.x = window['store']['userPositionObj'][i].x;
-                userImg.y = window['store']['userPositionObj'][i].y;
+                this[choseUserImg].x = window['store']['stage_Width'] - window['store']['userPositionObj'][window['store']['userPosition'][i] - 1].x;
+                this[choseUserImg].y = window['store']['userPositionObj'][window['store']['userPosition'][i] - 1].y;
             }
-            this.bgCourtWrap.addChild(userImg);
+            this.bgCourtWrap.addChild(this[choseUserImg]);
         }
     };
-    // 进入用户 
-    Cnt.prototype.addUserImage = function () {
+    // 用户 进入
+    Cnt.prototype.addUserImage = function (username, photo, total, uid) {
+        var userI = window['store']['emptyUserPosition'].shift();
+        if (!userI) {
+            console.error('无空闲房间');
+            return false;
+        }
+        userI = userI - 1;
+        var choseUserImg = 'userImg' + userI;
+        this[choseUserImg] = new userImage(window['formateName'](username), photo, window['formateGold'](total));
+        if ((window['store']['userPosition'][userI] - 1) < 5) {
+            this[choseUserImg].x = window['store']['userPositionObj'][window['store']['userPosition'][userI] - 1].x;
+            this[choseUserImg].y = window['store']['userPositionObj'][window['store']['userPosition'][userI] - 1].y;
+        }
+        else {
+            this[choseUserImg].x = window['store']['stage_Width'] - window['store']['userPositionObj'][window['store']['userPosition'][userI] - 1].x;
+            this[choseUserImg].y = window['store']['userPositionObj'][window['store']['userPosition'][userI] - 1].y;
+        }
+        console.log(window['store']['emptyUserPosition']);
+        window['store']['userPositionID'].push(uid);
+        this.bgCourtWrap.addChild(this[choseUserImg]);
     };
-    // 离开用户 
-    Cnt.prototype.removeUserImage = function () {
+    // 用户 离开 
+    Cnt.prototype.removeUserImage = function (uid) {
+        var delIndex = 0;
+        for (var i = 0, len = window['store']['userPositionID'].length; i < len; i++) {
+            if (window['store']['userPositionID'][i] === uid) {
+                delIndex = i;
+                break;
+            }
+        }
+        if (i === len || delIndex === 0) {
+            console.error('not find uid');
+            return false;
+        }
+        console.log(delIndex);
+        console.log(delIndex);
+        console.log(delIndex);
+        console.log(delIndex);
+        delIndex = delIndex + 1;
+        if (delIndex) {
+            var choseUserImg = 'userImg' + (delIndex - 1);
+            console.log(choseUserImg);
+            // 更新数组
+            window['store']['userPositionID'].splice(delIndex - 1, 1);
+            window['store']['emptyUserPosition'].push(delIndex);
+            // console.log( window['store']['userPositionID'] )
+            this.bgCourtWrap.removeChild(this[choseUserImg]);
+            // this.bgCourtWrap.removeChild(this[choseUserImg]);
+        }
+        console.log(delIndex);
+        console.log(window['store']['userPosition'][delIndex]);
     };
     return Cnt;
 }(egret.DisplayObjectContainer));

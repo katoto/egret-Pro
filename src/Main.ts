@@ -124,11 +124,11 @@ class Main extends egret.DisplayObjectContainer {
      * Create a game scene
      */
     private createGameScene() {
-        this.Width = this.stage.stageWidth;
-        this.Height = this.stage.stageHeight;
-        this.anWidth = this.Width/2;
+        this.Width = window['store']['stage_Width'] = this.stage.stageWidth;
+        this.Height = window['store']['stage_Height'] = this.stage.stageHeight;
+        this.anWidth = window['store']['stage_anWidth'] = this.Width/2;
         // const wrapHeight = (Height-80)/2;
-        const anHeight = this.Height/2;
+        const anHeight =  window['store']['stage_anHeight'] = this.Height/2;
 
         this.initStage();
         console.log( window['store'] )
@@ -254,7 +254,6 @@ class Main extends egret.DisplayObjectContainer {
             var msgObj = JSON.parse( msg );
             console.log( msgObj );
             var i = 1;
-            setInterval(()=>{
                 i = i+1;
                 if( msgObj && msgObj.body && msgObj.body.room_info && msgObj.body.room_info.desc ){
                     msgObj.body.room_info.desc = '第'+(i+1) +'期目';
@@ -263,22 +262,47 @@ class Main extends egret.DisplayObjectContainer {
 
             switch ( msgObj.messageid ) {
                 case '2000':
-                    // 进程的数据
+                    // 进场的数据
                     this.top.setTextDate(  msgObj.body.room_info.desc )
                     this.top.setTextTitle(  msgObj.body.room_info.title )
 
                     if( msgObj.body && msgObj.body.user_info ){
                         window['store'].user_info =  msgObj.body.user_info ;
-                        this.cnt.initUserImage( this.anWidth );
+                        this.cnt.initUserImage();
                     }
                     ;break;
+                case '123':
+                    // 用户进场
+                    this.cnt.addUserImage( '','','', );
+                    break;
             }
+            var i = 0;
+            setInterval(() => {
+                console.log('user in')
+                var obj = { 
+                    "username": "游客_2867477",
+                    "photo": "https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg",
+                    "total": i+'202422',
+                    "uid": "1003118"+i
+                 }
+                i = i+1 ;
+                // 加用户
+                this.cnt.addUserImage( obj.username, obj.photo ,obj.total , obj.uid );
+            },2000)
 
+            var j =0 ;
+            setInterval(() => {
+                console.log('user out 111')
+                var obj = { 
+                    "uid": "1003118"+ j
+                 }
+                 j = j+1;
+                // 删除用户
+                console.log( obj.uid )
+                this.cnt.removeUserImage( obj.uid );
+            },10000)
 
-            },3000)
             console.log( this.cnt )
-
-
         }
 
     }
@@ -318,12 +342,18 @@ class Main extends egret.DisplayObjectContainer {
 
 }
 
-window['store'] = { 
+window['store'] = {
+    'stage_Width': null ,
+    'stage_Height': null ,
+    'stage_anWidth': null ,
+    'stage_anHeight': null ,
+
     'scale': 1,  // 桌子缩放
     'src':'off',
     'platform':'',
     'userPosition':[],  //  随机数组
     'userPositionID':[],  // 头像的uid
+    'emptyUserPosition':[],  // 空闲的位置
     'user_info':[],
     'orderObj':{
         // 下单
