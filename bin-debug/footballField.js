@@ -36,7 +36,7 @@ var Field4 = (function (_super) {
         leftUserBox.width = 68;
         leftUserBox.height = 68;
         leftUserBox.x = 25;
-        leftUserBox.y = 60;
+        leftUserBox.y = 54;
         this.addChild(leftUserBox);
         // 插入边框
         var bgBorder = new egret.Bitmap(RES.getRes('bg-item_png'));
@@ -104,7 +104,7 @@ var Field4 = (function (_super) {
         rightUserBox.width = 68;
         rightUserBox.height = 68;
         rightUserBox.x = 400;
-        rightUserBox.y = 60;
+        rightUserBox.y = 54;
         this.addChild(rightUserBox);
         // 插入边框
         var bgBorder02 = new egret.Bitmap(RES.getRes('bg-item_png'));
