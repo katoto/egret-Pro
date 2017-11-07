@@ -18,7 +18,8 @@ class Main extends egret.DisplayObjectContainer {
     //  头部lei
     private top;
     private cnt;
-
+    //   底部
+    private bottom;
 
     private textfield:egret.TextField;
     
@@ -130,8 +131,7 @@ class Main extends egret.DisplayObjectContainer {
         // const wrapHeight = (Height-80)/2;
         const anHeight =  window['store']['stage_anHeight'] = this.Height/2;
 
-        this.initStage();
-        console.log( window['store'] )
+
         // let sky = this.createBitmapByName("btn-500_png");
         // this.addChild(sky)
 
@@ -148,12 +148,12 @@ class Main extends egret.DisplayObjectContainer {
         this.addChild(this.top);
 
         // 底部实例
-        let bottom:Foot = new Foot(this.Width,this.Height);
-        bottom.anchorOffsetY = 90;
-        bottom.x = 0;
-        bottom.y = this.Height;
-        bottom.alpha = 0.6;
-        this.addChild(bottom);
+        this.bottom = new Foot(this.Width,this.Height);
+        this.bottom.anchorOffsetY = 90;
+        this.bottom.x = 0;
+        this.bottom.y = this.Height;
+        this.bottom.alpha = 0.6;
+        this.addChild(this.bottom);
 
         // 内容区实例
         this.cnt = new Cnt(this.Width,this.Height,this.anWidth,anHeight);
@@ -163,16 +163,16 @@ class Main extends egret.DisplayObjectContainer {
 
         //test
         
-        let gold = new Gold();
-        gold.x = this.anWidth;
-        gold.y = this.cnt.bgCourtWrap.height;
-        gold.anchorOffsetX = gold.width/2;
-        gold.anchorOffsetY = gold.height/2;
-        this.cnt.addChild(gold);
-        this.cnt.stage.addEventListener( egret.TouchEvent.TOUCH_BEGIN, ( evt:egret.TouchEvent )=>{
-               gold.x = evt.localX ;
-               gold.y = evt.localY ;
-        }, this );
+        // let gold = new Gold();
+        // gold.x = this.anWidth;
+        // gold.y = this.cnt.bgCourtWrap.height;
+        // gold.anchorOffsetX = gold.width/2;
+        // gold.anchorOffsetY = gold.height/2;
+        // this.cnt.addChild(gold);
+        // this.cnt.stage.addEventListener( egret.TouchEvent.TOUCH_BEGIN, ( evt:egret.TouchEvent )=>{
+        //        gold.x = evt.localX ;
+        //        gold.y = evt.localY ;
+        // }, this );
 
 
 
@@ -208,7 +208,7 @@ class Main extends egret.DisplayObjectContainer {
         // this.setChildIndex(header,0)
         this.setChildIndex(this.cnt,1)
         this.setChildIndex(this.top,2)
-        this.setChildIndex(bottom,3)
+        this.setChildIndex(this.bottom,3)
 
 
         /*
@@ -219,6 +219,9 @@ class Main extends egret.DisplayObjectContainer {
         xx.anchorOffsetY = xx.height/2;
         */
 
+
+        this.initStage();
+        console.log( window['store'] )
         
         // websocket
         this.webSocket = new egret.WebSocket();
@@ -226,7 +229,7 @@ class Main extends egret.DisplayObjectContainer {
         this.webSocket.addEventListener( egret.Event.CONNECT ,this.onSocketOpen ,this );
         this.webSocket.addEventListener( egret.IOErrorEvent.IO_ERROR ,this.onIOError ,this );
         this.webSocket.addEventListener( egret.Event.CLOSE ,this.onCloseSock ,this );
-        // this.webSocket.connectByUrl("ws://192.168.81.240:7777/ws");
+        this.webSocket.connectByUrl("ws://192.168.76.49:9777/ws");
 
     }
 
@@ -241,23 +244,25 @@ class Main extends egret.DisplayObjectContainer {
         // platform
         window['store']['platform'] = egret.localStorage.getItem('platform'); 
         // 头像随机的位置
-        window['store']['userPosition'] = window['randomArray']( 9 )
-        console.log( window['store']['userPosition'] )
+        window['store']['userPosition'] = window['randomArray']( 9 );
+
+
     }
 
 
-        // 函数：生成图片
-        private createBitmapByName(name: string): egret.Bitmap {
-            let result = new egret.Bitmap();
-            let texture: egret.Texture = RES.getRes(name);
-            result.texture = texture;
-            return result;
-        }
+    // 函数：生成图片
+    private createBitmapByName(name: string): egret.Bitmap {
+        let result = new egret.Bitmap();
+        let texture: egret.Texture = RES.getRes(name);
+        result.texture = texture;
+        return result;
+    }
 
     /**
      *  onReceiveMess  websock 接收消息
      */
-    private onReceiveMess():void{
+    private onReceiveMess(e:egret.Event):void{
+// event.updateAfterEvent();  //  什么时候进行强制刷新 ??????手机上用户立场 舞台不刷新 
         var msg = this.webSocket.readUTF();
         if(~msg.indexOf('You said')|| !~msg.indexOf('{')){
             console.log(msg)
@@ -273,15 +278,28 @@ class Main extends egret.DisplayObjectContainer {
                 msgObj.body.room_info.title = '欧洲杯赛'+(i+1)+'期目';
 
             switch ( msgObj.messageid ) {
+                    // 进场的数据 2000
                 case '2000':
-                    // 进场的数据
                     this.top.setTextDate(  msgObj.body.room_info.desc )
                     this.top.setTextTitle(  msgObj.body.room_info.title )
+                    
+                    if( msgObj.body ){
+                        if( msgObj.body.user_info ){
+                            window['store'].user_info =  msgObj.body.user_info ;
+                            // 初始化用户头像
+                            this.cnt.initUserImage();
+                            // 初始化底部按钮
+                            this.bottom.initBtn();
+                        }
+                        if( msgObj.body.matches ){
+                            window['store'].matches =  msgObj.body.matches;
+                            //  初始化场地 数据
+                            this.cnt.initField();
+                        }
 
-                    if( msgObj.body && msgObj.body.user_info ){
-                        window['store'].user_info =  msgObj.body.user_info ;
-                        this.cnt.initUserImage();
                     }
+
+
                     ;break;
                 case '123':
                     // 用户进场
@@ -289,8 +307,7 @@ class Main extends egret.DisplayObjectContainer {
                     break;
             }
             var i = 0;
-            setInterval(() => {
-                console.log('user in')
+            setTimeout(() => {
                 var obj = { 
                     "username": "游客_2867477",
                     "photo": "https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg",
@@ -300,19 +317,19 @@ class Main extends egret.DisplayObjectContainer {
                 i = i+1 ;
                 // 加用户
                 this.cnt.addUserImage( obj.username, obj.photo ,obj.total , obj.uid );
-            },2000)
+            },2500)
 
             var j =0 ;
-            setInterval(() => {
-                console.log('user out 111')
-                var obj = { 
-                    "uid": "1003118"+ j
-                 }
-                 j = j+1;
-                // 删除用户
-                console.log( obj.uid )
-                this.cnt.removeUserImage( obj.uid );
-            },10000)
+            // setInterval(() => {
+            //     console.log('user out')
+            //     var obj = { 
+            //         "uid": "1003118"+ j
+            //      }
+            //      j = j+1;
+            //     // 删除用户
+            //     console.log( obj.uid )
+            //     this.cnt.removeUserImage( obj.uid );
+            // },10000)
 
             console.log( this.cnt )
         }
@@ -328,13 +345,14 @@ class Main extends egret.DisplayObjectContainer {
             "msg_type":"user_join",
             "msg_id":"123",
             "data":{
-                "uid":"1002922"
+                "uid":"1002949"
             }               
         }
         this.webSocket.writeUTF(JSON.stringify(start))
-        this.webSocket.writeUTF('x')
 
-        // this.webSocket.flush();
+        this.webSocket.writeUTF('x')
+        
+        this.webSocket.flush();
     }
 
     
@@ -367,6 +385,8 @@ window['store'] = {
     'userPositionID':[],  // 头像的uid
     'emptyUserPosition':[],  // 空闲的位置
     'user_info':[],
+    'curr_btn_coin':null,
+    'curr_btn_arr':[],
     'orderObj':{
         // 下单
         'ck':null,
@@ -381,6 +401,7 @@ window['store'] = {
         'roomid':null,
         'node':null,
     },
+    'matches':[],  // 赛事信息
     'userPositionObj':[
         //  位置坐标    
         {

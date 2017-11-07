@@ -1,4 +1,7 @@
-class FootBtn extends egret.DisplayObjectContainer{
+class FootBtn extends egret.DisplayObjectContainer {
+    private _this;
+    private btn:egret.Bitmap;
+    
     public constructor(n){
         super();
         this.drawBtn(n);
@@ -8,9 +11,8 @@ class FootBtn extends egret.DisplayObjectContainer{
         this.scaleY = 0.9;
         this.y= 45;
         this.touchEnabled = true;
-        this.addEventListener(egret.TouchEvent.TOUCH_TAP,this.btnDown,this)
+        this._this = this;
     }
-    private btn:egret.Bitmap;
     private drawBtn(n){
         let wrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
         wrap.width = 157;
@@ -33,15 +35,16 @@ class FootBtn extends egret.DisplayObjectContainer{
         betMoney.verticalAlign = egret.VerticalAlign.MIDDLE;
         wrap.addChild(betMoney);
     }
-    private btnDown(){
-        if(this.scaleX==1){
-            this.scaleX = 0.9;
-            this.scaleY = 0.9;
+    private init_scale( num:Number ){
+        this._this.scaleX = num;
+        this._this.scaleY = num;
+        if(num === 1 ){
            this.btn.texture = RES.getRes('btn_png');
         }else{
-            this.scaleX = 1;
-            this.scaleY = 1;
             this.btn.texture = RES.getRes('btnOn_png');
         }
+    }
+    private get_scaleVal(){
+        return this._this.scaleX
     }
 }

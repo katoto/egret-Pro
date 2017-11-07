@@ -19,6 +19,11 @@ class Cnt extends egret.DisplayObjectContainer{
     private  userImg8:userImage
     private  userImg9:userImage
 
+    // 比赛对阵
+    private field1
+    private field2
+    private field3
+    private field4
 
     private drawCnt(Width,Height,anWidth,anHeight){
         // 内容区
@@ -72,13 +77,33 @@ class Cnt extends egret.DisplayObjectContainer{
 
         //生成四个足球场，1/4比赛  485为小球场宽度，应该可以在构造函数里设置，需要优化
         //参数分辨是 x,x，左边球队icon，队名，赔率，总投注，我的投注，右边~
-        for(let i=0;i<4;i++){
-            let _field4:Field4 = new Field4(485,anWidth,'team-01_jpg','克罗地亚',3.78,'10万','10.09万','team-02_jpg','德国',1.26,'23万','10.09万');
-            _field4.y = 120+202*i;
-            this.bgCourtWrap.addChild(_field4);
-        }
+        //  http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png
+
+        this.field2 = new Field_ball(485,anWidth,'http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png','克罗地亚',3.78,'10万','10.09万','team-02_jpg','德国',1.26,'23万','10.09万');
+        this.field2.y = 120;
+        this.bgCourtWrap.addChild(this.field2);
+        this.field2.touchEnabled = true;
+        this.field2.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_twoEvt ,this)
+
+
+        // this.field1 = new Field_ball(485,anWidth,'team-01_jpg','克罗地亚',3.78,'10万','10.09万','team-02_jpg','德国',1.26,'23万','10.09万');
+        // this.field1.y = 120+202*1;
+        // this.bgCourtWrap.addChild(this.field1);
+        // this.field1.touchEnabled = true;
+        // this.field1.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_oneEvt ,this)
 
         
+        // this.field3 = new Field_ball(485,anWidth,'http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png','克罗地亚',3.78,'10万','10.09万','team-02_jpg','德国',1.26,'23万','10.09万');
+        // this.field3.y = 120+202*2;
+        // this.bgCourtWrap.addChild(this.field3);
+        // this.field3.touchEnabled = true;
+        // this.field3.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_threeEvt ,this)
+
+        // for(let i=0;i<4;i++){
+        //     let _field4:Field4 = new Field4(485,anWidth,'team-01_jpg','克罗地亚',3.78,'10万','10.09万','team-02_jpg','德国',1.26,'23万','10.09万');
+        //     _field4.y = 120+202*i;
+        //     this.bgCourtWrap.addChild(_field4);
+        // }
 
         // 左边其他用户 头像实例 ,（名字，头像，金币）,位置为数组中的随机一个{x=15,y=80+220*i} 
         // for(let i=0;i<4;i++){
@@ -97,12 +122,56 @@ class Cnt extends egret.DisplayObjectContainer{
         //     this.bgCourtWrap.addChild(userImg);
         // }
         //  自己的头像
-        let myImg:userImage = new userImage('飞翔小七','https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4182536181,630612655&fm=173&s=EC7819C7026A2D1399FD589D0300C084&w=218&h=146&img.JPEG','23万');
-        myImg.anchorOffsetX = 44;
-        myImg.anchorOffsetY = 124;
-        myImg.x = anWidth;
-        myImg.y = this.bgCourtWrap.height;
-        this.bgCourtWrap.addChild(myImg);
+        // let myImg:userImage = new userImage('飞翔小七','https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4182536181,630612655&fm=173&s=EC7819C7026A2D1399FD589D0300C084&w=218&h=146&img.JPEG','23万');
+        // myImg.anchorOffsetX = 44;
+        // myImg.anchorOffsetY = 124;
+        // myImg.x = anWidth;
+        // myImg.y = this.bgCourtWrap.height;
+        // this.bgCourtWrap.addChild(myImg);
+
+    }
+
+    // 场地点击处理
+    private field_oneEvt( e:egret.TouchEvent ){
+        console.log(1111)
+        console.log(e.localX)
+        console.log(e.localY)
+    }
+    private field_twoEvt( e:egret.TouchEvent ){
+        console.log(222)
+        console.log(e.localX)
+        console.log(e.localY)
+    }
+    private field_threeEvt( e:egret.TouchEvent ){
+        console.log(e)
+        console.log(e.localX)
+        console.log(e.localY)
+    }
+
+
+    //  初始化 场地  （ 每次切换场地，都认为是初始化 ）
+    private initField(){
+        console.log(' 初始化场地 ')
+        var fieldStr = 'field';
+        var $store = window['store']
+        if( $store['matches'] ){
+            for( var i=0,len = $store['matches'].length ;i<len;i++ ){
+                // fieldStr = 'field'+(i+1)
+                // this[fieldStr] = new Field_ball( 485,$store['stage_anWidth'] , $store['matches'][i].homelogo ,
+                //     $store['matches'][i].homename ,  $store['matches'][i].homeodds ,'0' , '0' ,
+                //     $store['matches'][i].awaylogo , $store['matches'][i].awayname , $store['matches'][i].awayodds ,'0' ,'0'
+                // )
+
+            // this.bgCourtWrap.addChild(this[fieldStr]);
+        // this.field1.y = 120+202;
+        // this.bgCourtWrap.addChild(this.field1);
+        // this.field1.touchEnabled = true;
+        // this.field1.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_oneEvt ,this)
+            }
+
+        }
+
+
 
     }
 
@@ -117,7 +186,6 @@ class Cnt extends egret.DisplayObjectContainer{
                 window['store']['emptyUserPosition'].push( i+1 )
             }
         }
-        console.log(  window['store']['emptyUserPosition'] )
         for(let i=0; i<len ;i++){
             if( window['store']['user_info'][i] && window['store']['user_info'][i].photo === '' ){
                 window['store']['user_info'][i].photo = 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4182536181,630612655&fm=173&s=EC7819C7026A2D1399FD589D0300C084&w=218&h=146&img.JPEG'
@@ -144,6 +212,8 @@ class Cnt extends egret.DisplayObjectContainer{
                 this[choseUserImg].y = window['store']['userPositionObj'][window['store']['userPosition'][i] - 1].y;
             }
             this.bgCourtWrap.addChild(this[choseUserImg]);
+            console.log( choseUserImg  )
+
         }
     }
     // 用户 进入
@@ -155,7 +225,8 @@ class Cnt extends egret.DisplayObjectContainer{
             return false;
         }
         userI = userI - 1 ;
-        var choseUserImg = 'userImg' + userI
+        var choseUserImg = 'userImg' + ( userI+1 )
+        console.log( choseUserImg )
         this[choseUserImg] = new userImage( window['formateName'] (username) ,photo  ,
         window['formateGold'] ( total ) );
 
@@ -166,9 +237,14 @@ class Cnt extends egret.DisplayObjectContainer{
             this[choseUserImg].x = window['store']['stage_Width'] - window['store']['userPositionObj'][window['store']['userPosition'][userI]-1].x;
             this[choseUserImg].y = window['store']['userPositionObj'][window['store']['userPosition'][userI]-1].y;
         }
-        
-        window['store']['userPositionID'].push( uid )
+
+        // window['store']['userPositionID'].push( uid )
+        window['store']['userPositionID'].splice( userI - 1,0 ,uid );
         this.bgCourtWrap.addChild(this[choseUserImg]);
+
+        //  注意层级控制，不然事件会有问题 ！
+        this.bgCourtWrap.setChildIndex( this.field1  , this.bgCourtWrap.getChildIndex( this[choseUserImg] ))    
+
     }
     // 用户 离开 
     private removeUserImage( uid:string ){
@@ -179,21 +255,18 @@ class Cnt extends egret.DisplayObjectContainer{
                 break;
             }
         }
-        if( i === len ||delIndex === 0 ){
+        if( i === len || delIndex === 0 ){
             console.error( 'not find uid');
             return false;
         }
         delIndex = delIndex + 1;
         if( delIndex ){
-            let choseUserImg = 'userImg'+ ( delIndex -1 ) ;
-            console.log( choseUserImg )
+            let choseUserImg = 'userImg'+ ( delIndex) ;
             // 更新数组
             window['store']['userPositionID'].splice( delIndex -1 , 1 );
             window['store']['emptyUserPosition'].push( delIndex );
-            // console.log( window['store']['userPositionID'] )
             this.bgCourtWrap.removeChild(this[choseUserImg]);
             // this.bgCourtWrap.removeChild(this[choseUserImg]);
         }
-        console.log(window['store']['userPosition'][delIndex])
     }
 }

@@ -11,17 +11,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var Field4 = (function (_super) {
-    __extends(Field4, _super);
+var Field_ball = (function (_super) {
+    __extends(Field_ball, _super);
     // 设置锚点和x值
-    function Field4(width, x, leftImg, leftT, leftO, leftGold, leftMyMoney, rightImg, rightT, rightO, rightGold, rightMyMoney) {
+    function Field_ball(width, x, leftImg, leftT, leftO, leftGold, leftMyMoney, rightImg, rightT, rightO, rightGold, rightMyMoney) {
         var _this = _super.call(this) || this;
         _this.anchorOffsetX = width / 2;
         _this.x = x;
         _this.drawField(leftImg, leftT, leftO, leftGold, leftMyMoney, rightImg, rightT, rightO, rightGold, rightMyMoney);
         return _this;
     }
-    Field4.prototype.drawField = function (leftImg, leftT, leftO, leftGold, leftMyMoney, rightImg, rightT, rightO, rightGold, rightMyMoney) {
+    Field_ball.prototype.drawField = function (leftImg, leftT, leftO, leftGold, leftMyMoney, rightImg, rightT, rightO, rightGold, rightMyMoney) {
         var court4 = new egret.Bitmap(RES.getRes('bg-court4_png'));
         this.addChild(court4);
         //两个金币收集的背景， 这里要考虑假如没人投注的情况，是否要隐藏
@@ -169,7 +169,11 @@ var Field4 = (function (_super) {
         rightMyMoneyText.textAlign = egret.HorizontalAlign.CENTER;
         rightMyMoneyBox.addChild(rightMyMoneyText);
     };
-    return Field4;
+    // 更新 累计投注
+    // 更新 自己投注的数值
+    Field_ball.prototype.updataBetCoin = function () {
+    };
+    return Field_ball;
 }(egret.DisplayObjectContainer));
-__reflect(Field4.prototype, "Field4");
+__reflect(Field_ball.prototype, "Field_ball");
 //# sourceMappingURL=footballField.js.map

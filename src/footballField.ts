@@ -1,4 +1,4 @@
-class Field4 extends egret.DisplayObjectContainer{
+class Field_ball extends egret.DisplayObjectContainer{
     // 设置锚点和x值
     public constructor(width,x,leftImg,leftT,leftO,leftGold,leftMyMoney,rightImg,rightT,rightO,rightGold,rightMyMoney){
         super();
@@ -19,8 +19,6 @@ class Field4 extends egret.DisplayObjectContainer{
             goldItems.y = -6;
             this.addChild(goldItems);
         }
-       
-
 
 
         // 左边队伍头像容器
@@ -180,4 +178,15 @@ class Field4 extends egret.DisplayObjectContainer{
         rightMyMoneyText.textAlign = egret.HorizontalAlign.CENTER;
         rightMyMoneyBox.addChild(rightMyMoneyText);
     }
+
+    // 更新 累计投注
+    
+    // 更新 自己投注的数值
+    public updataBetCoin(){
+
+
+
+    }
+
+
 }

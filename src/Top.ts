@@ -5,10 +5,8 @@ class Top extends egret.DisplayObjectContainer{
         this.drawTop(Width);
     }
 
-
     private textTitle:egret.TextField;
     private textDate:egret.TextField;
-
     private drawTop(Width){
 
         //    左上角标题

@@ -22,17 +22,17 @@ var Foot = (function (_super) {
     Foot.prototype.drawFoot = function (Width, Height) {
         // 底部背景与投注按钮
         // 底部背景
-        var bottom = new egret.Sprite();
-        bottom.graphics.beginFill(0x2c253e);
-        bottom.graphics.drawRect(0, 0, Width, 90);
-        bottom.graphics.endFill();
+        this.bottom = new egret.Sprite();
+        this.bottom.graphics.beginFill(0x2c253e);
+        this.bottom.graphics.drawRect(0, 0, Width, 90);
+        this.bottom.graphics.endFill();
         // 设置锚点，使背景处于舞台最下方
-        this.addChild(bottom);
+        this.addChild(this.bottom);
         // 规则
         var btnRule = new egret.Bitmap(RES.getRes('rule_png'));
         btnRule.x = 40;
         btnRule.y = 27;
-        bottom.addChild(btnRule);
+        this.bottom.addChild(btnRule);
         btnRule.touchEnabled = true;
         btnRule.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             console.log('规则弹窗');
@@ -41,21 +41,74 @@ var Foot = (function (_super) {
         var btnChat = new egret.Bitmap(RES.getRes('chat_png'));
         btnChat.x = Width - 80;
         btnChat.y = 20;
-        bottom.addChild(btnChat);
+        this.bottom.addChild(btnChat);
         btnChat.touchEnabled = true;
         btnChat.addEventListener(egret.TouchEvent.TOUCH_TAP, function () {
             console.log('聊天弹窗');
         }, this);
+    };
+    Foot.prototype.initBtn = function () {
         //三个投注按钮
-        var btn100 = new FootBtn(100);
-        var btn500 = new FootBtn(500);
-        var btn1000 = new FootBtn(1000);
-        btn100.x = 188;
-        btn500.x = Width / 2;
-        btn1000.x = 560;
-        bottom.addChild(btn100);
-        bottom.addChild(btn500);
-        bottom.addChild(btn1000);
+        if (window['store']['user_info'] && window['store']['user_info'][0] && window['store']['user_info'][0].total) {
+            if (parseInt(window['store']['user_info'][0].total) < 100000) {
+                this.btn_one = new FootBtn(100);
+                this.btn_two = new FootBtn(500);
+                this.btn_three = new FootBtn(1000);
+                window['store']['curr_btn_arr'] = [100, 500, 1000];
+            }
+            else if (parseInt(window['store']['user_info'][0].total) >= 1000000) {
+                this.btn_one = new FootBtn(1000);
+                this.btn_two = new FootBtn(10000);
+                this.btn_three = new FootBtn(50000);
+                window['store']['curr_btn_arr'] = [1000, 10000, 50000];
+            }
+            else {
+                this.btn_one = new FootBtn(500);
+                this.btn_two = new FootBtn(1000);
+                this.btn_three = new FootBtn(10000);
+                window['store']['curr_btn_arr'] = [500, 1000, 10000];
+            }
+            this.btn_one.x = 188;
+            this.btn_two.x = window['store']['stage_Width'] / 2;
+            this.btn_three.x = 560;
+            this.bottom.addChild(this.btn_one);
+            this.bottom.addChild(this.btn_two);
+            this.bottom.addChild(this.btn_three);
+            this.btn_one['init_scale'](1);
+            this.btn_two['init_scale'](0.9);
+            this.btn_three['init_scale'](0.9);
+            window['store']['curr_btn_coin'] = window['store']['curr_btn_arr'][0];
+            this.btn_one.addEventListener(egret.TouchEvent.TOUCH_TAP, this.btn_oneDown, this);
+            this.btn_two.addEventListener(egret.TouchEvent.TOUCH_TAP, this.btn_twoDown, this);
+            this.btn_three.addEventListener(egret.TouchEvent.TOUCH_TAP, this.btn_threeDown, this);
+        }
+        else {
+            console.error('user_info data error  at foot.ts');
+        }
+    };
+    Foot.prototype.btn_oneDown = function (e) {
+        this.btn_two['init_scale'](0.9);
+        this.btn_three['init_scale'](0.9);
+        if (this.btn_one['get_scaleVal']() !== 1) {
+            this.btn_one['init_scale'](1);
+            window['store']['curr_btn_coin'] = window['store']['curr_btn_arr'][0];
+        }
+    };
+    Foot.prototype.btn_twoDown = function (e) {
+        this.btn_one['init_scale'](0.9);
+        this.btn_three['init_scale'](0.9);
+        if (this.btn_two['get_scaleVal']() !== 1) {
+            this.btn_two['init_scale'](1);
+            window['store']['curr_btn_coin'] = window['store']['curr_btn_arr'][1];
+        }
+    };
+    Foot.prototype.btn_threeDown = function (e) {
+        this.btn_two['init_scale'](0.9);
+        this.btn_one['init_scale'](0.9);
+        if (this.btn_three['get_scaleVal']() !== 1) {
+            this.btn_three['init_scale'](1);
+            window['store']['curr_btn_coin'] = window['store']['curr_btn_arr'][2];
+        }
     };
     Foot.prototype.hignColor = function () {
         // var color:number = 0xffd02f;        /// 光晕的颜色，十六进制，不包含透明度
