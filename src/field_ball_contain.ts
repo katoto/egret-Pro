@@ -28,7 +28,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         var fieldStr = 'field';
         var $store = window['store']
         if( $store['matches'] ){
-            for( var i=0,len = $store['matches'].length ;i<len;i++ ){
+            for( var i=0,len = 4 ;i<len;i++ ){
                 fieldStr = 'field'+(i+1)
                 this[fieldStr] = new Field_ball( 485,$store['stage_anWidth'] , $store['matches'][i].homelogo ,
                     $store['matches'][i].homename ,  $store['matches'][i].homeodds ,'0' , '0' ,
@@ -58,6 +58,11 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         console.log(1111)
         console.log(e.localX)
         console.log(e.localY)
+        let x = e.localX;
+        let y = e.localY;
+        if(x<242.5){
+           console.log('左边')
+        }
     }
     private field_twoEvt( e:egret.TouchEvent ){
         console.log(222)
