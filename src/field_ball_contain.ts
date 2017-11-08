@@ -1,12 +1,10 @@
 class Field_ball_contain extends egret.DisplayObjectContainer{
-
-    private this_fieldContain
-
+    private this_fieldContain;
     // 比赛对阵
-    private field1
-    private field2
-    private field3
-    private field4
+    private field1;
+    private field2;
+    private field3;
+    private field4;
 
     public constructor(){
         super();
@@ -56,12 +54,12 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
     // 场地点击处理
     private field_oneEvt( e:egret.TouchEvent ){
         console.log(1111)
-        console.log(e.localX)
-        console.log(e.localY)
         let x = e.localX;
         let y = e.localY;
-        if(x<242.5){
+        if(10<x && x<242.5){
            console.log('左边')
+        }else if(252.5<x && x<475){
+            console.log('右边')
         }
     }
     private field_twoEvt( e:egret.TouchEvent ){

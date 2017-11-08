@@ -459,6 +459,5 @@ window['store'] = {
     'commit':function(key,val){
         console.log(key)
         console.log(val)
-
     }
 } 
