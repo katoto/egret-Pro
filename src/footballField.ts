@@ -129,7 +129,6 @@ class Field_ball extends eui.UILayer {
 
 
 
-
         let rightTitle:egret.TextField = new egret.TextField();
         rightTitle.text = rightT;
         rightTitle.width = 140;

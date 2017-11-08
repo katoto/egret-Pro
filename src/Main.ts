@@ -170,10 +170,24 @@ class Main extends egret.DisplayObjectContainer {
             gold.anchorOffsetX = gold.width/2;
             gold.anchorOffsetY = gold.height/2;
             this.cnt.addChild(gold);
-                gold.x = 100+i*10;
-                gold.y = 100 +i*10 ;
+            gold.x = 100+i*10;
+            gold.y = 100 +i*10 ;
 
         }
+
+        setTimeout(function(){
+            console.log(30000);
+
+            let gold = new Gold();
+            gold.x = this.anWidth;
+            gold.y = this.cnt.bgCourtWrap.height;
+            gold.anchorOffsetX = gold.width/2;
+            gold.anchorOffsetY = gold.height/2;
+            this.cnt.addChild(gold);
+            gold.x = 100+i*10;
+            gold.y = 100 +i*10 ;
+
+        },30000)
 
 
 
@@ -231,7 +245,7 @@ class Main extends egret.DisplayObjectContainer {
         this.webSocket.addEventListener( egret.Event.CONNECT ,this.onSocketOpen ,this );
         this.webSocket.addEventListener( egret.IOErrorEvent.IO_ERROR ,this.onIOError ,this );
         this.webSocket.addEventListener( egret.Event.CLOSE ,this.onCloseSock ,this );
-        this.webSocket.connectByUrl("ws://192.168.76.49:9777/ws");
+        this.webSocket.connectByUrl("ws://192.168.81.240:9777/ws");
 
     }
 
@@ -327,7 +341,9 @@ class Main extends egret.DisplayObjectContainer {
                  j = j+1;
                 // 删除用户
                 console.log( obj.uid )
-                this.cnt.removeUserImage( obj.uid );
+                if( this.cnt ){
+                    this.cnt.removeUserImage( obj.uid );
+                }
             },10000)
 
             console.log( this.cnt )
