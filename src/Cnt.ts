@@ -227,7 +227,12 @@ class Cnt extends egret.DisplayObjectContainer{
             // 更新数组
             window['store']['userPositionID'].splice( delIndex -1 , 1 );
             window['store']['emptyUserPosition'].push( delIndex );
-            this.bgCourtWrap.removeChild(this[choseUserImg]);
+            console.log( this[choseUserImg] )
+            // 还是有问题
+            if( this.bgCourtWrap && this[choseUserImg] ){
+                this.bgCourtWrap.removeChild(this[choseUserImg]);
+            }
+
             // this.bgCourtWrap.removeChild(this[choseUserImg]);
         }
     }
