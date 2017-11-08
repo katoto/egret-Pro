@@ -11,6 +11,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+// class Field_ball extends egret.DisplayObjectContainer{
 var Field_ball = (function (_super) {
     __extends(Field_ball, _super);
     // 设置锚点和x值
@@ -47,7 +48,9 @@ var Field_ball = (function (_super) {
         bgMask.y = 3;
         leftUserBox.addChild(bgMask);
         //队伍icon
-        var leftTeam = new egret.Bitmap(RES.getRes(leftImg));
+        var leftTeam = new eui.Image();
+        // leftTeam.source = leftImg;
+        leftTeam.source = 'http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png';
         leftTeam.width = 62;
         leftTeam.height = 62;
         leftTeam.x = 3;
@@ -115,7 +118,9 @@ var Field_ball = (function (_super) {
         bgMask02.y = 3;
         rightUserBox.addChild(bgMask02);
         //队伍icon
-        var rightTeam = new egret.Bitmap(RES.getRes(rightImg));
+        var rightTeam = new eui.Image();
+        // leftTeam.source = rightImg;
+        rightTeam.source = 'http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png';
         rightTeam.width = 62;
         rightTeam.height = 62;
         rightTeam.x = 3;
@@ -174,6 +179,6 @@ var Field_ball = (function (_super) {
     Field_ball.prototype.updataBetCoin = function () {
     };
     return Field_ball;
-}(egret.DisplayObjectContainer));
+}(eui.UILayer));
 __reflect(Field_ball.prototype, "Field_ball");
 //# sourceMappingURL=footballField.js.map

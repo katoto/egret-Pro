@@ -1,4 +1,5 @@
-class Field_ball extends egret.DisplayObjectContainer{
+// class Field_ball extends egret.DisplayObjectContainer{
+class Field_ball extends eui.UILayer {
     // 设置锚点和x值
     public constructor(width,x,leftImg,leftT,leftO,leftGold,leftMyMoney,rightImg,rightT,rightO,rightGold,rightMyMoney){
         super();
@@ -37,7 +38,9 @@ class Field_ball extends egret.DisplayObjectContainer{
         bgMask.y = 3;
         leftUserBox.addChild(bgMask);
         //队伍icon
-        let leftTeam:egret.Bitmap = new egret.Bitmap(RES.getRes(leftImg));
+        let leftTeam:eui.Image = new eui.Image();
+        // leftTeam.source = leftImg;
+        leftTeam.source = 'http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png';
         leftTeam.width = 62;
         leftTeam.height = 62;
         leftTeam.x = 3;
@@ -114,7 +117,9 @@ class Field_ball extends egret.DisplayObjectContainer{
         bgMask02.y = 3;
         rightUserBox.addChild(bgMask02);
         //队伍icon
-        let rightTeam:egret.Bitmap = new egret.Bitmap(RES.getRes(rightImg));
+        let rightTeam:eui.Image = new eui.Image();
+        // leftTeam.source = rightImg;
+        rightTeam.source = 'http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png';
         rightTeam.width = 62;
         rightTeam.height = 62;
         rightTeam.x = 3;
