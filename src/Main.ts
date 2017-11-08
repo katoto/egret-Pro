@@ -163,16 +163,18 @@ class Main extends egret.DisplayObjectContainer {
 
         //test
         
-        // let gold = new Gold();
-        // gold.x = this.anWidth;
-        // gold.y = this.cnt.bgCourtWrap.height;
-        // gold.anchorOffsetX = gold.width/2;
-        // gold.anchorOffsetY = gold.height/2;
-        // this.cnt.addChild(gold);
-        // this.cnt.stage.addEventListener( egret.TouchEvent.TOUCH_BEGIN, ( evt:egret.TouchEvent )=>{
-        //        gold.x = evt.localX ;
-        //        gold.y = evt.localY ;
-        // }, this );
+        for( var i=0,len = 150;i<len;i++ ){
+            let gold = new Gold();
+            gold.x = this.anWidth;
+            gold.y = this.cnt.bgCourtWrap.height;
+            gold.anchorOffsetX = gold.width/2;
+            gold.anchorOffsetY = gold.height/2;
+            this.cnt.addChild(gold);
+                gold.x = 100+i*10;
+                gold.y = 100 +i*10 ;
+
+        }
+
 
 
 
@@ -293,13 +295,10 @@ class Main extends egret.DisplayObjectContainer {
                         }
                         if( msgObj.body.matches ){
                             window['store'].matches =  msgObj.body.matches;
-                            //  初始化场地 数据
-                            this.cnt.initField();
+                            //  初始化场地容器 数据
+                            this.cnt.initFieldCon();
                         }
-
                     }
-
-
                     ;break;
                 case '123':
                     // 用户进场
@@ -307,7 +306,7 @@ class Main extends egret.DisplayObjectContainer {
                     break;
             }
             var i = 0;
-            setTimeout(() => {
+            setInterval(() => {
                 var obj = { 
                     "username": "游客_2867477",
                     "photo": "https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg",
