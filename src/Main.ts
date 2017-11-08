@@ -316,19 +316,19 @@ class Main extends egret.DisplayObjectContainer {
                 i = i+1 ;
                 // 加用户
                 this.cnt.addUserImage( obj.username, obj.photo ,obj.total , obj.uid );
-            },2500)
+            },5000)
 
             var j =0 ;
-            // setInterval(() => {
-            //     console.log('user out')
-            //     var obj = { 
-            //         "uid": "1003118"+ j
-            //      }
-            //      j = j+1;
-            //     // 删除用户
-            //     console.log( obj.uid )
-            //     this.cnt.removeUserImage( obj.uid );
-            // },10000)
+            setInterval(() => {
+                console.log('user out')
+                var obj = { 
+                    "uid": "1003118"+ j
+                 }
+                 j = j+1;
+                // 删除用户
+                console.log( obj.uid )
+                this.cnt.removeUserImage( obj.uid );
+            },10000)
 
             console.log( this.cnt )
         }
