@@ -1,72 +1,76 @@
-// class Field_ball extends egret.DisplayObjectContainer{
-class Field_ball extends eui.UILayer {
+var __reflect = (this && this.__reflect) || function (p, c, t) {
+    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
+};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var Field_ball = (function (_super) {
+    __extends(Field_ball, _super);
     // 设置锚点和x值
-    public constructor(width,x,leftImg,leftT,leftO,leftGold,leftMyMoney,rightImg,rightT,rightO,rightGold,rightMyMoney){
-        super();
-        this.anchorOffsetX=width/2;
-        this.x = x;
-        this.drawField(leftImg,leftT,leftO,leftGold,leftMyMoney,rightImg,rightT,rightO,rightGold,rightMyMoney);
+    function Field_ball(width, x, leftImg, leftT, leftO, leftGold, leftMyMoney, rightImg, rightT, rightO, rightGold, rightMyMoney) {
+        var _this = _super.call(this) || this;
+        _this.anchorOffsetX = width / 2;
+        _this.x = x;
+        _this.drawField(leftImg, leftT, leftO, leftGold, leftMyMoney, rightImg, rightT, rightO, rightGold, rightMyMoney);
+        return _this;
     }
-    private drawField(leftImg,leftT,leftO,leftGold,leftMyMoney,rightImg,rightT,rightO,rightGold,rightMyMoney){
-        
-        let court4:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-court4_png'));
+    Field_ball.prototype.drawField = function (leftImg, leftT, leftO, leftGold, leftMyMoney, rightImg, rightT, rightO, rightGold, rightMyMoney) {
+        var court4 = new egret.Bitmap(RES.getRes('bg-court4_png'));
         this.addChild(court4);
-
-
         //两个金币收集的背景， 这里要考虑假如没人投注的情况，是否要隐藏
-        for(let i=0;i<2;i++){
-            let goldItems:egret.Bitmap = new egret.Bitmap(RES.getRes('gold-items_png'));
-            goldItems.x = 62+246*i;
+        for (var i = 0; i < 2; i++) {
+            var goldItems = new egret.Bitmap(RES.getRes('gold-items_png'));
+            goldItems.x = 62 + 246 * i;
             goldItems.y = -6;
             this.addChild(goldItems);
         }
-
-
         // 左边队伍头像容器
-        let leftUserBox:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
+        var leftUserBox = new egret.DisplayObjectContainer();
         leftUserBox.width = 68;
         leftUserBox.height = 68;
         leftUserBox.x = 25;
         leftUserBox.y = 54;
         this.addChild(leftUserBox);
         // 插入边框
-        let bgBorder:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
+        var bgBorder = new egret.Bitmap(RES.getRes('bg-item_png'));
         leftUserBox.addChild(bgBorder);
         // 插入遮罩层
-        let bgMask:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-user_png'));
+        var bgMask = new egret.Bitmap(RES.getRes('bg-user_png'));
         bgMask.x = 3;
         bgMask.y = 3;
         leftUserBox.addChild(bgMask);
         //队伍icon
-        let leftTeam:eui.Image = new eui.Image();
-        // leftTeam.source = leftImg;
-        leftTeam.source = 'http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png';
+        var leftTeam = new egret.Bitmap(RES.getRes(leftImg));
         leftTeam.width = 62;
         leftTeam.height = 62;
         leftTeam.x = 3;
         leftTeam.y = 3;
         leftUserBox.addChild(leftTeam);
         leftTeam.mask = bgMask;
-
         // 左边队伍对面
-        let leftTitle:egret.TextField = new egret.TextField();
+        var leftTitle = new egret.TextField();
         leftTitle.text = leftT;
         leftTitle.size = 22;
         leftTitle.x = 102;
         leftTitle.y = 60;
         this.addChild(leftTitle);
-
         // 左边队伍赔率
-        let leftOdds:egret.TextField = new egret.TextField();
+        var leftOdds = new egret.TextField();
         leftOdds.text = leftO;
         leftOdds.size = 28;
         leftOdds.x = 102;
         leftOdds.y = 94;
         leftOdds.bold = true;
         this.addChild(leftOdds);
-
         // 左边队伍金币收集
-        let leftG:egret.TextField = new egret.TextField();
+        var leftG = new egret.TextField();
         leftG.text = leftGold;
         leftG.textColor = 0xbbcfc6;
         leftG.size = 20;
@@ -77,20 +81,16 @@ class Field_ball extends eui.UILayer {
         leftG.verticalAlign = egret.VerticalAlign.MIDDLE;
         leftG.textAlign = egret.HorizontalAlign.CENTER;
         this.addChild(leftG);
-
-
         //左边队伍我投足的金额,可能需要隐藏
-        let leftMyMoneyBox:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
+        var leftMyMoneyBox = new egret.DisplayObjectContainer();
         leftMyMoneyBox.width = 196;
         leftMyMoneyBox.height = 27;
         leftMyMoneyBox.x = 25;
         leftMyMoneyBox.y = 148;
         this.addChild(leftMyMoneyBox);
-
-        let leftMyMoneyBg:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-betting_png'));
+        var leftMyMoneyBg = new egret.Bitmap(RES.getRes('bg-betting_png'));
         leftMyMoneyBox.addChild(leftMyMoneyBg);
-
-        let leftMyMoneyText:egret.TextField = new egret.TextField();
+        var leftMyMoneyText = new egret.TextField();
         leftMyMoneyText.text = leftMyMoney;
         leftMyMoneyText.width = 196;
         leftMyMoneyText.height = 27;
@@ -99,38 +99,30 @@ class Field_ball extends eui.UILayer {
         leftMyMoneyText.verticalAlign = egret.VerticalAlign.MIDDLE;
         leftMyMoneyText.textAlign = egret.HorizontalAlign.CENTER;
         leftMyMoneyBox.addChild(leftMyMoneyText);
-
         // 右边同上
-
-        let rightUserBox:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
+        var rightUserBox = new egret.DisplayObjectContainer();
         rightUserBox.width = 68;
         rightUserBox.height = 68;
         rightUserBox.x = 400;
         rightUserBox.y = 54;
         this.addChild(rightUserBox);
         // 插入边框
-        let bgBorder02:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
+        var bgBorder02 = new egret.Bitmap(RES.getRes('bg-item_png'));
         rightUserBox.addChild(bgBorder02);
         // 插入遮罩层
-        let bgMask02:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-user_png'));
+        var bgMask02 = new egret.Bitmap(RES.getRes('bg-user_png'));
         bgMask02.x = 3;
         bgMask02.y = 3;
         rightUserBox.addChild(bgMask02);
         //队伍icon
-        let rightTeam:eui.Image = new eui.Image();
-        // leftTeam.source = rightImg;
-        rightTeam.source = 'http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png';
+        var rightTeam = new egret.Bitmap(RES.getRes(rightImg));
         rightTeam.width = 62;
         rightTeam.height = 62;
         rightTeam.x = 3;
         rightTeam.y = 3;
         rightUserBox.addChild(rightTeam);
         rightTeam.mask = bgMask02;
-
-
-
-
-        let rightTitle:egret.TextField = new egret.TextField();
+        var rightTitle = new egret.TextField();
         rightTitle.text = rightT;
         rightTitle.width = 140;
         rightTitle.textAlign = egret.HorizontalAlign.RIGHT;
@@ -138,8 +130,7 @@ class Field_ball extends eui.UILayer {
         rightTitle.x = 250;
         rightTitle.y = 58;
         this.addChild(rightTitle);
-
-        let rightOdds:egret.TextField = new egret.TextField();
+        var rightOdds = new egret.TextField();
         rightOdds.text = rightO;
         rightOdds.width = 140;
         rightOdds.textAlign = egret.HorizontalAlign.RIGHT;
@@ -148,8 +139,7 @@ class Field_ball extends eui.UILayer {
         rightOdds.y = 94;
         rightOdds.bold = true;
         this.addChild(rightOdds);
-
-        let rightG:egret.TextField = new egret.TextField();
+        var rightG = new egret.TextField();
         rightG.text = rightGold;
         rightG.textColor = 0xbbcfc6;
         rightG.size = 20;
@@ -160,20 +150,16 @@ class Field_ball extends eui.UILayer {
         rightG.verticalAlign = egret.VerticalAlign.MIDDLE;
         rightG.textAlign = egret.HorizontalAlign.CENTER;
         this.addChild(rightG);
-
-
-         //左边队伍我投足的金额
-        let rightMyMoneyBox:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
+        //左边队伍我投足的金额
+        var rightMyMoneyBox = new egret.DisplayObjectContainer();
         rightMyMoneyBox.width = 196;
         rightMyMoneyBox.height = 27;
         rightMyMoneyBox.x = 270;
         rightMyMoneyBox.y = 148;
         this.addChild(rightMyMoneyBox);
-
-        let rightMyMoneyBg:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-betting_png'));
+        var rightMyMoneyBg = new egret.Bitmap(RES.getRes('bg-betting_png'));
         rightMyMoneyBox.addChild(rightMyMoneyBg);
-
-        let rightMyMoneyText:egret.TextField = new egret.TextField();
+        var rightMyMoneyText = new egret.TextField();
         rightMyMoneyText.text = rightMyMoney;
         rightMyMoneyText.width = 196;
         rightMyMoneyText.height = 27;
@@ -182,16 +168,12 @@ class Field_ball extends eui.UILayer {
         rightMyMoneyText.verticalAlign = egret.VerticalAlign.MIDDLE;
         rightMyMoneyText.textAlign = egret.HorizontalAlign.CENTER;
         rightMyMoneyBox.addChild(rightMyMoneyText);
-    }
-
+    };
     // 更新 累计投注
-    
     // 更新 自己投注的数值
-    public updataBetCoin(){
-
-
-
-    }
-
-
-}
+    Field_ball.prototype.updataBetCoin = function () {
+    };
+    return Field_ball;
+}(egret.DisplayObjectContainer));
+__reflect(Field_ball.prototype, "Field_ball");
+//# sourceMappingURL=footballField.js.map
