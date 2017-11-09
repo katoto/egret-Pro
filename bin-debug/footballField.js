@@ -14,6 +14,7 @@ var __extends = (this && this.__extends) || (function () {
 // class Field_ball extends egret.DisplayObjectContainer{
 var Field_ball = (function (_super) {
     __extends(Field_ball, _super);
+    // 自己金币边投边创建  累计的投注额 优先创建好
     // 设置锚点和x值
     function Field_ball(width, x, leftImg, leftT, leftO, leftGold, leftMyMoney, rightImg, rightT, rightO, rightGold, rightMyMoney) {
         var _this = _super.call(this) || this;
@@ -84,6 +85,17 @@ var Field_ball = (function (_super) {
         leftG.verticalAlign = egret.VerticalAlign.MIDDLE;
         leftG.textAlign = egret.HorizontalAlign.CENTER;
         this.addChild(leftG);
+        var rightG = new egret.TextField();
+        rightG.text = rightGold;
+        rightG.textColor = 0xbbcfc6;
+        rightG.size = 20;
+        rightG.width = 110;
+        rightG.height = 28;
+        rightG.x = 320;
+        rightG.y = -6;
+        rightG.verticalAlign = egret.VerticalAlign.MIDDLE;
+        rightG.textAlign = egret.HorizontalAlign.CENTER;
+        this.addChild(rightG);
         //左边队伍我投足的金额,可能需要隐藏
         var leftMyMoneyBox = new egret.DisplayObjectContainer();
         leftMyMoneyBox.width = 196;
@@ -144,17 +156,6 @@ var Field_ball = (function (_super) {
         rightOdds.y = 94;
         rightOdds.bold = true;
         this.addChild(rightOdds);
-        var rightG = new egret.TextField();
-        rightG.text = rightGold;
-        rightG.textColor = 0xbbcfc6;
-        rightG.size = 20;
-        rightG.width = 110;
-        rightG.height = 28;
-        rightG.x = 320;
-        rightG.y = -6;
-        rightG.verticalAlign = egret.VerticalAlign.MIDDLE;
-        rightG.textAlign = egret.HorizontalAlign.CENTER;
-        this.addChild(rightG);
         //左边队伍我投足的金额
         var rightMyMoneyBox = new egret.DisplayObjectContainer();
         rightMyMoneyBox.width = 196;

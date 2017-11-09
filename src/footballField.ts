@@ -1,5 +1,14 @@
 // class Field_ball extends egret.DisplayObjectContainer{
 class Field_ball extends eui.UILayer {
+    // 收起的实例
+    private goldItems_left:egret.Bitmap;
+    private goldItems_right:egret.Bitmap;
+
+    //  缺一个 被人投注金币的样式
+
+    // 自己金币边投边创建  累计的投注额 优先创建好
+
+
     // 设置锚点和x值
     public constructor(width,x,leftImg,leftT,leftO,leftGold,leftMyMoney,rightImg,rightT,rightO,rightGold,rightMyMoney){
         super();
@@ -12,14 +21,33 @@ class Field_ball extends eui.UILayer {
         let court4:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-court4_png'));
         this.addChild(court4);
 
+        //两个金币收集的背景， 这里要考虑假如没人投注的情况，是否要隐藏  62+246;
+        this.goldItems_left = new egret.Bitmap(RES.getRes('gold-items_png'));
+        this.goldItems_left.x = 308;
+        this.goldItems_left.y = -6;
 
-        //两个金币收集的背景， 这里要考虑假如没人投注的情况，是否要隐藏
-        for(let i=0;i<2;i++){
-            let goldItems:egret.Bitmap = new egret.Bitmap(RES.getRes('gold-items_png'));
-            goldItems.x = 62+246*i;
-            goldItems.y = -6;
-            this.addChild(goldItems);
-        }
+        this.goldItems_right = new egret.Bitmap(RES.getRes('gold-items_png'));
+        this.goldItems_right.x = 62+246;
+        this.goldItems_right.y = -6;
+
+        this.addChild(this.goldItems_left);
+        this.addChild(this.goldItems_right);
+
+        // 左边队伍金币收集
+        let leftG:egret.TextField = new egret.TextField();
+        leftG.text = leftGold;
+        leftG.textColor = 0xbbcfc6;
+        leftG.size = 20;
+        leftG.width = 110;
+        leftG.height = 28;
+        leftG.x = 75;
+        leftG.y = -6;
+        leftG.verticalAlign = egret.VerticalAlign.MIDDLE;
+        leftG.textAlign = egret.HorizontalAlign.CENTER;
+        this.addChild(leftG);
+
+
+
 
 
         // 左边队伍头像容器
@@ -29,6 +57,7 @@ class Field_ball extends eui.UILayer {
         leftUserBox.x = 25;
         leftUserBox.y = 54;
         this.addChild(leftUserBox);
+        
         // 插入边框
         let bgBorder:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         leftUserBox.addChild(bgBorder);
@@ -65,18 +94,19 @@ class Field_ball extends eui.UILayer {
         leftOdds.bold = true;
         this.addChild(leftOdds);
 
-        // 左边队伍金币收集
-        let leftG:egret.TextField = new egret.TextField();
-        leftG.text = leftGold;
-        leftG.textColor = 0xbbcfc6;
-        leftG.size = 20;
-        leftG.width = 110;
-        leftG.height = 28;
-        leftG.x = 75;
-        leftG.y = -6;
-        leftG.verticalAlign = egret.VerticalAlign.MIDDLE;
-        leftG.textAlign = egret.HorizontalAlign.CENTER;
-        this.addChild(leftG);
+
+
+        let rightG:egret.TextField = new egret.TextField();
+        rightG.text = rightGold;
+        rightG.textColor = 0xbbcfc6;
+        rightG.size = 20;
+        rightG.width = 110;
+        rightG.height = 28;
+        rightG.x = 320;
+        rightG.y = -6;
+        rightG.verticalAlign = egret.VerticalAlign.MIDDLE;
+        rightG.textAlign = egret.HorizontalAlign.CENTER;
+        this.addChild(rightG);
 
 
         //左边队伍我投足的金额,可能需要隐藏
@@ -148,17 +178,7 @@ class Field_ball extends eui.UILayer {
         rightOdds.bold = true;
         this.addChild(rightOdds);
 
-        let rightG:egret.TextField = new egret.TextField();
-        rightG.text = rightGold;
-        rightG.textColor = 0xbbcfc6;
-        rightG.size = 20;
-        rightG.width = 110;
-        rightG.height = 28;
-        rightG.x = 320;
-        rightG.y = -6;
-        rightG.verticalAlign = egret.VerticalAlign.MIDDLE;
-        rightG.textAlign = egret.HorizontalAlign.CENTER;
-        this.addChild(rightG);
+
 
 
          //左边队伍我投足的金额
@@ -181,8 +201,23 @@ class Field_ball extends eui.UILayer {
         rightMyMoneyText.verticalAlign = egret.VerticalAlign.MIDDLE;
         rightMyMoneyText.textAlign = egret.HorizontalAlign.CENTER;
         rightMyMoneyBox.addChild(rightMyMoneyText);
+
+
+
+
     }
 
+    //  创建 左边 收起的类
+    private addLeftAllCoin(){
+
+
+    }
+    //  创建 右边 收起的类
+    private addRightAllCoin(){
+
+
+
+    }
     // 更新 累计投注
     
     // 更新 自己投注的数值
