@@ -55,6 +55,12 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
     private field_oneEvt( e:egret.TouchEvent ){
         console.log(1)
         console.log( e )
+
+        //  ajax 下单
+        //  执行动画
+
+
+
         let x = e.localX;
         let y = e.localY;
         if(10<x && x<242.5){
@@ -62,9 +68,15 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         }else if(252.5<x && x<475){
             console.log('右边')
         }
+
+
     }
     private field_twoEvt( e:egret.TouchEvent ){
         console.log(2)
+
+        //  ajax 下单
+        //  执行动画
+        this.tween_Coin()
         console.log(e.localX)
         console.log(e.localY)
     }
@@ -78,6 +90,24 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         console.log(4)
         console.log(e.localX)
         console.log(e.localY)
+    }
+
+    private tween_Coin(){
+        /**
+         *  创建 金币 并执行动画 
+         * 
+         */
+            let gold = new Gold();
+            gold.anchorOffsetX = gold.width/2;
+            gold.anchorOffsetY = gold.height/2;
+            gold.x = 200;
+            gold.y = 200;
+
+            this.addChild(gold);
+            
+            egret.Tween.get( gold ).to( { x:400,y:700 },1000 )
+
+
     }
 
 }

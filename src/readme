@@ -55,3 +55,8 @@ https://ashan.org/archives/522
 
 白鹭引擎官方提供了 MovieClip API 来进行帧动画创作
 
+         *  egret.Tween.get(display).call(function (a:number, b:string) {
+         *      console.log("a: " + a); //对应传入的第一个参数 233
+         *      console.log("b: " + b); //对应传入的第二个参数 “hello”
+         *  }, this, [233, "hello"]);
+
