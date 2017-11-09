@@ -190,7 +190,7 @@ class Cnt extends egret.DisplayObjectContainer{
         var choseUserImg = 'userImg' + ( userI+1 )
         console.log( choseUserImg )
         this[choseUserImg] = new userImage( window['formateName'] (username) ,photo  ,
-        window['formateGold'] ( total ) );
+        window['formateGold'] ( total ),'测试金币' );
 
         if( ( window['store']['userPosition'][userI]-1 ) < 5 ){
             this[choseUserImg].x = window['store']['userPositionObj'][window['store']['userPosition'][userI]-1].x;

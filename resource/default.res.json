@@ -1,175 +1,180 @@
 {
 	"groups": [
 		{
-			"keys": "bg_jpg,description_json,btn-recharge_png,btn-past_png,rule_png,chat_png,pop-game_png,text-over_png,text-begin_png,back_png,bg-time_png,bg-court_png,bg-court4_png,team-01_jpg,team-02_jpg,bg-avatar_png,bg-textTips_png,btnOn_png,btn_png,gold_png,userimg_png,win_png,gold-items_png,bg-betting_png,bg-user_png,bg-item_png,bg-betting2_png,bg-item2_png,bg-user2_png,gold-items2_png,gold2_png,userimg2_png,win2_png",
+			"keys": "bg_jpg,description_json,btn-recharge_png,btn-past_png,rule_png,chat_png,pop-game_png,text-over_png,text-begin_png,back_png,bg-time_png,bg-court_png,bg-court4_png,team-01_jpg,team-02_jpg,bg-avatar_png,bg-textTips_png,btnOn_png,btn_png,gold_png,userimg_png,win_png,gold-items_png,bg-betting_png,bg-user_png,bg-item_png,bg-betting2_png,bg-item2_png,bg-user2_png,gold-items2_png,gold2_png,userimg2_png,win2_png,bg-border_png",
 			"name": "preload"
 		}
 	],
 	"resources": [
 		{
-			"name": "bg_jpg",
+			"url": "assets/bg.jpg",
 			"type": "image",
-			"url": "assets/bg.jpg"
+			"name": "bg_jpg"
 		},
 		{
-			"name": "description_json",
+			"url": "config/description.json",
 			"type": "json",
-			"url": "config/description.json"
+			"name": "description_json"
 		},
 		{
-			"name": "btn-recharge_png",
+			"url": "assets/btn-recharge.png",
 			"type": "image",
-			"url": "assets/btn-recharge.png"
+			"name": "btn-recharge_png"
 		},
 		{
-			"name": "btn-past_png",
+			"url": "assets/btn-past.png",
 			"type": "image",
-			"url": "assets/btn-past.png"
+			"name": "btn-past_png"
 		},
 		{
-			"name": "rule_png",
+			"url": "assets/rule.png",
 			"type": "image",
-			"url": "assets/rule.png"
+			"name": "rule_png"
 		},
 		{
-			"name": "chat_png",
+			"url": "assets/chat.png",
 			"type": "image",
-			"url": "assets/chat.png"
+			"name": "chat_png"
 		},
 		{
-			"name": "pop-game_png",
+			"url": "assets/pop-game.png",
 			"type": "image",
-			"url": "assets/pop-game.png"
+			"name": "pop-game_png"
 		},
 		{
-			"name": "text-over_png",
+			"url": "assets/text-over.png",
 			"type": "image",
-			"url": "assets/text-over.png"
+			"name": "text-over_png"
 		},
 		{
-			"name": "text-begin_png",
+			"url": "assets/text-begin.png",
 			"type": "image",
-			"url": "assets/text-begin.png"
+			"name": "text-begin_png"
 		},
 		{
-			"name": "back_png",
+			"url": "assets/back.png",
 			"type": "image",
-			"url": "assets/back.png"
+			"name": "back_png"
 		},
 		{
-			"name": "bg-time_png",
+			"url": "assets/bg-time.png",
 			"type": "image",
-			"url": "assets/bg-time.png"
+			"name": "bg-time_png"
 		},
 		{
-			"name": "bg-court_png",
+			"url": "assets/bg-court.png",
 			"type": "image",
-			"url": "assets/bg-court.png"
+			"name": "bg-court_png"
 		},
 		{
-			"name": "bg-court4_png",
+			"url": "assets/bg-court4.png",
 			"type": "image",
-			"url": "assets/bg-court4.png"
+			"name": "bg-court4_png"
 		},
 		{
-			"name": "team-01_jpg",
+			"url": "assets/team-01.jpg",
 			"type": "image",
-			"url": "assets/team-01.jpg"
+			"name": "team-01_jpg"
 		},
 		{
-			"name": "team-02_jpg",
+			"url": "assets/team-02.jpg",
 			"type": "image",
-			"url": "assets/team-02.jpg"
+			"name": "team-02_jpg"
 		},
 		{
-			"name": "bg-avatar_png",
+			"url": "assets/bg-avatar.png",
 			"type": "image",
-			"url": "assets/bg-avatar.png"
+			"name": "bg-avatar_png"
 		},
 		{
-			"name": "bg-textTips_png",
+			"url": "assets/bg-textTips.png",
 			"type": "image",
-			"url": "assets/bg-textTips.png"
+			"name": "bg-textTips_png"
 		},
 		{
-			"name": "btnOn_png",
+			"url": "assets/btnOn.png",
 			"type": "image",
-			"url": "assets/btnOn.png"
+			"name": "btnOn_png"
 		},
 		{
-			"name": "btn_png",
+			"url": "assets/btn.png",
 			"type": "image",
-			"url": "assets/btn.png"
+			"name": "btn_png"
 		},
 		{
-			"name": "gold_png",
+			"url": "assets/gold.png",
 			"type": "image",
-			"url": "assets/gold.png"
+			"name": "gold_png"
 		},
 		{
-			"name": "userimg_png",
+			"url": "assets/userimg.png",
 			"type": "image",
-			"url": "assets/userimg.png"
+			"name": "userimg_png"
 		},
 		{
-			"name": "win_png",
+			"url": "assets/win.png",
 			"type": "image",
-			"url": "assets/win.png"
+			"name": "win_png"
 		},
 		{
-			"name": "gold-items_png",
+			"url": "assets/gold-items.png",
 			"type": "image",
-			"url": "assets/gold-items.png"
+			"name": "gold-items_png"
 		},
 		{
-			"name": "bg-betting_png",
+			"url": "assets/bg-betting.png",
 			"type": "image",
-			"url": "assets/bg-betting.png"
+			"name": "bg-betting_png"
 		},
 		{
-			"name": "bg-user_png",
+			"url": "assets/bg-user.png",
 			"type": "image",
-			"url": "assets/bg-user.png"
+			"name": "bg-user_png"
 		},
 		{
-			"name": "bg-item_png",
+			"url": "assets/bg-item.png",
 			"type": "image",
-			"url": "assets/bg-item.png"
+			"name": "bg-item_png"
 		},
 		{
-			"name": "bg-betting2_png",
+			"url": "assets/bg-betting.png",
 			"type": "image",
-			"url": "assets/bg-betting.png"
+			"name": "bg-betting2_png"
 		},
 		{
-			"name": "bg-item2_png",
+			"url": "assets/bg-item.png",
 			"type": "image",
-			"url": "assets/bg-item.png"
+			"name": "bg-item2_png"
 		},
 		{
-			"name": "bg-user2_png",
+			"url": "assets/bg-user.png",
 			"type": "image",
-			"url": "assets/bg-user.png"
+			"name": "bg-user2_png"
 		},
 		{
-			"name": "gold-items2_png",
+			"url": "assets/gold-items.png",
 			"type": "image",
-			"url": "assets/gold-items.png"
+			"name": "gold-items2_png"
 		},
 		{
-			"name": "gold2_png",
+			"url": "assets/gold.png",
 			"type": "image",
-			"url": "assets/gold.png"
+			"name": "gold2_png"
 		},
 		{
-			"name": "userimg2_png",
+			"url": "assets/userimg.png",
 			"type": "image",
-			"url": "assets/userimg.png"
+			"name": "userimg2_png"
 		},
 		{
-			"name": "win2_png",
+			"url": "assets/win.png",
 			"type": "image",
-			"url": "assets/win.png"
+			"name": "win2_png"
+		},
+		{
+			"name": "bg-border_png",
+			"type": "image",
+			"url": "assets/bg-border.png"
 		}
 	]
 }

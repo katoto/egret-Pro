@@ -10,13 +10,13 @@ class Field_ball extends eui.UILayer {
 
 
     // 设置锚点和x值
-    public constructor(width,x,leftImg,leftT,leftO,leftGold,leftMyMoney,rightImg,rightT,rightO,rightGold,rightMyMoney){
+    public constructor(width,x,leftImg,leftT,leftO,leftGold,leftMyMoney,rightImg,rightT,rightO,rightGold,rightMyMoney,winX){
         super();
         this.anchorOffsetX=width/2;
         this.x = x;
-        this.drawField(leftImg,leftT,leftO,leftGold,leftMyMoney,rightImg,rightT,rightO,rightGold,rightMyMoney);
+        this.drawField(leftImg,leftT,leftO,leftGold,leftMyMoney,rightImg,rightT,rightO,rightGold,rightMyMoney,winX);
     }
-    private drawField(leftImg,leftT,leftO,leftGold,leftMyMoney,rightImg,rightT,rightO,rightGold,rightMyMoney){
+    private drawField(leftImg,leftT,leftO,leftGold,leftMyMoney,rightImg,rightT,rightO,rightGold,rightMyMoney,winX){
         
         let court4:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-court4_png'));
         this.addChild(court4);
@@ -201,6 +201,16 @@ class Field_ball extends eui.UILayer {
         rightMyMoneyText.verticalAlign = egret.VerticalAlign.MIDDLE;
         rightMyMoneyText.textAlign = egret.HorizontalAlign.CENTER;
         rightMyMoneyBox.addChild(rightMyMoneyText);
+
+
+        // 胜利图标
+        let win:egret.Bitmap = new egret.Bitmap(RES.getRes('win2_png'));
+        win.anchorOffsetY = win.height/2;
+        
+        // -80  or 350
+        win.x = winX;
+        win.y = 90;
+        this.addChild(win);
 
 
 

@@ -24,7 +24,7 @@
 		"bin-debug/TextTips.js",
 		"bin-debug/Timer.js",
 		"bin-debug/Top.js",
-		"bin-debug/userImage.js",
+		"bin-debug/UserImage.js",
 		"bin-debug/adapter/AssetAdapter.js",
 		"bin-debug/adapter/ThemeAdapter.js",
 		"bin-debug/utils/Http.js"
