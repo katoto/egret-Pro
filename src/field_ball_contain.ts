@@ -53,7 +53,8 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
     // 场地点击处理
     private field_oneEvt( e:egret.TouchEvent ){
-        console.log(1111)
+        console.log(1)
+        console.log( e )
         let x = e.localX;
         let y = e.localY;
         if(10<x && x<242.5){
@@ -63,7 +64,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         }
     }
     private field_twoEvt( e:egret.TouchEvent ){
-        console.log(222)
+        console.log(2)
         console.log(e.localX)
         console.log(e.localY)
     }
