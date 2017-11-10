@@ -62,12 +62,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
         //  ajax 下单
         //  执行动画
-<<<<<<< HEAD
-=======
         console.log(e.stageY)
         console.log(e.$stageY)
 
->>>>>>> ca591b61e61eb5dce788afae324e56251a184935
 
         let x = e.localX;
         let y = e.localY;
@@ -81,13 +78,11 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
     }
     async field_twoEvt( e:egret.TouchEvent ){
         console.log(2)
-<<<<<<< HEAD
         //  ajax 下单
         //  执行动画
-        this.tween_Coin(30,40)
+        // this.tween_Coin(30,40)
         console.log(e.localX)
         console.log(e.localY)
-=======
         console.log( e )
         //  ajax 下单  请求
 
@@ -97,7 +92,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         
         console.log(e.stageY)
         console.log(e.$stageY)
->>>>>>> ca591b61e61eb5dce788afae324e56251a184935
     }
     private field_threeEvt( e:egret.TouchEvent ){
         console.log(3)
@@ -113,11 +107,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         this.tween_Coin( e.$stageX ,e.$stageY -150 )
     }
 
-<<<<<<< HEAD
-    private tween_Coin(xx,yy){
-=======
     private tween_Coin( stage_x:Number ,stage_y:Number ){
->>>>>>> ca591b61e61eb5dce788afae324e56251a184935
         /**
          *  创建 金币 并执行动画  (报错对应的对象 ，为收集金币做处理 )
          * 
@@ -125,12 +115,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             let gold = new Gold();
             gold.anchorOffsetX = gold.width/2;
             gold.anchorOffsetY = gold.height/2;
-<<<<<<< HEAD
-            gold.x = 200;
-            gold.y = 200;
-            this.addChild(gold);
-            egret.Tween.get( gold ).to( { x:xx,y:yy },1000 )
-=======
             gold.x = window['store']['stage_anWidth'];
             gold.y = 1000;
 
@@ -149,7 +133,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         /**
          *  下单
          */
->>>>>>> ca591b61e61eb5dce788afae324e56251a184935
 
 
     }

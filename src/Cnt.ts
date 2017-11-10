@@ -160,8 +160,6 @@ class Cnt extends egret.DisplayObjectContainer{
             var choseUserImg = 'userImg'+(i+1)
             this[choseUserImg] = new userImage( window['formateName'] ( window['store']['user_info'][i].username ) , window['store']['user_info'][i].photo  ,
             window['formateGold'] ( window['store']['user_info'][i].total ),'asdas' );
-
-
             if( i === 0 ){
                 this[choseUserImg].anchorOffsetX = 44;
                 this[choseUserImg].anchorOffsetY = 124 ;
