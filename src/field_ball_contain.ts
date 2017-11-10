@@ -6,6 +6,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
     private field3;
     private field4;
 
+    // urlloader ajax 实例
+    private ajax_orderLoader;
+
     public constructor(){
         super();
         this.drawField();
@@ -18,6 +21,8 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         // this.addChild(this.field2);
         // this.field2.touchEnabled = true;
         // this.field2.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_twoEvt ,this)
+
+
     }
 
     //  初始化 场地  （ 每次切换场地，都认为是初始化 ）
@@ -54,10 +59,15 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
     // 场地点击处理
     private field_oneEvt( e:egret.TouchEvent ){
         console.log(1)
-        console.log( e )
 
         //  ajax 下单
         //  执行动画
+<<<<<<< HEAD
+=======
+        console.log(e.stageY)
+        console.log(e.$stageY)
+
+>>>>>>> ca591b61e61eb5dce788afae324e56251a184935
 
         let x = e.localX;
         let y = e.localY;
@@ -66,41 +76,80 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         }else if(252.5<x && x<475){
             console.log('右边')
         }
-
+        this.tween_Coin( e.$stageX ,e.$stageY -150 )
 
     }
-    private field_twoEvt( e:egret.TouchEvent ){
+    async field_twoEvt( e:egret.TouchEvent ){
         console.log(2)
+<<<<<<< HEAD
         //  ajax 下单
         //  执行动画
         this.tween_Coin(30,40)
         console.log(e.localX)
         console.log(e.localY)
+=======
+        console.log( e )
+        //  ajax 下单  请求
+
+        //  执行动画  
+        await this.tween_Coin( e.$stageX ,e.$stageY -150 );
+
+        
+        console.log(e.stageY)
+        console.log(e.$stageY)
+>>>>>>> ca591b61e61eb5dce788afae324e56251a184935
     }
     private field_threeEvt( e:egret.TouchEvent ){
-        console.log(e)
         console.log(3)
-        console.log(e.localX)
-        console.log(e.localY)
+
+        this.tween_Coin( e.$stageX ,e.$stageY -150 )
+        console.log(e.stageY)
+        console.log(e.$stageY)
     }
     private field_fourEvt( e:egret.TouchEvent ){
         console.log(4)
-        console.log(e.localX)
-        console.log(e.localY)
+        console.log(e.stageY)
+        console.log(e.$stageY)
+        this.tween_Coin( e.$stageX ,e.$stageY -150 )
     }
 
+<<<<<<< HEAD
     private tween_Coin(xx,yy){
+=======
+    private tween_Coin( stage_x:Number ,stage_y:Number ){
+>>>>>>> ca591b61e61eb5dce788afae324e56251a184935
         /**
-         *  创建 金币 并执行动画 
+         *  创建 金币 并执行动画  (报错对应的对象 ，为收集金币做处理 )
          * 
          */
             let gold = new Gold();
             gold.anchorOffsetX = gold.width/2;
             gold.anchorOffsetY = gold.height/2;
+<<<<<<< HEAD
             gold.x = 200;
             gold.y = 200;
             this.addChild(gold);
             egret.Tween.get( gold ).to( { x:xx,y:yy },1000 )
+=======
+            gold.x = window['store']['stage_anWidth'];
+            gold.y = 1000;
+
+            this.addChild(gold);
+
+            egret.Tween.get( gold ).to( { x:stage_x,y:stage_y },500 )
+
+            // setTimeout(()=>{
+            //     console.log( 112 )
+            //     egret.Tween.get( gold ).to( { x:600,y:800 },500 )
+            // },5000)
+
+    }
+
+    private ajax_order(){
+        /**
+         *  下单
+         */
+>>>>>>> ca591b61e61eb5dce788afae324e56251a184935
 
 
     }

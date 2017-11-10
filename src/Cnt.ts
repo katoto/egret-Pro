@@ -159,13 +159,18 @@ class Cnt extends egret.DisplayObjectContainer{
             }
             var choseUserImg = 'userImg'+(i+1)
             this[choseUserImg] = new userImage( window['formateName'] ( window['store']['user_info'][i].username ) , window['store']['user_info'][i].photo  ,
+<<<<<<< HEAD
             window['formateGold'] ( window['store']['user_info'][i].total ),'asdas' );
+=======
+            window['formateGold'] ( window['store']['user_info'][i].total ) ,'123');
+>>>>>>> ca591b61e61eb5dce788afae324e56251a184935
 
             if( i === 0 ){
                 this[choseUserImg].anchorOffsetX = 44;
                 this[choseUserImg].anchorOffsetY = 124 ;
                 this[choseUserImg].x = window['store']['stage_anWidth'] ;
                 this[choseUserImg].y = 1035;
+                window['store']['userMySelf'] = this[choseUserImg];
             }else if( ( window['store']['userPosition'][i] - 1 ) < 5 ){
                 this[choseUserImg].x = window['store']['userPositionObj'][window['store']['userPosition'][i] - 1].x;
                 this[choseUserImg].y = window['store']['userPositionObj'][window['store']['userPosition'][i] - 1].y;
@@ -190,7 +195,7 @@ class Cnt extends egret.DisplayObjectContainer{
         var choseUserImg = 'userImg' + ( userI+1 )
         console.log( choseUserImg )
         this[choseUserImg] = new userImage( window['formateName'] (username) ,photo  ,
-        window['formateGold'] ( total ),'测试金币' );
+        window['formateGold'] ( total ) );
 
         if( ( window['store']['userPosition'][userI]-1 ) < 5 ){
             this[choseUserImg].x = window['store']['userPositionObj'][window['store']['userPosition'][userI]-1].x;

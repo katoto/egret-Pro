@@ -44,8 +44,6 @@ class Field_ball extends eui.UILayer {
         this.addChild(this.goldItems_left);
         this.addChild(this.goldItems_right02);
 
-        
-
         // 左边队伍金币收集
         let leftG:egret.TextField = new egret.TextField();
         leftG.text = leftGold;

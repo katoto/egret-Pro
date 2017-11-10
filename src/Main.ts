@@ -232,7 +232,7 @@ class Main extends egret.DisplayObjectContainer {
         this.webSocket.addEventListener( egret.Event.CONNECT ,this.onSocketOpen ,this );
         this.webSocket.addEventListener( egret.IOErrorEvent.IO_ERROR ,this.onIOError ,this );
         this.webSocket.addEventListener( egret.Event.CLOSE ,this.onCloseSock ,this );
-        this.webSocket.connectByUrl("ws://192.168.76.49:9777/ws");
+        this.webSocket.connectByUrl("ws://192.168.81.240:9777/ws");
 
     }
 
@@ -389,6 +389,7 @@ window['store'] = {
     'user_info':[],
     'curr_btn_coin':null,
     'curr_btn_arr':[],
+    'userMySelf':null,  // 自己的实例便于修改自身金币
     'orderObj':{
         // 下单
         'ck':null,

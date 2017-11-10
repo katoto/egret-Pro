@@ -1,9 +1,11 @@
 
 class userImage extends eui.UILayer {
     // 用户头像
-    public constructor(name,src,gold,winG){
+    public constructor(name,src,gold,winG?){
         super();
         // this.once(egret.Event.ADDED_TO_STAGE,this.addToStage(),this);
+        console.log( winG )
+        console.log( 12344 )
         this.addToStage(name,src,gold,winG);
     }
 
@@ -14,6 +16,8 @@ class userImage extends eui.UILayer {
     // ];
     private myGold:egret.TextField;
     private winGold:egret.TextField;
+    private bgBorder:egret.Bitmap;
+
 
     private addToStage(name,src,gold,winG) {
         let bg:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
@@ -75,11 +79,10 @@ class userImage extends eui.UILayer {
         this.addChild(this.myGold);
 
           // win高亮边框
-        let bgBorder:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-border_png'));
-        this.addChild(bgBorder);
+        this.bgBorder = new egret.Bitmap(RES.getRes('bg-border_png'));
         //  win金币
         this.winGold = new egret.TextField();
-        this.winGold.text = winG;
+        this.winGold.text = '0';
         this.winGold.size = 26;
         this.winGold.textColor = 0xf2aa20;
         this.winGold.bold = true;
@@ -89,7 +92,8 @@ class userImage extends eui.UILayer {
         this.winGold.y = -34;
         this.winGold.textAlign = egret.HorizontalAlign.CENTER;
         this.winGold.verticalAlign = egret.VerticalAlign.MIDDLE;
-        this.addChild(this.winGold);
+
+
 
     }
 
@@ -97,4 +101,20 @@ class userImage extends eui.UILayer {
     public setMyGold( currGold:string ){
         this.myGold.text = currGold;
     }
+
+    /*  设置边框值和显示 win 高亮边框 */
+    private isShowWinGold( winCoin:string ){
+
+        this.addChild(this.winGold);
+        this.addChild(this.bgBorder);
+    }
+    /**
+     *  隐藏 中奖的样式
+     */
+    private isHideWinGold(){
+        this.removeChild(this.winGold);
+        this.removeChild(this.bgBorder);
+    }
+
+
 }
