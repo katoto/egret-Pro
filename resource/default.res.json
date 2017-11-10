@@ -1,8 +1,12 @@
 {
 	"groups": [
 		{
-			"keys": "bg_jpg,description_json,btn-recharge_png,btn-past_png,rule_png,chat_png,pop-game_png,text-over_png,text-begin_png,back_png,bg-time_png,bg-court_png,bg-court4_png,team-01_jpg,team-02_jpg,bg-avatar_png,bg-textTips_png,btnOn_png,btn_png,gold_png,userimg_png,win_png,gold-items_png,bg-betting_png,bg-user_png,bg-item_png,bg-betting2_png,bg-item2_png,bg-user2_png,gold-items2_png,gold2_png,userimg2_png,win2_png,bg-border_png",
+			"keys": "bg_jpg,description_json,btn-recharge_png,btn-past_png,rule_png,chat_png,pop-game_png,text-over_png,text-begin_png,back_png,bg-time_png,bg-court_png,bg-court4_png,team-01_jpg,team-02_jpg,bg-avatar_png,bg-textTips_png,btnOn_png,btn_png,gold_png,userimg_png,win_png,gold-items_png,bg-betting_png,bg-user_png,bg-item_png,bg-betting2_png,bg-item2_png,bg-user2_png,gold-items2_png,gold2_png,userimg2_png,win2_png,bg-border_png,gold-items02_png",
 			"name": "preload"
+		},
+		{
+			"keys": "bg-loading_png,bg-load_png,bg-loadCo_png",
+			"name": "load"
 		}
 	],
 	"resources": [
@@ -172,9 +176,29 @@
 			"name": "win2_png"
 		},
 		{
-			"name": "bg-border_png",
+			"url": "assets/bg-border.png",
 			"type": "image",
-			"url": "assets/bg-border.png"
+			"name": "bg-border_png"
+		},
+		{
+			"url": "assets/gold-items02.png",
+			"type": "image",
+			"name": "gold-items02_png"
+		},
+		{
+			"url": "assets/bg-loading.png",
+			"type": "image",
+			"name": "bg-loading_png"
+		},
+		{
+			"url": "assets/bg-load.png",
+			"type": "image",
+			"name": "bg-load_png"
+		},
+		{
+			"url": "assets/bg-loadCo.png",
+			"type": "image",
+			"name": "bg-loadCo_png"
 		}
 	]
 }

@@ -29,13 +29,19 @@ var Field_ball = (function (_super) {
         this.addChild(court4);
         //两个金币收集的背景， 这里要考虑假如没人投注的情况，是否要隐藏  62+246;
         this.goldItems_left = new egret.Bitmap(RES.getRes('gold-items_png'));
-        this.goldItems_left.x = 308;
+        this.goldItems_left.x = 62;
         this.goldItems_left.y = -6;
+        this.goldItems_left02 = new egret.Bitmap(RES.getRes('gold-items02_png'));
+        this.goldItems_left02.x = 62;
+        this.goldItems_left02.y = -6;
         this.goldItems_right = new egret.Bitmap(RES.getRes('gold-items_png'));
-        this.goldItems_right.x = 62 + 246;
+        this.goldItems_right.x = 308;
         this.goldItems_right.y = -6;
+        this.goldItems_right02 = new egret.Bitmap(RES.getRes('gold-items02_png'));
+        this.goldItems_right02.x = 308;
+        this.goldItems_right02.y = -6;
         this.addChild(this.goldItems_left);
-        this.addChild(this.goldItems_right);
+        this.addChild(this.goldItems_right02);
         // 左边队伍金币收集
         var leftG = new egret.TextField();
         leftG.text = leftGold;

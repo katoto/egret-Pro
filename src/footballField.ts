@@ -4,6 +4,9 @@ class Field_ball extends eui.UILayer {
     private goldItems_left:egret.Bitmap;
     private goldItems_right:egret.Bitmap;
 
+    private goldItems_left02:egret.Bitmap;
+    private goldItems_right02:egret.Bitmap;
+
     //  缺一个 被人投注金币的样式
 
     // 自己金币边投边创建  累计的投注额 优先创建好
@@ -23,15 +26,25 @@ class Field_ball extends eui.UILayer {
 
         //两个金币收集的背景， 这里要考虑假如没人投注的情况，是否要隐藏  62+246;
         this.goldItems_left = new egret.Bitmap(RES.getRes('gold-items_png'));
-        this.goldItems_left.x = 308;
+        this.goldItems_left.x = 62;
         this.goldItems_left.y = -6;
 
+        this.goldItems_left02 = new egret.Bitmap(RES.getRes('gold-items02_png'));
+        this.goldItems_left02.x = 62;
+        this.goldItems_left02.y = -6;
+
         this.goldItems_right = new egret.Bitmap(RES.getRes('gold-items_png'));
-        this.goldItems_right.x = 62+246;
+        this.goldItems_right.x = 308;
         this.goldItems_right.y = -6;
 
+        this.goldItems_right02 = new egret.Bitmap(RES.getRes('gold-items02_png'));
+        this.goldItems_right02.x = 308;
+        this.goldItems_right02.y = -6;
+
         this.addChild(this.goldItems_left);
-        this.addChild(this.goldItems_right);
+        this.addChild(this.goldItems_right02);
+
+        
 
         // 左边队伍金币收集
         let leftG:egret.TextField = new egret.TextField();
@@ -206,7 +219,7 @@ class Field_ball extends eui.UILayer {
         // 胜利图标
         let win:egret.Bitmap = new egret.Bitmap(RES.getRes('win2_png'));
         win.anchorOffsetY = win.height/2;
-        
+
         // -80  or 350
         win.x = winX;
         win.y = 90;
