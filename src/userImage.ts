@@ -104,7 +104,9 @@ class userImage extends eui.UILayer {
 
     /*  设置边框值和显示 win 高亮边框 */
     private isShowWinGold( winCoin:string ){
-
+        if( !winCoin || winCoin === 'undefined' ){
+            winCoin = '0'
+        }
         this.addChild(this.winGold);
         this.addChild(this.bgBorder);
     }
@@ -115,6 +117,5 @@ class userImage extends eui.UILayer {
         this.removeChild(this.winGold);
         this.removeChild(this.bgBorder);
     }
-
 
 }
