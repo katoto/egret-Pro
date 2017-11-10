@@ -49,6 +49,63 @@ function formateName(name) {
     }
 }
 
+/**
+ *   原生ajax 和 promise 
+ * conf {
+ *      type
+ *      url
+ *       dataType
+ * }
+ *  @param type  get or post
+ * @param url
+ * @param dataType text xml json 
+ */
+
+function getJson( conf ){
+    return new Promise ( function ( resolve ,reject ){
+        var type = conf.type;
+        var url = conf.url;
+        var dataType = conf.dataType;
+        // XMLHttpRequest 可以兼容处理
+        var xhr = new XMLHttpRequest();
+        xhr.open( type ,url ,true );
+        if (type == null) {
+            type = "get";
+        }
+        if (dataType == null) {
+            dataType = "text";
+        }
+
+        if (type == "GET" || type == "get") {
+            xhr.send(null);
+        } else if (type == "POST" || type == "post") {
+            xhr.setRequestHeader("content-type",
+                "application/x-www-form-urlencoded");
+            xhr.send(data);
+        }
+        xhr.onreadystatechange = function(){
+            if(  xhr.readyState == 4 ){
+                if( xhr.status == 200 ){
+                    try{
+                        if( dataType == 'text' || dataType == 'TEXT' ){
+                            resolve( xhr.responseText )
+                        }
+                        if( dataType == 'xml' || dataType == 'XML' ){
+                            resolve( xhr.responseXML )
+                        }
+                        if( dataType == 'json' || dataType == 'JSON' ){
+                            resolve( eval( "(" + xhr.responseText + ")" ) )
+                        }
+                    } catch(e){
+                        reject(e)
+                    }
+                }else{
+                    reject( new Error( xhr.statusText ) );
+                }
+            }
+        }
+    } )
+}
 
 
     

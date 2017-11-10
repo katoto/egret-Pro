@@ -3,9 +3,6 @@ class userImage extends eui.UILayer {
     // 用户头像
     public constructor(name,src,gold,winG?){
         super();
-        // this.once(egret.Event.ADDED_TO_STAGE,this.addToStage(),this);
-        console.log( winG )
-        console.log( 12344 )
         this.addToStage(name,src,gold,winG);
     }
 
@@ -37,8 +34,6 @@ class userImage extends eui.UILayer {
         bgMask.x = 16;
         bgMask.y = 31;
         this.addChild(bgMask);
-
-
 
 
         //用户姓名
@@ -82,7 +77,7 @@ class userImage extends eui.UILayer {
         this.bgBorder = new egret.Bitmap(RES.getRes('bg-border_png'));
         //  win金币
         this.winGold = new egret.TextField();
-        this.winGold.text = '0';
+        this.winGold.text = '';
         this.winGold.size = 26;
         this.winGold.textColor = 0xf2aa20;
         this.winGold.bold = true;
@@ -92,8 +87,6 @@ class userImage extends eui.UILayer {
         this.winGold.y = -34;
         this.winGold.textAlign = egret.HorizontalAlign.CENTER;
         this.winGold.verticalAlign = egret.VerticalAlign.MIDDLE;
-
-
 
     }
 
