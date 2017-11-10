@@ -9,8 +9,11 @@ class LoadingUI extends egret.Sprite {
     private textField:egret.TextField;
     private pro:number;
     private img_football:egret.Bitmap;
+    private bg_pro:egret.Bitmap;
+    private bg_myPro:egret.Bitmap;
 
     private createView(width,height):void {
+
         let bg:egret.Shape = new egret.Shape();
         bg.graphics.beginFill(0x3d3258);
         bg.graphics.drawRect(0,0,width,height);
@@ -23,7 +26,6 @@ class LoadingUI extends egret.Sprite {
         this.img_football.y = 105;
         this.addChild(this.img_football);
 
-
         this.textField = new egret.TextField();
         this.textField.y = 900;
         this.textField.width = 750;
@@ -33,13 +35,23 @@ class LoadingUI extends egret.Sprite {
         this.textField.text = "火速加载中.....";
         this.addChild(this.textField);
 
+        this.bg_pro = new egret.Bitmap(RES.getRes('bg-loading_png')); 
+        this.bg_pro.x = 140;
+        this.bg_pro.y = 960;
+        this.addChild(this.bg_pro);
+
+        this.bg_myPro = new egret.Bitmap(RES.getRes('bg-myLoad_png'));
+        this.bg_myPro.x = 140;
+        this.bg_myPro.y = 960;
+        this.addChild(this.bg_myPro);
+
+
 
     }
 
     public setProgress(current:number, total:number):void {
         // this.textField.text = `Loading...${current}/${total}`;
-        this.pro = Math.ceil((current/total)*100); //加载进度百分比
-
-        
+        this.pro = (Math.ceil((current/total)*100))/100; //加载进度百分比
+        this.bg_myPro.width = 487*this.pro;
     }
 }
