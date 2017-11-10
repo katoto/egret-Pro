@@ -35,7 +35,7 @@ var Field_ball = (function (_super) {
         this.goldItems_right.x = 62 + 246;
         this.goldItems_right.y = -6;
         this.addChild(this.goldItems_left);
-        this.addChild(this.goldItems_right);
+        // this.addChild(this.goldItems_right);
         // 左边队伍金币收集
         var leftG = new egret.TextField();
         leftG.text = leftGold;

@@ -166,6 +166,7 @@ class Cnt extends egret.DisplayObjectContainer{
                 this[choseUserImg].anchorOffsetY = 124 ;
                 this[choseUserImg].x = window['store']['stage_anWidth'] ;
                 this[choseUserImg].y = 1035;
+                window['store']['userMySelf'] = this[choseUserImg];
             }else if( ( window['store']['userPosition'][i] - 1 ) < 5 ){
                 this[choseUserImg].x = window['store']['userPositionObj'][window['store']['userPosition'][i] - 1].x;
                 this[choseUserImg].y = window['store']['userPositionObj'][window['store']['userPosition'][i] - 1].y;
