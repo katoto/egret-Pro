@@ -170,13 +170,10 @@ class Main extends egret.DisplayObjectContainer {
         this.cnt.y = 0;
         this.addChild(this.cnt);
 
-       
-
-
         // 弹窗实例,竞猜开始or竞猜完毕
         // text-begin_png text-over_png
         this.pop = new Pop(this.Width,this.Height,'text-begin_png');
-        this.addChild(this.pop);
+        // this.addChild(this.pop);
         
 
          //test

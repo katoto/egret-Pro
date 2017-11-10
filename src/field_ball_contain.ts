@@ -6,9 +6,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
     private field3;
     private field4;
 
-    // urlloader ajax 实例
-    private ajax_orderLoader;
-
     public constructor(){
         super();
         this.drawField();
@@ -21,7 +18,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         // this.addChild(this.field2);
         // this.field2.touchEnabled = true;
         // this.field2.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_twoEvt ,this)
-
 
     }
 
@@ -76,22 +72,34 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         this.tween_Coin( e.$stageX ,e.$stageY -150 )
 
     }
+    // private awaitTime(){
+    //     return new Promise( function( resolve ){
+    //         setTimeout( function(){
+    //             console.log( 56666)
+    //             resolve( true )
+    //         } ,1000 )
+    //     } )
+    // }
+
     async field_twoEvt( e:egret.TouchEvent ){
         console.log(2)
         //  ajax 下单
         //  执行动画
         // this.tween_Coin(30,40)
-        console.log(e.localX)
-        console.log(e.localY)
-        console.log( e )
+        // console.log(e.localX)
+        // console.log(e.localY)
+        // console.log( e )
         //  ajax 下单  请求
-
         //  执行动画  
-        await this.tween_Coin( e.$stageX ,e.$stageY -150 );
-
-        
-        console.log(e.stageY)
-        console.log(e.$stageY)
+        console.log(555555)
+        await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
+            console.log( 123 )
+            console.log( res )
+        })
+        console.log(777777)
+        this.tween_Coin( e.$stageX ,e.$stageY -150 );
+        // console.log(e.stageY)
+        // console.log(e.$stageY)
     }
     private field_threeEvt( e:egret.TouchEvent ){
         console.log(3)
