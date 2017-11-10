@@ -20,6 +20,8 @@ class Main extends egret.DisplayObjectContainer {
     private cnt;
     //   底部
     private bottom;
+    //  弹窗
+    private pop;
 
     private textfield:egret.TextField;
     
@@ -168,7 +170,16 @@ class Main extends egret.DisplayObjectContainer {
         this.cnt.y = 0;
         this.addChild(this.cnt);
 
-        //test
+       
+
+
+        // 弹窗实例,竞猜开始or竞猜完毕
+        // text-begin_png text-over_png
+        this.pop = new Pop(this.Width,this.Height,'text-begin_png');
+        this.addChild(this.pop);
+        
+
+         //test
         let gold = new Gold();
         gold.anchorOffsetX = gold.width/2;
         gold.anchorOffsetY = gold.height/2;
@@ -181,42 +192,12 @@ class Main extends egret.DisplayObjectContainer {
             gold.y = evt.localY ;
         },this);
 
-
-
-
-
-
-
-        // //竞猜弹窗：开始或者结束,层级最高 ,这里思考是否可以优化，使用构造函数
-        // let popGame:egret.Bitmap = new egret.Bitmap(RES.getRes('pop-game_png'));
-        // popGame.anchorOffsetX = popGame.width/2;
-        // popGame.anchorOffsetY = popGame.height/2;
-        // popGame.x = Width/2;
-        // popGame.y = Height/2;
-        // this.addChild(popGame);
-
-        // let textBegin:egret.Bitmap = new egret.Bitmap(RES.getRes('text-begin_png'));
-        // textBegin.anchorOffsetX = textBegin.width/2;
-        // textBegin.anchorOffsetY = textBegin.height/2;
-        // textBegin.x = Width/2;
-        // textBegin.y = Height/2;
-        // this.addChild(textBegin);
-
-
-        // let textOver:egret.Bitmap = new egret.Bitmap(RES.getRes('text-over_png'));
-        // textOver.anchorOffsetX = textOver.width/2;
-        // textOver.anchorOffsetY = textOver.height/2;
-        // textOver.x = Width/2;
-        // textOver.y = Height/2;
-        // this.addChild(textOver);
-
-
-
         // 层级控制
         // this.setChildIndex(header,0)
         this.setChildIndex(this.cnt,1)
         this.setChildIndex(this.top,2)
         this.setChildIndex(this.bottom,3)
+        this.setChildIndex(this.pop,4)
 
 
         /*
@@ -312,7 +293,7 @@ class Main extends egret.DisplayObjectContainer {
                     break;
             }
             var i = 0;
-            setInterval(() => {
+            setTimeout(() => {
                 var obj = { 
                     "username": "游客_2867477",
                     "photo": "https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg",
@@ -325,7 +306,7 @@ class Main extends egret.DisplayObjectContainer {
             },5000)
 
             var j =0 ;
-            setInterval(() => {
+            setTimeout(() => {
                 console.log('user out')
                 var obj = { 
                     "uid": "1003118"+ j
