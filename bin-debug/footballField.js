@@ -17,14 +17,14 @@ var Field_ball = (function (_super) {
     //  缺一个 被人投注金币的样式
     // 自己金币边投边创建  累计的投注额 优先创建好
     // 设置锚点和x值
-    function Field_ball(width, x, leftImg, leftT, leftO, leftGold, leftMyMoney, rightImg, rightT, rightO, rightGold, rightMyMoney) {
+    function Field_ball(width, x, leftImg, leftT, leftO, leftGold, leftMyMoney, rightImg, rightT, rightO, rightGold, rightMyMoney, winX) {
         var _this = _super.call(this) || this;
         _this.anchorOffsetX = width / 2;
         _this.x = x;
-        _this.drawField(leftImg, leftT, leftO, leftGold, leftMyMoney, rightImg, rightT, rightO, rightGold, rightMyMoney);
+        _this.drawField(leftImg, leftT, leftO, leftGold, leftMyMoney, rightImg, rightT, rightO, rightGold, rightMyMoney, winX);
         return _this;
     }
-    Field_ball.prototype.drawField = function (leftImg, leftT, leftO, leftGold, leftMyMoney, rightImg, rightT, rightO, rightGold, rightMyMoney) {
+    Field_ball.prototype.drawField = function (leftImg, leftT, leftO, leftGold, leftMyMoney, rightImg, rightT, rightO, rightGold, rightMyMoney, winX) {
         var court4 = new egret.Bitmap(RES.getRes('bg-court4_png'));
         this.addChild(court4);
         //两个金币收集的背景， 这里要考虑假如没人投注的情况，是否要隐藏  62+246;
@@ -177,6 +177,13 @@ var Field_ball = (function (_super) {
         rightMyMoneyText.verticalAlign = egret.VerticalAlign.MIDDLE;
         rightMyMoneyText.textAlign = egret.HorizontalAlign.CENTER;
         rightMyMoneyBox.addChild(rightMyMoneyText);
+        // 胜利图标
+        var win = new egret.Bitmap(RES.getRes('win2_png'));
+        win.anchorOffsetY = win.height / 2;
+        // -80  or 350
+        win.x = winX;
+        win.y = 90;
+        this.addChild(win);
     };
     //  创建 左边 收起的类
     Field_ball.prototype.addLeftAllCoin = function () {

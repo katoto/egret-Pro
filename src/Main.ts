@@ -162,32 +162,17 @@ class Main extends egret.DisplayObjectContainer {
         this.addChild(this.cnt);
 
         //test
-        
-        for( var i=0,len = 150;i<len;i++ ){
-            let gold = new Gold();
-            gold.x = this.anWidth;
-            gold.y = this.cnt.bgCourtWrap.height;
-            gold.anchorOffsetX = gold.width/2;
-            gold.anchorOffsetY = gold.height/2;
-            this.cnt.addChild(gold);
-            gold.x = 100+i*10;
-            gold.y = 100 +i*10 ;
-
-        }
-
-        setTimeout(function(){
-            console.log(30000);
-
-            let gold = new Gold();
-            gold.x = this.anWidth;
-            gold.y = this.cnt.bgCourtWrap.height;
-            gold.anchorOffsetX = gold.width/2;
-            gold.anchorOffsetY = gold.height/2;
-            this.cnt.addChild(gold);
-            gold.x = 100+i*10;
-            gold.y = 100 +i*10 ;
-
-        },30000)
+        let gold = new Gold();
+        gold.anchorOffsetX = gold.width/2;
+        gold.anchorOffsetY = gold.height/2;
+        gold.x = this.anWidth;
+        gold.y = 980;
+        this.cnt.bgCourtWrap.addChild(gold);
+        gold.touchEnabled = true;
+        this.stage.addEventListener(egret.TouchEvent.TOUCH_TAP,(evt:egret.TouchEvent)=>{
+            gold.x = evt.localX ;
+            gold.y = evt.localY ;
+        },this);
 
 
 
@@ -245,7 +230,7 @@ class Main extends egret.DisplayObjectContainer {
         this.webSocket.addEventListener( egret.Event.CONNECT ,this.onSocketOpen ,this );
         this.webSocket.addEventListener( egret.IOErrorEvent.IO_ERROR ,this.onIOError ,this );
         this.webSocket.addEventListener( egret.Event.CLOSE ,this.onCloseSock ,this );
-        this.webSocket.connectByUrl("ws://192.168.76.49:9777/ws");
+        this.webSocket.connectByUrl("ws://192.168.81.240:9777/ws");
 
     }
 

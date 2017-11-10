@@ -35,7 +35,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 fieldStr = 'field'+(i+1)
                 this[fieldStr] = new Field_ball( 485,$store['stage_anWidth'] , $store['matches'][i].homelogo ,
                     $store['matches'][i].homename ,  $store['matches'][i].homeodds ,'0' , '0' ,
-                    $store['matches'][i].awaylogo , $store['matches'][i].awayname , $store['matches'][i].awayodds ,'0' ,'10'
+                    $store['matches'][i].awaylogo , $store['matches'][i].awayname , $store['matches'][i].awayodds ,'0' ,'10','-80'
                 )
                 this[fieldStr].y = 120+202*i;
                 this[fieldStr].touchEnabled = true;
