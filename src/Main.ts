@@ -54,8 +54,8 @@ class Main extends egret.DisplayObjectContainer {
         //Config to load process interface
 
 
-        this.loadingView = new LoadingUI(750,1334);
-        this.stage.addChild(this.loadingView);
+        // this.loadingView = new LoadingUI(750,1334);
+        // this.stage.addChild(this.loadingView);
  
         //初始化Resource资源加载库
         //initiate Resource loading library
@@ -73,7 +73,7 @@ class Main extends egret.DisplayObjectContainer {
         RES.addEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);
         RES.addEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
         RES.addEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, this.onItemLoadError, this);
-        RES.loadGroup("preload");
+        RES.loadGroup("load");
     }
 
     /**
@@ -81,6 +81,11 @@ class Main extends egret.DisplayObjectContainer {
      * Preload resource group is loaded
      */
     private onResourceLoadComplete(event: RES.ResourceEvent) {
+        if (event.groupName == "load") {
+            this.loadingView = new LoadingUI(750,1334);
+            this.stage.addChild(this.loadingView);
+            RES.loadGroup("preload");
+        }
         if (event.groupName == "preload") {
             this.stage.removeChild(this.loadingView);
             RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);

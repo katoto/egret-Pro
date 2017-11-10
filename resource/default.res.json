@@ -5,7 +5,7 @@
 			"name": "preload"
 		},
 		{
-			"keys": "bg-loading_png,bg-load_png,bg-loadCo_png",
+			"keys": "bg-loading_png,bg-load_png,bg-loadCo_png,bg-myLoad_png",
 			"name": "load"
 		}
 	],
@@ -199,6 +199,11 @@
 			"url": "assets/bg-loadCo.png",
 			"type": "image",
 			"name": "bg-loadCo_png"
+		},
+		{
+			"name": "bg-myLoad_png",
+			"type": "image",
+			"url": "assets/bg-myLoad.png"
 		}
 	]
 }
