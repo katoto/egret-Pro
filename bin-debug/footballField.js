@@ -150,9 +150,9 @@ var Field_ball = (function (_super) {
         win.x = winX;
         win.y = 90;
         // win、左边队伍图标和右边队伍图片会影响金币点击效果
-        this.addChild(leftUserBox);
-        this.addChild(rightUserBox);
-        this.addChild(win);
+        // this.addChild(leftUserBox); 
+        // this.addChild(rightUserBox);
+        // this.addChild(win);
     };
     //  创建 左边 收起的类
     Field_ball.prototype.addLeftAllCoin = function () {

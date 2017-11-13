@@ -187,8 +187,6 @@ class Main extends egret.DisplayObjectContainer {
         优化：
         1.图片合并，使用纹理集
         2. 函数
-        xx.anchorOffsetX = xx.width/2;
-        xx.anchorOffsetY = xx.height/2;
         */
 
 

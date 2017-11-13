@@ -71,12 +71,17 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         console.log(x);
         console.log(y);
 
-        if(10<x && x<242.5){
-           console.log('左边')
-        }else if(252.5<x && x<475){
-            console.log('右边')
+        if(y>150 && y <260){
+            if(150<x && x<350){
+                console.log('左边')
+                this.tween_Coin(x,y)
+            }else if(410<x && x<600){
+                console.log('右边')
+                this.tween_Coin(x,y)
+            }
         }
-        this.tween_Coin(x,y)
+        
+       
 
     }
     // private awaitTime(){
