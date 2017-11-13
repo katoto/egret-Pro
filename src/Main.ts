@@ -194,7 +194,7 @@ class Main extends egret.DisplayObjectContainer {
         this.setChildIndex(this.cnt,1)
         this.setChildIndex(this.top,2)
         this.setChildIndex(this.bottom,3)
-        this.setChildIndex(this.pop,4)
+        // this.setChildIndex(this.pop,4)
 
 
         /*

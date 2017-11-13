@@ -50,6 +50,20 @@ function formateName(name) {
 }
 
 /**
+ *   数据序列化
+ */
+function convertToQueryString( obj ){
+    let result = []
+    if (Object.keys(obj).length <= 0) {
+        return false
+    }
+    Object.keys(obj).forEach(key => {
+        result.push(`${key}=${obj[key]}`)
+    })
+    return result.join('&')
+}
+
+/**
  *   原生ajax 和 promise 
  * conf {
  *      type
