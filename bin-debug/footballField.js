@@ -41,24 +41,23 @@ var Field_ball = (function (_super) {
         this.addChild(this.goldItems_left);
         this.addChild(this.goldItems_right02);
         // 左边队伍金币收集
-        var leftG = new egret.TextField();
-        leftG.text = leftGold;
-        leftG.textColor = 0xbbcfc6;
-        leftG.size = 20;
-        leftG.width = 110;
-        leftG.height = 28;
-        leftG.x = 75;
-        leftG.y = -6;
-        leftG.verticalAlign = egret.VerticalAlign.MIDDLE;
-        leftG.textAlign = egret.HorizontalAlign.CENTER;
-        this.addChild(leftG);
+        this.allLeftCoin = new egret.TextField();
+        this.allLeftCoin.text = '123';
+        this.allLeftCoin.textColor = 0xbbcfc6;
+        this.allLeftCoin.size = 20;
+        this.allLeftCoin.width = 110;
+        this.allLeftCoin.height = 28;
+        this.allLeftCoin.x = 75;
+        this.allLeftCoin.y = -6;
+        this.allLeftCoin.verticalAlign = egret.VerticalAlign.MIDDLE;
+        this.allLeftCoin.textAlign = egret.HorizontalAlign.CENTER;
+        this.addChild(this.allLeftCoin);
         // 左边队伍头像容器
         var leftUserBox = new egret.DisplayObjectContainer();
         leftUserBox.width = 68;
         leftUserBox.height = 68;
         leftUserBox.x = 25;
         leftUserBox.y = 54;
-        this.addChild(leftUserBox);
         // 插入边框
         var bgBorder = new egret.Bitmap(RES.getRes('bg-item_png'));
         leftUserBox.addChild(bgBorder);
@@ -103,14 +102,12 @@ var Field_ball = (function (_super) {
         rightG.verticalAlign = egret.VerticalAlign.MIDDLE;
         rightG.textAlign = egret.HorizontalAlign.CENTER;
         this.addChild(rightG);
-        //左边队伍我投足的金额,可能需要隐藏
         // 右边同上
         var rightUserBox = new egret.DisplayObjectContainer();
         rightUserBox.width = 68;
         rightUserBox.height = 68;
         rightUserBox.x = 400;
         rightUserBox.y = 54;
-        this.addChild(rightUserBox);
         // 插入边框
         var bgBorder02 = new egret.Bitmap(RES.getRes('bg-item_png'));
         rightUserBox.addChild(bgBorder02);
@@ -146,15 +143,16 @@ var Field_ball = (function (_super) {
         rightOdds.y = 94;
         rightOdds.bold = true;
         this.addChild(rightOdds);
-        //左边队伍我投足的金额
         // 胜利图标
         var win = new egret.Bitmap(RES.getRes('win2_png'));
         win.anchorOffsetY = win.height / 2;
         // -80  or 350
         win.x = winX;
         win.y = 90;
-        // this.addChild(win);
-        console.log(!!this.leftMyMoneyBox);
+        // win、左边队伍图标和右边队伍图片会影响金币点击效果
+        this.addChild(leftUserBox);
+        this.addChild(rightUserBox);
+        this.addChild(win);
     };
     //  创建 左边 收起的类
     Field_ball.prototype.addLeftAllCoin = function () {
@@ -162,8 +160,7 @@ var Field_ball = (function (_super) {
     //  创建 右边 收起的类
     Field_ball.prototype.addRightAllCoin = function () {
     };
-    // 更新 累计投注
-    // 更新 自己投注的数值 (并且判断是否有改事物 left)
+    // 更新 自己投注的数值 (判断是否有该事物 left)
     Field_ball.prototype.upLeftMyMoney = function (coin) {
         if (!!this.leftMyMoneyBox) {
             this.leftMyMoneyText.text = coin;
@@ -188,14 +185,12 @@ var Field_ball = (function (_super) {
             this.addChild(this.leftMyMoneyBox);
         }
     };
-    // 更新 自己投注的数值 (并且判断是否有改事物 right)
+    // 更新 自己投注的数值 (判断是否有该事物 right)
     Field_ball.prototype.upRightMyMoney = function (coin) {
         if (!!this.rightMyMoneyBox) {
-            console.log(1);
             this.rightMyMoneyText.text = coin;
         }
         else {
-            console.log(2);
             this.rightMyMoneyBox = new egret.DisplayObjectContainer();
             this.rightMyMoneyBox.width = 196;
             this.rightMyMoneyBox.height = 27;
@@ -214,13 +209,6 @@ var Field_ball = (function (_super) {
             this.rightMyMoneyBox.addChild(this.rightMyMoneyText);
             this.addChild(this.rightMyMoneyBox);
         }
-    };
-    // 
-    Field_ball.prototype.updataBetCoin = function () {
-    };
-    Field_ball.prototype.hasLeftMyMoney = function () {
-        console.log(!!this.leftMyMoneyBox);
-        return !!this.leftMyMoneyBox;
     };
     return Field_ball;
 }(eui.UILayer));

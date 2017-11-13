@@ -36,20 +36,17 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
                 this[fieldStr].y = 120+202*i;
                 this[fieldStr].touchEnabled = true;
-                this.this_fieldContain.addChild( this[fieldStr] )
+                this.this_fieldContain.addChild( this[fieldStr] );
                 this[fieldStr].width = 485;
                 this[fieldStr].height = 181;
-                
+
                 setInterval(()=>{
                     i = i+1
                     this[fieldStr].upLeftMyMoney('324'+i)
                     this[fieldStr].upRightMyMoney('31'+i)
                 },1000)
-
             }
             if( this.field1 ){
-
-                console.log('this.field1.width:'+this.field1.width)
                 this.field1.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_oneEvt ,this)
             }
             if( this.field2 ){
@@ -72,14 +69,13 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let x = e.localX + 133;
         let y = e.localY + 120;
         console.log(x);
-        console.log(y)
+        console.log(y);
 
-        // if(10<x && x<242.5){
-        //    console.log('左边')
-        // }else if(252.5<x && x<475){
-        //     console.log('右边')
-        // }
-        // this.tween_Coin( e.$stageX ,e.$stageY)
+        if(10<x && x<242.5){
+           console.log('左边')
+        }else if(252.5<x && x<475){
+            console.log('右边')
+        }
         this.tween_Coin(x,y)
 
     }

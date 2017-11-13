@@ -7,7 +7,6 @@ class Field_ball extends eui.UILayer {
     private goldItems_left02:egret.Bitmap;
     private goldItems_right02:egret.Bitmap;
 
-    //  缺一个 被人投注金币的样式
 
     // 投注盒子和 金额文案 left
     private leftMyMoneyBox:egret.DisplayObjectContainer
@@ -17,6 +16,8 @@ class Field_ball extends eui.UILayer {
     private rightMyMoneyBox:egret.DisplayObjectContainer
     private rightMyMoneyText:egret.TextField;
 
+    // 总投注额
+    private allLeftCoin:egret.TextField;
 
     // 设置锚点和x值
     public constructor(width,x,leftImg,leftT,leftO,leftGold,leftMyMoney,rightImg,rightT,rightO,rightGold,rightMyMoney,winX){
@@ -50,20 +51,19 @@ class Field_ball extends eui.UILayer {
         this.addChild(this.goldItems_left);
         this.addChild(this.goldItems_right02);
 
+
         // 左边队伍金币收集
-        let leftG:egret.TextField = new egret.TextField();
-        leftG.text = leftGold;
-        leftG.textColor = 0xbbcfc6;
-        leftG.size = 20;
-        leftG.width = 110;
-        leftG.height = 28;
-        leftG.x = 75;
-        leftG.y = -6;
-        leftG.verticalAlign = egret.VerticalAlign.MIDDLE;
-        leftG.textAlign = egret.HorizontalAlign.CENTER;
-        this.addChild(leftG);
-
-
+        this.allLeftCoin = new egret.TextField();
+        this.allLeftCoin.text = '123';
+        this.allLeftCoin.textColor = 0xbbcfc6;
+        this.allLeftCoin.size = 20;
+        this.allLeftCoin.width = 110;
+        this.allLeftCoin.height = 28;
+        this.allLeftCoin.x = 75;
+        this.allLeftCoin.y = -6;
+        this.allLeftCoin.verticalAlign = egret.VerticalAlign.MIDDLE;
+        this.allLeftCoin.textAlign = egret.HorizontalAlign.CENTER;
+        this.addChild(this.allLeftCoin);
 
 
 
@@ -73,7 +73,7 @@ class Field_ball extends eui.UILayer {
         leftUserBox.height = 68;
         leftUserBox.x = 25;
         leftUserBox.y = 54;
-        this.addChild(leftUserBox);
+       
         
         // 插入边框
         let bgBorder:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
@@ -132,7 +132,7 @@ class Field_ball extends eui.UILayer {
         rightUserBox.height = 68;
         rightUserBox.x = 400;
         rightUserBox.y = 54;
-        this.addChild(rightUserBox);
+         
         // 插入边框
         let bgBorder02:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         rightUserBox.addChild(bgBorder02);
@@ -181,8 +181,12 @@ class Field_ball extends eui.UILayer {
         // -80  or 350
         win.x = winX;
         win.y = 90;
-        // this.addChild(win);
-        console.log(  !!this.leftMyMoneyBox )
+
+        // win、左边队伍图标和右边队伍图片会影响金币点击效果
+        this.addChild(leftUserBox); 
+        this.addChild(rightUserBox);
+        this.addChild(win);
+
 
     }
 
@@ -194,8 +198,9 @@ class Field_ball extends eui.UILayer {
     //  创建 右边 收起的类
     private addRightAllCoin(){
 
-
     }
+
+
 
     // 更新 自己投注的数值 (判断是否有该事物 left)
     private upLeftMyMoney( coin:string ){
@@ -246,15 +251,6 @@ class Field_ball extends eui.UILayer {
 
             this.addChild(this.rightMyMoneyBox);
         }
-    }
-   // 
-    public updataBetCoin(){
-        
-    }
-
-    private hasLeftMyMoney(){
-        console.log( !!this.leftMyMoneyBox )
-        return !!this.leftMyMoneyBox
     }
 
 }
