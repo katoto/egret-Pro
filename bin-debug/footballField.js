@@ -60,7 +60,6 @@ var Field_ball = (function (_super) {
         leftUserBox.height = 68;
         leftUserBox.x = 25;
         leftUserBox.y = 54;
-        this.addChild(leftUserBox);
         // 插入边框
         var bgBorder = new egret.Bitmap(RES.getRes('bg-item_png'));
         leftUserBox.addChild(bgBorder);
@@ -129,7 +128,6 @@ var Field_ball = (function (_super) {
         rightUserBox.height = 68;
         rightUserBox.x = 400;
         rightUserBox.y = 54;
-        this.addChild(rightUserBox);
         // 插入边框
         var bgBorder02 = new egret.Bitmap(RES.getRes('bg-item_png'));
         rightUserBox.addChild(bgBorder02);
@@ -189,7 +187,9 @@ var Field_ball = (function (_super) {
         // -80  or 350
         win.x = winX;
         win.y = 90;
-        // this.addChild(win);
+        this.addChild(leftUserBox);
+        this.addChild(rightUserBox);
+        this.addChild(win);
     };
     //  创建 左边 收起的类
     Field_ball.prototype.addLeftAllCoin = function () {

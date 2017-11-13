@@ -67,7 +67,7 @@ class Field_ball extends eui.UILayer {
         leftUserBox.height = 68;
         leftUserBox.x = 25;
         leftUserBox.y = 54;
-        this.addChild(leftUserBox);
+       
         
         // 插入边框
         let bgBorder:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
@@ -148,7 +148,7 @@ class Field_ball extends eui.UILayer {
         rightUserBox.height = 68;
         rightUserBox.x = 400;
         rightUserBox.y = 54;
-        this.addChild(rightUserBox);
+         
         // 插入边框
         let bgBorder02:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         rightUserBox.addChild(bgBorder02);
@@ -221,7 +221,10 @@ class Field_ball extends eui.UILayer {
         // -80  or 350
         win.x = winX;
         win.y = 90;
-        // this.addChild(win);
+        // win、左边队伍图标和右边队伍图片会影响金币点击效果
+        this.addChild(leftUserBox); 
+        this.addChild(rightUserBox);
+        this.addChild(win);
 
 
 
