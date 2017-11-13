@@ -39,6 +39,13 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 this.this_fieldContain.addChild( this[fieldStr] )
                 this[fieldStr].width = 485;
                 this[fieldStr].height = 181;
+                
+                setInterval(()=>{
+                    i = i+1
+                    this[fieldStr].upLeftMyMoney('324'+i)
+                    this[fieldStr].upRightMyMoney('31'+i)
+                },1000)
+
             }
             if( this.field1 ){
 

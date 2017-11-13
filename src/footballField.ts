@@ -9,7 +9,13 @@ class Field_ball extends eui.UILayer {
 
     //  缺一个 被人投注金币的样式
 
-    // 自己金币边投边创建  累计的投注额 优先创建好
+    // 投注盒子和 金额文案 left
+    private leftMyMoneyBox:egret.DisplayObjectContainer
+    private leftMyMoneyText:egret.TextField;
+    
+    // 投注盒子和 金额文案 right
+    private rightMyMoneyBox:egret.DisplayObjectContainer
+    private rightMyMoneyText:egret.TextField;
 
 
     // 设置锚点和x值
@@ -119,28 +125,6 @@ class Field_ball extends eui.UILayer {
         rightG.textAlign = egret.HorizontalAlign.CENTER;
         this.addChild(rightG);
 
-
-        //左边队伍我投足的金额,可能需要隐藏
-        let leftMyMoneyBox:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
-        leftMyMoneyBox.width = 196;
-        leftMyMoneyBox.height = 27;
-        leftMyMoneyBox.x = 25;
-        leftMyMoneyBox.y = 148;
-        this.addChild(leftMyMoneyBox);
-
-        let leftMyMoneyBg:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-betting_png'));
-        leftMyMoneyBox.addChild(leftMyMoneyBg);
-
-        let leftMyMoneyText:egret.TextField = new egret.TextField();
-        leftMyMoneyText.text = leftMyMoney;
-        leftMyMoneyText.width = 196;
-        leftMyMoneyText.height = 27;
-        leftMyMoneyText.textColor = 0xffd146;
-        leftMyMoneyText.size = 22;
-        leftMyMoneyText.verticalAlign = egret.VerticalAlign.MIDDLE;
-        leftMyMoneyText.textAlign = egret.HorizontalAlign.CENTER;
-        leftMyMoneyBox.addChild(leftMyMoneyText);
-
         // 右边同上
 
         let rightUserBox:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
@@ -190,30 +174,6 @@ class Field_ball extends eui.UILayer {
         this.addChild(rightOdds);
 
 
-
-
-         //左边队伍我投足的金额
-        let rightMyMoneyBox:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
-        rightMyMoneyBox.width = 196;
-        rightMyMoneyBox.height = 27;
-        rightMyMoneyBox.x = 270;
-        rightMyMoneyBox.y = 148;
-        this.addChild(rightMyMoneyBox);
-
-        let rightMyMoneyBg:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-betting_png'));
-        rightMyMoneyBox.addChild(rightMyMoneyBg);
-
-        let rightMyMoneyText:egret.TextField = new egret.TextField();
-        rightMyMoneyText.text = rightMyMoney;
-        rightMyMoneyText.width = 196;
-        rightMyMoneyText.height = 27;
-        rightMyMoneyText.textColor = 0xffd146;
-        rightMyMoneyText.size = 22;
-        rightMyMoneyText.verticalAlign = egret.VerticalAlign.MIDDLE;
-        rightMyMoneyText.textAlign = egret.HorizontalAlign.CENTER;
-        rightMyMoneyBox.addChild(rightMyMoneyText);
-
-
         // 胜利图标
         let win:egret.Bitmap = new egret.Bitmap(RES.getRes('win2_png'));
         win.anchorOffsetY = win.height/2;
@@ -222,9 +182,7 @@ class Field_ball extends eui.UILayer {
         win.x = winX;
         win.y = 90;
         // this.addChild(win);
-
-
-
+        console.log(  !!this.leftMyMoneyBox )
 
     }
 
@@ -237,16 +195,66 @@ class Field_ball extends eui.UILayer {
     private addRightAllCoin(){
 
 
-
     }
-    // 更新 累计投注
-    
-    // 更新 自己投注的数值
+
+    // 更新 自己投注的数值 (判断是否有该事物 left)
+    private upLeftMyMoney( coin:string ){
+        if( !!this.leftMyMoneyBox ){
+            this.leftMyMoneyText.text = coin ;
+        }else{
+            this.leftMyMoneyBox = new egret.DisplayObjectContainer();
+            this.leftMyMoneyBox.width = 196;
+            this.leftMyMoneyBox.height = 27;
+            this.leftMyMoneyBox.x = 25;
+            this.leftMyMoneyBox.y = 148;
+            let leftMyMoneyBg:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-betting_png'));
+            this.leftMyMoneyBox.addChild(leftMyMoneyBg);
+            this.leftMyMoneyText = new egret.TextField();
+            this.leftMyMoneyText.text = coin ;
+            this.leftMyMoneyText.width = 196;
+            this.leftMyMoneyText.height = 27;
+            this.leftMyMoneyText.textColor = 0xffd146;
+            this.leftMyMoneyText.size = 22;
+            this.leftMyMoneyText.verticalAlign = egret.VerticalAlign.MIDDLE;
+            this.leftMyMoneyText.textAlign = egret.HorizontalAlign.CENTER;
+            this.leftMyMoneyBox.addChild(this.leftMyMoneyText);
+            this.addChild( this.leftMyMoneyBox);
+        }
+    }
+
+    // 更新 自己投注的数值 (判断是否有该事物 right)
+    private upRightMyMoney( coin:string ){
+        if( !!this.rightMyMoneyBox ){
+            this.rightMyMoneyText.text = coin ;
+        }else{
+            this.rightMyMoneyBox = new egret.DisplayObjectContainer();
+            this.rightMyMoneyBox.width = 196;
+            this.rightMyMoneyBox.height = 27;
+            this.rightMyMoneyBox.x = 270;
+            this.rightMyMoneyBox.y = 148;
+            let rightMyMoneyBg:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-betting_png'));
+            this.rightMyMoneyBox.addChild(rightMyMoneyBg);
+            this.rightMyMoneyText = new egret.TextField();
+            this.rightMyMoneyText.text = coin ;
+            this.rightMyMoneyText.width = 196;
+            this.rightMyMoneyText.height = 27;
+            this.rightMyMoneyText.textColor = 0xffd146;
+            this.rightMyMoneyText.size = 22;
+            this.rightMyMoneyText.verticalAlign = egret.VerticalAlign.MIDDLE;
+            this.rightMyMoneyText.textAlign = egret.HorizontalAlign.CENTER;
+            this.rightMyMoneyBox.addChild(this.rightMyMoneyText);
+
+            this.addChild(this.rightMyMoneyBox);
+        }
+    }
+   // 
     public updataBetCoin(){
-
-
-
+        
     }
 
+    private hasLeftMyMoney(){
+        console.log( !!this.leftMyMoneyBox )
+        return !!this.leftMyMoneyBox
+    }
 
 }
