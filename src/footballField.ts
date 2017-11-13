@@ -221,7 +221,7 @@ class Field_ball extends eui.UILayer {
         // -80  or 350
         win.x = winX;
         win.y = 90;
-        this.addChild(win);
+        // this.addChild(win);
 
 
 

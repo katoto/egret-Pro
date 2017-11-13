@@ -27,17 +27,22 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         var fieldStr = 'field';
         var $store = window['store']
         if( $store['matches'] ){
-            for( var i=0,len = 4 ;i<len;i++ ){
+            for( var i=0,len = 1 ;i<len;i++ ){
                 fieldStr = 'field'+(i+1)
                 this[fieldStr] = new Field_ball( 485,$store['stage_anWidth'] , $store['matches'][i].homelogo ,
                     $store['matches'][i].homename ,  $store['matches'][i].homeodds ,'0' , '0' ,
                     $store['matches'][i].awaylogo , $store['matches'][i].awayname , $store['matches'][i].awayodds ,'0' ,'10','-80'
                 )
+
                 this[fieldStr].y = 120+202*i;
                 this[fieldStr].touchEnabled = true;
                 this.this_fieldContain.addChild( this[fieldStr] )
+                this[fieldStr].width = 485;
+                this[fieldStr].height = 181;
             }
             if( this.field1 ){
+
+                console.log('this.field1.width:'+this.field1.width)
                 this.field1.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_oneEvt ,this)
             }
             if( this.field2 ){
@@ -55,21 +60,20 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
     // 场地点击处理
     private field_oneEvt( e:egret.TouchEvent ){
         console.log(1)
-
         //  ajax 下单
         //  执行动画
-        console.log(e.stageY)
-        console.log(e.$stageY)
+        let x = e.localX + 133;
+        let y = e.localY + 120;
+        console.log(x);
+        console.log(y)
 
-
-        let x = e.localX;
-        let y = e.localY;
-        if(10<x && x<242.5){
-           console.log('左边')
-        }else if(252.5<x && x<475){
-            console.log('右边')
-        }
-        this.tween_Coin( e.$stageX ,e.$stageY -150 )
+        // if(10<x && x<242.5){
+        //    console.log('左边')
+        // }else if(252.5<x && x<475){
+        //     console.log('右边')
+        // }
+        // this.tween_Coin( e.$stageX ,e.$stageY)
+        this.tween_Coin(x,y)
 
     }
     // private awaitTime(){
@@ -82,7 +86,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
     // }
 
     async field_twoEvt( e:egret.TouchEvent ){
-        console.log(2)
+        
         //  ajax 下单
         //  执行动画
         // this.tween_Coin(30,40)
@@ -98,21 +102,22 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             
         })
         this.tween_Coin( e.$stageX ,e.$stageY -150 );
+        // console.log(555555)
+        // await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
+        //     console.log( 123 )
+        //     console.log( res )
+        // })
+        // console.log(777777)
+        // this.tween_Coin( e.$stageX ,e.$stageY -150 );
+
         // console.log(e.stageY)
         // console.log(e.$stageY)
     }
     private field_threeEvt( e:egret.TouchEvent ){
-        console.log(3)
 
-        this.tween_Coin( e.$stageX ,e.$stageY -150 )
-        console.log(e.stageY)
-        console.log(e.$stageY)
     }
     private field_fourEvt( e:egret.TouchEvent ){
-        console.log(4)
-        console.log(e.stageY)
-        console.log(e.$stageY)
-        this.tween_Coin( e.$stageX ,e.$stageY -150 )
+
     }
 
     private tween_Coin( stage_x:Number ,stage_y:Number ){
@@ -125,16 +130,8 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             gold.anchorOffsetY = gold.height/2;
             gold.x = window['store']['stage_anWidth'];
             gold.y = 1000;
-
             this.addChild(gold);
-
             egret.Tween.get( gold ).to( { x:stage_x,y:stage_y },500 )
-
-            // setTimeout(()=>{
-            //     console.log( 112 )
-            //     egret.Tween.get( gold ).to( { x:600,y:800 },500 )
-            // },5000)
-
     }
 
     private ajax_order(){
@@ -146,3 +143,11 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
     }
 
 }
+/**
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */

@@ -189,7 +189,7 @@ var Field_ball = (function (_super) {
         // -80  or 350
         win.x = winX;
         win.y = 90;
-        this.addChild(win);
+        // this.addChild(win);
     };
     //  创建 左边 收起的类
     Field_ball.prototype.addLeftAllCoin = function () {

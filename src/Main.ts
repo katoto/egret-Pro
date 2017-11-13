@@ -137,7 +137,6 @@ class Main extends egret.DisplayObjectContainer {
         this.Width = window['store']['stage_Width'] = this.stage.stageWidth;
         this.Height = window['store']['stage_Height'] = this.stage.stageHeight;
         this.anWidth = window['store']['stage_anWidth'] = this.Width/2;
-        // const wrapHeight = (Height-80)/2;
         const anHeight =  window['store']['stage_anHeight'] = this.Height/2;
 
 
@@ -175,19 +174,6 @@ class Main extends egret.DisplayObjectContainer {
         this.pop = new Pop(this.Width,this.Height,'text-begin_png');
         // this.addChild(this.pop);
         
-
-         //test
-        let gold = new Gold();
-        gold.anchorOffsetX = gold.width/2;
-        gold.anchorOffsetY = gold.height/2;
-        gold.x = this.anWidth;
-        gold.y = 980;
-        this.cnt.bgCourtWrap.addChild(gold);
-        gold.touchEnabled = true;
-        this.stage.addEventListener(egret.TouchEvent.TOUCH_TAP,(evt:egret.TouchEvent)=>{
-            gold.x = evt.localX ;
-            gold.y = evt.localY ;
-        },this);
 
         // 层级控制
         // this.setChildIndex(header,0)
