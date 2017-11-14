@@ -1,5 +1,7 @@
 /**
  *  虚拟杯
+ * 
+ * ( 用户信息和场地优化 new实例减少 )
  */
 
 class Main extends egret.DisplayObjectContainer {
@@ -194,12 +196,17 @@ class Main extends egret.DisplayObjectContainer {
         console.log( window['store'] )
         
         // websocket
-        this.webSocket = new egret.WebSocket();
-        this.webSocket.addEventListener( egret.ProgressEvent.SOCKET_DATA , this.onReceiveMess ,this );
-        this.webSocket.addEventListener( egret.Event.CONNECT ,this.onSocketOpen ,this );
-        this.webSocket.addEventListener( egret.IOErrorEvent.IO_ERROR ,this.onIOError ,this );
-        this.webSocket.addEventListener( egret.Event.CLOSE ,this.onCloseSock ,this );
-        this.webSocket.connectByUrl("ws://192.168.81.240:9777/ws");
+        try{
+            this.webSocket = new egret.WebSocket();
+            this.webSocket.addEventListener( egret.ProgressEvent.SOCKET_DATA , this.onReceiveMess ,this );
+            this.webSocket.addEventListener( egret.Event.CONNECT ,this.onSocketOpen ,this );
+            this.webSocket.addEventListener( egret.IOErrorEvent.IO_ERROR ,this.onIOError ,this );
+            this.webSocket.addEventListener( egret.Event.CLOSE ,this.onCloseSock ,this );
+            this.webSocket.connectByUrl("ws://192.168.81.240:9777/ws");
+        }catch(e){
+            alert('websock error')
+        }
+
 
     }
 
@@ -215,7 +222,6 @@ class Main extends egret.DisplayObjectContainer {
         window['store']['platform'] = egret.localStorage.getItem('platform'); 
         // 头像随机的位置
         window['store']['userPosition'] = window['randomArray']( 9 );
-
 
     }
 
