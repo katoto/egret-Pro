@@ -147,12 +147,9 @@ class Field_ball extends eui.UILayer {
         this.addChild(rightOdds);
 
 
-
-
         // win、左边队伍图标和右边队伍图片会影响金币点击效果
-        leftUserBox.touchEnabled = true
-        this.addChild(leftUserBox); 
-        this.addChild(rightUserBox);
+        // this.addChild(leftUserBox); 
+        // this.addChild(rightUserBox);
         // 
 
     }

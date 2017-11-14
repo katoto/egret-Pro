@@ -21,7 +21,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
     }
 
-    //  初始化 场地  （ 每次切换场地，都认为是初始化 ）
+    //  初始化 场地  （ 每次切换场地，都认为是初始化  ( 感觉应该做 ) ）
     private initField(){
         console.log(' 初始化场地 ')
         var fieldStr = 'field';
