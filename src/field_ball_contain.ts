@@ -149,6 +149,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         /**
          *  创建 金币 并执行动画  (报错对应的对象 ，为收集金币做处理 )
          * 
+         *  金币的场次id 比赛id 金币的额度， 金币的来源。。。。。好像很多
          */
             let gold = new Gold();
             gold.anchorOffsetX = gold.width/2;
@@ -159,20 +160,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             egret.Tween.get( gold ).to( { x:stage_x,y:stage_y },500 )
     }
 
-    private ajax_order(){
-        /**
-         *  下单
-         */
-
-
-    }
-
 }
 /**
- * 
- * 
- * 
- * 
- * 
  * 
  */
