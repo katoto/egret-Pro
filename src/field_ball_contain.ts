@@ -33,7 +33,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     $store['matches'][i].homename ,  $store['matches'][i].homeodds ,
                     $store['matches'][i].awaylogo , $store['matches'][i].awayname , $store['matches'][i].awayodds
                 )
-
                 this[fieldStr].y = 120+202*i;
                 this[fieldStr].touchEnabled = true;
                 this.this_fieldContain.addChild( this[fieldStr] );
