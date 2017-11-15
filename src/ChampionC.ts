@@ -22,38 +22,53 @@ class ChampionC extends eui.Group{
         
         
         //获胜队伍大容器
-        let teamBigWrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
-       
-        //获胜队伍小容器，每五支队伍为一个小容器
-        let teamWrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
-        teamWrap.width = 680;
-        teamWrap.height = 530;
-        teamBigWrap.addChild(teamWrap);
+        let teamBigWrap:eui.Group = new eui.Group();
 
-        let textWrapBg:egret.Shape = new egret.Shape();
-        textWrapBg.graphics.beginFill(0x30313b);
-        textWrapBg.graphics.drawRect(0,0,680,530);
-        textWrapBg.graphics.endFill();
-        teamWrap.addChild(textWrapBg);
+        //  n个小容器
+        let n =  Math.ceil(window['store']['recording'].length/5);
+        for(let i=0;i<n;i++){
+            //获胜队伍小容器，每五支队伍为一个小容器
+            // let name = 'teamWrap'+i;
+            let name = new eui.Group();
+            name.width = 680;
+            name.height = 530;
 
-        for(let i=0;i<5;i++){
-            let chamTeam01 = this.chamTeam("121501","世界杯","https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg");
-            chamTeam01.y = i*100+28;
-            teamWrap.addChild(chamTeam01);
+             //小容器背景色
+            let textWrapBg:egret.Shape = new egret.Shape();
+            textWrapBg.graphics.beginFill(0x30313b);
+            textWrapBg.graphics.drawRect(0,0,680,530);
+            textWrapBg.graphics.endFill();
+            name.addChild(textWrapBg);
+
+            //详细数据
+            for(let i=0;i<5;i++){
+                let chamTeam01 = this.chamTeam("121501","世界杯","https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg");
+                chamTeam01.y = i*100+28;
+                name.addChild(chamTeam01);
+            }
+
+            teamBigWrap.addChild(name);
         }
+       
+
+        
+   
+        
+        
+       
+
 
 
         var group = new eui.Group();
-        var img = new eui.Image("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510744461625&di=5963a6ba31ae39ce31faad1d1c2797d5&imgtype=jpg&src=http%3A%2F%2Fimg4.imgtn.bdimg.com%2Fit%2Fu%3D2760457749%2C4161462131%26fm%3D214%26gp%3D0.jpg");
         group.addChild(teamBigWrap);
-
         var myScroller = new eui.Scroller();
         myScroller.y = 50;
         myScroller.width = 680;
-        myScroller.height = 300;
+        myScroller.height = 800;
         myScroller.viewport = group;
         this.addChild(myScroller);
 
+    //    window['store']['recording']
     }
 
     private drawTitie(t,w,x){ /*标题，宽度，x位置*/
