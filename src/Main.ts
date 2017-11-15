@@ -24,6 +24,8 @@ class Main extends egret.DisplayObjectContainer {
     private bottom;
     //  弹窗
     private pop;
+    //冠军记录弹窗
+    private popChampionRecord;
 
     private textfield:egret.TextField;
     
@@ -176,6 +178,10 @@ class Main extends egret.DisplayObjectContainer {
         this.pop = new Pop(this.Width,this.Height,'text-begin_png');
         // this.addChild(this.pop);
         
+        //冠军记录
+        this.popChampionRecord = new Pop02('冠军记录');
+        this.addChild(this.popChampionRecord);
+
 
         // 层级控制
         // this.setChildIndex(header,0)
@@ -183,6 +189,7 @@ class Main extends egret.DisplayObjectContainer {
         this.setChildIndex(this.top,2)
         this.setChildIndex(this.bottom,3)
         // this.setChildIndex(this.pop,4)
+        this.setChildIndex(this.popChampionRecord,4)
 
 
         /*
