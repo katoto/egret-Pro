@@ -34,7 +34,7 @@ class Field_ball extends eui.UILayer {
     private drawField(leftImg,leftT,leftO,rightImg,rightT,rightO){
         
         let court4:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-court4_png'));
-
+         this.addChild(court4);
         //两个金币收集的背景， 这里要考虑假如没人投注的情况，是否要隐藏  62+246;
         this.goldItems_left = new egret.Bitmap(RES.getRes('gold-items_png'));
         this.goldItems_left.x = 62;
@@ -58,15 +58,16 @@ class Field_ball extends eui.UILayer {
         leftUserBox.height = 68;
         leftUserBox.x = 25;
         leftUserBox.y = 54;
-        
+        this.addChild(leftUserBox); 
         // 插入边框
         let bgBorder:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         leftUserBox.addChild(bgBorder);
+        
         // 插入遮罩层
         let bgMask:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-user_png'));
         bgMask.x = 3;
         bgMask.y = 3;
-        leftUserBox.addChild(bgMask);
+        // leftUserBox.addChild(bgMask);
         //队伍icon
         let leftTeam:eui.Image = new eui.Image();
         // leftTeam.source = leftImg;
@@ -104,7 +105,7 @@ class Field_ball extends eui.UILayer {
         rightUserBox.height = 68;
         rightUserBox.x = 400;
         rightUserBox.y = 54;
-         
+        this.addChild(rightUserBox);
         // 插入边框
         let bgBorder02:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         rightUserBox.addChild(bgBorder02);
@@ -112,7 +113,7 @@ class Field_ball extends eui.UILayer {
         let bgMask02:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-user_png'));
         bgMask02.x = 3;
         bgMask02.y = 3;
-        rightUserBox.addChild(bgMask02);
+        // rightUserBox.addChild(bgMask02);
         //队伍icon
         let rightTeam:eui.Image = new eui.Image();
         // leftTeam.source = rightImg;
@@ -147,9 +148,7 @@ class Field_ball extends eui.UILayer {
 
 
         // win、左边队伍图标和右边队伍图片会影响金币点击效果
-        // this.addChild(leftUserBox); 
-        this.addChild(rightUserBox);
-        this.addChild(court4);
+       
         // 
 
     }

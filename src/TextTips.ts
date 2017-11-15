@@ -4,6 +4,7 @@ class TextTips extends egret.DisplayObjectContainer{
         super();
         this.drawText();
     }
+    private textTips:string = '请选择球队下注...';
     private drawText(){
         // 内容区
         let wrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
@@ -18,9 +19,8 @@ class TextTips extends egret.DisplayObjectContainer{
         bg.y = 0;
         wrap.addChild(bg);
         //文字
-        let textTips:string = '请选择球队下注...';
         let text:egret.TextField = new egret.TextField();
-        text.text = textTips;
+        text.text = this.textTips;
         text.textColor = 0x94d7bd;
         text.size = 24;
         text.width = 231;

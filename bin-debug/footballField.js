@@ -24,6 +24,7 @@ var Field_ball = (function (_super) {
     }
     Field_ball.prototype.drawField = function (leftImg, leftT, leftO, rightImg, rightT, rightO) {
         var court4 = new egret.Bitmap(RES.getRes('bg-court4_png'));
+        this.addChild(court4);
         //两个金币收集的背景， 这里要考虑假如没人投注的情况，是否要隐藏  62+246;
         this.goldItems_left = new egret.Bitmap(RES.getRes('gold-items_png'));
         this.goldItems_left.x = 62;
@@ -43,6 +44,7 @@ var Field_ball = (function (_super) {
         leftUserBox.height = 68;
         leftUserBox.x = 25;
         leftUserBox.y = 54;
+        this.addChild(leftUserBox);
         // 插入边框
         var bgBorder = new egret.Bitmap(RES.getRes('bg-item_png'));
         leftUserBox.addChild(bgBorder);
@@ -50,7 +52,7 @@ var Field_ball = (function (_super) {
         var bgMask = new egret.Bitmap(RES.getRes('bg-user_png'));
         bgMask.x = 3;
         bgMask.y = 3;
-        leftUserBox.addChild(bgMask);
+        // leftUserBox.addChild(bgMask);
         //队伍icon
         var leftTeam = new eui.Image();
         // leftTeam.source = leftImg;
@@ -83,6 +85,7 @@ var Field_ball = (function (_super) {
         rightUserBox.height = 68;
         rightUserBox.x = 400;
         rightUserBox.y = 54;
+        this.addChild(rightUserBox);
         // 插入边框
         var bgBorder02 = new egret.Bitmap(RES.getRes('bg-item_png'));
         rightUserBox.addChild(bgBorder02);
@@ -90,7 +93,7 @@ var Field_ball = (function (_super) {
         var bgMask02 = new egret.Bitmap(RES.getRes('bg-user_png'));
         bgMask02.x = 3;
         bgMask02.y = 3;
-        rightUserBox.addChild(bgMask02);
+        // rightUserBox.addChild(bgMask02);
         //队伍icon
         var rightTeam = new eui.Image();
         // leftTeam.source = rightImg;
@@ -119,9 +122,6 @@ var Field_ball = (function (_super) {
         rightOdds.bold = true;
         this.addChild(rightOdds);
         // win、左边队伍图标和右边队伍图片会影响金币点击效果
-        // this.addChild(leftUserBox); 
-        this.addChild(rightUserBox);
-        this.addChild(court4);
         // 
     };
     //  left add icon win   胜利图标

@@ -157,7 +157,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             gold.x = window['store']['stage_anWidth'];
             gold.y = 1000;
             this.addChild(gold);
-            egret.Tween.get( gold ).to( { x:stage_x,y:stage_y },500 )
+            egret.Tween.get( gold ).to( { x:stage_x,y:stage_y },200 )
     }
 
 }

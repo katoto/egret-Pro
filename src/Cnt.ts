@@ -60,7 +60,7 @@ class Cnt extends egret.DisplayObjectContainer{
         this.bgCourtWrap.addChild(bgCourt);
 
         //倒计时
-        let timer:Timer = new Timer(Width,Height,anWidth,anHeight);
+        let timer:Timer = new Timer();
         timer.anchorOffsetX = timer.width/2;
         timer.x = anWidth;
         timer.y = 0;
