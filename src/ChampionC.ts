@@ -23,40 +23,28 @@ class ChampionC extends eui.Group{
         
         //获胜队伍大容器
         let teamBigWrap:eui.Group = new eui.Group();
+       
 
         //  n个小容器
         let n =  Math.ceil(window['store']['recording'].length/5);
-        for(let i=0;i<n;i++){
-            //获胜队伍小容器，每五支队伍为一个小容器
-            // let name = 'teamWrap'+i;
-            let name = new eui.Group();
-            name.width = 680;
-            name.height = 530;
 
-             //小容器背景色
-            let textWrapBg:egret.Shape = new egret.Shape();
-            textWrapBg.graphics.beginFill(0x30313b);
-            textWrapBg.graphics.drawRect(0,0,680,530);
-            textWrapBg.graphics.endFill();
-            name.addChild(textWrapBg);
-
-            //详细数据
-            for(let i=0;i<5;i++){
-                let chamTeam01 = this.chamTeam("121501","世界杯","https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg");
-                chamTeam01.y = i*100+28;
-                name.addChild(chamTeam01);
-            }
-
-            teamBigWrap.addChild(name);
+        var teamWrap:eui.Group = new eui.Group();
+        teamWrap.width = 680;
+        teamWrap.height = 530;
+        //小容器背景色
+        let textWrapBg:egret.Shape = new egret.Shape();
+        textWrapBg.graphics.beginFill(0x30313b);
+        textWrapBg.graphics.drawRect(0,0,680,530);
+        textWrapBg.graphics.endFill();
+        teamWrap.addChild(textWrapBg);
+        //详细数据
+        for(let i=0;i<5;i++){
+            let chamTeam01 = this.chamTeam("121501","世界杯","https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg");
+            chamTeam01.y = i*100+28;
+            teamWrap.addChild(chamTeam01);
         }
-       
 
-        
-   
-        
-        
-       
-
+        teamBigWrap.addChild(teamWrap);
 
 
         var group = new eui.Group();
@@ -68,7 +56,8 @@ class ChampionC extends eui.Group{
         myScroller.viewport = group;
         this.addChild(myScroller);
 
-    //    window['store']['recording']
+
+        
     }
 
     private drawTitie(t,w,x){ /*标题，宽度，x位置*/
