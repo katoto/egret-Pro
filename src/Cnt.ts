@@ -5,6 +5,9 @@ class Cnt extends egret.DisplayObjectContainer{
     }
     // 缩放系数
     private scale:number = window['store'].scale;
+
+    // 比赛进程 1/4 / 1/2  / 决赛
+    private matchPro = '决赛';
     // 内容舞台 操作头像
     private bgCourtWrap:egret.DisplayObjectContainer ;
 
@@ -38,6 +41,7 @@ class Cnt extends egret.DisplayObjectContainer{
         bg.x = anWidth;
         bg.y = 0;
         wrap.addChild(bg);
+
          // 背景 桌子区域，用来定位桌子计时器和里面的足球场等
         this.bgCourtWrap = new egret.DisplayObjectContainer();
         this.bgCourtWrap.width = Width;
@@ -46,13 +50,14 @@ class Cnt extends egret.DisplayObjectContainer{
         this.bgCourtWrap.anchorOffsetY = this.bgCourtWrap.height/2;
         this.bgCourtWrap.x = anWidth;
         this.bgCourtWrap.y = anHeight;
+
         //问题，测试屏幕大小进行缩放
         this.bgCourtWrap.scaleX=this.scale;
         this.bgCourtWrap.scaleY=this.scale;
         wrap.addChild(this.bgCourtWrap);
         
 
-        // 背景 桌子
+        // 背景 大桌子
         let bgCourt:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-court_png'));
         bgCourt.anchorOffsetX = bgCourt.width/2;
         bgCourt.x = anWidth;
@@ -60,7 +65,7 @@ class Cnt extends egret.DisplayObjectContainer{
         this.bgCourtWrap.addChild(bgCourt);
 
         //倒计时
-        let timer:Timer = new Timer(Width,Height,anWidth,anHeight);
+        let timer:Timer = new Timer();
         timer.anchorOffsetX = timer.width/2;
         timer.x = anWidth;
         timer.y = 0;
@@ -73,12 +78,24 @@ class Cnt extends egret.DisplayObjectContainer{
         textT.y = 66;
         this.bgCourtWrap.addChild(textT);
 
+
+
+        if(this.matchPro == '决赛'){
+            let court1 = new Court();
+            // court1.anchorOffsetX = court1.width/2;
+            // court1.anchorOffsetY = court1.height/2;
+            court1.x = 150;
+            court1.y = 100;
+            this.bgCourtWrap.addChild(court1);
+        }
+
+
         //生成四个足球场，1/4比赛  485为小球场宽度，应该可以在构造函数里设置，需要优化
         //参数分辨是 x,x，左边球队icon，队名，赔率，总投注，我的投注，右边~
         //  http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png
 
-        this.fieldContain = new Field_ball_contain();
-        this.bgCourtWrap.addChild(this.fieldContain)
+        // this.fieldContain = new Field_ball_contain();
+        // this.bgCourtWrap.addChild(this.fieldContain);
 
         // this.field2 = new Field_ball(485,anWidth,'http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png','克罗地亚',3.78,'10万','10.09万','team-02_jpg','德国',1.26,'23万','10.09万');
         // this.field2.y = 120;
@@ -134,7 +151,7 @@ class Cnt extends egret.DisplayObjectContainer{
 
     // 调研初始化场地
     private initFieldCon(){
-        this.fieldContain.initField();
+        // this.fieldContain.initField();
     }
 
     // 初始化场地 

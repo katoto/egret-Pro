@@ -17,8 +17,8 @@ var Field_ball = (function (_super) {
     // 设置锚点和x值  头像 队名 赔率 （  感觉得设置成 修改类的方式  ）
     function Field_ball(leftImg, leftT, leftO, rightImg, rightT, rightO) {
         var _this = _super.call(this) || this;
-        _this.anchorOffsetX = window['store']['stage_Width'] / 2;
-        _this.x = 485;
+        _this.anchorOffsetX = 242.5;
+        _this.x = window['store']['stage_Width'] / 2;
         _this.drawField(leftImg, leftT, leftO, rightImg, rightT, rightO);
         return _this;
     }
@@ -44,6 +44,7 @@ var Field_ball = (function (_super) {
         leftUserBox.height = 68;
         leftUserBox.x = 25;
         leftUserBox.y = 54;
+        this.addChild(leftUserBox);
         // 插入边框
         var bgBorder = new egret.Bitmap(RES.getRes('bg-item_png'));
         leftUserBox.addChild(bgBorder);
@@ -51,7 +52,7 @@ var Field_ball = (function (_super) {
         var bgMask = new egret.Bitmap(RES.getRes('bg-user_png'));
         bgMask.x = 3;
         bgMask.y = 3;
-        leftUserBox.addChild(bgMask);
+        // leftUserBox.addChild(bgMask);
         //队伍icon
         var leftTeam = new eui.Image();
         // leftTeam.source = leftImg;
@@ -84,6 +85,7 @@ var Field_ball = (function (_super) {
         rightUserBox.height = 68;
         rightUserBox.x = 400;
         rightUserBox.y = 54;
+        this.addChild(rightUserBox);
         // 插入边框
         var bgBorder02 = new egret.Bitmap(RES.getRes('bg-item_png'));
         rightUserBox.addChild(bgBorder02);
@@ -91,7 +93,7 @@ var Field_ball = (function (_super) {
         var bgMask02 = new egret.Bitmap(RES.getRes('bg-user_png'));
         bgMask02.x = 3;
         bgMask02.y = 3;
-        rightUserBox.addChild(bgMask02);
+        // rightUserBox.addChild(bgMask02);
         //队伍icon
         var rightTeam = new eui.Image();
         // leftTeam.source = rightImg;
@@ -120,8 +122,11 @@ var Field_ball = (function (_super) {
         rightOdds.bold = true;
         this.addChild(rightOdds);
         // win、左边队伍图标和右边队伍图片会影响金币点击效果
+<<<<<<< HEAD
         // this.addChild(leftUserBox); 
         // this.addChild(rightUserBox);
+=======
+>>>>>>> f91d2bcf093e9e1eeea9e804a1d540facc63b0da
         // 
     };
     //  left add icon win   胜利图标
@@ -135,20 +140,20 @@ var Field_ball = (function (_super) {
             // -80  or 350
             this.winIcon_l.x = -80;
             this.winIcon_l.y = 90;
-            this.addChild(this.winIcon_l);
+            // this.addChild(this.winIcon_l);
         }
     };
     // right add icon
     Field_ball.prototype.addwinIcon_r = function () {
         if (!!this.winIcon_r) {
-            this.addChild(this.winIcon_r);
+            // this.addChild(this.winIcon_r);
         }
         else {
             this.winIcon_r = new egret.Bitmap(RES.getRes('win2_png'));
             this.winIcon_r.anchorOffsetY = this.winIcon_r.height / 2;
             this.winIcon_r.x = 350;
             this.winIcon_r.y = 90;
-            this.addChild(this.winIcon_r);
+            // this.addChild(this.winIcon_r);
         }
     };
     // 更新左边总金币的背景

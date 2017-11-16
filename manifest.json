@@ -10,8 +10,15 @@
 		"promise/bin/promise.js"
 	],
 	"game": [
+<<<<<<< HEAD
 		"bin-debug/field_ball_contain.js",
 		"bin-debug/Main.js",
+=======
+		"bin-debug/ChampionC.js",
+		"bin-debug/Cnt.js",
+		"bin-debug/Court.js",
+		"bin-debug/field_ball_contain.js",
+>>>>>>> f91d2bcf093e9e1eeea9e804a1d540facc63b0da
 		"bin-debug/Foot.js",
 		"bin-debug/footballField.js",
 		"bin-debug/FootBtn.js",
@@ -19,8 +26,14 @@
 		"bin-debug/Header.js",
 		"bin-debug/HelloTime.js",
 		"bin-debug/LoadingUI.js",
+<<<<<<< HEAD
 		"bin-debug/Cnt.js",
+=======
+		"bin-debug/Main.js",
+>>>>>>> f91d2bcf093e9e1eeea9e804a1d540facc63b0da
 		"bin-debug/Pop.js",
+		"bin-debug/Pop02.js",
+		"bin-debug/PopChat.js",
 		"bin-debug/Test.js",
 		"bin-debug/TextTips.js",
 		"bin-debug/Timer.js",

@@ -1,3 +1,4 @@
+// 竞猜开始or结束弹窗
 class Pop extends egret.DisplayObjectContainer{
     // 弹窗
     public constructor(Width,Height,Bgtext){

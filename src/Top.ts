@@ -4,7 +4,8 @@ class Top extends egret.DisplayObjectContainer{
         super();
         this.drawTop(Width);
     }
-
+    //冠军记录弹窗
+    private popChampionRecord;
     private textTitle:egret.TextField;
     private textDate:egret.TextField;
     private drawTop(Width){
@@ -32,7 +33,9 @@ class Top extends egret.DisplayObjectContainer{
         this.addChild(btnPast);
         btnPast.touchEnabled = true;
         btnPast.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
-            console.log('往期弹窗')
+            console.log('往期弹窗');
+            this.popChampionRecord = new Pop02('冠军记录');
+            this.addChild(this.popChampionRecord);
         },this)
         let btnRecharge:egret.Bitmap = new egret.Bitmap(RES.getRes('btn-recharge_png'));
         btnRecharge.x = Width - 76;

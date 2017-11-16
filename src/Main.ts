@@ -24,6 +24,8 @@ class Main extends egret.DisplayObjectContainer {
     private bottom;
     //  弹窗
     private pop;
+    // 聊天实例
+    private popChat;
 
     private textfield:egret.TextField;
     
@@ -31,6 +33,7 @@ class Main extends egret.DisplayObjectContainer {
     private Height;
     private anWidth;
     private anHeight;
+    
 
 
     private position:Array<number> =  [];
@@ -151,19 +154,7 @@ class Main extends egret.DisplayObjectContainer {
         // header.y = 0;
         // this.addChild(header);
 
-        //头部实例2
-        this.top = new Top(this.Width);
-        this.top.x = 0;
-        this.top.y = 0;
-        this.addChild(this.top);
-
-        // 底部实例
-        this.bottom = new Foot(this.Width,this.Height);
-        this.bottom.anchorOffsetY = 90;
-        this.bottom.x = 0;
-        this.bottom.y = this.Height;
-        this.bottom.alpha = 0.6;
-        this.addChild(this.bottom);
+       
 
         // 内容区实例
         this.cnt = new Cnt(this.Width,this.Height,this.anWidth,anHeight);
@@ -171,18 +162,41 @@ class Main extends egret.DisplayObjectContainer {
         this.cnt.y = 0;
         this.addChild(this.cnt);
 
+         //头部实例2
+        this.top = new Top(this.Width);
+        this.top.x = 0;
+        this.top.y = 0;
+        this.addChild(this.top);
+
+        // 底部实例
+        this.bottom = new Foot();
+        this.bottom.anchorOffsetY = 90;
+        this.bottom.x = 0;
+        this.bottom.y = this.Height;
+        this.addChild(this.bottom);
+
+        //聊天区域实例
+        this.popChat = new PopChat();
+        this.popChat.y = this.Height;
+        this.addChild(this.popChat);
+
         // 弹窗实例,竞猜开始or竞猜完毕
         // text-begin_png text-over_png
         this.pop = new Pop(this.Width,this.Height,'text-begin_png');
         // this.addChild(this.pop);
         
 
+        
+
+
+
         // 层级控制
         // this.setChildIndex(header,0)
-        this.setChildIndex(this.cnt,1)
-        this.setChildIndex(this.top,2)
-        this.setChildIndex(this.bottom,3)
+        // this.setChildIndex(this.cnt,1)
+        // this.setChildIndex(this.top,2)
+        // this.setChildIndex(this.bottom,3)
         // this.setChildIndex(this.pop,4)
+        // this.setChildIndex(this.popChampionRecord,4)
 
 
         /*
@@ -420,5 +434,18 @@ window['store'] = {
     'commit':function(key,val){
         console.log(key)
         console.log(val)
-    }
+    },
+    // 冠军记录
+    'recording':[
+        {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        {'期号':121501,'赛事':'欧洲杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        {'期号':121501,'赛事':'欧洲杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        {'期号':121501,'赛事':'欧洲杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        {'期号':121501,'赛事':'欧洲杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        {'期号':121501,'赛事':'欧洲杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        ]
 } 

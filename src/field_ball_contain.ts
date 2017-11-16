@@ -1,5 +1,7 @@
 class Field_ball_contain extends egret.DisplayObjectContainer{
     private this_fieldContain;
+    // 比赛进程 1/4 / 1/2  / 决赛
+    private matchPro = '决赛';
     // 比赛对阵
     private field1;
     private field2;
@@ -18,6 +20,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         // this.addChild(this.field2);
         // this.field2.touchEnabled = true;
         // this.field2.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_twoEvt ,this)
+       
 
     }
 
@@ -33,7 +36,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     $store['matches'][i].homename ,  $store['matches'][i].homeodds ,
                     $store['matches'][i].awaylogo , $store['matches'][i].awayname , $store['matches'][i].awayodds
                 )
-
                 this[fieldStr].y = 120+202*i;
                 this[fieldStr].touchEnabled = true;
                 this.this_fieldContain.addChild( this[fieldStr] );
@@ -158,7 +160,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             gold.x = window['store']['stage_anWidth'];
             gold.y = 1000;
             this.addChild(gold);
-            egret.Tween.get( gold ).to( { x:stage_x,y:stage_y },500 )
+            egret.Tween.get( gold ).to( { x:stage_x,y:stage_y },200 )
     }
 
 }
