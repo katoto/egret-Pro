@@ -40,10 +40,15 @@ utils 是工具类函数 全局的
 	 TextTips 文字提示
 	 FootballField  足球场
 	 UserImage 用户头像
+	 Pop 竞猜开始结束弹窗
+	 Pop02 信息类弹窗
+	 ChampionC 冠军记录弹窗的内容
+
 
 ###### tips 固定的东西，优先new 让其处于内存中
 
 https://ashan.org/archives/522
+https://ashan.org/category/egret
 不要向stage中放置太多的DisplayObject 就如同天朝的人口数量一样，
 什么东西多了都是噩梦。太多的显示对象不仅仅在第三步会消耗性能，
 更重要的是，在第四步的时候，会严重影响性能。让帧频下降。 

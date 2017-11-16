@@ -1,5 +1,7 @@
 class Field_ball_contain extends egret.DisplayObjectContainer{
     private this_fieldContain;
+    // 比赛进程 1/4 / 1/2  / 决赛
+    private matchPro = '决赛';
     // 比赛对阵
     private field1;
     private field2;
@@ -18,6 +20,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         // this.addChild(this.field2);
         // this.field2.touchEnabled = true;
         // this.field2.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_twoEvt ,this)
+       
 
     }
 

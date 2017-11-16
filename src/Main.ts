@@ -24,8 +24,8 @@ class Main extends egret.DisplayObjectContainer {
     private bottom;
     //  弹窗
     private pop;
-    //冠军记录弹窗
-    private popChampionRecord;
+    // 聊天实例
+    private popChat;
 
     private textfield:egret.TextField;
     
@@ -33,6 +33,7 @@ class Main extends egret.DisplayObjectContainer {
     private Height;
     private anWidth;
     private anHeight;
+    
 
 
     private position:Array<number> =  [];
@@ -153,19 +154,7 @@ class Main extends egret.DisplayObjectContainer {
         // header.y = 0;
         // this.addChild(header);
 
-        //头部实例2
-        this.top = new Top(this.Width);
-        this.top.x = 0;
-        this.top.y = 0;
-        this.addChild(this.top);
-
-        // 底部实例
-        this.bottom = new Foot(this.Width,this.Height);
-        this.bottom.anchorOffsetY = 90;
-        this.bottom.x = 0;
-        this.bottom.y = this.Height;
-        this.bottom.alpha = 0.6;
-        this.addChild(this.bottom);
+       
 
         // 内容区实例
         this.cnt = new Cnt(this.Width,this.Height,this.anWidth,anHeight);
@@ -173,23 +162,41 @@ class Main extends egret.DisplayObjectContainer {
         this.cnt.y = 0;
         this.addChild(this.cnt);
 
+         //头部实例2
+        this.top = new Top(this.Width);
+        this.top.x = 0;
+        this.top.y = 0;
+        this.addChild(this.top);
+
+        // 底部实例
+        this.bottom = new Foot();
+        this.bottom.anchorOffsetY = 90;
+        this.bottom.x = 0;
+        this.bottom.y = this.Height;
+        this.addChild(this.bottom);
+
+        //聊天区域实例
+        this.popChat = new PopChat();
+        this.popChat.y = this.Height;
+        this.addChild(this.popChat);
+
         // 弹窗实例,竞猜开始or竞猜完毕
         // text-begin_png text-over_png
         this.pop = new Pop(this.Width,this.Height,'text-begin_png');
         // this.addChild(this.pop);
         
-        //冠军记录
-        this.popChampionRecord = new Pop02('冠军记录');
-        this.addChild(this.popChampionRecord);
+
+        
+
 
 
         // 层级控制
         // this.setChildIndex(header,0)
-        this.setChildIndex(this.cnt,1)
-        this.setChildIndex(this.top,2)
-        this.setChildIndex(this.bottom,3)
+        // this.setChildIndex(this.cnt,1)
+        // this.setChildIndex(this.top,2)
+        // this.setChildIndex(this.bottom,3)
         // this.setChildIndex(this.pop,4)
-        this.setChildIndex(this.popChampionRecord,4)
+        // this.setChildIndex(this.popChampionRecord,4)
 
 
         /*
@@ -209,7 +216,7 @@ class Main extends egret.DisplayObjectContainer {
             this.webSocket.addEventListener( egret.Event.CONNECT ,this.onSocketOpen ,this );
             this.webSocket.addEventListener( egret.IOErrorEvent.IO_ERROR ,this.onIOError ,this );
             this.webSocket.addEventListener( egret.Event.CLOSE ,this.onCloseSock ,this );
-            this.webSocket.connectByUrl("ws://192.168.76.131:9777/ws");
+            this.webSocket.connectByUrl("ws://192.168.81.240:9777/ws");
         }catch(e){
             alert('websock error')
         }

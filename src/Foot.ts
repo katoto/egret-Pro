@@ -8,17 +8,20 @@ class Foot extends egret.DisplayObjectContainer{
     //  底部实例
     private bottom:egret.Sprite
 
+
+    
+
     // 底部按钮区域
-    public constructor(Width,Height){
+    public constructor(){
         super();
-        this.drawFoot(Width,Height);
+        this.drawFoot();
     }
-    private drawFoot(Width,Height){
+    private drawFoot(){
         // 底部背景与投注按钮
         // 底部背景
         this.bottom = new egret.Sprite();
-        this.bottom.graphics.beginFill(0x2c253e);
-        this.bottom.graphics.drawRect(0,0,Width,90);
+        this.bottom.graphics.beginFill(0x2c253e,0.6);
+        this.bottom.graphics.drawRect(0,0,750,90);
         this.bottom.graphics.endFill();
         // 设置锚点，使背景处于舞台最下方
        
@@ -36,13 +39,17 @@ class Foot extends egret.DisplayObjectContainer{
 
          // 聊天
          let btnChat:egret.Bitmap = new egret.Bitmap(RES.getRes('chat_png'));
-         btnChat.x = Width - 80;
+         btnChat.x = 670;
          btnChat.y = 20;
          this.bottom.addChild(btnChat);
          btnChat.touchEnabled = true;
          btnChat.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
-             console.log('聊天弹窗')
+                //聊天区域
+            console.log('聊天');
+            
          },this)
+
+
 
 
     }

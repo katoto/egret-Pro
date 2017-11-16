@@ -20,7 +20,6 @@ class ChampionC extends eui.Group{
         tWrap.addChild(text03);
 
         
-        
         //获胜队伍大容器
         let teamBigWrap:eui.Group = new eui.Group();
        
