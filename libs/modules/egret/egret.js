@@ -7488,7 +7488,7 @@ var egret;
         if (true) {
             egret.sys.$logToFPS("Error #" + code + ": " + text);
         }
-        //throw new Error("#" + code + ": " + text); //使用这种方式报错能够终止后续代码继续运行
+        throw new Error("#" + code + ": " + text); //使用这种方式报错能够终止后续代码继续运行
     }
     egret.$error = _error;
     function _warn(code) {

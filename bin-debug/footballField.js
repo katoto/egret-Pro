@@ -122,11 +122,6 @@ var Field_ball = (function (_super) {
         rightOdds.bold = true;
         this.addChild(rightOdds);
         // win、左边队伍图标和右边队伍图片会影响金币点击效果
-<<<<<<< HEAD
-        // this.addChild(leftUserBox); 
-        // this.addChild(rightUserBox);
-=======
->>>>>>> f91d2bcf093e9e1eeea9e804a1d540facc63b0da
         // 
     };
     //  left add icon win   胜利图标
