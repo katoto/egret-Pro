@@ -1,12 +1,16 @@
 class Field_ball_contain extends egret.DisplayObjectContainer{
-    private this_fieldContain;
-    // 比赛进程 1/4 / 1/2  / 决赛
-    private matchPro = '决赛';
+    //三个容器 用来包裹决赛、1/2和1/4
+    private courtWrap1;
+    private courtWrap2;
+    private courtWrap4;
     // 比赛对阵
     private field1;
-    private field2;
-    private field3;
-    private field4;
+    private field21;
+    private field22;
+    private field41;
+    private field42;
+    private field43;
+    private field44;
 
     public constructor(){
         super();
@@ -14,14 +18,51 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
     }
     private drawField(){
         console.log(1234);
-        this.this_fieldContain = this;
-        // this.field2 = new Field_ball('http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png','克罗地亚',3.78,'team-02_jpg','德国',1.26 );
-        // this.field2.y = 360;
-        // this.addChild(this.field2);
+        this.courtWrap1 = this.courtWrap();
+        this.courtWrap2 = this.courtWrap();
+        this.courtWrap4 = this.courtWrap();
+        // 三选一插入
+        this.addChild(this.courtWrap4);
+
+        this.field1 = new Field_ball('http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png','克罗地亚',3.78,'team-02_jpg','德国',1.26 ,'bg-court1_png');
+        this.field1.anchorOffsetY = 187.5;
+        this.field1.y = 511;   //   963/2+30
+        this.courtWrap1.addChild(this.field1);
+
+        this.field21 = new Field_ball('http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png','克罗地亚',3.78,'team-02_jpg','德国',1.26 ,'bg-court2_png');
+        this.field21.y = 184;   // (963-250*2)/3+30 
+        this.courtWrap2.addChild(this.field21);
+        this.field22 = new Field_ball('http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png','克罗地亚',3.78,'team-02_jpg','德国',1.26 ,'bg-court2_png');
+        this.field22.y = 558;   //  
+        this.courtWrap2.addChild(this.field22);
+
+        this.field41 = new Field_ball('http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png','克罗地亚',3.78,'team-02_jpg','德国',1.26 ,'bg-court4_png');
+        this.field41.y = 120;
+        this.courtWrap4.addChild(this.field41);
+        this.field42 = new Field_ball('http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png','克罗地亚',3.78,'team-02_jpg','德国',1.26 ,'bg-court4_png');
+        this.field42.y = 320;   //  
+        this.courtWrap4.addChild(this.field42);
+        this.field41 = new Field_ball('http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png','克罗地亚',3.78,'team-02_jpg','德国',1.26 ,'bg-court4_png');
+        this.field41.y = 520;   //
+        this.courtWrap4.addChild(this.field41);
+        this.field42 = new Field_ball('http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png','克罗地亚',3.78,'team-02_jpg','德国',1.26 ,'bg-court4_png');
+        this.field42.y = 720;   //  
+        this.courtWrap4.addChild(this.field42);
+
+
+
+
+
+
+
+
+
+
+
+
+
         // this.field2.touchEnabled = true;
         // this.field2.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_twoEvt ,this)
-       
-
     }
 
     //  初始化 场地  （ 每次切换场地，都认为是初始化  ( 感觉应该做 ) ）
@@ -46,7 +87,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     i = i+1
                     this[fieldStr].upLeftMyMoney('324'+i)
                     this[fieldStr].upRightMyMoney('31'+i)
-
                     this[fieldStr].addLeftAllCoin('1'+i);
                     this[fieldStr].addRightAllCoin('2'+i);
 
@@ -65,18 +105,18 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 },6000)
 
             }
-            if( this.field1 ){
-                this.field1.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_oneEvt ,this)
-            }
-            if( this.field2 ){
-                this.field2.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_twoEvt ,this)
-            }            
-            if( this.field3 ){
-                this.field3.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_threeEvt ,this)
-            }
-            if( this.field4 ){
-                this.field4.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_twoEvt ,this)
-            }       
+            // if( this.field1 ){
+            //     this.field1.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_oneEvt ,this)
+            // }
+            // if( this.field2 ){
+            //     this.field2.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_twoEvt ,this)
+            // }            
+            // if( this.field3 ){
+            //     this.field3.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_threeEvt ,this)
+            // }
+            // if( this.field4 ){
+            //     this.field4.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_twoEvt ,this)
+            // }       
         }
     }
 
@@ -161,6 +201,13 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             gold.y = 1000;
             this.addChild(gold);
             egret.Tween.get( gold ).to( { x:stage_x,y:stage_y },200 )
+    }
+
+    private courtWrap(){
+        let wrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
+        wrap.width = 596;
+        wrap.height = 963;
+        return wrap;
     }
 
 }

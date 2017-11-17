@@ -109,7 +109,7 @@ class Court extends eui.UILayer {
     //    if(左边胜利){
     //        win.x = -80;
     //    }else{
-    //        win.x = 80;
+    //        win.x = 350;
     //    }
        this.addChild(win)
 

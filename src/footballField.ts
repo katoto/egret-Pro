@@ -1,6 +1,11 @@
 // class Field_ball extends egret.DisplayObjectContainer{
 
 class Field_ball extends eui.UILayer {
+    //三种球场的高度和高度中心,重要参数
+    private courtHeight;
+    private courtAnHeight;
+
+
     // 收起的实例（ 总金币的背景切换 ）
     private goldItems_left:egret.Bitmap;
     private goldItems_right:egret.Bitmap;
@@ -24,17 +29,20 @@ class Field_ball extends eui.UILayer {
     private winIcon_l:egret.Bitmap;
     private winIcon_r:egret.Bitmap;
 
-    // 设置锚点和x值  头像 队名 赔率 （  感觉得设置成 修改类的方式  ）
-    public constructor(leftImg,leftT,leftO,rightImg,rightT,rightO){
+    // 设置锚点和x值  头像 队名 赔率 （  感觉得设置成 修改类的方式  ） ，这里加了一个参数bgUrl，用来控制不同赛场的背景
+    public constructor(leftImg,leftT,leftO,rightImg,rightT,rightO,bgUrl){
         super();
         this.anchorOffsetX = 242.5 ;
         this.x = window['store']['stage_Width']/2 ;
-        this.drawField(leftImg,leftT,leftO,rightImg,rightT,rightO);
+        this.drawField(leftImg,leftT,leftO,rightImg,rightT,rightO,bgUrl);
     }
-    private drawField(leftImg,leftT,leftO,rightImg,rightT,rightO){
+    private drawField(leftImg,leftT,leftO,rightImg,rightT,rightO,bgUrl){
         
-        let court4:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-court4_png'));
-         this.addChild(court4);
+        let court:egret.Bitmap = new egret.Bitmap(RES.getRes(bgUrl));  
+        this.courtHeight = court.height;
+        this.courtAnHeight = this.courtHeight/2;
+
+        this.addChild(court);
         //两个金币收集的背景， 这里要考虑假如没人投注的情况，是否要隐藏  62+246;
         this.goldItems_left = new egret.Bitmap(RES.getRes('gold-items_png'));
         this.goldItems_left.x = 62;
@@ -56,8 +64,9 @@ class Field_ball extends eui.UILayer {
         let leftUserBox:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
         leftUserBox.width = 68;
         leftUserBox.height = 68;
+        leftUserBox.anchorOffsetY = 34;
         leftUserBox.x = 25;
-        leftUserBox.y = 54;
+        leftUserBox.y = this.courtAnHeight;  
         this.addChild(leftUserBox); 
         // 插入边框
         let bgBorder:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
@@ -81,12 +90,13 @@ class Field_ball extends eui.UILayer {
 
         // this.addChild( leftTeam )
 
-        // 左边队伍对面
+        // 左边队伍队名
         let leftTitle:egret.TextField = new egret.TextField();
         leftTitle.text = leftT;
         leftTitle.size = 22;
         leftTitle.x = 102;
-        leftTitle.y = 60;
+        leftTitle.y = this.courtAnHeight - 6;
+        leftTitle.anchorOffsetY = 22;
         this.addChild(leftTitle);
 
         // 左边队伍赔率
@@ -94,17 +104,18 @@ class Field_ball extends eui.UILayer {
         leftOdds.text = leftO;
         leftOdds.size = 28;
         leftOdds.x = 102;
-        leftOdds.y = 94;
+        leftOdds.y = this.courtAnHeight + 2;
         leftOdds.bold = true;
         this.addChild(leftOdds);
 
 
         // 右边同上
         let rightUserBox:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
+        rightUserBox.anchorOffsetY = 34;
         rightUserBox.width = 68;
         rightUserBox.height = 68;
         rightUserBox.x = 400;
-        rightUserBox.y = 54;
+        rightUserBox.y = this.courtAnHeight;  
         this.addChild(rightUserBox);
         // 插入边框
         let bgBorder02:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
@@ -133,7 +144,8 @@ class Field_ball extends eui.UILayer {
         rightTitle.textAlign = egret.HorizontalAlign.RIGHT;
         rightTitle.size = 22;
         rightTitle.x = 250;
-        rightTitle.y = 58;
+        rightTitle.y = this.courtAnHeight - 6;
+        rightTitle.anchorOffsetY = 22;
         this.addChild(rightTitle);
 
         let rightOdds:egret.TextField = new egret.TextField();
@@ -142,7 +154,7 @@ class Field_ball extends eui.UILayer {
         rightOdds.textAlign = egret.HorizontalAlign.RIGHT;
         rightOdds.size = 28;
         rightOdds.x = 250;
-        rightOdds.y = 94;
+        rightOdds.y = this.courtAnHeight + 2;
         rightOdds.bold = true;
         this.addChild(rightOdds);
 
@@ -159,10 +171,9 @@ class Field_ball extends eui.UILayer {
             this.addChild(this.winIcon_l);
         }else{
             this.winIcon_l = new egret.Bitmap(RES.getRes('win2_png'));
-            this.winIcon_l.anchorOffsetY = this.winIcon_l.height/2;
-            // -80  or 350
+            this.winIcon_l.anchorOffsetY = 101;
+            this.winIcon_l.y = this.courtAnHeight;
             this.winIcon_l.x = -80;
-            this.winIcon_l.y = 90;
             // this.addChild(this.winIcon_l);
         }
     }
@@ -172,8 +183,9 @@ class Field_ball extends eui.UILayer {
             // this.addChild(this.winIcon_r);
         }else{
             this.winIcon_r = new egret.Bitmap(RES.getRes('win2_png'));
-            this.winIcon_r.anchorOffsetY = this.winIcon_r.height/2;
+            this.winIcon_r.anchorOffsetY = 101;
             this.winIcon_r.x = 350;
+            this.winIcon_r.y = this.courtAnHeight;
             this.winIcon_r.y = 90;
             // this.addChild(this.winIcon_r);
         }
@@ -247,7 +259,8 @@ class Field_ball extends eui.UILayer {
             this.leftMyMoneyBox.width = 196;
             this.leftMyMoneyBox.height = 27;
             this.leftMyMoneyBox.x = 25;
-            this.leftMyMoneyBox.y = 148;
+            this.leftMyMoneyBox.anchorOffsetY = 27;
+            this.leftMyMoneyBox.y = this.courtHeight - 5;
             let leftMyMoneyBg:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-betting_png'));
             this.leftMyMoneyBox.addChild(leftMyMoneyBg);
             this.leftMyMoneyText = new egret.TextField();
@@ -273,6 +286,8 @@ class Field_ball extends eui.UILayer {
             this.rightMyMoneyBox.height = 27;
             this.rightMyMoneyBox.x = 270;
             this.rightMyMoneyBox.y = 148;
+            this.rightMyMoneyBox.anchorOffsetY = 27;
+            this.rightMyMoneyBox.y = this.courtHeight - 5;
             let rightMyMoneyBg:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-betting_png'));
             this.rightMyMoneyBox.addChild(rightMyMoneyBg);
             this.rightMyMoneyText = new egret.TextField();

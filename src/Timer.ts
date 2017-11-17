@@ -42,7 +42,7 @@ class Timer extends egret.DisplayObjectContainer{
         timer.start();
     }
      private timerFunc(event:egret.TimerEvent) {
-        egret.log("timerFunc count" + (<egret.Timer>event.target).currentCount);
+        // egret.log("timerFunc count" + (<egret.Timer>event.target).currentCount);
         this.timerNum--;
         this.textSS.text = (this.timerNum).toString()+ '"';
     }
