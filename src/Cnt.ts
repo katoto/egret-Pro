@@ -187,7 +187,7 @@ class Cnt extends egret.DisplayObjectContainer{
         }
         for(let i=0; i<len ;i++){
             if( window['store']['user_info'][i] && window['store']['user_info'][i].photo === '' ){
-                window['store']['user_info'][i].photo = 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4182536181,630612655&fm=173&s=EC7819C7026A2D1399FD589D0300C084&w=218&h=146&img.JPEG'
+                window['store']['user_info'][i].photo = 'http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1213.png'
             }
             if( window['store']['user_info'][i].uid ){
                 window['store']['userPositionID'].push( window['store']['user_info'][i].uid )
@@ -196,7 +196,7 @@ class Cnt extends egret.DisplayObjectContainer{
             }
             var choseUserImg = 'userImg'+(i+1)
             if( this[choseUserImg] ){
-                this[choseUserImg].upDataUseMsg(  window['store']['user_info'][i].username , window['store']['user_info'][i].photo ,
+                this[choseUserImg].upDataUseMsg( window['formateName'] ( window['store']['user_info'][i].username ) , window['store']['user_info'][i].photo ,
                  window['formateGold']( window['store']['user_info'][i].total ));
             }
 
@@ -263,5 +263,4 @@ class Cnt extends egret.DisplayObjectContainer{
 
         }
     }
-
 }
