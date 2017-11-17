@@ -368,6 +368,7 @@ window['store'] = {
     'user_info':[],
     'curr_btn_coin':null,
     'curr_btn_arr':[],
+    'coin_arr':[], // 为了收起
     'userMySelf':null,  // 自己的实例便于修改自身金币
     'orderObj':{
         // 下单

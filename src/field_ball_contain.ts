@@ -37,6 +37,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
         this.field41 = new Field_ball('bg-court4_png');
         this.field41.y = 120;
+        this.field41.touchEnabled = true;
+        this.field41.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_41Evt ,this)
+
         this.courtWrap4.addChild(this.field41);
         this.field42 = new Field_ball('bg-court4_png');
         this.field42.y = 320;   //  
@@ -55,7 +58,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
         // 放入4个场地
     private addcourtWrap4(){
-
         if( this.courtWrap2.parent ){
             this.removeChild(this.courtWrap2);
         }
@@ -86,7 +88,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         this.addChild(this.courtWrap1);
     }
 
-    //  初始化 场地 写错  !!!!!
+    //  初始化 场地 写错 
     private initFieldMsg(){
         console.log(' 初始化场地 ')
         let fieldStr = 'field';
@@ -154,8 +156,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             //     this[fieldStr].width = 485;
             //     this[fieldStr].height = 181;
 
-
-
                 // setInterval(()=>{
                 //     i = i+1
                 //     this[fieldStr].upLeftMyMoney('324'+i)
@@ -193,7 +193,14 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         }
     }
 
-    // 场地点击处理
+    // 场地点击处理 new 
+    private field_41Evt( e:egret.TouchEvent ){
+                //  执行动画
+        let x = e.localX + 133;
+        let y = e.localY + 120;
+        this.tween_Coin(x,y)
+    }
+
     private field_oneEvt( e:egret.TouchEvent ){
         console.log(1)
         console.log( e ) 
@@ -265,6 +272,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             gold.anchorOffsetY = gold.height/2;
             gold.x = window['store']['stage_anWidth'];
             gold.y = 1000;
+            window['store']['coin_arr'].push( gold )
             this.addChild(gold);
             egret.Tween.get( gold ).to( { x:stage_x,y:stage_y },200 )
     }
