@@ -154,8 +154,28 @@ class Cnt extends egret.DisplayObjectContainer{
         // this.fieldContain.initField();
     }
 
-    // 初始化场地 
-    private initUserImage(){
+    private initUserImg(){
+        for( let i=0;i<9;i++ ){
+            var choseUserImg = 'userImg'+(i+1)
+            this[choseUserImg] = new userImage();
+            if( i === 0 ){
+                this[choseUserImg].anchorOffsetX = 44;
+                this[choseUserImg].anchorOffsetY = 124 ;
+                this[choseUserImg].x = window['store']['stage_anWidth'] ;
+                this[choseUserImg].y = 1035;
+                window['store']['userMySelf'] = this[choseUserImg];
+            }else if( ( window['store']['userPosition'][i] - 1 ) < 5 ){
+                this[choseUserImg].x = window['store']['userPositionObj'][window['store']['userPosition'][i] - 1].x;
+                this[choseUserImg].y = window['store']['userPositionObj'][window['store']['userPosition'][i] - 1].y;
+            }else{
+                this[choseUserImg].x = window['store']['stage_Width'] - window['store']['userPositionObj'][window['store']['userPosition'][i] - 1].x;
+                this[choseUserImg].y = window['store']['userPositionObj'][window['store']['userPosition'][i] - 1].y;
+            }
+        }
+    }
+
+    //  初始的用户信息
+    private initUserMsg(){
         let len = window['store']['user_info'].length
         if( !len || len === undefined){
             len = 0
@@ -172,40 +192,29 @@ class Cnt extends egret.DisplayObjectContainer{
             if( window['store']['user_info'][i].uid ){
                 window['store']['userPositionID'].push( window['store']['user_info'][i].uid )
             }else{
-                console.error( '无uid' )
+                console.error( 'websock 无uid' )
             }
             var choseUserImg = 'userImg'+(i+1)
-            this[choseUserImg] = new userImage( window['formateName'] ( window['store']['user_info'][i].username ) , window['store']['user_info'][i].photo  ,
-            window['formateGold'] ( window['store']['user_info'][i].total ) );
+            if( this[choseUserImg] ){
+                this[choseUserImg].upDataUseMsg(  window['store']['user_info'][i].username , window['store']['user_info'][i].photo ,
+                 window['formateGold']( window['store']['user_info'][i].total ));
+            }
 
             //  中奖的处理 ！
-            this[choseUserImg].isShowWinGold('3333333')
-            setTimeout(()=>{
-               this[choseUserImg].isHideWinGold() 
-            },1000)
+            // this[choseUserImg].isShowWinGold('3333333')
+            // setTimeout(()=>{
+            //    this[choseUserImg].isHideWinGold() 
+            // },1000)
 
-            if( i === 0 ){
-                this[choseUserImg].anchorOffsetX = 44;
-                this[choseUserImg].anchorOffsetY = 124 ;
-                this[choseUserImg].x = window['store']['stage_anWidth'] ;
-                this[choseUserImg].y = 1035;
-                window['store']['userMySelf'] = this[choseUserImg];
-            }else if( ( window['store']['userPosition'][i] - 1 ) < 5 ){
-                this[choseUserImg].x = window['store']['userPositionObj'][window['store']['userPosition'][i] - 1].x;
-                this[choseUserImg].y = window['store']['userPositionObj'][window['store']['userPosition'][i] - 1].y;
-            }else{
-                this[choseUserImg].x = window['store']['stage_Width'] - window['store']['userPositionObj'][window['store']['userPosition'][i] - 1].x;
-                this[choseUserImg].y = window['store']['userPositionObj'][window['store']['userPosition'][i] - 1].y;
-            }
             this.bgCourtWrap.addChild(this[choseUserImg]);
             console.log( choseUserImg  )
-
         }
     }
+
     // 用户 进入
     private addUserImage( username:string , photo:string , total:string , uid:string ){
-
         var userI = window['store']['emptyUserPosition'].shift() ;
+        console.log( userI )
         if( !userI ){
             console.error('无空闲房间')
             return false;
@@ -213,35 +222,32 @@ class Cnt extends egret.DisplayObjectContainer{
         userI = userI - 1 ;
         var choseUserImg = 'userImg' + ( userI+1 )
         console.log( choseUserImg )
-        this[choseUserImg] = new userImage( window['formateName'] (username) ,photo  ,
-        window['formateGold'] ( total ) );
-
-        if( ( window['store']['userPosition'][userI]-1 ) < 5 ){
-            this[choseUserImg].x = window['store']['userPositionObj'][window['store']['userPosition'][userI]-1].x;
-            this[choseUserImg].y = window['store']['userPositionObj'][window['store']['userPosition'][userI]-1].y;
-        }else{
-            this[choseUserImg].x = window['store']['stage_Width'] - window['store']['userPositionObj'][window['store']['userPosition'][userI]-1].x;
-            this[choseUserImg].y = window['store']['userPositionObj'][window['store']['userPosition'][userI]-1].y;
+        if( photo === '' ){
+            photo = 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4182536181,630612655&fm=173&s=EC7819C7026A2D1399FD589D0300C084&w=218&h=146&img.JPEG'
         }
 
-        // window['store']['userPositionID'].push( uid )
-        window['store']['userPositionID'].splice( userI - 1,0 ,uid );
-        this.bgCourtWrap.addChild(this[choseUserImg]);
+        if( this[choseUserImg] ){
+            this[choseUserImg].upDataUseMsg( window['formateName'] (username) ,photo  ,
+            window['formateGold'] ( total ) );
+        }
 
-        //  注意层级控制，不然事件会有问题 ！
-        this.bgCourtWrap.setChildIndex( this.fieldContain  , this.bgCourtWrap.getChildIndex( this[choseUserImg] ))    
+        window['store']['userPositionID'].splice( userI ,0 ,uid+'' );
+        this.bgCourtWrap.addChild(this[choseUserImg]);
+        // //  注意层级控制，不然事件会有问题 ！
+        // this.bgCourtWrap.setChildIndex( this.fieldContain  , this.bgCourtWrap.getChildIndex( this[choseUserImg] ))    
 
     }
     // 用户 离开 
     private removeUserImage( uid:string ){
         var delIndex = 0;
+
         for( var i=0 ,len = window['store']['userPositionID'].length;i<len;i++){
             if( window['store']['userPositionID'][i] === uid ){
                 delIndex = i;
                 break;
             }
         }
-        if( i === len || delIndex === 0 ){
+        if( delIndex === 0 ){
             console.error( 'not find uid');
             return false;
         }
@@ -251,13 +257,11 @@ class Cnt extends egret.DisplayObjectContainer{
             // 更新数组
             window['store']['userPositionID'].splice( delIndex -1 , 1 );
             window['store']['emptyUserPosition'].push( delIndex );
-            console.log( this[choseUserImg] )
-            // 还是有问题
             if( this.bgCourtWrap && this[choseUserImg] ){
                 this.bgCourtWrap.removeChild(this[choseUserImg]);
             }
 
-            // this.bgCourtWrap.removeChild(this[choseUserImg]);
         }
     }
+
 }

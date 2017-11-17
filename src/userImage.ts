@@ -1,22 +1,19 @@
 
 class userImage extends eui.UILayer {
     // 用户头像
-    public constructor(name,src,gold,winG?){
+    public constructor(){
         super();
-        this.addToStage(name,src,gold,winG);
+        this.addToStage();
     }
 
-    // private _source:Array<string> =  [
-    //     "https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4182536181,630612655&fm=173&s=EC7819C7026A2D1399FD589D0300C084&w=218&h=146&img.JPEG",
-    //     "https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=2602004849,1504397654&fm=173&s=B180DB1548E33B0925B8B884030070E1&w=218&h=146&img.JPEG",
-    //     "https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3999684790,170950214&fm=173&s=B79DAC6C62F3002704A160180300C09A&w=218&h=146&img.JPEG"
-    // ];
     private myGold:egret.TextField;
     private winGold:egret.TextField;
     private bgBorder:egret.Bitmap;
 
+    private User_img:eui.Image;
+    private myName:egret.TextField;
 
-    private addToStage(name,src,gold,winG) {
+    private addToStage() {
         let bg:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
         //  bg.width = 88;
         // bg.height = 124;
@@ -35,34 +32,29 @@ class userImage extends eui.UILayer {
         bgMask.y = 31;
         this.addChild(bgMask);
 
-
         //用户姓名
-        let myName:egret.TextField = new egret.TextField();
-        myName.y= 3;
-        myName.text = name;
-        myName.size = 15;
-        myName.textColor = 0xa5a1af;
-        myName.width = 88;
-        myName.height = 28;
-        myName.textAlign = egret.HorizontalAlign.CENTER;
-        myName.verticalAlign = egret.VerticalAlign.MIDDLE;
-        this.addChild(myName);
+        this.myName = new egret.TextField();
+        this.myName.y= 3;
+        this.myName.size = 15;
+        this.myName.textColor = 0xa5a1af;
+        this.myName.width = 88;
+        this.myName.height = 28;
+        this.myName.textAlign = egret.HorizontalAlign.CENTER;
+        this.myName.verticalAlign = egret.VerticalAlign.MIDDLE;
+        this.addChild(this.myName);
         // 用户头像
-        // var source:Array<string> = this._source;
-        let img:eui.Image = new eui.Image();
-        img.source = src;
-        // img.source = source[0];
-        img.width = 62;
-        img.height = 62;
-        img.x = 16;
-        img.y = 31;
-        this.addChild(img);
-        img.mask = bgMask;
+
+        this.User_img = new eui.Image();
+        this.User_img.width = 62;
+        this.User_img.height = 62;
+        this.User_img.x = 16;
+        this.User_img.y = 31;
+        this.addChild(this.User_img);
+        this.User_img.mask = bgMask;
 
 
         // 金币
         this.myGold = new egret.TextField();
-        this.myGold.text = gold;
         this.myGold.size = 20;
         this.myGold.textColor = 0xf2aa20;
         this.myGold.bold = true;
@@ -88,6 +80,13 @@ class userImage extends eui.UILayer {
         this.winGold.textAlign = egret.HorizontalAlign.CENTER;
         this.winGold.verticalAlign = egret.VerticalAlign.MIDDLE;
 
+    }
+
+    // 用户头像的 名称 头像 金币
+    private upDataUseMsg( name:string ,src:string,gold:string ){
+        this.myGold.text = gold;
+        this.User_img.source = src;
+        this.myName.text = name;
     }
 
     /* 更新金币数 */
