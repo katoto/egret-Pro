@@ -29,14 +29,22 @@ class Field_ball extends eui.UILayer {
     private winIcon_l:egret.Bitmap;
     private winIcon_r:egret.Bitmap;
 
+    //  头像 赔率 队名
+    private leftTeam:eui.Image;
+    private leftTitle:egret.TextField;
+    private leftOdds:egret.TextField;
+    private rightTitle:egret.TextField;
+    private rightOdds:egret.TextField;
+    private rightTeam:eui.Image;
+
     // 设置锚点和x值  头像 队名 赔率 （  感觉得设置成 修改类的方式  ） ，这里加了一个参数bgUrl，用来控制不同赛场的背景
-    public constructor(leftImg,leftT,leftO,rightImg,rightT,rightO,bgUrl?){
+    public constructor(bgUrl?){
         super();
         this.anchorOffsetX = 242.5 ;
         this.x = window['store']['stage_Width']/2 ;
-        this.drawField(leftImg,leftT,leftO,rightImg,rightT,rightO,bgUrl);
+        this.drawField(bgUrl);
     }
-    private drawField(leftImg,leftT,leftO,rightImg,rightT,rightO,bgUrl){
+    private drawField(bgUrl){
         
         let court:egret.Bitmap = new egret.Bitmap(RES.getRes(bgUrl));  
         this.courtHeight = court.height;
@@ -78,35 +86,32 @@ class Field_ball extends eui.UILayer {
         bgMask.y = 3;
         // leftUserBox.addChild(bgMask);
         //队伍icon
-        let leftTeam:eui.Image = new eui.Image();
+        this.leftTeam = new eui.Image();
         // leftTeam.source = leftImg;
-        leftTeam.source = 'http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png';
-        leftTeam.width = 62;
-        leftTeam.height = 62;
-        leftTeam.x = 3;
-        leftTeam.y = 3;
-        leftUserBox.addChild(leftTeam);
-        leftTeam.mask = bgMask;
+        this.leftTeam.width = 62;
+        this.leftTeam.height = 62;
+        this.leftTeam.x = 3;
+        this.leftTeam.y = 3;
+        leftUserBox.addChild(this.leftTeam);
+        this.leftTeam.mask = bgMask;
 
         // this.addChild( leftTeam )
 
         // 左边队伍队名
-        let leftTitle:egret.TextField = new egret.TextField();
-        leftTitle.text = leftT;
-        leftTitle.size = 22;
-        leftTitle.x = 102;
-        leftTitle.y = this.courtAnHeight - 6;
-        leftTitle.anchorOffsetY = 22;
-        this.addChild(leftTitle);
+        this.leftTitle = new egret.TextField();
+        this.leftTitle.size = 22;
+        this.leftTitle.x = 102;
+        this.leftTitle.y = this.courtAnHeight - 6;
+        this.leftTitle.anchorOffsetY = 22;
+        this.addChild(this.leftTitle);
 
         // 左边队伍赔率
-        let leftOdds:egret.TextField = new egret.TextField();
-        leftOdds.text = leftO;
-        leftOdds.size = 28;
-        leftOdds.x = 102;
-        leftOdds.y = this.courtAnHeight + 2;
-        leftOdds.bold = true;
-        this.addChild(leftOdds);
+        this.leftOdds= new egret.TextField();
+        this.leftOdds.size = 28;
+        this.leftOdds.x = 102;
+        this.leftOdds.y = this.courtAnHeight + 2;
+        this.leftOdds.bold = true;
+        this.addChild(this.leftOdds);
 
 
         // 右边同上
@@ -126,42 +131,47 @@ class Field_ball extends eui.UILayer {
         bgMask02.y = 3;
         // rightUserBox.addChild(bgMask02);
         //队伍icon
-        let rightTeam:eui.Image = new eui.Image();
-        // leftTeam.source = rightImg;
-        rightTeam.source = 'http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png';
-        rightTeam.width = 62;
-        rightTeam.height = 62;
-        rightTeam.x = 3;
-        rightTeam.y = 3;
-        rightUserBox.addChild(rightTeam);
-        rightTeam.mask = bgMask02;
+        this.rightTeam = new eui.Image();
+        this.rightTeam.width = 62;
+        this.rightTeam.height = 62;
+        this.rightTeam.x = 3;
+        this.rightTeam.y = 3;
+        rightUserBox.addChild(this.rightTeam);
+        this.rightTeam.mask = bgMask02;
 
+        this.rightTitle = new egret.TextField();
+        this.rightTitle.width = 140;
+        this.rightTitle.textAlign = egret.HorizontalAlign.RIGHT;
+        this.rightTitle.size = 22;
+        this.rightTitle.x = 250;
+        this.rightTitle.y = this.courtAnHeight - 6;
+        this.rightTitle.anchorOffsetY = 22;
+        this.addChild(this.rightTitle);
 
-
-        let rightTitle:egret.TextField = new egret.TextField();
-        rightTitle.text = rightT;
-        rightTitle.width = 140;
-        rightTitle.textAlign = egret.HorizontalAlign.RIGHT;
-        rightTitle.size = 22;
-        rightTitle.x = 250;
-        rightTitle.y = this.courtAnHeight - 6;
-        rightTitle.anchorOffsetY = 22;
-        this.addChild(rightTitle);
-
-        let rightOdds:egret.TextField = new egret.TextField();
-        rightOdds.text = rightO;
-        rightOdds.width = 140;
-        rightOdds.textAlign = egret.HorizontalAlign.RIGHT;
-        rightOdds.size = 28;
-        rightOdds.x = 250;
-        rightOdds.y = this.courtAnHeight + 2;
-        rightOdds.bold = true;
-        this.addChild(rightOdds);
+        this.rightOdds = new egret.TextField();
+        this.rightOdds.width = 140;
+        this.rightOdds.textAlign = egret.HorizontalAlign.RIGHT;
+        this.rightOdds.size = 28;
+        this.rightOdds.x = 250;
+        this.rightOdds.y = this.courtAnHeight + 2;
+        this.rightOdds.bold = true;
+        this.addChild(this.rightOdds);
 
 
         // win、左边队伍图标和右边队伍图片会影响金币点击效果
-       
         // 
+
+    }
+
+    // 更新场地数据
+    private upFieldAllData( leftImg,leftT,leftO,rightImg,rightT,rightO ){
+
+        this.leftTeam.source = leftImg ;
+        this.leftTitle.text = leftT;
+        this.leftOdds.text = leftO;
+        this.rightTitle.text = rightT;
+        this.rightOdds.text = rightO;
+        this.rightTeam.source = rightImg ;
 
     }
 

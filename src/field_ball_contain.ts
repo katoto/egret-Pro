@@ -17,94 +17,167 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         this.drawField();
     }
     private drawField(){
-        console.log(1234);
+
         this.courtWrap1 = this.courtWrap();
         this.courtWrap2 = this.courtWrap();
         this.courtWrap4 = this.courtWrap();
         // 三选一插入
-        this.addChild(this.courtWrap4);
 
-        this.field1 = new Field_ball('http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png','克罗地亚',3.78,'team-02_jpg','德国',1.26 ,'bg-court1_png');
+        this.field1 = new Field_ball('bg-court1_png');
         this.field1.anchorOffsetY = 187.5;
         this.field1.y = 511;   //   963/2+30
         this.courtWrap1.addChild(this.field1);
 
-        this.field21 = new Field_ball('http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png','克罗地亚',3.78,'team-02_jpg','德国',1.26 ,'bg-court2_png');
+        this.field21 = new Field_ball('bg-court2_png');
         this.field21.y = 184;   // (963-250*2)/3+30 
         this.courtWrap2.addChild(this.field21);
-        this.field22 = new Field_ball('http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png','克罗地亚',3.78,'team-02_jpg','德国',1.26 ,'bg-court2_png');
+        this.field22 = new Field_ball('bg-court2_png');
         this.field22.y = 558;   //  
         this.courtWrap2.addChild(this.field22);
 
-        this.field41 = new Field_ball('http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png','克罗地亚',3.78,'team-02_jpg','德国',1.26 ,'bg-court4_png');
+        this.field41 = new Field_ball('bg-court4_png');
         this.field41.y = 120;
         this.courtWrap4.addChild(this.field41);
-        this.field42 = new Field_ball('http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png','克罗地亚',3.78,'team-02_jpg','德国',1.26 ,'bg-court4_png');
+        this.field42 = new Field_ball('bg-court4_png');
         this.field42.y = 320;   //  
         this.courtWrap4.addChild(this.field42);
-        this.field41 = new Field_ball('http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png','克罗地亚',3.78,'team-02_jpg','德国',1.26 ,'bg-court4_png');
-        this.field41.y = 520;   //
-        this.courtWrap4.addChild(this.field41);
-        this.field42 = new Field_ball('http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png','克罗地亚',3.78,'team-02_jpg','德国',1.26 ,'bg-court4_png');
-        this.field42.y = 720;   //  
-        this.courtWrap4.addChild(this.field42);
-
-
-
-
-
-
-
-
-
-
-
-
+        this.field43 = new Field_ball('bg-court4_png');
+        this.field43.y = 520;   //
+        this.courtWrap4.addChild(this.field43);
+        this.field44 = new Field_ball('bg-court4_png');
+        this.field44.y = 720;   //  
+        this.courtWrap4.addChild(this.field44);
 
         // this.field2.touchEnabled = true;
         // this.field2.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_twoEvt ,this)
+
     }
 
-    //  初始化 场地  （ 每次切换场地，都认为是初始化  ( 感觉应该做 ) ）
-    private initField(){
+        // 放入4个场地
+    private addcourtWrap4(){
+
+        if( this.courtWrap2.parent ){
+            this.removeChild(this.courtWrap2);
+        }
+        if( this.courtWrap1.parent ){
+            this.removeChild(this.courtWrap1);
+        }
+        this.addChild(this.courtWrap4);
+    }
+    // 放入2个场地
+    private addcourtWrap2(){
+        if( this.courtWrap1.parent ){
+            this.removeChild(this.courtWrap1);
+        }
+        if( this.courtWrap4.parent ){
+            this.removeChild(this.courtWrap4);
+        }
+
+        this.addChild(this.courtWrap2);
+    }
+    // 放入1个场地
+    private addcourtWrap1(){
+        if( this.courtWrap2.parent ){
+            this.removeChild(this.courtWrap2);
+        }
+        if( this.courtWrap4.parent ){
+            this.removeChild(this.courtWrap4);
+        }
+        this.addChild(this.courtWrap1);
+    }
+
+    //  初始化 场地 写错  !!!!!
+    private initFieldMsg(){
         console.log(' 初始化场地 ')
-        var fieldStr = 'field';
-        var $store = window['store']
-        if( $store['matches'] ){
-            for( var i=0,len = 1 ;i<len;i++ ){
-                fieldStr = 'field'+(i+1)
-                this[fieldStr] = new Field_ball(  $store['matches'][i].homelogo ,
-                    $store['matches'][i].homename ,  $store['matches'][i].homeodds ,
-                    $store['matches'][i].awaylogo , $store['matches'][i].awayname , $store['matches'][i].awayodds
-                )
-                this[fieldStr].y = 120+202*i;
-                this[fieldStr].touchEnabled = true;
-                this.this_fieldContain.addChild( this[fieldStr] );
-                this[fieldStr].width = 485;
-                this[fieldStr].height = 181;
+        let fieldStr = 'field';
+        let $store = window['store']
+        let matchLen = $store['matches'].length
+        console.log( matchLen )
+        if( $store['matches'] && matchLen ){
+            switch( matchLen ){
+                case 1 :
+                    if( $store['matches'][0] ){
+                        console.log( this.field1 )
+                        this.field1.upFieldAllData( $store['matches'][0].homelogo , $store['matches'][0].homename ,  $store['matches'][0].homeodds ,
+                        $store['matches'][0].awaylogo , $store['matches'][0].awayname , $store['matches'][0].awayodds )  
+                        
+                        this.addcourtWrap1()
+                    }else{
+                        console.error( '场地1数据不对' )
+                    }
+                break;
+                case 2 :
+                    if( $store['matches'][0] && $store['matches'][1] ){
 
-                setInterval(()=>{
-                    i = i+1
-                    this[fieldStr].upLeftMyMoney('324'+i)
-                    this[fieldStr].upRightMyMoney('31'+i)
-                    this[fieldStr].addLeftAllCoin('1'+i);
-                    this[fieldStr].addRightAllCoin('2'+i);
+                        this.field21.upFieldAllData( $store['matches'][0].homelogo , $store['matches'][0].homename ,  $store['matches'][0].homeodds ,
+                            $store['matches'][0].awaylogo , $store['matches'][0].awayname , $store['matches'][0].awayodds )
 
-                },1000)
+                        this.field22.upFieldAllData( $store['matches'][1].homelogo , $store['matches'][1].homename ,  $store['matches'][1].homeodds ,
+                            $store['matches'][1].awaylogo , $store['matches'][1].awayname , $store['matches'][1].awayodds );
 
-                setTimeout(()=>{
-                    console.log('显示金币的背景')
-                    this.field1.upLeftCoinBg()
-                    this.field1.upRightCoinBg()
-                },5000)
+                        this.addcourtWrap2()
+                    }else{
+                        console.error( '场地1/2数据不对' )
+                    }
 
-                setTimeout(()=>{
-                    console.log('显示中奖背景')
-                    this.field1.addwinIcon_l()
-                    this.field1.addwinIcon_r()
-                },6000)
+                break;
+                case 4 :
+                    if( $store['matches'][0] && $store['matches'][1] && $store['matches'][2] && $store['matches'][3]){
+                        this.field41.upFieldAllData( $store['matches'][0].homelogo , $store['matches'][0].homename ,  $store['matches'][0].homeodds ,
+                            $store['matches'][0].awaylogo , $store['matches'][0].awayname , $store['matches'][0].awayodds )
+                        this.field42.upFieldAllData( $store['matches'][1].homelogo , $store['matches'][1].homename ,  $store['matches'][1].homeodds ,
+                            $store['matches'][1].awaylogo , $store['matches'][1].awayname , $store['matches'][1].awayodds )
+                        this.field43.upFieldAllData( $store['matches'][2].homelogo , $store['matches'][2].homename ,  $store['matches'][2].homeodds ,
+                            $store['matches'][2].awaylogo , $store['matches'][2].awayname , $store['matches'][2].awayodds )
+                        this.field44.upFieldAllData( $store['matches'][3].homelogo , $store['matches'][3].homename ,  $store['matches'][3].homeodds ,
+                            $store['matches'][3].awaylogo , $store['matches'][3].awayname , $store['matches'][3].awayodds )
+                            this.addcourtWrap4()
+                    }else{
+                        console.error( '场地1/4数据不对' )
+                    }
+                break;
 
+                default:
+                    console.error('场地error')
+                ;
             }
+
+            // for( var i=0,len = 1 ;i<len;i++ ){
+            //     fieldStr = 'field'+(i+1)
+            //     this[fieldStr] = new Field_ball(  $store['matches'][i].homelogo ,
+            //         $store['matches'][i].homename ,  $store['matches'][i].homeodds ,
+            //         $store['matches'][i].awaylogo , $store['matches'][i].awayname , $store['matches'][i].awayodds
+            //     )
+            //     this[fieldStr].y = 120+202*i;
+            //     this[fieldStr].touchEnabled = true;
+            //     this.this_fieldContain.addChild( this[fieldStr] );
+            //     this[fieldStr].width = 485;
+            //     this[fieldStr].height = 181;
+
+
+
+                // setInterval(()=>{
+                //     i = i+1
+                //     this[fieldStr].upLeftMyMoney('324'+i)
+                //     this[fieldStr].upRightMyMoney('31'+i)
+                //     this[fieldStr].addLeftAllCoin('1'+i);
+                //     this[fieldStr].addRightAllCoin('2'+i);
+
+                // },1000)
+
+                // setTimeout(()=>{
+                //     console.log('显示金币的背景')
+                //     this.field1.upLeftCoinBg()
+                //     this.field1.upRightCoinBg()
+                // },5000)
+
+                // setTimeout(()=>{
+                //     console.log('显示中奖背景')
+                //     this.field1.addwinIcon_l()
+                //     this.field1.addwinIcon_r()
+                // },6000)
+
+            // }
             // if( this.field1 ){
             //     this.field1.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_oneEvt ,this)
             // }
@@ -144,14 +217,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
        
 
     }
-    // private awaitTime(){
-    //     return new Promise( function( resolve ){
-    //         setTimeout( function(){
-    //             console.log( 56666)
-    //             resolve( true )
-    //         } ,1000 )
-    //     } )
-    // }
+
 
     async field_twoEvt( e:egret.TouchEvent ){
         
@@ -209,7 +275,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         wrap.height = 963;
         return wrap;
     }
-
 }
 /**
  * 

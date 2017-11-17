@@ -227,6 +227,8 @@ class Main extends egret.DisplayObjectContainer {
      * 常用数据初始化
      */
     private initStage(){
+        // uid  还得有个uid ..
+
         // 桌子缩放计算 
         window['store'].scale = 0.91;
         // 取ck 按src+ck 的形式，防止串号
@@ -239,6 +241,8 @@ class Main extends egret.DisplayObjectContainer {
         //  用户头像的9个 实例对象 
         this.cnt.initUserImg();
         //  场地容器 实例对象
+        
+
 
     }
 
@@ -291,6 +295,7 @@ class Main extends egret.DisplayObjectContainer {
                             window['store'].matches =  msgObj.body.matches;
                             //  初始化场地容器 数据
                             this.cnt.initFieldCon();
+                            // this.cnt.initFieldCon();
                         }
                     }
                     ;break;
