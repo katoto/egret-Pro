@@ -216,7 +216,7 @@ class Main extends egret.DisplayObjectContainer {
             this.webSocket.addEventListener( egret.Event.CONNECT ,this.onSocketOpen ,this );
             this.webSocket.addEventListener( egret.IOErrorEvent.IO_ERROR ,this.onIOError ,this );
             this.webSocket.addEventListener( egret.Event.CLOSE ,this.onCloseSock ,this );
-            this.webSocket.connectByUrl("ws://192.168.81.240:9777/ws");
+            this.webSocket.connectByUrl("ws://192.168.81.240:9777/ws?uid=1002920");
         }catch(e){
             alert('websock error')
         }
@@ -236,6 +236,9 @@ class Main extends egret.DisplayObjectContainer {
         window['store']['platform'] = egret.localStorage.getItem('platform'); 
         // 头像随机的位置
         window['store']['userPosition'] = window['randomArray']( 9 );
+
+        //  用户头像的9个 实例对象 
+        this.cnt.initUserImg();
 
     }
 
@@ -262,10 +265,13 @@ class Main extends egret.DisplayObjectContainer {
             console.log( msgObj );
             var i = 1;
                 i = i+1;
+
                 if( msgObj && msgObj.body && msgObj.body.room_info && msgObj.body.room_info.desc ){
                     msgObj.body.room_info.desc = '第'+(i+1) +'期目';
                 }
-                msgObj.body.room_info.title = '欧洲杯赛'+(i+1)+'期目';
+                if( msgObj && msgObj.body && msgObj.body.room_info && msgObj.body.room_info.title ){
+                    msgObj.body.room_info.title = '欧洲杯赛'+(i+1)+'期目';
+                }
 
             switch ( msgObj.messageid ) {
                     // 进场的数据 2000
@@ -276,8 +282,8 @@ class Main extends egret.DisplayObjectContainer {
                     if( msgObj.body ){
                         if( msgObj.body.user_info ){
                             window['store'].user_info =  msgObj.body.user_info ;
-                            // 初始化用户头像
-                            this.cnt.initUserImage();
+                            // 初始化用户信息
+                            this.cnt.initUserMsg();
                             // 初始化底部按钮
                             this.bottom.initBtn();
                         }
@@ -288,39 +294,50 @@ class Main extends egret.DisplayObjectContainer {
                         }
                     }
                     ;break;
-                case '123':
+                case '2012':
                     // 用户进场
-                    this.cnt.addUserImage( '','','', );
+                    if( msgObj.body ){
+                        this.cnt.addUserImage( msgObj.body.username, msgObj.body.photo ,msgObj.body.total , msgObj.body.uid );
+                    }
                     break;
+                case '2013':
+                    // 删除用户
+                    if( msgObj.body ){
+                        this.cnt.removeUserImage( msgObj.body.uid );
+                    }
+                break;
+        
             }
-            var i = 0;
-            setTimeout(() => {
-                var obj = { 
-                    "username": "游客_2867477",
-                    "photo": "https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg",
-                    "total": i+'202422',
-                    "uid": "1003118"+i
-                 }
-                i = i+1 ;
-                // 加用户
-                this.cnt.addUserImage( obj.username, obj.photo ,obj.total , obj.uid );
-            },5000)
+            // var i = 0;
+            // setInterval(() => {
+            //     var obj = { 
+            //         "username": "游客_2867477",
+            //         "photo": "https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg",
+            //         "total": i+'202422',
+            //         "uid": "1003118"+i
+            //      }
+            //     i = i+1 ;
+            //     // 加用户
+            //     this.cnt.addUserImage( obj.username, obj.photo ,obj.total , obj.uid );
+            // },5000)
 
-            var j =0 ;
-            setTimeout(() => {
-                console.log('user out')
-                var obj = { 
-                    "uid": "1003118"+ j
-                 }
-                 j = j+1;
-                // 删除用户
-                console.log( obj.uid )
-                if( this.cnt ){
-                    this.cnt.removeUserImage( obj.uid );
-                }
-            },10000)
 
-            console.log( this.cnt )
+            // var j =0 ;
+            // setInterval(() => {
+            //     console.log('user out')
+            //     // "uid": "1003118"+ j
+            //     var obj = { 
+            //         "uid": "1003118"+ j
+            //      }
+            //      j = j+1;
+            //     // 删除用户
+            //     // console.log( obj.uid )
+            //     if( this.cnt ){
+            //         this.cnt.removeUserImage( obj.uid );
+            //     }
+            // },10000)
+
+            // console.log( this.cnt )
         }
 
     }
@@ -332,14 +349,14 @@ class Main extends egret.DisplayObjectContainer {
     private onSocketOpen():void{
         var start = {
             "msg_type":"user_join",
-            "msg_id":"123",
+            "msg_id":"225",
             "data":{
-                "uid":"1002949"
+                "uid":"1002920"
             }               
         }
         this.webSocket.writeUTF(JSON.stringify(start))
 
-        this.webSocket.writeUTF('x')
+        // this.webSocket.writeUTF('x')
         
         this.webSocket.flush();
     }
