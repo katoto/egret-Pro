@@ -223,7 +223,7 @@ class Cnt extends egret.DisplayObjectContainer{
         var choseUserImg = 'userImg' + ( userI+1 )
         console.log( choseUserImg )
         if( photo === '' ){
-            photo = 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4182536181,630612655&fm=173&s=EC7819C7026A2D1399FD589D0300C084&w=218&h=146&img.JPEG'
+            photo = 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=547138142,3998729701&fm=27&gp=0.jpg'
         }
 
         if( this[choseUserImg] ){
