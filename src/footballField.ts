@@ -30,7 +30,7 @@ class Field_ball extends eui.UILayer {
     private winIcon_r:egret.Bitmap;
 
     // 设置锚点和x值  头像 队名 赔率 （  感觉得设置成 修改类的方式  ） ，这里加了一个参数bgUrl，用来控制不同赛场的背景
-    public constructor(leftImg,leftT,leftO,rightImg,rightT,rightO,bgUrl){
+    public constructor(leftImg,leftT,leftO,rightImg,rightT,rightO,bgUrl?){
         super();
         this.anchorOffsetX = 242.5 ;
         this.x = window['store']['stage_Width']/2 ;
