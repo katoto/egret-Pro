@@ -80,22 +80,22 @@ class Cnt extends egret.DisplayObjectContainer{
 
 
 
-        if(this.matchPro == '决赛'){
-            let court1 = new Court();
-            // court1.anchorOffsetX = court1.width/2;
-            // court1.anchorOffsetY = court1.height/2;
-            court1.x = 150;
-            court1.y = 100;
-            this.bgCourtWrap.addChild(court1);
-        }
+        // if(this.matchPro == '决赛'){
+        //     let court1 = new Court();
+        //     // court1.anchorOffsetX = court1.width/2;
+        //     // court1.anchorOffsetY = court1.height/2;
+        //     court1.x = 150;
+        //     court1.y = 100;
+        //     this.bgCourtWrap.addChild(court1);
+        // }
 
 
         //生成四个足球场，1/4比赛  485为小球场宽度，应该可以在构造函数里设置，需要优化
         //参数分辨是 x,x，左边球队icon，队名，赔率，总投注，我的投注，右边~
         //  http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png
 
-        // this.fieldContain = new Field_ball_contain();
-        // this.bgCourtWrap.addChild(this.fieldContain);
+        this.fieldContain = new Field_ball_contain();
+        this.bgCourtWrap.addChild(this.fieldContain);
 
         // this.field2 = new Field_ball(485,anWidth,'http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png','克罗地亚',3.78,'10万','10.09万','team-02_jpg','德国',1.26,'23万','10.09万');
         // this.field2.y = 120;
