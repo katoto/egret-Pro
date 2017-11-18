@@ -17,6 +17,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         this.drawField();
     }
     private drawField(){
+        // 放出舞台是否去除事件绑定提高性能？
 
         this.courtWrap1 = this.courtWrap();
         this.courtWrap2 = this.courtWrap();
@@ -26,33 +27,47 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         this.field1 = new Field_ball('bg-court1_png');
         this.field1.anchorOffsetY = 187.5;
         this.field1.y = 511;   //   963/2+30
+        this.field1.touchEnabled = true;
+        this.field1.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_1Evt ,this)
         this.courtWrap1.addChild(this.field1);
 
         this.field21 = new Field_ball('bg-court2_png');
         this.field21.y = 184;   // (963-250*2)/3+30 
+        this.field21.touchEnabled = true;
+        this.field21.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_21Evt ,this)
         this.courtWrap2.addChild(this.field21);
+
         this.field22 = new Field_ball('bg-court2_png');
         this.field22.y = 558;   //  
+        this.field22.touchEnabled = true;
+        this.field22.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_22Evt ,this)
         this.courtWrap2.addChild(this.field22);
 
         this.field41 = new Field_ball('bg-court4_png');
         this.field41.y = 120;
         this.field41.touchEnabled = true;
         this.field41.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_41Evt ,this)
-
         this.courtWrap4.addChild(this.field41);
+
         this.field42 = new Field_ball('bg-court4_png');
         this.field42.y = 320;   //  
+        this.field42.touchEnabled = true;
+        this.field42.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_42Evt ,this)
         this.courtWrap4.addChild(this.field42);
+
+
         this.field43 = new Field_ball('bg-court4_png');
         this.field43.y = 520;   //
+        this.field43.touchEnabled = true;
+        this.field43.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_43Evt ,this)
         this.courtWrap4.addChild(this.field43);
+
         this.field44 = new Field_ball('bg-court4_png');
         this.field44.y = 720;   //  
+        this.field44.touchEnabled = true;
+        this.field44.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_44Evt ,this)
         this.courtWrap4.addChild(this.field44);
 
-        // this.field2.touchEnabled = true;
-        // this.field2.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_twoEvt ,this)
 
     }
 
@@ -144,18 +159,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 ;
             }
 
-            // for( var i=0,len = 1 ;i<len;i++ ){
-            //     fieldStr = 'field'+(i+1)
-            //     this[fieldStr] = new Field_ball(  $store['matches'][i].homelogo ,
-            //         $store['matches'][i].homename ,  $store['matches'][i].homeodds ,
-            //         $store['matches'][i].awaylogo , $store['matches'][i].awayname , $store['matches'][i].awayodds
-            //     )
-            //     this[fieldStr].y = 120+202*i;
-            //     this[fieldStr].touchEnabled = true;
-            //     this.this_fieldContain.addChild( this[fieldStr] );
-            //     this[fieldStr].width = 485;
-            //     this[fieldStr].height = 181;
-
                 // setInterval(()=>{
                 //     i = i+1
                 //     this[fieldStr].upLeftMyMoney('324'+i)
@@ -178,93 +181,340 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 // },6000)
 
             // }
-            // if( this.field1 ){
-            //     this.field1.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_oneEvt ,this)
-            // }
-            // if( this.field2 ){
-            //     this.field2.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_twoEvt ,this)
-            // }            
-            // if( this.field3 ){
-            //     this.field3.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_threeEvt ,this)
-            // }
-            // if( this.field4 ){
-            //     this.field4.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_twoEvt ,this)
-            // }       
+   
         }
     }
 
     // 场地点击处理 new 
-    private field_41Evt( e:egret.TouchEvent ){
-                //  执行动画
+    async field_41Evt( e:egret.TouchEvent ){
+        //  执行动画  213 154 left   496 156 right
+        //  field41  为了方便处理
+        // field41:{
+        //     coin_left:[],
+        //     coin_right:[],
+        //     coin_left_local:{ x:null ,y:null },
+        //     coin_right_local:{ x:null ,y:null }
+        // }
+
+            // this[fieldStr].upLeftMyMoney('324'+i)
+            // this[fieldStr].upRightMyMoney('31'+i)
+
         let x = e.localX + 133;
         let y = e.localY + 120;
-        this.tween_Coin(x,y)
-    }
-
-    private field_oneEvt( e:egret.TouchEvent ){
-        console.log(1)
-        console.log( e ) 
-        //  ajax 下单
-        //  执行动画
-        let x = e.localX + 133;
-        let y = e.localY + 120;
-        console.log(x);
-        console.log(y);
-
-        if(y>150 && y <260){
+        let $store = window['store'];
+        let currBtnNumber = $store['curr_btn_coin']
+        if( y>150 && y <260 ){
+            console.log( currBtnNumber )
+            // 下单
+            await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
+                // 更新 自己头像 金币   下单之后
+                window['store']['userMySelf'].setMyGold('222');
+            })
+            if( !$store['allCoinObj']['field41'] ){
+                window['Object'].assign($store['allCoinObj'] ,{ 'field41':{
+                        coin_left:[],
+                        coin_right:[],
+                        coin_left_local:{ x:214 ,y:154 },
+                        coin_right_local:{ x:496 ,y:154 }
+                    }
+                })
+            }
+            // 更新自己投注的金额
             if(150<x && x<350){
                 console.log('左边')
-                this.tween_Coin(x,y)
+                this.field41.upLeftMyMoney( currBtnNumber )  // 个人金额 ??
+                this.field41.addLeftAllCoin( currBtnNumber ); //  总的金额 ??
+                this.tween_Coin(x,y, $store['allCoinObj']['field41'].coin_left )
             }else if(410<x && x<600){
                 console.log('右边')
-                this.tween_Coin(x,y)
+                this.field41.upRightMyMoney( currBtnNumber )
+                this.field41.addRightAllCoin( currBtnNumber ); //  总的金额
+                this.tween_Coin(x,y, $store['allCoinObj']['field41'].coin_right )
             }
         }
-        
-       
+    }
 
+    async field_42Evt( e:egret.TouchEvent ){
+        //  执行动画  213 154 left   496 156 right  
+        // field42_obj 
+        let x = e.localX + 133;
+        let y = e.localY + 300;
+        let $store = window['store'];
+        let currBtnNumber = $store['curr_btn_coin']
+        if( y>330 && y <440 ){
+            await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
+                // 更新 自己头像 金币   下单之后
+                window['store']['userMySelf'].setMyGold('222');
+            })
+
+            if( !$store['allCoinObj']['field42'] ){
+                window['Object'].assign($store['allCoinObj'] ,{ 'field42':{
+                        coin_left:[],
+                        coin_right:[],
+                        coin_left_local:{ x:214 ,y:354 },
+                        coin_right_local:{ x:496 ,y:354 }
+                    }
+                })
+            }
+            if(150<x && x<350){
+                console.log('左边')
+                this.field42.upLeftMyMoney( currBtnNumber )
+                this.field42.addLeftAllCoin( currBtnNumber ); //  总的金额 ??
+                this.tween_Coin(x,y, $store['allCoinObj']['field42'].coin_left )
+            }else if(410<x && x<600){
+                console.log('右边')
+                this.field42.upRightMyMoney( currBtnNumber )
+                this.field42.addRightAllCoin( currBtnNumber ); //  总的金额 ??
+                this.tween_Coin(x,y, $store['allCoinObj']['field42'].coin_right )
+            }
+        }
+    }
+
+    async field_43Evt( e:egret.TouchEvent ){
+        //  执行动画  213 154 left   496 156 right  
+        // field43_obj 
+        let x = e.localX + 133;
+        let y = e.localY + 500;
+        let $store = window['store'];
+        let currBtnNumber = $store['curr_btn_coin']
+        if( y>530 && y <640 ){
+            await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
+                // 更新 自己头像 金币   下单之后
+                window['store']['userMySelf'].setMyGold('231');
+            })
+
+            if( !$store['allCoinObj']['field43'] ){
+                window['Object'].assign($store['allCoinObj'] ,{ 'field43':{
+                        coin_left:[],
+                        coin_right:[],
+                        coin_left_local:{ x:214 ,y:554 },
+                        coin_right_local:{ x:496 ,y:554 }
+                    }
+                })
+            }
+            if(150<x && x<350){
+                console.log('左边')
+                this.field43.upLeftMyMoney( currBtnNumber )  // 个人金额 ??
+                this.field43.addLeftAllCoin( currBtnNumber ); //  总的金额 ??
+                this.tween_Coin(x,y, $store['allCoinObj']['field43'].coin_left )
+            }else if(410<x && x<600){
+                console.log('右边')
+                this.field43.upRightMyMoney( currBtnNumber )  // 个人金额 ??
+                this.field43.addRightAllCoin( currBtnNumber ); //  总的金额 ??
+                this.tween_Coin(x,y, $store['allCoinObj']['field43'].coin_right )
+            }
+        }
+    }
+
+    async field_44Evt( e:egret.TouchEvent ){
+        //  执行动画  213 154 left   496 156 right  
+        // field44_obj 
+        let x = e.localX + 133;
+        let y = e.localY + 700;
+        let $store = window['store'];
+        let currBtnNumber = $store['curr_btn_coin']
+        if( y>730 && y <840 ){
+            await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
+                // 更新 自己头像 金币   下单之后
+                window['store']['userMySelf'].setMyGold('333');
+            })
+
+            if( !$store['allCoinObj']['field44'] ){
+                window['Object'].assign($store['allCoinObj'] ,{ 'field44':{
+                        coin_left:[],
+                        coin_right:[],
+                        coin_left_local:{ x:214 ,y:754 },
+                        coin_right_local:{ x:496 ,y:754 }
+                    }
+                })
+            }
+            if(150<x && x<350){
+                console.log('左边')
+                this.field44.upLeftMyMoney( currBtnNumber )  // 个人金额 ??
+                this.field44.addLeftAllCoin( currBtnNumber ); //  总的金额 ??
+                this.tween_Coin(x,y, $store['allCoinObj']['field44'].coin_left )
+            }else if(410<x && x<600){
+                console.log('右边')
+                this.field44.upRightMyMoney( currBtnNumber )  // 个人金额 ??
+                this.field44.addRightAllCoin( currBtnNumber ); //  总的金额 ??                
+                this.tween_Coin(x,y, $store['allCoinObj']['field44'].coin_right )
+            }
+        }
     }
 
 
-    async field_twoEvt( e:egret.TouchEvent ){
-        
-        //  ajax 下单
-        //  执行动画
-        // this.tween_Coin(30,40)
-        // console.log(e.localX)
-        // console.log(e.localY)
-        // console.log( e )
-        //  ajax 下单  请求
-        //  执行动画  
-        await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
-            // 更新 自己头像 金币   下单之后
-            window['store']['userMySelf'].setMyGold('222');
-            console.log( res )
-            
-        })
-        this.tween_Coin( e.$stageX ,e.$stageY -150 );
-        // console.log(555555)
-        // await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
-        //     console.log( 123 )
-        //     console.log( res )
-        // })
-        // console.log(777777)
-        // this.tween_Coin( e.$stageX ,e.$stageY -150 );
+    async field_21Evt( e:egret.TouchEvent ){
+        // field21_obj  坐标要调整 
+        let x = e.localX + 133;
+        let y = e.localY + 700;
+        let $store = window['store'];
+        let currBtnNumber = $store['curr_btn_coin']
+        if( y>230 && y <440 ){
+            await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
+                // 更新 自己头像 金币   下单之后
+                window['store']['userMySelf'].setMyGold('123');
+            })
 
-        // console.log(e.stageY)
-        // console.log(e.$stageY)
+            if( !$store['allCoinObj']['field21'] ){
+                window['Object'].assign($store['allCoinObj'] ,{ 'field21':{
+                        coin_left:[],
+                        coin_right:[],
+                        coin_left_local:{ x:214 ,y:754 },
+                        coin_right_local:{ x:496 ,y:754 }
+                    }
+                })
+            }
+            if(150<x && x<350){
+                console.log('左边')
+                this.field21.upLeftMyMoney( currBtnNumber )  // 个人金额 ??
+                this.field21.addLeftAllCoin( currBtnNumber ); //  总的金额 ??                
+                this.tween_Coin(x,y, $store['allCoinObj']['field21'].coin_left )
+            }else if(410<x && x<600){
+                console.log('右边')
+                this.field21.upRightMyMoney( currBtnNumber )  // 个人金额 ??
+                this.field21.addRightAllCoin( currBtnNumber ); //  总的金额 ??                  
+                this.tween_Coin(x,y, $store['allCoinObj']['field21'].coin_right )
+            }
+        }
     }
-    private field_threeEvt( e:egret.TouchEvent ){
+    async field_22Evt( e:egret.TouchEvent ){
+        let x = e.localX + 133;
+        let y = e.localY + 700;
+        let $store = window['store'];
+        let currBtnNumber = $store['curr_btn_coin']
+        if( y>230 && y <440 ){
+            await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
+                // 更新 自己头像 金币   下单之后
+                window['store']['userMySelf'].setMyGold('123');
+            })
+
+            if( !$store['allCoinObj']['field22'] ){
+                window['Object'].assign($store['allCoinObj'] ,{ 'field22':{
+                        coin_left:[],
+                        coin_right:[],
+                        coin_left_local:{ x:214 ,y:754 },
+                        coin_right_local:{ x:496 ,y:754 }
+                    }
+                })
+            }
+            if(150<x && x<350){
+                console.log('左边')
+                this.field22.upLeftMyMoney( currBtnNumber )  // 个人金额 ??
+                this.field22.addLeftAllCoin( currBtnNumber ); //  总的金额 ??                  
+                this.tween_Coin(x,y, $store['allCoinObj']['field22'].coin_left )
+            }else if(410<x && x<600){
+                console.log('右边')
+                this.field22.upRightMyMoney( currBtnNumber )  // 个人金额 ??
+                this.field22.addRightAllCoin( currBtnNumber ); //  总的金额 ??                   
+                this.tween_Coin(x,y, $store['allCoinObj']['field22'].coin_right )
+            }
+        }
+    }
+    async field_1Evt( e:egret.TouchEvent ){
+        let x = e.localX + 133;
+        let y = e.localY + 700;
+        let $store = window['store'];
+        let currBtnNumber = $store['curr_btn_coin']
+        if( y>230 && y <440 ){
+            await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
+                // 更新 自己头像 金币   下单之后
+                window['store']['userMySelf'].setMyGold('345');
+            })
+
+            if( !$store['allCoinObj']['field1'] ){
+                window['Object'].assign($store['allCoinObj'] ,{ 'field1':{
+                        coin_left:[],
+                        coin_right:[],
+                        coin_left_local:{ x:214 ,y:754 },
+                        coin_right_local:{ x:496 ,y:754 }
+                    }
+                })
+            }
+            if(150<x && x<350){
+                console.log('左边')
+                this.field1.upLeftMyMoney( currBtnNumber )  // 个人金额 ??
+                this.field1.addLeftAllCoin( currBtnNumber ); //  总的金额 ??                     
+                this.tween_Coin(x,y, $store['allCoinObj']['field1'].coin_left )
+            }else if(410<x && x<600){
+                console.log('右边')
+                this.field1.upRightMyMoney( currBtnNumber )  // 个人金额 ??
+                this.field1.addRightAllCoin( currBtnNumber ); //  总的金额 ??                      
+                this.tween_Coin(x,y, $store['allCoinObj']['field1'].coin_right )
+            }
+        }
+    }
+
+    /**
+     *  收起对应的 金币
+     */
+    private collectCoin(){
+        console.log( '收起金币测试' );
+        let $store = window['store'];
+        let allCoinKeys = window['Object'].keys( $store['allCoinObj'] );
+        let objLen = allCoinKeys.length;
+        let $egret_Tween = egret.Tween ;
+        console.log(objLen  )
+        if( objLen > 0){
+            for( let i=0;i<objLen;i++ ){
+                if( $store['allCoinObj'][allCoinKeys[i]] && $store['allCoinObj'][allCoinKeys[i]].coin_left ){
+                    for( let j=0,len = $store['allCoinObj'][allCoinKeys[i]].coin_left.length ;j<len;j++ ){
+                        $egret_Tween.get( $store['allCoinObj'][allCoinKeys[i]].coin_left[j] ).to( { 
+                            x:$store['allCoinObj'][allCoinKeys[i]].coin_left_local.x,
+                            y:$store['allCoinObj'][allCoinKeys[i]].coin_left_local.y 
+                        }, 200)
+                    }
+                }
+                if( $store['allCoinObj'][allCoinKeys[i]] && $store['allCoinObj'][allCoinKeys[i]].coin_right ){
+                    for( let j=0,len = $store['allCoinObj'][allCoinKeys[i]].coin_right.length ;j<len;j++ ){
+                        $egret_Tween.get( $store['allCoinObj'][allCoinKeys[i]].coin_right[j] ).to( { 
+                            x:$store['allCoinObj'][allCoinKeys[i]].coin_right_local.x,
+                            y:$store['allCoinObj'][allCoinKeys[i]].coin_right_local.y 
+                        }, 200 )
+                    }
+                }
+            }
+            setTimeout(()=>{
+                //  看定位，先把这段注释掉
+                // 显示出总的金额  ,并清除所有金币 改变总的背景
+                for( let i=0;i<objLen;i++ ){
+                    // 清除左边金币
+                    if( $store['allCoinObj'][allCoinKeys[i]] && $store['allCoinObj'][allCoinKeys[i]].coin_left ){
+                        for( let j=0,len = $store['allCoinObj'][allCoinKeys[i]].coin_left.length ;j<len;j++ ){
+                            if( $store['allCoinObj'][allCoinKeys[i]].coin_left[j].parent ){
+                                this.removeChild( $store['allCoinObj'][allCoinKeys[i]].coin_left[j] )
+                            }
+                        }
+                        // 全局修改left收起背景
+                        this[allCoinKeys[i]].upLeftCoinBg()
+                        $store['allCoinObj'][allCoinKeys[i]].coin_left = [] ; // 回收
+                    }
+                    // 清除右边金币
+                    if( $store['allCoinObj'][allCoinKeys[i]] && $store['allCoinObj'][allCoinKeys[i]].coin_right ){
+                        for( let j=0,len = $store['allCoinObj'][allCoinKeys[i]].coin_right.length ;j<len;j++ ){
+                            if( $store['allCoinObj'][allCoinKeys[i]].coin_right[j].parent ){
+                                this.removeChild( $store['allCoinObj'][allCoinKeys[i]].coin_right[j] )
+                            }
+                        }
+                        // 全局修改right收起背景
+                        this[allCoinKeys[i]].upRightCoinBg()
+                        $store['allCoinObj'][allCoinKeys[i]].coin_right = [] ; // 回收
+                    }
+
+                }
+            },200)
+        }
+    }
+    /**
+     *  移除 所有的金币
+     */
+    private delAllCoin(){
 
     }
-    private field_fourEvt( e:egret.TouchEvent ){
 
-    }
-
-    private tween_Coin( stage_x:Number ,stage_y:Number ){
+    private tween_Coin( stage_x:Number ,stage_y:Number ,currArr:any ){
         /**
          *  创建 金币 并执行动画  (报错对应的对象 ，为收集金币做处理 )
-         * 
+         *  currArr 报错金币
          *  金币的场次id 比赛id 金币的额度， 金币的来源。。。。。好像很多
          */
             let gold = new Gold();
@@ -272,7 +522,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             gold.anchorOffsetY = gold.height/2;
             gold.x = window['store']['stage_anWidth'];
             gold.y = 1000;
-            window['store']['coin_arr'].push( gold )
+            currArr.push( gold )
             this.addChild(gold);
             egret.Tween.get( gold ).to( { x:stage_x,y:stage_y },200 )
     }
@@ -284,6 +534,3 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         return wrap;
     }
 }
-/**
- * 
- */

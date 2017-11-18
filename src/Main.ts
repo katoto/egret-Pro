@@ -34,8 +34,6 @@ class Main extends egret.DisplayObjectContainer {
     private anWidth;
     private anHeight;
     
-
-
     private position:Array<number> =  [];
 
     public constructor() {
@@ -94,7 +92,7 @@ class Main extends egret.DisplayObjectContainer {
             RES.loadGroup("preload");
         }
         if (event.groupName == "preload") {
-            this.stage.removeChild(this.loadingView);
+            // this.stage.removeChild(this.loadingView);
             RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
             RES.removeEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);
             RES.removeEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
@@ -216,7 +214,7 @@ class Main extends egret.DisplayObjectContainer {
             this.webSocket.addEventListener( egret.Event.CONNECT ,this.onSocketOpen ,this );
             this.webSocket.addEventListener( egret.IOErrorEvent.IO_ERROR ,this.onIOError ,this );
             this.webSocket.addEventListener( egret.Event.CLOSE ,this.onCloseSock ,this );
-            this.webSocket.connectByUrl("ws://192.168.81.240:9777/ws?uid=1002920");
+            this.webSocket.connectByUrl("ws://192.168.76.9:9777/ws?uid=1002920");
         }catch(e){
             alert('websock error')
         }
@@ -313,16 +311,22 @@ class Main extends egret.DisplayObjectContainer {
                 break;
         
             }
+            setInterval(()=>{
+                console.log('收起金币 测试 ok')
+                this.cnt.cnt_collectCoin()
 
+
+
+            },5000)
         }
-
     }
-
     
     /**
      *  onSocketOpen  websock 接收消息
      */
     private onSocketOpen():void{
+        this.stage.removeChild(this.loadingView);
+        
         var start = {
             "msg_type":"user_join",
             "msg_id":"225",
@@ -385,6 +389,33 @@ window['store'] = {
         'node':null,
     },
     'matches':[],  // 赛事信息
+
+    'commit':function(key,val){
+        console.log(key)
+        console.log(val)
+    },
+    // 冠军记录
+    'recording':[
+        {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        {'期号':121501,'赛事':'欧洲杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        {'期号':121501,'赛事':'欧洲杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        {'期号':121501,'赛事':'欧洲杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        {'期号':121501,'赛事':'欧洲杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        {'期号':121501,'赛事':'欧洲杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        ],
+    // 记录 投注的金币数 ( 可能的金币 )
+    allCoinObj:{
+        // field_41_obj:{
+        //     coin_left:[],
+        //     coin_right:[],
+        //     coin_left_local:{ x:null ,y:null },
+        //     coin_right_local:{ x:null ,y:null }
+        // }
+    },
     'userPositionObj':[
         //  位置坐标    
         {
@@ -424,21 +455,4 @@ window['store'] = {
             'y':740
         }
     ], 
-    'commit':function(key,val){
-        console.log(key)
-        console.log(val)
-    },
-    // 冠军记录
-    'recording':[
-        {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
-        {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
-        {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
-        {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
-        {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
-        {'期号':121501,'赛事':'欧洲杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
-        {'期号':121501,'赛事':'欧洲杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
-        {'期号':121501,'赛事':'欧洲杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
-        {'期号':121501,'赛事':'欧洲杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
-        {'期号':121501,'赛事':'欧洲杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
-        ]
 } 

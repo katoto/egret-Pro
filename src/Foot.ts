@@ -8,9 +8,6 @@ class Foot extends egret.DisplayObjectContainer{
     //  底部实例
     private bottom:egret.Sprite
 
-
-    
-
     // 底部按钮区域
     public constructor(){
         super();

@@ -203,17 +203,27 @@ class Field_ball extends eui.UILayer {
 
     // 更新左边总金币的背景
     private upLeftCoinBg(){
-        this.removeChild( this.goldItems_left02 );
-        this.addChild( this.goldItems_left );
+
+        if( this.goldItems_left02.parent ){
+            this.removeChild(this.goldItems_left02);
+        }
+
         // 提高层级，不然会被挡住
-        this.setChildIndex( this.allLeftCoin , this.getChildIndex( this.goldItems_left ))
+        if( this.allLeftCoin && this.allLeftCoin.parent ){
+            this.addChild( this.goldItems_left );
+            this.setChildIndex( this.allLeftCoin , this.getChildIndex( this.goldItems_left ))
+        }
     }
     
     // 更新右边总金币的背景
     private upRightCoinBg(){
-        this.removeChild( this.goldItems_right02 );
-        this.addChild( this.goldItems_right );
-        this.setChildIndex( this.allRightCoin , this.getChildIndex( this.goldItems_right ))
+        if( this.goldItems_right02.parent ){
+            this.removeChild(this.goldItems_right02);
+        }
+        if(  this.allRightCoin && this.allRightCoin.parent ){
+            this.addChild( this.goldItems_right );
+            this.setChildIndex( this.allRightCoin , this.getChildIndex( this.goldItems_right ))
+        }
     }
     
     //  创建 左边 收起的类
@@ -313,5 +323,4 @@ class Field_ball extends eui.UILayer {
             this.addChild(this.rightMyMoneyBox);
         }
     }
-
 }
