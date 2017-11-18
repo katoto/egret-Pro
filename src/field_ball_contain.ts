@@ -445,7 +445,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
     }
 
     /**
-     *  收起对应的 金币
+     *  收起对应的 金币 ！
      */
     private collectCoin(){
         console.log( '收起金币测试' );
@@ -459,8 +459,11 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 if( $store['allCoinObj'][allCoinKeys[i]] && $store['allCoinObj'][allCoinKeys[i]].coin_left ){
                     for( let j=0,len = $store['allCoinObj'][allCoinKeys[i]].coin_left.length ;j<len;j++ ){
                         $egret_Tween.get( $store['allCoinObj'][allCoinKeys[i]].coin_left[j] ).to( { 
-                            x:$store['allCoinObj'][allCoinKeys[i]].coin_left_local.x,
-                            y:$store['allCoinObj'][allCoinKeys[i]].coin_left_local.y 
+                            // x:$store['allCoinObj'][allCoinKeys[i]].coin_left_local.x,
+                            // y:$store['allCoinObj'][allCoinKeys[i]].coin_left_local.y 
+                            x:15,
+                            y:18 
+
                         }, 200)
                     }
                 }
@@ -474,41 +477,35 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 }
             }
             setTimeout(()=>{
-                //  看定位，先把这段注释掉
+                //  看 金币 定位，先把这段注释掉
                 // 显示出总的金额  ,并清除所有金币 改变总的背景
-                for( let i=0;i<objLen;i++ ){
-                    // 清除左边金币
-                    if( $store['allCoinObj'][allCoinKeys[i]] && $store['allCoinObj'][allCoinKeys[i]].coin_left ){
-                        for( let j=0,len = $store['allCoinObj'][allCoinKeys[i]].coin_left.length ;j<len;j++ ){
-                            if( $store['allCoinObj'][allCoinKeys[i]].coin_left[j].parent ){
-                                this.removeChild( $store['allCoinObj'][allCoinKeys[i]].coin_left[j] )
-                            }
-                        }
-                        // 全局修改left收起背景
-                        this[allCoinKeys[i]].upLeftCoinBg()
-                        $store['allCoinObj'][allCoinKeys[i]].coin_left = [] ; // 回收
-                    }
-                    // 清除右边金币
-                    if( $store['allCoinObj'][allCoinKeys[i]] && $store['allCoinObj'][allCoinKeys[i]].coin_right ){
-                        for( let j=0,len = $store['allCoinObj'][allCoinKeys[i]].coin_right.length ;j<len;j++ ){
-                            if( $store['allCoinObj'][allCoinKeys[i]].coin_right[j].parent ){
-                                this.removeChild( $store['allCoinObj'][allCoinKeys[i]].coin_right[j] )
-                            }
-                        }
-                        // 全局修改right收起背景
-                        this[allCoinKeys[i]].upRightCoinBg()
-                        $store['allCoinObj'][allCoinKeys[i]].coin_right = [] ; // 回收
-                    }
+                // for( let i=0;i<objLen;i++ ){
+                //     // 清除左边金币
+                //     if( $store['allCoinObj'][allCoinKeys[i]] && $store['allCoinObj'][allCoinKeys[i]].coin_left ){
+                //         for( let j=0,len = $store['allCoinObj'][allCoinKeys[i]].coin_left.length ;j<len;j++ ){
+                //             if( $store['allCoinObj'][allCoinKeys[i]].coin_left[j].parent ){
+                //                 this.removeChild( $store['allCoinObj'][allCoinKeys[i]].coin_left[j] )
+                //             }
+                //         }
+                //         // 全局修改left收起背景
+                //         this[allCoinKeys[i]].upLeftCoinBg()
+                //         $store['allCoinObj'][allCoinKeys[i]].coin_left = [] ; // 回收
+                //     }
+                //     // 清除右边金币
+                //     if( $store['allCoinObj'][allCoinKeys[i]] && $store['allCoinObj'][allCoinKeys[i]].coin_right ){
+                //         for( let j=0,len = $store['allCoinObj'][allCoinKeys[i]].coin_right.length ;j<len;j++ ){
+                //             if( $store['allCoinObj'][allCoinKeys[i]].coin_right[j].parent ){
+                //                 this.removeChild( $store['allCoinObj'][allCoinKeys[i]].coin_right[j] )
+                //             }
+                //         }
+                //         // 全局修改right收起背景
+                //         this[allCoinKeys[i]].upRightCoinBg()
+                //         $store['allCoinObj'][allCoinKeys[i]].coin_right = [] ; // 回收
+                //     }
 
-                }
+                // }
             },200)
         }
-    }
-    /**
-     *  移除 所有的金币
-     */
-    private delAllCoin(){
-
     }
 
     private tween_Coin( stage_x:Number ,stage_y:Number ,currArr:any ){
