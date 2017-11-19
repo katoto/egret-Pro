@@ -467,6 +467,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         }, 200)
                     }
                 }
+                // call() 动画结束的回调
                 if( $store['allCoinObj'][allCoinKeys[i]] && $store['allCoinObj'][allCoinKeys[i]].coin_right ){
                     for( let j=0,len = $store['allCoinObj'][allCoinKeys[i]].coin_right.length ;j<len;j++ ){
                         $egret_Tween.get( $store['allCoinObj'][allCoinKeys[i]].coin_right[j] ).to( { 
