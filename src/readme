@@ -43,6 +43,7 @@ utils 是工具类函数 全局的
 	 Pop 竞猜开始结束弹窗
 	 Pop02 信息类弹窗
 	 ChampionC 冠军记录弹窗的内容
+	 Penalty  进球过程
 
 
 ###### tips 固定的东西，优先new 让其处于内存中

@@ -97,6 +97,10 @@ class Cnt extends egret.DisplayObjectContainer{
         this.fieldContain = new Field_ball_contain();
         this.bgCourtWrap.addChild(this.fieldContain);
 
+        let penalty = new Penalty();
+        penalty.y = 100;
+        this.bgCourtWrap.addChild(penalty);
+
     }
 
     // 金币收起  main ==> cnt ==> fieldcontain
