@@ -16,6 +16,22 @@ var urlData = (function () {
     }
     return obj;
 })();
+
+/**
+ *  平台 ios  or android
+ */
+var platform = (function(){
+    let ua = navigator.userAgent.toLowerCase();
+    let isAndroid = /android/.test(ua);  
+    let platform = 'android';
+    if(isAndroid){
+        platform = 'android';
+    }else{
+        platform = 'ios';
+    }
+    return platform
+})()
+
 /**
  *  洗牌算法，取8个随机数组
  *  @param len 随机数组长度

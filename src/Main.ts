@@ -226,25 +226,36 @@ class Main extends egret.DisplayObjectContainer {
      */
     private initStage(){
         // uid  还得有个uid ..
-
+        let $store = window['store'];
         // 桌子缩放计算 
-        window['store'].scale = 0.91;
-        // 取ck 按src+ck 的形式，防止串号
+        $store.scale = 0.91;
+        // 取ck 按src+ck 的形式，防止串号 = 替换 $
         if( window['urlData'] && window['urlData'].ck ){
-            window['store']['orderObj'].ck = window['urlData'].ck ;
+            $store['orderObj'].ck = window['urlData'].ck.replace(/\$/g,'=');
+            $store['env_variable'].ck = window['urlData'].ck.replace(/\$/g,'=');
         }else{
-            window['store']['orderObj'].ck = egret.localStorage.getItem('ck');
+            $store['orderObj'].ck = egret.localStorage.getItem('ck');
+            $store['env_variable'].ck = egret.localStorage.getItem('ck');
         }
 
-        // if( window['urlData'] && window['urlData'].ck ){
-        //     window['store']['orderObj'].ck = window['urlData'].ck ;
-        // }else{
-        //     window['store']['orderObj'].ck = egret.localStorage.getItem('ck');
-        // }
+        if( window['urlData'] && window['urlData'].src ){
+            $store['env_variable'].src = window['urlData'].src ;
+        }else{
+            $store['env_variable'].src = egret.localStorage.getItem('src')
+        }
+
+        if( window['urlData'] && window['urlData'].uid ){
+            $store['env_variable'].uid = window['urlData'].uid ;
+        }
         // platform
-        window['store']['platform'] = egret.localStorage.getItem('platform'); 
+        if( window['platform'] ){
+            $store['env_variable'].platform = window['platform'] ;
+        }else{
+            $store['env_variable'].platform =egret.localStorage.getItem('platform'); 
+        }
+        
         // 头像随机的位置
-        window['store']['userPosition'] = window['randomArray']( 9 );
+        $store['userPosition'] = window['randomArray']( 9 );
 
         //  用户头像的9个 实例对象 
         this.cnt.initUserImg();
@@ -372,9 +383,14 @@ window['store'] = {
     'stage_anWidth': null ,
     'stage_anHeight': null ,
 
+    'env_variable':{ // 查询当前的环境变量
+        src : null ,
+        ck : null ,
+        uid : null ,
+        platform : null ,
+    },
+
     'scale': 1,  // 桌子缩放
-    'src':'off',
-    'platform':'',
     'userPosition':[],  //  随机数组
     'userPositionID':[],  // 头像的uid
     'emptyUserPosition':[],  // 空闲的位置
