@@ -214,8 +214,8 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 window['Object'].assign($store['allCoinObj'] ,{ 'field41':{
                         coin_left:[],
                         coin_right:[],
-                        coin_left_local:{ x:214 ,y:154 },
-                        coin_right_local:{ x:496 ,y:154 }
+                        coin_left_local:{ x:214 ,y:128 },
+                        coin_right_local:{ x:458 ,y:128 }
                     }
                 })
             }
@@ -238,10 +238,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         //  执行动画  213 154 left   496 156 right  
         // field42_obj 
         let x = e.localX + 133;
-        let y = e.localY + 300;
+        let y = e.localY + 320;
         let $store = window['store'];
         let currBtnNumber = $store['curr_btn_coin']
-        if( y>330 && y <440 ){
+        if( y>350 && y <460 ){
             await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
                 // 更新 自己头像 金币   下单之后
                 window['store']['userMySelf'].setMyGold('222');
@@ -251,8 +251,8 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 window['Object'].assign($store['allCoinObj'] ,{ 'field42':{
                         coin_left:[],
                         coin_right:[],
-                        coin_left_local:{ x:214 ,y:354 },
-                        coin_right_local:{ x:496 ,y:354 }
+                        coin_left_local:{ x:214 ,y:328 },
+                        coin_right_local:{ x:458 ,y:328 }
                     }
                 })
             }
@@ -274,10 +274,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         //  执行动画  213 154 left   496 156 right  
         // field43_obj 
         let x = e.localX + 133;
-        let y = e.localY + 500;
+        let y = e.localY + 520;
         let $store = window['store'];
         let currBtnNumber = $store['curr_btn_coin']
-        if( y>530 && y <640 ){
+        if( y>550 && y <660 ){
             await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
                 // 更新 自己头像 金币   下单之后
                 window['store']['userMySelf'].setMyGold('231');
@@ -287,8 +287,8 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 window['Object'].assign($store['allCoinObj'] ,{ 'field43':{
                         coin_left:[],
                         coin_right:[],
-                        coin_left_local:{ x:214 ,y:554 },
-                        coin_right_local:{ x:496 ,y:554 }
+                         coin_left_local:{ x:214 ,y:528 },
+                        coin_right_local:{ x:458 ,y:528 }
                     }
                 })
             }
@@ -310,10 +310,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         //  执行动画  213 154 left   496 156 right  
         // field44_obj 
         let x = e.localX + 133;
-        let y = e.localY + 700;
+        let y = e.localY + 720;
         let $store = window['store'];
         let currBtnNumber = $store['curr_btn_coin']
-        if( y>730 && y <840 ){
+        if( y>750 && y <860 ){
             await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
                 // 更新 自己头像 金币   下单之后
                 window['store']['userMySelf'].setMyGold('333');
@@ -323,8 +323,8 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 window['Object'].assign($store['allCoinObj'] ,{ 'field44':{
                         coin_left:[],
                         coin_right:[],
-                        coin_left_local:{ x:214 ,y:754 },
-                        coin_right_local:{ x:496 ,y:754 }
+                        coin_left_local:{ x:214 ,y:728 },
+                        coin_right_local:{ x:458 ,y:728 }
                     }
                 })
             }

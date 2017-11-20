@@ -214,7 +214,7 @@ class Main extends egret.DisplayObjectContainer {
             this.webSocket.addEventListener( egret.Event.CONNECT ,this.onSocketOpen ,this );
             this.webSocket.addEventListener( egret.IOErrorEvent.IO_ERROR ,this.onIOError ,this );
             this.webSocket.addEventListener( egret.Event.CLOSE ,this.onCloseSock ,this );
-            this.webSocket.connectByUrl("ws://192.168.76.9:9777/ws?uid=1002920");
+            this.webSocket.connectByUrl("ws://192.168.81.240:9777/ws?uid=1002920");
         }catch(e){
             alert('websock error')
         }
