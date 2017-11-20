@@ -10,8 +10,8 @@
 		"promise/bin/promise.js"
 	],
 	"game": [
+		"bin-debug/Main.js",
 		"bin-debug/ChampionC.js",
-		"bin-debug/Cnt.js",
 		"bin-debug/Court.js",
 		"bin-debug/field_ball_contain.js",
 		"bin-debug/Foot.js",
@@ -21,7 +21,7 @@
 		"bin-debug/Header.js",
 		"bin-debug/HelloTime.js",
 		"bin-debug/LoadingUI.js",
-		"bin-debug/Main.js",
+		"bin-debug/Cnt.js",
 		"bin-debug/Penalty.js",
 		"bin-debug/Pop.js",
 		"bin-debug/Pop02.js",
