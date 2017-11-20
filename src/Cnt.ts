@@ -97,56 +97,11 @@ class Cnt extends egret.DisplayObjectContainer{
         this.fieldContain = new Field_ball_contain();
         this.bgCourtWrap.addChild(this.fieldContain);
 
-        // this.field2 = new Field_ball(485,anWidth,'http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png','克罗地亚',3.78,'10万','10.09万','team-02_jpg','德国',1.26,'23万','10.09万');
-        // this.field2.y = 120;
-        // this.bgCourtWrap.addChild(this.field2);
-        // this.field2.touchEnabled = true;
-        // this.field2.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_twoEvt ,this)
+    }
 
-
-        // this.field1 = new Field_ball(485,anWidth,'team-01_jpg','克罗地亚',3.78,'10万','10.09万','team-02_jpg','德国',1.26,'23万','10.09万');
-        // this.field1.y = 120+202*1;
-        // this.bgCourtWrap.addChild(this.field1);
-        // this.field1.touchEnabled = true;
-        // this.field1.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_oneEvt ,this)
-
-        
-        // this.field3 = new Field_ball(485,anWidth,'http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png','克罗地亚',3.78,'10万','10.09万','team-02_jpg','德国',1.26,'23万','10.09万');
-        // this.field3.y = 120+202*2;
-        // this.bgCourtWrap.addChild(this.field3);
-        // this.field3.touchEnabled = true;
-        // this.field3.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_threeEvt ,this)
-
-        // for(let i=0;i<4;i++){
-        //     let _field4:Field4 = new Field4(485,anWidth,'team-01_jpg','克罗地亚',3.78,'10万','10.09万','team-02_jpg','德国',1.26,'23万','10.09万');
-        //     _field4.y = 120+202*i;
-        //     this.bgCourtWrap.addChild(_field4);
-        // }
-
-        // 左边其他用户 头像实例 ,（名字，头像，金币）,位置为数组中的随机一个{x=15,y=80+220*i} 
-        // for(let i=0;i<4;i++){
-        //     let userImg:userImage = new userImage('飞翔小七','https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4182536181,630612655&fm=173&s=EC7819C7026A2D1399FD589D0300C084&w=218&h=146&img.JPEG','23万');
-        //     userImg.x = 15;
-        //     userImg.y = 80+220*i;
-        //     console.log( userImg.y  )
-        //     this.bgCourtWrap.addChild(userImg);
-        // }
-        // // 右边其他用户 头像实例 ,（名字，头像，金币）,位置为数组中的随机一个{x=15,y=80+220*i} 
-        // for(let i=0;i<4;i++){
-        //     let userImg:userImage = new userImage('飞翔小七','https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4182536181,630612655&fm=173&s=EC7819C7026A2D1399FD589D0300C084&w=218&h=146&img.JPEG','23万');
-        //     userImg.x = Width-104;
-        //     userImg.y = 80+220*i;
-        //     console.log( userImg.y )
-        //     this.bgCourtWrap.addChild(userImg);
-        // }
-        //  自己的头像
-        // let myImg:userImage = new userImage('飞翔小七','https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4182536181,630612655&fm=173&s=EC7819C7026A2D1399FD589D0300C084&w=218&h=146&img.JPEG','23万');
-        // myImg.anchorOffsetX = 44;
-        // myImg.anchorOffsetY = 124;
-        // myImg.x = anWidth;
-        // myImg.y = this.bgCourtWrap.height;
-        // this.bgCourtWrap.addChild(myImg);
-
+    // 金币收起  main ==> cnt ==> fieldcontain
+    private cnt_collectCoin(){
+        this.fieldContain.collectCoin();
     }
 
     // 调研初始化场地
