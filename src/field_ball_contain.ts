@@ -461,11 +461,12 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 if( $store['allCoinObj'][allCoinKeys[i]] && $store['allCoinObj'][allCoinKeys[i]].coin_left ){
                     for( let j=0,len = $store['allCoinObj'][allCoinKeys[i]].coin_left.length ;j<len;j++ ){
                         $egret_Tween.get( $store['allCoinObj'][allCoinKeys[i]].coin_left[j] ).to( { 
-                            x:$store['allCoinObj'][allCoinKeys[i]].coin_left_local.x,
-                            y:$store['allCoinObj'][allCoinKeys[i]].coin_left_local.y 
-                            // x:15,
-                            // y:18 
-
+                            // x:$store['allCoinObj'][allCoinKeys[i]].coin_left_local.x,
+                            // y:$store['allCoinObj'][allCoinKeys[i]].coin_left_local.y 
+                            // x:window['store']['stage_anWidth'] ,
+                            // y: 1000 
+                            x:15 ,
+                            y: 80 
                         }, 200)
                     }
                 }
@@ -505,7 +506,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 //         this[allCoinKeys[i]].upRightCoinBg()
                 //         $store['allCoinObj'][allCoinKeys[i]].coin_right = [] ; // 回收
                 //     }
-
                 // }
             },200)
         }
