@@ -1,12 +1,12 @@
 // 点球
-class Penalty extends eui.UILayer {
+class Penalty02 extends eui.UILayer {
     public constructor(){
         super();
-        this.drawPenalty();
+        this.drawPenalty02();
     }
     private topTeam:eui.Image;
     private bottomTeam:eui.Image;
-    private drawPenalty(){
+    private drawPenalty02(){
         let bgPenalty:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-penalty_png'));
         this.addChild(bgPenalty);
 
@@ -33,11 +33,21 @@ class Penalty extends eui.UILayer {
         this.topTeam.y = 2;
         this.addChild(this.topTeam);
         this.topTeam.mask = bgMask;
+        //上边队伍点球情况
+        for(var i=0;i<7;i++){
+            let penaltyIn = this.drawIn();
+            penaltyIn.x = 123+i*44;     //x坐标[123,167,211,255,299,343,387]
+            penaltyIn.y = 1;
+            this.addChild(penaltyIn);
+        }
+        let penaltyWin = this.drawWin();
+        penaltyWin.x = 421;
+        penaltyWin.y = 1;
+        // penaltyWin.y = 36;
+        this.addChild(penaltyWin);
 
 
-
-
-        // // 插入遮罩层
+        //插入遮罩层
         let bgMask02:egret.Bitmap = new egret.Bitmap(RES.getRes('penalty-mask_png'));
         bgMask02.x = 72;
         bgMask02.y = 30;
@@ -51,5 +61,26 @@ class Penalty extends eui.UILayer {
         this.bottomTeam.y = 30;
         this.addChild(this.bottomTeam);
         this.bottomTeam.mask = bgMask02;
+
+        //下边队伍点球情况
+        for(var i=0;i<7;i++){
+            let penaltyOut = this.drawOut();
+            penaltyOut.x = 123+i*44;
+            penaltyOut.y = 34;
+            this.addChild(penaltyOut);
+        }
+    }
+
+    private drawIn(){
+        let img:egret.Bitmap = new egret.Bitmap(RES.getRes('penalty-in_png'));
+        return img;
+    }
+    private drawOut(){
+        let img:egret.Bitmap = new egret.Bitmap(RES.getRes('penalty-out_png'));
+        return img;
+    }
+    private drawWin(){
+        let img:egret.Bitmap = new egret.Bitmap(RES.getRes('penalty-win_png'));
+        return img;
     }
 }
