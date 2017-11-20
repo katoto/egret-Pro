@@ -137,10 +137,11 @@ class Main extends egret.DisplayObjectContainer {
      * Create a game scene
      */
     private createGameScene() {
-        this.Width = window['store']['stage_Width'] = this.stage.stageWidth;
-        this.Height = window['store']['stage_Height'] = this.stage.stageHeight;
-        this.anWidth = window['store']['stage_anWidth'] = this.Width/2;
-        const anHeight =  window['store']['stage_anHeight'] = this.Height/2;
+        let $store = window['store'];
+        this.Width = $store['stage_Width'] = this.stage.stageWidth;
+        this.Height = $store['stage_Height'] = this.stage.stageHeight;
+        this.anWidth = $store['stage_anWidth'] = this.Width/2;
+        const anHeight =  $store['stage_anHeight'] = this.Height/2;
 
 
         // let sky = this.createBitmapByName("btn-500_png");
@@ -203,7 +204,6 @@ class Main extends egret.DisplayObjectContainer {
 
 
         this.initStage();
-        console.log( window['store'] )
         
         // websocket
         try{
@@ -212,13 +212,16 @@ class Main extends egret.DisplayObjectContainer {
             this.webSocket.addEventListener( egret.Event.CONNECT ,this.onSocketOpen ,this );
             this.webSocket.addEventListener( egret.IOErrorEvent.IO_ERROR ,this.onIOError ,this );
             this.webSocket.addEventListener( egret.Event.CLOSE ,this.onCloseSock ,this );
-            this.webSocket.connectByUrl("ws://192.168.81.240:9777/ws?uid=1002920");
-            console.log( window['urlData'] )
+            if( $store['env_variable'].uid ){
+                this.webSocket.connectByUrl("ws://192.168.81.240:9777/ws?uid="+ $store['env_variable'].uid );
+            }else{
+                this.webSocket.connectByUrl("ws://192.168.81.240:9777/ws?uid=1002900");
+                console.error('uid null at main.ts 219 1002900')
+            }
 
         }catch(e){
             alert('websock error')
         }
-
     }
 
     /**
@@ -253,7 +256,7 @@ class Main extends egret.DisplayObjectContainer {
         }else{
             $store['env_variable'].platform =egret.localStorage.getItem('platform'); 
         }
-        
+
         // 头像随机的位置
         $store['userPosition'] = window['randomArray']( 9 );
 
@@ -345,13 +348,19 @@ class Main extends egret.DisplayObjectContainer {
      *  onSocketOpen  websock 接收消息
      */
     private onSocketOpen():void{
+        let $store = window['store'];
+        let uid = '1002900'  // default
         this.stage.removeChild(this.loadingView);
         
+        if( $store['env_variable'].uid ){
+            uid = $store['env_variable'].uid
+        }
+
         var start = {
             "msg_type":"user_join",
             "msg_id":"225",
             "data":{
-                "uid":"1002920"
+                "uid": uid ,
             }               
         }
         this.webSocket.writeUTF(JSON.stringify(start))
