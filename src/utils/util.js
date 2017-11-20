@@ -1,4 +1,21 @@
-
+/**
+ *  用户信息的提取 
+ *  @param 
+ */
+var urlData = (function () {
+    var obj = {},
+        deseg = window.location.search,
+        seg = deseg.replace(/^\?/, '').split('&'),
+        len = seg.length, i = 0, s;
+    for (; i < len; i++) {
+        if (!seg[i]) {
+            continue;
+        }
+        s = seg[i].split('=');
+        obj[s[0]] = s[1];
+    }
+    return obj;
+})();
 /**
  *  洗牌算法，取8个随机数组
  *  @param len 随机数组长度

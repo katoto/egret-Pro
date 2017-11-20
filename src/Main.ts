@@ -184,8 +184,6 @@ class Main extends egret.DisplayObjectContainer {
         // this.addChild(this.pop);
         
 
-        
-
 
 
         // 层级控制
@@ -214,7 +212,8 @@ class Main extends egret.DisplayObjectContainer {
             this.webSocket.addEventListener( egret.Event.CONNECT ,this.onSocketOpen ,this );
             this.webSocket.addEventListener( egret.IOErrorEvent.IO_ERROR ,this.onIOError ,this );
             this.webSocket.addEventListener( egret.Event.CLOSE ,this.onCloseSock ,this );
-            this.webSocket.connectByUrl("ws://192.168.76.9:9777/ws?uid=1002920");
+            this.webSocket.connectByUrl("ws://192.168.81.240:9777/ws?uid=1002920");
+            console.log( window['urlData'] )
         }catch(e){
             alert('websock error')
         }
@@ -230,7 +229,17 @@ class Main extends egret.DisplayObjectContainer {
         // 桌子缩放计算 
         window['store'].scale = 0.91;
         // 取ck 按src+ck 的形式，防止串号
-        window['store']['orderObj'].ck = egret.localStorage.getItem('ck');
+        if( window['urlData'] && window['urlData'].ck ){
+            window['store']['orderObj'].ck = window['urlData'].ck ;
+        }else{
+            window['store']['orderObj'].ck = egret.localStorage.getItem('ck');
+        }
+
+        // if( window['urlData'] && window['urlData'].ck ){
+        //     window['store']['orderObj'].ck = window['urlData'].ck ;
+        // }else{
+        //     window['store']['orderObj'].ck = egret.localStorage.getItem('ck');
+        // }
         // platform
         window['store']['platform'] = egret.localStorage.getItem('platform'); 
         // 头像随机的位置
@@ -240,7 +249,6 @@ class Main extends egret.DisplayObjectContainer {
         this.cnt.initUserImg();
         //  场地容器 实例对象
         
-
 
     }
 
