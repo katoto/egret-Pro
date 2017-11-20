@@ -221,13 +221,14 @@ class Main extends egret.DisplayObjectContainer {
             alert('websock error')
         }
 
-
     }
 
     /**
      * 常用数据初始化
      */
     private initStage(){
+        // uid  还得有个uid ..
+
         // 桌子缩放计算 
         window['store'].scale = 0.91;
         // 取ck 按src+ck 的形式，防止串号
@@ -239,6 +240,9 @@ class Main extends egret.DisplayObjectContainer {
 
         //  用户头像的9个 实例对象 
         this.cnt.initUserImg();
+        //  场地容器 实例对象
+        
+
 
     }
 
@@ -291,6 +295,7 @@ class Main extends egret.DisplayObjectContainer {
                             window['store'].matches =  msgObj.body.matches;
                             //  初始化场地容器 数据
                             this.cnt.initFieldCon();
+                            // this.cnt.initFieldCon();
                         }
                     }
                     ;break;
@@ -308,36 +313,7 @@ class Main extends egret.DisplayObjectContainer {
                 break;
         
             }
-            // var i = 0;
-            // setInterval(() => {
-            //     var obj = { 
-            //         "username": "游客_2867477",
-            //         "photo": "https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg",
-            //         "total": i+'202422',
-            //         "uid": "1003118"+i
-            //      }
-            //     i = i+1 ;
-            //     // 加用户
-            //     this.cnt.addUserImage( obj.username, obj.photo ,obj.total , obj.uid );
-            // },5000)
 
-
-            // var j =0 ;
-            // setInterval(() => {
-            //     console.log('user out')
-            //     // "uid": "1003118"+ j
-            //     var obj = { 
-            //         "uid": "1003118"+ j
-            //      }
-            //      j = j+1;
-            //     // 删除用户
-            //     // console.log( obj.uid )
-            //     if( this.cnt ){
-            //         this.cnt.removeUserImage( obj.uid );
-            //     }
-            // },10000)
-
-            // console.log( this.cnt )
         }
 
     }
@@ -357,7 +333,7 @@ class Main extends egret.DisplayObjectContainer {
         this.webSocket.writeUTF(JSON.stringify(start))
 
         // this.webSocket.writeUTF('x')
-        
+
         this.webSocket.flush();
     }
 
@@ -374,7 +350,6 @@ class Main extends egret.DisplayObjectContainer {
     private onCloseSock():void{
         
     }
-
 
 }
 

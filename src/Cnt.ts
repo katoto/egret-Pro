@@ -151,9 +151,23 @@ class Cnt extends egret.DisplayObjectContainer{
 
     // 调研初始化场地
     private initFieldCon(){
-        // this.fieldContain.initField();
+        this.fieldContain.initFieldMsg();
     }
 
+    // 放入4个场地
+    private addFieldtWrap4(){
+        this.fieldContain.addcourtWrap4();
+    }
+    // 放入2个场地
+    private addFieldtWrap2(){
+        this.fieldContain.addcourtWrap2();
+    }
+    // 放入1个场地
+    private addFieldtWrap1(){
+        this.fieldContain.addcourtWrap1();
+    }
+
+    //  容器 new
     private initUserImg(){
         for( let i=0;i<9;i++ ){
             var choseUserImg = 'userImg'+(i+1)
@@ -174,7 +188,7 @@ class Cnt extends egret.DisplayObjectContainer{
         }
     }
 
-    //  初始的用户信息
+    //  初始的用户信息  new
     private initUserMsg(){
         let len = window['store']['user_info'].length
         if( !len || len === undefined){
@@ -211,7 +225,7 @@ class Cnt extends egret.DisplayObjectContainer{
         }
     }
 
-    // 用户 进入
+    // 用户 进入  new
     private addUserImage( username:string , photo:string , total:string , uid:string ){
         var userI = window['store']['emptyUserPosition'].shift() ;
         console.log( userI )
@@ -223,7 +237,7 @@ class Cnt extends egret.DisplayObjectContainer{
         var choseUserImg = 'userImg' + ( userI+1 )
         console.log( choseUserImg )
         if( photo === '' ){
-            photo = 'https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=4182536181,630612655&fm=173&s=EC7819C7026A2D1399FD589D0300C084&w=218&h=146&img.JPEG'
+            photo = 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=547138142,3998729701&fm=27&gp=0.jpg'
         }
 
         if( this[choseUserImg] ){
@@ -237,7 +251,7 @@ class Cnt extends egret.DisplayObjectContainer{
         // this.bgCourtWrap.setChildIndex( this.fieldContain  , this.bgCourtWrap.getChildIndex( this[choseUserImg] ))    
 
     }
-    // 用户 离开 
+    // 用户 离开  new
     private removeUserImage( uid:string ){
         var delIndex = 0;
 
