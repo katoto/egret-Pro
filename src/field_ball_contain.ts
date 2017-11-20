@@ -414,10 +414,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
     }
     async field_1Evt( e:egret.TouchEvent ){
         let x = e.localX + 133;
-        let y = e.localY + 700;
+        let y = e.localY + 322;
         let $store = window['store'];
         let currBtnNumber = $store['curr_btn_coin']
-        if( y>230 && y <440 ){
+        if( y>352 && y <650 ){
             await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
                 // 更新 自己头像 金币   下单之后
                 window['store']['userMySelf'].setMyGold('345');
@@ -427,8 +427,8 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 window['Object'].assign($store['allCoinObj'] ,{ 'field1':{
                         coin_left:[],
                         coin_right:[],
-                        coin_left_local:{ x:214 ,y:754 },
-                        coin_right_local:{ x:496 ,y:754 }
+                        coin_left_local:{ x:214 ,y:330 },
+                        coin_right_local:{ x:458 ,y:330 }
                     }
                 })
             }
