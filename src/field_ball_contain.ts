@@ -465,8 +465,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                             // y:$store['allCoinObj'][allCoinKeys[i]].coin_left_local.y 
                             // x:window['store']['stage_anWidth'] ,
                             // y: 1000 
-                            x:15 ,
-                            y: 80 
+                            // x: 41 ,   //+46    +584
+                            // y: 152   //+72
+                             x:584,
+                             y:152
                         }, 200)
                     }
                 }

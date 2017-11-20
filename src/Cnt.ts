@@ -99,7 +99,7 @@ class Cnt extends egret.DisplayObjectContainer{
 
         let penalty = new Penalty();
         penalty.y = 100;
-        this.bgCourtWrap.addChild(penalty);
+        // this.bgCourtWrap.addChild(penalty);
 
     }
 
