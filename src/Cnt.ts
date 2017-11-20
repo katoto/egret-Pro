@@ -97,11 +97,75 @@ class Cnt extends egret.DisplayObjectContainer{
         this.fieldContain = new Field_ball_contain();
         this.bgCourtWrap.addChild(this.fieldContain);
 
-        let penalty = new Penalty();
-        penalty.y = 100;
-        // this.bgCourtWrap.addChild(penalty);
 
+        //决赛的开奖-点球
+        // 插入遮罩层,正常进球和点球要分开两个遮罩
+        // let bgMask01 = this.bgMask();
+        // bgMask01.anchorOffsetX = 245;
+        // bgMask01.x = window['store'].stage_anWidth;
+        // bgMask01.y = 265;  
+        // this.bgCourtWrap.addChild(bgMask01);
+
+        // let bgMask02 = this.bgMask();
+        // bgMask02.anchorOffsetX = 245;
+        // bgMask02.x = window['store'].stage_anWidth;
+        // bgMask02.y = 265;  
+        // this.bgCourtWrap.addChild(bgMask02);
+
+        // //正常进球
+        // let penalty01 = new Penalty01();
+        // penalty01.anchorOffsetX = 245;
+        // penalty01.x = window['store'].stage_anWidth;
+        // penalty01.y = 323;  //决赛265   +58  
+        // penalty01.mask = bgMask01;
+        // this.bgCourtWrap.addChild(penalty01);
+        // setTimeout(()=>{
+        //     egret.Tween.get( penalty01 ).to( {y:265 },200 );
+        // },3000)
+
+        // setTimeout(()=>{
+        //     egret.Tween.get( penalty01 ).to( {y:107 },200 );
+        // },5000)
+
+        // //点球
+        // let penalty02 = new Penalty02();
+        // penalty02.anchorOffsetX = 245;
+        // penalty02.x = window['store'].stage_anWidth;
+        // penalty02.y = 323;  //决赛265   +58  
+        // penalty02.mask = bgMask02;
+        // this.bgCourtWrap.addChild(penalty02);
+        // setTimeout(()=>{
+        //     egret.Tween.get( penalty02 ).to( {y:265 },200 );
+        // },5000)
+
+         
+
+
+        
     }
+
+
+    private bgMask(){
+        let bgMask:egret.Bitmap = new egret.Bitmap(RES.getRes('penaltyWrap-mask_png'));
+        return bgMask;
+    }
+
+    // 金币发出  main ==> cnt ==> fieldcontain  
+    //  自己 是 0 
+    // 
+    private cnt_sendEndCoin( uid:string , msg:string ){
+
+        let delIndex = -1 ;
+        let startString = 'field41_l'
+        for( var i=0 ,len = window['store']['userPositionID'].length;i<len;i++){
+            if( window['store']['userPositionID'][i] === uid ){
+                delIndex = i;
+                break;
+            }
+        }
+        this.fieldContain.sendEndCoin( startString , delIndex.toString() )
+    }
+
 
     // 金币收起  main ==> cnt ==> fieldcontain
     private cnt_collectCoin(){
@@ -164,6 +228,7 @@ class Cnt extends egret.DisplayObjectContainer{
             }
             if( window['store']['user_info'][i].uid ){
                 window['store']['userPositionID'].push( window['store']['user_info'][i].uid )
+                // window['store']['userPositionLocal'][window['store']['user_info'][i].uid] = 
             }else{
                 console.error( 'websock 无uid' )
             }
@@ -212,7 +277,6 @@ class Cnt extends egret.DisplayObjectContainer{
     }
     // 用户 离开  new
     private removeUserImage( uid:string ){
-
         var delIndex = 0;
         for( var i=0 ,len = window['store']['userPositionID'].length;i<len;i++){
             if( window['store']['userPositionID'][i] === uid ){
@@ -228,7 +292,7 @@ class Cnt extends egret.DisplayObjectContainer{
         if( delIndex ){
             let choseUserImg = 'userImg'+ ( delIndex) ;
             // 更新数组
-            window['store']['userPositionID'].splice( delIndex -1 , 1 );
+            window['store']['userPositionID'].splice( delIndex - 1 , 1 );
             window['store']['emptyUserPosition'].push( delIndex );
 
             console.log( delIndex )
@@ -237,8 +301,6 @@ class Cnt extends egret.DisplayObjectContainer{
             if( this.bgCourtWrap && this[choseUserImg] ){
                 this.bgCourtWrap.removeChild(this[choseUserImg]);
             }
-
         }
-        
     }
 }

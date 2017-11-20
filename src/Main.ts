@@ -334,13 +334,12 @@ class Main extends egret.DisplayObjectContainer {
                 break;
         
             }
-            // setInterval(()=>{
-            //     console.log('收起金币 测试 ok')
-            //     this.cnt.cnt_collectCoin()
-
-
-
-            // },5000)
+            setInterval(()=>{
+                console.log('收起金币 测试 ok')
+                // this.cnt.cnt_collectCoin()
+                this.cnt.cnt_sendEndCoin( '1002999','' )
+                this.cnt.cnt_sendEndCoin( '1002988','' )
+            },5000)
         }
     }
     
@@ -402,6 +401,7 @@ window['store'] = {
     scale: 1,  // 桌子缩放
     userPosition:[],  //  随机数组
     userPositionID:[],  // 头像的uid
+    userPositionLocal:{},  // 维护一套 位置，为了金币分发
     emptyUserPosition:[],  // 空闲的位置
     user_info:[],
     curr_btn_coin:null,
@@ -452,36 +452,28 @@ window['store'] = {
     },
     // 收集金币的坐标集合 （分发金币的start）
     coin_local:{
-        field41:{
-            coin_l:{ x:214 ,y:128 },
-            coin_r:{ x:458 ,y:128 }
-        },
-        field42:{
-            coin_l:{ x:214 ,y:328 },
-            coin_r:{ x:458 ,y:328 }
-        },
-        field43:{
-            coin_l:{ x:214 ,y:528 },
-            coin_r:{ x:458 ,y:528 }
-        },       
-        field44:{
-            coin_l:{ x:214 ,y:728 },
-            coin_r:{ x:458 ,y:728 }
-        },  
-        field21:{
-            coin_l:{ x:214 ,y:192 },
-            coin_r:{ x:458 ,y:192 }  
-        },
-        field22:{
-            coin_l:{ x:214 ,y:566 },
-            coin_r:{ x:458 ,y:566 }  
-        },    
-        field1:{
-            coin_l:{ x:214 ,y:330 },
-            coin_r:{ x:458 ,y:330 } 
-        }
-    },
+        field41_l:{ x:214 ,y:128 },
+        field41_r:{ x:458 ,y:128 },
 
+        field42_l:{ x:214 ,y:328 },
+        field42_r:{ x:458 ,y:328 },
+
+        field43_l:{ x:214 ,y:528 },
+        field43_r:{ x:458 ,y:528 },
+
+        field44_l:{ x:214 ,y:728 },
+        field44_r:{ x:458 ,y:728 },
+
+        field21_l:{ x:214 ,y:192 },
+        field21_r:{ x:458 ,y:192 },
+
+        field22_l:{ x:214 ,y:566 },
+        field22_r:{ x:458 ,y:566 },
+  
+        field1_l:{ x:214 ,y:330 },
+        field1_r:{ x:458 ,y:330 }
+
+    },
     userPositionObj:[
         //  位置坐标    
         {
