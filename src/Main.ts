@@ -214,6 +214,7 @@ class Main extends egret.DisplayObjectContainer {
             this.webSocket.addEventListener( egret.Event.CLOSE ,this.onCloseSock ,this );
             this.webSocket.connectByUrl("ws://192.168.81.240:9777/ws?uid=1002920");
             console.log( window['urlData'] )
+
         }catch(e){
             alert('websock error')
         }
