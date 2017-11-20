@@ -155,15 +155,9 @@ class Cnt extends egret.DisplayObjectContainer{
     // 
     private cnt_sendEndCoin( uid:string , msg:string ){
 
-        let delIndex = -1 ;
         let startString = 'field41_l'
-        for( var i=0 ,len = window['store']['userPositionID'].length;i<len;i++){
-            if( window['store']['userPositionID'][i] === uid ){
-                delIndex = i;
-                break;
-            }
-        }
-        this.fieldContain.sendEndCoin( startString , delIndex.toString() )
+
+        this.fieldContain.sendEndCoin( startString , uid.toString() )
     }
 
 
@@ -228,7 +222,7 @@ class Cnt extends egret.DisplayObjectContainer{
             }
             if( window['store']['user_info'][i].uid ){
                 window['store']['userPositionID'].push( window['store']['user_info'][i].uid )
-                // window['store']['userPositionLocal'][window['store']['user_info'][i].uid] = 
+                window['store']['userPositionLocal'][window['store']['user_info'][i].uid] = ( i + 1 ) 
             }else{
                 console.error( 'websock 无uid' )
             }
@@ -257,6 +251,7 @@ class Cnt extends egret.DisplayObjectContainer{
             console.error('无空闲房间')
             return false;
         }
+        window['store']['userPositionLocal'][uid] = userI
         userI = userI - 1 ;
         var choseUserImg = 'userImg' + ( userI+1 )
         console.log( choseUserImg )
@@ -269,7 +264,7 @@ class Cnt extends egret.DisplayObjectContainer{
             window['formateGold'] ( total ) );
         }
 
-        window['store']['userPositionID'].splice( userI ,0 ,uid+'' );
+        window['store']['userPositionID'].splice( userI ,0 ,uid +'' );
         this.bgCourtWrap.addChild(this[choseUserImg]);
         // //  注意层级控制，不然事件会有问题 ！
         // this.bgCourtWrap.setChildIndex( this.fieldContain  , this.bgCourtWrap.getChildIndex( this[choseUserImg] ))    
@@ -293,6 +288,11 @@ class Cnt extends egret.DisplayObjectContainer{
             let choseUserImg = 'userImg'+ ( delIndex) ;
             // 更新数组
             window['store']['userPositionID'].splice( delIndex - 1 , 1 );
+
+            if( window['store']['userPositionLocal'][uid] ){
+                window['store']['userPositionLocal'][uid] = null ;
+            }
+
             window['store']['emptyUserPosition'].push( delIndex );
 
             console.log( delIndex )

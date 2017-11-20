@@ -519,15 +519,15 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
      * 
      * 标识
      */
-    private sendEndCoin( start:string , endNum:string ){
+    private sendEndCoin( start:string , uid:string ){
         let goldArr = [];
         let $store = window['store'];
         let newEndNum = null;
         let newEndLocal_x = null;
         let newEndLocal_y = null;
 
-        if( endNum === '-1'){
-            console.error('sendEndCoin error endNum = -1 no find uid');
+        if( !uid || !( $store['userPositionLocal'][uid] )){
+            console.error('sendEndCoin error  no find uid');
             return false ;
         }
 
@@ -543,13 +543,14 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         }
 
 
-        if( endNum === '0'){
+        if( $store['userPositionLocal'][uid] && $store['userPositionLocal'][uid] === '1'){
             $store['userPositionObj'][0].x = $store['stage_anWidth'] ;
             $store['userPositionObj'][0].y = 1000
         }
 
         //  取到随机的位置
-        newEndNum = $store['userPosition'][endNum] - 1;
+        console.log( $store['userPosition'][$store['userPositionLocal'][uid] -1] )
+        newEndNum = $store['userPosition'][$store['userPositionLocal'][uid] - 1] - 1  ;
 
         // x: 41 ,   //+46    +584
         // y: 152   //+72
