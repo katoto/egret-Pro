@@ -212,8 +212,8 @@ class Cnt extends egret.DisplayObjectContainer{
     }
     // 用户 离开  new
     private removeUserImage( uid:string ){
-        var delIndex = 0;
 
+        var delIndex = 0;
         for( var i=0 ,len = window['store']['userPositionID'].length;i<len;i++){
             if( window['store']['userPositionID'][i] === uid ){
                 delIndex = i;
@@ -230,10 +230,15 @@ class Cnt extends egret.DisplayObjectContainer{
             // 更新数组
             window['store']['userPositionID'].splice( delIndex -1 , 1 );
             window['store']['emptyUserPosition'].push( delIndex );
+
+            console.log( delIndex )
+            console.log(  window['store']['userPosition'][delIndex -1 ] )
+
             if( this.bgCourtWrap && this[choseUserImg] ){
                 this.bgCourtWrap.removeChild(this[choseUserImg]);
             }
 
         }
+        
     }
 }

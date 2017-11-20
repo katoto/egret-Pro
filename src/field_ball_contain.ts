@@ -198,7 +198,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
             // this[fieldStr].upLeftMyMoney('324'+i)
             // this[fieldStr].upRightMyMoney('31'+i)
-
         let x = e.localX + 133;
         let y = e.localY + 120;
         let $store = window['store'];
@@ -463,12 +462,14 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         $egret_Tween.get( $store['allCoinObj'][allCoinKeys[i]].coin_left[j] ).to( { 
                             // x:$store['allCoinObj'][allCoinKeys[i]].coin_left_local.x,
                             // y:$store['allCoinObj'][allCoinKeys[i]].coin_left_local.y 
+
                             // x:window['store']['stage_anWidth'] ,
                             // y: 1000 
                             // x: 41 ,   //+46    +584
                             // y: 152   //+72
                              x:584,
                              y:152
+                             
                         }, 200)
                     }
                 }

@@ -334,13 +334,13 @@ class Main extends egret.DisplayObjectContainer {
                 break;
         
             }
-            setInterval(()=>{
-                console.log('收起金币 测试 ok')
-                this.cnt.cnt_collectCoin()
+            // setInterval(()=>{
+            //     console.log('收起金币 测试 ok')
+            //     this.cnt.cnt_collectCoin()
 
 
 
-            },5000)
+            // },5000)
         }
     }
     
@@ -387,49 +387,49 @@ class Main extends egret.DisplayObjectContainer {
 }
 
 window['store'] = {
-    'stage_Width': null ,
-    'stage_Height': null ,
-    'stage_anWidth': null ,
-    'stage_anHeight': null ,
+    stage_Width: null ,
+    stage_Height: null ,
+    stage_anWidth: null ,
+    stage_anHeight: null ,
 
-    'env_variable':{ // 查询当前的环境变量
+    env_variable:{ // 查询当前的环境变量
         src : null ,
         ck : null ,
         uid : null ,
         platform : null ,
     },
 
-    'scale': 1,  // 桌子缩放
-    'userPosition':[],  //  随机数组
-    'userPositionID':[],  // 头像的uid
-    'emptyUserPosition':[],  // 空闲的位置
-    'user_info':[],
-    'curr_btn_coin':null,
-    'curr_btn_arr':[],
-    'coin_arr':[], // 为了收起
-    'userMySelf':null,  // 自己的实例便于修改自身金币
-    'orderObj':{
+    scale: 1,  // 桌子缩放
+    userPosition:[],  //  随机数组
+    userPositionID:[],  // 头像的uid
+    emptyUserPosition:[],  // 空闲的位置
+    user_info:[],
+    curr_btn_coin:null,
+    curr_btn_arr:[],
+    coin_arr:[], // 为了收起
+    userMySelf:null,  // 自己的实例便于修改自身金币
+    orderObj:{
         // 下单
-        'ck':null,
-        'golds':null,
-        'matchid':null,
-        'expect':null,
-        'odds':null,
-        'homeid':null,
-        'awayid':null,
-        'stageid':null,
-        'selection':null,
-        'roomid':null,
-        'node':null,
+        ck:null,
+        golds:null,
+        matchid:null,
+        expect:null,
+        odds:null,
+        homeid:null,
+        awayid:null,
+        stageid:null,
+        selection:null,
+        roomid:null,
+        node:null,
     },
-    'matches':[],  // 赛事信息
+    matches:[],  // 赛事信息
 
-    'commit':function(key,val){
+    commit:function(key,val){
         console.log(key)
         console.log(val)
     },
     // 冠军记录
-    'recording':[
+    recording:[
         {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
         {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
         {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
@@ -450,7 +450,39 @@ window['store'] = {
         //     coin_right_local:{ x:null ,y:null }
         // }
     },
-    'userPositionObj':[
+    // 收集金币的坐标集合 （分发金币的start）
+    coin_local:{
+        field41:{
+            coin_l:{ x:214 ,y:128 },
+            coin_r:{ x:458 ,y:128 }
+        },
+        field42:{
+            coin_l:{ x:214 ,y:328 },
+            coin_r:{ x:458 ,y:328 }
+        },
+        field43:{
+            coin_l:{ x:214 ,y:528 },
+            coin_r:{ x:458 ,y:528 }
+        },       
+        field44:{
+            coin_l:{ x:214 ,y:728 },
+            coin_r:{ x:458 ,y:728 }
+        },  
+        field21:{
+            coin_l:{ x:214 ,y:192 },
+            coin_r:{ x:458 ,y:192 }  
+        },
+        field22:{
+            coin_l:{ x:214 ,y:566 },
+            coin_r:{ x:458 ,y:566 }  
+        },    
+        field1:{
+            coin_l:{ x:214 ,y:330 },
+            coin_r:{ x:458 ,y:330 } 
+        }
+    },
+
+    userPositionObj:[
         //  位置坐标    
         {
             'x':null,
