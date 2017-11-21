@@ -198,7 +198,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
             // this[fieldStr].upLeftMyMoney('324'+i)
             // this[fieldStr].upRightMyMoney('31'+i)
-
         let x = e.localX + 133;
         let y = e.localY + 120;
         let $store = window['store'];
@@ -214,8 +213,8 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 window['Object'].assign($store['allCoinObj'] ,{ 'field41':{
                         coin_left:[],
                         coin_right:[],
-                        coin_left_local:{ x:214 ,y:128 },
-                        coin_right_local:{ x:458 ,y:128 }
+                        coin_left_local: $store['coin_local']['field41_l'] ,
+                        coin_right_local: $store['coin_local']['field41_r']
                     }
                 })
             }
@@ -251,8 +250,8 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 window['Object'].assign($store['allCoinObj'] ,{ 'field42':{
                         coin_left:[],
                         coin_right:[],
-                        coin_left_local:{ x:214 ,y:328 },
-                        coin_right_local:{ x:458 ,y:328 }
+                        coin_left_local: $store['coin_local']['field42_l'] ,
+                        coin_right_local: $store['coin_local']['field42_r']
                     }
                 })
             }
@@ -287,8 +286,8 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 window['Object'].assign($store['allCoinObj'] ,{ 'field43':{
                         coin_left:[],
                         coin_right:[],
-                         coin_left_local:{ x:214 ,y:528 },
-                        coin_right_local:{ x:458 ,y:528 }
+                        coin_left_local: $store['coin_local']['field43_l'] ,
+                        coin_right_local: $store['coin_local']['field43_r']
                     }
                 })
             }
@@ -323,8 +322,8 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 window['Object'].assign($store['allCoinObj'] ,{ 'field44':{
                         coin_left:[],
                         coin_right:[],
-                        coin_left_local:{ x:214 ,y:728 },
-                        coin_right_local:{ x:458 ,y:728 }
+                        coin_left_local: $store['coin_local']['field44_l'] ,
+                        coin_right_local: $store['coin_local']['field44_r']
                     }
                 })
             }
@@ -359,8 +358,8 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 window['Object'].assign($store['allCoinObj'] ,{ 'field21':{
                         coin_left:[],
                         coin_right:[],
-                        coin_left_local:{ x:214 ,y:192 },
-                        coin_right_local:{ x:458 ,y:192 }
+                        coin_left_local: $store['coin_local']['field21_l'],
+                        coin_right_local: $store['coin_local']['field21_r']
                     }
                 })
             }
@@ -394,8 +393,8 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 window['Object'].assign($store['allCoinObj'] ,{ 'field22':{
                         coin_left:[],
                         coin_right:[],
-                        coin_left_local:{ x:214 ,y:566 },
-                        coin_right_local:{ x:458 ,y:566 }
+                        coin_left_local: $store['coin_local']['field22_l'] ,
+                        coin_right_local: $store['coin_local']['field22_r']
                     }
                 })
             }
@@ -427,8 +426,8 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 window['Object'].assign($store['allCoinObj'] ,{ 'field1':{
                         coin_left:[],
                         coin_right:[],
-                        coin_left_local:{ x:214 ,y:330 },
-                        coin_right_local:{ x:458 ,y:330 }
+                        coin_left_local: $store['coin_local']['field1_l'],
+                        coin_right_local: $store['coin_local']['field1_r']
                     }
                 })
             }
@@ -461,14 +460,14 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 if( $store['allCoinObj'][allCoinKeys[i]] && $store['allCoinObj'][allCoinKeys[i]].coin_left ){
                     for( let j=0,len = $store['allCoinObj'][allCoinKeys[i]].coin_left.length ;j<len;j++ ){
                         $egret_Tween.get( $store['allCoinObj'][allCoinKeys[i]].coin_left[j] ).to( { 
-                            // x:$store['allCoinObj'][allCoinKeys[i]].coin_left_local.x,
-                            // y:$store['allCoinObj'][allCoinKeys[i]].coin_left_local.y 
+                            x:$store['allCoinObj'][allCoinKeys[i]].coin_left_local.x,
+                            y:$store['allCoinObj'][allCoinKeys[i]].coin_left_local.y 
                             // x:window['store']['stage_anWidth'] ,
                             // y: 1000 
                             // x: 41 ,   //+46    +584
                             // y: 152   //+72
-                             x:584,
-                             y:152
+                            //  x:584,
+                            //  y:152
                         }, 200)
                     }
                 }
@@ -513,20 +512,103 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         }
     }
 
-    private tween_Coin( stage_x:Number ,stage_y:Number ,currArr:any ){
-        /**
-         *  创建 金币 并执行动画  (报错对应的对象 ，为收集金币做处理 )
-         *  currArr 报错金币
-         *  金币的场次id 比赛id 金币的额度， 金币的来源。。。。。好像很多
-         */
+    /**
+     *  分发金币  一个 
+     *  @param  start coin_local 坐标
+     *  @param  end 通过uid 找出的位置 userPositionObj  坐标 
+     * 
+     * 标识
+     */
+    private sendEndCoin( start:string , uid:string ){
+        let goldArr = [];
+        let $store = window['store'];
+        let newEndNum = null;
+        let newEndLocal_x = null;
+        let newEndLocal_y = null;
+
+        if( !uid || !( $store['userPositionLocal'][uid] )){
+            console.error('sendEndCoin error  no find uid');
+            return false ;
+        }
+
+        for( let i=0;i<4; i++ ){
+
             let gold = new Gold();
             gold.anchorOffsetX = gold.width/2;
             gold.anchorOffsetY = gold.height/2;
-            gold.x = window['store']['stage_anWidth'];
-            gold.y = 1000;
-            currArr.push( gold )
+            gold.x = $store['coin_local'][start].x ;
+            gold.y = $store['coin_local'][start].y ;
+            goldArr.push( gold );
             this.addChild(gold);
-            egret.Tween.get( gold ).to( { x:stage_x,y:stage_y },200 )
+        }
+
+
+        if( $store['userPositionLocal'][uid] && $store['userPositionLocal'][uid] === '1'){
+            $store['userPositionObj'][0].x = $store['stage_anWidth'] ;
+            $store['userPositionObj'][0].y = 1000
+        }
+
+        //  取到随机的位置
+        console.log( $store['userPosition'][$store['userPositionLocal'][uid] -1] )
+        newEndNum = $store['userPosition'][$store['userPositionLocal'][uid] - 1] - 1  ;
+
+        // x: 41 ,   //+46    +584
+        // y: 152   //+72
+
+        if(newEndNum <=4){
+            newEndLocal_x = $store['userPositionObj'][newEndNum].x + 46;
+        }else{
+            newEndLocal_x = $store['userPositionObj'][newEndNum].x + 584;
+        }
+        newEndLocal_y =  $store['userPositionObj'][newEndNum].y + 72;
+
+        setTimeout(()=>{
+            egret.Tween.get( goldArr[0] ).to({
+                x: newEndLocal_x ,
+                y: newEndLocal_y ,
+            }, 500 ).call(()=>{
+                if( goldArr[0] && goldArr[0].parent ){
+                    this.removeChild( goldArr[0] )
+                }
+            })
+            setTimeout(()=>{
+                egret.Tween.get( goldArr[1] ).to({
+                    x: newEndLocal_x ,
+                    y: newEndLocal_y ,
+                }, 500 ).call(()=>{
+                    if( goldArr[1] && goldArr[1].parent ){
+                        this.removeChild( goldArr[1] )
+                    }
+                })
+            },100)
+            setTimeout(()=>{
+                egret.Tween.get( goldArr[2] ).to({
+                    x: newEndLocal_x ,
+                    y: newEndLocal_y ,
+                }, 500 ).call(()=>{
+                    // 移除 。。 用户中奖展现 （自定义事件？）
+                    if( goldArr[2] && goldArr[2].parent ){
+                        this.removeChild( goldArr[2] )
+                    }
+                })
+            },250)
+        },0)
+    }
+
+    /**
+     *  创建 金币 并执行动画  ( 为收集金币做处理 )
+     *  currArr 报错金币
+     *  金币的场次id 比赛id 金币的额度， 金币的来源。。。。。好像很多
+     */
+    private tween_Coin( stage_x:Number ,stage_y:Number ,currArr:any ){
+        let gold = new Gold();
+        gold.anchorOffsetX = gold.width/2;
+        gold.anchorOffsetY = gold.height/2;
+        gold.x = window['store']['stage_anWidth'];
+        gold.y = 1000;
+        currArr.push( gold )
+        this.addChild(gold);
+        egret.Tween.get( gold ).to( { x:stage_x,y:stage_y },200 )
     }
 
     private courtWrap(){
