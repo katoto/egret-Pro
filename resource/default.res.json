@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "bg_jpg,description_json,btn-recharge_png,btn-past_png,rule_png,chat_png,pop-game_png,text-over_png,text-begin_png,back_png,bg-time_png,bg-court_png,bg-court4_png,team-01_jpg,team-02_jpg,bg-avatar_png,bg-textTips_png,btnOn_png,btn_png,gold_png,userimg_png,win_png,gold-items_png,bg-betting_png,bg-user_png,bg-item_png,bg-betting2_png,bg-item2_png,bg-user2_png,gold-items2_png,gold2_png,userimg2_png,win2_png,bg-border_png,gold-items02_png,pop-close_png,pop-02_png,bg-chat_png,bgChatClose_png,bg-court1_png,bg-court2_png,penalty-in_png,penalty-out_png,bg-penalty_png,penalty-mask_png,penalty-win_png,penaltyWrap-mask_png,penalty-time_png",
+			"keys": "bg_jpg,description_json,btn-recharge_png,btn-past_png,rule_png,chat_png,pop-game_png,text-over_png,text-begin_png,back_png,bg-time_png,bg-court_png,bg-court4_png,team-01_jpg,team-02_jpg,bg-avatar_png,bg-textTips_png,btnOn_png,btn_png,gold_png,userimg_png,win_png,gold-items_png,bg-betting_png,bg-user_png,bg-item_png,bg-betting2_png,bg-item2_png,bg-user2_png,gold-items2_png,gold2_png,userimg2_png,win2_png,bg-border_png,gold-items02_png,pop-close_png,pop-02_png,bg-chat_png,bgChatClose_png,bg-court1_png,bg-court2_png,penalty-in_png,penalty-out_png,bg-penalty_png,penalty-mask_png,penalty-win_png,penaltyWrap-mask_png,penalty-time_png,bg-myChat_png",
 			"name": "preload"
 		},
 		{
@@ -269,6 +269,11 @@
 			"name": "penalty-time_png",
 			"type": "image",
 			"url": "assets/penalty-time.png"
+		},
+		{
+			"name": "bg-myChat_png",
+			"type": "image",
+			"url": "assets/bg-myChat.png"
 		}
 	]
 }

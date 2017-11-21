@@ -92,7 +92,7 @@ class Main extends egret.DisplayObjectContainer {
             RES.loadGroup("preload");
         }
         if (event.groupName == "preload") {
-            // this.stage.removeChild(this.loadingView);
+            this.stage.removeChild(this.loadingView);
             RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
             RES.removeEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);
             RES.removeEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
@@ -349,7 +349,7 @@ class Main extends egret.DisplayObjectContainer {
     private onSocketOpen():void{
         let $store = window['store'];
         let uid = '1002900'  // default
-        this.stage.removeChild(this.loadingView);
+        // this.stage.removeChild(this.loadingView);
         
         if( $store['env_variable'].uid ){
             uid = $store['env_variable'].uid
