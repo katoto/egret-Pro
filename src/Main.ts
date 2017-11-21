@@ -180,7 +180,8 @@ class Main extends egret.DisplayObjectContainer {
 
         // 弹窗实例,竞猜开始or竞猜完毕
         // text-begin_png text-over_png
-        this.pop = new Pop(this.Width,this.Height,'text-begin_png');
+
+        // this.pop = new Pop(this.Width,this.Height,'text-begin_png');
         // this.addChild(this.pop);
         
 
@@ -202,6 +203,8 @@ class Main extends egret.DisplayObjectContainer {
         */
 
         this.initStage();
+
+        $store['this_main'] = this;
 
         // websocket
         try{
@@ -369,15 +372,17 @@ class Main extends egret.DisplayObjectContainer {
         
             }
             setTimeout(()=>{
-                console.log('收起金币 测试 ok')
+                // console.log('收起金币 测试 ok')
                 // this.cnt.cnt_collectCoin()
                 // this.cnt.cnt_sendEndCoin( '1002999','' )
                 // this.cnt.cnt_sendEndCoin( '1002988','' )
-                
-                this.cnt.cnt_upTextTips( '比赛开始' )
-                setTimeout(()=>{
-                    this.cnt.cnt_upTextTips( '' )
-                },1000)
+
+                // this.cnt.cnt_upTextTips( '比赛开始' )
+                // setTimeout(()=>{
+                //     this.cnt.cnt_upTextTips( '' )
+                // },1000)
+
+                this.cnt.cnt_timer('6')
 
             },5000)
         }
@@ -427,6 +432,9 @@ class Main extends egret.DisplayObjectContainer {
 }
 
 window['store'] = {
+
+    this_main: null ,
+
     stage_Width: null ,
     stage_Height: null ,
     stage_anWidth: null ,

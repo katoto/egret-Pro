@@ -25,8 +25,11 @@ class Cnt extends egret.DisplayObjectContainer{
     // 比赛容器
     private fieldContain
 
-    //  文字区域 开始 、 投注 、 结束
+    //  文字区域 开始 、 投注 、 结束 (放入 放出)
     private textT:TextTips ;
+
+    // 定时器
+    private timer:Timer ;
 
     private drawCnt(Width,Height,anWidth,anHeight){
         // 内容区
@@ -67,11 +70,11 @@ class Cnt extends egret.DisplayObjectContainer{
         this.bgCourtWrap.addChild(bgCourt);
 
         //倒计时
-        let timer:Timer = new Timer();
-        timer.anchorOffsetX = timer.width/2;
-        timer.x = anWidth;
-        timer.y = 0;
-        this.bgCourtWrap.addChild(timer);
+        this.timer = new Timer();
+        this.timer.anchorOffsetX = this.timer.width/2;
+        this.timer.x = anWidth;
+        this.timer.y = 0;
+        this.bgCourtWrap.addChild( this.timer );
 
         //文字说明区域
         this.textT = new TextTips();
@@ -131,6 +134,14 @@ class Cnt extends egret.DisplayObjectContainer{
         
     }
 
+
+    // timer 定时器
+    // main => cnt => Timer
+    private cnt_timer( setTime:string ){
+
+        this.timer['createTimer']( setTime );
+
+    }
 
     // 修改顶部文案
     // main => cnt => textTips
