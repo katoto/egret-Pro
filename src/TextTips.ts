@@ -2,6 +2,7 @@ class TextTips extends egret.DisplayObjectContainer{
     // 文字提示区域
     private textField:egret.TextField ;
     private wrap:egret.DisplayObjectContainer;
+    private bg:egret.Bitmap;
 
     public constructor(){
         super();
@@ -12,14 +13,16 @@ class TextTips extends egret.DisplayObjectContainer{
         this.wrap = new egret.DisplayObjectContainer();
         this.wrap.width = 231;
         this.wrap.height = 36; 
+        this.wrap.anchorOffsetX = 115 ;
         this.wrap.x = 0;
         this.wrap.y = 0;
-        this.addChild(this.wrap);
+        //  位置有点问题
+        // this.addChild(this.wrap);
         // 背景 
-        let bg:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-textTips_png'));
-        bg.x = 0;
-        bg.y = 0;
-        this.wrap.addChild(bg);
+        this.bg = new egret.Bitmap(RES.getRes('bg-textTips_png'));
+        this.bg.x = 0;
+        this.bg.y = 0;
+        this.wrap.addChild( this.bg );
         //文字
         this.textField = new egret.TextField();
         this.textField.textColor = 0x94d7bd;
@@ -30,25 +33,27 @@ class TextTips extends egret.DisplayObjectContainer{
         // text.verticalAlign = vAlign;
         this.textField.textAlign = egret.HorizontalAlign.CENTER;
         this.textField.verticalAlign = egret.VerticalAlign.MIDDLE;
+        this.wrap.addChild(this.textField);
+
     }
     /**
-     * 更新文案
+     * 更新文案  包含显示和隐藏
      */
     private upTextTips( tips:string ){
-        this.textField.text = tips ;
-    }
-    /**
-     *   显示
-     */
-    private addTextTips(){
-        this.wrap.addChild(this.textField);
-    }
-    /**
-     *  隐藏
-     */
-    private delTextTips(){
-        if( this.textField.parent ){
-            this.wrap.removeChild(this.textField);
+        
+        console.log(1234)
+        console.log(tips)
+        if(tips === ''){
+            if( this.wrap.parent ){
+                this.removeChild(this.wrap);
+            }
+
+        }else{
+            this.textField.text = tips ;
+            if( !this.wrap.parent ){
+                this.addChild(this.wrap);
+            }
         }
     }
+
 }

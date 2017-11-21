@@ -22,9 +22,11 @@ class Cnt extends egret.DisplayObjectContainer{
     private  userImg8:userImage
     private  userImg9:userImage
 
-
     // 比赛容器
     private fieldContain
+
+    //  文字区域 开始 、 投注 、 结束
+    private textT:TextTips ;
 
     private drawCnt(Width,Height,anWidth,anHeight){
         // 内容区
@@ -72,18 +74,12 @@ class Cnt extends egret.DisplayObjectContainer{
         this.bgCourtWrap.addChild(timer);
 
         //文字说明区域
-        let textT:TextTips = new TextTips();
-        textT.anchorOffsetX = textT.width/2;
-        textT.x = anWidth;
-        textT.y = 66;
-        this.bgCourtWrap.addChild(textT);
+        this.textT = new TextTips();
+        this.textT.anchorOffsetX = this.textT.width/2;
+        this.textT.x = anWidth;
+        this.textT.y = 66;
+        this.bgCourtWrap.addChild( this.textT );
 
-
-
-
-        //生成四个足球场，1/4比赛  485为小球场宽度，应该可以在构造函数里设置，需要优化
-        //参数分辨是 x,x，左边球队icon，队名，赔率，总投注，我的投注，右边~
-        //  http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1579.png
 
         this.fieldContain = new Field_ball_contain();
         this.bgCourtWrap.addChild(this.fieldContain);
@@ -135,6 +131,13 @@ class Cnt extends egret.DisplayObjectContainer{
         
     }
 
+
+    // 修改顶部文案
+    // main => cnt => textTips
+    private cnt_upTextTips( tips:string ){
+        console.log( tips )
+        this.textT['upTextTips']( tips )
+    }
 
     private bgMask(){
         let bgMask:egret.Bitmap = new egret.Bitmap(RES.getRes('penaltyWrap-mask_png'));

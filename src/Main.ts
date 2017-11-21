@@ -137,6 +137,7 @@ class Main extends egret.DisplayObjectContainer {
      * Create a game scene
      */
     private createGameScene() {
+
         let $store = window['store'];
         this.Width = $store['stage_Width'] = this.stage.stageWidth;
         this.Height = $store['stage_Height'] = this.stage.stageHeight;
@@ -152,8 +153,6 @@ class Main extends egret.DisplayObjectContainer {
         // header.x = 0;
         // header.y = 0;
         // this.addChild(header);
-
-       
 
         // 内容区实例
         this.cnt = new Cnt(this.Width,this.Height,this.anWidth,anHeight);
@@ -202,9 +201,8 @@ class Main extends egret.DisplayObjectContainer {
         2. 函数
         */
 
-
         this.initStage();
-        
+
         // websocket
         try{
             this.webSocket = new egret.WebSocket();
@@ -218,6 +216,7 @@ class Main extends egret.DisplayObjectContainer {
                 this.webSocket.connectByUrl("ws://192.168.81.240:9777/ws?uid=1002900");
                 console.error('uid null at main.ts 219 1002900')
             }
+
 
         }catch(e){
             alert('websock error')
@@ -369,11 +368,17 @@ class Main extends egret.DisplayObjectContainer {
                 case '2003':;break;
         
             }
-            setInterval(()=>{
+            setTimeout(()=>{
                 console.log('收起金币 测试 ok')
                 // this.cnt.cnt_collectCoin()
                 // this.cnt.cnt_sendEndCoin( '1002999','' )
                 // this.cnt.cnt_sendEndCoin( '1002988','' )
+                
+                this.cnt.cnt_upTextTips( '比赛开始' )
+                setTimeout(()=>{
+                    this.cnt.cnt_upTextTips( '' )
+                },1000)
+
             },5000)
         }
     }
@@ -384,6 +389,7 @@ class Main extends egret.DisplayObjectContainer {
     private onSocketOpen():void{
         let $store = window['store'];
         let uid = '1002900'  // default
+
         this.stage.removeChild(this.loadingView);
         
         if( $store['env_variable'].uid ){
