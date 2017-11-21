@@ -549,9 +549,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         }
 
         //  取到随机的位置
-        console.log( $store['userPosition'][$store['userPositionLocal'][uid] -1] )
         newEndNum = $store['userPosition'][$store['userPositionLocal'][uid] - 1] - 1  ;
-
         // x: 41 ,   //+46    +584
         // y: 152   //+72
 
@@ -561,7 +559,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             newEndLocal_x = $store['userPositionObj'][newEndNum].x + 584;
         }
         newEndLocal_y =  $store['userPositionObj'][newEndNum].y + 72;
-
         setTimeout(()=>{
             egret.Tween.get( goldArr[0] ).to({
                 x: newEndLocal_x ,

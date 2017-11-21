@@ -263,7 +263,6 @@ class Main extends egret.DisplayObjectContainer {
         //  用户头像的9个 实例对象 
         this.cnt.initUserImg();
         //  场地容器 实例对象
-        
 
     }
 
@@ -280,40 +279,37 @@ class Main extends egret.DisplayObjectContainer {
      *  onReceiveMess  websock 接收消息
      */
     private onReceiveMess(e:egret.Event):void{
+        let $store = window['store'];
+
 // event.updateAfterEvent();  //  什么时候进行强制刷新 ??????手机上用户立场 舞台不刷新 
-        var msg = this.webSocket.readUTF();
+        let msg = this.webSocket.readUTF();
         if(~msg.indexOf('You said')|| !~msg.indexOf('{')){
             console.log(msg)
         }else{
             //  后台数据  分发
             var msgObj = JSON.parse( msg );
             console.log( msgObj );
-            var i = 1;
-                i = i+1;
-
-                if( msgObj && msgObj.body && msgObj.body.room_info && msgObj.body.room_info.desc ){
-                    msgObj.body.room_info.desc = '第'+(i+1) +'期目';
-                }
-                if( msgObj && msgObj.body && msgObj.body.room_info && msgObj.body.room_info.title ){
-                    msgObj.body.room_info.title = '欧洲杯赛'+(i+1)+'期目';
-                }
-
+            let $msgObjBody = msgObj.body;
             switch ( msgObj.messageid ) {
                     // 进场的数据 2000
                 case '2000':
-                    this.top.setTextDate(  msgObj.body.room_info.desc )
-                    this.top.setTextTitle(  msgObj.body.room_info.title )
-                    
-                    if( msgObj.body ){
-                        if( msgObj.body.user_info ){
-                            window['store'].user_info =  msgObj.body.user_info ;
+
+                    if( $msgObjBody ){
+                        // 房间信息
+                        if( $msgObjBody.room_info ){
+                            this.top.setTextDate( $msgObjBody.room_info.desc )
+                            this.top.setTextTitle(  $msgObjBody.room_info.title )
+                            $store['cur_room_info'] = $msgObjBody.room_info;
+                        }
+                        if( $msgObjBody.user_info ){
+                            $store.user_info =  $msgObjBody.user_info ;
                             // 初始化用户信息
                             this.cnt.initUserMsg();
                             // 初始化底部按钮
                             this.bottom.initBtn();
                         }
-                        if( msgObj.body.matches ){
-                            window['store'].matches =  msgObj.body.matches;
+                        if( $msgObjBody.matches ){
+                            $store.matches =  $msgObjBody.matches;
                             //  初始化场地容器 数据
                             this.cnt.initFieldCon();
                             // this.cnt.initFieldCon();
@@ -322,23 +318,62 @@ class Main extends egret.DisplayObjectContainer {
                     ;break;
                 case '2012':
                     // 用户进场
-                    if( msgObj.body ){
-                        this.cnt.addUserImage( msgObj.body.username, msgObj.body.photo ,msgObj.body.total , msgObj.body.uid );
+                    if( $msgObjBody ){
+                        this.cnt.addUserImage( $msgObjBody.username, $msgObjBody.photo , $msgObjBody.total , $msgObjBody.uid );
                     }
                     break;
                 case '2013':
                     // 删除用户
-                    if( msgObj.body ){
-                        this.cnt.removeUserImage( msgObj.body.uid );
+                    if( $msgObjBody ){
+                        this.cnt.removeUserImage( $msgObjBody.uid );
                     }
                 break;
+                case '2001':
+                    // 赛事消息 2001
+                    if( $msgObjBody ){
+                        if( $msgObjBody.room_info ){
+                            this.top.setTextDate(  $msgObjBody.room_info.desc )
+                            this.top.setTextTitle(  $msgObjBody.room_info.title )
+                            $store['cur_room_info'] = $msgObjBody.room_info;
+                        }
+                        if( $msgObjBody.matches ){
+                            $store.matches =  $msgObjBody.matches;
+                            //  初始化场地容器 数据
+                            this.cnt.initFieldCon();
+                            // this.cnt.initFieldCon();
+                        }
+                    }
+                break;
+                case '2002':
+                // 准备下注
+                    if( $msgObjBody ){
+
+                    }
+                ;break;
+                case '2003':
+                // 开始下注
+                    if( $msgObjBody ){
+
+                    }
+                ;break;
+                case '2003':
+                 // 停止下注
+                    if( $msgObjBody ){
+
+                    }               
+                ;break;
+                case '2003':;break;
+                case '2003':;break;
+                case '2003':;break;
+                case '2003':;break;
+                case '2003':;break;
         
             }
             setInterval(()=>{
                 console.log('收起金币 测试 ok')
                 // this.cnt.cnt_collectCoin()
-                this.cnt.cnt_sendEndCoin( '1002999','' )
-                this.cnt.cnt_sendEndCoin( '1002988','' )
+                // this.cnt.cnt_sendEndCoin( '1002999','' )
+                // this.cnt.cnt_sendEndCoin( '1002988','' )
             },5000)
         }
     }
@@ -408,6 +443,10 @@ window['store'] = {
     curr_btn_arr:[],
     coin_arr:[], // 为了收起
     userMySelf:null,  // 自己的实例便于修改自身金币
+    cur_room_info:{
+        // 当前房间信息
+
+    },
     orderObj:{
         // 下单
         ck:null,

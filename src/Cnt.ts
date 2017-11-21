@@ -80,15 +80,6 @@ class Cnt extends egret.DisplayObjectContainer{
 
 
 
-        // if(this.matchPro == '决赛'){
-        //     let court1 = new Court();
-        //     // court1.anchorOffsetX = court1.width/2;
-        //     // court1.anchorOffsetY = court1.height/2;
-        //     court1.x = 150;
-        //     court1.y = 100;
-        //     this.bgCourtWrap.addChild(court1);
-        // }
-
 
         //生成四个足球场，1/4比赛  485为小球场宽度，应该可以在构造函数里设置，需要优化
         //参数分辨是 x,x，左边球队icon，队名，赔率，总投注，我的投注，右边~
@@ -151,15 +142,14 @@ class Cnt extends egret.DisplayObjectContainer{
     }
 
     // 金币发出  main ==> cnt ==> fieldcontain  
-    //  自己 是 0 
+    //  维护了一套uid 的位置 
     // 
-    private cnt_sendEndCoin( uid:string , msg:string ){
+    async cnt_sendEndCoin( uid:string , msg:string ){
 
-        let startString = 'field41_l'
-
-        this.fieldContain.sendEndCoin( startString , uid.toString() )
+        let startString = 'field41_l';
+        await this.fieldContain.sendEndCoin( startString , uid.toString() )
+        // 中奖展示 
     }
-
 
     // 金币收起  main ==> cnt ==> fieldcontain
     private cnt_collectCoin(){
@@ -246,7 +236,6 @@ class Cnt extends egret.DisplayObjectContainer{
     // 用户 进入  new
     private addUserImage( username:string , photo:string , total:string , uid:string ){
         var userI = window['store']['emptyUserPosition'].shift() ;
-        console.log( userI )
         if( !userI ){
             console.error('无空闲房间')
             return false;

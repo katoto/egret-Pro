@@ -1,34 +1,54 @@
 class TextTips extends egret.DisplayObjectContainer{
     // 文字提示区域
+    private textField:egret.TextField ;
+    private wrap:egret.DisplayObjectContainer;
+
     public constructor(){
         super();
         this.drawText();
     }
-    private textTips:string = '请选择球队下注...';
     private drawText(){
         // 内容区
-        let wrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
-        wrap.width = 231;
-        wrap.height = 36; 
-        wrap.x = 0;
-        wrap.y = 0;
-        this.addChild(wrap);
+        this.wrap = new egret.DisplayObjectContainer();
+        this.wrap.width = 231;
+        this.wrap.height = 36; 
+        this.wrap.x = 0;
+        this.wrap.y = 0;
+        this.addChild(this.wrap);
         // 背景 
         let bg:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-textTips_png'));
         bg.x = 0;
         bg.y = 0;
-        wrap.addChild(bg);
+        this.wrap.addChild(bg);
         //文字
-        let text:egret.TextField = new egret.TextField();
-        text.text = this.textTips;
-        text.textColor = 0x94d7bd;
-        text.size = 24;
-        text.width = 231;
-        text.height = 36; 
+        this.textField = new egret.TextField();
+        this.textField.textColor = 0x94d7bd;
+        this.textField.size = 24;
+        this.textField.width = 231;
+        this.textField.height = 36; 
         // text.textAlign = hAlign;
         // text.verticalAlign = vAlign;
-        text.textAlign = egret.HorizontalAlign.CENTER;
-        text.verticalAlign = egret.VerticalAlign.MIDDLE;
-        wrap.addChild(text);
+        this.textField.textAlign = egret.HorizontalAlign.CENTER;
+        this.textField.verticalAlign = egret.VerticalAlign.MIDDLE;
+    }
+    /**
+     * 更新文案
+     */
+    private upTextTips( tips:string ){
+        this.textField.text = tips ;
+    }
+    /**
+     *   显示
+     */
+    private addTextTips(){
+        this.wrap.addChild(this.textField);
+    }
+    /**
+     *  隐藏
+     */
+    private delTextTips(){
+        if( this.textField.parent ){
+            this.wrap.removeChild(this.textField);
+        }
     }
 }
