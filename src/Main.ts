@@ -26,6 +26,8 @@ class Main extends egret.DisplayObjectContainer {
     private pop;
     // 聊天实例
     private popChat;
+    // 杯赛过场
+    private change;
 
     private textfield:egret.TextField;
     
@@ -183,6 +185,11 @@ class Main extends egret.DisplayObjectContainer {
         // text-begin_png text-over_png
         this.pop = new Pop(this.Width,this.Height,'text-begin_png');
         // this.addChild(this.pop);
+
+        //杯赛过场change
+        this.change = new Change();
+        this.addChild(this.change);
+
         
 
 

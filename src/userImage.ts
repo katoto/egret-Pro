@@ -82,7 +82,7 @@ class userImage extends eui.UILayer {
         //聊天
         let chatWrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
         chatWrap.y = -55;
-        
+
         this.addChild(chatWrap);
 
         let myChat = new egret.TextField();
