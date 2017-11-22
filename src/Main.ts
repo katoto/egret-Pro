@@ -188,7 +188,12 @@ class Main extends egret.DisplayObjectContainer {
 
         //杯赛过场change
         this.change = new Change();
+        this.change.x = 0;
         this.addChild(this.change);
+        setTimeout(function(){
+            // egret.Tween.get(this.change).to({x:20},200);
+            console.log('move')
+        },2000)
 
         
 

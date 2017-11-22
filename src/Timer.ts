@@ -77,9 +77,9 @@ class Timer extends egret.DisplayObjectContainer{
         }
 
         // 出现竞猜 结束
-        let end_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-over_png');
+        // let end_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-over_png');
         
-        window['store']['this_main'].addChild( end_pop )
+        // window['store']['this_main'].addChild( end_pop )
 
         // cnt.textT.textTips.text = '正在开奖'
         ////timerFunc count5

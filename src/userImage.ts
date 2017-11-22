@@ -50,7 +50,6 @@ class userImage extends eui.UILayer {
         this.addChild(this.User_img);
         this.User_img.mask = bgMask;
 
-
         // 金币
         this.myGold = new egret.TextField();
         this.myGold.size = 20;
