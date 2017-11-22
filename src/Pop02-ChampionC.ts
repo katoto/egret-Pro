@@ -1,12 +1,12 @@
 // 信息类弹窗02
-class Pop02 extends egret.DisplayObjectContainer{
-    public constructor(popT){
+class Pop02Cham extends egret.DisplayObjectContainer{
+    public constructor(){
         super();
-        this.drawPop(popT);
+        this.drawPop();
     }
 
     private popTitle:egret.TextField;
-    private drawPop(popT){
+    private drawPop(){
 
         // 大容器
        let BigWrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
@@ -43,7 +43,7 @@ class Pop02 extends egret.DisplayObjectContainer{
 
        //标题
        this.popTitle = new egret.TextField();
-       this.popTitle.text = popT;
+       this.popTitle.text = '冠军记录';
        this.popTitle.size = 32;
        this.popTitle.textColor = 0xd9ddff;
        this.popTitle.width = 680;
@@ -67,8 +67,7 @@ class Pop02 extends egret.DisplayObjectContainer{
        let popChamC = new ChampionC();
        popChamC.y = 83;
        popWrap.addChild(popChamC);
-      
-      
+
 
     }
 }

@@ -54,9 +54,6 @@ class ChampionC extends eui.Group{
         myScroller.height = 800;
         myScroller.viewport = group;
         this.addChild(myScroller);
-
-
-        
     }
 
     private drawTitie(t,w,x){ /*标题，宽度，x位置*/

@@ -26,6 +26,8 @@ class Main extends egret.DisplayObjectContainer {
     private pop;
     // 聊天实例
     private popChat;
+    // 杯赛过场
+    private change;
 
     private textfield:egret.TextField;
     
@@ -92,7 +94,7 @@ class Main extends egret.DisplayObjectContainer {
             RES.loadGroup("preload");
         }
         if (event.groupName == "preload") {
-            // this.stage.removeChild(this.loadingView);
+            this.stage.removeChild(this.loadingView);
             RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
             RES.removeEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);
             RES.removeEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
@@ -183,6 +185,11 @@ class Main extends egret.DisplayObjectContainer {
 
         // this.pop = new Pop(this.Width,this.Height,'text-begin_png');
         // this.addChild(this.pop);
+
+        //杯赛过场change
+        this.change = new Change();
+        this.addChild(this.change);
+
         
 
 
@@ -396,6 +403,8 @@ class Main extends egret.DisplayObjectContainer {
         let uid = '1002900'  // default
 
         this.stage.removeChild(this.loadingView);
+        // this.stage.removeChild(this.loadingView);
+
         
         if( $store['env_variable'].uid ){
             uid = $store['env_variable'].uid
