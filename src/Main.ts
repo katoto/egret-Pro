@@ -27,7 +27,7 @@ class Main extends egret.DisplayObjectContainer {
     // 聊天实例
     private popChat;
     // 杯赛过场
-    private change;
+    // private change;
 
     private textfield:egret.TextField;
     
@@ -190,9 +190,18 @@ class Main extends egret.DisplayObjectContainer {
         // this.addChild(this.pop);
 
         //杯赛过场change
+        // let change = new Change();
+        // change.x = 0;
+        // this.addChild(change);
+        // setTimeout(()=>{
+        //     egret.Tween.get(change).to({x:-750},200);   //如果这里用this.change ，就没办法执行这个动画，原因未知
+        //     console.log('move')
+        // },2000)
 
-        // this.change = new Change();
-        // this.addChild(this.change);
+        //杯赛晋升
+
+        // let promotion = new Promotion();
+        // this.addChild(promotion);
 
         
 
@@ -220,7 +229,12 @@ class Main extends egret.DisplayObjectContainer {
         if( $store['env_variable'].ck === '' || !$store['env_variable'].ck ){
             console.error('请带上ck');
             // 临时ck
-            $store['env_variable'].ck = 'MTAwMTUxMjlkZTgyNWNhZDFlYmVkMjM4MTI2ZjYwYmZmMTRmNjg0ZQ=='
+            await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=1238815' ,dataType:'json'} ).then(( res )=>{
+                console.log(res)
+                $store['env_variable'].ck = res.data.ck;
+                $store['orderObj'].ck = res.data.ck;
+            })
+
         }
 
         await window['getJson']( { type:'get' ,url :  $store['initDomain']+'/api/join?ck='+ $store['env_variable'].ck ,dataType:'json'} ).then(( res )=>{
@@ -315,7 +329,7 @@ this.webSocket.connectByUrl("ws://10.0.1.167:9000/vguess?uid="+ roomMsg.uid +'&r
 // event.updateAfterEvent();  //  什么时候进行强制刷新 ??????手机上用户立场 舞台不刷新 
         let msg = this.webSocket.readUTF();
         if(~msg.indexOf('You said')|| !~msg.indexOf('{')){
-            console.log(msg)
+            // console.log(msg)
         }else{
             // 可能的变量
 
@@ -336,6 +350,7 @@ this.webSocket.connectByUrl("ws://10.0.1.167:9000/vguess?uid="+ roomMsg.uid +'&r
                             // 下单需要的期号
                             $store['orderObj']['expect'] = $msgObjBody.room_info.expect ;
                             $store['orderObj']['stageid'] = $msgObjBody.room_info.stageid ;
+
                         }
                         if( $msgObjBody.user_info ){
                             $store.user_info =  $msgObjBody.user_info ;
@@ -348,9 +363,9 @@ this.webSocket.connectByUrl("ws://10.0.1.167:9000/vguess?uid="+ roomMsg.uid +'&r
                             $store.matches =  $msgObjBody.matches; // ? 这个是否用不到了
                             //  初始化场地容器 数据
                             this.cnt.initFieldCon();
-                            if( $msgObjBody.matches && $msgObjBody.matches.length > 0 ){
-                                $store.matchesObj = window['convertArrToObj']( $msgObjBody.matches , 'matchid') // 好像用不到
-                            }
+                            // if( $msgObjBody.matches && $msgObjBody.matches.length > 0 ){
+                            //     $store.matchesObj = window['convertArrToObj']( $msgObjBody.matches , 'matchid') // 好像用不到
+                            // }
                             // this.cnt.initFieldCon();
                         }
                     }
@@ -380,9 +395,9 @@ this.webSocket.connectByUrl("ws://10.0.1.167:9000/vguess?uid="+ roomMsg.uid +'&r
                             //  初始化场地容器 数据
                             this.cnt.initFieldCon();
 
-                            if( $msgObjBody.matches && $msgObjBody.matches.length > 0 ){
-                                $store.matchesObj = window['convertArrToObj']( $msgObjBody.matches , 'matchid')
-                            }
+                            // if( $msgObjBody.matches && $msgObjBody.matches.length > 0 ){
+                            //     $store.matchesObj = window['convertArrToObj']( $msgObjBody.matches , 'matchid')
+                            // }
                         }
                         // 
                     }
@@ -453,10 +468,11 @@ this.webSocket.connectByUrl("ws://10.0.1.167:9000/vguess?uid="+ roomMsg.uid +'&r
                 ;break;
                 case '2005':
                     // 开奖前
-                    // 正在开奖
+                    // 正在开奖 正在派奖
                     this.cnt.cnt_upTextTips('正在派奖...');
                     if( this.stop_pop && this.stop_pop.parent ){
                         this.removeChild( this.stop_pop );
+
                     }
 
                 ;break;
@@ -508,8 +524,7 @@ this.webSocket.connectByUrl("ws://10.0.1.167:9000/vguess?uid="+ roomMsg.uid +'&r
 }
 
 window['store'] = {
-    
-
+    orderDomain:'http://10.0.1.167:9899',
     initDomain:'http://10.0.1.167:2332',
     this_main: null ,
 
@@ -537,10 +552,18 @@ window['store'] = {
     userMySelf:null,  // 自己的实例便于修改自身金币
     cur_room_info:{
         // 当前房间信息
+    },
 
+    coin_Num:{
+        // 112228430:{ // eg
+        //     home_golds:'0',
+        //     away_golds:'0',
+        //     home_golds_l:'0',
+        //     away_golds_r:'0'
+        // }
     },
     orderObj:{
-        // 下单
+        // 下单 有些是非必须字段
         ck:null,
         golds:null,
         matchid:null,

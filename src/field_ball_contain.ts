@@ -205,8 +205,8 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         //     coin_right_local:{ x:null ,y:null }
         // }
 
-            // this[fieldStr].upLeftMyMoney('324'+i)
-            // this[fieldStr].upRightMyMoney('31'+i)
+        // this[fieldStr].upLeftMyMoney('324'+i)
+        // this[fieldStr].upRightMyMoney('31'+i)
         let x = e.localX + 133;
         let y = e.localY + 120;
         let $store = window['store'];
@@ -217,10 +217,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
         if( y>150 && y <260 ){
             console.log( currBtnNumber )
-            // 下单
-            
-
-
             if( !$store['allCoinObj']['field41'] ){
                 window['Object'].assign($store['allCoinObj'] ,{ 'field41':{
                         coin_left:[],
@@ -238,24 +234,36 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     ck : $store['orderObj'].ck,
                     golds : $store['curr_btn_coin'] ,
                     matchid : currMatchData.matchid ,
-                    expect : currMatchData.expect ,
+                    expect : $store['orderObj'].expect ,
                     odds : currMatchData.leftOdds ,
                     homeid : currMatchData.homeid ,
                     awayid : currMatchData.awayid ,
                     stageid : $store['orderObj'].stageid ,
-                    selection : $store['orderObj'].selection ,
+                    selection : '1' ,
                     roomid : $store['orderObj'].roomid ,
                     node : $store['orderObj'].node ,
                 })
-
-                await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
+                console.log( currQueryStr )
+                await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
                     // 更新 自己头像 金币   下单之后
-                    // window['store']['userMySelf'].setMyGold('222');
+                    console.log( res )
+                    if( res && res.status === '100' ){
+                        if( res.data && res.data.total ){
+                            window['store']['userMySelf'].setMyGold( res.data.total );
+                        }else{
+                            console.error( 'field_ball_contain userMySelf Gold error' )
+                        }
+
+                        this.field41.upLeftMyMoney( currBtnNumber )  // 个人金额 ??
+                        this.field41.addLeftAllCoin( currBtnNumber ); //  总的金额 ??
+                        this.tween_Coin(x,y, $store['allCoinObj']['field41'].coin_left )
+                    }else{
+                        alert( res.message )
+                    }
+
                 })
 
-                this.field41.upLeftMyMoney( currBtnNumber )  // 个人金额 ??
-                this.field41.addLeftAllCoin( currBtnNumber ); //  总的金额 ??
-                this.tween_Coin(x,y, $store['allCoinObj']['field41'].coin_left )
+
             }else if(410<x && x<600){
                 console.log('右边')
 
@@ -263,24 +271,38 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     ck : $store['orderObj'].ck,
                     golds : $store['curr_btn_coin'] ,
                     matchid : currMatchData.matchid ,
-                    expect : currMatchData.expect ,
+                    expect : $store['orderObj'].expect ,
                     odds : currMatchData.rightOdds ,
                     homeid : currMatchData.homeid ,
                     awayid : currMatchData.awayid ,
                     stageid : $store['orderObj'].stageid ,
-                    selection : $store['orderObj'].selection ,
+                    selection : '2' ,
                     roomid : $store['orderObj'].roomid ,
                     node : $store['orderObj'].node ,
                 })
 
-                await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
+                await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
                     // 更新 自己头像 金币   下单之后
-                    // window['store']['userMySelf'].setMyGold('222');
+                    console.log( res )
+                    if( res && res.status === '100' ){
+
+                        if( res.data && res.data.total ){
+                            window['store']['userMySelf'].setMyGold( res.data.total );
+                        }else{
+                            console.error( 'field_ball_contain userMySelf Gold error' )
+                        }
+
+
+                        this.field41.upRightMyMoney( currBtnNumber )  // 个人金额 ??
+                        this.field41.addRightAllCoin( currBtnNumber ); //  总的金额 ??
+                        this.tween_Coin(x,y, $store['allCoinObj']['field41'].coin_right )
+                    }else{
+                        alert( res.message )
+                    }
+                    
                 })
 
-                this.field41.upRightMyMoney( currBtnNumber )
-                this.field41.addRightAllCoin( currBtnNumber ); //  总的金额
-                this.tween_Coin(x,y, $store['allCoinObj']['field41'].coin_right )
+
             }
         }
     }
@@ -291,12 +313,12 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let x = e.localX + 133;
         let y = e.localY + 320;
         let $store = window['store'];
-        let currBtnNumber = $store['curr_btn_coin']
+        let currBtnNumber = $store['curr_btn_coin'];
+
+        let currQueryStr = '';
+        let currMatchData = this.field42.getCurrMatchData()
+
         if( y>350 && y <460 ){
-            await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
-                // 更新 自己头像 金币   下单之后
-                // window['store']['userMySelf'].setMyGold('222');
-            })
 
             if( !$store['allCoinObj']['field42'] ){
                 window['Object'].assign($store['allCoinObj'] ,{ 'field42':{
@@ -309,14 +331,77 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             }
             if(150<x && x<350){
                 console.log('左边')
-                this.field42.upLeftMyMoney( currBtnNumber )
-                this.field42.addLeftAllCoin( currBtnNumber ); //  总的金额 ??
-                this.tween_Coin(x,y, $store['allCoinObj']['field42'].coin_left )
+                currQueryStr = window['convertToQueryString']({
+                    ck : $store['orderObj'].ck,
+                    golds : $store['curr_btn_coin'] ,
+                    matchid : currMatchData.matchid ,
+                    expect : $store['orderObj'].expect ,
+                    odds : currMatchData.leftOdds ,
+                    homeid : currMatchData.homeid ,
+                    awayid : currMatchData.awayid ,
+                    stageid : $store['orderObj'].stageid ,
+                    selection : '1' ,
+                    roomid : $store['orderObj'].roomid ,
+                    node : $store['orderObj'].node ,
+                })
+                await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
+                    // 更新 自己头像 金币   下单之后
+                    console.log( res )
+                    if( res && res.status === '100' ){
+
+                        if( res.data && res.data.total ){
+                            window['store']['userMySelf'].setMyGold( res.data.total );
+                        }else{
+                            console.error( 'field_ball_contain userMySelf Gold error' )
+                        }                       
+
+                        this.field42.upLeftMyMoney( currBtnNumber )
+                        this.field42.addLeftAllCoin( currBtnNumber ); //  总的金额 ??
+                        this.tween_Coin(x,y, $store['allCoinObj']['field42'].coin_left )
+                    }else{
+                        alert( res.message )
+                    }
+
+                    // window['store']['userMySelf'].setMyGold('222');
+                })
+
             }else if(410<x && x<600){
-                console.log('右边')
-                this.field42.upRightMyMoney( currBtnNumber )
-                this.field42.addRightAllCoin( currBtnNumber ); //  总的金额 ??
-                this.tween_Coin(x,y, $store['allCoinObj']['field42'].coin_right )
+
+                currQueryStr = window['convertToQueryString']({
+                    ck : $store['orderObj'].ck,
+                    golds : $store['curr_btn_coin'] ,
+                    matchid : currMatchData.matchid ,
+                    expect : $store['orderObj'].expect ,
+                    odds : currMatchData.rightOdds ,
+                    homeid : currMatchData.homeid ,
+                    awayid : currMatchData.awayid ,
+                    stageid : $store['orderObj'].stageid ,
+                    selection : '2' ,
+                    roomid : $store['orderObj'].roomid ,
+                    node : $store['orderObj'].node ,
+                })
+
+                await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
+                    // 更新 自己头像 金币   下单之后
+                    console.log( res )
+                    if( res && res.status === '100' ){
+
+                        if( res.data && res.data.total ){
+                            window['store']['userMySelf'].setMyGold( res.data.total );
+                        }else{
+                            console.error( 'field_ball_contain userMySelf Gold error' )
+                        }    
+
+                        this.field42.upRightMyMoney( currBtnNumber )
+                        this.field42.addRightAllCoin( currBtnNumber ); //  总的金额 ??
+                        this.tween_Coin(x,y, $store['allCoinObj']['field42'].coin_right )
+                    }else{
+                        alert( res.message )
+                    }
+                    
+                    // window['store']['userMySelf'].setMyGold('222');
+                })
+
             }
         }
     }
@@ -327,12 +412,14 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let x = e.localX + 133;
         let y = e.localY + 520;
         let $store = window['store'];
-        let currBtnNumber = $store['curr_btn_coin']
+        let currBtnNumber = $store['curr_btn_coin'] ;
+
+        let currQueryStr = '';
+        let currMatchData = this.field43.getCurrMatchData();
+
+        console.log( currMatchData )
+
         if( y>550 && y <660 ){
-            await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
-                // 更新 自己头像 金币   下单之后
-                // window['store']['userMySelf'].setMyGold('231');
-            })
 
             if( !$store['allCoinObj']['field43'] ){
                 window['Object'].assign($store['allCoinObj'] ,{ 'field43':{
@@ -344,15 +431,76 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 })
             }
             if(150<x && x<350){
-                console.log('左边')
-                this.field43.upLeftMyMoney( currBtnNumber )  // 个人金额 ??
-                this.field43.addLeftAllCoin( currBtnNumber ); //  总的金额 ??
-                this.tween_Coin(x,y, $store['allCoinObj']['field43'].coin_left )
+
+                currQueryStr = window['convertToQueryString']({
+                    ck : $store['orderObj'].ck,
+                    golds : $store['curr_btn_coin'] ,
+                    matchid : currMatchData.matchid ,
+                    expect : $store['orderObj'].expect ,
+                    odds : currMatchData.leftOdds ,
+                    homeid : currMatchData.homeid ,
+                    awayid : currMatchData.awayid ,
+                    stageid : $store['orderObj'].stageid ,
+                    selection : '1' ,
+                    roomid : $store['orderObj'].roomid ,
+                    node : $store['orderObj'].node ,
+                })
+                await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
+                    // 更新 自己头像 金币   下单之后
+                    console.log( res )
+                    if( res && res.status === '100' ){
+
+                        if( res.data && res.data.total ){
+                            window['store']['userMySelf'].setMyGold( res.data.total );
+                        }else{
+                            console.error( 'field_ball_contain userMySelf Gold error' )
+                        }  
+                        
+                        this.field43.upLeftMyMoney( currBtnNumber )  // 个人金额 ??
+                        this.field43.addLeftAllCoin( currBtnNumber ); //  总的金额 ??
+                        this.tween_Coin(x,y, $store['allCoinObj']['field43'].coin_left )
+                    }else{
+                        alert( res.message )
+                    }
+                    // window['store']['userMySelf'].setMyGold('222');
+                })
+
+
             }else if(410<x && x<600){
                 console.log('右边')
-                this.field43.upRightMyMoney( currBtnNumber )  // 个人金额 ??
-                this.field43.addRightAllCoin( currBtnNumber ); //  总的金额 ??
-                this.tween_Coin(x,y, $store['allCoinObj']['field43'].coin_right )
+
+                currQueryStr = window['convertToQueryString']({
+                    ck : $store['orderObj'].ck,
+                    golds : $store['curr_btn_coin'] ,
+                    matchid : currMatchData.matchid ,
+                    expect : $store['orderObj'].expect ,
+                    odds : currMatchData.rightOdds ,
+                    homeid : currMatchData.homeid ,
+                    awayid : currMatchData.awayid ,
+                    stageid : $store['orderObj'].stageid ,
+                    selection : '2' ,
+                    roomid : $store['orderObj'].roomid ,
+                    node : $store['orderObj'].node ,
+                })
+                await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
+                    // 更新 自己头像 金币   下单之后
+                    console.log( res )
+                    if( res && res.status === '100' ){
+
+                        if( res.data && res.data.total ){
+                            window['store']['userMySelf'].setMyGold( res.data.total );
+                        }else{
+                            console.error( 'field_ball_contain userMySelf Gold error' )
+                        }                          
+                        this.field43.upRightMyMoney( currBtnNumber )  // 个人金额 ??
+                        this.field43.addRightAllCoin( currBtnNumber ); //  总的金额 ??
+                        this.tween_Coin(x,y, $store['allCoinObj']['field43'].coin_right )
+                    }else{
+                        alert( res.message )
+                    }
+                    // window['store']['userMySelf'].setMyGold('222');
+                })
+
             }
         }
     }
@@ -363,12 +511,11 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let x = e.localX + 133;
         let y = e.localY + 720;
         let $store = window['store'];
-        let currBtnNumber = $store['curr_btn_coin']
+        let currBtnNumber = $store['curr_btn_coin'];
+
+        let currQueryStr = '';
+        let currMatchData = this.field44.getCurrMatchData();
         if( y>750 && y <860 ){
-            await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
-                // 更新 自己头像 金币   下单之后
-                // window['store']['userMySelf'].setMyGold('333');
-            })
 
             if( !$store['allCoinObj']['field44'] ){
                 window['Object'].assign($store['allCoinObj'] ,{ 'field44':{
@@ -380,15 +527,77 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 })
             }
             if(150<x && x<350){
-                console.log('左边')
-                this.field44.upLeftMyMoney( currBtnNumber )  // 个人金额 ??
-                this.field44.addLeftAllCoin( currBtnNumber ); //  总的金额 ??
-                this.tween_Coin(x,y, $store['allCoinObj']['field44'].coin_left )
+
+                currQueryStr = window['convertToQueryString']({
+                    ck : $store['orderObj'].ck,
+                    golds : $store['curr_btn_coin'] ,
+                    matchid : currMatchData.matchid ,
+                    expect : $store['orderObj'].expect ,
+                    odds : currMatchData.leftOdds ,
+                    homeid : currMatchData.homeid ,
+                    awayid : currMatchData.awayid ,
+                    stageid : $store['orderObj'].stageid ,
+                    selection : '1' ,
+                    roomid : $store['orderObj'].roomid ,
+                    node : $store['orderObj'].node ,
+                })
+                await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
+                    // 更新 自己头像 金币   下单之后
+                    console.log( res )
+                    if( res && res.status === '100' ){
+
+                        if( res.data && res.data.total ){
+                            window['store']['userMySelf'].setMyGold( res.data.total );
+                        }else{
+                            console.error( 'field_ball_contain userMySelf Gold error' )
+                        }                          
+                        this.field44.upLeftMyMoney( currBtnNumber )  // 个人金额 ??
+                        this.field44.addLeftAllCoin( currBtnNumber ); //  总的金额 ??
+                        this.tween_Coin(x,y, $store['allCoinObj']['field44'].coin_left )
+                    }else{
+                        alert( res.message )
+                    }
+                    // window['store']['userMySelf'].setMyGold('222');
+                })
+
+
             }else if(410<x && x<600){
                 console.log('右边')
-                this.field44.upRightMyMoney( currBtnNumber )  // 个人金额 ??
-                this.field44.addRightAllCoin( currBtnNumber ); //  总的金额 ??                
-                this.tween_Coin(x,y, $store['allCoinObj']['field44'].coin_right )
+
+                currQueryStr = window['convertToQueryString']({
+                    ck : $store['orderObj'].ck,
+                    golds : $store['curr_btn_coin'] ,
+                    matchid : currMatchData.matchid ,
+                    expect : $store['orderObj'].expect ,
+                    odds : currMatchData.rightOdds ,
+                    homeid : currMatchData.homeid ,
+                    awayid : currMatchData.awayid ,
+                    stageid : $store['orderObj'].stageid ,
+                    selection : '2' ,
+                    roomid : $store['orderObj'].roomid ,
+                    node : $store['orderObj'].node ,
+                })
+                await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
+                    // 更新 自己头像 金币   下单之后
+                    console.log( res )
+                    if( res && res.status === '100' ){
+                        if( res.data && res.data.total ){
+                            window['store']['userMySelf'].setMyGold( res.data.total );
+                        }else{
+                            console.error( 'field_ball_contain userMySelf Gold error' )
+                        }
+                        this.field44.upRightMyMoney( currBtnNumber )  // 个人金额 ??
+                        this.field44.addRightAllCoin( currBtnNumber ); //  总的金额 ??                
+                        this.tween_Coin(x,y, $store['allCoinObj']['field44'].coin_right )
+                    }else{
+                        alert( res.message )
+                    }
+                    // 
+                })
+
+
+
+
             }
         }
     }
@@ -399,12 +608,13 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let x = e.localX + 133;
         let y = e.localY + 184;
         let $store = window['store'];
-        let currBtnNumber = $store['curr_btn_coin']
+        let currBtnNumber = $store['curr_btn_coin'];
+
+        let currQueryStr = '';
+        let currMatchData = this.field21.getCurrMatchData();
+
         if( y>220 && y <395 ){
-            await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
-                // 更新 自己头像 金币   下单之后
-                // window['store']['userMySelf'].setMyGold('123');
-            })
+
 
             if( !$store['allCoinObj']['field21'] ){
                 window['Object'].assign($store['allCoinObj'] ,{ 'field21':{
@@ -416,15 +626,79 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 })
             }
             if(150<x && x<350){
-                console.log('左边')
-                this.field21.upLeftMyMoney( currBtnNumber )  // 个人金额 ??
-                this.field21.addLeftAllCoin( currBtnNumber ); //  总的金额 ??                
-                this.tween_Coin(x,y, $store['allCoinObj']['field21'].coin_left )
+
+
+                currQueryStr = window['convertToQueryString']({
+                    ck : $store['orderObj'].ck,
+                    golds : $store['curr_btn_coin'] ,
+                    matchid : currMatchData.matchid ,
+                    expect : $store['orderObj'].expect ,
+                    odds : currMatchData.leftOdds ,
+                    homeid : currMatchData.homeid ,
+                    awayid : currMatchData.awayid ,
+                    stageid : $store['orderObj'].stageid ,
+                    selection : '1' ,
+                    roomid : $store['orderObj'].roomid ,
+                    node : $store['orderObj'].node ,
+                })
+                await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
+                    // 更新 自己头像 金币   下单之后
+                    console.log( res )
+                    if( res && res.status === '100' ){
+
+                        if( res.data && res.data.total ){
+                            window['store']['userMySelf'].setMyGold( res.data.total );
+                        }else{
+                            console.error( 'field_ball_contain userMySelf Gold error' )
+                        }                          
+                        this.field21.upLeftMyMoney( currBtnNumber )  // 个人金额 ??
+                        this.field21.addLeftAllCoin( currBtnNumber ); //  总的金额 ??                
+                        this.tween_Coin(x,y, $store['allCoinObj']['field21'].coin_left )
+                    }else{
+                        alert( res.message )
+                    }
+                    // window['store']['userMySelf'].setMyGold('222');
+                })
+
+
+
             }else if(410<x && x<600){
                 console.log('右边')
-                this.field21.upRightMyMoney( currBtnNumber )  // 个人金额 ??
-                this.field21.addRightAllCoin( currBtnNumber ); //  总的金额 ??                  
-                this.tween_Coin(x,y, $store['allCoinObj']['field21'].coin_right )
+
+                currQueryStr = window['convertToQueryString']({
+                    ck : $store['orderObj'].ck,
+                    golds : $store['curr_btn_coin'] ,
+                    matchid : currMatchData.matchid ,
+                    expect : $store['orderObj'].expect ,
+                    odds : currMatchData.rightOdds ,
+                    homeid : currMatchData.homeid ,
+                    awayid : currMatchData.awayid ,
+                    stageid : $store['orderObj'].stageid ,
+                    selection : '2' ,
+                    roomid : $store['orderObj'].roomid ,
+                    node : $store['orderObj'].node ,
+                })
+                await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
+                    // 更新 自己头像 金币   下单之后
+                    console.log( res )
+                    if( res && res.status === '100' ){
+
+                        if( res.data && res.data.total ){
+                            window['store']['userMySelf'].setMyGold( res.data.total );
+                        }else{
+                            console.error( 'field_ball_contain userMySelf Gold error' )
+                        }                          
+                        this.field21.upRightMyMoney( currBtnNumber )  // 个人金额 ??
+                        this.field21.addRightAllCoin( currBtnNumber ); //  总的金额 ??                  
+                        this.tween_Coin(x,y, $store['allCoinObj']['field21'].coin_right )
+                    }else{
+                        alert( res.message )
+                    }
+                    // window['store']['userMySelf'].setMyGold('222');
+                })
+
+
+
             }
         }
     }
@@ -433,13 +707,14 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let y = e.localY + 558;
         let $store = window['store'];
         let currBtnNumber = $store['curr_btn_coin'];
+
+        let currQueryStr = '';
+        let currMatchData = this.field22.getCurrMatchData();
+
         console.log(x);
         console.log(y)
         if( y>594 && y <770 ){
-            await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
-                // 更新 自己头像 金币   下单之后
-                // window['store']['userMySelf'].setMyGold('123');
-            })
+
 
             if( !$store['allCoinObj']['field22'] ){
                 window['Object'].assign($store['allCoinObj'] ,{ 'field22':{
@@ -452,14 +727,65 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             }
             if(150<x && x<350){
                 console.log('左边')
-                this.field22.upLeftMyMoney( currBtnNumber )  // 个人金额 ??
-                this.field22.addLeftAllCoin( currBtnNumber ); //  总的金额 ??                  
-                this.tween_Coin(x,y, $store['allCoinObj']['field22'].coin_left )
+
+
+                currQueryStr = window['convertToQueryString']({
+                    ck : $store['orderObj'].ck,
+                    golds : $store['curr_btn_coin'] ,
+                    matchid : currMatchData.matchid ,
+                    expect : $store['orderObj'].expect ,
+                    odds : currMatchData.leftOdds ,
+                    homeid : currMatchData.homeid ,
+                    awayid : currMatchData.awayid ,
+                    stageid : $store['orderObj'].stageid ,
+                    selection : '1' ,
+                    roomid : $store['orderObj'].roomid ,
+                    node : $store['orderObj'].node ,
+                })
+                await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
+                    // 更新 自己头像 金币   下单之后
+                    console.log( res )
+                    if( res && res.status === '100' ){
+                        this.field22.upLeftMyMoney( currBtnNumber )  // 个人金额 ??
+                        this.field22.addLeftAllCoin( currBtnNumber ); //  总的金额 ??                  
+                        this.tween_Coin(x,y, $store['allCoinObj']['field22'].coin_left )
+                    }else{
+                        alert( res.message )
+                    }
+                    // window['store']['userMySelf'].setMyGold('222');
+                })
+
+
+
             }else if(410<x && x<600){
                 console.log('右边')
-                this.field22.upRightMyMoney( currBtnNumber )  // 个人金额 ??
-                this.field22.addRightAllCoin( currBtnNumber ); //  总的金额 ??                   
-                this.tween_Coin(x,y, $store['allCoinObj']['field22'].coin_right )
+
+                currQueryStr = window['convertToQueryString']({
+                    ck : $store['orderObj'].ck,
+                    golds : $store['curr_btn_coin'] ,
+                    matchid : currMatchData.matchid ,
+                    expect : $store['orderObj'].expect ,
+                    odds : currMatchData.rightOdds ,
+                    homeid : currMatchData.homeid ,
+                    awayid : currMatchData.awayid ,
+                    stageid : $store['orderObj'].stageid ,
+                    selection : '2' ,
+                    roomid : $store['orderObj'].roomid ,
+                    node : $store['orderObj'].node ,
+                })
+                await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
+                    // 更新 自己头像 金币   下单之后
+                    console.log( res )
+                    if( res && res.status === '100' ){
+                        this.field22.upRightMyMoney( currBtnNumber )  // 个人金额 ??
+                        this.field22.addRightAllCoin( currBtnNumber ); //  总的金额 ??                   
+                        this.tween_Coin(x,y, $store['allCoinObj']['field22'].coin_right )
+                    }else{
+                        alert( res.message )
+                    }
+                    // window['store']['userMySelf'].setMyGold('222');
+                })
+
             }
         }
     }
@@ -467,12 +793,13 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let x = e.localX + 133;
         let y = e.localY + 322;
         let $store = window['store'];
-        let currBtnNumber = $store['curr_btn_coin']
+        let currBtnNumber = $store['curr_btn_coin'];
+
+        let currQueryStr = '';
+        let currMatchData = this.field1.getCurrMatchData();
+
         if( y>352 && y <650 ){
-            await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
-                // 更新 自己头像 金币   下单之后
-                // window['store']['userMySelf'].setMyGold('345');
-            })
+
 
             if( !$store['allCoinObj']['field1'] ){
                 window['Object'].assign($store['allCoinObj'] ,{ 'field1':{
@@ -485,14 +812,66 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             }
             if(150<x && x<350){
                 console.log('左边')
-                this.field1.upLeftMyMoney( currBtnNumber )  // 个人金额 ??
-                this.field1.addLeftAllCoin( currBtnNumber ); //  总的金额 ??                     
-                this.tween_Coin(x,y, $store['allCoinObj']['field1'].coin_left )
+
+
+                currQueryStr = window['convertToQueryString']({
+                    ck : $store['orderObj'].ck,
+                    golds : $store['curr_btn_coin'] ,
+                    matchid : currMatchData.matchid ,
+                    expect : $store['orderObj'].expect ,
+                    odds : currMatchData.leftOdds ,
+                    homeid : currMatchData.homeid ,
+                    awayid : currMatchData.awayid ,
+                    stageid : $store['orderObj'].stageid ,
+                    selection : '1' ,
+                    roomid : $store['orderObj'].roomid ,
+                    node : $store['orderObj'].node ,
+                })
+                await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
+                    // 更新 自己头像 金币   下单之后
+                    console.log( res )
+                    if( res && res.status === '100' ){
+                        this.field1.upLeftMyMoney( currBtnNumber )  // 个人金额 ??
+                        this.field1.addLeftAllCoin( currBtnNumber ); //  总的金额 ??                     
+                        this.tween_Coin(x,y, $store['allCoinObj']['field1'].coin_left )
+                    }else{
+                        alert( res.message )
+                    }
+                    // window['store']['userMySelf'].setMyGold('222');
+                })
+
+
+
             }else if(410<x && x<600){
                 console.log('右边')
-                this.field1.upRightMyMoney( currBtnNumber )  // 个人金额 ??
-                this.field1.addRightAllCoin( currBtnNumber ); //  总的金额 ??                      
-                this.tween_Coin(x,y, $store['allCoinObj']['field1'].coin_right )
+
+                currQueryStr = window['convertToQueryString']({
+                    ck : $store['orderObj'].ck,
+                    golds : $store['curr_btn_coin'] ,
+                    matchid : currMatchData.matchid ,
+                    expect : $store['orderObj'].expect ,
+                    odds : currMatchData.rightOdds ,
+                    homeid : currMatchData.homeid ,
+                    awayid : currMatchData.awayid ,
+                    stageid : $store['orderObj'].stageid ,
+                    selection : '2' ,
+                    roomid : $store['orderObj'].roomid ,
+                    node : $store['orderObj'].node ,
+                })
+                await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
+                    // 更新 自己头像 金币   下单之后
+                    console.log( res )
+                    if( res && res.status === '100' ){
+                        this.field1.upRightMyMoney( currBtnNumber )  // 个人金额 ??
+                        this.field1.addRightAllCoin( currBtnNumber ); //  总的金额 ??                      
+                        this.tween_Coin(x,y, $store['allCoinObj']['field1'].coin_right )
+                    }else{
+                        alert( res.message )
+                    }
+                    // window['store']['userMySelf'].setMyGold('222');
+                })
+
+
             }
         }
     }
