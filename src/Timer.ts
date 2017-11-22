@@ -45,7 +45,7 @@ class Timer extends egret.DisplayObjectContainer{
         // timer.start();
     }
 
-    private createTimer( setTime:string ){
+    async createTimer( setTime:string ){
 
         //  ?
         // this.timer.removeEventListener(egret.TimerEvent.TIMER, this.timerFunc, this);
@@ -57,9 +57,25 @@ class Timer extends egret.DisplayObjectContainer{
         this.timer.addEventListener(egret.TimerEvent.TIMER, this.timerFunc, this);
         this.timer.addEventListener(egret.TimerEvent.TIMER_COMPLETE, this.timerComFunc, this);
         //竞猜开始提示弹窗弹出，然后开始执行倒计时
-        this.timer.start();
+        await this.setStartPop() ;
 
+        this.timer.start();
         this.addChild(this.wrapTimer);
+    }
+
+    // 等待竞猜开始
+    private setStartPop (){
+
+        return new Promise( function( resolve ,reject ){
+            let start_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-begin_png');
+            window['store']['this_main'].addChild( start_pop )
+            setTimeout(()=>{
+                resolve( 1 )
+                if( start_pop.parent ){
+                    window['store']['this_main'].removeChild( start_pop )  
+                }
+            },3000)
+        })
 
     }
 
@@ -76,13 +92,15 @@ class Timer extends egret.DisplayObjectContainer{
             this.removeChild(this.wrapTimer);
         }
 
-        // 出现竞猜 结束
+        // 出现竞猜 结束  竞猜开始
+
         // let end_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-over_png');
-        
         // window['store']['this_main'].addChild( end_pop )
+
+
+
 
         // cnt.textT.textTips.text = '正在开奖'
         ////timerFunc count5
-
     }
 }

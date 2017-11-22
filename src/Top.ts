@@ -26,17 +26,19 @@ class Top extends egret.DisplayObjectContainer{
         this.textDate.x = 20;
         this.textDate.y = 54;
         this.addChild(this.textDate);
+        
         // 右上角充值与往期
-        let btnPast:egret.Bitmap = new egret.Bitmap(RES.getRes('btn-past_png'));
-        btnPast.x = Width - 163;
-        btnPast.y = 21;
-        this.addChild(btnPast);
-        btnPast.touchEnabled = true;
-        btnPast.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
-            console.log('往期弹窗');
-            this.pop02Cham = new Pop02Cham();
-            this.addChild(this.pop02Cham);
-        },this)
+        // let btnPast:egret.Bitmap = new egret.Bitmap(RES.getRes('btn-past_png'));
+        // btnPast.x = Width - 163;
+        // btnPast.y = 21;
+        // this.addChild(btnPast);
+        // btnPast.touchEnabled = true;
+        // btnPast.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
+        //     console.log('往期弹窗');
+        //     this.pop02Cham = new Pop02Cham();
+        //     this.addChild(this.pop02Cham);
+        // },this)
+
         let btnRecharge:egret.Bitmap = new egret.Bitmap(RES.getRes('btn-recharge_png'));
         btnRecharge.x = Width - 76;
         btnRecharge.y = 23;

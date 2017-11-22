@@ -135,17 +135,15 @@ class Main extends egret.DisplayObjectContainer {
 
 
     /**
-     * 创建游戏场景
-     * Create a game scene
+     * 创建游戏场景 ( 申请房间 、建立websocket)
      */
-    private createGameScene() {
+    async createGameScene() {
 
         let $store = window['store'];
         this.Width = $store['stage_Width'] = this.stage.stageWidth;
         this.Height = $store['stage_Height'] = this.stage.stageHeight;
         this.anWidth = $store['stage_anWidth'] = this.Width/2;
         const anHeight =  $store['stage_anHeight'] = this.Height/2;
-
 
         // let sky = this.createBitmapByName("btn-500_png");
         // this.addChild(sky)
@@ -184,6 +182,7 @@ class Main extends egret.DisplayObjectContainer {
         // text-begin_png text-over_png
 
         // this.pop = new Pop(this.Width,this.Height,'text-begin_png');
+
         // this.addChild(this.pop);
 
         //杯赛过场change
@@ -218,24 +217,38 @@ class Main extends egret.DisplayObjectContainer {
 
         $store['this_main'] = this;
 
-        // websocket
-        try{
-            this.webSocket = new egret.WebSocket();
-            this.webSocket.addEventListener( egret.ProgressEvent.SOCKET_DATA , this.onReceiveMess ,this );
-            this.webSocket.addEventListener( egret.Event.CONNECT ,this.onSocketOpen ,this );
-            this.webSocket.addEventListener( egret.IOErrorEvent.IO_ERROR ,this.onIOError ,this );
-            this.webSocket.addEventListener( egret.Event.CLOSE ,this.onCloseSock ,this );
-            if( $store['env_variable'].uid ){
-                this.webSocket.connectByUrl("ws://192.168.81.240:9777/ws?uid="+ $store['env_variable'].uid );
-            }else{
-                this.webSocket.connectByUrl("ws://192.168.81.240:9777/ws?uid=1002900");
-                console.error('uid null at main.ts 219 1002900')
-            }
-
-
-        }catch(e){
-            alert('websock error')
+        if( $store['env_variable'].ck === '' || !$store['env_variable'].ck ){
+            console.error('请带上ck');
+            // 临时ck
+            $store['env_variable'].ck = 'MTAwMTUxMjlkZTgyNWNhZDFlYmVkMjM4MTI2ZjYwYmZmMTRmNjg0ZQ=='
         }
+
+        await window['getJson']( { type:'get' ,url :  $store['initDomain']+'/api/join?ck='+ $store['env_variable'].ck ,dataType:'json'} ).then(( res )=>{
+                // 申请房间
+                console.log( res )
+                if( res.status && res.status === '100' ){
+                    // 保存房间信息
+                    let roomMsg = res.data
+                    // websocket
+                    try{
+                        this.webSocket = new egret.WebSocket();
+                        this.webSocket.addEventListener( egret.ProgressEvent.SOCKET_DATA , this.onReceiveMess ,this );
+                        this.webSocket.addEventListener( egret.Event.CONNECT ,this.onSocketOpen ,this );
+                        this.webSocket.addEventListener( egret.IOErrorEvent.IO_ERROR ,this.onIOError ,this );
+                        this.webSocket.addEventListener( egret.Event.CLOSE ,this.onCloseSock ,this );
+
+this.webSocket.connectByUrl("ws://10.0.1.167:9000/vguess?uid="+ roomMsg.uid +'&roomid='+roomMsg.roomid +'&port='+roomMsg.port+'&node='+roomMsg.node+'&ip='+roomMsg.ip+'&create_time='+roomMsg.create_time );
+
+                    }catch(e){
+                        alert('websock error')
+                    }
+
+                }else{
+                    alert( res.message );
+                    console.log('申请房间出错')
+                }
+            })
+
     }
 
     /**
@@ -394,7 +407,7 @@ class Main extends egret.DisplayObjectContainer {
                 //     this.cnt.cnt_upTextTips( '' )
                 // },1000)
 
-                this.cnt.cnt_timer('6')
+                // this.cnt.cnt_timer('6')
 
             },5000)
         }
@@ -404,28 +417,11 @@ class Main extends egret.DisplayObjectContainer {
      *  onSocketOpen  websock 接收消息
      */
     private onSocketOpen():void{
-        let $store = window['store'];
-        let uid = '1002900'  // default
+        // this.webSocket.writeUTF(JSON.stringify(start))
+        setInterval(()=>{
+            this.webSocket.writeUTF('p')
 
-        this.stage.removeChild(this.loadingView);
-        // this.stage.removeChild(this.loadingView);
-
-        
-        if( $store['env_variable'].uid ){
-            uid = $store['env_variable'].uid
-        }
-
-        var start = {
-            "msg_type":"user_join",
-            "msg_id":"225",
-            "data":{
-                "uid": uid ,
-            }               
-        }
-        this.webSocket.writeUTF(JSON.stringify(start))
-
-        // this.webSocket.writeUTF('x')
-
+        },5000)
         this.webSocket.flush();
     }
 
@@ -446,7 +442,9 @@ class Main extends egret.DisplayObjectContainer {
 }
 
 window['store'] = {
+    
 
+    initDomain:'http://10.0.1.167:2332',
     this_main: null ,
 
     stage_Width: null ,
@@ -495,19 +493,7 @@ window['store'] = {
         console.log(key)
         console.log(val)
     },
-    // 冠军记录
-    recording:[
-        {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
-        {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
-        {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
-        {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
-        {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
-        {'期号':121501,'赛事':'欧洲杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
-        {'期号':121501,'赛事':'欧洲杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
-        {'期号':121501,'赛事':'欧洲杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
-        {'期号':121501,'赛事':'欧洲杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
-        {'期号':121501,'赛事':'欧洲杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
-        ],
+
     // 记录 投注的金币数 ( 可能的金币 )
     allCoinObj:{
         // field_41_obj:{
@@ -579,5 +565,18 @@ window['store'] = {
             'x':104,
             'y':740
         }
+    ],
+        // 冠军记录
+    recording:[
+        {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        {'期号':121501,'赛事':'欧洲杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        {'期号':121501,'赛事':'欧洲杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        {'期号':121501,'赛事':'欧洲杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        {'期号':121501,'赛事':'欧洲杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
+        {'期号':121501,'赛事':'欧洲杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
     ], 
 } 
