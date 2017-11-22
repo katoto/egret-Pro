@@ -57,27 +57,35 @@ class Timer extends egret.DisplayObjectContainer{
         this.timer.addEventListener(egret.TimerEvent.TIMER, this.timerFunc, this);
         this.timer.addEventListener(egret.TimerEvent.TIMER_COMPLETE, this.timerComFunc, this);
         //竞猜开始提示弹窗弹出，然后开始执行倒计时
-        await this.setStartPop() ;
+        // await this.setStartPop() ;
 
+    }
+
+    // 投注时间开始
+    private timeStart(){
         this.timer.start();
         this.addChild(this.wrapTimer);
     }
-
     // 等待竞猜开始
     private setStartPop (){
 
-        return new Promise( function( resolve ,reject ){
-            let start_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-begin_png');
-            window['store']['this_main'].addChild( start_pop )
-            setTimeout(()=>{
-                resolve( 1 )
-                if( start_pop.parent ){
-                    window['store']['this_main'].removeChild( start_pop )  
-                }
-            },3000)
-        })
+        this.timer.start();
+        this.addChild(this.wrapTimer);
+
+        // return new Promise( function( resolve ,reject ){
+        //     let start_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-begin_png');
+        //     window['store']['this_main'].addChild( start_pop )
+        //     setTimeout(()=>{
+        //         resolve( 1 )
+        //         if( start_pop.parent ){
+        //             window['store']['this_main'].removeChild( start_pop )  
+        //         }
+        //     },3000)
+        // })
 
     }
+    //  竞猜开始
+
 
      private timerFunc(event:egret.TimerEvent) {
         // egret.log("timerFunc count" + (<egret.Timer>event.target).currentCount);

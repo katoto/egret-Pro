@@ -207,7 +207,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             // 下单
             await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
                 // 更新 自己头像 金币   下单之后
-                window['store']['userMySelf'].setMyGold('222');
+                // window['store']['userMySelf'].setMyGold('222');
             })
             if( !$store['allCoinObj']['field41'] ){
                 window['Object'].assign($store['allCoinObj'] ,{ 'field41':{
@@ -243,7 +243,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         if( y>350 && y <460 ){
             await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
                 // 更新 自己头像 金币   下单之后
-                window['store']['userMySelf'].setMyGold('222');
+                // window['store']['userMySelf'].setMyGold('222');
             })
 
             if( !$store['allCoinObj']['field42'] ){
@@ -279,7 +279,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         if( y>550 && y <660 ){
             await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
                 // 更新 自己头像 金币   下单之后
-                window['store']['userMySelf'].setMyGold('231');
+                // window['store']['userMySelf'].setMyGold('231');
             })
 
             if( !$store['allCoinObj']['field43'] ){
@@ -315,7 +315,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         if( y>750 && y <860 ){
             await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
                 // 更新 自己头像 金币   下单之后
-                window['store']['userMySelf'].setMyGold('333');
+                // window['store']['userMySelf'].setMyGold('333');
             })
 
             if( !$store['allCoinObj']['field44'] ){
@@ -351,7 +351,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         if( y>220 && y <395 ){
             await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
                 // 更新 自己头像 金币   下单之后
-                window['store']['userMySelf'].setMyGold('123');
+                // window['store']['userMySelf'].setMyGold('123');
             })
 
             if( !$store['allCoinObj']['field21'] ){
@@ -386,7 +386,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         if( y>594 && y <770 ){
             await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
                 // 更新 自己头像 金币   下单之后
-                window['store']['userMySelf'].setMyGold('123');
+                // window['store']['userMySelf'].setMyGold('123');
             })
 
             if( !$store['allCoinObj']['field22'] ){
@@ -419,7 +419,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         if( y>352 && y <650 ){
             await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
                 // 更新 自己头像 金币   下单之后
-                window['store']['userMySelf'].setMyGold('345');
+                // window['store']['userMySelf'].setMyGold('345');
             })
 
             if( !$store['allCoinObj']['field1'] ){
