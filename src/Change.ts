@@ -14,15 +14,17 @@ class Change extends eui.UILayer{
         logo.x = window['store']['stage_anWidth'];
         logo.y = 206;
         this.addChild(logo);
-
         this.teamName = new egret.TextField();
         this.teamName.text = '亚洲杯';
         this.teamName.size = 46;
         this.teamName.textColor = 0xffffff;
         this.teamName.bold = true;
+        this.teamName.italic = true;
         this.teamName.x = 160;
         this.teamName.y = 533;
         this.addChild(this.teamName);
+
+        
 
     }
 }
