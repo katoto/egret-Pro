@@ -32,6 +32,8 @@ class Foot extends egret.DisplayObjectContainer{
          btnRule.touchEnabled = true;
          btnRule.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
             console.log('规则弹窗');
+            let popRule = new Pop02RuleC();
+            this.parent.addChild(popRule);
          },this)
 
          // 聊天

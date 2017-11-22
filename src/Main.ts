@@ -27,7 +27,7 @@ class Main extends egret.DisplayObjectContainer {
     // 聊天实例
     private popChat;
     // 杯赛过场
-    private change;
+    // private change;
 
     private textfield:egret.TextField;
     
@@ -186,13 +186,17 @@ class Main extends egret.DisplayObjectContainer {
         // this.addChild(this.pop);
 
         //杯赛过场change
-        this.change = new Change();
-        this.change.x = 0;
-        this.addChild(this.change);
+        let change = new Change();
+        change.x = 0;
+        this.addChild(change);
         setTimeout(function(){
-            // egret.Tween.get(this.change).to({x:20},200);
+            egret.Tween.get(change).to({x:-750},200);   //如果这里用this.change ，就没办法执行这个动画，原因未知
             console.log('move')
         },2000)
+
+        //杯赛晋升
+        let promotion = new Promotion();
+        this.addChild(promotion);
 
         
 
@@ -313,9 +317,12 @@ this.webSocket.connectByUrl("ws://10.0.1.167:9000/vguess?uid="+ roomMsg.uid +'&r
         if(~msg.indexOf('You said')|| !~msg.indexOf('{')){
             console.log(msg)
         }else{
+            // 可能的变量
+            let start_pop = null;
+
+
             //  后台数据  分发
             var msgObj = JSON.parse( msg );
-            console.log( msgObj );
             let $msgObjBody = msgObj.body;
             switch ( msgObj.messageid ) {
                     // 进场的数据 2000
@@ -372,7 +379,7 @@ this.webSocket.connectByUrl("ws://10.0.1.167:9000/vguess?uid="+ roomMsg.uid +'&r
                     }
                 break;
                 case '2002':
-                // 准备下注
+                // 准备下注 
                     if( $msgObjBody ){
 
                     }
@@ -383,15 +390,31 @@ this.webSocket.connectByUrl("ws://10.0.1.167:9000/vguess?uid="+ roomMsg.uid +'&r
 
                     }
                 ;break;
-                case '2003':
-                 // 停止下注
+                case '2004':
+                 // 停止下注 出现停止 下注的门窗
                     if( $msgObjBody ){
 
                     }               
                 ;break;
-                case '2003':;break;
-                case '2003':;break;
-                case '2003':;break;
+                case '2029':
+                    // 开始下注
+
+                ;break;
+                case '2019':
+                    // expect stageid  竞猜开始蒙城
+                    start_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-begin_png');
+                    // this.addChild( start_pop );
+                ;break;
+                case '2003':
+                    // 开始 投注 去除竞猜 开始定时器
+                    console.log( start_pop )
+                    console.log( start_pop.parent )
+                    if( start_pop.parent ){
+                        this.cnt.cnt_timer('10')
+                        this.removeChild( start_pop );
+                    }
+
+                ;break;
                 case '2003':;break;
                 case '2003':;break;
         

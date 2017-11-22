@@ -48,6 +48,7 @@ utils 是工具类函数 全局的
 	 Pop02-RuleC 聊天记录弹窗
 
 	 Penalty  进球过程
+	 Promotion 晋级
 
 
 ###### tips 固定的东西，优先new 让其处于内存中

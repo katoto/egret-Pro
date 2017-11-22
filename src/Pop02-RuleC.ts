@@ -7,13 +7,21 @@ class Pop02RuleC extends egret.DisplayObjectContainer{
 
     private popTitle:egret.TextField;
     private drawPop(){
+
+          // 大容器
+       let BigWrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
+       BigWrap.width = window['store']['stage_Width'];
+       BigWrap.height = window['store']['stage_Height'];
+       BigWrap.x = 0;
+       BigWrap.y = 0;
+       this.addChild(BigWrap);
     
        //弹窗蒙层
        let popLayer:egret.Shape = new egret.Shape();
        popLayer.graphics.beginFill(0x000000,0.6);
        popLayer.graphics.drawRect(0,0,window['store']['stage_Width'],window['store']['stage_Height'])
        popLayer.graphics.endFill();
-       this.addChild(popLayer);
+       BigWrap.addChild(popLayer);
 
        //容器
        let popWrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
@@ -23,7 +31,7 @@ class Pop02RuleC extends egret.DisplayObjectContainer{
        popWrap.anchorOffsetY = popWrap.height/2;
        popWrap.x = window['store']['stage_anWidth'];
        popWrap.y = window['store']['stage_anHeight'];
-       this.addChild(popWrap);
+       BigWrap.addChild(popWrap);
 
         //背景
        let popBg:egret.Bitmap = new egret.Bitmap(RES.getRes('pop-02_png'));
@@ -48,9 +56,13 @@ class Pop02RuleC extends egret.DisplayObjectContainer{
        popWrap.addChild(popClose);
        popClose.touchEnabled = true;
        popClose.addEventListener(egret.TouchEvent.TOUCH_TAP,()=>{
-           this.removeChild(this);
+           this.removeChild(BigWrap)
        },this)
        //以下是规则弹窗特有内容
 
+       let popC:egret.Bitmap = new egret.Bitmap(RES.getRes('pop-rule_png'));
+       popC.x = 20;
+       popC.y = 110;
+       popWrap.addChild(popC);
     }
 }

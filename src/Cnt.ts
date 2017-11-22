@@ -230,10 +230,31 @@ class Cnt extends egret.DisplayObjectContainer{
             }else{
                 console.error( 'websock 无uid' )
             }
-            var choseUserImg = 'userImg'+(i+1)
-            if( this[choseUserImg] ){
+            var choseUserImg = 'userImg'+(i+1) ;
+            var firstUserData = null;
+
+
+
+            if( i === 0 && window['store']['user_info'][i].uid === window['store']['env_variable']['uid'] && this[choseUserImg] ){
+                // 正常位置
                 this[choseUserImg].upDataUseMsg( window['formateName'] ( window['store']['user_info'][i].username ) , window['store']['user_info'][i].photo ,
-                 window['formateGold']( window['store']['user_info'][i].total ));
+                window['formateGold']( window['store']['user_info'][i].total )); 
+            }else{
+
+                firstUserData = window['store']['user_info'][0]
+                if( this[choseUserImg] ){
+                    this[choseUserImg].upDataUseMsg( window['formateName'] ( window['store']['user_info'][i].username ) , window['store']['user_info'][i].photo ,
+                    window['formateGold']( window['store']['user_info'][i].total ));
+                }
+                if(  window['store']['user_info'][i].uid === window['store']['env_variable']['uid'] && this[choseUserImg] ){
+                     var choseUserImgCopy = 'userImg1' ;
+                     this[choseUserImgCopy].upDataUseMsg( window['formateName'] ( window['store']['user_info'][i].username ) , window['store']['user_info'][i].photo ,
+                    window['formateGold']( window['store']['user_info'][i].total )); 
+
+                    this[choseUserImg].upDataUseMsg( window['formateName'] ( firstUserData.username ) , firstUserData.photo ,
+                    window['formateGold']( firstUserData.total ));                 
+                }
+
             }
 
             //  中奖的处理 ！
