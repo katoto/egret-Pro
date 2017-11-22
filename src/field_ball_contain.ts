@@ -55,7 +55,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         this.field42.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_42Evt ,this)
         this.courtWrap4.addChild(this.field42);
 
-
         this.field43 = new Field_ball('bg-court4_png');
         this.field43.y = 520;   //
         this.field43.touchEnabled = true;
@@ -67,7 +66,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         this.field44.touchEnabled = true;
         this.field44.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_44Evt ,this)
         this.courtWrap4.addChild(this.field44);
-
 
     }
 
@@ -168,14 +166,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 ;
             }
 
-                // setInterval(()=>{
-                //     i = i+1
-                //     this[fieldStr].upLeftMyMoney('324'+i)
-                //     this[fieldStr].upRightMyMoney('31'+i)
-                //     this[fieldStr].addLeftAllCoin('1'+i);
-                //     this[fieldStr].addRightAllCoin('2'+i);
-
-                // },1000)
 
                 // setTimeout(()=>{
                 //     console.log('显示金币的背景')
@@ -205,12 +195,11 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         //     coin_right_local:{ x:null ,y:null }
         // }
 
-        // this[fieldStr].upLeftMyMoney('324'+i)
-        // this[fieldStr].upRightMyMoney('31'+i)
         let x = e.localX + 133;
         let y = e.localY + 120;
         let $store = window['store'];
-        let currBtnNumber = $store['curr_btn_coin']
+        let $store_coinNum = $store['coin_Num'];
+        let currBtnNumber = $store['curr_btn_coin'];
         let currQueryStr = '';
 
         let currMatchData = this.field41.getCurrMatchData()
@@ -226,10 +215,16 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     }
                 })
             }
-            // 更新自己投注的金额
+            if( !$store_coinNum[currMatchData.matchid] ){
+                $store_coinNum[currMatchData.matchid] = {
+                    home_golds : null,
+                    my_golds_l : null,
+                    my_golds_r : null ,
+                    away_golds: null ,
+                }
+            }
             if(150<x && x<350){
-                console.log('左边')
-
+                // 更新 投注 数据
                 currQueryStr = window['convertToQueryString']({
                     ck : $store['orderObj'].ck,
                     golds : $store['curr_btn_coin'] ,
@@ -243,19 +238,27 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     roomid : $store['orderObj'].roomid ,
                     node : $store['orderObj'].node ,
                 })
-                console.log( currQueryStr )
+
                 await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
                     // 更新 自己头像 金币   下单之后
                     console.log( res )
                     if( res && res.status === '100' ){
+
+                // 记录自己的金币 (派发之后，清空)
+            $store_coinNum[currMatchData.matchid]['my_golds_l'] = $store_coinNum[currMatchData.matchid]['my_golds_l'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_l'] ) + $store.curr_btn_coin :
+            $store.curr_btn_coin;  
+            $store_coinNum[currMatchData.matchid]['home_golds'] = $store_coinNum[currMatchData.matchid]['home_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['home_golds'] ) + $store.curr_btn_coin :
+            $store.curr_btn_coin ;
+
                         if( res.data && res.data.total ){
-                            window['store']['userMySelf'].setMyGold( res.data.total );
+                            window['store']['userMySelf'].setMyGold( window['formateGold'] (res.data.total));
                         }else{
                             console.error( 'field_ball_contain userMySelf Gold error' )
                         }
 
-                        this.field41.upLeftMyMoney( currBtnNumber )  // 个人金额 ??
-                        this.field41.addLeftAllCoin( currBtnNumber ); //  总的金额 ??
+                        this.field41.upLeftMyMoney( window['formateGold'] ( $store_coinNum[currMatchData.matchid]['my_golds_l']) )  
+                        this.field41.addLeftAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['home_golds']) ); 
+
                         this.tween_Coin(x,y, $store['allCoinObj']['field41'].coin_left )
                     }else{
                         alert( res.message )
@@ -265,8 +268,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
 
             }else if(410<x && x<600){
-                console.log('右边')
-
                 currQueryStr = window['convertToQueryString']({
                     ck : $store['orderObj'].ck,
                     golds : $store['curr_btn_coin'] ,
@@ -282,37 +283,36 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 })
 
                 await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
-                    // 更新 自己头像 金币   下单之后
                     console.log( res )
                     if( res && res.status === '100' ){
+            $store_coinNum[currMatchData.matchid]['my_golds_r'] = $store_coinNum[currMatchData.matchid]['my_golds_r'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) + $store.curr_btn_coin :
+            $store.curr_btn_coin;  
+            $store_coinNum[currMatchData.matchid]['away_golds'] = $store_coinNum[currMatchData.matchid]['away_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['away_golds'] ) + $store.curr_btn_coin : 
+            $store.curr_btn_coin ;
 
                         if( res.data && res.data.total ){
-                            window['store']['userMySelf'].setMyGold( res.data.total );
+                            window['store']['userMySelf'].setMyGold( window['formateGold']( res.data.total ));
                         }else{
                             console.error( 'field_ball_contain userMySelf Gold error' )
                         }
 
-
-                        this.field41.upRightMyMoney( currBtnNumber )  // 个人金额 ??
-                        this.field41.addRightAllCoin( currBtnNumber ); //  总的金额 ??
+                        this.field41.upRightMyMoney( window['formateGold']( $store_coinNum[currMatchData.matchid]['my_golds_r'] ))  // 个人金额
+                        this.field41.addRightAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['away_golds']) ); //  总的金额 
                         this.tween_Coin(x,y, $store['allCoinObj']['field41'].coin_right )
                     }else{
                         alert( res.message )
                     }
-                    
                 })
-
-
             }
         }
     }
 
     async field_42Evt( e:egret.TouchEvent ){
         //  执行动画  213 154 left   496 156 right  
-        // field42_obj 
         let x = e.localX + 133;
         let y = e.localY + 320;
         let $store = window['store'];
+        let $store_coinNum = $store['coin_Num'];
         let currBtnNumber = $store['curr_btn_coin'];
 
         let currQueryStr = '';
@@ -329,8 +329,17 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     }
                 })
             }
+
+            if( !$store_coinNum[currMatchData.matchid] ){
+                $store_coinNum[currMatchData.matchid] = {
+                    home_golds : null,
+                    my_golds_l : null,
+                    my_golds_r : null ,
+                    away_golds: null ,
+                }
+            }
+
             if(150<x && x<350){
-                console.log('左边')
                 currQueryStr = window['convertToQueryString']({
                     ck : $store['orderObj'].ck,
                     golds : $store['curr_btn_coin'] ,
@@ -345,24 +354,26 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     node : $store['orderObj'].node ,
                 })
                 await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
-                    // 更新 自己头像 金币   下单之后
-                    console.log( res )
                     if( res && res.status === '100' ){
 
+                // 记录自己的金币 (派发之后，清空)
+            $store_coinNum[currMatchData.matchid]['my_golds_l'] = $store_coinNum[currMatchData.matchid]['my_golds_l'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_l'] ) + $store.curr_btn_coin :
+            $store.curr_btn_coin;  
+            $store_coinNum[currMatchData.matchid]['home_golds'] = $store_coinNum[currMatchData.matchid]['home_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['home_golds'] ) + $store.curr_btn_coin :
+            $store.curr_btn_coin ;
+
                         if( res.data && res.data.total ){
-                            window['store']['userMySelf'].setMyGold( res.data.total );
+                            window['store']['userMySelf'].setMyGold( window['formateGold']( res.data.total ) );
                         }else{
                             console.error( 'field_ball_contain userMySelf Gold error' )
                         }                       
-
-                        this.field42.upLeftMyMoney( currBtnNumber )
-                        this.field42.addLeftAllCoin( currBtnNumber ); //  总的金额 ??
+                        
+                        this.field42.upLeftMyMoney( window['formateGold']( $store_coinNum[currMatchData.matchid]['my_golds_l'] )  )
+                        this.field42.addLeftAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['home_golds']) ); //  总的金额
                         this.tween_Coin(x,y, $store['allCoinObj']['field42'].coin_left )
                     }else{
                         alert( res.message )
                     }
-
-                    // window['store']['userMySelf'].setMyGold('222');
                 })
 
             }else if(410<x && x<600){
@@ -386,20 +397,23 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     console.log( res )
                     if( res && res.status === '100' ){
 
+            $store_coinNum[currMatchData.matchid]['my_golds_r'] = $store_coinNum[currMatchData.matchid]['my_golds_r'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) + $store.curr_btn_coin :
+            $store.curr_btn_coin;  
+            $store_coinNum[currMatchData.matchid]['away_golds'] = $store_coinNum[currMatchData.matchid]['away_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['away_golds'] ) + $store.curr_btn_coin : 
+            $store.curr_btn_coin ;
+
                         if( res.data && res.data.total ){
-                            window['store']['userMySelf'].setMyGold( res.data.total );
+                            window['store']['userMySelf'].setMyGold( window['formateGold']( res.data.total ));
                         }else{
                             console.error( 'field_ball_contain userMySelf Gold error' )
                         }    
 
-                        this.field42.upRightMyMoney( currBtnNumber )
-                        this.field42.addRightAllCoin( currBtnNumber ); //  总的金额 ??
+                        this.field42.upRightMyMoney( window['formateGold']( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) )
+                        this.field42.addRightAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['away_golds'] ) ); //  总的金额
                         this.tween_Coin(x,y, $store['allCoinObj']['field42'].coin_right )
                     }else{
                         alert( res.message )
                     }
-                    
-                    // window['store']['userMySelf'].setMyGold('222');
                 })
 
             }
@@ -408,10 +422,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
     async field_43Evt( e:egret.TouchEvent ){
         //  执行动画  213 154 left   496 156 right  
-        // field43_obj 
         let x = e.localX + 133;
         let y = e.localY + 520;
         let $store = window['store'];
+        let $store_coinNum = $store['coin_Num'];
         let currBtnNumber = $store['curr_btn_coin'] ;
 
         let currQueryStr = '';
@@ -430,6 +444,16 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     }
                 })
             }
+
+            if( !$store_coinNum[currMatchData.matchid] ){
+                $store_coinNum[currMatchData.matchid] = {
+                    home_golds : null,
+                    my_golds_l : null,
+                    my_golds_r : null ,
+                    away_golds: null ,
+                }
+            }
+
             if(150<x && x<350){
 
                 currQueryStr = window['convertToQueryString']({
@@ -450,14 +474,19 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     console.log( res )
                     if( res && res.status === '100' ){
 
+            $store_coinNum[currMatchData.matchid]['my_golds_l'] = $store_coinNum[currMatchData.matchid]['my_golds_l'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_l'] ) + $store.curr_btn_coin :
+            $store.curr_btn_coin;  
+            $store_coinNum[currMatchData.matchid]['home_golds'] = $store_coinNum[currMatchData.matchid]['home_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['home_golds'] ) + $store.curr_btn_coin :
+            $store.curr_btn_coin ;                        
+
                         if( res.data && res.data.total ){
-                            window['store']['userMySelf'].setMyGold( res.data.total );
+                            window['store']['userMySelf'].setMyGold( window['formateGold'](  res.data.total ) );
                         }else{
                             console.error( 'field_ball_contain userMySelf Gold error' )
                         }  
                         
-                        this.field43.upLeftMyMoney( currBtnNumber )  // 个人金额 ??
-                        this.field43.addLeftAllCoin( currBtnNumber ); //  总的金额 ??
+                        this.field43.upLeftMyMoney( window['formateGold']( $store_coinNum[currMatchData.matchid]['my_golds_l'] ) )  // 个人金额 
+                        this.field43.addLeftAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['home_golds'] ) ); //  总的金额 
                         this.tween_Coin(x,y, $store['allCoinObj']['field43'].coin_left )
                     }else{
                         alert( res.message )
@@ -467,7 +496,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
 
             }else if(410<x && x<600){
-                console.log('右边')
 
                 currQueryStr = window['convertToQueryString']({
                     ck : $store['orderObj'].ck,
@@ -487,18 +515,21 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     console.log( res )
                     if( res && res.status === '100' ){
 
+            $store_coinNum[currMatchData.matchid]['my_golds_r'] = $store_coinNum[currMatchData.matchid]['my_golds_r'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) + $store.curr_btn_coin :
+            $store.curr_btn_coin;  
+            $store_coinNum[currMatchData.matchid]['away_golds'] = $store_coinNum[currMatchData.matchid]['away_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['away_golds'] ) + $store.curr_btn_coin : 
+            $store.curr_btn_coin ;
                         if( res.data && res.data.total ){
-                            window['store']['userMySelf'].setMyGold( res.data.total );
+                            window['store']['userMySelf'].setMyGold( window['formateGold'] ( res.data.total ) );
                         }else{
                             console.error( 'field_ball_contain userMySelf Gold error' )
                         }                          
-                        this.field43.upRightMyMoney( currBtnNumber )  // 个人金额 ??
-                        this.field43.addRightAllCoin( currBtnNumber ); //  总的金额 ??
+                        this.field43.upRightMyMoney( window['formateGold']( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) )  
+                        this.field43.addRightAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['away_golds'] ) );
                         this.tween_Coin(x,y, $store['allCoinObj']['field43'].coin_right )
                     }else{
                         alert( res.message )
                     }
-                    // window['store']['userMySelf'].setMyGold('222');
                 })
 
             }
@@ -507,10 +538,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
     async field_44Evt( e:egret.TouchEvent ){
         //  执行动画  213 154 left   496 156 right  
-        // field44_obj 
         let x = e.localX + 133;
         let y = e.localY + 720;
         let $store = window['store'];
+        let $store_coinNum = $store['coin_Num'];
         let currBtnNumber = $store['curr_btn_coin'];
 
         let currQueryStr = '';
@@ -526,6 +557,16 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     }
                 })
             }
+
+            if( !$store_coinNum[currMatchData.matchid] ){
+                $store_coinNum[currMatchData.matchid] = {
+                    home_golds : null,
+                    my_golds_l : null,
+                    my_golds_r : null ,
+                    away_golds: null ,
+                }
+            }
+
             if(150<x && x<350){
 
                 currQueryStr = window['convertToQueryString']({
@@ -546,13 +587,18 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     console.log( res )
                     if( res && res.status === '100' ){
 
+            $store_coinNum[currMatchData.matchid]['my_golds_l'] = $store_coinNum[currMatchData.matchid]['my_golds_l'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_l'] ) + $store.curr_btn_coin :
+            $store.curr_btn_coin;  
+            $store_coinNum[currMatchData.matchid]['home_golds'] = $store_coinNum[currMatchData.matchid]['home_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['home_golds'] ) + $store.curr_btn_coin :
+            $store.curr_btn_coin ;
+
                         if( res.data && res.data.total ){
-                            window['store']['userMySelf'].setMyGold( res.data.total );
+                            window['store']['userMySelf'].setMyGold( window['formateGold']( res.data.total) );
                         }else{
                             console.error( 'field_ball_contain userMySelf Gold error' )
                         }                          
-                        this.field44.upLeftMyMoney( currBtnNumber )  // 个人金额 ??
-                        this.field44.addLeftAllCoin( currBtnNumber ); //  总的金额 ??
+                        this.field44.upLeftMyMoney( window['formateGold']( $store_coinNum[currMatchData.matchid]['my_golds_l'] ) )  // 个人金额
+                        this.field44.addLeftAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['home_golds'] ) ); //  总的金额
                         this.tween_Coin(x,y, $store['allCoinObj']['field44'].coin_left )
                     }else{
                         alert( res.message )
@@ -581,22 +627,23 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     // 更新 自己头像 金币   下单之后
                     console.log( res )
                     if( res && res.status === '100' ){
+            $store_coinNum[currMatchData.matchid]['my_golds_r'] = $store_coinNum[currMatchData.matchid]['my_golds_r'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) + $store.curr_btn_coin :
+            $store.curr_btn_coin;  
+            $store_coinNum[currMatchData.matchid]['away_golds'] = $store_coinNum[currMatchData.matchid]['away_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['away_golds'] ) + $store.curr_btn_coin : 
+            $store.curr_btn_coin ;
+
                         if( res.data && res.data.total ){
-                            window['store']['userMySelf'].setMyGold( res.data.total );
+                            window['store']['userMySelf'].setMyGold( window['formateGold'](res.data.total ) );
                         }else{
                             console.error( 'field_ball_contain userMySelf Gold error' )
                         }
-                        this.field44.upRightMyMoney( currBtnNumber )  // 个人金额 ??
-                        this.field44.addRightAllCoin( currBtnNumber ); //  总的金额 ??                
+                        this.field44.upRightMyMoney( window['formateGold']( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) )  // 个人金额 ??
+                        this.field44.addRightAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['away_golds'] ) ); //  总的金额 ??                
                         this.tween_Coin(x,y, $store['allCoinObj']['field44'].coin_right )
                     }else{
                         alert( res.message )
                     }
-                    // 
                 })
-
-
-
 
             }
         }
@@ -604,17 +651,16 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
 
     async field_21Evt( e:egret.TouchEvent ){
-        // field21_obj  坐标要调整 
         let x = e.localX + 133;
         let y = e.localY + 184;
         let $store = window['store'];
+        let $store_coinNum = $store['coin_Num'];
         let currBtnNumber = $store['curr_btn_coin'];
 
         let currQueryStr = '';
         let currMatchData = this.field21.getCurrMatchData();
 
         if( y>220 && y <395 ){
-
 
             if( !$store['allCoinObj']['field21'] ){
                 window['Object'].assign($store['allCoinObj'] ,{ 'field21':{
@@ -625,6 +671,16 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     }
                 })
             }
+
+            if( !$store_coinNum[currMatchData.matchid] ){
+                $store_coinNum[currMatchData.matchid] = {
+                    home_golds : null,
+                    my_golds_l : null,
+                    my_golds_r : null ,
+                    away_golds: null ,
+                }
+            }
+
             if(150<x && x<350){
 
 
@@ -646,24 +702,27 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     console.log( res )
                     if( res && res.status === '100' ){
 
+            $store_coinNum[currMatchData.matchid]['my_golds_l'] = $store_coinNum[currMatchData.matchid]['my_golds_l'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_l'] ) + $store.curr_btn_coin :
+            $store.curr_btn_coin;  
+            $store_coinNum[currMatchData.matchid]['home_golds'] = $store_coinNum[currMatchData.matchid]['home_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['home_golds'] ) + $store.curr_btn_coin :
+            $store.curr_btn_coin ;
+
                         if( res.data && res.data.total ){
-                            window['store']['userMySelf'].setMyGold( res.data.total );
+                            window['store']['userMySelf'].setMyGold( window['formateGold']( res.data.total ) );
                         }else{
                             console.error( 'field_ball_contain userMySelf Gold error' )
                         }                          
-                        this.field21.upLeftMyMoney( currBtnNumber )  // 个人金额 ??
-                        this.field21.addLeftAllCoin( currBtnNumber ); //  总的金额 ??                
+                        this.field21.upLeftMyMoney( window['formateGold']( $store_coinNum[currMatchData.matchid]['my_golds_l'] ) )  // 个人金额 ??
+                        this.field21.addLeftAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['home_golds'] ) ); //  总的金额 ??                
                         this.tween_Coin(x,y, $store['allCoinObj']['field21'].coin_left )
                     }else{
                         alert( res.message )
                     }
-                    // window['store']['userMySelf'].setMyGold('222');
+
                 })
 
 
-
             }else if(410<x && x<600){
-                console.log('右边')
 
                 currQueryStr = window['convertToQueryString']({
                     ck : $store['orderObj'].ck,
@@ -682,22 +741,22 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     // 更新 自己头像 金币   下单之后
                     console.log( res )
                     if( res && res.status === '100' ){
-
+            $store_coinNum[currMatchData.matchid]['my_golds_r'] = $store_coinNum[currMatchData.matchid]['my_golds_r'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) + $store.curr_btn_coin :
+            $store.curr_btn_coin;  
+            $store_coinNum[currMatchData.matchid]['away_golds'] = $store_coinNum[currMatchData.matchid]['away_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['away_golds'] ) + $store.curr_btn_coin : 
+            $store.curr_btn_coin ;
                         if( res.data && res.data.total ){
-                            window['store']['userMySelf'].setMyGold( res.data.total );
+                            window['store']['userMySelf'].setMyGold(window['formateGold']( res.data.total) );
                         }else{
                             console.error( 'field_ball_contain userMySelf Gold error' )
                         }                          
-                        this.field21.upRightMyMoney( currBtnNumber )  // 个人金额 ??
-                        this.field21.addRightAllCoin( currBtnNumber ); //  总的金额 ??                  
+                        this.field21.upRightMyMoney( window['formateGold']( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) )  // 个人金额 ??
+                        this.field21.addRightAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['away_golds'] ) ); //  总的金额 ??                  
                         this.tween_Coin(x,y, $store['allCoinObj']['field21'].coin_right )
                     }else{
                         alert( res.message )
                     }
-                    // window['store']['userMySelf'].setMyGold('222');
                 })
-
-
 
             }
         }
@@ -706,6 +765,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let x = e.localX + 133;
         let y = e.localY + 558;
         let $store = window['store'];
+        let $store_coinNum = $store['coin_Num'];
         let currBtnNumber = $store['curr_btn_coin'];
 
         let currQueryStr = '';
@@ -715,7 +775,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         console.log(y)
         if( y>594 && y <770 ){
 
-
             if( !$store['allCoinObj']['field22'] ){
                 window['Object'].assign($store['allCoinObj'] ,{ 'field22':{
                         coin_left:[],
@@ -724,6 +783,15 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         coin_right_local: $store['coin_local']['field22_r']
                     }
                 })
+            }
+
+            if( !$store_coinNum[currMatchData.matchid] ){
+                $store_coinNum[currMatchData.matchid] = {
+                    home_golds : null,
+                    my_golds_l : null,
+                    my_golds_r : null ,
+                    away_golds: null ,
+                }
             }
             if(150<x && x<350){
                 console.log('左边')
@@ -746,16 +814,24 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     // 更新 自己头像 金币   下单之后
                     console.log( res )
                     if( res && res.status === '100' ){
-                        this.field22.upLeftMyMoney( currBtnNumber )  // 个人金额 ??
-                        this.field22.addLeftAllCoin( currBtnNumber ); //  总的金额 ??                  
+
+            $store_coinNum[currMatchData.matchid]['my_golds_l'] = $store_coinNum[currMatchData.matchid]['my_golds_l'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_l'] ) + $store.curr_btn_coin :
+            $store.curr_btn_coin;  
+            $store_coinNum[currMatchData.matchid]['home_golds'] = $store_coinNum[currMatchData.matchid]['home_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['home_golds'] ) + $store.curr_btn_coin :
+            $store.curr_btn_coin ;
+                        if( res.data && res.data.total ){
+                            window['store']['userMySelf'].setMyGold(window['formateGold']( res.data.total) );
+                        }else{
+                            console.error( 'field_ball_contain userMySelf Gold error' )
+                        } 
+
+                        this.field22.upLeftMyMoney( window['formateGold']( $store_coinNum[currMatchData.matchid]['my_golds_l'] ) )  // 个人金额 ??
+                        this.field22.addLeftAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['home_golds'] ) ); //  总的金额 ??                  
                         this.tween_Coin(x,y, $store['allCoinObj']['field22'].coin_left )
                     }else{
                         alert( res.message )
                     }
-                    // window['store']['userMySelf'].setMyGold('222');
                 })
-
-
 
             }else if(410<x && x<600){
                 console.log('右边')
@@ -777,8 +853,19 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     // 更新 自己头像 金币   下单之后
                     console.log( res )
                     if( res && res.status === '100' ){
-                        this.field22.upRightMyMoney( currBtnNumber )  // 个人金额 ??
-                        this.field22.addRightAllCoin( currBtnNumber ); //  总的金额 ??                   
+            $store_coinNum[currMatchData.matchid]['my_golds_r'] = $store_coinNum[currMatchData.matchid]['my_golds_r'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) + $store.curr_btn_coin :
+            $store.curr_btn_coin;  
+            $store_coinNum[currMatchData.matchid]['away_golds'] = $store_coinNum[currMatchData.matchid]['away_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['away_golds'] ) + $store.curr_btn_coin : 
+            $store.curr_btn_coin ;
+
+                        if( res.data && res.data.total ){
+                            window['store']['userMySelf'].setMyGold(window['formateGold']( res.data.total) );
+                        }else{
+                            console.error( 'field_ball_contain userMySelf Gold error' )
+                        } 
+
+                        this.field22.upRightMyMoney( window['formateGold']( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) )  // 个人金额 ??
+                        this.field22.addRightAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['away_golds'] ) ); //  总的金额 ??                   
                         this.tween_Coin(x,y, $store['allCoinObj']['field22'].coin_right )
                     }else{
                         alert( res.message )
@@ -793,13 +880,13 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let x = e.localX + 133;
         let y = e.localY + 322;
         let $store = window['store'];
+        let $store_coinNum = $store['coin_Num'];        
         let currBtnNumber = $store['curr_btn_coin'];
 
         let currQueryStr = '';
         let currMatchData = this.field1.getCurrMatchData();
 
         if( y>352 && y <650 ){
-
 
             if( !$store['allCoinObj']['field1'] ){
                 window['Object'].assign($store['allCoinObj'] ,{ 'field1':{
@@ -809,6 +896,14 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         coin_right_local: $store['coin_local']['field1_r']
                     }
                 })
+            }
+            if( !$store_coinNum[currMatchData.matchid] ){
+                $store_coinNum[currMatchData.matchid] = {
+                    home_golds : null,
+                    my_golds_l : null,
+                    my_golds_r : null ,
+                    away_golds: null ,
+                }
             }
             if(150<x && x<350){
                 console.log('左边')
@@ -831,15 +926,26 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     // 更新 自己头像 金币   下单之后
                     console.log( res )
                     if( res && res.status === '100' ){
-                        this.field1.upLeftMyMoney( currBtnNumber )  // 个人金额 ??
-                        this.field1.addLeftAllCoin( currBtnNumber ); //  总的金额 ??                     
+
+            $store_coinNum[currMatchData.matchid]['my_golds_l'] = $store_coinNum[currMatchData.matchid]['my_golds_l'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_l'] ) + $store.curr_btn_coin :
+            $store.curr_btn_coin;  
+            $store_coinNum[currMatchData.matchid]['home_golds'] = $store_coinNum[currMatchData.matchid]['home_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['home_golds'] ) + $store.curr_btn_coin :
+            $store.curr_btn_coin ;
+
+
+                        if( res.data && res.data.total ){
+                            window['store']['userMySelf'].setMyGold(window['formateGold']( res.data.total) );
+                        }else{
+                            console.error( 'field_ball_contain userMySelf Gold error' )
+                        } 
+
+                        this.field1.upLeftMyMoney( window['formateGold']( $store_coinNum[currMatchData.matchid]['my_golds_l'] ) )  // 个人金额 
+                        this.field1.addLeftAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['home_golds'] ) ); //  总的金额                     
                         this.tween_Coin(x,y, $store['allCoinObj']['field1'].coin_left )
                     }else{
                         alert( res.message )
                     }
-                    // window['store']['userMySelf'].setMyGold('222');
                 })
-
 
 
             }else if(410<x && x<600){
@@ -862,15 +968,24 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     // 更新 自己头像 金币   下单之后
                     console.log( res )
                     if( res && res.status === '100' ){
-                        this.field1.upRightMyMoney( currBtnNumber )  // 个人金额 ??
-                        this.field1.addRightAllCoin( currBtnNumber ); //  总的金额 ??                      
+            $store_coinNum[currMatchData.matchid]['my_golds_r'] = $store_coinNum[currMatchData.matchid]['my_golds_r'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) + $store.curr_btn_coin :
+            $store.curr_btn_coin;  
+            $store_coinNum[currMatchData.matchid]['away_golds'] = $store_coinNum[currMatchData.matchid]['away_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['away_golds'] ) + $store.curr_btn_coin : 
+            $store.curr_btn_coin ;
+
+                        if( res.data && res.data.total ){
+                            window['store']['userMySelf'].setMyGold(window['formateGold']( res.data.total) );
+                        }else{
+                            console.error( 'field_ball_contain userMySelf Gold error' )
+                        } 
+
+                        this.field1.upRightMyMoney( window['formateGold']( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) )  // 个人金额
+                        this.field1.addRightAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['away_golds'] ) ); //  总的金额                
                         this.tween_Coin(x,y, $store['allCoinObj']['field1'].coin_right )
                     }else{
                         alert( res.message )
                     }
-                    // window['store']['userMySelf'].setMyGold('222');
                 })
-
 
             }
         }

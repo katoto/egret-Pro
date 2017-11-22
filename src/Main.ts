@@ -476,7 +476,32 @@ this.webSocket.connectByUrl("ws://10.0.1.167:9000/vguess?uid="+ roomMsg.uid +'&r
                     }
 
                 ;break;
-        
+                case '2010':
+                    // 他人投注 金币
+                    let $store_coinNum = window['store']['coin_Num'];
+                    if($msgObjBody){
+                        if( !($store_coinNum[$msgObjBody.matchid]) ){
+                            $store_coinNum[$msgObjBody.matchid] = {
+                                home_golds : null,
+                                my_golds_l : null,
+                                my_golds_r : null ,
+                                away_golds: null ,
+                            }
+                        }
+                        if( $msgObjBody.selection === '1' ){
+            $store_coinNum[$msgObjBody.matchid].home_golds = $store_coinNum[$msgObjBody.matchid]['home_golds'] ? parseInt ( $store_coinNum[$msgObjBody.matchid]['home_golds'] ) + parseInt( $msgObjBody.bet_golds )  :
+            $msgObjBody.bet_golds ;
+                            
+                        }else if( $msgObjBody.selection === '2' ){
+            $store_coinNum[$msgObjBody.matchid].away_golds = $store_coinNum[$msgObjBody.matchid]['away_golds'] ? parseInt ( $store_coinNum[$msgObjBody.matchid]['away_golds'] ) + parseInt( $msgObjBody.bet_golds )  :
+            $msgObjBody.bet_golds ;
+                        }
+
+                        // 更新对应的总的数据 。。。
+                        
+                    }
+
+                ;break;        
             }
             setTimeout(()=>{
                 // console.log('收起金币 测试 ok')
@@ -558,8 +583,8 @@ window['store'] = {
         // 112228430:{ // eg
         //     home_golds:'0',
         //     away_golds:'0',
-        //     home_golds_l:'0',
-        //     away_golds_r:'0'
+        //     my_golds_l:'0',
+        //     wy_golds_r:'0'
         // }
     },
     orderObj:{
