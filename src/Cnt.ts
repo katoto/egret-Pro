@@ -143,6 +143,10 @@ class Cnt extends egret.DisplayObjectContainer{
 
     }
 
+    private cnt_timerRemove(){
+        this.timer['timerRemove']( );
+    }
+
     // 修改顶部文案
     // main => cnt => textTips
     private cnt_upTextTips( tips:string ){

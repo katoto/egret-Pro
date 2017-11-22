@@ -5,6 +5,10 @@ class Field_ball extends eui.UILayer {
     private courtHeight;
     private courtAnHeight;
 
+    // 下单用到
+    private homeid; // 主队id
+    private awayid; // 客队id
+    private matchid; // 对阵id
 
     // 收起的实例（ 总金币的背景切换 ）
     private goldItems_left:egret.Bitmap;
@@ -163,8 +167,8 @@ class Field_ball extends eui.UILayer {
 
     }
 
-    // 更新场地数据
-    private upFieldAllData( leftImg,leftT,leftO,rightImg,rightT,rightO ){
+    // 更新场地数据 赔率， 对阵 ，homeid awayid 
+    private upFieldAllData( leftImg,leftT,leftO,rightImg,rightT,rightO ,homeid ,awayid ,matchid ){
 
         this.leftTeam.source = leftImg ;
         this.leftTitle.text = leftT;
@@ -173,7 +177,23 @@ class Field_ball extends eui.UILayer {
         this.rightOdds.text = rightO;
         this.rightTeam.source = rightImg ;
 
+        this.homeid = homeid;
+        this.awayid = awayid;
+        this.matchid = matchid
+
     }
+
+    // 当前对阵数据
+    private getCurrMatchData(){
+        return {
+            homeid: this.homeid,
+            awayid: this.awayid,
+            matchid: this.matchid,
+            leftOdds: this.leftOdds.text,
+            rightOdds: this.rightOdds.text,
+        }
+    }
+
 
     //  left add icon win   胜利图标
     private addwinIcon_l(){

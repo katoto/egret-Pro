@@ -116,7 +116,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     if( $store['matches'][0] ){
                         console.log( this.field1 )
                         this.field1.upFieldAllData( $store['matches'][0].homelogo , $store['matches'][0].homename ,  $store['matches'][0].homeodds ,
-                        $store['matches'][0].awaylogo , $store['matches'][0].awayname , $store['matches'][0].awayodds )  
+                        $store['matches'][0].awaylogo , $store['matches'][0].awayname , $store['matches'][0].awayodds ,
+                        $store['matches'][0].homeid , $store['matches'][0].awayid , $store['matches'][0].matchid
+                         )  
                         
                         this.addcourtWrap1()
                     }else{
@@ -127,10 +129,12 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     if( $store['matches'][0] && $store['matches'][1] ){
 
                         this.field21.upFieldAllData( $store['matches'][0].homelogo , $store['matches'][0].homename ,  $store['matches'][0].homeodds ,
-                            $store['matches'][0].awaylogo , $store['matches'][0].awayname , $store['matches'][0].awayodds )
+                            $store['matches'][0].awaylogo , $store['matches'][0].awayname , $store['matches'][0].awayodds  ,
+                            $store['matches'][0].homeid , $store['matches'][0].awayid , $store['matches'][0].matchid )
 
                         this.field22.upFieldAllData( $store['matches'][1].homelogo , $store['matches'][1].homename ,  $store['matches'][1].homeodds ,
-                            $store['matches'][1].awaylogo , $store['matches'][1].awayname , $store['matches'][1].awayodds );
+                            $store['matches'][1].awaylogo , $store['matches'][1].awayname , $store['matches'][1].awayodds ,
+                            $store['matches'][1].homeid , $store['matches'][1].awayid , $store['matches'][1].matchid );
 
                         this.addcourtWrap2()
                     }else{
@@ -141,13 +145,18 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 case 4 :
                     if( $store['matches'][0] && $store['matches'][1] && $store['matches'][2] && $store['matches'][3]){
                         this.field41.upFieldAllData( $store['matches'][0].homelogo , $store['matches'][0].homename ,  $store['matches'][0].homeodds ,
-                            $store['matches'][0].awaylogo , $store['matches'][0].awayname , $store['matches'][0].awayodds )
+                            $store['matches'][0].awaylogo , $store['matches'][0].awayname , $store['matches'][0].awayodds ,
+                            $store['matches'][0].homeid , $store['matches'][0].awayid , $store['matches'][0].matchid )
+
                         this.field42.upFieldAllData( $store['matches'][1].homelogo , $store['matches'][1].homename ,  $store['matches'][1].homeodds ,
-                            $store['matches'][1].awaylogo , $store['matches'][1].awayname , $store['matches'][1].awayodds )
+                            $store['matches'][1].awaylogo , $store['matches'][1].awayname , $store['matches'][1].awayodds ,
+                            $store['matches'][1].homeid , $store['matches'][1].awayid , $store['matches'][1].matchid )
                         this.field43.upFieldAllData( $store['matches'][2].homelogo , $store['matches'][2].homename ,  $store['matches'][2].homeodds ,
-                            $store['matches'][2].awaylogo , $store['matches'][2].awayname , $store['matches'][2].awayodds )
+                            $store['matches'][2].awaylogo , $store['matches'][2].awayname , $store['matches'][2].awayodds ,
+                            $store['matches'][2].homeid , $store['matches'][2].awayid , $store['matches'][2].matchid )
                         this.field44.upFieldAllData( $store['matches'][3].homelogo , $store['matches'][3].homename ,  $store['matches'][3].homeodds ,
-                            $store['matches'][3].awaylogo , $store['matches'][3].awayname , $store['matches'][3].awayodds )
+                            $store['matches'][3].awaylogo , $store['matches'][3].awayname , $store['matches'][3].awayodds ,
+                            $store['matches'][3].homeid , $store['matches'][3].awayid , $store['matches'][3].matchid )
                             this.addcourtWrap4()
                     }else{
                         console.error( '场地1/4数据不对' )
@@ -202,13 +211,16 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let y = e.localY + 120;
         let $store = window['store'];
         let currBtnNumber = $store['curr_btn_coin']
+        let currQueryStr = '';
+
+        let currMatchData = this.field41.getCurrMatchData()
+
         if( y>150 && y <260 ){
             console.log( currBtnNumber )
             // 下单
-            await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
-                // 更新 自己头像 金币   下单之后
-                // window['store']['userMySelf'].setMyGold('222');
-            })
+            
+
+
             if( !$store['allCoinObj']['field41'] ){
                 window['Object'].assign($store['allCoinObj'] ,{ 'field41':{
                         coin_left:[],
@@ -221,11 +233,51 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             // 更新自己投注的金额
             if(150<x && x<350){
                 console.log('左边')
+
+                currQueryStr = window['convertToQueryString']({
+                    ck : $store['orderObj'].ck,
+                    golds : $store['curr_btn_coin'] ,
+                    matchid : currMatchData.matchid ,
+                    expect : currMatchData.expect ,
+                    odds : currMatchData.leftOdds ,
+                    homeid : currMatchData.homeid ,
+                    awayid : currMatchData.awayid ,
+                    stageid : $store['orderObj'].stageid ,
+                    selection : $store['orderObj'].selection ,
+                    roomid : $store['orderObj'].roomid ,
+                    node : $store['orderObj'].node ,
+                })
+
+                await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
+                    // 更新 自己头像 金币   下单之后
+                    // window['store']['userMySelf'].setMyGold('222');
+                })
+
                 this.field41.upLeftMyMoney( currBtnNumber )  // 个人金额 ??
                 this.field41.addLeftAllCoin( currBtnNumber ); //  总的金额 ??
                 this.tween_Coin(x,y, $store['allCoinObj']['field41'].coin_left )
             }else if(410<x && x<600){
                 console.log('右边')
+
+                currQueryStr = window['convertToQueryString']({
+                    ck : $store['orderObj'].ck,
+                    golds : $store['curr_btn_coin'] ,
+                    matchid : currMatchData.matchid ,
+                    expect : currMatchData.expect ,
+                    odds : currMatchData.rightOdds ,
+                    homeid : currMatchData.homeid ,
+                    awayid : currMatchData.awayid ,
+                    stageid : $store['orderObj'].stageid ,
+                    selection : $store['orderObj'].selection ,
+                    roomid : $store['orderObj'].roomid ,
+                    node : $store['orderObj'].node ,
+                })
+
+                await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=12315' ,dataType:'json'} ).then(( res )=>{
+                    // 更新 自己头像 金币   下单之后
+                    // window['store']['userMySelf'].setMyGold('222');
+                })
+
                 this.field41.upRightMyMoney( currBtnNumber )
                 this.field41.addRightAllCoin( currBtnNumber ); //  总的金额
                 this.tween_Coin(x,y, $store['allCoinObj']['field41'].coin_right )

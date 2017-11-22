@@ -123,14 +123,27 @@ var Field_ball = (function (_super) {
         // win、左边队伍图标和右边队伍图片会影响金币点击效果
         // 
     };
-    // 更新场地数据
-    Field_ball.prototype.upFieldAllData = function (leftImg, leftT, leftO, rightImg, rightT, rightO) {
+    // 更新场地数据 赔率， 对阵 ，homeid awayid 
+    Field_ball.prototype.upFieldAllData = function (leftImg, leftT, leftO, rightImg, rightT, rightO, homeid, awayid, matchid) {
         this.leftTeam.source = leftImg;
         this.leftTitle.text = leftT;
         this.leftOdds.text = leftO;
         this.rightTitle.text = rightT;
         this.rightOdds.text = rightO;
         this.rightTeam.source = rightImg;
+        this.homeid = homeid;
+        this.awayid = awayid;
+        this.matchid = matchid;
+    };
+    // 当前对阵数据
+    Field_ball.prototype.getCurrMatchData = function () {
+        return {
+            homeid: this.homeid,
+            awayid: this.awayid,
+            matchid: this.matchid,
+            leftOdds: this.leftOdds.text,
+            rightOdds: this.rightOdds.text,
+        };
     };
     //  left add icon win   胜利图标
     Field_ball.prototype.addwinIcon_l = function () {
