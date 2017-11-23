@@ -25,7 +25,7 @@ class Main extends egret.DisplayObjectContainer {
     //  弹窗
     private pop;
     // 聊天实例
-    private popChat;
+    // private popChat;
     // 杯赛过场
     // private change;
 
@@ -177,16 +177,11 @@ class Main extends egret.DisplayObjectContainer {
         this.bottom.y = this.Height;
         this.addChild(this.bottom);
 
-        //聊天区域实例
-        this.popChat = new PopChat();
-        this.popChat.y = this.Height;
-        this.addChild(this.popChat);
+        
 
         // 弹窗实例,竞猜开始or竞猜完毕
         // text-begin_png text-over_png
-
         // this.pop = new Pop(this.Width,this.Height,'text-begin_png');
-
         // this.addChild(this.pop);
 
         //杯赛过场change
@@ -358,6 +353,7 @@ this.webSocket.connectByUrl("ws://10.0.1.167:9000/vguess?uid="+ roomMsg.uid +'&r
                             this.cnt.initUserMsg();
                             // 初始化底部按钮
                             this.bottom.initBtn();
+                            this.bottom['test']();
                         }
                         if( $msgObjBody.matches ){
                             $store.matches =  $msgObjBody.matches; // ? 这个是否用不到了

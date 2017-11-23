@@ -71,7 +71,7 @@ class Cnt extends egret.DisplayObjectContainer{
 
         //倒计时
         this.timer = new Timer();
-        this.timer.anchorOffsetX = this.timer.width/2;
+        this.timer.anchorOffsetX = 100;
         this.timer.x = anWidth;
         this.timer.y = 0;
         this.bgCourtWrap.addChild( this.timer );

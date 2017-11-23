@@ -5,7 +5,7 @@ class Foot extends egret.DisplayObjectContainer{
     private  btn_two:FootBtn
     private  btn_three:FootBtn
 
-    //  底部实例
+    //  底部背景
     private bottom:egret.Sprite
 
     // 底部按钮区域
@@ -28,7 +28,7 @@ class Foot extends egret.DisplayObjectContainer{
          let btnRule:egret.Bitmap = new egret.Bitmap(RES.getRes('rule_png'));
          btnRule.x = 40;
          btnRule.y = 27;
-         this.bottom.addChild(btnRule);
+         this.addChild(btnRule);
          btnRule.touchEnabled = true;
          btnRule.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
             console.log('规则弹窗');
@@ -40,19 +40,23 @@ class Foot extends egret.DisplayObjectContainer{
          let btnChat:egret.Bitmap = new egret.Bitmap(RES.getRes('chat_png'));
          btnChat.x = 670;
          btnChat.y = 20;
-         this.bottom.addChild(btnChat);
+         this.addChild(btnChat);
          btnChat.touchEnabled = true;
          btnChat.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
                 //聊天区域
             console.log('聊天');
             
+            //聊天区域实例
+            let popChat = new PopChat();
+            this.parent.addChild(popChat);
+            
          },this)
 
-
-
-
+                // this.btn_one = new FootBtn(100);
+                // this.btn_two = new FootBtn(500);
+                // this.btn_three = new FootBtn(1000);
+                // this.addChild(this.btn_one)
     }
-
     private initBtn(){
         //三个投注按钮
         if( window['store']['user_info'] && window['store']['user_info'][0] && window['store']['user_info'][0].total ){
@@ -76,9 +80,9 @@ class Foot extends egret.DisplayObjectContainer{
             this.btn_one.x = 188;
             this.btn_two.x = window['store']['stage_Width'] / 2;
             this.btn_three.x = 560;
-            this.bottom.addChild( this.btn_one );
-            this.bottom.addChild( this.btn_two );
-            this.bottom.addChild( this.btn_three );  
+            this.addChild( this.btn_one );
+            this.addChild( this.btn_two );
+            this.addChild( this.btn_three );  
             
             this.btn_one['init_scale']( 1 )
             this.btn_two['init_scale']( 0.9 )
@@ -132,5 +136,9 @@ class Foot extends egret.DisplayObjectContainer{
         // var glowFilter:egret.GlowFilter = new egret.GlowFilter( color, alpha, blurX, blurY,strength, quality, inner, knockout );
         // obj.filters = [ glowFilter ];
         // console.log(222)
+    }
+
+    private test(){
+        alert('test')
     }
 }

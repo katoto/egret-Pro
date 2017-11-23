@@ -32,35 +32,46 @@ class PopChat extends egret.DisplayObjectContainer{
        popBgLayer.addChild(popClose);
        popClose.touchEnabled = true;
        popClose.addEventListener(egret.TouchEvent.TOUCH_TAP,()=>{
-        //    this.removeChild(this);
-        console.log('关闭弹窗')
+            egret.Tween.get(popBgLayer).to({
+                y: 1868  //534+1334
+            },200)
+            setTimeout(()=>{
+                this.parent.removeChild(this);
+                 console.log('关闭弹窗')
+            },100)
        },this)
 
 
        //聊天内容大容器
-        let popScroll:eui.Group = new eui.Group();
+       
 
-       // 聊天内容  ，这里有个bug，向下滚动有时无法复原，待修复
-       for(let i=0;i<10;i++){
-           let meg = this.message('保佑保佑,逢买必中');
-           meg.y = i*80;
-           popScroll.addChild(meg);
-       }
+      
 
-        var group = new eui.Group();
+        let group = new eui.Group();
         
-        group.addChild(popScroll);
+        // 聊天内容  ，这里有个bug，向下滚动有时无法复原，待修复
+        for(let i=0;i<10;i++){
+            let meg = this.message('保佑保佑,逢买必中'+i);
+            meg.y = i*80;
+            group.addChild(meg);
+        }
         //创建一个Scroller
-        var myScroller = new eui.Scroller();
-        //注意位置和尺寸的设置是在Scroller上面，而不是容器上面
+        let myScroller = new eui.Scroller();
+        // //注意位置和尺寸的设置是在Scroller上面，而不是容器上面
         myScroller.width = 750;
         myScroller.height = 482;
         myScroller.y = 52;
         //设置viewport
         myScroller.viewport = group;
         popBgLayer.addChild(myScroller);
-
-
+        if(myScroller.viewport.scrollV==0){
+            myScroller.addEventListener(egret.TouchEvent.TOUCH_MOVE,function(){
+               if( myScroller.viewport.scrollV < -100){
+                   myScroller.viewport.scrollV = 0;
+                   return false;
+               }
+            },this)
+        }
     }
     private message(t){
         let wrap:eui.Group = new eui.Group();
