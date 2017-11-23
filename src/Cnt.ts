@@ -177,18 +177,19 @@ class Cnt extends egret.DisplayObjectContainer{
         let selOtherCoin = $store['userPosition'][$store['userPositionLocal'][uid] - 1];
         console.log( selOtherCoin )
 
-        this.userImg1['setMyGold']('1234')
+        // this.userImg1['setMyGold']('1234')
 
-        this[ 'userImg'+selOtherCoin ]['setMyGold']('21') 
+        // this[ 'userImg'+selOtherCoin ]['setMyGold']('21') 
 
-        console.log(this.userImg1['getCurGold']())
-console.log(this.userImg1['getCurGold']())
-console.log(this.userImg1['getCurGold']())
-console.log(this.userImg1['getCurGold']())
-console.log(this.userImg1['getCurGold']())
-console.log(this.userImg1['getCurGold']())
-console.log(this.userImg1['getCurGold']())
-console.log(this.userImg1['getCurGold']())
+        this.userImg1['getCurGold']()
+        this.userImg2['getCurGold']()
+        this.userImg3['getCurGold']()
+        this.userImg4['getCurGold']()
+        this.userImg5['getCurGold']()
+        this.userImg6['getCurGold']()
+        this.userImg7['getCurGold']()
+        this.userImg8['getCurGold']() 
+        
         // this[ 'userImg'+selOtherCoin ]['setMyGold']( this[ 'userImg'+selOtherCoin ]['getCurGold']() - parseInt( bet_golds ) )
 
         // setMyGold
@@ -351,8 +352,8 @@ console.log(this.userImg1['getCurGold']())
 
             window['store']['emptyUserPosition'].push( delIndex );
 
-            console.log( delIndex )
-            console.log(  window['store']['userPosition'][delIndex -1 ] )
+            // console.log( delIndex )
+            // console.log(  window['store']['userPosition'][delIndex -1 ] )
 
             if( this.bgCourtWrap && this[choseUserImg] && this[choseUserImg].parent ){
                 this.bgCourtWrap.removeChild(this[choseUserImg]);

@@ -353,10 +353,10 @@ this.webSocket.connectByUrl("ws://10.0.1.167:9000/vguess?uid="+ roomMsg.uid +'&r
                             this.cnt.initUserMsg();
                             // 初始化底部按钮
                             this.bottom.initBtn();
-                            this.bottom['test']();
+                            // this.bottom['test']();
                         }
                         if( $msgObjBody.matches ){
-                            $store.matches =  $msgObjBody.matches; // ? 这个是否用不到了
+                            // $store.matches =  $msgObjBody.matches; // ? 这个是否用不到了
                             //  初始化场地容器 数据
                             this.cnt.initFieldCon();
                             // if( $msgObjBody.matches && $msgObjBody.matches.length > 0 ){
