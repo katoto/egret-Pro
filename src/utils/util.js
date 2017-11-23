@@ -1,3 +1,32 @@
+
+/**
+ *  url formate
+ *  @param  arr  key
+ */
+function convertToQueryString (obj) {
+    let result = []
+    if (Object.keys(obj).length <= 0) {
+        return false
+    }
+    Object.keys(obj).forEach(key => {
+        result.push(`${key}=${obj[key]}`)
+    })
+    return result.join('&')
+}
+
+
+/**
+ *  数组转对象
+ *  @param  arr  key
+ */
+function convertArrToObj(arr, key) {
+    let result = {};
+    arr.forEach(item => {
+        result[item[key]] = item;
+    });
+    return result;
+}
+
 /**
  *  用户信息的提取 
  *  @param 

@@ -79,27 +79,28 @@ class userImage extends eui.UILayer {
 
 
         //聊天
-        let chatWrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
-        chatWrap.y = -55;
-
-        this.addChild(chatWrap);
-
-        let myChat = new egret.TextField();
-        myChat.x = 20;
-        myChat.text = '保佑保佑,逢买必中~';
-        myChat.textColor = 0x605182;
-        myChat.size = 24;
-        myChat.height = 45;
-        myChat.verticalAlign = egret.VerticalAlign.MIDDLE;
         
-        let myChatWidth = myChat.width;  //获取文字长度，控制白色背景长度
-        let chatBg:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-myChat_png'));
-        let rect:egret.Rectangle = new egret.Rectangle(22.5,22.5,55,0);
-        chatBg.scale9Grid =rect;
-        chatBg.width = myChatWidth+40;
-        myChat.textAlign = egret.HorizontalAlign.CENTER;
-        chatWrap.addChild(chatBg);
-        chatWrap.addChild(myChat);
+        // let chatWrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
+        // chatWrap.y = -55;
+
+        // this.addChild(chatWrap);
+
+        // let myChat = new egret.TextField();
+        // myChat.x = 20;
+        // myChat.text = '保佑保佑,逢买必中~';
+        // myChat.textColor = 0x605182;
+        // myChat.size = 24;
+        // myChat.height = 45;
+        // myChat.verticalAlign = egret.VerticalAlign.MIDDLE;
+        
+        // let myChatWidth = myChat.width;  //获取文字长度，控制白色背景长度
+        // let chatBg:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-myChat_png'));
+        // let rect:egret.Rectangle = new egret.Rectangle(22.5,22.5,55,0);
+        // chatBg.scale9Grid =rect;
+        // chatBg.width = myChatWidth+40;
+        // myChat.textAlign = egret.HorizontalAlign.CENTER;
+        // chatWrap.addChild(chatBg);
+        // chatWrap.addChild(myChat);
 
 
         

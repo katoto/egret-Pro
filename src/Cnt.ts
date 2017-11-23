@@ -143,6 +143,10 @@ class Cnt extends egret.DisplayObjectContainer{
 
     }
 
+    private cnt_timerRemove(){
+        this.timer['timerRemove']( );
+    }
+
     // 修改顶部文案
     // main => cnt => textTips
     private cnt_upTextTips( tips:string ){
@@ -291,7 +295,7 @@ class Cnt extends egret.DisplayObjectContainer{
         window['store']['userPositionID'].splice( userI ,0 ,uid +'' );
         this.bgCourtWrap.addChild(this[choseUserImg]);
         // //  注意层级控制，不然事件会有问题 ！
-        // this.bgCourtWrap.setChildIndex( this.fieldContain  , this.bgCourtWrap.getChildIndex( this[choseUserImg] ))    
+        this.bgCourtWrap.setChildIndex( this.fieldContain  , this.bgCourtWrap.getChildIndex( this[choseUserImg] ))    
 
     }
     // 用户 离开  new
@@ -322,7 +326,7 @@ class Cnt extends egret.DisplayObjectContainer{
             console.log( delIndex )
             console.log(  window['store']['userPosition'][delIndex -1 ] )
 
-            if( this.bgCourtWrap && this[choseUserImg] ){
+            if( this.bgCourtWrap && this[choseUserImg] && this[choseUserImg].parent ){
                 this.bgCourtWrap.removeChild(this[choseUserImg]);
             }
         }

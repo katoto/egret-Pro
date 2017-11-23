@@ -10,7 +10,7 @@ class Timer extends egret.DisplayObjectContainer{
     private timer:egret.Timer ;
 
     // 核心 this.timerNum
-    private timerNum:number = 5;
+    private timerNum:number = null;
     private drawTimer(){
         //倒计时
         //倒计时-舞台
@@ -29,7 +29,6 @@ class Timer extends egret.DisplayObjectContainer{
         this.wrapTimer.addChild(textTimer);
          //倒计时-动态文字
         this.textSS = new egret.TextField();
-        this.textSS.text = (this.timerNum).toString() + '"';
         this.textSS.textColor = 0xffffff; 
         this.textSS.size = 30;
         this.textSS.x = 114;
@@ -55,22 +54,18 @@ class Timer extends egret.DisplayObjectContainer{
         this.timerNum = parseInt( setTime ) ;
         this.timer = new egret.Timer( 1000, parseInt( setTime ) );
         this.timer.addEventListener(egret.TimerEvent.TIMER, this.timerFunc, this);
-        this.timer.addEventListener(egret.TimerEvent.TIMER_COMPLETE, this.timerComFunc, this);
+        this.timer.addEventListener(egret.TimerEvent.TIMER_COMPLETE, this.timerRemove, this);
         //竞猜开始提示弹窗弹出，然后开始执行倒计时
         // await this.setStartPop() ;
 
-    }
-
-    // 投注时间开始
-    private timeStart(){
         this.timer.start();
         this.addChild(this.wrapTimer);
     }
+
     // 等待竞猜开始
     private setStartPop (){
-
-        this.timer.start();
-        this.addChild(this.wrapTimer);
+        // this.timer.start();
+        // this.addChild(this.wrapTimer);
 
         // return new Promise( function( resolve ,reject ){
         //     let start_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-begin_png');
@@ -93,7 +88,7 @@ class Timer extends egret.DisplayObjectContainer{
         this.textSS.text = (this.timerNum).toString()+ '"';
     }
 
-    private timerComFunc(event: egret.TimerEvent) {
+    private timerRemove( ) {
         egret.log('倒计时结束');
 
         if( this.wrapTimer.parent ){
