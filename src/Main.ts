@@ -353,6 +353,7 @@ this.webSocket.connectByUrl("ws://10.0.1.167:9000/vguess?uid="+ roomMsg.uid +'&r
                             this.cnt.initUserMsg();
                             // 初始化底部按钮
                             this.bottom.initBtn();
+                            this.bottom['test']();
                         }
                         if( $msgObjBody.matches ){
                             $store.matches =  $msgObjBody.matches; // ? 这个是否用不到了
