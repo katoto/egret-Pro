@@ -214,7 +214,7 @@ class Cnt extends egret.DisplayObjectContainer{
     }
 
     //  初始的用户信息  new
-    private initUserMsg(){
+    public initUserMsg(){
         let len = window['store']['user_info'].length
         if( !len || len === undefined){
             len = 0

@@ -57,7 +57,7 @@ class Foot extends egret.DisplayObjectContainer{
                 // this.btn_three = new FootBtn(1000);
                 // this.addChild(this.btn_one)
     }
-    private initBtn(){
+    public initBtn(){
         //三个投注按钮
         if( window['store']['user_info'] && window['store']['user_info'][0] && window['store']['user_info'][0].total ){
             if( parseInt ( window['store']['user_info'][0].total ) < 100000  ){
@@ -123,7 +123,6 @@ class Foot extends egret.DisplayObjectContainer{
             window['store']['curr_btn_coin'] = window['store']['curr_btn_arr'][2]
         }
     }
-
     private hignColor(){
         // var color:number = 0xffd02f;        /// 光晕的颜色，十六进制，不包含透明度
         // var alpha:number = 1;             /// 光晕的颜色透明度，是对 color 参数的透明度设定。有效值为 0.0 到 1.0。例如，0.8 设置透明度值为 80%。
@@ -136,9 +135,5 @@ class Foot extends egret.DisplayObjectContainer{
         // var glowFilter:egret.GlowFilter = new egret.GlowFilter( color, alpha, blurX, blurY,strength, quality, inner, knockout );
         // obj.filters = [ glowFilter ];
         // console.log(222)
-    }
-
-    private test(){
-        alert('test')
     }
 }

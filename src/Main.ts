@@ -142,7 +142,6 @@ class Main extends egret.DisplayObjectContainer {
      * 创建游戏场景 ( 申请房间 、建立websocket)
      */
     async createGameScene() {
-
         let $store = window['store'];
         this.Width = $store['stage_Width'] = this.stage.stageWidth;
         this.Height = $store['stage_Height'] = this.stage.stageHeight;
@@ -218,7 +217,6 @@ class Main extends egret.DisplayObjectContainer {
         */
 
         this.initStage();
-
         $store['this_main'] = this;
 
         if( $store['env_variable'].ck === '' || !$store['env_variable'].ck ){
@@ -231,7 +229,6 @@ class Main extends egret.DisplayObjectContainer {
             })
 
         }
-
         await window['getJson']( { type:'get' ,url :  $store['initDomain']+'/api/join?ck='+ $store['env_variable'].ck ,dataType:'json'} ).then(( res )=>{
                 // 申请房间
                 console.log( res )
@@ -270,6 +267,7 @@ this.webSocket.connectByUrl("ws://10.0.1.167:9000/vguess?uid="+ roomMsg.uid +'&r
     private initStage(){
         // uid  还得有个uid ..
         let $store = window['store'];
+        
         // 桌子缩放计算 
         $store.scale = 0.91;
         // 取ck 按src+ck 的形式，防止串号 = 替换 $
@@ -320,14 +318,12 @@ this.webSocket.connectByUrl("ws://10.0.1.167:9000/vguess?uid="+ roomMsg.uid +'&r
      */
     private onReceiveMess(e:egret.Event):void{
         let $store = window['store'];
-
 // event.updateAfterEvent();  //  什么时候进行强制刷新 ??????手机上用户立场 舞台不刷新 
         let msg = this.webSocket.readUTF();
         if(~msg.indexOf('You said')|| !~msg.indexOf('{')){
             // console.log(msg)
         }else{
             // 可能的变量
-
             //  后台数据  分发
             var msgObj = JSON.parse( msg );
             let $msgObjBody = msgObj.body;
@@ -353,7 +349,6 @@ this.webSocket.connectByUrl("ws://10.0.1.167:9000/vguess?uid="+ roomMsg.uid +'&r
                             this.cnt.initUserMsg();
                             // 初始化底部按钮
                             this.bottom.initBtn();
-                            this.bottom['test']();
                         }
                         if( $msgObjBody.matches ){
                             $store.matches =  $msgObjBody.matches; // ? 这个是否用不到了
