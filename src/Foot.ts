@@ -46,6 +46,10 @@ class Foot extends egret.DisplayObjectContainer{
                 //聊天区域
             console.log('聊天');
             
+            //聊天区域实例
+            let popChat = new PopChat();
+            this.parent.addChild(popChat);
+            
          },this)
 
 

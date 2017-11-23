@@ -25,7 +25,7 @@ class Main extends egret.DisplayObjectContainer {
     //  弹窗
     private pop;
     // 聊天实例
-    private popChat;
+    // private popChat;
     // 杯赛过场
     // private change;
 
@@ -173,30 +173,25 @@ class Main extends egret.DisplayObjectContainer {
         this.bottom.y = this.Height;
         this.addChild(this.bottom);
 
-        //聊天区域实例
-        this.popChat = new PopChat();
-        this.popChat.y = this.Height;
-        this.addChild(this.popChat);
+        
 
         // 弹窗实例,竞猜开始or竞猜完毕
         // text-begin_png text-over_png
-
         // this.pop = new Pop(this.Width,this.Height,'text-begin_png');
-
         // this.addChild(this.pop);
 
         //杯赛过场change
-        let change = new Change();
-        change.x = 0;
-        this.addChild(change);
-        setTimeout(function(){
-            egret.Tween.get(change).to({x:-750},200);   //如果这里用this.change ，就没办法执行这个动画，原因未知
-            console.log('move')
-        },2000)
+        // let change = new Change();
+        // change.x = 0;
+        // this.addChild(change);
+        // setTimeout(function(){
+        //     egret.Tween.get(change).to({x:-750},200);   //如果这里用this.change ，就没办法执行这个动画，原因未知
+        //     console.log('move')
+        // },2000)
 
-        //杯赛晋升
-        let promotion = new Promotion();
-        this.addChild(promotion);
+        // //杯赛晋升
+        // let promotion = new Promotion();
+        // this.addChild(promotion);
 
         
 
