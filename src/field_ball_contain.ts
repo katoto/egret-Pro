@@ -103,11 +103,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
     //  初始化 场地 （记录位置）
     private initFieldMsg(){
-        console.log(' 初始化场地 ')
         let fieldStr = 'field';
         let $store = window['store']
         let matchLen = $store['matches'].length
-        console.log( matchLen );
+        console.log( matchLen +'matchListLength' );
         $store['matFindField'] = {};  // 切换场地 清空数据
         if( $store['matches'] && matchLen ){
             switch( matchLen ){
@@ -118,7 +117,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         $store['matches'][0].awaylogo , $store['matches'][0].awayname , $store['matches'][0].awayodds ,
                         $store['matches'][0].homeid , $store['matches'][0].awayid , $store['matches'][0].matchid
                          )  
-                        
                         this.addcourtWrap1()
 
                         // 记录位置  切换
@@ -1178,7 +1176,89 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
      *  上一步修改 他人用户金币额度 
      */
     private other_Coin( matchid:string , selection:string , uidLocal:string , bet_golds:string ){
+        let $store = window['store'];
+        let currFieldStr = '';
+        let currFieldLocalStr = '';
+
+        let newUser_x = null ;
+        let newUser_y = null ;
+
+        let newField_x = null ;
+        let newField_y = null ;
+        console.log( 'field_ball_contain' )
+
+        // 飞向  场地  位置
+        if( $store['matFindField'][ matchid ] ){
+            currFieldStr = $store['matFindField'][ matchid ] ;
+            // if( selection ){
+            //     if( selection === '1' ){
+            //         currFieldLocalStr =  currFieldStr +'_l' ;
+            //     }else if( selection === '2' ){
+            //         currFieldLocalStr =  currFieldStr +'_r' ;
+
+            //     }
+            // }
+        }
+
+        console.log( this[ currFieldStr ] )
+        switch( currFieldStr ){
+            case 'field1':
+                // y>352 && y <650
+                newField_y = Math.random() * 298 + 352 ;
+            ;break;
+            case 'field21': 
+                // y>220 && y <395
+                newField_y = Math.random() * 175 + 220;
+            ;break;
+            case 'field22':
+                // y>594 && y <770
+                newField_y = Math.random() * 176 + 594;
+            ;break;
+
+            case 'field41':
+                //y>150 && y <260
+                newField_y = Math.random() * 110 + 150;
+            ;break;
+            case 'field42':
+                // y>350 && y <460
+                newField_y = Math.random() * 110 + 350;
+            ;break;
+            case 'field43':
+                // y>550 && y <660
+                newField_y = Math.random() * 110 + 550;
+            ;break;
+            case 'field44':
+                // y>750 && y <860
+                newField_y = Math.random() * 110 + 750;
+            ;break;
+        }
+        
+        if( selection ){
+            if( selection === '1' ){
+                // 150<x && x<350
+                newField_x = Math.random() * 200 + 150;
+
+            }else if( selection === '2' ){
+                // 410<x && x<600
+                newField_x = Math.random() * 200 + 410;
+            }
+        }
+
+        console.log( $store['coin_local'][ currFieldLocalStr ] )
+
+        // 头像位置
         console.log( uidLocal )
+        newUser_x = $store['userPositionObj'][uidLocal].x;
+        newUser_y =  $store['userPositionObj'][uidLocal].y;
+
+
+        console.log(' curr local ')
+        console.warn( newUser_x )
+        console.warn( newUser_y )
+
+        console.warn( newField_x )
+        console.warn( newField_y )
+
 
     }
 

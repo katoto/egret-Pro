@@ -1,6 +1,5 @@
 /**
  *  虚拟杯
- * 
  * ( 用户信息和场地优化 new实例减少 )
  */
 
@@ -177,8 +176,6 @@ class Main extends egret.DisplayObjectContainer {
         this.bottom.y = this.Height;
         this.addChild(this.bottom);
 
-        
-
         // 弹窗实例,竞猜开始or竞猜完毕
         // text-begin_png text-over_png
         // this.pop = new Pop(this.Width,this.Height,'text-begin_png');
@@ -198,9 +195,6 @@ class Main extends egret.DisplayObjectContainer {
         // let promotion = new Promotion();
         // this.addChild(promotion);
 
-        
-
-
 
         // 层级控制
         // this.setChildIndex(header,0)
@@ -210,7 +204,6 @@ class Main extends egret.DisplayObjectContainer {
         // this.setChildIndex(this.pop,4)
         // this.setChildIndex(this.popChampionRecord,4)
 
-
         /*
         优化：
         1.图片合并，使用纹理集
@@ -218,8 +211,6 @@ class Main extends egret.DisplayObjectContainer {
         */
 
         this.initStage();
-
-        $store['this_main'] = this;
 
         if( $store['env_variable'].ck === '' || !$store['env_variable'].ck ){
             console.error('请带上ck');
@@ -356,7 +347,7 @@ this.webSocket.connectByUrl("ws://10.0.1.167:9000/vguess?uid="+ roomMsg.uid +'&r
                             // this.bottom['test']();
                         }
                         if( $msgObjBody.matches ){
-                            // $store.matches =  $msgObjBody.matches; // ? 这个是否用不到了
+                            $store.matches =  $msgObjBody.matches; 
                             //  初始化场地容器 数据
                             this.cnt.initFieldCon();
                             // if( $msgObjBody.matches && $msgObjBody.matches.length > 0 ){

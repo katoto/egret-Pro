@@ -150,7 +150,6 @@ class Cnt extends egret.DisplayObjectContainer{
     // 修改顶部文案
     // main => cnt => textTips
     private cnt_upTextTips( tips:string ){
-        console.log( tips )
         this.textT['upTextTips']( tips )
     }
 
@@ -175,12 +174,13 @@ class Cnt extends egret.DisplayObjectContainer{
         // 处理 他人金币的金币减少 .
         let $store = window['store'] ;
         let selOtherCoin = $store['userPosition'][$store['userPositionLocal'][uid] - 1];
-        console.log( selOtherCoin )
+        let baseImg = 'userImg' ; 
+        console.log(  )
 
         // this.userImg1['setMyGold']('1234')
 
         // this[ 'userImg'+selOtherCoin ]['setMyGold']('21') 
-
+        console.log( baseImg + selOtherCoin  )
         this.userImg1['getCurGold']()
         this.userImg2['getCurGold']()
         this.userImg3['getCurGold']()
@@ -188,12 +188,35 @@ class Cnt extends egret.DisplayObjectContainer{
         this.userImg5['getCurGold']()
         this.userImg6['getCurGold']()
         this.userImg7['getCurGold']()
-        this.userImg8['getCurGold']() 
-        
+        this.userImg8['getCurGold']()
+        this.userImg9['getCurGold']()  
+
+        console.log('++++++++++++++++++++++++++')
+        this[ baseImg + selOtherCoin ]['getCurGold']()
+        this[ baseImg + 1 ]['getCurGold']()
+        this[ baseImg + 2 ]['getCurGold']()
+        this[ baseImg + 3 ]['getCurGold']()
+        this[ baseImg + 4 ]['getCurGold']()
+        this[ baseImg + 5 ]['getCurGold']()
+        this[ baseImg + 6 ]['getCurGold']()
+        this[ baseImg + 7 ]['getCurGold']()
+        this[ baseImg + 8 ]['getCurGold']()
+        this[ baseImg + 9 ]['getCurGold']()
+
+        // this.userImg1['setMyGold']('1')
+        // this.userImg2['setMyGold']('2')
+        // this.userImg3['setMyGold']('3')
+        // this.userImg4['setMyGold']('4')
+        // this.userImg5['setMyGold']('5')
+        // this.userImg6['setMyGold']('6')
+        // this.userImg7['setMyGold']('7')
+        // this.userImg8['setMyGold']('8')
+        // this.userImg9['setMyGold']('9')
+
         // this[ 'userImg'+selOtherCoin ]['setMyGold']( this[ 'userImg'+selOtherCoin ]['getCurGold']() - parseInt( bet_golds ) )
 
         // setMyGold
-        this.fieldContain.other_Coin( matchid , selection , selOtherCoin - 1 , bet_golds );
+        // this.fieldContain.other_Coin( matchid , selection , selOtherCoin - 1 , bet_golds );
 
     }
 
@@ -266,9 +289,7 @@ class Cnt extends egret.DisplayObjectContainer{
             var choseUserImg = 'userImg'+(i+1) ;
             var firstUserData = null;
 
-
-
-            if( i === 0 && window['store']['user_info'][i].uid === window['store']['env_variable']['uid'] && this[choseUserImg] ){
+            if(  window['store']['user_info'][i].uid === window['store']['env_variable']['uid'] && this[choseUserImg] && i === 0 ){
                 // 正常位置
                 this[choseUserImg].upDataUseMsg( window['formateName'] ( window['store']['user_info'][i].username ) , window['store']['user_info'][i].photo ,
                 window['store']['user_info'][i].total ); 
@@ -287,7 +308,6 @@ class Cnt extends egret.DisplayObjectContainer{
                     this[choseUserImg].upDataUseMsg( window['formateName'] ( firstUserData.username ) , firstUserData.photo ,
                      firstUserData.total );                 
                 }
-
             }
 
             //  中奖的处理 ！

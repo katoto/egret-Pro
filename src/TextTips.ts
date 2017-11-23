@@ -41,8 +41,7 @@ class TextTips extends egret.DisplayObjectContainer{
      */
     private upTextTips( tips:string ){
         
-        console.log(1234)
-        console.log(tips)
+        // console.log(tips)
         if(tips === ''){
             if( this.wrap.parent ){
                 this.removeChild(this.wrap);
