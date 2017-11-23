@@ -159,7 +159,7 @@ class Cnt extends egret.DisplayObjectContainer{
         return bgMask;
     }
 
-    // 金币发出  main ==> cnt ==> fieldcontain  
+    // 金币发出 ( 分发 )  main ==> cnt ==> fieldcontain  
     //  维护了一套uid 的位置 
     // 
     async cnt_sendEndCoin( uid:string , msg:string ){
@@ -168,6 +168,34 @@ class Cnt extends egret.DisplayObjectContainer{
         await this.fieldContain.sendEndCoin( startString , uid.toString() )
         // 中奖展示 
     }
+
+    // 他人金币 发出
+    //
+    private cnt_Other_Coin( matchid:string , selection:string , uid:string , bet_golds:string ){
+        // 处理 他人金币的金币减少 .
+        let $store = window['store'] ;
+        let selOtherCoin = $store['userPosition'][$store['userPositionLocal'][uid] - 1];
+        console.log( selOtherCoin )
+
+        this.userImg1['setMyGold']('1234')
+
+        this[ 'userImg'+selOtherCoin ]['setMyGold']('21') 
+
+        console.log(this.userImg1['getCurGold']())
+console.log(this.userImg1['getCurGold']())
+console.log(this.userImg1['getCurGold']())
+console.log(this.userImg1['getCurGold']())
+console.log(this.userImg1['getCurGold']())
+console.log(this.userImg1['getCurGold']())
+console.log(this.userImg1['getCurGold']())
+console.log(this.userImg1['getCurGold']())
+        // this[ 'userImg'+selOtherCoin ]['setMyGold']( this[ 'userImg'+selOtherCoin ]['getCurGold']() - parseInt( bet_golds ) )
+
+        // setMyGold
+        this.fieldContain.other_Coin( matchid , selection , selOtherCoin - 1 , bet_golds );
+
+    }
+
 
     // 金币收起  main ==> cnt ==> fieldcontain
     private cnt_collectCoin(){
@@ -242,21 +270,21 @@ class Cnt extends egret.DisplayObjectContainer{
             if( i === 0 && window['store']['user_info'][i].uid === window['store']['env_variable']['uid'] && this[choseUserImg] ){
                 // 正常位置
                 this[choseUserImg].upDataUseMsg( window['formateName'] ( window['store']['user_info'][i].username ) , window['store']['user_info'][i].photo ,
-                window['formateGold']( window['store']['user_info'][i].total )); 
+                window['store']['user_info'][i].total ); 
             }else{
 
                 firstUserData = window['store']['user_info'][0]
                 if( this[choseUserImg] ){
                     this[choseUserImg].upDataUseMsg( window['formateName'] ( window['store']['user_info'][i].username ) , window['store']['user_info'][i].photo ,
-                    window['formateGold']( window['store']['user_info'][i].total ));
+                     window['store']['user_info'][i].total );
                 }
                 if(  window['store']['user_info'][i].uid === window['store']['env_variable']['uid'] && this[choseUserImg] ){
                      var choseUserImgCopy = 'userImg1' ;
                      this[choseUserImgCopy].upDataUseMsg( window['formateName'] ( window['store']['user_info'][i].username ) , window['store']['user_info'][i].photo ,
-                    window['formateGold']( window['store']['user_info'][i].total )); 
+                    window['store']['user_info'][i].total ); 
 
                     this[choseUserImg].upDataUseMsg( window['formateName'] ( firstUserData.username ) , firstUserData.photo ,
-                    window['formateGold']( firstUserData.total ));                 
+                     firstUserData.total );                 
                 }
 
             }
@@ -268,7 +296,7 @@ class Cnt extends egret.DisplayObjectContainer{
             // },1000)
 
             this.bgCourtWrap.addChild(this[choseUserImg]);
-            console.log( choseUserImg  )
+            // console.log( choseUserImg  )
         }
     }
 
@@ -282,14 +310,14 @@ class Cnt extends egret.DisplayObjectContainer{
         window['store']['userPositionLocal'][uid] = userI
         userI = userI - 1 ;
         var choseUserImg = 'userImg' + ( userI+1 )
-        console.log( choseUserImg )
+        // console.log( choseUserImg )
         if( photo === '' ){
             photo = 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=547138142,3998729701&fm=27&gp=0.jpg'
         }
 
         if( this[choseUserImg] ){
             this[choseUserImg].upDataUseMsg( window['formateName'] (username) ,photo  ,
-            window['formateGold'] ( total ) );
+            total );
         }
 
         window['store']['userPositionID'].splice( userI ,0 ,uid +'' );
