@@ -13,6 +13,8 @@ class userImage extends eui.UILayer {
     private myName:egret.TextField;
     private myChat:egret.TextField;
 
+    private numCoin
+
     private addToStage() {
         let bg:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
         bg.width = 94;
@@ -101,23 +103,31 @@ class userImage extends eui.UILayer {
         // myChat.textAlign = egret.HorizontalAlign.CENTER;
         // chatWrap.addChild(chatBg);
         // chatWrap.addChild(myChat);
-
-
-        
          
 
     }
 
     // 用户头像的 名称 头像 金币
-    private upDataUseMsg( name:string ,src:string,gold:string ){
-        this.myGold.text = gold;
+    private upDataUseMsg( name:string ,src:string,gold:string  ){
+        this.myGold.text = window['formateGold']( gold );
         this.User_img.source = src;
         this.myName.text = name;
+        this.numCoin = gold;
     }
 
-    /* 更新金币数 */
-    public setMyGold( currGold:string ){
-        this.myGold.text = currGold;
+    /* 更新金币数  传进来的是对的 */
+    private setMyGold( currGold:string ){
+        this.myGold.text = window['formateGold']( currGold );
+        this.numCoin = currGold;
+    }
+
+    private getUserName(){
+        return this.myName.text
+    }
+    // 当前用户的金币
+    private getCurGold(){
+        console.log( this.numCoin )
+        return this.numCoin
     }
 
     /*  设置边框值和显示 win 高亮边框 */
@@ -129,6 +139,7 @@ class userImage extends eui.UILayer {
         this.addChild(this.bgBorder);
         this.addChild(this.winGold);
     }
+
     /**
      *  隐藏 中奖的样式
      */

@@ -223,7 +223,6 @@ class Main extends egret.DisplayObjectContainer {
             console.error('请带上ck');
             // 临时ck
             await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=1238815' ,dataType:'json'} ).then(( res )=>{
-                console.log(res)
                 $store['env_variable'].ck = res.data.ck;
                 $store['orderObj'].ck = res.data.ck;
             })
@@ -231,7 +230,6 @@ class Main extends egret.DisplayObjectContainer {
         }
         await window['getJson']( { type:'get' ,url :  $store['initDomain']+'/api/join?ck='+ $store['env_variable'].ck ,dataType:'json'} ).then(( res )=>{
                 // 申请房间
-                console.log( res )
                 if( res.status && res.status === '100' ){
                     // 保存房间信息
                     let roomMsg = res.data;
@@ -317,6 +315,8 @@ this.webSocket.connectByUrl("ws://10.0.1.167:9000/vguess?uid="+ roomMsg.uid +'&r
      *  onReceiveMess  websock 接收消息
      */
     private onReceiveMess(e:egret.Event):void{
+
+
         let $store = window['store'];
 // event.updateAfterEvent();  //  什么时候进行强制刷新 ??????手机上用户立场 舞台不刷新 
         let msg = this.webSocket.readUTF();
@@ -490,6 +490,9 @@ this.webSocket.connectByUrl("ws://10.0.1.167:9000/vguess?uid="+ roomMsg.uid +'&r
 
                         // 更新对应的总的数据 。。。
                         
+                        //  执行金币动画  
+                        // matchid:string , selection:string , uid:string , bet_golds:string
+                        this.cnt.cnt_Other_Coin( $msgObjBody.matchid , $msgObjBody.selection ,$msgObjBody.uid, $msgObjBody.bet_golds );
                     }
 
                 ;break;        
@@ -569,9 +572,12 @@ window['store'] = {
     cur_room_info:{
         // 当前房间信息
     },
-
+    // 比赛id 找场地
+    matFindField:{  
+        // 112300330:'field41'
+    },
     coin_Num:{
-        // 112228430:{ // eg
+        // 112228430:{ // eg 累加金币
         //     home_golds:'0',
         //     away_golds:'0',
         //     my_golds_l:'0',
