@@ -4,7 +4,6 @@ class Foot extends egret.DisplayObjectContainer{
     private  btn_one:FootBtn
     private  btn_two:FootBtn
     private  btn_three:FootBtn
-
     //  底部背景
     private bottom:egret.Sprite
 
@@ -105,7 +104,7 @@ class Foot extends egret.DisplayObjectContainer{
             this.btn_one['init_scale']( 1 );
             window['store']['curr_btn_coin'] = window['store']['curr_btn_arr'][0] 
         }
-
+         
     }
     private btn_twoDown( e:egret.Event){
         this.btn_one['init_scale']( 0.9 )

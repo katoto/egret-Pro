@@ -307,8 +307,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
      *  onReceiveMess  websock 接收消息
      */
     private onReceiveMess(e:egret.Event):void{
-
-
         let $store = window['store'];
 // event.updateAfterEvent();  //  什么时候进行强制刷新 ??????手机上用户立场 舞台不刷新 
         let msg = this.webSocket.readUTF();
@@ -322,7 +320,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
             switch ( msgObj.messageid ) {
                     // 进场的数据 2000
                 case '2000':
-
                     if( $msgObjBody ){
                         // 房间信息
                         if( $msgObjBody.room_info ){
@@ -382,6 +379,16 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                             // if( $msgObjBody.matches && $msgObjBody.matches.length > 0 ){
                             //     $store.matchesObj = window['convertArrToObj']( $msgObjBody.matches , 'matchid')
                             // }
+                        }
+                        if( $msgObjBody.user_info ){
+
+                            $store.user_info =  $msgObjBody.user_info ;
+
+                            // 初始化用户信息
+                            this.cnt.initUserMsg();
+                            
+                            this.bottom.initBtn();
+
                         }
                         // 
                     }
@@ -485,7 +492,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         
                         //  执行金币动画  
                         // matchid:string , selection:string , uid:string , bet_golds:string
-                        
+
                         // this.cnt.cnt_Other_Coin( $msgObjBody.matchid , $msgObjBody.selection ,$msgObjBody.uid, $msgObjBody.bet_golds );
                     }
 

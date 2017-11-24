@@ -11,6 +11,7 @@ class FootBtn extends egret.DisplayObjectContainer {
         this.scaleY = 0.9;
         this.y= 45;
         this.touchEnabled = true;
+        this.addEventListener(egret.TouchEvent.TOUCH_TAP,this.loadSound,this)
         this._this = this;
     }
     private drawBtn(n){
@@ -46,5 +47,15 @@ class FootBtn extends egret.DisplayObjectContainer {
     }
     private get_scaleVal(){
         return this._this.scaleX
+    }
+     //加载声音
+    private loadSound(): void {
+        var loader:egret.URLLoader = new egret.URLLoader();
+        loader.addEventListener(egret.Event.COMPLETE, function loadOver(event:egret.Event) {
+            var sound:egret.Sound = loader.data;
+            sound.play(0,1)
+        }, this);
+        loader.dataFormat = egret.URLLoaderDataFormat.SOUND;
+        loader.load(new egret.URLRequest("resource/assets/music-gold.mp3"));
     }
 }
