@@ -22,8 +22,9 @@ class Penalty01 extends eui.UILayer {
         this.topTeam.height = 24;
         this.topTeam.x = 38;
         this.topTeam.y = 2;
+        this.topTeam.mask = bgMask;  // 这里见鬼了，添加遮罩会使整个队伍logo不显示，原因找不到。
         this.addChild(this.topTeam);
-        // this.topTeam.mask = bgMask;  // 这里见鬼了，添加遮罩会使整个队伍logo不显示，原因找不到。
+       
         //插入遮罩层
         let bgMask02:egret.Bitmap = new egret.Bitmap(RES.getRes('penalty-mask_png'));
         bgMask02.x = 38;
@@ -36,8 +37,8 @@ class Penalty01 extends eui.UILayer {
         this.bottomTeam.height = 24;
         this.bottomTeam.x = 38;
         this.bottomTeam.y = 30;
+         // this.bottomTeam.mask = bgMask02;// 这里见鬼了，添加遮罩会使整个队伍logo不显示，原因找不到。
         this.addChild(this.bottomTeam);
-        // this.bottomTeam.mask = bgMask02;// 这里见鬼了，添加遮罩会使整个队伍logo不显示，原因找不到。
        
 
          //上边队伍点球情况  (上面进球y=1，下面y=34， x>90&&x<426)
