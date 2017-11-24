@@ -1,19 +1,4 @@
 
-/**
- *  url formate
- *  @param  arr  key
- */
-function convertToQueryString (obj) {
-    let result = []
-    if (Object.keys(obj).length <= 0) {
-        return false
-    }
-    Object.keys(obj).forEach(key => {
-        result.push(`${key}=${obj[key]}`)
-    })
-    return result.join('&')
-}
-
 
 /**
  *  数组转对象
@@ -66,7 +51,7 @@ var platform = (function(){
  *  @param len 随机数组长度
  */
 function randomArray( len ){
-    var i,index,temp,arr = [len];
+    let i,index,temp,arr = [len];
     len = typeof( len ) === 'string' ? 8 :len;
     for(i=1;i<=len;i++ ){
         arr[i-1] = i;
@@ -184,5 +169,3 @@ function getJson( conf ){
     } )
 }
 
-
-    

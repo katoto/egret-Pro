@@ -106,7 +106,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let fieldStr = 'field';
         let $store = window['store']
         let matchLen = $store['matches'].length
-        console.log( matchLen +'matchListLength' );
+        console.log( matchLen +'matchListLength+++' );
         $store['matFindField'] = {};  // 切换场地 清空数据
         if( $store['matches'] && matchLen ){
             switch( matchLen ){
@@ -1171,11 +1171,64 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
     }
 
     /**
+     *  创建 他人 投注的金币
+     *  地址 start_x  start_y  end_x end_y  arr 
+     */
+    private create_other_Coin( start_x:any , start_y:any , end_x:any , end_y:any ,currArr:any , moreCoin:Boolean){
+
+        let goldArr = [] ; // 多个金币的情况
+        if( !moreCoin ){
+            let gold = new Gold();
+            gold.anchorOffsetX = gold.width/2;
+            gold.anchorOffsetY = gold.height/2;
+            gold.x = start_x ;
+            gold.y = start_y ;
+            currArr.push( gold )
+            this.addChild(gold);
+            egret.Tween.get( gold ).to( { x: end_x,y: end_y },200 );
+        }else{
+            // more  飞金币
+            for( let i=0;i<4; i++ ){
+                let gold = new Gold();
+                gold.anchorOffsetX = gold.width/2;
+                gold.anchorOffsetY = gold.height/2;
+                gold.x = start_x ;
+                gold.y = start_y ;
+                goldArr.push( gold );
+                this.addChild(gold);
+            }
+
+            setTimeout(()=>{
+                egret.Tween.get( goldArr[0] ).to({
+                    x: parseInt( end_x ) + 2 ,
+                    y: parseInt( end_y ) + 3 ,
+                }, 500 )
+                
+                setTimeout(()=>{
+                    egret.Tween.get( goldArr[1] ).to({
+                        x: parseInt( end_x ) + 6 ,
+                        y: parseInt( end_y ) + 8 ,
+                    }, 500 )
+
+                },80)
+                setTimeout(()=>{
+                    egret.Tween.get( goldArr[2] ).to({
+                        x: parseInt( end_x ) + 12 ,
+                        y: parseInt( end_y ) + 15 ,
+                    }, 500 )
+                },180 )
+            },0)
+
+        }
+    }
+
+    /**
      *  他人投注 金币 位置 实例收集  (更新总的金币)
      *  @param  uidLocal ? matchid selection
      *  上一步修改 他人用户金币额度 
      */
     private other_Coin( matchid:string , selection:string , uidLocal:string , bet_golds:string ){
+
         let $store = window['store'];
         let currFieldStr = '';
         let currFieldLocalStr = '';
@@ -1185,19 +1238,21 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
         let newField_x = null ;
         let newField_y = null ;
+
+        let $store_coinNum = $store['coin_Num'];  
+
+        let moreCoin = false;   
         console.log( 'field_ball_contain' )
 
+        if( parseInt ( bet_golds ) > 10000 ){
+            moreCoin = true ;  // 是否按等级投注更多金币
+        }
         // 飞向  场地  位置
         if( $store['matFindField'][ matchid ] ){
             currFieldStr = $store['matFindField'][ matchid ] ;
-            // if( selection ){
-            //     if( selection === '1' ){
-            //         currFieldLocalStr =  currFieldStr +'_l' ;
-            //     }else if( selection === '2' ){
-            //         currFieldLocalStr =  currFieldStr +'_r' ;
 
-            //     }
-            // }
+        }else{
+            console.error('not find matchid at field_ball_contain' );
         }
 
         console.log( this[ currFieldStr ] )
@@ -1205,31 +1260,154 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             case 'field1':
                 // y>352 && y <650
                 newField_y = Math.random() * 298 + 352 ;
+
+                if( !$store['allCoinObj']['field1'] ){
+                    window['Object'].assign($store['allCoinObj'] ,{ 'field1':{
+                            coin_left:[],
+                            coin_right:[],
+                            coin_left_local: $store['coin_local']['field1_l'],
+                            coin_right_local: $store['coin_local']['field1_r']
+                        }
+                    })
+                }
+                if( !$store_coinNum[matchid] ){
+                    $store_coinNum[matchid] = {
+                        home_golds : null,
+                        my_golds_l : null,
+                        my_golds_r : null ,
+                        away_golds: null ,
+                    }
+                }
             ;break;
+
             case 'field21': 
                 // y>220 && y <395
                 newField_y = Math.random() * 175 + 220;
+
+                if( !$store['allCoinObj']['field21'] ){
+                    window['Object'].assign($store['allCoinObj'] ,{ 'field21':{
+                            coin_left:[],
+                            coin_right:[],
+                            coin_left_local: $store['coin_local']['field21_l'],
+                            coin_right_local: $store['coin_local']['field21_r']
+                        }
+                    })
+                }
+                if( !$store_coinNum[matchid] ){
+                    $store_coinNum[matchid] = {
+                        home_golds : null,
+                        my_golds_l : null,
+                        my_golds_r : null ,
+                        away_golds: null ,
+                    }
+                }
+
             ;break;
             case 'field22':
                 // y>594 && y <770
                 newField_y = Math.random() * 176 + 594;
+                if( !$store['allCoinObj']['field22'] ){
+                    window['Object'].assign($store['allCoinObj'] ,{ 'field22':{
+                            coin_left:[],
+                            coin_right:[],
+                            coin_left_local: $store['coin_local']['field22_l'],
+                            coin_right_local: $store['coin_local']['field22_r']
+                        }
+                    })
+                }
+                if( !$store_coinNum[matchid] ){
+                    $store_coinNum[matchid] = {
+                        home_golds : null,
+                        my_golds_l : null,
+                        my_golds_r : null ,
+                        away_golds: null ,
+                    }
+                }
             ;break;
 
             case 'field41':
                 //y>150 && y <260
                 newField_y = Math.random() * 110 + 150;
+                if( !$store['allCoinObj']['field41'] ){
+                    window['Object'].assign($store['allCoinObj'] ,{ 'field41':{
+                            coin_left:[],
+                            coin_right:[],
+                            coin_left_local: $store['coin_local']['field41_l'],
+                            coin_right_local: $store['coin_local']['field41_r']
+                        }
+                    })
+                }
+                if( !$store_coinNum[matchid] ){
+                    $store_coinNum[matchid] = {
+                        home_golds : null,
+                        my_golds_l : null,
+                        my_golds_r : null ,
+                        away_golds: null ,
+                    }
+                }                
             ;break;
             case 'field42':
                 // y>350 && y <460
                 newField_y = Math.random() * 110 + 350;
+                if( !$store['allCoinObj']['field42'] ){
+                    window['Object'].assign($store['allCoinObj'] ,{ 'field42':{
+                            coin_left:[],
+                            coin_right:[],
+                            coin_left_local: $store['coin_local']['field42_l'],
+                            coin_right_local: $store['coin_local']['field42_r']
+                        }
+                    })
+                }
+                if( !$store_coinNum[matchid] ){
+                    $store_coinNum[matchid] = {
+                        home_golds : null,
+                        my_golds_l : null,
+                        my_golds_r : null ,
+                        away_golds: null ,
+                    }
+                }                
             ;break;
             case 'field43':
                 // y>550 && y <660
                 newField_y = Math.random() * 110 + 550;
+                if( !$store['allCoinObj']['field43'] ){
+                    window['Object'].assign($store['allCoinObj'] ,{ 'field43':{
+                            coin_left:[],
+                            coin_right:[],
+                            coin_left_local: $store['coin_local']['field43_l'],
+                            coin_right_local: $store['coin_local']['field43_r']
+                        }
+                    })
+                }
+                if( !$store_coinNum[matchid] ){
+                    $store_coinNum[matchid] = {
+                        home_golds : null,
+                        my_golds_l : null,
+                        my_golds_r : null ,
+                        away_golds: null ,
+                    }
+                }                
             ;break;
             case 'field44':
                 // y>750 && y <860
                 newField_y = Math.random() * 110 + 750;
+                if( !$store['allCoinObj']['field44'] ){
+                    window['Object'].assign($store['allCoinObj'] ,{ 'field44':{
+                            coin_left:[],
+                            coin_right:[],
+                            coin_left_local: $store['coin_local']['field44_l'],
+                            coin_right_local: $store['coin_local']['field44_r']
+                        }
+                    })
+                }
+                if( !$store_coinNum[matchid] ){
+                    $store_coinNum[matchid] = {
+                        home_golds : null,
+                        my_golds_l : null,
+                        my_golds_r : null ,
+                        away_golds: null ,
+                    }
+                }                
             ;break;
         }
         
@@ -1237,10 +1415,12 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             if( selection === '1' ){
                 // 150<x && x<350
                 newField_x = Math.random() * 200 + 150;
+                this.create_other_Coin( newUser_x , newUser_y , newField_x , newField_y , $store['allCoinObj'][currFieldStr].coin_left , moreCoin )
 
             }else if( selection === '2' ){
                 // 410<x && x<600
                 newField_x = Math.random() * 200 + 410;
+                this.create_other_Coin( newUser_x , newUser_y , newField_x , newField_y , $store['allCoinObj'][currFieldStr].coin_right , moreCoin )
             }
         }
 
@@ -1258,6 +1438,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
         console.warn( newField_x )
         console.warn( newField_y )
+
 
 
     }

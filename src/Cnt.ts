@@ -175,11 +175,11 @@ class Cnt extends egret.DisplayObjectContainer{
         let $store = window['store'] ;
         let selOtherCoin = $store['userPosition'][$store['userPositionLocal'][uid] - 1];
         let baseImg = 'userImg' ; 
-        console.log(  )
 
         // this.userImg1['setMyGold']('1234')
 
         // this[ 'userImg'+selOtherCoin ]['setMyGold']('21') 
+        console.log('---------------------')
         console.log( baseImg + selOtherCoin  )
         this.userImg1['getCurGold']()
         this.userImg2['getCurGold']()
@@ -202,16 +202,20 @@ class Cnt extends egret.DisplayObjectContainer{
         this[ baseImg + 7 ]['getCurGold']()
         this[ baseImg + 8 ]['getCurGold']()
         this[ baseImg + 9 ]['getCurGold']()
+        console.log('==========================')
+        // setTimeout(()=>{
+        //     console.log('222222222222222222')
+        //     this.userImg1['setMyGold']('11')
+        //     this.userImg2['setMyGold']('22')
+        //     this.userImg3['setMyGold']('33')
+        //     this.userImg4['setMyGold']('44')
+        //     this.userImg5['setMyGold']('55')
+        //     this.userImg6['setMyGold']('66')
+        //     this.userImg7['setMyGold']('77')
+        //     this.userImg8['setMyGold']('88')
+        //     this.userImg9['setMyGold']('99')
+        // },1500)
 
-        // this.userImg1['setMyGold']('1')
-        // this.userImg2['setMyGold']('2')
-        // this.userImg3['setMyGold']('3')
-        // this.userImg4['setMyGold']('4')
-        // this.userImg5['setMyGold']('5')
-        // this.userImg6['setMyGold']('6')
-        // this.userImg7['setMyGold']('7')
-        // this.userImg8['setMyGold']('8')
-        // this.userImg9['setMyGold']('9')
 
         // this[ 'userImg'+selOtherCoin ]['setMyGold']( this[ 'userImg'+selOtherCoin ]['getCurGold']() - parseInt( bet_golds ) )
 
@@ -266,7 +270,7 @@ class Cnt extends egret.DisplayObjectContainer{
     }
 
     //  初始的用户信息  new
-    private initUserMsg(){
+    public initUserMsg(){
         let len = window['store']['user_info'].length
         if( !len || len === undefined){
             len = 0

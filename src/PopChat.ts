@@ -40,16 +40,8 @@ class PopChat extends egret.DisplayObjectContainer{
                  console.log('关闭弹窗')
             },100)
        },this)
-
-
-       //聊天内容大容器
        
-
-      
-
         let group = new eui.Group();
-        
-        // 聊天内容  ，这里有个bug，向下滚动有时无法复原，待修复
         for(let i=0;i<10;i++){
             let meg = this.message('保佑保佑,逢买必中'+i);
             meg.y = i*80;
@@ -57,18 +49,18 @@ class PopChat extends egret.DisplayObjectContainer{
         }
         //创建一个Scroller
         let myScroller = new eui.Scroller();
-        // //注意位置和尺寸的设置是在Scroller上面，而不是容器上面
+        //注意位置和尺寸的设置是在Scroller上面，而不是容器上面
         myScroller.width = 750;
         myScroller.height = 482;
         myScroller.y = 52;
         //设置viewport
         myScroller.viewport = group;
         popBgLayer.addChild(myScroller);
+        // 因为ios 10.3.2 滚动会有bug
         if(myScroller.viewport.scrollV==0){
             myScroller.addEventListener(egret.TouchEvent.TOUCH_MOVE,function(){
-               if( myScroller.viewport.scrollV < -100){
+               if( myScroller.viewport.scrollV < 0){
                    myScroller.viewport.scrollV = 0;
-                   return false;
                }
             },this)
         }

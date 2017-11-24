@@ -141,7 +141,6 @@ class Main extends egret.DisplayObjectContainer {
      * 创建游戏场景 ( 申请房间 、建立websocket)
      */
     async createGameScene() {
-
         let $store = window['store'];
         this.Width = $store['stage_Width'] = this.stage.stageWidth;
         this.Height = $store['stage_Height'] = this.stage.stageHeight;
@@ -215,13 +214,12 @@ class Main extends egret.DisplayObjectContainer {
         if( $store['env_variable'].ck === '' || !$store['env_variable'].ck ){
             console.error('请带上ck');
             // 临时ck
-            await window['getJson']( { type:'get' ,url :'http://10.0.1.167:9899/login/guest?deviceid=1238815' ,dataType:'json'} ).then(( res )=>{
+            await window['getJson']( { type:'get' ,url :'http://10.0.1.41:9899/login/guest?deviceid=1238815' ,dataType:'json'} ).then(( res )=>{
                 $store['env_variable'].ck = res.data.ck;
                 $store['orderObj'].ck = res.data.ck;
             })
 
         }
-
         await window['getJson']( { type:'get' ,url :  $store['initDomain']+'/api/join?ck='+ $store['env_variable'].ck ,dataType:'json'} ).then(( res )=>{
                 // 申请房间
                 if( res.status && res.status === '100' ){
@@ -239,7 +237,7 @@ class Main extends egret.DisplayObjectContainer {
                         this.webSocket.addEventListener( egret.IOErrorEvent.IO_ERROR ,this.onIOError ,this );
                         this.webSocket.addEventListener( egret.Event.CLOSE ,this.onCloseSock ,this );
 
-this.webSocket.connectByUrl("ws://10.0.1.167:9000/vguess?uid="+ roomMsg.uid +'&roomid='+roomMsg.roomid +'&port='+roomMsg.port+'&node='+roomMsg.node+'&ip='+roomMsg.ip+'&create_time='+roomMsg.create_time );
+this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&roomid='+roomMsg.roomid +'&port='+roomMsg.port+'&node='+roomMsg.node+'&ip='+roomMsg.ip+'&create_time='+roomMsg.create_time );
 
                     }catch(e){
                         alert('websock error')
@@ -259,6 +257,7 @@ this.webSocket.connectByUrl("ws://10.0.1.167:9000/vguess?uid="+ roomMsg.uid +'&r
     private initStage(){
         // uid  还得有个uid ..
         let $store = window['store'];
+        
         // 桌子缩放计算 
         $store.scale = 0.91;
         // 取ck 按src+ck 的形式，防止串号 = 替换 $
@@ -311,14 +310,12 @@ this.webSocket.connectByUrl("ws://10.0.1.167:9000/vguess?uid="+ roomMsg.uid +'&r
 
 
         let $store = window['store'];
-
 // event.updateAfterEvent();  //  什么时候进行强制刷新 ??????手机上用户立场 舞台不刷新 
         let msg = this.webSocket.readUTF();
         if(~msg.indexOf('You said')|| !~msg.indexOf('{')){
             // console.log(msg)
         }else{
             // 可能的变量
-
             //  后台数据  分发
             var msgObj = JSON.parse( msg );
             let $msgObjBody = msgObj.body;
@@ -344,7 +341,7 @@ this.webSocket.connectByUrl("ws://10.0.1.167:9000/vguess?uid="+ roomMsg.uid +'&r
                             this.cnt.initUserMsg();
                             // 初始化底部按钮
                             this.bottom.initBtn();
-                            // this.bottom['test']();
+
                         }
                         if( $msgObjBody.matches ){
                             $store.matches =  $msgObjBody.matches; 
@@ -494,6 +491,7 @@ this.webSocket.connectByUrl("ws://10.0.1.167:9000/vguess?uid="+ roomMsg.uid +'&r
                 ;break;        
             }
             setTimeout(()=>{
+                // this.cnt.cnt_Other_Coin('10015131' , '1' ,'' ,'111' )
                 // console.log('收起金币 测试 ok')
                 // this.cnt.cnt_collectCoin()
                 // this.cnt.cnt_sendEndCoin( '1002999','' )
@@ -539,8 +537,8 @@ this.webSocket.connectByUrl("ws://10.0.1.167:9000/vguess?uid="+ roomMsg.uid +'&r
 }
 
 window['store'] = {
-    orderDomain:'http://10.0.1.167:9899',
-    initDomain:'http://10.0.1.167:2332',
+    orderDomain:'http://10.0.1.41:9899',
+    initDomain:'http://10.0.1.41:2332',
     this_main: null ,
 
     stage_Width: null ,
@@ -603,7 +601,7 @@ window['store'] = {
 
     // 记录 投注的金币数 ( 可能的金币 )
     allCoinObj:{
-        // field_41_obj:{
+        // field41:{
         //     coin_left:[],
         //     coin_right:[],
         //     coin_left_local:{ x:null ,y:null },
