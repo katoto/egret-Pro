@@ -474,9 +474,19 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         this.removeChild( this.stop_pop );
                     }
 
-
                     // 模拟显示中奖
+                    if( $msgObjBody ){
 
+                        if( $msgObjBody.result &&  $msgObjBody.result.length > 0 ){
+                            this.cnt.showWinLocation( $msgObjBody.result )
+                        }else{
+                            console.warn('2005 data error not find result');
+                        }
+
+                        setTimeout(()=>{
+                            this.cnt.cnt_removeAllWinIcon() ;
+                        },5000)
+                    }
 
                 ;break;
                 case'2006':
@@ -551,11 +561,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 // this.cnt.cnt_collectCoin()
                 // this.cnt.cnt_sendEndCoin( '1002999','' )
                 // this.cnt.cnt_sendEndCoin( '1002988','' )
-
-                // this.cnt.cnt_upTextTips( '比赛开始' )
-                // setTimeout(()=>{
-                //     this.cnt.cnt_upTextTips( '' )
-                // },1000)
 
                 // this.cnt.cnt_timer('6')
 

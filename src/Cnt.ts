@@ -179,7 +179,7 @@ class Cnt extends egret.DisplayObjectContainer{
         // let uid = '10015140' ;
         // await this.fieldContain.sendEndCoin( startString , uid.toString() )
         // 中奖展示 
-        
+
     }
 
     // 他人金币 发出
@@ -244,6 +244,31 @@ class Cnt extends egret.DisplayObjectContainer{
     // 金币收起  main ==> cnt ==> fieldcontain
     private cnt_collectCoin(){
         this.fieldContain.collectCoin();
+    }
+
+    // 显示 winIcon main ==》 cnt ==> fieldcontain
+    /**
+     *   显示出最近的中奖 matchid  winid 
+     */
+    private showWinLocation ( res05:any ) {
+        // 显示中奖 
+        console.log( '+++++++++++++++++++++++++++' );
+        for( let i=0 ,len = res05.length ;i< len ; i++ ){
+            if( res05[i].matchid && res05[i].winid ){
+                console.log( res05[i].matchid );
+                console.log( res05[i].winid );
+                console.log( '-------------------' );
+
+                this.fieldContain.showWinLocation(res05[i].matchid , res05[i].winid ); 
+            }
+        }
+
+    }
+    /**
+     *  清楚中奖 main ==》 cnt ==> fieldcontain
+     */
+    private cnt_removeAllWinIcon(){
+        this.fieldContain.removeAllWinIcon()
     }
 
     // 调研初始化场地
@@ -391,10 +416,9 @@ class Cnt extends egret.DisplayObjectContainer{
                 window['store']['userPositionLocal'][uid] = null ;
             }
 
-
             window['store']['emptyUserPosition'].push( delIndex );
-            console.log( delIndex )
 
+            // console.log( delIndex )
             if( this.bgCourtWrap && this[choseUserImg] && this[choseUserImg].parent ){
                 this.bgCourtWrap.removeChild(this[choseUserImg]);
             }
