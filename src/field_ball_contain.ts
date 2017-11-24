@@ -221,7 +221,13 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let currMatchData = this.field41.getCurrMatchData()
 
         if( y>150 && y <260 ){
-            console.log( currBtnNumber )
+
+            if($store['unableClick']){
+                // 不可点击
+                alert('现在不能投注')
+                return false ;
+            }
+
             if( !$store['allCoinObj']['field41'] ){
                 window['Object'].assign($store['allCoinObj'] ,{ 'field41':{
                         coin_left:[],
@@ -335,6 +341,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let currMatchData = this.field42.getCurrMatchData()
 
         if( y>350 && y <460 ){
+            if($store['unableClick']){
+                // 不可点击
+                return false ;
+            }
 
             if( !$store['allCoinObj']['field42'] ){
                 window['Object'].assign($store['allCoinObj'] ,{ 'field42':{
@@ -450,6 +460,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         console.log( currMatchData )
 
         if( y>550 && y <660 ){
+            if($store['unableClick']){
+                // 不可点击
+                return false ;
+            }
 
             if( !$store['allCoinObj']['field43'] ){
                 window['Object'].assign($store['allCoinObj'] ,{ 'field43':{
@@ -563,7 +577,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let currQueryStr = '';
         let currMatchData = this.field44.getCurrMatchData();
         if( y>750 && y <860 ){
-
+            if($store['unableClick']){
+                // 不可点击
+                return false ;
+            }
             if( !$store['allCoinObj']['field44'] ){
                 window['Object'].assign($store['allCoinObj'] ,{ 'field44':{
                         coin_left:[],
@@ -677,7 +694,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let currMatchData = this.field21.getCurrMatchData();
 
         if( y>220 && y <395 ){
-
+            if($store['unableClick']){
+                // 不可点击
+                return false ;
+            }
             if( !$store['allCoinObj']['field21'] ){
                 window['Object'].assign($store['allCoinObj'] ,{ 'field21':{
                         coin_left:[],
@@ -790,7 +810,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         console.log(x);
         console.log(y)
         if( y>594 && y <770 ){
-
+            if($store['unableClick']){
+                // 不可点击
+                return false ;
+            }
             if( !$store['allCoinObj']['field22'] ){
                 window['Object'].assign($store['allCoinObj'] ,{ 'field22':{
                         coin_left:[],
@@ -903,7 +926,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let currMatchData = this.field1.getCurrMatchData();
 
         if( y>352 && y <650 ){
-
+            if($store['unableClick']){
+                // 不可点击
+                return false ;
+            }
             if( !$store['allCoinObj']['field1'] ){
                 window['Object'].assign($store['allCoinObj'] ,{ 'field1':{
                         coin_left:[],
@@ -1175,8 +1201,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
      *  地址 start_x  start_y  end_x end_y  arr 
      */
     private create_other_Coin( start_x:any , start_y:any , end_x:any , end_y:any ,currArr:any , moreCoin:Boolean){
-
-        let goldArr = [] ; // 多个金币的情况
+        let goldArr = [] ;
         if( !moreCoin ){
             let gold = new Gold();
             gold.anchorOffsetX = gold.width/2;
@@ -1194,6 +1219,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 gold.anchorOffsetY = gold.height/2;
                 gold.x = start_x ;
                 gold.y = start_y ;
+                currArr.push( gold );
                 goldArr.push( gold );
                 this.addChild(gold);
             }
