@@ -1046,30 +1046,30 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             setTimeout(()=>{
                 //  看 金币 定位，先把这段注释掉
                 // 显示出总的金额  ,并清除所有金币 改变总的背景
-                // for( let i=0;i<objLen;i++ ){
-                //     // 清除左边金币
-                //     if( $store['allCoinObj'][allCoinKeys[i]] && $store['allCoinObj'][allCoinKeys[i]].coin_left ){
-                //         for( let j=0,len = $store['allCoinObj'][allCoinKeys[i]].coin_left.length ;j<len;j++ ){
-                //             if( $store['allCoinObj'][allCoinKeys[i]].coin_left[j].parent ){
-                //                 this.removeChild( $store['allCoinObj'][allCoinKeys[i]].coin_left[j] )
-                //             }
-                //         }
-                //         // 全局修改left收起背景
-                //         this[allCoinKeys[i]].upLeftCoinBg()
-                //         $store['allCoinObj'][allCoinKeys[i]].coin_left = [] ; // 回收
-                //     }
-                //     // 清除右边金币
-                //     if( $store['allCoinObj'][allCoinKeys[i]] && $store['allCoinObj'][allCoinKeys[i]].coin_right ){
-                //         for( let j=0,len = $store['allCoinObj'][allCoinKeys[i]].coin_right.length ;j<len;j++ ){
-                //             if( $store['allCoinObj'][allCoinKeys[i]].coin_right[j].parent ){
-                //                 this.removeChild( $store['allCoinObj'][allCoinKeys[i]].coin_right[j] )
-                //             }
-                //         }
-                //         // 全局修改right收起背景
-                //         this[allCoinKeys[i]].upRightCoinBg()
-                //         $store['allCoinObj'][allCoinKeys[i]].coin_right = [] ; // 回收
-                //     }
-                // }
+                for( let i=0;i<objLen;i++ ){
+                    // 清除左边金币
+                    if( $store['allCoinObj'][allCoinKeys[i]] && $store['allCoinObj'][allCoinKeys[i]].coin_left ){
+                        for( let j=0,len = $store['allCoinObj'][allCoinKeys[i]].coin_left.length ;j<len;j++ ){
+                            if( $store['allCoinObj'][allCoinKeys[i]].coin_left[j].parent ){
+                                this.removeChild( $store['allCoinObj'][allCoinKeys[i]].coin_left[j] )
+                            }
+                        }
+                        // 全局修改left收起背景
+                        this[allCoinKeys[i]].upLeftCoinBg()
+                        $store['allCoinObj'][allCoinKeys[i]].coin_left = [] ; // 回收
+                    }
+                    // 清除右边金币
+                    if( $store['allCoinObj'][allCoinKeys[i]] && $store['allCoinObj'][allCoinKeys[i]].coin_right ){
+                        for( let j=0,len = $store['allCoinObj'][allCoinKeys[i]].coin_right.length ;j<len;j++ ){
+                            if( $store['allCoinObj'][allCoinKeys[i]].coin_right[j].parent ){
+                                this.removeChild( $store['allCoinObj'][allCoinKeys[i]].coin_right[j] )
+                            }
+                        }
+                        // 全局修改right收起背景
+                        this[allCoinKeys[i]].upRightCoinBg()
+                        $store['allCoinObj'][allCoinKeys[i]].coin_right = [] ; // 回收
+                    }
+                }
             },200)
         }
     }
@@ -1256,6 +1256,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         }
 
         console.log( this[ currFieldStr ] )
+
         switch( currFieldStr ){
             case 'field1':
                 // y>352 && y <650
@@ -1419,34 +1420,24 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         }
         newUser_y =  $store['userPositionObj'][uidLocal].y + 72;
 
-
+        // 更新金额
         if( selection ){
             if( selection === '1' ){
                 // 150<x && x<350
                 newField_x = Math.random() * 200 + 150;
                 this.create_other_Coin( newUser_x , newUser_y , newField_x , newField_y , $store['allCoinObj'][currFieldStr].coin_left , moreCoin )
-
+                this[currFieldStr].addLeftAllCoin( window['formateGold']( $store_coinNum[matchid]['home_golds'] ) ); //  总的金额  
             }else if( selection === '2' ){
                 // 410<x && x<600
                 newField_x = Math.random() * 200 + 410;
+                this[currFieldStr].addRightAllCoin( window['formateGold']( $store_coinNum[matchid]['away_golds'] ) ); //  总的金额  
                 this.create_other_Coin( newUser_x , newUser_y , newField_x , newField_y , $store['allCoinObj'][currFieldStr].coin_right , moreCoin )
             }
         }
 
         console.log( $store['coin_local'][ currFieldLocalStr ] )
-
-        // 头像位置
-        console.log( uidLocal )
-
-
-
+        // 头像位置  位置可以调整
         console.log(' curr local ')
-        console.warn( newUser_x )
-        console.warn( newUser_y )
-
-        console.warn( newField_x )
-        console.warn( newField_y )
-
 
 
     }
