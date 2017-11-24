@@ -97,7 +97,7 @@ class Main extends egret.DisplayObjectContainer {
             RES.loadGroup("preload");
         }
         if (event.groupName == "preload") {
-            this.stage.removeChild(this.loadingView);
+            // this.stage.removeChild(this.loadingView);
             RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
             RES.removeEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);
             RES.removeEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
@@ -386,7 +386,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
 
                             // 初始化用户信息
                             this.cnt.initUserMsg();
-                            
+
                             this.bottom.initBtn();
 
                         }
@@ -521,6 +521,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
      */
     private onSocketOpen():void{
         // this.webSocket.writeUTF(JSON.stringify(start))
+        this.stage.removeChild(this.loadingView);
         setInterval(()=>{
             this.webSocket.writeUTF('p')
 

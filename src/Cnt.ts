@@ -383,6 +383,7 @@ class Cnt extends egret.DisplayObjectContainer{
     // 用户 离开  new
     private removeUserImage( uid:string ){
         var delIndex = 0;
+
         // for( var i=0 ,len = window['store']['userPositionID'].length;i<len;i++){
         //     if( window['store']['userPositionID'][i] === uid ){
         //         delIndex = i;
@@ -401,12 +402,9 @@ class Cnt extends egret.DisplayObjectContainer{
             return false;
         }
 
-        // delIndex = delIndex + 1;
-
         if( delIndex ){
             let choseUserImg = 'userImg'+ ( delIndex ) ;
             // 更新数组
-            // window['store']['userPositionID'].splice( delIndex - 1 , 1 );
 
             if( window['store']['userPositionLocal'][uid] ){
                 window['store']['userPositionLocal'][uid] = null ;
