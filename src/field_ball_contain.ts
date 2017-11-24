@@ -112,7 +112,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             switch( matchLen ){
                 case 1 :
                     if( $store['matches'][0] ){
-                        console.log( this.field1 )
                         this.field1.upFieldAllData( $store['matches'][0].homelogo , $store['matches'][0].homename ,  $store['matches'][0].homeodds ,
                         $store['matches'][0].awaylogo , $store['matches'][0].awayname , $store['matches'][0].awayodds ,
                         $store['matches'][0].homeid , $store['matches'][0].awayid , $store['matches'][0].matchid
@@ -224,7 +223,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
             if($store['unableClick']){
                 // 不可点击
-                alert('现在不能投注')
+                alert('现在不能投注,bug 被我设置了')
                 return false ;
             }
 
@@ -1461,10 +1460,26 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             }
         }
 
-        console.log( $store['coin_local'][ currFieldLocalStr ] )
+        // console.log( $store['coin_local'][ currFieldLocalStr ] )
         // 头像位置  位置可以调整
-        console.log(' curr local ')
+    }
 
+    /**
+     *  查找 win
+     *  @param matchid 比赛id  找到对应场地  winid 找 左右 
+     *  @return  _l  left  _r  right
+     */
+    private findWinLocation( matchid:string ,  winid:string ){
+        let $store = window['store'] ;
+        
+        if( matchid && $store['matFindField'] && $store['matFindField'][matchid] ){
+            
+            return this[ $store['matFindField'][matchid] ].findLocal( winid );
+
+        }else{
+            // 没找到 赢的比赛
+            console.warn( '没找到 赢的比赛' )
+        }
 
     }
 

@@ -474,10 +474,17 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         this.removeChild( this.stop_pop );
                     }
 
+
+                    // 模拟显示中奖
+
+
                 ;break;
                 case'2006':
                     // 正在派奖
                     this.cnt.cnt_upTextTips('正在派奖...');
+
+
+
                 ;break;
 
                 case '2007':

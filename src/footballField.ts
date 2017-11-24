@@ -343,4 +343,21 @@ class Field_ball extends eui.UILayer {
             this.addChild(this.rightMyMoneyBox);
         }
     }
+
+    // findWinLocation  ==> findLocal 
+    /**
+     *   @return  _l  left  _r  right
+     */
+    private findLocal( winid:string ){
+        if( winid ){
+            if( this.homeid === winid ){
+                return '_l'
+            }else if( this.awayid === winid ){
+                return '_r'
+            }
+        }else{
+            console.warn('footballfield findLocal not find winid')
+        }
+        
+    }
 }
