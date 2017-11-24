@@ -276,14 +276,14 @@ class Cnt extends egret.DisplayObjectContainer{
         // 调整原数组
 
         let len = window['store']['user_info'].length
+        let newUserInfo = [];
+        let firstUser = null ;
+
         if( !len || len === undefined){
             len = 0
         }
 
-        let newUserInfo = [];
-        let firstUser = null ;
-
-        for( let i =0 ;i<len ;i++ ){
+        for( let i =0 ;i< len ;i++ ){
             if(  window['store']['user_info'][i].uid === window['store']['env_variable']['uid'] ){
                 firstUser = window['store']['user_info'][i];
             }else{
@@ -291,9 +291,10 @@ class Cnt extends egret.DisplayObjectContainer{
             }
         }
         newUserInfo.unshift( firstUser )
-        
         window['store']['user_info'] = newUserInfo ;
 
+        console.log( newUserInfo )
+        window['store']['emptyUserPosition'] = [];
         for( let i=0;i<9 ; i++ ){
             if( i >=len ){
                 window['store']['emptyUserPosition'].push( i+1 )
@@ -304,8 +305,11 @@ class Cnt extends egret.DisplayObjectContainer{
                 window['store']['user_info'][i].photo = 'http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1213.png'
             }
             if( window['store']['user_info'][i].uid ){
-                window['store']['userPositionID'].push( window['store']['user_info'][i].uid )
+
+                // window['store']['userPositionID'].push( window['store']['user_info'][i].uid )
+
                 window['store']['userPositionLocal'][window['store']['user_info'][i].uid] = ( i + 1 ) 
+
             }else{
                 console.error( 'websock 无uid' )
             }
@@ -313,8 +317,10 @@ class Cnt extends egret.DisplayObjectContainer{
             var choseUserImg = 'userImg'+(i+1) ;
             // var firstUserData = null;
 
-            this[choseUserImg].upDataUseMsg( window['formateName'] ( window['store']['user_info'][i].username ) , window['store']['user_info'][i].photo ,
-            window['store']['user_info'][i].total ); 
+            if( this[choseUserImg] ){
+                this[choseUserImg].upDataUseMsg( window['formateName'] ( window['store']['user_info'][i].username ) , window['store']['user_info'][i].photo ,
+                    window['store']['user_info'][i].total );
+            }
 
             // if(  window['store']['user_info'][i].uid === window['store']['env_variable']['uid'] && this[choseUserImg] && i === 0 ){
             //     // 正常位置
@@ -357,8 +363,7 @@ class Cnt extends egret.DisplayObjectContainer{
             return false;
         }
         window['store']['userPositionLocal'][uid] = userI
-        userI = userI - 1 ;
-        var choseUserImg = 'userImg' + ( userI+1 )
+        var choseUserImg = 'userImg' + ( userI )
         // console.log( choseUserImg )
         if( photo === '' ){
             photo = 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=547138142,3998729701&fm=27&gp=0.jpg'
@@ -369,7 +374,7 @@ class Cnt extends egret.DisplayObjectContainer{
             total );
         }
 
-        window['store']['userPositionID'].splice( userI ,0 ,uid +'' );
+        // window['store']['userPositionID'].splice( userI ,0 ,uid +'' );
         this.bgCourtWrap.addChild(this[choseUserImg]);
         // //  注意层级控制，不然事件会有问题 ！
         this.bgCourtWrap.setChildIndex( this.fieldContain  , this.bgCourtWrap.getChildIndex( this[choseUserImg] ))    
@@ -378,35 +383,44 @@ class Cnt extends egret.DisplayObjectContainer{
     // 用户 离开  new
     private removeUserImage( uid:string ){
         var delIndex = 0;
-        for( var i=0 ,len = window['store']['userPositionID'].length;i<len;i++){
-            if( window['store']['userPositionID'][i] === uid ){
-                delIndex = i;
-                break;
-            }
+        // for( var i=0 ,len = window['store']['userPositionID'].length;i<len;i++){
+        //     if( window['store']['userPositionID'][i] === uid ){
+        //         delIndex = i;
+        //         break;
+        //     }
+        // }
+
+        if( window['store']['userPositionLocal'][uid] ){
+            delIndex = window['store']['userPositionLocal'][uid] ;
         }
-        console.log( window['store']['userPositionID'][delIndex] );
+
+        // console.log( window['store']['userPositionID'][delIndex] ); 
+
         if( delIndex === 0 ){
             console.error( 'not find uid');
             return false;
         }
-        delIndex = delIndex + 1;
+
+        // delIndex = delIndex + 1;
+
         if( delIndex ){
-            let choseUserImg = 'userImg'+ ( delIndex) ;
+            let choseUserImg = 'userImg'+ ( delIndex ) ;
             // 更新数组
-            window['store']['userPositionID'].splice( delIndex - 1 , 1 );
+            // window['store']['userPositionID'].splice( delIndex - 1 , 1 );
 
             if( window['store']['userPositionLocal'][uid] ){
                 window['store']['userPositionLocal'][uid] = null ;
             }
 
-            window['store']['emptyUserPosition'].push( delIndex );
 
-            // console.log( delIndex )
+            window['store']['emptyUserPosition'].push( delIndex );
+            console.log( delIndex )
             // console.log(  window['store']['userPosition'][delIndex -1 ] )
 
             if( this.bgCourtWrap && this[choseUserImg] && this[choseUserImg].parent ){
                 this.bgCourtWrap.removeChild(this[choseUserImg]);
             }
         }
+
     }
 }
