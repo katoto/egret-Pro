@@ -158,14 +158,28 @@ class Cnt extends egret.DisplayObjectContainer{
         return bgMask;
     }
 
-    // 金币发出 ( 分发 )  main ==> cnt ==> fieldcontain  
-    //  维护了一套uid 的位置 
+    // 金币发出 ( 分发 )   
+    //  settle-list 处理函数 更新用户的金币（延迟一下吧）
+    //  通过matchid 找到 开始位置 通过uid 找到头像位置
     // 
-    async cnt_sendEndCoin( uid:string , msg:string ){
+    async settle_listFn( settleData:any ){
 
-        let startString = 'field41_l';
-        await this.fieldContain.sendEndCoin( startString , uid.toString() )
+        // let choseUser = null ;
+
+        // if( settleData ){
+        //     for( let i=0,len = settleData.length ;i<len ; i++ ){
+        //         if( settleData[i].prize_info &&  settleData[i].prize_info.length > 0 ){
+
+
+        //         }
+        //     }
+        // }
+
+        // let startString = 'field41_l';
+        // let uid = '10015140' ;
+        // await this.fieldContain.sendEndCoin( startString , uid.toString() )
         // 中奖展示 
+        
     }
 
     // 他人金币 发出
@@ -173,6 +187,7 @@ class Cnt extends egret.DisplayObjectContainer{
     private cnt_Other_Coin( matchid:string , selection:string , uid:string , bet_golds:string ){
         // 处理 他人金币的金币减少 .
         let $store = window['store'] ;
+        let choseOther = $store['userPositionLocal'][uid] 
         let selOtherCoin = $store['userPosition'][$store['userPositionLocal'][uid] - 1];
         let baseImg = 'userImg' ; 
 
@@ -180,49 +195,48 @@ class Cnt extends egret.DisplayObjectContainer{
         // this.userImg1['setMyGold']('1234')
 
         // this[ 'userImg'+selOtherCoin ]['setMyGold']('21') 
-        console.log('---------------------')
-        console.log( $store['userPosition'] )
-        console.log( $store['userPositionLocal'][uid] )
-        console.log(selOtherCoin)
-        console.log( baseImg + selOtherCoin  )
-        this.userImg1['getCurGold']()
-        this.userImg2['getCurGold']()
-        this.userImg3['getCurGold']()
-        this.userImg4['getCurGold']()
-        this.userImg5['getCurGold']()
+        // console.log('---------------------')
+        // console.log( $store['userPosition'] )
+        // console.log( $store['userPositionLocal'][uid] )
+        // console.log(selOtherCoin)
+        // console.log( baseImg + choseOther  )
+        // this.userImg1['getCurGold']()
+        // this.userImg2['getCurGold']()
+        // this.userImg3['getCurGold']()
+        // this.userImg4['getCurGold']()
+        // this.userImg5['getCurGold']()
 
-        this.userImg6['getCurGold']()
+        // this.userImg6['getCurGold']()
 
-        this.userImg7['getCurGold']()
-        this.userImg8['getCurGold']()
-        this.userImg9['getCurGold']()  
+        // this.userImg7['getCurGold']()
+        // this.userImg8['getCurGold']()
+        // this.userImg9['getCurGold']()  
 
-        console.log('++++++++++++++++++++++++++')
-        this[ baseImg + selOtherCoin ]['getCurGold']()
-        this[ baseImg + 1 ]['getCurGold']()
-        this[ baseImg + 2 ]['getCurGold']()
-        this[ baseImg + 3 ]['getCurGold']()
-        this[ baseImg + 4 ]['getCurGold']()
-        this[ baseImg + 5 ]['getCurGold']()
-        this[ baseImg + 6 ]['getCurGold']()
-        this[ baseImg + 7 ]['getCurGold']()
-        this[ baseImg + 8 ]['getCurGold']()
-        this[ baseImg + 9 ]['getCurGold']()
-        console.log('==========================')
+        // console.log('++++++++++++++++++++++++++')
+        // this[ baseImg + choseOther ]['getCurGold']()
+        // this[ baseImg + 1 ]['getCurGold']()
+        // this[ baseImg + 2 ]['getCurGold']()
+        // this[ baseImg + 3 ]['getCurGold']()
+        // this[ baseImg + 4 ]['getCurGold']()
+        // this[ baseImg + 5 ]['getCurGold']()
+        // this[ baseImg + 6 ]['getCurGold']()
+        // this[ baseImg + 7 ]['getCurGold']()
+        // this[ baseImg + 8 ]['getCurGold']()
+        // this[ baseImg + 9 ]['getCurGold']()
+        // console.log('==========================')
 
-        console.log( this[ baseImg + selOtherCoin ]['getCurGold']() )
-        if( isNaN( this[ baseImg + selOtherCoin ]['getCurGold']() ) ){
+        // console.log( this[ baseImg + choseOther ]['getCurGold']() )
+        if( isNaN( this[ baseImg + choseOther ]['getCurGold']() ) ){
             console.log( 'isNaN 了 cnt.ts' )
         }else{
-            oldCoin = parseInt( this[ baseImg + selOtherCoin ]['getCurGold']() ) ;
+            oldCoin = parseInt( this[ baseImg + choseOther ]['getCurGold']() ) ;
         }
 
 
-        this[ 'userImg'+selOtherCoin ]['setMyGold']( oldCoin - parseInt( bet_golds ) )
+        this[ 'userImg'+choseOther ]['setMyGold']( oldCoin - parseInt( bet_golds ) )
 
         // setMyGold
-
-        // this.fieldContain.other_Coin( matchid , selection , selOtherCoin - 1 , bet_golds );
+        this.fieldContain.other_Coin( matchid , selection , selOtherCoin - 1 , bet_golds );
 
     }
 
@@ -274,7 +288,6 @@ class Cnt extends egret.DisplayObjectContainer{
     //  初始的用户信息  new
     public initUserMsg(){
         // 调整原数组
-
         let len = window['store']['user_info'].length
         let newUserInfo = [];
         let firstUser = null ;
@@ -306,7 +319,6 @@ class Cnt extends egret.DisplayObjectContainer{
             }
             if( window['store']['user_info'][i].uid ){
 
-                // window['store']['userPositionID'].push( window['store']['user_info'][i].uid )
 
                 window['store']['userPositionLocal'][window['store']['user_info'][i].uid] = ( i + 1 ) 
 
@@ -315,34 +327,12 @@ class Cnt extends egret.DisplayObjectContainer{
             }
 
             var choseUserImg = 'userImg'+(i+1) ;
-            // var firstUserData = null;
 
             if( this[choseUserImg] ){
                 this[choseUserImg].upDataUseMsg( window['formateName'] ( window['store']['user_info'][i].username ) , window['store']['user_info'][i].photo ,
                     window['store']['user_info'][i].total );
             }
 
-            // if(  window['store']['user_info'][i].uid === window['store']['env_variable']['uid'] && this[choseUserImg] && i === 0 ){
-            //     // 正常位置
-            //     this[choseUserImg].upDataUseMsg( window['formateName'] ( window['store']['user_info'][i].username ) , window['store']['user_info'][i].photo ,
-            //     window['store']['user_info'][i].total ); 
-            // }else{
-
-            //     firstUserData = window['store']['user_info'][0]
-            //     if( this[choseUserImg] ){
-            //         this[choseUserImg].upDataUseMsg( window['formateName'] ( window['store']['user_info'][i].username ) , window['store']['user_info'][i].photo ,
-            //          window['store']['user_info'][i].total );
-            //     }
-            //     if(  window['store']['user_info'][i].uid === window['store']['env_variable']['uid'] && this[choseUserImg] ){
-            //          var choseUserImgCopy = 'userImg1' ;
-            //          this[choseUserImgCopy].upDataUseMsg( window['formateName'] ( window['store']['user_info'][i].username ) , window['store']['user_info'][i].photo ,
-            //         window['store']['user_info'][i].total ); 
-
-            //         this[choseUserImg].upDataUseMsg( window['formateName'] ( firstUserData.username ) , firstUserData.photo ,
-            //          firstUserData.total );  
-                                    
-            //     }
-            // }
 
             //  中奖的处理 ！
             // this[choseUserImg].isShowWinGold('3333333')
@@ -364,7 +354,7 @@ class Cnt extends egret.DisplayObjectContainer{
         }
         window['store']['userPositionLocal'][uid] = userI
         var choseUserImg = 'userImg' + ( userI )
-        // console.log( choseUserImg )
+        console.log( choseUserImg )
         if( photo === '' ){
             photo = 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=547138142,3998729701&fm=27&gp=0.jpg'
         }
@@ -374,7 +364,6 @@ class Cnt extends egret.DisplayObjectContainer{
             total );
         }
 
-        // window['store']['userPositionID'].splice( userI ,0 ,uid +'' );
         this.bgCourtWrap.addChild(this[choseUserImg]);
         // //  注意层级控制，不然事件会有问题 ！
         this.bgCourtWrap.setChildIndex( this.fieldContain  , this.bgCourtWrap.getChildIndex( this[choseUserImg] ))    
@@ -383,30 +372,20 @@ class Cnt extends egret.DisplayObjectContainer{
     // 用户 离开  new
     private removeUserImage( uid:string ){
         var delIndex = 0;
-        // for( var i=0 ,len = window['store']['userPositionID'].length;i<len;i++){
-        //     if( window['store']['userPositionID'][i] === uid ){
-        //         delIndex = i;
-        //         break;
-        //     }
-        // }
 
         if( window['store']['userPositionLocal'][uid] ){
             delIndex = window['store']['userPositionLocal'][uid] ;
         }
 
-        // console.log( window['store']['userPositionID'][delIndex] ); 
 
         if( delIndex === 0 ){
             console.error( 'not find uid');
             return false;
         }
 
-        // delIndex = delIndex + 1;
-
         if( delIndex ){
             let choseUserImg = 'userImg'+ ( delIndex ) ;
             // 更新数组
-            // window['store']['userPositionID'].splice( delIndex - 1 , 1 );
 
             if( window['store']['userPositionLocal'][uid] ){
                 window['store']['userPositionLocal'][uid] = null ;
@@ -415,7 +394,6 @@ class Cnt extends egret.DisplayObjectContainer{
 
             window['store']['emptyUserPosition'].push( delIndex );
             console.log( delIndex )
-            // console.log(  window['store']['userPosition'][delIndex -1 ] )
 
             if( this.bgCourtWrap && this[choseUserImg] && this[choseUserImg].parent ){
                 this.bgCourtWrap.removeChild(this[choseUserImg]);

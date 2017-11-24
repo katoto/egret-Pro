@@ -97,7 +97,7 @@ class Main extends egret.DisplayObjectContainer {
             RES.loadGroup("preload");
         }
         if (event.groupName == "preload") {
-            this.stage.removeChild(this.loadingView);
+            // this.stage.removeChild(this.loadingView);
             RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
             RES.removeEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);
             RES.removeEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
@@ -317,6 +317,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
             //  后台数据  分发
             var msgObj = JSON.parse( msg );
             let $msgObjBody = msgObj.body;
+
             switch ( msgObj.messageid ) {
                     // 进场的数据 2000
                 case '2000':
@@ -386,7 +387,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
 
                             // 初始化用户信息
                             this.cnt.initUserMsg();
-                            
+
                             this.bottom.initBtn();
 
                         }
@@ -455,6 +456,8 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     // 移除文案
                     this.cnt.cnt_upTextTips('');
                     this.cnt.cnt_timerRemove();
+                    // 收集金币
+                    this.cnt.cnt_collectCoin();
                     
                 ;break;
                 case '2005':
@@ -467,6 +470,23 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     }
 
                 ;break;
+
+                case '2007':
+                    // 派奖
+                    this.cnt.cnt_upTextTips('正在派奖...');
+                    // settle_list 处理
+                    if( $msgObjBody && $msgObjBody.settle_list &&$msgObjBody.settle_list.length > 0 ){
+                        // settle_list = window['convertArrToObj']( $msgObjBody.settle_list , 'uid' )
+                        $store['settle_list'] = $msgObjBody.settle_list ;
+                        this.cnt.settle_listFn(  $msgObjBody.settle_list ) ;
+                    }else{
+                        console.warn( '2007 派奖数据有误' )
+                    }
+
+                    // this.cnt.cnt_sendEndCoin( '1002999','' )
+
+                ;break;
+
                 case '2010':
                     // 他人投注 金币
                     let $store_coinNum = window['store']['coin_Num'];
@@ -493,7 +513,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         //  执行金币动画  
                         // matchid:string , selection:string , uid:string , bet_golds:string
 
-                        // this.cnt.cnt_Other_Coin( $msgObjBody.matchid , $msgObjBody.selection ,$msgObjBody.uid, $msgObjBody.bet_golds );
+                        this.cnt.cnt_Other_Coin( $msgObjBody.matchid , $msgObjBody.selection ,$msgObjBody.uid, $msgObjBody.bet_golds );
                     }
 
                 ;break;        
@@ -521,6 +541,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
      */
     private onSocketOpen():void{
         // this.webSocket.writeUTF(JSON.stringify(start))
+        this.stage.removeChild(this.loadingView);
         setInterval(()=>{
             this.webSocket.writeUTF('p')
 
@@ -547,8 +568,8 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
 window['store'] = {
     orderDomain:'http://10.0.1.41:9899',
     initDomain:'http://10.0.1.41:2332',
-    this_main: null ,
 
+    settle_list:[] , // 派奖的数据
     stage_Width: null ,
     stage_Height: null ,
     stage_anWidth: null ,
