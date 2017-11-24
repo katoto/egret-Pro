@@ -317,6 +317,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
             //  后台数据  分发
             var msgObj = JSON.parse( msg );
             let $msgObjBody = msgObj.body;
+
             switch ( msgObj.messageid ) {
                     // 进场的数据 2000
                 case '2000':
@@ -455,6 +456,8 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     // 移除文案
                     this.cnt.cnt_upTextTips('');
                     this.cnt.cnt_timerRemove();
+                    // 收集金币
+                    this.cnt.cnt_collectCoin();
                     
                 ;break;
                 case '2005':
@@ -467,6 +470,23 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     }
 
                 ;break;
+
+                case '2007':
+                    // 派奖
+                    this.cnt.cnt_upTextTips('正在派奖...');
+                    // settle_list 处理
+                    if( $msgObjBody && $msgObjBody.settle_list &&$msgObjBody.settle_list.length > 0 ){
+                        // settle_list = window['convertArrToObj']( $msgObjBody.settle_list , 'uid' )
+                        $store['settle_list'] = $msgObjBody.settle_list ;
+                        this.cnt.settle_listFn(  $msgObjBody.settle_list ) ;
+                    }else{
+                        console.warn( '2007 派奖数据有误' )
+                    }
+
+                    // this.cnt.cnt_sendEndCoin( '1002999','' )
+
+                ;break;
+
                 case '2010':
                     // 他人投注 金币
                     let $store_coinNum = window['store']['coin_Num'];
@@ -548,8 +568,8 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
 window['store'] = {
     orderDomain:'http://10.0.1.41:9899',
     initDomain:'http://10.0.1.41:2332',
-    this_main: null ,
 
+    settle_list:[] , // 派奖的数据
     stage_Width: null ,
     stage_Height: null ,
     stage_anWidth: null ,

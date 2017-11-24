@@ -158,14 +158,28 @@ class Cnt extends egret.DisplayObjectContainer{
         return bgMask;
     }
 
-    // 金币发出 ( 分发 )  main ==> cnt ==> fieldcontain  
-    //  维护了一套uid 的位置 
+    // 金币发出 ( 分发 )   
+    //  settle-list 处理函数 更新用户的金币（延迟一下吧）
+    //  通过matchid 找到 开始位置 通过uid 找到头像位置
     // 
-    async cnt_sendEndCoin( uid:string , msg:string ){
+    async settle_listFn( settleData:any ){
 
-        let startString = 'field41_l';
-        await this.fieldContain.sendEndCoin( startString , uid.toString() )
+        // let choseUser = null ;
+
+        // if( settleData ){
+        //     for( let i=0,len = settleData.length ;i<len ; i++ ){
+        //         if( settleData[i].prize_info &&  settleData[i].prize_info.length > 0 ){
+
+
+        //         }
+        //     }
+        // }
+
+        // let startString = 'field41_l';
+        // let uid = '10015140' ;
+        // await this.fieldContain.sendEndCoin( startString , uid.toString() )
         // 中奖展示 
+        
     }
 
     // 他人金币 发出
@@ -181,37 +195,37 @@ class Cnt extends egret.DisplayObjectContainer{
         // this.userImg1['setMyGold']('1234')
 
         // this[ 'userImg'+selOtherCoin ]['setMyGold']('21') 
-        console.log('---------------------')
-        console.log( $store['userPosition'] )
-        console.log( $store['userPositionLocal'][uid] )
-        console.log(selOtherCoin)
-        console.log( baseImg + choseOther  )
-        this.userImg1['getCurGold']()
-        this.userImg2['getCurGold']()
-        this.userImg3['getCurGold']()
-        this.userImg4['getCurGold']()
-        this.userImg5['getCurGold']()
+        // console.log('---------------------')
+        // console.log( $store['userPosition'] )
+        // console.log( $store['userPositionLocal'][uid] )
+        // console.log(selOtherCoin)
+        // console.log( baseImg + choseOther  )
+        // this.userImg1['getCurGold']()
+        // this.userImg2['getCurGold']()
+        // this.userImg3['getCurGold']()
+        // this.userImg4['getCurGold']()
+        // this.userImg5['getCurGold']()
 
-        this.userImg6['getCurGold']()
+        // this.userImg6['getCurGold']()
 
-        this.userImg7['getCurGold']()
-        this.userImg8['getCurGold']()
-        this.userImg9['getCurGold']()  
+        // this.userImg7['getCurGold']()
+        // this.userImg8['getCurGold']()
+        // this.userImg9['getCurGold']()  
 
-        console.log('++++++++++++++++++++++++++')
-        this[ baseImg + choseOther ]['getCurGold']()
-        this[ baseImg + 1 ]['getCurGold']()
-        this[ baseImg + 2 ]['getCurGold']()
-        this[ baseImg + 3 ]['getCurGold']()
-        this[ baseImg + 4 ]['getCurGold']()
-        this[ baseImg + 5 ]['getCurGold']()
-        this[ baseImg + 6 ]['getCurGold']()
-        this[ baseImg + 7 ]['getCurGold']()
-        this[ baseImg + 8 ]['getCurGold']()
-        this[ baseImg + 9 ]['getCurGold']()
-        console.log('==========================')
+        // console.log('++++++++++++++++++++++++++')
+        // this[ baseImg + choseOther ]['getCurGold']()
+        // this[ baseImg + 1 ]['getCurGold']()
+        // this[ baseImg + 2 ]['getCurGold']()
+        // this[ baseImg + 3 ]['getCurGold']()
+        // this[ baseImg + 4 ]['getCurGold']()
+        // this[ baseImg + 5 ]['getCurGold']()
+        // this[ baseImg + 6 ]['getCurGold']()
+        // this[ baseImg + 7 ]['getCurGold']()
+        // this[ baseImg + 8 ]['getCurGold']()
+        // this[ baseImg + 9 ]['getCurGold']()
+        // console.log('==========================')
 
-        console.log( this[ baseImg + choseOther ]['getCurGold']() )
+        // console.log( this[ baseImg + choseOther ]['getCurGold']() )
         if( isNaN( this[ baseImg + choseOther ]['getCurGold']() ) ){
             console.log( 'isNaN 了 cnt.ts' )
         }else{
