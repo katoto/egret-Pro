@@ -72,7 +72,8 @@ function randomArray( len ){
  */
 function formateGold(num) {
     num = Number(num)
-    if( num === null ){
+    if( num === null || isNaN(num) ){
+        console.log( num )
         console.error( 'formateGold error' )
     }
     if (num < 10000) {

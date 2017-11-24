@@ -1410,7 +1410,16 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 }                
             ;break;
         }
-        
+
+        // 坐标修改
+        if( Number( uidLocal )  <= 4) {
+            newUser_x = $store['userPositionObj'][uidLocal].x + 46;
+        }else{
+            newUser_x = $store['userPositionObj'][uidLocal].x + 584;
+        }
+        newUser_y =  $store['userPositionObj'][uidLocal].y + 72;
+
+
         if( selection ){
             if( selection === '1' ){
                 // 150<x && x<350
@@ -1428,8 +1437,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
         // 头像位置
         console.log( uidLocal )
-        newUser_x = $store['userPositionObj'][uidLocal].x;
-        newUser_y =  $store['userPositionObj'][uidLocal].y;
+
 
 
         console.log(' curr local ')

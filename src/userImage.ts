@@ -126,7 +126,6 @@ class userImage extends eui.UILayer {
     }
     // 当前用户的金币
     private getCurGold(){
-        console.log(  this.numCoin )
         return this.numCoin
     }
 
