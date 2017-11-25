@@ -292,6 +292,8 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
         this.cnt.initUserImg();
         //  场地容器 实例对象
 
+        // 初始化点球
+        this.cnt.initAllPenalty() ;
     }
 
 
@@ -474,19 +476,27 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         this.removeChild( this.stop_pop );
                     }
 
-                    // 模拟显示中奖
                     if( $msgObjBody ){
-
+                        // 模拟显示中奖
                         if( $msgObjBody.result &&  $msgObjBody.result.length > 0 ){
                             this.cnt.showWinLocation( $msgObjBody.result )
                         }else{
                             console.warn('2005 data error not find result');
                         }
-
                         setTimeout(()=>{
                             this.cnt.cnt_removeAllWinIcon() ;
                         },5000)
+
+                        // 模拟点球
+                        // var spotkick_style = [["1", "1"], ["1", "0"], ["1", "1"], ["0", "0"], ["0", "0"], ["0", "0"]]
+                        // if( $msgObjBody.spotkick_style && $msgObjBody.spotkick_style.length ){
+                            
+                        // }
+
                     }
+
+
+
 
                 ;break;
                 case'2006':
@@ -564,7 +574,18 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
 
                 // this.cnt.cnt_timer('6')
 
-            },5000)
+
+                // 模拟点球
+                var spotkick_style = [["1", "1"], ["0", "1"], ["1", "1"], ["0", "0"], ["0", "0"]]
+                // this.cnt.showPenalty02( spotkick_style , '3:1' , '1' ) ;
+
+                // 点球蒙城
+                this.cnt.adjustPenalty(4 , spotkick_style ) ;
+
+                // setTimeout(()=>{
+                //     this.cnt.cleanAllPenalty() ;
+                // },5000)
+            },3000)
         }
     }
     

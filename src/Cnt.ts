@@ -31,6 +31,23 @@ class Cnt extends egret.DisplayObjectContainer{
     // 定时器
     private timer:Timer ;
 
+
+
+
+    // 总决赛的点球 4 个 进行复用
+
+    private penalty0 ; private bgMask0;
+    private penalty_point0 ; private bgMask_point0
+
+    private penalty1 ; private bgMask1;
+    private penalty_point1 ; private bgMask_point1 ;
+
+    private penalty2 ; private bgMask2;
+    private penalty_point2 ; private bgMask_point2;
+
+    private penalty3 ; private bgMask3;
+    private penalty_point3 ; private bgMask_point3;
+
     private drawCnt(Width,Height,anWidth,anHeight){
         // 内容区
         let wrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
@@ -88,52 +105,359 @@ class Cnt extends egret.DisplayObjectContainer{
         this.bgCourtWrap.addChild(this.fieldContain);
 
 
-        //决赛的开奖-点球
-        // 插入遮罩层,正常进球和点球要分开两个遮罩
-        // let bgMask01 = this.bgMask();
-        // bgMask01.anchorOffsetX = 245;
-        // bgMask01.x = window['store'].stage_anWidth;
-        // bgMask01.y = 265;  
-        // this.bgCourtWrap.addChild(bgMask01);
+    //     //决赛的开奖-点球
+    //     // 插入遮罩层,正常进球和点球要分开两个遮罩
+    //     this.f1_penalty02 = this.bgMask();
+    //     this.f1_penalty02.anchorOffsetX = 245;
+    //     this.f1_penalty02.x = window['store'].stage_anWidth;
+    //     this.f1_penalty02.y = 265;  
+    //     this.bgCourtWrap.addChild( this.f1_penalty02 );
 
-        // let bgMask02 = this.bgMask();
-        // bgMask02.anchorOffsetX = 245;
-        // bgMask02.x = window['store'].stage_anWidth;
-        // bgMask02.y = 265;  
-        // this.bgCourtWrap.addChild(bgMask02);
+    //     //正常进球
+    //     this.f1_penalty02 = new Penalty01();
+    //     this.f1_penalty02.anchorOffsetX = 245;
+    //     this.f1_penalty02.x = window['store'].stage_anWidth;
+    //     this.f1_penalty02.y = 323;  //决赛265   +58  
+    //     this.f1_penalty02.mask = this.f1_penalty02 ;
+    //     this.bgCourtWrap.addChild(this.f1_penalty02);
 
-        // //正常进球
-        // let penalty01 = new Penalty01();
-        // penalty01.anchorOffsetX = 245;
-        // penalty01.x = window['store'].stage_anWidth;
-        // penalty01.y = 323;  //决赛265   +58  
-        // penalty01.mask = bgMask01;
-        // this.bgCourtWrap.addChild(penalty01);
-        // setTimeout(()=>{
-        //     egret.Tween.get( penalty01 ).to( {y:265 },200 );
-        // },3000)
+    //     // 过一会出现的
+    //     setTimeout(()=>{
+    //         egret.Tween.get( this.f1_penalty02 ).to( {y:265 },200 );
+    //     },3000)
+ 
+    //     //点球
 
-        // setTimeout(()=>{
-        //     egret.Tween.get( penalty01 ).to( {y:107 },200 );
-        // },5000)
+    //     this.bgMask02 = this.bgMask();
+    //     this.bgMask02.anchorOffsetX = 245;
+    //     this.bgMask02.x = window['store'].stage_anWidth;
+    //     this.bgMask02.y = 265;  
+    //     this.bgCourtWrap.addChild(this.bgMask02);
 
-        // //点球
-        // let penalty02 = new Penalty02();
-        // penalty02.anchorOffsetX = 245;
-        // penalty02.x = window['store'].stage_anWidth;
-        // penalty02.y = 323;  //决赛265   +58  
-        // penalty02.mask = bgMask02;
-        // this.bgCourtWrap.addChild(penalty02);
-        // setTimeout(()=>{
-        //     egret.Tween.get( penalty02 ).to( {y:265 },200 );
-        // },5000)
+    //     this.penalty02 = new Penalty02();
+    //     this.penalty02.anchorOffsetX = 245;
+    //     this.penalty02.x = window['store'].stage_anWidth;
+    //     this.penalty02.y = 323;  //决赛265   +58  
+    //     this.penalty02.mask = this.bgMask02;
+    //     this.bgCourtWrap.addChild(this.penalty02);
 
-         
-
-
+    // // egret.Tween.get( this.penalty02 ).to( {y:265 },200 );
+    //    setTimeout(()=>{
+    //         egret.Tween.get( this.penalty01 ).to( {y:107 },200 );
+    //     },5000)
+    //     setTimeout(()=>{
+    //         egret.Tween.get( this.penalty02 ).to( {y:265 },200 );
+    //     },5000)
         
     }
 
+    /**
+     *  4个进球的实例的初始化
+     */
+    private initAllPenalty(){
+        let penaltyStr = 'penalty' ;
+        let bgMaskStr = 'bgMask' ;
+        let penaltyStr_p = 'penalty_point' ;
+        let bgMaskStr_p = 'bgMask_point' ;   
+
+        for( let i=0;i<4;i++ ){
+            penaltyStr = 'penalty'+i ;
+            bgMaskStr = 'bgMask'+i ;
+            penaltyStr_p = 'penalty_point'+i ;
+            bgMaskStr_p = 'bgMask_point'+i ;  
+            
+            //决赛的开奖
+            // 插入遮罩层,正常进球和点球要分开两个遮罩 mark
+            this[bgMaskStr] = this.bgMask();
+            this[bgMaskStr].anchorOffsetX = 245;
+            this[bgMaskStr].x = window['store'].stage_anWidth;
+            // this[bgMaskStr].y = 265;  
+            // this.bgCourtWrap.addChild( this[bgMaskStr] );
+            //正常进球
+            this[penaltyStr] = new Penalty01();
+            this[penaltyStr].anchorOffsetX = 245;
+            this[penaltyStr].x = window['store'].stage_anWidth;
+            // this[penaltyStr].y = 323;  //决赛265   +58  
+            // this[penaltyStr].mask = this[bgMaskStr] ;
+            // this.bgCourtWrap.addChild( this[penaltyStr] );
+
+            // 过一会出现的
+            // setTimeout(()=>{
+            //     egret.Tween.get( this[penaltyStr] ).to( {y:265 },200 );
+            // },3000)
+    
+            //点球
+            this[bgMaskStr_p] = this.bgMask();
+            this[bgMaskStr_p].anchorOffsetX = 245;
+            this[bgMaskStr_p].x = window['store'].stage_anWidth;
+            // this[bgMaskStr_p].y = 265;  
+            // this.bgCourtWrap.addChild( this[bgMaskStr_p] );
+
+            this[penaltyStr_p] = new Penalty02();
+            this[penaltyStr_p].anchorOffsetX = 245;
+            this[penaltyStr_p].x = window['store'].stage_anWidth;
+            // this[penaltyStr_p].y = 323;  //决赛265   +58  
+            // this[penaltyStr_p].mask = this[bgMaskStr_p] ;
+            // this.bgCourtWrap.addChild( this[penaltyStr_p] );
+
+            // setTimeout(()=>{
+            //         egret.Tween.get( this[penaltyStr] ).to( {y:107 },200 );
+            //     },5000)
+            //     setTimeout(()=>{
+            //         egret.Tween.get( this[penaltyStr_p]  ).to( {y:265 },200 );
+            //     },5000)            
+            // }
+
+        }
+    }
+
+    /**
+     *  传入结算 长度  调整4 2 1 的位置
+     *  调整位置 -- 放入舞台
+     *  @param len 长度
+     */
+    private adjustPenalty( len = 4 ,penaltyArr:any ){
+
+        let local_4 = [80,280,500,700] ;
+        let local_2 = [130,500] ; // 130 500
+        let local_1 = [ 265 ] ; // 265
+        let curr_local = null ;
+
+        let penaltyStr = 'penalty' ;
+        let bgMaskStr = 'bgMask' ;
+        let penaltyStr_p = 'penalty_point' ;
+        let bgMaskStr_p = 'bgMask_point' ;   
+
+        len = 2 ;
+
+        //  在调用之前已经清除
+        switch (len){
+            case 4:
+                curr_local = [...local_4] ;
+            ;break;
+            case 2:
+                curr_local = [...local_2] ;
+            ;break;
+            case 1:
+                curr_local = [...local_1] ;
+            ;break;
+        }
+        for( let i = 0;i < len; i++ ){
+
+            penaltyStr = 'penalty'+i ;
+            bgMaskStr = 'bgMask'+i ;
+            penaltyStr_p = 'penalty_point'+i ;
+            bgMaskStr_p = 'bgMask_point'+i ;  
+            // this[bgMaskStr].y = 265; 
+            // this[penaltyStr].y = 323;  //决赛265   +58   
+            // this[bgMaskStr_p].y = 265;  
+            // this[penaltyStr_p].y = 323;  //决赛265   +58  
+
+            console.log( penaltyStr )
+            console.log( bgMaskStr )
+            console.log( penaltyStr_p )
+            console.log( bgMaskStr_p )
+
+            this[bgMaskStr].y = curr_local[i];                                  
+            this[penaltyStr].y = curr_local[i] + 58 ;
+
+            this[bgMaskStr_p].y = curr_local[i];           
+            this[penaltyStr_p].y = curr_local[i] + 58 ;
+
+            if( !!this[bgMaskStr] ){
+                this.bgCourtWrap.addChild( this[bgMaskStr] );
+            }
+            if( !!this[penaltyStr] ){
+                this.bgCourtWrap.addChild( this[penaltyStr] );
+            }
+            if( !!this[bgMaskStr_p] ){
+                this[penaltyStr].mask = this[bgMaskStr] ;
+                this.bgCourtWrap.addChild( this[bgMaskStr_p] );
+            }
+            if( !!this[penaltyStr_p] ){
+                this[penaltyStr_p].mask = this[bgMaskStr_p] ;
+                this.bgCourtWrap.addChild( this[penaltyStr_p] );
+            }
+
+            egret.Tween.get( this[penaltyStr] ).to( {y: curr_local[i] }, 300 );
+
+            setTimeout(()=>{
+
+                // egret.Tween.get( this['penalty0'] ).to( {y:curr_local[0] -158 }, 200 ).call(()=>{
+                //     if( this['bgMask0'].parent ){
+                //         this.bgCourtWrap.removeChild( this['bgMask0'] );
+                //     }
+                //     if( this['penalty0'].parent ){
+                //         this.bgCourtWrap.removeChild( this['penalty0'] );
+                //     }
+                // });
+
+                // egret.Tween.get( this['penalty_point0']  ).to( {y: curr_local[0] }, 200 ).call(()=>{
+                //     // 对应点球动画
+                //     setTimeout(()=>{
+                //         this['penalty_point0'].movePenalty( penaltyArr )
+                //     },500)
+                // });
+
+                // egret.Tween.get( this['penalty1'] ).to( {y:curr_local[1] -158 }, 200 ).call(()=>{
+                //     if( this['bgMask1'].parent ){
+                //         this.bgCourtWrap.removeChild( this['bgMask1'] );
+                //     }
+                //     if( this['penalty1'].parent ){
+                //         this.bgCourtWrap.removeChild( this['penalty1'] );
+                //     }
+                // });
+                // egret.Tween.get( this['penalty_point1']  ).to( {y: curr_local[1] }, 200 ).call(()=>{
+                //     // 对应点球动画
+                //     setTimeout(()=>{
+                //         this['penalty_point1'].movePenalty( penaltyArr )
+                //     },500)
+                // });
+
+                // egret.Tween.get( this['penalty2'] ).to( {y:curr_local[2] -158 }, 300 ).call(()=>{
+                //     if( this['bgMask2'].parent ){
+                //         this.bgCourtWrap.removeChild( this['bgMask2'] );
+                //     }
+                //     if( this['penalty2'].parent ){
+                //         this.bgCourtWrap.removeChild( this['penalty2'] );
+                //     }
+                // });
+                // egret.Tween.get( this['penalty_point2']  ).to( {y: curr_local[2] }, 300 ).call(()=>{
+                //     // 对应点球动画
+                //     setTimeout(()=>{
+                //         this['penalty_point2'].movePenalty( penaltyArr )
+                //     },500)
+                // });
+
+                // egret.Tween.get( this['penalty3'] ).to( {y:curr_local[3] -158 }, 300 ).call(()=>{
+                //     if( this['bgMask3'].parent ){
+                //         this.bgCourtWrap.removeChild( this['bgMask3'] );
+                //     }
+                //     if( this['penalty3'].parent ){
+                //         this.bgCourtWrap.removeChild( this['penalty3'] );
+                //     }
+                // });
+                // egret.Tween.get( this['penalty_point3']  ).to( {y: curr_local[3] }, 300 ).call(()=>{
+                //     // 对应点球动画
+                //     setTimeout(()=>{
+                //         this['penalty_point3'].movePenalty( penaltyArr )
+                //     },500)
+                // });
+
+            },2000)
+
+        }
+    }
+
+    /**
+     *  清楚 所有的点球
+     */
+    private cleanAllPenalty(){
+        let penaltyStr = 'penalty' ;
+        let bgMaskStr = 'bgMask' ;
+        let penaltyStr_p = 'penalty_point' ;
+        let bgMaskStr_p = 'bgMask_point' ;  
+
+        for( let i = 0;i<4;i++ ){
+            penaltyStr = 'penalty'+i ;
+            bgMaskStr = 'bgMask'+i ;
+            penaltyStr_p = 'penalty_point'+i ;
+            bgMaskStr_p = 'bgMask_point'+i ;  
+
+            if( this[penaltyStr].parent ){
+                this.bgCourtWrap.removeChild( this[penaltyStr] );
+            }
+            if( this[bgMaskStr].parent ){
+                this.bgCourtWrap.removeChild( this[bgMaskStr] );
+            }
+            if( this[penaltyStr_p].parent ){
+                this.bgCourtWrap.removeChild( this[penaltyStr_p] );
+            }
+            if( this[bgMaskStr_p].parent ){
+                this.bgCourtWrap.removeChild( this[bgMaskStr_p] );
+            }
+        }
+    }
+
+    /**
+     *  是否出现点球 (对应场地)
+     * @param is_spotkick 0 无  1 有
+     * @param curr_local 运动的坐标
+     *  @param penaltyArr 点球坐标
+     */
+    private showPenalty( penaltyArr , is_spotkick:string , curr_local ){
+        console.log( penaltyArr )
+        //     // 是否显示 点球
+        if( is_spotkick === '1' || 1 ){
+
+
+        }
+
+
+
+                egret.Tween.get( this['penalty0'] ).to( {y:curr_local[0] -158 }, 200 ).call(()=>{
+                    if( this['bgMask0'].parent ){
+                        this.bgCourtWrap.removeChild( this['bgMask0'] );
+                    }
+                    if( this['penalty0'].parent ){
+                        this.bgCourtWrap.removeChild( this['penalty0'] );
+                    }
+                });
+
+                egret.Tween.get( this['penalty_point0']  ).to( {y: curr_local[0] }, 200 ).call(()=>{
+                    // 对应点球动画
+                    setTimeout(()=>{
+                        this['penalty_point0'].movePenalty( penaltyArr )
+                    },500)
+                });
+
+                egret.Tween.get( this['penalty1'] ).to( {y:curr_local[1] -158 }, 200 ).call(()=>{
+                    if( this['bgMask1'].parent ){
+                        this.bgCourtWrap.removeChild( this['bgMask1'] );
+                    }
+                    if( this['penalty1'].parent ){
+                        this.bgCourtWrap.removeChild( this['penalty1'] );
+                    }
+                });
+                egret.Tween.get( this['penalty_point1']  ).to( {y: curr_local[1] }, 200 ).call(()=>{
+                    // 对应点球动画
+                    setTimeout(()=>{
+                        this['penalty_point1'].movePenalty( penaltyArr )
+                    },500)
+                });
+
+                egret.Tween.get( this['penalty2'] ).to( {y:curr_local[2] -158 }, 300 ).call(()=>{
+                    if( this['bgMask2'].parent ){
+                        this.bgCourtWrap.removeChild( this['bgMask2'] );
+                    }
+                    if( this['penalty2'].parent ){
+                        this.bgCourtWrap.removeChild( this['penalty2'] );
+                    }
+                });
+                egret.Tween.get( this['penalty_point2']  ).to( {y: curr_local[2] }, 300 ).call(()=>{
+                    // 对应点球动画
+                    setTimeout(()=>{
+                        this['penalty_point2'].movePenalty( penaltyArr )
+                    },500)
+                });
+
+                egret.Tween.get( this['penalty3'] ).to( {y:curr_local[3] -158 }, 300 ).call(()=>{
+                    if( this['bgMask3'].parent ){
+                        this.bgCourtWrap.removeChild( this['bgMask3'] );
+                    }
+                    if( this['penalty3'].parent ){
+                        this.bgCourtWrap.removeChild( this['penalty3'] );
+                    }
+                });
+                egret.Tween.get( this['penalty_point3']  ).to( {y: curr_local[3] }, 300 ).call(()=>{
+                    // 对应点球动画
+                    setTimeout(()=>{
+                        this['penalty_point3'].movePenalty( penaltyArr )
+                    },500)
+                });
+
+
+    }
 
     // timer 定时器
     // main => cnt => Timer
@@ -277,17 +601,17 @@ class Cnt extends egret.DisplayObjectContainer{
     }
 
     // 放入4个场地
-    private addFieldtWrap4(){
-        this.fieldContain.addcourtWrap4();
-    }
-    // 放入2个场地
-    private addFieldtWrap2(){
-        this.fieldContain.addcourtWrap2();
-    }
-    // 放入1个场地
-    private addFieldtWrap1(){
-        this.fieldContain.addcourtWrap1();
-    }
+    // private addFieldtWrap4(){
+    //     this.fieldContain.addcourtWrap4();
+    // }
+    // // 放入2个场地
+    // private addFieldtWrap2(){
+    //     this.fieldContain.addcourtWrap2();
+    // }
+    // // 放入1个场地
+    // private addFieldtWrap1(){
+    //     this.fieldContain.addcourtWrap1();
+    // }
 
     //  容器 new
     private initUserImg(){
@@ -328,10 +652,11 @@ class Cnt extends egret.DisplayObjectContainer{
                 newUserInfo.push( window['store']['user_info'][i] )
             }
         }
-        newUserInfo.unshift( firstUser )
+        if( firstUser !== null ){
+            newUserInfo.unshift( firstUser )
+        }
         window['store']['user_info'] = newUserInfo ;
 
-        console.log( newUserInfo )
         window['store']['emptyUserPosition'] = [];
         for( let i=0;i<9 ; i++ ){
             if( i >=len ){
@@ -343,8 +668,6 @@ class Cnt extends egret.DisplayObjectContainer{
                 window['store']['user_info'][i].photo = 'http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1213.png'
             }
             if( window['store']['user_info'][i].uid ){
-
-
                 window['store']['userPositionLocal'][window['store']['user_info'][i].uid] = ( i + 1 ) 
 
             }else{
