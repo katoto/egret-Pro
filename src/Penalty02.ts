@@ -104,6 +104,8 @@ class Penalty02 extends eui.UILayer {
         let colectPenalt = [] // 收集 点球 ，为了remove 
         // new win
         this.penaltyWin = this.drawWin();
+        
+        console.log( penaltyArr )
         if( penaltyArr.length > 0 ){
             for( let i = 0 ;i < len ; i ++ ){
                 if( penaltyArr[i] ){

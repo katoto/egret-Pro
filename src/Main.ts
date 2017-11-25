@@ -479,7 +479,8 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     if( $msgObjBody ){
                         // 模拟显示中奖
                         if( $msgObjBody.result &&  $msgObjBody.result.length > 0 ){
-                            this.cnt.showWinLocation( $msgObjBody.result )
+                            this.cnt.adjustPenalty( $msgObjBody.result )
+                            // this.cnt.showWinLocation( $msgObjBody.result )
                         }else{
                             console.warn('2005 data error not find result');
                         }
