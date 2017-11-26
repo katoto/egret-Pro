@@ -484,9 +484,10 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         }else{
                             console.warn('2005 data error not find result');
                         }
-                        setTimeout(()=>{
-                            this.cnt.cnt_removeAllWinIcon() ;
-                        },5000)
+                        // 去除中奖图标 
+                        // setTimeout(()=>{
+                        //     this.cnt.cnt_removeAllWinIcon() ;
+                        // },5000)
 
                         // 模拟点球
                         // var spotkick_style = [["1", "1"], ["1", "0"], ["1", "1"], ["0", "0"], ["0", "0"], ["0", "0"]]
@@ -577,11 +578,11 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
 
 
                 // 模拟点球
-                var spotkick_style = [["1", "1"], ["0", "1"], ["1", "1"], ["0", "0"], ["0", "0"]]
+                // var spotkick_style = [["1", "1"], ["0", "1"], ["1", "1"], ["0", "0"], ["0", "0"]]
                 // this.cnt.showPenalty02( spotkick_style , '3:1' , '1' ) ;
 
                 // 点球蒙城
-                this.cnt.adjustPenalty(4 , spotkick_style ) ;
+                // this.cnt.adjustPenalty(4 , spotkick_style ) ;
 
                 // setTimeout(()=>{
                 //     this.cnt.cleanAllPenalty() ;
@@ -623,6 +624,7 @@ window['store'] = {
     orderDomain:'http://10.0.1.41:9899',
     initDomain:'http://10.0.1.41:2332',
 
+    $fieldContain:null ,
     settle_list:[] , // 派奖的数据
     stage_Width: null ,
     stage_Height: null ,

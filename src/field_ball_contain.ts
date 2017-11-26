@@ -1456,20 +1456,16 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
     /**
      *  查找 win
      *  @param matchid 比赛id  找到对应场地  winid 找 左右 
-     *  @return  _l  left  _r  right
+     *  @return  _l  left  _r  right   修改 winid  放上一步
      * 
      */
-    private showWinLocation( matchid:string ,  winid:string ){
+    private showWinLocation( matchid:string ,findStr:string ){
         let $store = window['store'] ;
-        let findStr = '';
 
         if( matchid && $store['matFindField'] && $store['matFindField'][matchid] ){
-            findStr = this[ $store['matFindField'][matchid] ].findLocal( winid ) ;
             if( findStr ==='_l' ){
-
                this[ $store['matFindField'][matchid] ].addwinIcon_l() ;
             }else if( findStr === '_r' ){
-
                 this[ $store['matFindField'][matchid] ].addwinIcon_r() ;
             }
             return ;
@@ -1478,6 +1474,24 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             console.warn( '没找到 赢的Icon' )
         }
 
+
+        // let $store = window['store'] ;
+        // let findStr = '';
+
+        // if( matchid && $store['matFindField'] && $store['matFindField'][matchid] ){
+        //     findStr = this[ $store['matFindField'][matchid] ].findLocal( winid ) ;
+        //     if( findStr ==='_l' ){
+
+        //        this[ $store['matFindField'][matchid] ].addwinIcon_l() ;
+        //     }else if( findStr === '_r' ){
+
+        //         this[ $store['matFindField'][matchid] ].addwinIcon_r() ;
+        //     }
+        //     return ;
+        // }else{
+        //     // 没找到 赢的比赛
+        //     console.warn( '没找到 赢的Icon' )
+        // }
     }
 
     /**

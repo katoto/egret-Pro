@@ -102,6 +102,7 @@ class Cnt extends egret.DisplayObjectContainer{
 
 
         this.fieldContain = new Field_ball_contain();
+        window['store']['$fieldContain'] = this.fieldContain ;
         this.bgCourtWrap.addChild(this.fieldContain);
 
 
@@ -212,6 +213,18 @@ class Cnt extends egret.DisplayObjectContainer{
     }
 
     /**
+     *  延迟函数  临时在 adjustPenalty 用一下
+     */
+    private wait (duration = 250) {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve()
+            }, duration)
+        })
+    }
+
+
+    /**
      *  传入结算 长度  调整 4 2 1 的位置  
      * 
      *  显示比分 记得加上点球的比分  要做判断
@@ -219,7 +232,7 @@ class Cnt extends egret.DisplayObjectContainer{
      *  调整位置 -- 放入舞台 -- 执行动画 
      *  @param result  所有的数据 2005
      */
-    private adjustPenalty( allResult ){
+    async adjustPenalty( allResult ){
         // 比赛框的位置坐标 
         let local_4 = [80,280,500,700] ;
         let local_2 = [130,500] ; // 130 500
@@ -246,6 +259,7 @@ class Cnt extends egret.DisplayObjectContainer{
                 curr_local = [...local_1] ;
             ;break;
         }
+        // 放出对应进球 点球
         for( let i = 0;i < len; i++ ){
 
             penaltyStr = 'penalty'+i ;
@@ -277,9 +291,9 @@ class Cnt extends egret.DisplayObjectContainer{
             // 等等正常比分
             egret.Tween.get( this[penaltyStr] ).to( {y: curr_local[i] }, 300 );
 
+            
             //  matchid  找 对应的点球进度
             // findIndex = this.findPenaltyStr( allResult[i].matchid ) ;
-
             // if( allResult[i] && allResult[i].is_spotkick === '1' ){
             //     this.showPenalty( allResult[i].spotkick_style , curr_local , findIndex )
             // }
@@ -287,11 +301,58 @@ class Cnt extends egret.DisplayObjectContainer{
         //  开始点球判断
 
         // 在外面await
-        // 如何做到同步 ？？？ 
+        await this.wait( 3000 ) ;
+        // 同步  执行 点球
+        // await this.start_showPenalty( allResult ,  curr_local);
+        for( let i = 0; i<len ;i ++ ){
+            findIndex = this.findPenaltyStr( allResult[i].matchid ) ;
+            if( allResult[i] && allResult[i].is_spotkick === '1' ){
+                this.showPenalty( allResult[i].spotkick_style , curr_local , findIndex , allResult[i].matchid )
+            }else{
+                // 无点球  根据 score 来显示对应的 win 图标 score 1:1
+                // 去除 进球框 显示win .showWinLocation( matchid , leftOrRig );
+                if( allResult[i].score ){
+                    if( parseInt ( allResult[i].score[0] ) > parseInt ( allResult[i].score[2] ) ){
+                        this.fieldContain.showWinLocation( allResult[i].matchid , '_l' ) ;
+                    }else{
+                        this.fieldContain.showWinLocation( allResult[i].matchid , '_r' ) ;
+                    }
+                }
 
-
+            }
+        }
+        console.log(1234)
 
     }
+
+    // 显示 winIcon main ==》 cnt ==> fieldcontain
+    /**
+     *   显示出最近的中奖 matchid  winid   要重新写 win
+     */
+    // private showWinLocation ( res05:any ) {
+    //     // 显示中奖 
+    //     console.log( '+++++++++++++++++++++++++++' );
+    //     for( let i=0 ,len = res05.length ;i< len ; i++ ){
+    //         if( res05[i].matchid && res05[i].winid ){
+    //             console.log( res05[i].matchid );
+    //             console.log( res05[i].winid );
+    //             console.log( '-------------------' );
+
+    //             this.fieldContain.showWinLocation(res05[i].matchid , res05[i].winid ); 
+    //         }
+    //     }
+
+    // }
+    /**
+     *  清楚中奖 main ==》 cnt ==> fieldcontain
+     */
+    private cnt_removeAllWinIcon(){
+        this.fieldContain.removeAllWinIcon()
+    }
+
+
+
+
 
     /**
      *  根据 matchid  找 对应的点球
@@ -362,8 +423,9 @@ class Cnt extends egret.DisplayObjectContainer{
      * @param curr_local 运动的坐标
      *  @param penaltyArr 点球坐标
      *  @param footIndex 点球的坐标 （通过比赛id 找到的）
+     *  @param mathcid 为了 显示最终的win
      */
-    private showPenalty( penaltyArr  , curr_local , footIndex ){
+    private showPenalty( penaltyArr  , curr_local , footIndex ,matchid:string ){
         let penaltyStr = 'penalty' ;
         let bgMaskStr = 'bgMask' ;
         let penaltyStr_p = 'penalty_point' ;
@@ -374,8 +436,8 @@ class Cnt extends egret.DisplayObjectContainer{
         penaltyStr_p = 'penalty_point'+footIndex;
         bgMaskStr_p = 'bgMask_point'+footIndex  ;  
 
-        console.log( penaltyArr )
-        //  是否显示 点球
+        // console.log( penaltyArr )
+        //  进球 切 点球
         egret.Tween.get( this[penaltyStr] ).to( {y:curr_local[footIndex] -158 }, 200 ).call(()=>{
             if( this[bgMaskStr].parent ){
                 this.bgCourtWrap.removeChild( this[bgMaskStr] );
@@ -387,54 +449,9 @@ class Cnt extends egret.DisplayObjectContainer{
         egret.Tween.get( this[ penaltyStr_p ]  ).to( {y: curr_local[footIndex] }, 200 ).call(()=>{
             // 对应点球动画
             setTimeout(()=>{
-                this[ penaltyStr_p ].movePenalty( penaltyArr )
+                this[ penaltyStr_p ].movePenalty( penaltyArr , matchid )
             },500)
         });
-
-            // egret.Tween.get( this['penalty1'] ).to( {y:curr_local[1] -158 }, 200 ).call(()=>{
-            //     if( this['bgMask1'].parent ){
-            //         this.bgCourtWrap.removeChild( this['bgMask1'] );
-            //     }
-            //     if( this['penalty1'].parent ){
-            //         this.bgCourtWrap.removeChild( this['penalty1'] );
-            //     }
-            // });
-            // egret.Tween.get( this['penalty_point1']  ).to( {y: curr_local[1] }, 200 ).call(()=>{
-            //     // 对应点球动画
-            //     setTimeout(()=>{
-            //         this['penalty_point1'].movePenalty( penaltyArr )
-            //     },500)
-            // });
-
-            // egret.Tween.get( this['penalty2'] ).to( {y:curr_local[2] -158 }, 300 ).call(()=>{
-            //     if( this['bgMask2'].parent ){
-            //         this.bgCourtWrap.removeChild( this['bgMask2'] );
-            //     }
-            //     if( this['penalty2'].parent ){
-            //         this.bgCourtWrap.removeChild( this['penalty2'] );
-            //     }
-            // });
-            // egret.Tween.get( this['penalty_point2']  ).to( {y: curr_local[2] }, 300 ).call(()=>{
-            //     // 对应点球动画
-            //     setTimeout(()=>{
-            //         this['penalty_point2'].movePenalty( penaltyArr )
-            //     },500)
-            // });
-
-            // egret.Tween.get( this['penalty3'] ).to( {y:curr_local[3] -158 }, 300 ).call(()=>{
-            //     if( this['bgMask3'].parent ){
-            //         this.bgCourtWrap.removeChild( this['bgMask3'] );
-            //     }
-            //     if( this['penalty3'].parent ){
-            //         this.bgCourtWrap.removeChild( this['penalty3'] );
-            //     }
-            // });
-            // egret.Tween.get( this['penalty_point3']  ).to( {y: curr_local[3] }, 300 ).call(()=>{
-            //     // 对应点球动画
-            //     setTimeout(()=>{
-            //         this['penalty_point3'].movePenalty( penaltyArr )
-            //     },500)
-            // });
     }
 
     // timer 定时器
@@ -546,31 +563,6 @@ class Cnt extends egret.DisplayObjectContainer{
     // 金币收起  main ==> cnt ==> fieldcontain
     private cnt_collectCoin(){
         this.fieldContain.collectCoin();
-    }
-
-    // 显示 winIcon main ==》 cnt ==> fieldcontain
-    /**
-     *   显示出最近的中奖 matchid  winid 
-     */
-    private showWinLocation ( res05:any ) {
-        // 显示中奖 
-        console.log( '+++++++++++++++++++++++++++' );
-        for( let i=0 ,len = res05.length ;i< len ; i++ ){
-            if( res05[i].matchid && res05[i].winid ){
-                console.log( res05[i].matchid );
-                console.log( res05[i].winid );
-                console.log( '-------------------' );
-
-                this.fieldContain.showWinLocation(res05[i].matchid , res05[i].winid ); 
-            }
-        }
-
-    }
-    /**
-     *  清楚中奖 main ==》 cnt ==> fieldcontain
-     */
-    private cnt_removeAllWinIcon(){
-        this.fieldContain.removeAllWinIcon()
     }
 
     // 调研初始化场地

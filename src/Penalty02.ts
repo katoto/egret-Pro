@@ -94,14 +94,16 @@ class Penalty02 extends eui.UILayer {
     /**
      *  点球 数组
      *  结果 betRes  ? 不是在这个展示？
+     *  @param  结果的matchid 
      *   // var spotkick_style = [["1", "1"], ["1", "0"], ["1", "1"], ["0", "0"], ["0", "0"],[]]
      */
 
-    async movePenalty( penaltyArr:any ){
+    async movePenalty( penaltyArr:any , matchid:string ){
         let len = penaltyArr.length ;
         let topNum = 0 ;
         let botNum = 0 ;
         let colectPenalt = [] // 收集 点球 ，为了remove 
+        let leftOrRig = '' ;
         // new win
         this.penaltyWin = this.drawWin();
         
@@ -149,12 +151,19 @@ class Penalty02 extends eui.UILayer {
             this.penaltyWin.x = 121 + ( len - 1 )  * 50
             if( topNum > botNum ){
                 this.penaltyWin.y = 1;
+                leftOrRig = '_l' ;
             }else{
                 this.penaltyWin.y = 36;
+                leftOrRig = '_r' ;
             }
             this.addChild( this.penaltyWin );
             // 去除 整个背景
-            //  显示win
+
+            //  显示win showWinLocation(res05[i].matchid);  _l left  _r right
+            if( !!window['store']['$fieldContain'] ){
+                window['store']['$fieldContain'].showWinLocation( matchid , leftOrRig );
+            }
+
 
             // 清楚 所有点球  win
 
