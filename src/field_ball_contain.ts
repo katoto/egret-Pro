@@ -112,7 +112,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             switch( matchLen ){
                 case 1 :
                     if( $store['matches'][0] ){
-                        console.log( this.field1 )
                         this.field1.upFieldAllData( $store['matches'][0].homelogo , $store['matches'][0].homename ,  $store['matches'][0].homeodds ,
                         $store['matches'][0].awaylogo , $store['matches'][0].awayname , $store['matches'][0].awayodds ,
                         $store['matches'][0].homeid , $store['matches'][0].awayid , $store['matches'][0].matchid
@@ -221,7 +220,13 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let currMatchData = this.field41.getCurrMatchData()
 
         if( y>150 && y <260 ){
-            console.log( currBtnNumber )
+
+            if($store['unableClick']){
+                // 不可点击
+                alert('现在不能投注,bug 被我设置了')
+                return false ;
+            }
+
             if( !$store['allCoinObj']['field41'] ){
                 window['Object'].assign($store['allCoinObj'] ,{ 'field41':{
                         coin_left:[],
@@ -257,7 +262,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
                 await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
                     // 更新 自己头像 金币   下单之后
-                    console.log( res )
                     if( res && res.status === '100' ){
 
                 // 记录自己的金币 (派发之后，清空)
@@ -299,7 +303,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 })
 
                 await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
-                    console.log( res )
                     if( res && res.status === '100' ){
             $store_coinNum[currMatchData.matchid]['my_golds_r'] = $store_coinNum[currMatchData.matchid]['my_golds_r'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) + $store.curr_btn_coin :
             $store.curr_btn_coin;  
@@ -335,6 +338,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let currMatchData = this.field42.getCurrMatchData()
 
         if( y>350 && y <460 ){
+            if($store['unableClick']){
+                // 不可点击
+                return false ;
+            }
 
             if( !$store['allCoinObj']['field42'] ){
                 window['Object'].assign($store['allCoinObj'] ,{ 'field42':{
@@ -410,7 +417,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
                 await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
                     // 更新 自己头像 金币   下单之后
-                    console.log( res )
                     if( res && res.status === '100' ){
 
             $store_coinNum[currMatchData.matchid]['my_golds_r'] = $store_coinNum[currMatchData.matchid]['my_golds_r'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) + $store.curr_btn_coin :
@@ -447,9 +453,12 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let currQueryStr = '';
         let currMatchData = this.field43.getCurrMatchData();
 
-        console.log( currMatchData )
 
         if( y>550 && y <660 ){
+            if($store['unableClick']){
+                // 不可点击
+                return false ;
+            }
 
             if( !$store['allCoinObj']['field43'] ){
                 window['Object'].assign($store['allCoinObj'] ,{ 'field43':{
@@ -487,7 +496,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 })
                 await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
                     // 更新 自己头像 金币   下单之后
-                    console.log( res )
                     if( res && res.status === '100' ){
 
             $store_coinNum[currMatchData.matchid]['my_golds_l'] = $store_coinNum[currMatchData.matchid]['my_golds_l'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_l'] ) + $store.curr_btn_coin :
@@ -563,7 +571,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let currQueryStr = '';
         let currMatchData = this.field44.getCurrMatchData();
         if( y>750 && y <860 ){
-
+            if($store['unableClick']){
+                // 不可点击
+                return false ;
+            }
             if( !$store['allCoinObj']['field44'] ){
                 window['Object'].assign($store['allCoinObj'] ,{ 'field44':{
                         coin_left:[],
@@ -600,7 +611,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 })
                 await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
                     // 更新 自己头像 金币   下单之后
-                    console.log( res )
                     if( res && res.status === '100' ){
 
             $store_coinNum[currMatchData.matchid]['my_golds_l'] = $store_coinNum[currMatchData.matchid]['my_golds_l'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_l'] ) + $store.curr_btn_coin :
@@ -624,8 +634,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
 
             }else if(410<x && x<600){
-                console.log('右边')
-
                 currQueryStr = window['convertToQueryString']({
                     ck : $store['orderObj'].ck,
                     golds : $store['curr_btn_coin'] ,
@@ -641,7 +649,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 })
                 await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
                     // 更新 自己头像 金币   下单之后
-                    console.log( res )
                     if( res && res.status === '100' ){
             $store_coinNum[currMatchData.matchid]['my_golds_r'] = $store_coinNum[currMatchData.matchid]['my_golds_r'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) + $store.curr_btn_coin :
             $store.curr_btn_coin;  
@@ -677,7 +684,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let currMatchData = this.field21.getCurrMatchData();
 
         if( y>220 && y <395 ){
-
+            if($store['unableClick']){
+                // 不可点击
+                return false ;
+            }
             if( !$store['allCoinObj']['field21'] ){
                 window['Object'].assign($store['allCoinObj'] ,{ 'field21':{
                         coin_left:[],
@@ -715,7 +725,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 })
                 await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
                     // 更新 自己头像 金币   下单之后
-                    console.log( res )
                     if( res && res.status === '100' ){
 
             $store_coinNum[currMatchData.matchid]['my_golds_l'] = $store_coinNum[currMatchData.matchid]['my_golds_l'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_l'] ) + $store.curr_btn_coin :
@@ -790,7 +799,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         console.log(x);
         console.log(y)
         if( y>594 && y <770 ){
-
+            if($store['unableClick']){
+                // 不可点击
+                return false ;
+            }
             if( !$store['allCoinObj']['field22'] ){
                 window['Object'].assign($store['allCoinObj'] ,{ 'field22':{
                         coin_left:[],
@@ -903,7 +915,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let currMatchData = this.field1.getCurrMatchData();
 
         if( y>352 && y <650 ){
-
+            if($store['unableClick']){
+                // 不可点击
+                return false ;
+            }
             if( !$store['allCoinObj']['field1'] ){
                 window['Object'].assign($store['allCoinObj'] ,{ 'field1':{
                         coin_left:[],
@@ -1011,7 +1026,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
      *  收起对应的 金币 ！
      */
     private collectCoin(){
-        console.log( '收起金币测试' );
         let $store = window['store'];
         let allCoinKeys = window['Object'].keys( $store['allCoinObj'] );
         let objLen = allCoinKeys.length;
@@ -1175,8 +1189,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
      *  地址 start_x  start_y  end_x end_y  arr 
      */
     private create_other_Coin( start_x:any , start_y:any , end_x:any , end_y:any ,currArr:any , moreCoin:Boolean){
-
-        let goldArr = [] ; // 多个金币的情况
+        let goldArr = [] ;
         if( !moreCoin ){
             let gold = new Gold();
             gold.anchorOffsetX = gold.width/2;
@@ -1194,6 +1207,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 gold.anchorOffsetY = gold.height/2;
                 gold.x = start_x ;
                 gold.y = start_y ;
+                currArr.push( gold );
                 goldArr.push( gold );
                 this.addChild(gold);
             }
@@ -1435,11 +1449,76 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             }
         }
 
-        console.log( $store['coin_local'][ currFieldLocalStr ] )
+        // console.log( $store['coin_local'][ currFieldLocalStr ] )
         // 头像位置  位置可以调整
-        console.log(' curr local ')
+    }
+
+    /**
+     *  查找 win
+     *  @param matchid 比赛id  找到对应场地  winid 找 左右 
+     *  @return  _l  left  _r  right   修改 winid  放上一步
+     * 
+     */
+    private showWinLocation( matchid:string ,findStr:string ){
+        let $store = window['store'] ;
+
+        if( matchid && $store['matFindField'] && $store['matFindField'][matchid] ){
+            if( findStr ==='_l' ){
+               this[ $store['matFindField'][matchid] ].addwinIcon_l() ;
+            }else if( findStr === '_r' ){
+                this[ $store['matFindField'][matchid] ].addwinIcon_r() ;
+            }
+            return ;
+        }else{
+            // 没找到 赢的比赛
+            console.warn( '没找到 赢的Icon' )
+        }
 
 
+        // let $store = window['store'] ;
+        // let findStr = '';
+
+        // if( matchid && $store['matFindField'] && $store['matFindField'][matchid] ){
+        //     findStr = this[ $store['matFindField'][matchid] ].findLocal( winid ) ;
+        //     if( findStr ==='_l' ){
+
+        //        this[ $store['matFindField'][matchid] ].addwinIcon_l() ;
+        //     }else if( findStr === '_r' ){
+
+        //         this[ $store['matFindField'][matchid] ].addwinIcon_r() ;
+        //     }
+        //     return ;
+        // }else{
+        //     // 没找到 赢的比赛
+        //     console.warn( '没找到 赢的Icon' )
+        // }
+    }
+
+    /**
+     *  清楚所有win 图标
+     */
+    private removeAllWinIcon(){
+        if( this.field1  ){
+            this.field1.removeWinIcon() ;
+        }
+        if( this.field21  ){
+            this.field21.removeWinIcon() ;
+        }
+        if( this.field22  ){
+            this.field22.removeWinIcon() ;
+        }   
+        if( this.field41 ){
+            this.field41.removeWinIcon() ;
+        }
+        if( this.field42  ){
+            this.field42.removeWinIcon() ;
+        }
+        if( this.field43  ){
+            this.field43.removeWinIcon() ;
+        }
+        if(this.field44  ){
+            this.field44.removeWinIcon() ;
+        }                             
     }
 
     private courtWrap(){

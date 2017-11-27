@@ -145,6 +145,15 @@ var Field_ball = (function (_super) {
             rightOdds: this.rightOdds.text,
         };
     };
+    // 删除所有 win 图标
+    Field_ball.prototype.removeWinIcon = function () {
+        if (this.winIcon_l && this.winIcon_l.parent) {
+            this.removeChild(this.winIcon_l);
+        }
+        if (this.winIcon_r && this.winIcon_r.parent) {
+            this.removeChild(this.winIcon_r);
+        }
+    };
     //  left add icon win   胜利图标
     Field_ball.prototype.addwinIcon_l = function () {
         if (!!this.winIcon_l) {
@@ -155,13 +164,13 @@ var Field_ball = (function (_super) {
             this.winIcon_l.anchorOffsetY = 101;
             this.winIcon_l.y = this.courtAnHeight;
             this.winIcon_l.x = -80;
-            // this.addChild(this.winIcon_l);
+            this.addChild(this.winIcon_l);
         }
     };
     // right add icon
     Field_ball.prototype.addwinIcon_r = function () {
         if (!!this.winIcon_r) {
-            // this.addChild(this.winIcon_r);
+            this.addChild(this.winIcon_r);
         }
         else {
             this.winIcon_r = new egret.Bitmap(RES.getRes('win2_png'));
@@ -169,7 +178,7 @@ var Field_ball = (function (_super) {
             this.winIcon_r.x = 350;
             this.winIcon_r.y = this.courtAnHeight;
             this.winIcon_r.y = 90;
-            // this.addChild(this.winIcon_r);
+            this.addChild(this.winIcon_r);
         }
     };
     // 更新左边总金币的背景
@@ -287,6 +296,23 @@ var Field_ball = (function (_super) {
             this.rightMyMoneyText.textAlign = egret.HorizontalAlign.CENTER;
             this.rightMyMoneyBox.addChild(this.rightMyMoneyText);
             this.addChild(this.rightMyMoneyBox);
+        }
+    };
+    // findWinLocation  ==> findLocal 
+    /**
+     *   @return  _l  left  _r  right
+     */
+    Field_ball.prototype.findLocal = function (winid) {
+        if (winid) {
+            if (this.homeid === winid) {
+                return '_l';
+            }
+            else if (this.awayid === winid) {
+                return '_r';
+            }
+        }
+        else {
+            console.warn('footballfield findLocal not find winid');
         }
     };
     return Field_ball;

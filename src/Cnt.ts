@@ -31,6 +31,23 @@ class Cnt extends egret.DisplayObjectContainer{
     // 定时器
     private timer:Timer ;
 
+
+
+
+    // 总决赛的点球 4 个 进行复用
+
+    private penalty0 ; private bgMask0;
+    private penalty_point0 ; private bgMask_point0
+
+    private penalty1 ; private bgMask1;
+    private penalty_point1 ; private bgMask_point1 ;
+
+    private penalty2 ; private bgMask2;
+    private penalty_point2 ; private bgMask_point2;
+
+    private penalty3 ; private bgMask3;
+    private penalty_point3 ; private bgMask_point3;
+
     private drawCnt(Width,Height,anWidth,anHeight){
         // 内容区
         let wrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
@@ -85,55 +102,357 @@ class Cnt extends egret.DisplayObjectContainer{
 
 
         this.fieldContain = new Field_ball_contain();
+        window['store']['$fieldContain'] = this.fieldContain ;
         this.bgCourtWrap.addChild(this.fieldContain);
 
 
-        //决赛的开奖-点球
-        // 插入遮罩层,正常进球和点球要分开两个遮罩
-        // let bgMask01 = this.bgMask();
-        // bgMask01.anchorOffsetX = 245;
-        // bgMask01.x = window['store'].stage_anWidth;
-        // bgMask01.y = 265;  
-        // this.bgCourtWrap.addChild(bgMask01);
+    //     //决赛的开奖-点球
+    //     // 插入遮罩层,正常进球和点球要分开两个遮罩
+    //     this.f1_penalty02 = this.bgMask();
+    //     this.f1_penalty02.anchorOffsetX = 245;
+    //     this.f1_penalty02.x = window['store'].stage_anWidth;
+    //     this.f1_penalty02.y = 265;  
+    //     this.bgCourtWrap.addChild( this.f1_penalty02 );
 
-        // let bgMask02 = this.bgMask();
-        // bgMask02.anchorOffsetX = 245;
-        // bgMask02.x = window['store'].stage_anWidth;
-        // bgMask02.y = 265;  
-        // this.bgCourtWrap.addChild(bgMask02);
+    //     //正常进球
+    //     this.f1_penalty02 = new Penalty01();
+    //     this.f1_penalty02.anchorOffsetX = 245;
+    //     this.f1_penalty02.x = window['store'].stage_anWidth;
+    //     this.f1_penalty02.y = 323;  //决赛265   +58  
+    //     this.f1_penalty02.mask = this.f1_penalty02 ;
+    //     this.bgCourtWrap.addChild(this.f1_penalty02);
 
-        // //正常进球
-        // let penalty01 = new Penalty01();
-        // penalty01.anchorOffsetX = 245;
-        // penalty01.x = window['store'].stage_anWidth;
-        // penalty01.y = 323;  //决赛265   +58  
-        // penalty01.mask = bgMask01;
-        // this.bgCourtWrap.addChild(penalty01);
-        // setTimeout(()=>{
-        //     egret.Tween.get( penalty01 ).to( {y:265 },200 );
-        // },3000)
+    //     // 过一会出现的
+    //     setTimeout(()=>{
+    //         egret.Tween.get( this.f1_penalty02 ).to( {y:265 },200 );
+    //     },3000)
+ 
+    //     //点球
 
-        // setTimeout(()=>{
-        //     egret.Tween.get( penalty01 ).to( {y:107 },200 );
-        // },5000)
+    //     this.bgMask02 = this.bgMask();
+    //     this.bgMask02.anchorOffsetX = 245;
+    //     this.bgMask02.x = window['store'].stage_anWidth;
+    //     this.bgMask02.y = 265;  
+    //     this.bgCourtWrap.addChild(this.bgMask02);
 
-        // //点球
-        // let penalty02 = new Penalty02();
-        // penalty02.anchorOffsetX = 245;
-        // penalty02.x = window['store'].stage_anWidth;
-        // penalty02.y = 323;  //决赛265   +58  
-        // penalty02.mask = bgMask02;
-        // this.bgCourtWrap.addChild(penalty02);
-        // setTimeout(()=>{
-        //     egret.Tween.get( penalty02 ).to( {y:265 },200 );
-        // },5000)
+    //     this.penalty02 = new Penalty02();
+    //     this.penalty02.anchorOffsetX = 245;
+    //     this.penalty02.x = window['store'].stage_anWidth;
+    //     this.penalty02.y = 323;  //决赛265   +58  
+    //     this.penalty02.mask = this.bgMask02;
+    //     this.bgCourtWrap.addChild(this.penalty02);
 
-         
-
-
+    // // egret.Tween.get( this.penalty02 ).to( {y:265 },200 );
+    //    setTimeout(()=>{
+    //         egret.Tween.get( this.penalty01 ).to( {y:107 },200 );
+    //     },5000)
+    //     setTimeout(()=>{
+    //         egret.Tween.get( this.penalty02 ).to( {y:265 },200 );
+    //     },5000)
         
     }
 
+    /**
+     *  4个进球的实例的初始化
+     */
+    private initAllPenalty(){
+        let penaltyStr = 'penalty' ;
+        let bgMaskStr = 'bgMask' ;
+        let penaltyStr_p = 'penalty_point' ;
+        let bgMaskStr_p = 'bgMask_point' ;   
+
+        for( let i=0;i<4;i++ ){
+            penaltyStr = 'penalty'+i ;
+            bgMaskStr = 'bgMask'+i ;
+            penaltyStr_p = 'penalty_point'+i ;
+            bgMaskStr_p = 'bgMask_point'+i ;  
+            
+            //决赛的开奖
+            // 插入遮罩层,正常进球和点球要分开两个遮罩 mark
+            this[bgMaskStr] = this.bgMask();
+            this[bgMaskStr].anchorOffsetX = 245;
+            this[bgMaskStr].x = window['store'].stage_anWidth;
+            // this[bgMaskStr].y = 265;  
+            // this.bgCourtWrap.addChild( this[bgMaskStr] );
+            //正常进球
+            this[penaltyStr] = new Penalty01();
+            this[penaltyStr].anchorOffsetX = 245;
+            this[penaltyStr].x = window['store'].stage_anWidth;
+            // this[penaltyStr].y = 323;  //决赛265   +58  
+            // this[penaltyStr].mask = this[bgMaskStr] ;
+            // this.bgCourtWrap.addChild( this[penaltyStr] );
+
+            // 过一会出现的
+            // setTimeout(()=>{
+            //     egret.Tween.get( this[penaltyStr] ).to( {y:265 },200 );
+            // },3000)
+    
+            //点球
+            this[bgMaskStr_p] = this.bgMask();
+            this[bgMaskStr_p].anchorOffsetX = 245;
+            this[bgMaskStr_p].x = window['store'].stage_anWidth;
+            // this[bgMaskStr_p].y = 265;  
+            // this.bgCourtWrap.addChild( this[bgMaskStr_p] );
+
+            this[penaltyStr_p] = new Penalty02();
+            this[penaltyStr_p].anchorOffsetX = 245;
+            this[penaltyStr_p].x = window['store'].stage_anWidth;
+            // this[penaltyStr_p].y = 323;  //决赛265   +58  
+            // this[penaltyStr_p].mask = this[bgMaskStr_p] ;
+            // this.bgCourtWrap.addChild( this[penaltyStr_p] );
+
+            // setTimeout(()=>{
+            //         egret.Tween.get( this[penaltyStr] ).to( {y:107 },200 );
+            //     },5000)
+            //     setTimeout(()=>{
+            //         egret.Tween.get( this[penaltyStr_p]  ).to( {y:265 },200 );
+            //     },5000)            
+            // }
+
+        }
+    }
+
+    /**
+     *  延迟函数  临时在 adjustPenalty 用一下
+     */
+    private wait (duration = 250) {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve()
+            }, duration)
+        })
+    }
+
+
+    /**
+     *  传入结算 长度  调整 4 2 1 的位置  
+     * 
+     *  显示比分 记得加上点球的比分  要做判断
+     * 
+     *  调整位置 -- 放入舞台 -- 执行动画 
+     *  @param result  所有的数据 2005
+     */
+    async adjustPenalty( allResult ){
+        // 比赛框的位置坐标 
+        let local_4 = [80,280,500,700] ;
+        let local_2 = [130,500] ; // 130 500
+        let local_1 = [ 265 ] ; // 265
+        let curr_local = null ;
+
+        let penaltyStr = 'penalty' ;
+        let bgMaskStr = 'bgMask' ;
+        let penaltyStr_p = 'penalty_point' ;
+        let bgMaskStr_p = 'bgMask_point' ;   
+
+        let len = allResult.length;  // 数据长度
+
+        let findIndex = null ;
+        // 确保 在调用之前已经清除
+        switch (len){
+            case 4:
+                curr_local = [...local_4] ;
+            ;break;
+            case 2:
+                curr_local = [...local_2] ;
+            ;break;
+            case 1:
+                curr_local = [...local_1] ;
+            ;break;
+        }
+        // 放出对应进球 点球
+        for( let i = 0;i < len; i++ ){
+
+            penaltyStr = 'penalty'+i ;
+            bgMaskStr = 'bgMask'+i ;
+            penaltyStr_p = 'penalty_point'+i ;
+            bgMaskStr_p = 'bgMask_point'+i ;  
+
+            this[bgMaskStr].y = curr_local[i];                                  
+            this[penaltyStr].y = curr_local[i] + 58 ;
+
+            this[bgMaskStr_p].y = curr_local[i];           
+            this[penaltyStr_p].y = curr_local[i] + 58 ;
+
+            if( !!this[bgMaskStr] ){
+                this.bgCourtWrap.addChild( this[bgMaskStr] );
+            }
+            if( !!this[penaltyStr] ){
+                this.bgCourtWrap.addChild( this[penaltyStr] );
+            }
+            if( !!this[bgMaskStr_p] ){
+                this[penaltyStr].mask = this[bgMaskStr] ;
+                this.bgCourtWrap.addChild( this[bgMaskStr_p] );
+            }
+            if( !!this[penaltyStr_p] ){
+                this[penaltyStr_p].mask = this[bgMaskStr_p] ;
+                this.bgCourtWrap.addChild( this[penaltyStr_p] );
+            }
+
+            // 等等正常比分
+            egret.Tween.get( this[penaltyStr] ).to( {y: curr_local[i] }, 300 );
+
+            
+            //  matchid  找 对应的点球进度
+            // findIndex = this.findPenaltyStr( allResult[i].matchid ) ;
+            // if( allResult[i] && allResult[i].is_spotkick === '1' ){
+            //     this.showPenalty( allResult[i].spotkick_style , curr_local , findIndex )
+            // }
+        }
+        //  开始点球判断
+
+        // 在外面await
+        await this.wait( 3000 ) ;
+        // 同步  执行 点球
+        // await this.start_showPenalty( allResult ,  curr_local);
+        for( let i = 0; i<len ;i ++ ){
+            findIndex = this.findPenaltyStr( allResult[i].matchid ) ;
+            if( allResult[i] && allResult[i].is_spotkick === '1' ){
+                this.showPenalty( allResult[i].spotkick_style , curr_local , findIndex , allResult[i].matchid )
+            }else{
+                // 无点球  根据 score 来显示对应的 win 图标 score 1:1
+                // 去除 进球框 显示win .showWinLocation( matchid , leftOrRig );
+                if( allResult[i].score ){
+                    if( parseInt ( allResult[i].score[0] ) > parseInt ( allResult[i].score[2] ) ){
+                        this.fieldContain.showWinLocation( allResult[i].matchid , '_l' ) ;
+                    }else{
+                        this.fieldContain.showWinLocation( allResult[i].matchid , '_r' ) ;
+                    }
+                }
+
+            }
+        }
+        console.log(1234)
+
+    }
+
+    // 显示 winIcon main ==》 cnt ==> fieldcontain
+    /**
+     *   显示出最近的中奖 matchid  winid   要重新写 win
+     */
+    // private showWinLocation ( res05:any ) {
+    //     // 显示中奖 
+    //     console.log( '+++++++++++++++++++++++++++' );
+    //     for( let i=0 ,len = res05.length ;i< len ; i++ ){
+    //         if( res05[i].matchid && res05[i].winid ){
+    //             console.log( res05[i].matchid );
+    //             console.log( res05[i].winid );
+    //             console.log( '-------------------' );
+
+    //             this.fieldContain.showWinLocation(res05[i].matchid , res05[i].winid ); 
+    //         }
+    //     }
+
+    // }
+    /**
+     *  清楚中奖 main ==》 cnt ==> fieldcontain
+     */
+    private cnt_removeAllWinIcon(){
+        this.fieldContain.removeAllWinIcon()
+    }
+
+
+
+
+
+    /**
+     *  根据 matchid  找 对应的点球
+     *  @param matchid
+     */
+    private  findPenaltyStr( matchid:string ){
+        let $store = window['store'] ;
+        let currFieldStr = '';
+        if( matchid ){
+            //  matchid  找 位置
+            if( $store['matFindField'][ matchid ] ){
+                currFieldStr = $store['matFindField'][ matchid ] ;
+                switch (currFieldStr){
+                    case 'field1':
+                    case 'field21':
+                    case 'field41':
+                        return '0' ;
+                    ;
+                    case 'field22':
+                    case 'field42':
+                        return '1' ;
+                    ;
+                    case 'field43':
+                        return '2' ;
+                    ;
+                    case 'field44':
+                        return '3' ;
+                    ;
+                }
+            }else{
+                console.error('not find matchid at field_ball_contain' );
+            }
+        }
+    }
+
+    /**
+     *  清楚 所有的点球
+     */
+    private cleanAllPenalty(){
+        let penaltyStr = 'penalty' ;
+        let bgMaskStr = 'bgMask' ;
+        let penaltyStr_p = 'penalty_point' ;
+        let bgMaskStr_p = 'bgMask_point' ;  
+
+        for( let i = 0;i<4;i++ ){
+            penaltyStr = 'penalty'+i ;
+            bgMaskStr = 'bgMask'+i ;
+            penaltyStr_p = 'penalty_point'+i ;
+            bgMaskStr_p = 'bgMask_point'+i ;  
+
+            if( this[penaltyStr].parent ){
+                this.bgCourtWrap.removeChild( this[penaltyStr] );
+            }
+            if( this[bgMaskStr].parent ){
+                this.bgCourtWrap.removeChild( this[bgMaskStr] );
+            }
+            if( this[penaltyStr_p].parent ){
+                this.bgCourtWrap.removeChild( this[penaltyStr_p] );
+            }
+            if( this[bgMaskStr_p].parent ){
+                this.bgCourtWrap.removeChild( this[bgMaskStr_p] );
+            }
+        }
+    }
+
+    /**
+     *  是否出现点球 (对应场地)
+     * @param curr_local 运动的坐标
+     *  @param penaltyArr 点球坐标
+     *  @param footIndex 点球的坐标 （通过比赛id 找到的）
+     *  @param mathcid 为了 显示最终的win
+     */
+    private showPenalty( penaltyArr  , curr_local , footIndex ,matchid:string ){
+        let penaltyStr = 'penalty' ;
+        let bgMaskStr = 'bgMask' ;
+        let penaltyStr_p = 'penalty_point' ;
+        let bgMaskStr_p = 'bgMask_point' ;  
+
+        penaltyStr = 'penalty'+footIndex ;
+        bgMaskStr = 'bgMask'+footIndex ;
+        penaltyStr_p = 'penalty_point'+footIndex;
+        bgMaskStr_p = 'bgMask_point'+footIndex  ;  
+
+        // console.log( penaltyArr )
+        //  进球 切 点球
+        egret.Tween.get( this[penaltyStr] ).to( {y:curr_local[footIndex] -158 }, 200 ).call(()=>{
+            if( this[bgMaskStr].parent ){
+                this.bgCourtWrap.removeChild( this[bgMaskStr] );
+            }
+            if( this[penaltyStr].parent ){
+                this.bgCourtWrap.removeChild( this[penaltyStr] );
+            }
+        });
+        egret.Tween.get( this[ penaltyStr_p ]  ).to( {y: curr_local[footIndex] }, 200 ).call(()=>{
+            // 对应点球动画
+            setTimeout(()=>{
+                this[ penaltyStr_p ].movePenalty( penaltyArr , matchid )
+            },500)
+        });
+    }
 
     // timer 定时器
     // main => cnt => Timer
@@ -179,7 +498,7 @@ class Cnt extends egret.DisplayObjectContainer{
         // let uid = '10015140' ;
         // await this.fieldContain.sendEndCoin( startString , uid.toString() )
         // 中奖展示 
-        
+
     }
 
     // 他人金币 发出
@@ -252,17 +571,17 @@ class Cnt extends egret.DisplayObjectContainer{
     }
 
     // 放入4个场地
-    private addFieldtWrap4(){
-        this.fieldContain.addcourtWrap4();
-    }
-    // 放入2个场地
-    private addFieldtWrap2(){
-        this.fieldContain.addcourtWrap2();
-    }
-    // 放入1个场地
-    private addFieldtWrap1(){
-        this.fieldContain.addcourtWrap1();
-    }
+    // private addFieldtWrap4(){
+    //     this.fieldContain.addcourtWrap4();
+    // }
+    // // 放入2个场地
+    // private addFieldtWrap2(){
+    //     this.fieldContain.addcourtWrap2();
+    // }
+    // // 放入1个场地
+    // private addFieldtWrap1(){
+    //     this.fieldContain.addcourtWrap1();
+    // }
 
     //  容器 new
     private initUserImg(){
@@ -303,10 +622,11 @@ class Cnt extends egret.DisplayObjectContainer{
                 newUserInfo.push( window['store']['user_info'][i] )
             }
         }
-        newUserInfo.unshift( firstUser )
+        if( firstUser !== null ){
+            newUserInfo.unshift( firstUser )
+        }
         window['store']['user_info'] = newUserInfo ;
 
-        console.log( newUserInfo )
         window['store']['emptyUserPosition'] = [];
         for( let i=0;i<9 ; i++ ){
             if( i >=len ){
@@ -318,8 +638,6 @@ class Cnt extends egret.DisplayObjectContainer{
                 window['store']['user_info'][i].photo = 'http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1213.png'
             }
             if( window['store']['user_info'][i].uid ){
-
-
                 window['store']['userPositionLocal'][window['store']['user_info'][i].uid] = ( i + 1 ) 
 
             }else{
@@ -391,10 +709,9 @@ class Cnt extends egret.DisplayObjectContainer{
                 window['store']['userPositionLocal'][uid] = null ;
             }
 
-
             window['store']['emptyUserPosition'].push( delIndex );
-            console.log( delIndex )
 
+            // console.log( delIndex )
             if( this.bgCourtWrap && this[choseUserImg] && this[choseUserImg].parent ){
                 this.bgCourtWrap.removeChild(this[choseUserImg]);
             }

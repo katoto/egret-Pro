@@ -194,6 +194,16 @@ class Field_ball extends eui.UILayer {
         }
     }
 
+    // 删除所有 win 图标
+    private removeWinIcon(){
+        if( this.winIcon_l && this.winIcon_l.parent ){
+            this.removeChild( this.winIcon_l );
+        }
+
+        if( this.winIcon_r && this.winIcon_r.parent ){
+            this.removeChild( this.winIcon_r );
+        }
+    }
 
     //  left add icon win   胜利图标
     private addwinIcon_l(){
@@ -204,20 +214,20 @@ class Field_ball extends eui.UILayer {
             this.winIcon_l.anchorOffsetY = 101;
             this.winIcon_l.y = this.courtAnHeight;
             this.winIcon_l.x = -80;
-            // this.addChild(this.winIcon_l);
+            this.addChild(this.winIcon_l);
         }
     }
     // right add icon
     private addwinIcon_r(){
         if( !!this.winIcon_r ){
-            // this.addChild(this.winIcon_r);
+            this.addChild(this.winIcon_r);
         }else{
             this.winIcon_r = new egret.Bitmap(RES.getRes('win2_png'));
             this.winIcon_r.anchorOffsetY = 101;
             this.winIcon_r.x = 350;
             this.winIcon_r.y = this.courtAnHeight;
             this.winIcon_r.y = 90;
-            // this.addChild(this.winIcon_r);
+            this.addChild(this.winIcon_r);
         }
     }
 
@@ -342,5 +352,22 @@ class Field_ball extends eui.UILayer {
 
             this.addChild(this.rightMyMoneyBox);
         }
+    }
+
+    // findWinLocation  ==> findLocal 
+    /**
+     *   @return  _l  left  _r  right
+     */
+    private findLocal( winid:string ){
+        if( winid ){
+            if( this.homeid === winid ){
+                return '_l'
+            }else if( this.awayid === winid ){
+                return '_r'
+            }
+        }else{
+            console.warn('footballfield findLocal not find winid')
+        }
+
     }
 }
