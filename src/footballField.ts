@@ -1,6 +1,10 @@
 // class Field_ball extends egret.DisplayObjectContainer{
 
 class Field_ball extends eui.UILayer {
+
+    //比分
+    private score:egret.TextField;
+
     //三种球场的高度和高度中心,重要参数
     private courtHeight;
     private courtAnHeight;
@@ -162,8 +166,20 @@ class Field_ball extends eui.UILayer {
         this.addChild(this.rightOdds);
 
 
-        // win、左边队伍图标和右边队伍图片会影响金币点击效果
-        // 
+       //比分
+    //    this.score = new egret.TextField();
+    //    this.score.text= '2:0';
+    //    this.score.textColor = 0xffffff;
+    //    this.score.size = 52;
+    //    this.score.bold = true;
+    //    this.score.width = 485;
+    //    this.score.height = this.courtHeight;
+    //    this.score.textAlign = egret.HorizontalAlign.CENTER;
+    //    this.score.verticalAlign = egret.VerticalAlign.MIDDLE;
+    //    this.addChild(this.score)
+
+
+
 
     }
 

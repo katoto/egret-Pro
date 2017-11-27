@@ -48,6 +48,14 @@ class Cnt extends egret.DisplayObjectContainer{
     private penalty3 ; private bgMask3;
     private penalty_point3 ; private bgMask_point3;
 
+    //冠军
+
+    private champion:egret.DisplayObjectContainer;
+    private championText:egret.TextField;
+
+    //toast
+    private toastText:egret.TextField;
+
     private drawCnt(Width,Height,anWidth,anHeight){
         // 内容区
         let wrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
@@ -105,6 +113,60 @@ class Cnt extends egret.DisplayObjectContainer{
         window['store']['$fieldContain'] = this.fieldContain ;
         this.bgCourtWrap.addChild(this.fieldContain);
 
+        //冠军
+        // this.champion = new egret.DisplayObjectContainer();
+        // this.champion.width = 241;
+        // this.champion.height = 200; 
+        // this.champion.x = 254.5;
+        // this.champion.y = 93;
+        // this.bgCourtWrap.addChild(this.champion);
+
+        // let championImg:egret.Bitmap = new egret.Bitmap(RES.getRes('champion_png'));
+        // this.champion.addChild(championImg);   
+
+        // this.championText = new egret.TextField();
+        // this.championText.text = '葡萄牙';
+        // this.championText.textColor = 0xffffff;
+        // this.championText.size = 36;
+        // this.championText.width = 241;
+        // this.championText.height = 200;
+        // this.championText.textAlign = egret.HorizontalAlign.CENTER;
+        // this.championText.verticalAlign = egret.VerticalAlign.BOTTOM;
+        // this.champion.addChild(this.championText);   
+
+        //toast
+        // let toast = new egret.DisplayObjectContainer();
+        // toast.width = 430;
+        // toast.height = 90; 
+        // toast.anchorOffsetX = 215;
+        // toast.anchorOffsetY = 45;
+        // toast.x =  window['store']['stage_anWidth'] ;
+        // toast.y =  window['store']['stage_anHeight'] ;
+        // this.addChild(toast);
+ 
+        // let toastBg:egret.Shape = new egret.Shape();
+        // toastBg.graphics.beginFill(0x000000,0.6);
+        // toastBg.graphics.drawRect(0,0,430,90);
+        // toastBg.graphics.endFill();
+        // toast.addChild(toastBg);
+
+        // this.toastText = new egret.TextField();
+        // this.toastText.text = 'toast提示';
+        // this.toastText.textColor = 0xffffff;
+        // this.toastText.size = 30;
+        // this.toastText.width =430;
+        // this.toastText.height = 90;
+        // this.toastText.textAlign = egret.HorizontalAlign.CENTER;
+        // this.toastText.verticalAlign = egret.VerticalAlign.MIDDLE;
+        // toast.addChild(this.toastText);   
+
+
+
+
+
+
+
+
 
     //     //决赛的开奖-点球
     //     // 插入遮罩层,正常进球和点球要分开两个遮罩
@@ -115,17 +177,17 @@ class Cnt extends egret.DisplayObjectContainer{
     //     this.bgCourtWrap.addChild( this.f1_penalty02 );
 
     //     //正常进球
-    //     this.f1_penalty02 = new Penalty01();
-    //     this.f1_penalty02.anchorOffsetX = 245;
-    //     this.f1_penalty02.x = window['store'].stage_anWidth;
-    //     this.f1_penalty02.y = 323;  //决赛265   +58  
-    //     this.f1_penalty02.mask = this.f1_penalty02 ;
-    //     this.bgCourtWrap.addChild(this.f1_penalty02);
+        this.penalty0 = new Penalty01();
+        this.penalty0.anchorOffsetX = 245;
+        this.penalty0.x = window['store'].stage_anWidth;
+        this.penalty0.y = 323;  //决赛265   +58  
+        this.penalty0.mask = this.penalty0 ;
+        this.bgCourtWrap.addChild(this.penalty0);
 
     //     // 过一会出现的
-    //     setTimeout(()=>{
-    //         egret.Tween.get( this.f1_penalty02 ).to( {y:265 },200 );
-    //     },3000)
+        setTimeout(()=>{
+            egret.Tween.get( this.penalty0 ).to( {y:265 },200 );
+        },3000)
  
     //     //点球
 

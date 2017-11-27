@@ -40,6 +40,8 @@ class Main extends egret.DisplayObjectContainer {
     // 竞猜开始文案
     private start_pop = null;
     private stop_pop = null ;
+    //其他提示
+    private toast;
 
     public constructor() {
         super();
@@ -319,12 +321,10 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
             //  后台数据  分发
             let msgObj = JSON.parse( msg );
             let $msgObjBody = msgObj.body;
-
             if( msgObj.time ){ //  同步时间
                 msgObj.time = msgObj.time * 1000;
                 $store['ser_time'] = parseInt ( msgObj.time );
             }
-
             switch ( msgObj.messageid ) {
                     // 进场的数据 2000  （时间进度分析）
                 case '2000':
