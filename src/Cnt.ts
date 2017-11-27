@@ -270,7 +270,6 @@ class Cnt extends egret.DisplayObjectContainer{
             //         egret.Tween.get( this[penaltyStr_p]  ).to( {y:265 },200 );
             //     },5000)            
             // }
-
         }
     }
 
@@ -519,7 +518,6 @@ class Cnt extends egret.DisplayObjectContainer{
     // timer 定时器
     // main => cnt => Timer
     private cnt_timer( setTime:string ){
-
         this.timer['createTimer']( setTime );
 
     }
