@@ -13,6 +13,7 @@ class Foot extends egret.DisplayObjectContainer{
         this.drawFoot();
     }
     private drawFoot(){
+        
         // 底部背景与投注按钮
         // 底部背景
         this.bottom = new egret.Sprite();
@@ -25,8 +26,8 @@ class Foot extends egret.DisplayObjectContainer{
 
          // 规则
          let btnRule:egret.Bitmap = new egret.Bitmap(RES.getRes('rule_png'));
-         btnRule.x = 40;
-         btnRule.y = 27;
+         btnRule.x = 0;
+         btnRule.y = 0;
          this.addChild(btnRule);
          btnRule.touchEnabled = true;
          btnRule.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
@@ -37,8 +38,8 @@ class Foot extends egret.DisplayObjectContainer{
 
          // 聊天
          let btnChat:egret.Bitmap = new egret.Bitmap(RES.getRes('chat_png'));
-         btnChat.x = 670;
-         btnChat.y = 20;
+         btnChat.x = 640;
+         btnChat.y = 0;
          this.addChild(btnChat);
          btnChat.touchEnabled = true;
          btnChat.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
@@ -55,6 +56,10 @@ class Foot extends egret.DisplayObjectContainer{
                 // this.btn_two = new FootBtn(500);
                 // this.btn_three = new FootBtn(1000);
                 // this.addChild(this.btn_one)
+                let music = new Music();
+                music.width = 500;
+                music.height = 500;
+                this.addChild(music)
     }
     public initBtn(){
         //三个投注按钮

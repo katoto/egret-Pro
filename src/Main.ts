@@ -317,7 +317,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
             //  后台数据  分发
             var msgObj = JSON.parse( msg );
             let $msgObjBody = msgObj.body;
-
+            console.log('$msgObjBody,'+$msgObjBody)
             switch ( msgObj.messageid ) {
                     // 进场的数据 2000
                 case '2000':

@@ -22,7 +22,7 @@ class Penalty01 extends eui.UILayer {
         this.topTeam.height = 24;
         this.topTeam.x = 38;
         this.topTeam.y = 2;
-        this.topTeam.mask = bgMask;  // 这里见鬼了，添加遮罩会使整个队伍logo不显示，原因找不到。
+        //this.topTeam.mask = bgMask;  // 这里见鬼了，添加遮罩会使整个队伍logo不显示，原因找不到。
         this.addChild(this.topTeam);
        
         //插入遮罩层
@@ -37,7 +37,7 @@ class Penalty01 extends eui.UILayer {
         this.bottomTeam.height = 24;
         this.bottomTeam.x = 38;
         this.bottomTeam.y = 30;
-         // this.bottomTeam.mask = bgMask02;// 这里见鬼了，添加遮罩会使整个队伍logo不显示，原因找不到。
+        // this.bottomTeam.mask = bgMask02;// 这里见鬼了，添加遮罩会使整个队伍logo不显示，原因找不到。
         this.addChild(this.bottomTeam);
        
 
@@ -62,7 +62,7 @@ class Penalty01 extends eui.UILayer {
         let lineTime:egret.Shape = new egret.Shape();
         lineTime.graphics.lineStyle(7,0xdf0000);
         lineTime.graphics.moveTo(91,30);
-        // lineTime.graphics.lineTo(358,30);  90分钟位置，如果有胜负就停止，不然继续走到449位置
+        lineTime.graphics.lineTo(358,30);   //358是90分钟位置，如果有胜负就停止，不然继续走到449位置
         // lineTime.graphics.lineTo(449,30);
         lineTime.graphics.endFill();
         this.addChild(lineTime);

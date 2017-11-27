@@ -90,34 +90,34 @@ class Cnt extends egret.DisplayObjectContainer{
 
         //决赛的开奖-点球
         // 插入遮罩层,正常进球和点球要分开两个遮罩
-        let bgMask01 = this.bgMask();
-        bgMask01.anchorOffsetX = 245;
-        bgMask01.x = window['store'].stage_anWidth;
-        bgMask01.y = 265;  
-        this.bgCourtWrap.addChild(bgMask01);
+        // let bgMask01 = this.bgMask();
+        // bgMask01.anchorOffsetX = 245;
+        // bgMask01.x = window['store'].stage_anWidth;
+        // bgMask01.y = 265;  
+        // this.bgCourtWrap.addChild(bgMask01);
 
-        let bgMask02 = this.bgMask();
-        bgMask02.anchorOffsetX = 245;
-        bgMask02.x = window['store'].stage_anWidth;
-        bgMask02.y = 265;  
-        this.bgCourtWrap.addChild(bgMask02);
+        // let bgMask02 = this.bgMask();
+        // bgMask02.anchorOffsetX = 245;
+        // bgMask02.x = window['store'].stage_anWidth;
+        // bgMask02.y = 265;  
+        // this.bgCourtWrap.addChild(bgMask02);
 
-        //正常进球
-        let penalty01 = new Penalty01();
-        penalty01.anchorOffsetX = 245;
-        penalty01.x = window['store'].stage_anWidth;
-        penalty01.y = 323;  //决赛265   +58  
-        penalty01.mask = bgMask01;
-        this.bgCourtWrap.addChild(penalty01);
-        setTimeout(()=>{
-            egret.Tween.get( penalty01 ).to( {y:265 },200 );
-        },3000)
+        // //正常进球
+        // let penalty01 = new Penalty01();
+        // penalty01.anchorOffsetX = 245;
+        // penalty01.x = window['store'].stage_anWidth;
+        // penalty01.y = 323;  //决赛265   +58  
+        // penalty01.mask = bgMask01;
+        // this.bgCourtWrap.addChild(penalty01);
+        // setTimeout(()=>{
+        //     egret.Tween.get( penalty01 ).to( {y:265 },200 );
+        // },3000)
 
         // setTimeout(()=>{
         //     egret.Tween.get( penalty01 ).to( {y:107 },200 );
         // },5000)
 
-        //点球
+        // //点球
         // let penalty02 = new Penalty02();
         // penalty02.anchorOffsetX = 245;
         // penalty02.x = window['store'].stage_anWidth;
