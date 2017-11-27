@@ -102,10 +102,14 @@ class Penalty01 extends eui.UILayer {
      *  创建球  
      * timeline
      * [{at_time: "729", is_team: "home"}, {at_time: "5113", is_team: "home"}]
-     *    
+     *    matchid 为了修改 点球
      */
-    private createFootball( timeline:any , is_extratime:any ){
+    private createFootball( timeline:any , is_extratime:any ,matchid:any ){
         let len = timeline.length ;
+        let $store = window['store'] ;
+        let currFieldStr = '';
+        let l_score = 0 ;
+        let r_score = 0 ;
 
         if( this.lineTime.parent ){
             this.addChild( this.lineTime );
@@ -134,13 +138,25 @@ class Penalty01 extends eui.UILayer {
                         penaltyIn.y = 1;
                         this.collFootball.push( penaltyIn );
                         this.addChild(penaltyIn);
+                        if( matchid ){
+                            l_score++ ;
+                        }
                     }else{
                         let penaltyIn2 = this.drawIn();
                         penaltyIn2.x = 336 * parseInt ( timeline[i].at_time ) / 7200 + 90 ;
                         penaltyIn2.y = 34;
                         this.collFootball.push( penaltyIn2 );
                         this.addChild(penaltyIn2);
+                        if( matchid ){
+                            r_score++ ;
+                        }
                     }
+
+                    if( matchid ){
+                        currFieldStr = $store['matFindField'][ matchid ] ;
+                        $store['$fieldContain'][currFieldStr].writeScore( l_score + ':' + r_score )
+                    }
+
                 }, ( parseInt( timeline[i].at_time ) / 7200 * 25000 ))
             }
         }
