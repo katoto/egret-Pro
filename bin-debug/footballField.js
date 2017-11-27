@@ -298,6 +298,29 @@ var Field_ball = (function (_super) {
             this.addChild(this.rightMyMoneyBox);
         }
     };
+    // 清除 自己投的和他人投 的 区域  以及总的背景 ？ 是否必须 
+    Field_ball.prototype.cleanAllCoinText = function () {
+        if (this.rightMyMoneyBox && this.rightMyMoneyBox.parent) {
+            this.removeChild(this.rightMyMoneyBox);
+        }
+        if (this.leftMyMoneyBox && this.leftMyMoneyBox.parent) {
+            this.removeChild(this.leftMyMoneyBox);
+        }
+        if (this.allRightCoin && this.allRightCoin.parent) {
+            this.removeChild(this.allRightCoin);
+        }
+        if (this.allLeftCoin && this.allLeftCoin.parent) {
+            this.removeChild(this.allLeftCoin);
+        }
+        // 总的金币背景
+        if (this.goldItems_right && this.goldItems_right.parent) {
+            this.removeChild(this.goldItems_right);
+        }
+        // 总的金币背景
+        if (this.goldItems_right && this.goldItems_right.parent) {
+            this.removeChild(this.goldItems_right);
+        }
+    };
     // findWinLocation  ==> findLocal 
     /**
      *   @return  _l  left  _r  right

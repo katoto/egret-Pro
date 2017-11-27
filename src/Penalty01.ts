@@ -61,7 +61,7 @@ class Penalty01 extends eui.UILayer {
         let lineTime:egret.Shape = new egret.Shape();
         lineTime.graphics.lineStyle(7,0xdf0000);
         lineTime.graphics.moveTo(91,30);
-        // lineTime.graphics.lineTo(358,30);  90分钟位置，如果有胜负就停止，不然继续走到449位置
+        lineTime.graphics.lineTo(358,30);   // 90分钟位置，如果有胜负就停止，不然继续走到449位置
         // lineTime.graphics.lineTo(449,30);
         lineTime.graphics.endFill();
         this.addChild(lineTime);
