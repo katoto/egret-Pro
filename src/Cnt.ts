@@ -162,12 +162,6 @@ class Cnt extends egret.DisplayObjectContainer{
 
 
 
-
-
-
-
-
-
     //     //决赛的开奖-点球
     //     // 插入遮罩层,正常进球和点球要分开两个遮罩
     //     this.f1_penalty02 = this.bgMask();
@@ -223,7 +217,7 @@ class Cnt extends egret.DisplayObjectContainer{
         let penaltyStr_p = 'penalty_point' ;
         let bgMaskStr_p = 'bgMask_point' ;   
 
-        for( let i=0;i<4;i++ ){
+        for( let i = 0; i < 4 ; i++ ){
             penaltyStr = 'penalty'+i ;
             bgMaskStr = 'bgMask'+i ;
             penaltyStr_p = 'penalty_point'+i ;
@@ -240,6 +234,7 @@ class Cnt extends egret.DisplayObjectContainer{
             this[penaltyStr] = new Penalty01();
             this[penaltyStr].anchorOffsetX = 245;
             this[penaltyStr].x = window['store'].stage_anWidth;
+
             // this[penaltyStr].y = 323;  //决赛265   +58  
             // this[penaltyStr].mask = this[bgMaskStr] ;
             // this.bgCourtWrap.addChild( this[penaltyStr] );
@@ -350,10 +345,12 @@ class Cnt extends egret.DisplayObjectContainer{
                 this.bgCourtWrap.addChild( this[penaltyStr_p] );
             }
 
+            this[penaltyStr].clearAllball();
+
             // 等等正常比分
             egret.Tween.get( this[penaltyStr] ).to( {y: curr_local[i] }, 300 );
 
-            this[penaltyStr].createFootball( allResult[i].timeline )
+            this[penaltyStr].createFootball( allResult[i].timeline , allResult[i].is_extratime );
             
             //  matchid  找 对应的点球进度
             // findIndex = this.findPenaltyStr( allResult[i].matchid ) ;
@@ -370,6 +367,7 @@ class Cnt extends egret.DisplayObjectContainer{
         for( let i = 0; i<len ;i ++ ){
             findIndex = this.findPenaltyStr( allResult[i].matchid ) ;
             if( allResult[i] && allResult[i].is_spotkick === '1' ){
+
                 this.showPenalty( allResult[i].spotkick_style , curr_local , findIndex , allResult[i].matchid )
             }else{
                 // 无点球  根据 score 来显示对应的 win 图标 score 1:1
@@ -444,16 +442,16 @@ class Cnt extends egret.DisplayObjectContainer{
             penaltyStr_p = 'penalty_point'+i ;
             bgMaskStr_p = 'bgMask_point'+i ;  
 
-            if( this[penaltyStr].parent ){
+            if( this[penaltyStr] && this[penaltyStr].parent ){
                 this.bgCourtWrap.removeChild( this[penaltyStr] );
             }
-            if( this[bgMaskStr].parent ){
+            if( this[bgMaskStr] && this[bgMaskStr].parent ){
                 this.bgCourtWrap.removeChild( this[bgMaskStr] );
             }
-            if( this[penaltyStr_p].parent ){
+            if( this[penaltyStr_p] && this[penaltyStr_p].parent ){
                 this.bgCourtWrap.removeChild( this[penaltyStr_p] );
             }
-            if( this[bgMaskStr_p].parent ){
+            if( this[bgMaskStr_p] && this[bgMaskStr_p].parent ){
                 this.bgCourtWrap.removeChild( this[bgMaskStr_p] );
             }
         }
