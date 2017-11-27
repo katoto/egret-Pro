@@ -123,7 +123,6 @@ class Penalty01 extends eui.UILayer {
                 setTimeout(()=>{
                     if( timeline[i].is_team === 'home' ){
                         let penaltyIn = this.drawIn();
-                        // penaltyIn.x = 90;
                         penaltyIn.x = 336 * parseInt ( timeline[i].at_time ) / 7200 + 90 ;
                         penaltyIn.y = 1;
                         this.collFootball.push( penaltyIn );
@@ -131,7 +130,6 @@ class Penalty01 extends eui.UILayer {
                     }else{
                         let penaltyIn2 = this.drawIn();
                         penaltyIn2.x = 336 * parseInt ( timeline[i].at_time ) / 7200 + 90 ;
-                        // penaltyIn2.x = 426;
                         penaltyIn2.y = 34;
                         this.collFootball.push( penaltyIn2 );
                         this.addChild(penaltyIn2);

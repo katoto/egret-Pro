@@ -367,7 +367,7 @@ class Cnt extends egret.DisplayObjectContainer{
         for( let i = 0; i<len ;i ++ ){
             findIndex = this.findPenaltyStr( allResult[i].matchid ) ;
             if( allResult[i] && allResult[i].is_spotkick === '1' ){
-
+                await this.wait( 7000 ) ;
                 this.showPenalty( allResult[i].spotkick_style , curr_local , findIndex , allResult[i].matchid )
             }else{
                 // 无点球  根据 score 来显示对应的 win 图标 score 1:1
