@@ -217,9 +217,13 @@ class Cnt extends egret.DisplayObjectContainer{
      *  champion 冠军
      */
     private showChampion( name:string ){
-
-
-
+        if( !!this.champion ){
+            this.bgCourtWrap.addChild( this.champion ) ;
+        }
+        if( !!this.championText ){
+            this.championText.text = name ;
+            this.champion.addChild(this.championText) ; 
+        }
     }
 
     /**
