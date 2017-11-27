@@ -36,21 +36,7 @@ class Foot extends egret.DisplayObjectContainer{
             this.parent.addChild(popRule);
          },this)
 
-<<<<<<< HEAD
-         // 聊天
-         let btnChat:egret.Bitmap = new egret.Bitmap(RES.getRes('chat_png'));
-         btnChat.x = 640;
-         btnChat.y = 0;
-         this.addChild(btnChat);
-         btnChat.touchEnabled = true;
-         btnChat.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
-                //聊天区域
-            console.log('聊天');
-            
-            //聊天区域实例
-            let popChat = new PopChat();
-            this.parent.addChild(popChat);
-=======
+
          // 聊天  暂时隐藏处理
 
         //  let btnChat:egret.Bitmap = new egret.Bitmap(RES.getRes('chat_png'));
@@ -64,14 +50,12 @@ class Foot extends egret.DisplayObjectContainer{
         //     //聊天区域实例
         //     let popChat = new PopChat();
         //     this.parent.addChild(popChat);
->>>>>>> 3164e806a9619159de892c5cadad660fe7687913
             
         //  },this)
 
 
 
 
-<<<<<<< HEAD
                 // this.btn_one = new FootBtn(100);
                 // this.btn_two = new FootBtn(500);
                 // this.btn_three = new FootBtn(1000);
@@ -80,12 +64,7 @@ class Foot extends egret.DisplayObjectContainer{
                 music.width = 500;
                 music.height = 500;
                 this.addChild(music)
-=======
-        // this.btn_one = new FootBtn(100);
-        // this.btn_two = new FootBtn(500);
-        // this.btn_three = new FootBtn(1000);
-        // this.addChild(this.btn_one)
->>>>>>> 3164e806a9619159de892c5cadad660fe7687913
+
     }
     public initBtn(){
         //三个投注按钮
