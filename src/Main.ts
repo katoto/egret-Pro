@@ -372,8 +372,13 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     }
                 break;
                 case '2001':
-                    // 赛事消息 2001  缺一个 换产 清楚数据
+                    // 赛事消息 2001  缺一个 换厂  清除  数据
                     if( $msgObjBody ){
+                         // 清空 投注 数据  coin_Num   是否合理 ？
+                         if( $store['coin_Num'] ){
+                             $store['coin_Num'] = {} ;
+                         }
+
                         if( $msgObjBody.room_info ){
                             this.top.setTextDate(  $msgObjBody.room_info.desc )
                             this.top.setTextTitle(  $msgObjBody.room_info.title )
@@ -389,6 +394,14 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         if( $msgObjBody.pre_result ){
                             // 切换场地  用
                         }
+
+                        // clean all  win
+                        this.cnt.cnt_removeAllWinIcon();
+                        // clean all  点球、进球黑框
+                        this.cnt.cleanAllPenalty() ;
+                        // clean all 自己投注和他人投注
+
+
                     }
                 break;
                 case '2002':
@@ -484,17 +497,14 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         }else{
                             console.warn('2005 data error not find result');
                         }
-                        
+
                         // 去除中奖图标 
                         // setTimeout(()=>{
                         //     this.cnt.cnt_removeAllWinIcon() ;
                         // },5000)
 
                         // 模拟点球
-                        // var spotkick_style = [["1", "1"], ["1", "0"], ["1", "1"], ["0", "0"], ["0", "0"], ["0", "0"]]
-                        // if( $msgObjBody.spotkick_style && $msgObjBody.spotkick_style.length ){
-                            
-                        // }
+
                     }
 
 
@@ -504,9 +514,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 case'2006':
                     // 正在派奖
                     this.cnt.cnt_upTextTips('正在派奖...');
-
-
-
                 ;break;
 
                 case '2007':
@@ -520,6 +527,9 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     }else{
                         console.warn( '2007 派奖数据有误' )
                     }
+
+                    //  去除所有的 进球投注区
+
 
                     // this.cnt.cnt_sendEndCoin( '1002999','' )
                 ;break;

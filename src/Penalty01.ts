@@ -54,18 +54,26 @@ class Penalty01 extends eui.UILayer {
 
         // 时间轴
         let timer:egret.Bitmap = new egret.Bitmap(RES.getRes('penalty-time_png'));
-        timer.x = 79;
+        timer.x = 80;
         timer.y = 15;
+        timer.scaleY = 0.98;
         this.addChild(timer);
 
         //进度条
         let lineTime:egret.Shape = new egret.Shape();
         lineTime.graphics.lineStyle(7,0xdf0000);
-        lineTime.graphics.moveTo(91,30);
-        lineTime.graphics.lineTo(358,30);   //358是90分钟位置，如果有胜负就停止，不然继续走到449位置
-        // lineTime.graphics.lineTo(449,30);
+        lineTime.graphics.moveTo(91,29);
+        //lineTime.graphics.lineTo(358,29);   //358是90分钟位置，如果有胜负就停止，不然继续走到449位置
+        lineTime.graphics.lineTo(449,29);
         lineTime.graphics.endFill();
         this.addChild(lineTime);
+
+        let lineTimeMask:egret.Bitmap = new egret.Bitmap(RES.getRes('scoreMask_png'));
+        lineTimeMask.x = 80;
+        lineTimeMask.y = 24;
+        lineTimeMask.mask = lineTime;
+        this.addChild(lineTimeMask);
+        egret.Tween.get( lineTimeMask ).to( { x : 350} ,5000 ) 
        
     }
 

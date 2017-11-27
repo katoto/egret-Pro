@@ -114,51 +114,51 @@ class Cnt extends egret.DisplayObjectContainer{
         this.bgCourtWrap.addChild(this.fieldContain);
 
         //冠军
-        this.champion = new egret.DisplayObjectContainer();
-        this.champion.width = 241;
-        this.champion.height = 200; 
-        this.champion.x = 254.5;
-        this.champion.y = 93;
-        this.bgCourtWrap.addChild(this.champion);
+        // this.champion = new egret.DisplayObjectContainer();
+        // this.champion.width = 241;
+        // this.champion.height = 200; 
+        // this.champion.x = 254.5;
+        // this.champion.y = 93;
+        // this.bgCourtWrap.addChild(this.champion);
 
-        let championImg:egret.Bitmap = new egret.Bitmap(RES.getRes('champion_png'));
-        this.champion.addChild(championImg);   
+        // let championImg:egret.Bitmap = new egret.Bitmap(RES.getRes('champion_png'));
+        // this.champion.addChild(championImg);   
 
-        this.championText = new egret.TextField();
-        this.championText.text = '葡萄牙';
-        this.championText.textColor = 0xffffff;
-        this.championText.size = 36;
-        this.championText.width = 241;
-        this.championText.height = 200;
-        this.championText.textAlign = egret.HorizontalAlign.CENTER;
-        this.championText.verticalAlign = egret.VerticalAlign.BOTTOM;
-        this.champion.addChild(this.championText);   
+        // this.championText = new egret.TextField();
+        // this.championText.text = '葡萄牙';
+        // this.championText.textColor = 0xffffff;
+        // this.championText.size = 36;
+        // this.championText.width = 241;
+        // this.championText.height = 200;
+        // this.championText.textAlign = egret.HorizontalAlign.CENTER;
+        // this.championText.verticalAlign = egret.VerticalAlign.BOTTOM;
+        // this.champion.addChild(this.championText);   
 
         //toast
-        let toast = new egret.DisplayObjectContainer();
-        toast.width = 430;
-        toast.height = 90; 
-        toast.anchorOffsetX = 215;
-        toast.anchorOffsetY = 45;
-        toast.x =  window['store']['stage_anWidth'] ;
-        toast.y =  window['store']['stage_anHeight'] ;
-        this.addChild(toast);
+        // let toast = new egret.DisplayObjectContainer();
+        // toast.width = 430;
+        // toast.height = 90; 
+        // toast.anchorOffsetX = 215;
+        // toast.anchorOffsetY = 45;
+        // toast.x =  window['store']['stage_anWidth'] ;
+        // toast.y =  window['store']['stage_anHeight'] ;
+        // this.addChild(toast);
  
-        let toastBg:egret.Shape = new egret.Shape();
-        toastBg.graphics.beginFill(0x000000,0.6);
-        toastBg.graphics.drawRect(0,0,430,90);
-        toastBg.graphics.endFill();
-        toast.addChild(toastBg);
+        // let toastBg:egret.Shape = new egret.Shape();
+        // toastBg.graphics.beginFill(0x000000,0.6);
+        // toastBg.graphics.drawRect(0,0,430,90);
+        // toastBg.graphics.endFill();
+        // toast.addChild(toastBg);
 
-        this.toastText = new egret.TextField();
-        this.toastText.text = 'toast提示';
-        this.toastText.textColor = 0xffffff;
-        this.toastText.size = 30;
-        this.toastText.width =430;
-        this.toastText.height = 90;
-        this.toastText.textAlign = egret.HorizontalAlign.CENTER;
-        this.toastText.verticalAlign = egret.VerticalAlign.MIDDLE;
-        toast.addChild(this.toastText);   
+        // this.toastText = new egret.TextField();
+        // this.toastText.text = 'toast提示';
+        // this.toastText.textColor = 0xffffff;
+        // this.toastText.size = 30;
+        // this.toastText.width =430;
+        // this.toastText.height = 90;
+        // this.toastText.textAlign = egret.HorizontalAlign.CENTER;
+        // this.toastText.verticalAlign = egret.VerticalAlign.MIDDLE;
+        // toast.addChild(this.toastText);   
 
 
 
@@ -177,17 +177,17 @@ class Cnt extends egret.DisplayObjectContainer{
     //     this.bgCourtWrap.addChild( this.f1_penalty02 );
 
     //     //正常进球
-    //     this.f1_penalty02 = new Penalty01();
-    //     this.f1_penalty02.anchorOffsetX = 245;
-    //     this.f1_penalty02.x = window['store'].stage_anWidth;
-    //     this.f1_penalty02.y = 323;  //决赛265   +58  
-    //     this.f1_penalty02.mask = this.f1_penalty02 ;
-    //     this.bgCourtWrap.addChild(this.f1_penalty02);
+        this.penalty0 = new Penalty01();
+        this.penalty0.anchorOffsetX = 245;
+        this.penalty0.x = window['store'].stage_anWidth;
+        this.penalty0.y = 323;  //决赛265   +58  
+        this.penalty0.mask = this.penalty0 ;
+        this.bgCourtWrap.addChild(this.penalty0);
 
     //     // 过一会出现的
-    //     setTimeout(()=>{
-    //         egret.Tween.get( this.f1_penalty02 ).to( {y:265 },200 );
-    //     },3000)
+        // setTimeout(()=>{
+        //     egret.Tween.get( this.penalty0 ).to( {y:265 },200 );
+        // },3000)
  
     //     //点球
 
@@ -259,6 +259,7 @@ class Cnt extends egret.DisplayObjectContainer{
             this[penaltyStr_p] = new Penalty02();
             this[penaltyStr_p].anchorOffsetX = 245;
             this[penaltyStr_p].x = window['store'].stage_anWidth;
+
             // this[penaltyStr_p].y = 323;  //决赛265   +58  
             // this[penaltyStr_p].mask = this[bgMaskStr_p] ;
             // this.bgCourtWrap.addChild( this[penaltyStr_p] );
@@ -382,37 +383,14 @@ class Cnt extends egret.DisplayObjectContainer{
 
             }
         }
-        console.log(1234)
-
     }
 
-    // 显示 winIcon main ==》 cnt ==> fieldcontain
-    /**
-     *   显示出最近的中奖 matchid  winid   要重新写 win
-     */
-    // private showWinLocation ( res05:any ) {
-    //     // 显示中奖 
-    //     console.log( '+++++++++++++++++++++++++++' );
-    //     for( let i=0 ,len = res05.length ;i< len ; i++ ){
-    //         if( res05[i].matchid && res05[i].winid ){
-    //             console.log( res05[i].matchid );
-    //             console.log( res05[i].winid );
-    //             console.log( '-------------------' );
-
-    //             this.fieldContain.showWinLocation(res05[i].matchid , res05[i].winid ); 
-    //         }
-    //     }
-
-    // }
     /**
      *  清楚中奖 main ==》 cnt ==> fieldcontain
      */
     private cnt_removeAllWinIcon(){
         this.fieldContain.removeAllWinIcon()
     }
-
-
-
 
 
     /**
@@ -450,7 +428,8 @@ class Cnt extends egret.DisplayObjectContainer{
     }
 
     /**
-     *  清楚 所有的点球
+     *  清除 所有的点球 
+     *  main ==》 cnt
      */
     private cleanAllPenalty(){
         let penaltyStr = 'penalty' ;
@@ -548,8 +527,6 @@ class Cnt extends egret.DisplayObjectContainer{
         // if( settleData ){
         //     for( let i=0,len = settleData.length ;i<len ; i++ ){
         //         if( settleData[i].prize_info &&  settleData[i].prize_info.length > 0 ){
-
-
         //         }
         //     }
         // }
@@ -630,19 +607,6 @@ class Cnt extends egret.DisplayObjectContainer{
         this.fieldContain.initFieldMsg();
     }
 
-    // 放入4个场地
-    // private addFieldtWrap4(){
-    //     this.fieldContain.addcourtWrap4();
-    // }
-    // // 放入2个场地
-    // private addFieldtWrap2(){
-    //     this.fieldContain.addcourtWrap2();
-    // }
-    // // 放入1个场地
-    // private addFieldtWrap1(){
-    //     this.fieldContain.addcourtWrap1();
-    // }
-
     //  容器 new
     private initUserImg(){
         for( let i=0;i<9;i++ ){
@@ -712,7 +676,7 @@ class Cnt extends egret.DisplayObjectContainer{
             }
 
 
-            //  中奖的处理 ！
+            //  中奖的处理 对应用户头像 ！
             // this[choseUserImg].isShowWinGold('3333333')
             // setTimeout(()=>{
             //    this[choseUserImg].isHideWinGold() 
@@ -755,7 +719,6 @@ class Cnt extends egret.DisplayObjectContainer{
             delIndex = window['store']['userPositionLocal'][uid] ;
         }
 
-
         if( delIndex === 0 ){
             console.error( 'not find uid');
             return false;
@@ -764,7 +727,6 @@ class Cnt extends egret.DisplayObjectContainer{
         if( delIndex ){
             let choseUserImg = 'userImg'+ ( delIndex ) ;
             // 更新数组
-
             if( window['store']['userPositionLocal'][uid] ){
                 window['store']['userPositionLocal'][uid] = null ;
             }
@@ -776,6 +738,5 @@ class Cnt extends egret.DisplayObjectContainer{
                 this.bgCourtWrap.removeChild(this[choseUserImg]);
             }
         }
-
     }
 }

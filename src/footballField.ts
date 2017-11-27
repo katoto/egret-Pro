@@ -167,16 +167,16 @@ class Field_ball extends eui.UILayer {
 
 
        //比分
-       this.score = new egret.TextField();
-       this.score.text= '2:0';
-       this.score.textColor = 0xffffff;
-       this.score.size = 52;
-       this.score.bold = true;
-       this.score.width = 485;
-       this.score.height = this.courtHeight;
-       this.score.textAlign = egret.HorizontalAlign.CENTER;
-       this.score.verticalAlign = egret.VerticalAlign.MIDDLE;
-       this.addChild(this.score)
+    //    this.score = new egret.TextField();
+    //    this.score.text= '2:0';
+    //    this.score.textColor = 0xffffff;
+    //    this.score.size = 52;
+    //    this.score.bold = true;
+    //    this.score.width = 485;
+    //    this.score.height = this.courtHeight;
+    //    this.score.textAlign = egret.HorizontalAlign.CENTER;
+    //    this.score.verticalAlign = egret.VerticalAlign.MIDDLE;
+    //    this.addChild(this.score)
 
 
 
@@ -249,7 +249,6 @@ class Field_ball extends eui.UILayer {
 
     // 更新左边总金币的背景
     private upLeftCoinBg(){
-
         if( this.goldItems_left02.parent ){
             this.removeChild(this.goldItems_left02);
         }
@@ -368,6 +367,31 @@ class Field_ball extends eui.UILayer {
 
             this.addChild(this.rightMyMoneyBox);
         }
+    }
+
+    // 清除 自己投的和他人投 的 区域  以及总的背景 ？ 是否必须 
+    private cleanAllCoinText(){
+        if( this.rightMyMoneyBox && this.rightMyMoneyBox.parent ){
+            this.removeChild( this.rightMyMoneyBox )
+        }
+        if( this.leftMyMoneyBox && this.leftMyMoneyBox.parent ){
+            this.removeChild( this.leftMyMoneyBox )
+        }
+        if( this.allRightCoin && this.allRightCoin.parent ){
+            this.removeChild( this.allRightCoin )
+        }
+        if( this.allLeftCoin && this.allLeftCoin.parent ){
+            this.removeChild( this.allLeftCoin )
+        }
+        // 总的金币背景
+        if( this.goldItems_right && this.goldItems_right.parent ){
+            this.removeChild( this.goldItems_right );
+        }
+        // 总的金币背景
+        if( this.goldItems_right && this.goldItems_right.parent ){
+            this.removeChild( this.goldItems_right );
+        }
+        
     }
 
     // findWinLocation  ==> findLocal 

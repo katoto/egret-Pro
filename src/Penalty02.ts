@@ -159,23 +159,23 @@ class Penalty02 extends eui.UILayer {
             // 去除 整个背景
 
             //  显示win showWinLocation(res05[i].matchid);  _l left  _r right
-            await this.wait( )
+            await this.wait( 350 ) ;
             if( !!window['store']['$fieldContain'] ){
                 window['store']['$fieldContain'].showWinLocation( matchid , leftOrRig );
             }
 
             // 清楚 所有点球  win
-            
-            // setTimeout(()=>{
-            //     for( let i=0 ,len = colectPenalt.length ;i< len ; i++ ){
-            //         if( colectPenalt[i] && colectPenalt[i].parent ){
-            //             this.removeChild( colectPenalt[i] );
-            //         }
-            //     }
-            //     if( this.penaltyWin.parent ){
-            //         this.removeChild( this.penaltyWin );
-            //     }
-            // },1000)
+
+            setTimeout(()=>{
+                for( let i=0 ,len = colectPenalt.length ;i< len ; i++ ){
+                    if( colectPenalt[i] && colectPenalt[i].parent ){
+                        this.removeChild( colectPenalt[i] );
+                    }
+                }
+                if( this.penaltyWin.parent ){
+                    this.removeChild( this.penaltyWin );
+                }
+            },1000)
 
         }
     }

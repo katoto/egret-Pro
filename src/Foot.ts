@@ -56,14 +56,14 @@ class Foot extends egret.DisplayObjectContainer{
 
 
 
-                // this.btn_one = new FootBtn(100);
-                // this.btn_two = new FootBtn(500);
-                // this.btn_three = new FootBtn(1000);
-                // this.addChild(this.btn_one)
-                let music = new Music();
-                music.width = 500;
-                music.height = 500;
-                this.addChild(music)
+        // this.btn_one = new FootBtn(100);
+        // this.btn_two = new FootBtn(500);
+        // this.btn_three = new FootBtn(1000);
+        // this.addChild(this.btn_one)
+        let music = new Music();
+        music.width = 500;
+        music.height = 500;
+        this.addChild(music)
 
     }
     public initBtn(){
