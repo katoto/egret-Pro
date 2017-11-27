@@ -282,7 +282,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
         if( window['platform'] ){
             $store['env_variable'].platform = window['platform'] ;
         }else{
-            $store['env_variable'].platform =egret.localStorage.getItem('platform'); 
+            $store['env_variable'].platform = egret.localStorage.getItem('platform'); 
         }
 
         // 头像随机的位置
@@ -484,6 +484,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         }else{
                             console.warn('2005 data error not find result');
                         }
+                        
                         // 去除中奖图标 
                         // setTimeout(()=>{
                         //     this.cnt.cnt_removeAllWinIcon() ;
@@ -494,7 +495,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         // if( $msgObjBody.spotkick_style && $msgObjBody.spotkick_style.length ){
                             
                         // }
-
                     }
 
 

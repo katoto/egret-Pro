@@ -35,26 +35,29 @@ class Foot extends egret.DisplayObjectContainer{
             this.parent.addChild(popRule);
          },this)
 
-         // 聊天
-         let btnChat:egret.Bitmap = new egret.Bitmap(RES.getRes('chat_png'));
-         btnChat.x = 670;
-         btnChat.y = 20;
-         this.addChild(btnChat);
-         btnChat.touchEnabled = true;
-         btnChat.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
-                //聊天区域
-            console.log('聊天');
-            
-            //聊天区域实例
-            let popChat = new PopChat();
-            this.parent.addChild(popChat);
-            
-         },this)
+         // 聊天  暂时隐藏处理
 
-                // this.btn_one = new FootBtn(100);
-                // this.btn_two = new FootBtn(500);
-                // this.btn_three = new FootBtn(1000);
-                // this.addChild(this.btn_one)
+        //  let btnChat:egret.Bitmap = new egret.Bitmap(RES.getRes('chat_png'));
+        //  btnChat.x = 670;
+        //  btnChat.y = 20;
+        //  this.addChild(btnChat);
+        //  btnChat.touchEnabled = true;
+        //  btnChat.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
+        //         //聊天区域
+        //     console.log('聊天');
+        //     //聊天区域实例
+        //     let popChat = new PopChat();
+        //     this.parent.addChild(popChat);
+            
+        //  },this)
+
+
+
+
+        // this.btn_one = new FootBtn(100);
+        // this.btn_two = new FootBtn(500);
+        // this.btn_three = new FootBtn(1000);
+        // this.addChild(this.btn_one)
     }
     public initBtn(){
         //三个投注按钮

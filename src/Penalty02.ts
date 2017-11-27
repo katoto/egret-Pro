@@ -107,7 +107,6 @@ class Penalty02 extends eui.UILayer {
         // new win
         this.penaltyWin = this.drawWin();
         
-        console.log( penaltyArr )
         if( penaltyArr.length > 0 ){
             for( let i = 0 ;i < len ; i ++ ){
                 if( penaltyArr[i] ){
@@ -146,7 +145,7 @@ class Penalty02 extends eui.UILayer {
                     
                 }
             }
-             await this.wait( )
+            await this.wait( )
             // win 图标 这个坐标还有调整
             this.penaltyWin.x = 121 + ( len - 1 )  * 50
             if( topNum > botNum ){
@@ -160,13 +159,13 @@ class Penalty02 extends eui.UILayer {
             // 去除 整个背景
 
             //  显示win showWinLocation(res05[i].matchid);  _l left  _r right
+            await this.wait( )
             if( !!window['store']['$fieldContain'] ){
                 window['store']['$fieldContain'].showWinLocation( matchid , leftOrRig );
             }
 
-
             // 清楚 所有点球  win
-
+            
             // setTimeout(()=>{
             //     for( let i=0 ,len = colectPenalt.length ;i< len ; i++ ){
             //         if( colectPenalt[i] && colectPenalt[i].parent ){
