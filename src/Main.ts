@@ -40,8 +40,6 @@ class Main extends egret.DisplayObjectContainer {
     // 竞猜开始文案
     private start_pop = null;
     private stop_pop = null ;
-    //其他提示
-    private toast;
 
     public constructor() {
         super();
@@ -138,7 +136,6 @@ class Main extends egret.DisplayObjectContainer {
         }
     }
 
-
     /**
      * 创建游戏场景 ( 申请房间 、建立websocket)
      */
@@ -148,7 +145,7 @@ class Main extends egret.DisplayObjectContainer {
         this.Height = $store['stage_Height'] = this.stage.stageHeight;
         this.anWidth = $store['stage_anWidth'] = this.Width/2;
         const anHeight =  $store['stage_anHeight'] = this.Height/2;
-
+        window['store'].scale = ( this.Height / 1334 ).toFixed(2) ;
         // let sky = this.createBitmapByName("btn-500_png");
         // this.addChild(sky)
 
@@ -259,9 +256,8 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
     private initStage(){
         // uid  还得有个uid ..
         let $store = window['store'];
-        
         // 桌子缩放计算 
-        $store.scale = 0.91;
+        // $store.scale = 0.91;
         // 取ck 按src+ck 的形式，防止串号 = 替换 $
         if( window['urlData'] && window['urlData'].ck ){
             $store['orderObj'].ck = window['urlData'].ck.replace(/\$/g,'=');
@@ -650,7 +646,6 @@ window['store'] = {
         uid : null ,
         platform : null ,
     },
-
     scale: 1,  // 桌子缩放
     userPosition:[],  //  随机数组
     userPositionID:[],  // 头像的uid

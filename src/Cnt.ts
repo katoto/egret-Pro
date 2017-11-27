@@ -5,6 +5,7 @@ class Cnt extends egret.DisplayObjectContainer{
     }
     // 缩放系数
     private scale:number = window['store'].scale;
+   
 
     // 比赛进程 1/4 / 1/2  / 决赛
     private matchPro = '决赛';
