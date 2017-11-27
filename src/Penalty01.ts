@@ -129,6 +129,11 @@ class Penalty01 extends eui.UILayer {
             }
         }
 
+        if( matchid ){
+            currFieldStr = $store['matFindField'][ matchid ] ;
+            $store['$fieldContain'][currFieldStr].writeScore( l_score + ':' + r_score )
+        }        
+
         for( let i = 0 ; i< len ; i++ ){
             if( timeline[i] ){
                 setTimeout(()=>{
