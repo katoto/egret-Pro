@@ -114,26 +114,7 @@ class Cnt extends egret.DisplayObjectContainer{
         window['store']['$fieldContain'] = this.fieldContain ;
         this.bgCourtWrap.addChild(this.fieldContain);
 
-        //冠军
-        // this.champion = new egret.DisplayObjectContainer();
-        // this.champion.width = 241;
-        // this.champion.height = 200; 
-        // this.champion.x = 254.5;
-        // this.champion.y = 93;
-        // this.bgCourtWrap.addChild(this.champion);
-
-        // let championImg:egret.Bitmap = new egret.Bitmap(RES.getRes('champion_png'));
-        // this.champion.addChild(championImg);   
-
-        // this.championText = new egret.TextField();
-        // this.championText.text = '葡萄牙';
-        // this.championText.textColor = 0xffffff;
-        // this.championText.size = 36;
-        // this.championText.width = 241;
-        // this.championText.height = 200;
-        // this.championText.textAlign = egret.HorizontalAlign.CENTER;
-        // this.championText.verticalAlign = egret.VerticalAlign.BOTTOM;
-        // this.champion.addChild(this.championText);   
+  
 
         //toast
         // let toast = new egret.DisplayObjectContainer();
@@ -207,6 +188,51 @@ class Cnt extends egret.DisplayObjectContainer{
     //         egret.Tween.get( this.penalty02 ).to( {y:265 },200 );
     //     },5000)
         
+
+        //冠军
+        this.champion = new egret.DisplayObjectContainer();
+        this.champion.width = 241;
+        this.champion.height = 200; 
+        this.champion.x = 254.5;
+        this.champion.y = 93;
+
+        let championImg:egret.Bitmap = new egret.Bitmap(RES.getRes('champion_png'));
+        this.champion.addChild(championImg);   
+
+        this.championText = new egret.TextField();
+        this.championText.text = '';
+        this.championText.textColor = 0xffffff;
+        this.championText.size = 36;
+        this.championText.width = 241;
+        this.championText.height = 200;
+        this.championText.textAlign = egret.HorizontalAlign.CENTER;
+        this.championText.verticalAlign = egret.VerticalAlign.BOTTOM;
+
+        // this.bgCourtWrap.addChild(this.champion);
+        // this.champion.addChild(this.championText); 
+
+
+    }
+
+    /**
+     *  champion 冠军
+     */
+    private showChampion( name:string ){
+
+
+
+    }
+
+    /**
+     *  remove champion 冠军
+     */
+    private delChampion(){
+        if( this.champion.parent ){
+            this.bgCourtWrap.removeChild(this.champion);
+        }
+        if( this.championText.parent ){
+            this.champion.removeChild(this.championText); 
+        }
     }
 
     /**
@@ -370,7 +396,6 @@ class Cnt extends egret.DisplayObjectContainer{
         for( let i = 0; i<len ;i ++ ){
             findIndex = this.findPenaltyStr( allResult[i].matchid ) ;
             if( allResult[i] && allResult[i].is_spotkick === '1' ){
-                await this.wait( 7000 ) ;
                 this.showPenalty( allResult[i].spotkick_style , curr_local , findIndex , allResult[i].matchid ,allResult[i].score )
             }else{
                 // 无点球  根据 score 来显示对应的 win 图标 score 1:1
@@ -485,7 +510,7 @@ class Cnt extends egret.DisplayObjectContainer{
      *  @param footIndex 点球的坐标 （通过比赛id 找到的）
      *  @param mathcid 为了 显示最终的win
      */
-    private showPenalty( penaltyArr  , curr_local , footIndex ,matchid:string ,score:string ){
+    async showPenalty( penaltyArr  , curr_local , footIndex ,matchid:string ,score:string ){
         let penaltyStr = 'penalty' ;
         let bgMaskStr = 'bgMask' ;
         let penaltyStr_p = 'penalty_point' ;
@@ -512,6 +537,8 @@ class Cnt extends egret.DisplayObjectContainer{
                 this.bgCourtWrap.removeChild( this[penaltyStr] );
             }
         });
+        await this.wait( 7000 ) ;
+        
         egret.Tween.get( this[ penaltyStr_p ]  ).to( {y: curr_local[footIndex] }, 200 ).call(()=>{
             // 对应点球动画
             setTimeout(()=>{
