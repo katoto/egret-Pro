@@ -120,8 +120,17 @@ var Field_ball = (function (_super) {
         this.rightOdds.y = this.courtAnHeight + 2;
         this.rightOdds.bold = true;
         this.addChild(this.rightOdds);
-        // win、左边队伍图标和右边队伍图片会影响金币点击效果
-        // 
+        //比分
+        this.score = new egret.TextField();
+        this.score.text = '2:0';
+        this.score.textColor = 0xffffff;
+        this.score.size = 52;
+        this.score.bold = true;
+        this.score.width = 485;
+        this.score.height = this.courtHeight;
+        this.score.textAlign = egret.HorizontalAlign.CENTER;
+        this.score.verticalAlign = egret.VerticalAlign.MIDDLE;
+        this.addChild(this.score);
     };
     // 更新场地数据 赔率， 对阵 ，homeid awayid 
     Field_ball.prototype.upFieldAllData = function (leftImg, leftT, leftO, rightImg, rightT, rightO, homeid, awayid, matchid) {

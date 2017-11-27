@@ -40,6 +40,8 @@ class Main extends egret.DisplayObjectContainer {
     // 竞猜开始文案
     private start_pop = null;
     private stop_pop = null ;
+    //其他提示
+    private toast;
 
     public constructor() {
         super();
