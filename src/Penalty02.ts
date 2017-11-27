@@ -24,10 +24,10 @@ class Penalty02 extends eui.UILayer {
         this.addChild(textPenalty);
 
         // 插入遮罩层
-        let bgMask:egret.Bitmap = new egret.Bitmap(RES.getRes('penalty-mask_png'));
-        bgMask.x = 72;
-        bgMask.y = 2;
-        this.addChild(bgMask);
+        // let bgMask:egret.Bitmap = new egret.Bitmap(RES.getRes('penalty-mask_png'));
+        // bgMask.x = 72;
+        // bgMask.y = 2;
+        // this.addChild(bgMask);
          // 上边队伍icon
         this.topTeam = new eui.Image();
         this.topTeam.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
@@ -36,7 +36,7 @@ class Penalty02 extends eui.UILayer {
         this.topTeam.x = 72;
         this.topTeam.y = 2;
         this.addChild(this.topTeam);
-        this.topTeam.mask = bgMask;
+        // this.topTeam.mask = bgMask;
 
         // this.penaltyWin = this.drawWin();
         // this.penaltyWin.x = 371;  
@@ -46,10 +46,10 @@ class Penalty02 extends eui.UILayer {
 
 
         //插入遮罩层
-        let bgMask02:egret.Bitmap = new egret.Bitmap(RES.getRes('penalty-mask_png'));
-        bgMask02.x = 72;
-        bgMask02.y = 30;
-        this.addChild(bgMask02);
+        // let bgMask02:egret.Bitmap = new egret.Bitmap(RES.getRes('penalty-mask_png'));
+        // bgMask02.x = 72;
+        // bgMask02.y = 30;
+        // this.addChild(bgMask02);
 
          // 下边队伍icon
         this.bottomTeam = new eui.Image();
@@ -59,7 +59,7 @@ class Penalty02 extends eui.UILayer {
         this.bottomTeam.x = 72;
         this.bottomTeam.y = 30;
         this.addChild(this.bottomTeam);
-        this.bottomTeam.mask = bgMask02;
+        // this.bottomTeam.mask = bgMask02;
 
         //上边队伍点球情况
         // for(var i=0;i<5;i++){
