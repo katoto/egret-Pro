@@ -6,6 +6,14 @@ class Penalty01 extends eui.UILayer {
     }
     private topTeam:eui.Image;
     private bottomTeam:eui.Image;
+
+    // 收集球
+    private collFootball = [] ;
+    
+    //  进度使用
+    private lineTimeMask:egret.Bitmap ;
+    private lineTime:egret.Shape ;
+
     private drawPenalty01(){
         let bgPenalty:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-penalty_png'));
         this.addChild(bgPenalty);
@@ -39,18 +47,6 @@ class Penalty01 extends eui.UILayer {
         this.bottomTeam.y = 30;
         // this.bottomTeam.mask = bgMask02;// 这里见鬼了，添加遮罩会使整个队伍logo不显示，原因找不到。
         this.addChild(this.bottomTeam);
-       
-
-         //上边队伍点球情况  (上面进球y=1，下面y=34， x>90&&x<426)
-        let penaltyIn = this.drawIn();
-        penaltyIn.x = 90;
-        penaltyIn.y = 1;
-        this.addChild(penaltyIn);
-        //下边队伍点球情况
-        let penaltyIn2 = this.drawIn();
-        penaltyIn2.x = 426;
-        penaltyIn2.y = 34;
-        this.addChild(penaltyIn2);
 
         // 时间轴
         let timer:egret.Bitmap = new egret.Bitmap(RES.getRes('penalty-time_png'));
@@ -60,21 +56,104 @@ class Penalty01 extends eui.UILayer {
         this.addChild(timer);
 
         //进度条
-        let lineTime:egret.Shape = new egret.Shape();
-        lineTime.graphics.lineStyle(7,0xdf0000);
-        lineTime.graphics.moveTo(91,29);
+        this.lineTime = new egret.Shape();
+        this.lineTime.graphics.lineStyle(7,0xdf0000);
+        this.lineTime.graphics.moveTo(91,29);
         //lineTime.graphics.lineTo(358,29);   //358是90分钟位置，如果有胜负就停止，不然继续走到449位置
-        lineTime.graphics.lineTo(449,29);
-        lineTime.graphics.endFill();
-        this.addChild(lineTime);
+        this.lineTime.graphics.lineTo(449,29);
+        this.lineTime.graphics.endFill();
 
-        let lineTimeMask:egret.Bitmap = new egret.Bitmap(RES.getRes('scoreMask_png'));
-        lineTimeMask.x = 80;
-        lineTimeMask.y = 24;
-        lineTimeMask.mask = lineTime;
-        this.addChild(lineTimeMask);
-        egret.Tween.get( lineTimeMask ).to( { x : 350} ,5000 ) 
-       
+        // this.addChild( this.lineTime );
+
+        this.lineTimeMask = new egret.Bitmap(RES.getRes('scoreMask_png'));
+
+        // this.lineTimeMask.x = 80;
+        // this.lineTimeMask.y = 24;
+
+        // this.lineTimeMask.mask = this.lineTime ;
+
+        // this.addChild(this.lineTimeMask);
+        // egret.Tween.get( this.lineTimeMask ).to( { x : 358 } ,8000 ) 
+
+         //上边队伍点球情况  (上面进球y=1，下面y=34， x>90&&x<426)
+        // let penaltyIn = this.drawIn();
+        // penaltyIn.x = 90;
+        // penaltyIn.y = 1;
+        // this.addChild(penaltyIn);
+        // //下边队伍点球情况
+        // let penaltyIn2 = this.drawIn();
+        // penaltyIn2.x = 426;
+        // penaltyIn2.y = 34;
+        // this.addChild(penaltyIn2);
+
+    }
+
+
+
+    /**
+     *  创建球  
+     * timeline
+     * [{at_time: "729", is_team: "home"}, {at_time: "5113", is_team: "home"}]
+     *    
+     */
+    private createFootball( timeline:any , is_extratime:any ){
+        let len = timeline.length ;
+
+        if( this.lineTime.parent ){
+            this.addChild( this.lineTime );
+        }
+        if( this.lineTimeMask ){
+            this.lineTimeMask.x = 80 ;
+            this.lineTimeMask.y = 24 ;
+            this.lineTimeMask.mask = this.lineTime ;
+            this.addChild(this.lineTimeMask) ;
+        }
+
+
+        if( is_extratime ){
+            if( is_extratime === '0' ){
+                egret.Tween.get( this.lineTimeMask ).to( { x : 358 } , 18000 ) 
+            }else if( is_extratime === '1' ){
+                egret.Tween.get( this.lineTimeMask ).to( { x : 449 } , 25000 ) 
+            }
+        }
+
+        for( let i = 0 ; i< len ; i++ ){
+            if( timeline[i] ){
+                setTimeout(()=>{
+                    if( timeline[i].is_team === 'home' ){
+                        let penaltyIn = this.drawIn();
+                        // penaltyIn.x = 90;
+                        penaltyIn.x = 336 * parseInt ( timeline[i].at_time ) / 7200 + 90 ;
+                        penaltyIn.y = 1;
+                        this.collFootball.push( penaltyIn );
+                        this.addChild(penaltyIn);
+                    }else{
+                        let penaltyIn2 = this.drawIn();
+                        penaltyIn2.x = 336 * parseInt ( timeline[i].at_time ) / 7200 + 90 ;
+                        // penaltyIn2.x = 426;
+                        penaltyIn2.y = 34;
+                        this.collFootball.push( penaltyIn2 );
+                        this.addChild(penaltyIn2);
+                    }
+                }, ( parseInt( timeline[i].at_time ) / 7200 * 25000 ))
+            }
+        }
+    }
+
+    /**
+     *  清除 所有的球
+     */
+    private clearAllball(){
+        let len = null ;
+        if( this.collFootball ){
+            len = this.collFootball.length ;
+            for( let i = 0;i < len ; i++ ){
+                if( this.collFootball[i] && this.collFootball[i].parent ){
+                    this.removeChild( this.collFootball[i] );
+                }
+            }
+        }
     }
 
     private drawIn(){
