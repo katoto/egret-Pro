@@ -167,21 +167,36 @@ class Field_ball extends eui.UILayer {
 
 
        //比分
-    //    this.score = new egret.TextField();
+       this.score = new egret.TextField();
     //    this.score.text= '2:0';
-    //    this.score.textColor = 0xffffff;
-    //    this.score.size = 52;
-    //    this.score.bold = true;
-    //    this.score.width = 485;
-    //    this.score.height = this.courtHeight;
-    //    this.score.textAlign = egret.HorizontalAlign.CENTER;
-    //    this.score.verticalAlign = egret.VerticalAlign.MIDDLE;
+       this.score.textColor = 0xffffff;
+       this.score.size = 52;
+       this.score.bold = true;
+       this.score.width = 485;
+       this.score.height = this.courtHeight;
+       this.score.textAlign = egret.HorizontalAlign.CENTER;
+       this.score.verticalAlign = egret.VerticalAlign.MIDDLE;
     //    this.addChild(this.score)
 
 
-
-
     }
+
+    /**
+     *  比分
+     */
+    private writeScore( num:string ){
+        if( num === '' ){
+            if( this.score.parent ){
+                this.removeChild( this.score )
+            }
+        }else{
+            this.score.text = num;
+            if( !this.score.parent ){
+                this.addChild(this.score)
+            }
+        }
+    }
+
 
     // 更新场地数据 赔率， 对阵 ，homeid awayid 
     private upFieldAllData( leftImg,leftT,leftO,rightImg,rightT,rightO ,homeid ,awayid ,matchid ){
@@ -197,6 +212,16 @@ class Field_ball extends eui.UILayer {
         this.awayid = awayid;
         this.matchid = matchid
 
+    }
+
+    /**
+     *  获取 对应场地的 img
+     */
+    private getFieldImg(){
+        return {
+            l_img: this.leftTeam.source ,
+            r_img : this.rightTeam.source
+        }
     }
 
     // 当前对阵数据

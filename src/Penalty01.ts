@@ -25,7 +25,7 @@ class Penalty01 extends eui.UILayer {
         this.addChild(bgMask);
          // 上边队伍icon
         this.topTeam = new eui.Image();
-        this.topTeam.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
+        // this.topTeam.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.topTeam.width = 24;
         this.topTeam.height = 24;
         this.topTeam.x = 38;
@@ -40,7 +40,7 @@ class Penalty01 extends eui.UILayer {
         this.addChild(bgMask02);
          // 下边队伍icon
         this.bottomTeam = new eui.Image();
-        this.bottomTeam.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
+        // this.bottomTeam.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.bottomTeam.width = 24;
         this.bottomTeam.height = 24;
         this.bottomTeam.x = 38;
@@ -88,7 +88,15 @@ class Penalty01 extends eui.UILayer {
 
     }
 
-
+    /**
+     *  更新 进球头像
+     */
+    private upFootballImg( imgObj ){
+        if( imgObj ){
+            this.topTeam.source = imgObj.l_img ;
+            this.bottomTeam.source = imgObj.r_img ;
+        }
+    }
 
     /**
      *  创建球  
@@ -108,7 +116,6 @@ class Penalty01 extends eui.UILayer {
             this.lineTimeMask.mask = this.lineTime ;
             this.addChild(this.lineTimeMask) ;
         }
-
 
         if( is_extratime ){
             if( is_extratime === '0' ){
@@ -151,6 +158,12 @@ class Penalty01 extends eui.UILayer {
                     this.removeChild( this.collFootball[i] );
                 }
             }
+        }
+        if( this.lineTime.parent ){
+            this.removeChild( this.lineTime );
+        }
+        if( this.lineTimeMask.parent ){
+            this.removeChild(this.lineTimeMask) ;
         }
     }
 

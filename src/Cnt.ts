@@ -346,10 +346,12 @@ class Cnt extends egret.DisplayObjectContainer{
             }
 
             this[penaltyStr].clearAllball();
-
+            // 获取头像            
+            this.cnt_getFieldImg( allResult[i].matchid );
+            // 更新头像
+            this[penaltyStr].upFootballImg(  this.cnt_getFieldImg( allResult[i].matchid ) )
             // 等等正常比分
             egret.Tween.get( this[penaltyStr] ).to( {y: curr_local[i] }, 300 );
-
             this[penaltyStr].createFootball( allResult[i].timeline , allResult[i].is_extratime );
             
             //  matchid  找 对应的点球进度
@@ -389,6 +391,24 @@ class Cnt extends egret.DisplayObjectContainer{
      */
     private cnt_removeAllWinIcon(){
         this.fieldContain.removeAllWinIcon()
+    }
+
+        /**
+     *  根据 matchid  找 对应的img
+     *  @param matchid
+     */
+    private cnt_getFieldImg( matchid:string ){
+        let $store = window['store'] ;
+        let currFieldStr = '';
+        if( matchid ){
+            currFieldStr = $store['matFindField'][ matchid ] ;
+            if( currFieldStr ){
+                return this.fieldContain[currFieldStr].getFieldImg() ;
+            }else{
+                console.warn('获取头像error')
+            }
+        }
+        return {}
     }
 
 
@@ -476,6 +496,12 @@ class Cnt extends egret.DisplayObjectContainer{
         bgMaskStr_p = 'bgMask_point'+footIndex  ;  
 
         // console.log( penaltyArr )
+        // 更新点球的 图片  
+        // this[ penaltyStr_p ].upPenaltyImg();
+        if( this[penaltyStr_p] ){
+            this[penaltyStr_p].upPenaltyballImg(  this.cnt_getFieldImg( matchid ) )
+        }
+
         //  进球 切 点球
         egret.Tween.get( this[penaltyStr] ).to( {y:curr_local[footIndex] -158 }, 200 ).call(()=>{
             if( this[bgMaskStr].parent ){
