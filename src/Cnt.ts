@@ -5,6 +5,7 @@ class Cnt extends egret.DisplayObjectContainer{
     }
     // 缩放系数
     private scale:number = window['store'].scale;
+   
 
     // 比赛进程 1/4 / 1/2  / 决赛
     private matchPro = '决赛';
@@ -346,11 +347,13 @@ class Cnt extends egret.DisplayObjectContainer{
             }
 
             this[penaltyStr].clearAllball();
-
+            // 获取头像            
+            this.cnt_getFieldImg( allResult[i].matchid );
+            // 更新头像
+            this[penaltyStr].upFootballImg(  this.cnt_getFieldImg( allResult[i].matchid ) )
             // 等等正常比分
             egret.Tween.get( this[penaltyStr] ).to( {y: curr_local[i] }, 300 );
-
-            this[penaltyStr].createFootball( allResult[i].timeline , allResult[i].is_extratime );
+            this[penaltyStr].createFootball( allResult[i].timeline , allResult[i].is_extratime ,allResult[i].matchid );
             
             //  matchid  找 对应的点球进度
             // findIndex = this.findPenaltyStr( allResult[i].matchid ) ;
@@ -367,8 +370,8 @@ class Cnt extends egret.DisplayObjectContainer{
         for( let i = 0; i<len ;i ++ ){
             findIndex = this.findPenaltyStr( allResult[i].matchid ) ;
             if( allResult[i] && allResult[i].is_spotkick === '1' ){
-
-                this.showPenalty( allResult[i].spotkick_style , curr_local , findIndex , allResult[i].matchid )
+                await this.wait( 7000 ) ;
+                this.showPenalty( allResult[i].spotkick_style , curr_local , findIndex , allResult[i].matchid ,allResult[i].score )
             }else{
                 // 无点球  根据 score 来显示对应的 win 图标 score 1:1
                 // 去除 进球框 显示win .showWinLocation( matchid , leftOrRig );
@@ -389,6 +392,24 @@ class Cnt extends egret.DisplayObjectContainer{
      */
     private cnt_removeAllWinIcon(){
         this.fieldContain.removeAllWinIcon()
+    }
+
+        /**
+     *  根据 matchid  找 对应的img
+     *  @param matchid
+     */
+    private cnt_getFieldImg( matchid:string ){
+        let $store = window['store'] ;
+        let currFieldStr = '';
+        if( matchid ){
+            currFieldStr = $store['matFindField'][ matchid ] ;
+            if( currFieldStr ){
+                return this.fieldContain[currFieldStr].getFieldImg() ;
+            }else{
+                console.warn('获取头像error')
+            }
+        }
+        return {}
     }
 
 
@@ -464,7 +485,7 @@ class Cnt extends egret.DisplayObjectContainer{
      *  @param footIndex 点球的坐标 （通过比赛id 找到的）
      *  @param mathcid 为了 显示最终的win
      */
-    private showPenalty( penaltyArr  , curr_local , footIndex ,matchid:string ){
+    private showPenalty( penaltyArr  , curr_local , footIndex ,matchid:string ,score:string ){
         let penaltyStr = 'penalty' ;
         let bgMaskStr = 'bgMask' ;
         let penaltyStr_p = 'penalty_point' ;
@@ -476,6 +497,12 @@ class Cnt extends egret.DisplayObjectContainer{
         bgMaskStr_p = 'bgMask_point'+footIndex  ;  
 
         // console.log( penaltyArr )
+        // 更新点球的 图片  
+        // this[ penaltyStr_p ].upPenaltyImg();
+        if( this[penaltyStr_p] ){
+            this[penaltyStr_p].upPenaltyballImg(  this.cnt_getFieldImg( matchid ) )
+        }
+
         //  进球 切 点球
         egret.Tween.get( this[penaltyStr] ).to( {y:curr_local[footIndex] -158 }, 200 ).call(()=>{
             if( this[bgMaskStr].parent ){
@@ -488,7 +515,7 @@ class Cnt extends egret.DisplayObjectContainer{
         egret.Tween.get( this[ penaltyStr_p ]  ).to( {y: curr_local[footIndex] }, 200 ).call(()=>{
             // 对应点球动画
             setTimeout(()=>{
-                this[ penaltyStr_p ].movePenalty( penaltyArr , matchid )
+                this[ penaltyStr_p ].movePenalty( penaltyArr , matchid ,score )
             },500)
         });
     }

@@ -1495,36 +1495,43 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
     }
 
     /**
-     *  清楚所有win 图标 & 投注的 数据
+     *  清楚所有win 图标 & 投注的 数据 & 比分
      */
     private removeAllWinIcon(){
         if( this.field1  ){
             this.field1.removeWinIcon() ;
             this.field1.cleanAllCoinText();
+            this.field1.writeScore('');
         }
         if( this.field21  ){
             this.field21.removeWinIcon() ;
             this.field21.cleanAllCoinText();
+            this.field21.writeScore('');
         }
         if( this.field22  ){
             this.field22.removeWinIcon() ;
             this.field22.cleanAllCoinText();
+            this.field22.writeScore('');
         }   
         if( this.field41 ){
             this.field41.removeWinIcon() ;
             this.field41.cleanAllCoinText();
+            this.field41.writeScore('');
         }
         if( this.field42  ){
             this.field42.removeWinIcon() ;
             this.field42.cleanAllCoinText();
+            this.field42.writeScore('');
         }
         if( this.field43  ){
             this.field43.removeWinIcon() ;
             this.field43.cleanAllCoinText();
+            this.field43.writeScore('');
         }
         if(this.field44  ){
             this.field44.removeWinIcon() ;
             this.field44.cleanAllCoinText();
+            this.field44.writeScore(''); 
         }                             
     }
 

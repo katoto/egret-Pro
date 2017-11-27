@@ -102,7 +102,6 @@ class Timer extends egret.DisplayObjectContainer{
 
 
 
-
         // cnt.textT.textTips.text = '正在开奖'
         ////timerFunc count5
     }

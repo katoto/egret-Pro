@@ -38,12 +38,6 @@ class Penalty02 extends eui.UILayer {
         this.addChild(this.topTeam);
         // this.topTeam.mask = bgMask;
 
-        // this.penaltyWin = this.drawWin();
-        // this.penaltyWin.x = 371;  
-        // this.penaltyWin.y = 1;
-        // // penaltyWin.y = 36;
-        // this.addChild( this.penaltyWin );
-
 
         //插入遮罩层
         // let bgMask02:egret.Bitmap = new egret.Bitmap(RES.getRes('penalty-mask_png'));
@@ -76,7 +70,11 @@ class Penalty02 extends eui.UILayer {
         //     this.addChild(penaltyOut);
         // }
 
-
+        // this.penaltyWin = this.drawWin();
+        // this.penaltyWin.x = 371;  
+        // this.penaltyWin.y = 1;
+        // // penaltyWin.y = 36;
+        // this.addChild( this.penaltyWin );
 
     }
 
@@ -92,18 +90,31 @@ class Penalty02 extends eui.UILayer {
     }
 
     /**
+     *  更新 进球头像
+     */
+    private upPenaltyballImg( imgObj ){
+        if( imgObj ){
+            this.topTeam.source = imgObj.l_img ;
+            this.bottomTeam.source = imgObj.r_img ;
+        }
+    }
+
+    /**
      *  点球 数组
      *  结果 betRes  ? 不是在这个展示？
      *  @param  结果的matchid 
      *   // var spotkick_style = [["1", "1"], ["1", "0"], ["1", "1"], ["0", "0"], ["0", "0"],[]]
      */
 
-    async movePenalty( penaltyArr:any , matchid:string ){
+    async movePenalty( penaltyArr:any , matchid:string, score:string ){
         let len = penaltyArr.length ;
+        let $store = window['store'] ;
+        let currFieldStr = '' ;
         let topNum = 0 ;
         let botNum = 0 ;
         let colectPenalt = [] // 收集 点球 ，为了remove 
         let leftOrRig = '' ;
+        let basescore = parseInt( score.slice(0,1))
         // new win
         this.penaltyWin = this.drawWin();
         
@@ -116,8 +127,13 @@ class Penalty02 extends eui.UILayer {
                         penaltyIn.y = 1;
                         colectPenalt.push( penaltyIn )
                         await this.wait( )
+
                         this.addChild(penaltyIn);
                         topNum ++ ;
+                        if( matchid ){
+                            currFieldStr = $store['matFindField'][ matchid ] ;
+                            $store['$fieldContain'][currFieldStr].writeScore(  ( basescore + topNum ) + ':' + ( basescore + botNum)  )
+                        }
                     }else if( penaltyArr[i][0] === '0' ) {
                         let penaltyOut = this.drawOut();
                         penaltyOut.x = 123+i*44;
@@ -134,6 +150,10 @@ class Penalty02 extends eui.UILayer {
                         await this.wait( )
                         this.addChild(penaltyIn);
                         botNum ++ ;
+                        if( matchid ){
+                            currFieldStr = $store['matFindField'][ matchid ] ;
+                            $store['$fieldContain'][currFieldStr].writeScore(  ( basescore + topNum ) + ':' + ( basescore + botNum)  )
+                        }
                     }else if( penaltyArr[i][1] === '0' ){
                         let penaltyOut = this.drawOut();
                         penaltyOut.x = 123+i*44;
@@ -179,8 +199,6 @@ class Penalty02 extends eui.UILayer {
 
         }
     }
-
-
 
     private drawIn(){
         let img:egret.Bitmap = new egret.Bitmap(RES.getRes('penalty-in_png'));
