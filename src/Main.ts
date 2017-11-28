@@ -29,8 +29,6 @@ class Main extends egret.DisplayObjectContainer {
     // private change;
     // 晋升
     private promotion;  
-       
-    
 
     private textfield:egret.TextField;
     
@@ -66,7 +64,6 @@ class Main extends egret.DisplayObjectContainer {
         }
         //设置加载进度界面
         //Config to load process interface
-
 
         // this.loadingView = new LoadingUI(750,1334);
         // this.stage.addChild(this.loadingView);
@@ -180,8 +177,8 @@ class Main extends egret.DisplayObjectContainer {
         this.addChild(this.bottom);
 
         // 晋级
-        this.promotion = new Promotion();
-        this.addChild(this.promotion)
+        // this.promotion = new Promotion();
+        // this.addChild(this.promotion)
 
         // 弹窗实例,竞猜开始or竞猜完毕
         // text-begin_png text-over_png
@@ -198,7 +195,6 @@ class Main extends egret.DisplayObjectContainer {
         // },2000)
 
         //杯赛晋升
-
 
         // 层级控制
         // this.setChildIndex(header,0)
@@ -233,7 +229,6 @@ class Main extends egret.DisplayObjectContainer {
                     // 下单
                     $store['orderObj']['roomid'] = roomMsg.roomid ;
                     $store['orderObj']['node'] = roomMsg.node ;
-
                     // websocket
                     try{
                         this.webSocket = new egret.WebSocket();
@@ -247,7 +242,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     }catch(e){
                         alert('websock error')
                     }
-
                 }else{
                     alert( res.message );
                     console.log('申请房间出错')
