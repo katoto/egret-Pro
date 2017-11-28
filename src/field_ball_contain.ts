@@ -176,7 +176,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         console.error( '场地1/4数据不对' )
                     }
                 break;
-
                 default:
                     console.error('场地error')
                 ;

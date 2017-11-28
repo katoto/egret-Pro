@@ -32,6 +32,12 @@ class Cnt extends egret.DisplayObjectContainer{
     // 定时器
     private timer:Timer ;
 
+<<<<<<< HEAD
+=======
+     
+
+
+>>>>>>> dd9e002915b0ff527808cb4055fa06131a2cc191
     // 总决赛的点球 4 个 进行复用
 
     private penalty0 ; private bgMask0;
@@ -55,6 +61,7 @@ class Cnt extends egret.DisplayObjectContainer{
     private toastText:egret.TextField;
 
     private drawCnt(Width,Height,anWidth,anHeight){
+        
         // 内容区
         let wrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
         wrap.width = Width;
@@ -112,6 +119,13 @@ class Cnt extends egret.DisplayObjectContainer{
         window['store']['$fieldContain'] = this.fieldContain ;
         this.bgCourtWrap.addChild(this.fieldContain);
 
+<<<<<<< HEAD
+=======
+        
+
+  
+
+>>>>>>> dd9e002915b0ff527808cb4055fa06131a2cc191
         //toast
         // let toast = new egret.DisplayObjectContainer();
         // toast.width = 430;
@@ -206,6 +220,8 @@ class Cnt extends egret.DisplayObjectContainer{
 
         // this.bgCourtWrap.addChild(this.champion);
         // this.champion.addChild(this.championText); 
+
+        
     }
 
     /**
@@ -853,5 +869,9 @@ class Cnt extends egret.DisplayObjectContainer{
                 this.bgCourtWrap.removeChild(this[choseUserImg]);
             }
         }
+    }
+    //晋级队伍
+    private proTeam(){
+        
     }
 }

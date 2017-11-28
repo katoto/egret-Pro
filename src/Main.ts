@@ -27,6 +27,10 @@ class Main extends egret.DisplayObjectContainer {
     // private popChat;
     // 杯赛过场
     // private change;
+    // 晋升
+    private promotion;  
+       
+    
 
     private textfield:egret.TextField;
     
@@ -175,6 +179,10 @@ class Main extends egret.DisplayObjectContainer {
         this.bottom.y = this.Height;
         this.addChild(this.bottom);
 
+        // 晋级
+        this.promotion = new Promotion();
+        this.addChild(this.promotion)
+
         // 弹窗实例,竞猜开始or竞猜完毕
         // text-begin_png text-over_png
         // this.pop = new Pop(this.Width,this.Height,'text-begin_png');
@@ -190,9 +198,6 @@ class Main extends egret.DisplayObjectContainer {
         // },2000)
 
         //杯赛晋升
-
-        // let promotion = new Promotion();
-        // this.addChild(promotion);
 
 
         // 层级控制
@@ -295,6 +300,12 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
         this.cnt.initAllPenalty() ;
     }
 
+    /**
+     * 声音
+     */
+    private music(){
+        
+    }
 
     // 函数：生成图片
     private createBitmapByName(name: string): egret.Bitmap {
@@ -390,6 +401,10 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         // pre_result 字段 （用于上一个 状态解析 == 》 matches  当前对阵 ）
                         if( $msgObjBody.pre_result ){
                             // 切换场地  用
+                            // this.cnt.proTeam('https://www.google.co.jp/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png');
+                             //晋升
+                           
+
                         }
 
                         // clean all  win
@@ -568,6 +583,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 case '2025':
                     // 提出用户 展现弹窗
                 ;break;
+
 
             }
             setTimeout(()=>{
