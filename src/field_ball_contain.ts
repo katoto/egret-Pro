@@ -1496,7 +1496,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
      *  清楚所有win 图标 & 投注的 数据 & 比分
      */
     private removeAllWinIcon(){
-        console.log( 'clear field data' ) ;
         if( this.field1  ){
             this.field1.removeWinIcon() ;
             this.field1.cleanAllCoinText();

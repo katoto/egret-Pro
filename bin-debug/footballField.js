@@ -356,12 +356,12 @@ var Field_ball = (function (_super) {
         if (this.goldItems_left && this.goldItems_left.parent) {
             this.removeChild(this.goldItems_left);
         }
-        if (this.goldItems_left02 && this.goldItems_left02.parent) {
-            this.removeChild(this.goldItems_left02);
-        }
-        if (this.goldItems_right02 && this.goldItems_right02.parent) {
-            this.removeChild(this.goldItems_right02);
-        }
+        // if( this.goldItems_left02 && this.goldItems_left02.parent ){
+        //     this.removeChild( this.goldItems_left02 );
+        // }
+        // if( this.goldItems_right02 && this.goldItems_right02.parent ){
+        //     this.removeChild( this.goldItems_right02 );
+        // }
     };
     // findWinLocation  ==> findLocal 
     /**

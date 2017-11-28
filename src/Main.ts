@@ -556,14 +556,10 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         
                         //  执行金币动画  
                         // matchid:string , selection:string , uid:string , bet_golds:string
-
                         this.cnt.cnt_Other_Coin( $msgObjBody.matchid , $msgObjBody.selection ,$msgObjBody.uid, $msgObjBody.bet_golds );
                     }
 
                 ;break;
-
-
-
 
                 case '2025':
                     // 更新奖池

@@ -823,8 +823,9 @@ class Cnt extends egret.DisplayObjectContainer{
         }
 
         this.bgCourtWrap.addChild(this[choseUserImg]);
+        
         // //  注意层级控制，不然事件会有问题 ！
-        this.bgCourtWrap.setChildIndex( this.fieldContain  , this.bgCourtWrap.getChildIndex( this[choseUserImg] ))    
+        // this.bgCourtWrap.setChildIndex( this.fieldContain  , this.bgCourtWrap.getChildIndex( this[choseUserImg] ))    
 
     }
     // 用户 离开  new
