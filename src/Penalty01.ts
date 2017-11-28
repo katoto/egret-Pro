@@ -118,13 +118,10 @@ class Penalty01 extends eui.UILayer {
         // }
 
         if( is_extratime ){
-            console.log('1825')
             if( is_extratime === '0' ){
                 egret.Tween.get( this.lineTimeMask ).to( { x : 358 } , 18000 ) 
-                console.log('18000')
             }else if( is_extratime === '1' ){
                 egret.Tween.get( this.lineTimeMask ).to( { x : 449 } , 25000 ) 
-                console.log('25000')
             }
         }
         //  显示出 0 ：0
