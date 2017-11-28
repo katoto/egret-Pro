@@ -32,14 +32,7 @@ class Cnt extends egret.DisplayObjectContainer{
     // 定时器
     private timer:Timer ;
 
-<<<<<<< HEAD
-=======
-     
-
-
->>>>>>> dd9e002915b0ff527808cb4055fa06131a2cc191
     // 总决赛的点球 4 个 进行复用
-
     private penalty0 ; private bgMask0;
     private penalty_point0 ; private bgMask_point0
 
@@ -53,7 +46,6 @@ class Cnt extends egret.DisplayObjectContainer{
     private penalty_point3 ; private bgMask_point3;
 
     //冠军
-
     private champion:egret.DisplayObjectContainer;
     private championText:egret.TextField;
 
@@ -61,7 +53,6 @@ class Cnt extends egret.DisplayObjectContainer{
     private toastText:egret.TextField;
 
     private drawCnt(Width,Height,anWidth,anHeight){
-        
         // 内容区
         let wrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
         wrap.width = Width;
@@ -91,7 +82,6 @@ class Cnt extends egret.DisplayObjectContainer{
         this.bgCourtWrap.scaleX=this.scale;
         this.bgCourtWrap.scaleY=this.scale;
         wrap.addChild(this.bgCourtWrap);
-        
 
         // 背景 大桌子
         let bgCourt:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-court_png'));
@@ -119,13 +109,6 @@ class Cnt extends egret.DisplayObjectContainer{
         window['store']['$fieldContain'] = this.fieldContain ;
         this.bgCourtWrap.addChild(this.fieldContain);
 
-<<<<<<< HEAD
-=======
-        
-
-  
-
->>>>>>> dd9e002915b0ff527808cb4055fa06131a2cc191
         //toast
         // let toast = new egret.DisplayObjectContainer();
         // toast.width = 430;
