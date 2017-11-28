@@ -206,8 +206,6 @@ class Cnt extends egret.DisplayObjectContainer{
 
         // this.bgCourtWrap.addChild(this.champion);
         // this.champion.addChild(this.championText); 
-
-
     }
 
     /**
