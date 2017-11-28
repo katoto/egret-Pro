@@ -410,8 +410,8 @@ class Promotion extends eui.UILayer{
         //队伍icon
         this.leftTeam11 = new eui.Image();
         this.leftTeam11.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
-        this.leftTeam11.width = 20;
-        this.leftTeam11.height = 20;
+        this.leftTeam11.width = 62;
+        this.leftTeam11.height = 62;
         this.leftTeam11.x = 3;
         this.leftTeam11.y = 3;
         leftUserBox11.addChild(this.leftTeam11);
@@ -446,6 +446,16 @@ class Promotion extends eui.UILayer{
 
 
 
+        let proWin01 = this.proWin();
+        proWin01.x = 16;
+        proWin01.y = -16;
+        wrap41.addChild(proWin01);
+
+        let proWin02 = this.proWin();
+        proWin02.x = 179;
+        proWin02.y = -16;
+        wrap41.addChild(proWin02);
+
 
         wrap.addChild(wrap41);
         wrap.addChild(wrap42);
@@ -454,6 +464,8 @@ class Promotion extends eui.UILayer{
         wrap.addChild(wrap21);
         wrap.addChild(wrap22);
         wrap.addChild(wrap11);
+
+       
     }
     private proWin(){
         let img = new egret.Bitmap(RES.getRes('proWin_png'));
