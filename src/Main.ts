@@ -177,8 +177,8 @@ class Main extends egret.DisplayObjectContainer {
         this.addChild(this.bottom);
 
         // 晋级
-        this.promotion = new Promotion();
-        this.addChild(this.promotion)
+        // this.promotion = new Promotion();
+        // this.addChild(this.promotion)
 
         // 弹窗实例,竞猜开始or竞猜完毕
         // text-begin_png text-over_png
