@@ -13,6 +13,14 @@ class Foot extends egret.DisplayObjectContainer{
         this.drawFoot();
     }
     private drawFoot(){
+        //创建 URLLoader 对象
+        var loader:egret.URLLoader = new egret.URLLoader();
+        //设置加载方式为声音
+        loader.dataFormat = egret.URLLoaderDataFormat.SOUND;
+        //添加加载完成侦听
+        loader.addEventListener(egret.Event.COMPLETE, this.onLoadComplete, this);
+        //开始加载
+        loader.load(new egret.URLRequest("resource/assets/music/bet.mp3"));
         
         // 底部背景与投注按钮
         // 底部背景
@@ -52,19 +60,29 @@ class Foot extends egret.DisplayObjectContainer{
         //     this.parent.addChild(popChat);
             
         //  },this)
-
-
-
-
         // this.btn_one = new FootBtn(100);
         // this.btn_two = new FootBtn(500);
         // this.btn_three = new FootBtn(1000);
         // this.addChild(this.btn_one)
-        let music = new Music();
-        music.width = 500;
-        music.height = 500;
-        this.addChild(music)
+       
 
+    }
+    private onLoadComplete(event:egret.Event):void {
+        var loader:egret.URLLoader = <egret.URLLoader>event.target;
+        //获取加载到的 Sound 对象
+        var sound:egret.Sound = <egret.Sound>loader.data;
+        this.sound = sound;
+    }
+    private sound:egret.Sound;
+    private soundChannel:egret.SoundChannel;
+    private onTouch(event:egret.Event){
+        var sound = this.sound;
+        var channel:egret.SoundChannel = this.soundChannel;
+        //使用SoundChannel播放音频
+        channel = sound.play(0,1);
+        //Egret 3.0.4 新增获取音频长度 length 属性。
+        //保存soundChannel对象
+        this.soundChannel = channel;
     }
     public initBtn(){
         //三个投注按钮
@@ -101,6 +119,10 @@ class Foot extends egret.DisplayObjectContainer{
             this.btn_one.addEventListener( egret.TouchEvent.TOUCH_TAP, this.btn_oneDown ,this )
             this.btn_two.addEventListener( egret.TouchEvent.TOUCH_TAP, this.btn_twoDown ,this )
             this.btn_three.addEventListener( egret.TouchEvent.TOUCH_TAP, this.btn_threeDown ,this )
+            //监听按钮的触摸事件
+            this.btn_one.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onTouch,this);
+            this.btn_two.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onTouch,this);
+            this.btn_three.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onTouch,this);
 
         }else{
             console.error( 'user_info data error  at foot.ts' )
@@ -114,7 +136,6 @@ class Foot extends egret.DisplayObjectContainer{
             this.btn_one['init_scale']( 1 );
             window['store']['curr_btn_coin'] = window['store']['curr_btn_arr'][0] 
         }
-         
     }
     private btn_twoDown( e:egret.Event){
         this.btn_one['init_scale']( 0.9 )
@@ -132,17 +153,5 @@ class Foot extends egret.DisplayObjectContainer{
             window['store']['curr_btn_coin'] = window['store']['curr_btn_arr'][2]
         }
     }
-    private hignColor(){
-        // var color:number = 0xffd02f;        /// 光晕的颜色，十六进制，不包含透明度
-        // var alpha:number = 1;             /// 光晕的颜色透明度，是对 color 参数的透明度设定。有效值为 0.0 到 1.0。例如，0.8 设置透明度值为 80%。
-        // var blurX:number = 35;              /// 水平模糊量。有效值为 0 到 255.0（浮点）
-        // var blurY:number = 35;              /// 垂直模糊量。有效值为 0 到 255.0（浮点）
-        // var strength:number = 2;            /// 压印的强度，值越大，压印的颜色越深，而且发光与背景之间的对比度也越强。有效值为 0 到 255。暂未实现
-        // var quality:number = egret.BitmapFilterQuality.HIGH;        /// 应用滤镜的次数，建议用 BitmapFilterQuality 类的常量来体现
-        // var inner:boolean = false;            /// 指定发光是否为内侧发光，暂未实现
-        // var knockout:boolean = false;            /// 指定对象是否具有挖空效果，暂未实现
-        // var glowFilter:egret.GlowFilter = new egret.GlowFilter( color, alpha, blurX, blurY,strength, quality, inner, knockout );
-        // obj.filters = [ glowFilter ];
-        // console.log(222)
-    }
+   
 }
