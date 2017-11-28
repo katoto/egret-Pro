@@ -181,12 +181,12 @@ class Penalty01 extends eui.UILayer {
                 }
             }
         }
-        if( this.lineTime.parent ){
-            this.removeChild( this.lineTime );
-        }
-        if( this.lineTimeMask.parent ){
-            this.removeChild(this.lineTimeMask) ;
-        }
+        // if( this.lineTime.parent ){
+        //     this.removeChild( this.lineTime );
+        // }
+        // if( this.lineTimeMask.parent ){
+        //     this.removeChild(this.lineTimeMask) ;
+        // }
     }
 
     private drawIn(){

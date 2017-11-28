@@ -106,15 +106,22 @@ class Penalty02 extends eui.UILayer {
      *   // var spotkick_style = [["1", "1"], ["1", "0"], ["1", "1"], ["0", "0"], ["0", "0"],[]]
      */
 
-    async movePenalty( penaltyArr:any , matchid:string, score:string ){
+    async movePenalty( penaltyArr:any , matchid:string, score:string ,footIndex ){
         let len = penaltyArr.length ;
         let $store = window['store'] ;
+
+        let penaltyStr_p = 'penalty_point' ;
+        let bgMaskStr_p = 'bgMask_point' ;  
+
         let currFieldStr = '' ;
         let topNum = 0 ;
         let botNum = 0 ;
         let colectPenalt = [] // 收集 点球 ，为了remove 
         let leftOrRig = '' ;
-        let basescore = parseInt( score.slice(0,1))
+        let basescore = parseInt( score.slice(0,1));
+
+        penaltyStr_p = 'penalty_point'+footIndex;
+        bgMaskStr_p = 'bgMask_point'+footIndex  ; 
         // new win
         this.penaltyWin = this.drawWin();
         
@@ -167,7 +174,7 @@ class Penalty02 extends eui.UILayer {
                     
                 }
             }
-            await this.wait( )
+            await this.wait()
             // win xiao 图标 这个坐标还有调整
             this.penaltyWin.x = 121 + ( len - 1 )  * 50
             if( topNum > botNum ){
@@ -181,25 +188,34 @@ class Penalty02 extends eui.UILayer {
             // 去除 整个背景
 
             //  显示win showWinLocation(res05[i].matchid);  _l left  _r right
+
+            // movePenalty
+
             await this.wait( 350 ) ;
-            if( !!window['store']['$fieldContain'] ){
-                window['store']['$fieldContain'].showWinLocation( matchid , leftOrRig );
+            if( !!$store['$fieldContain'] ){
+                $store['$fieldContain'].showWinLocation( matchid , leftOrRig );
             }
+
+            // 去除黑框
+            if( $store['$cnt'][bgMaskStr_p].parent ){
+                $store['$bgCourtWrap'].removeChild( $store['$cnt'][bgMaskStr_p] );
+            }
+            if( $store['$cnt'][penaltyStr_p].parent ){
+                $store['$bgCourtWrap'].removeChild( $store['$cnt'][penaltyStr_p] );
+            }
+
             // 显示冠军 
-            if( currFieldStr ){
+            if( currFieldStr &&  $store.matches.length === 1 ){
                 let championName = $store['$fieldContain'][currFieldStr].getFieldImg();
                 if( championName ){
                     if( leftOrRig === '_l' ){
-                         $store['$cnt'].this.showChampion( championName['l_name'] )
+                         $store['$cnt'].showChampion( championName['l_name'] )
                     }else{
-                        $store['$cnt'].this.showChampion( championName['r_name'] )
+                        $store['$cnt'].showChampion( championName['r_name'] )
                     }
                 }
             }
-
-            window['store']['$cnt']
-            // 清楚 所有点球  win
-
+            // 清楚 所有点球 
             setTimeout(()=>{
                 for( let i=0 ,len = colectPenalt.length ;i< len ; i++ ){
                     if( colectPenalt[i] && colectPenalt[i].parent ){
@@ -209,8 +225,7 @@ class Penalty02 extends eui.UILayer {
                 if( this.penaltyWin.parent ){
                     this.removeChild( this.penaltyWin );
                 }
-            },1000)
-
+            },900)
         }
     }
 

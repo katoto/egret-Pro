@@ -633,6 +633,7 @@ window['store'] = {
 
     $fieldContain:null ,
     $cnt:null, // cnt 实例
+    $bgCourtWrap:null,  // 清除点球
     settle_list:[] , // 派奖的数据
     stage_Width: null ,
     stage_Height: null ,
