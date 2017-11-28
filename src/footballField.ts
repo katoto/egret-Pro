@@ -215,12 +215,14 @@ class Field_ball extends eui.UILayer {
     }
 
     /**
-     *  获取 对应场地的 img
+     *  获取 对应场地的 img & name 
      */
     private getFieldImg(){
         return {
             l_img: this.leftTeam.source ,
-            r_img : this.rightTeam.source
+            r_img : this.rightTeam.source ,
+            l_name: this.leftTitle.text ,
+            r_name: this.rightTitle.text ,
         }
     }
 
@@ -413,11 +415,22 @@ class Field_ball extends eui.UILayer {
             this.removeChild( this.goldItems_right );
         }
         // 总的金币背景
-        if( this.goldItems_right && this.goldItems_right.parent ){
-            this.removeChild( this.goldItems_right );
+        if( this.goldItems_left && this.goldItems_left.parent ){
+            this.removeChild( this.goldItems_left );
         }
+
+        // if( this.goldItems_left02 && this.goldItems_left02.parent ){
+        //     this.removeChild( this.goldItems_left02 );
+        // }
+
+        // if( this.goldItems_right02 && this.goldItems_right02.parent ){
+        //     this.removeChild( this.goldItems_right02 );
+        // }
+
         
     }
+
+
 
     // findWinLocation  ==> findLocal 
     /**

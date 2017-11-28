@@ -163,6 +163,7 @@ class Main extends egret.DisplayObjectContainer {
         this.cnt = new Cnt(this.Width,this.Height,this.anWidth,anHeight);
         this.cnt.x = 0;
         this.cnt.y = 0;
+        window['store']['$cnt'] = this.cnt ;
         this.addChild(this.cnt);
 
          //头部实例2
@@ -541,7 +542,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
 
                     //  去除所有的 进球投注区
 
-
                     // this.cnt.cnt_sendEndCoin( '1002999','' )
                 ;break;
 
@@ -570,14 +570,10 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         
                         //  执行金币动画  
                         // matchid:string , selection:string , uid:string , bet_golds:string
-
                         this.cnt.cnt_Other_Coin( $msgObjBody.matchid , $msgObjBody.selection ,$msgObjBody.uid, $msgObjBody.bet_golds );
                     }
 
                 ;break;
-
-
-
 
                 case '2025':
                     // 更新奖池
@@ -637,7 +633,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
      *  onCloseSock  websock 接收消息
      */
     private onCloseSock():void{
-        
+        console.error( 'websock error' ) ;   
     }
 
 }
@@ -647,6 +643,8 @@ window['store'] = {
     initDomain:'http://10.0.1.41:2332',
 
     $fieldContain:null ,
+    $cnt:null, // cnt 实例
+    $bgCourtWrap:null,  // 清除点球
     settle_list:[] , // 派奖的数据
     stage_Width: null ,
     stage_Height: null ,

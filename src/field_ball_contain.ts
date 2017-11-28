@@ -1268,8 +1268,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             console.error('not find matchid at field_ball_contain' );
         }
 
-        console.log( this[ currFieldStr ] )
-
         switch( currFieldStr ){
             case 'field1':
                 // y>352 && y <650
