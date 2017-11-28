@@ -183,8 +183,7 @@ class Penalty01 extends eui.UILayer {
             this.removeChild( this.lineTime );
         }
         if( this.lineTimeMask.parent ){
-            // this.removeChild(this.lineTimeMask) ;
-            console.log('remove')
+            this.removeChild(this.lineTimeMask) ;
         }
     }
 

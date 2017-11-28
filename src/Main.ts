@@ -646,7 +646,7 @@ window['store'] = {
         uid : null ,
         platform : null ,
     },
-    scale: this.scale,  // 桌子缩放
+    scale: 1,  // 桌子缩放
     userPosition:[],  //  随机数组
     userPositionID:[],  // 头像的uid
     userPositionLocal:{},  // 维护一套 位置，为了金币分发

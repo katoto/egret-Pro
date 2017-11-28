@@ -166,7 +166,7 @@ class Penalty02 extends eui.UILayer {
                 }
             }
             await this.wait( )
-            // win 图标 这个坐标还有调整
+            // win xiao 图标 这个坐标还有调整
             this.penaltyWin.x = 121 + ( len - 1 )  * 50
             if( topNum > botNum ){
                 this.penaltyWin.y = 1;

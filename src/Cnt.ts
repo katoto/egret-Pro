@@ -210,16 +210,19 @@ class Cnt extends egret.DisplayObjectContainer{
 
         // this.bgCourtWrap.addChild(this.champion);
         // this.champion.addChild(this.championText); 
-
-        let xxx = new Penalty01();
-        xxx.y = 200;
-        this.addChild(xxx)
     }
 
     /**
      *  champion 冠军
      */
     private showChampion( name:string ){
+        if( !!this.champion ){
+            this.bgCourtWrap.addChild( this.champion ) ;
+        }
+        if( !!this.championText ){
+            this.championText.text = name ;
+            this.champion.addChild(this.championText) ; 
+        }
     }
 
     /**
