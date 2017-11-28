@@ -32,9 +32,6 @@ class Cnt extends egret.DisplayObjectContainer{
     // 定时器
     private timer:Timer ;
 
-
-
-
     // 总决赛的点球 4 个 进行复用
 
     private penalty0 ; private bgMask0;
@@ -113,8 +110,6 @@ class Cnt extends egret.DisplayObjectContainer{
         this.fieldContain = new Field_ball_contain();
         window['store']['$fieldContain'] = this.fieldContain ;
         this.bgCourtWrap.addChild(this.fieldContain);
-
-  
 
         //toast
         // let toast = new egret.DisplayObjectContainer();
@@ -335,6 +330,8 @@ class Cnt extends egret.DisplayObjectContainer{
         let len = allResult.length;  // 数据长度
 
         let findIndex = null ;
+        let endResult = null ;
+        let $store = window['store'] ;
         // 确保 在调用之前已经清除
         switch (len){
             case 4:
@@ -377,9 +374,7 @@ class Cnt extends egret.DisplayObjectContainer{
             }
 
             this[penaltyStr].clearAllball();
-            // 获取头像            
-            this.cnt_getFieldImg( allResult[i].matchid );
-            // 更新头像
+            // 更新头像  获取头像     
             this[penaltyStr].upFootballImg(  this.cnt_getFieldImg( allResult[i].matchid ) )
             // 等等正常比分
             egret.Tween.get( this[penaltyStr] ).to( {y: curr_local[i] }, 300 );
@@ -410,20 +405,43 @@ class Cnt extends egret.DisplayObjectContainer{
                     }else{
                         this.fieldContain.showWinLocation( allResult[i].matchid , '_r' ) ;
                     }
+                    // 取 出
+                    if( len === 1 ){
+                        endResult = allResult[i] ;
+                    }
                 }
-
             }
         }
+
+        // 显示冠军 
+        let championName = null;
+        await this.wait(300);
+
+        if( endResult ){
+            if( $store['matFindField'][ endResult.matchid ] ){
+                championName = this.fieldContain[ $store['matFindField'][ endResult.matchid ] ].getFieldImg();
+                console.log( this.fieldContain[ $store['matFindField'][ endResult.matchid ] ].getFieldImg() )
+                if( parseInt ( endResult.score[0] ) > parseInt ( endResult.score[2] ) ){
+                     this.showChampion( championName['l_name'] )
+                }else{
+                    this.showChampion( championName['r_name'] )
+                }
+            }
+        }
+
     }
 
     /**
      *  清楚中奖 main ==》 cnt ==> fieldcontain
      */
     private cnt_removeAllWinIcon(){
+        // remove  champion 
+        this.delChampion() ;
+        // remove field 
         this.fieldContain.removeAllWinIcon()
     }
 
-        /**
+    /**
      *  根据 matchid  找 对应的img
      *  @param matchid
      */

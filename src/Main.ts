@@ -159,6 +159,7 @@ class Main extends egret.DisplayObjectContainer {
         this.cnt = new Cnt(this.Width,this.Height,this.anWidth,anHeight);
         this.cnt.x = 0;
         this.cnt.y = 0;
+        window['store']['$cnt'] = this.cnt ;
         this.addChild(this.cnt);
 
          //头部实例2
@@ -621,7 +622,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
      *  onCloseSock  websock 接收消息
      */
     private onCloseSock():void{
-        
+        console.error( 'websock error' ) ;   
     }
 
 }
@@ -631,6 +632,7 @@ window['store'] = {
     initDomain:'http://10.0.1.41:2332',
 
     $fieldContain:null ,
+    $cnt:null, // cnt 实例
     settle_list:[] , // 派奖的数据
     stage_Width: null ,
     stage_Height: null ,

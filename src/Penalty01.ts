@@ -129,7 +129,7 @@ class Penalty01 extends eui.UILayer {
                 egret.Tween.get( this.lineTimeMask ).to( { x : 449 } , 25000 ) 
             }
         }
-
+        //  显示出 0 ：0
         if( matchid ){
             currFieldStr = $store['matFindField'][ matchid ] ;
             $store['$fieldContain'][currFieldStr].writeScore( l_score + ':' + r_score )

@@ -119,6 +119,10 @@ class Penalty02 extends eui.UILayer {
         this.penaltyWin = this.drawWin();
         
         if( penaltyArr.length > 0 ){
+            if( matchid ){
+                currFieldStr = $store['matFindField'][ matchid ] ;
+            }
+
             for( let i = 0 ;i < len ; i ++ ){
                 if( penaltyArr[i] ){
                     if( penaltyArr[i][0] === '1' ){
@@ -130,8 +134,7 @@ class Penalty02 extends eui.UILayer {
 
                         this.addChild(penaltyIn);
                         topNum ++ ;
-                        if( matchid ){
-                            currFieldStr = $store['matFindField'][ matchid ] ;
+                        if( currFieldStr ){
                             $store['$fieldContain'][currFieldStr].writeScore(  ( basescore + topNum ) + ':' + ( basescore + botNum)  )
                         }
                     }else if( penaltyArr[i][0] === '0' ) {
@@ -150,8 +153,7 @@ class Penalty02 extends eui.UILayer {
                         await this.wait( )
                         this.addChild(penaltyIn);
                         botNum ++ ;
-                        if( matchid ){
-                            currFieldStr = $store['matFindField'][ matchid ] ;
+                        if( currFieldStr ){
                             $store['$fieldContain'][currFieldStr].writeScore(  ( basescore + topNum ) + ':' + ( basescore + botNum)  )
                         }
                     }else if( penaltyArr[i][1] === '0' ){
@@ -183,7 +185,19 @@ class Penalty02 extends eui.UILayer {
             if( !!window['store']['$fieldContain'] ){
                 window['store']['$fieldContain'].showWinLocation( matchid , leftOrRig );
             }
+            // 显示冠军 
+            if( currFieldStr ){
+                let championName = $store['$fieldContain'][currFieldStr].getFieldImg();
+                if( championName ){
+                    if( leftOrRig === '_l' ){
+                         $store['$cnt'].this.showChampion( championName['l_name'] )
+                    }else{
+                        $store['$cnt'].this.showChampion( championName['r_name'] )
+                    }
+                }
+            }
 
+            window['store']['$cnt']
             // 清楚 所有点球  win
 
             setTimeout(()=>{
