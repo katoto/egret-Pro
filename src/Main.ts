@@ -542,7 +542,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
 
                     //  去除所有的 进球投注区
 
-
                     // this.cnt.cnt_sendEndCoin( '1002999','' )
                 ;break;
 
