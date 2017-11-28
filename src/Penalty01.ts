@@ -20,10 +20,10 @@ class Penalty01 extends eui.UILayer {
         this.addChild(bgPenalty);
 
         // 插入上边遮罩层
-        let bgMask:egret.Bitmap = new egret.Bitmap(RES.getRes('penalty-mask_png'));
-        bgMask.x = 38;
-        bgMask.y = 2;
-        this.addChild(bgMask);
+        // let bgMask:egret.Bitmap = new egret.Bitmap(RES.getRes('penalty-mask_png'));
+        // bgMask.x = 38;
+        // bgMask.y = 2;
+        // this.addChild(bgMask);
          // 上边队伍icon
         this.topTeam = new eui.Image();
         // this.topTeam.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
@@ -31,14 +31,14 @@ class Penalty01 extends eui.UILayer {
         this.topTeam.height = 24;
         this.topTeam.x = 38;
         this.topTeam.y = 2;
-        //this.topTeam.mask = bgMask;  // 这里见鬼了，添加遮罩会使整个队伍logo不显示，原因找不到。
+        //this.topTeam.mask = bgMask;  // 不需要遮罩了
         this.addChild(this.topTeam);
        
         //插入遮罩层
-        let bgMask02:egret.Bitmap = new egret.Bitmap(RES.getRes('penalty-mask_png'));
-        bgMask02.x = 38;
-        bgMask02.y = 30;
-        this.addChild(bgMask02);
+        // let bgMask02:egret.Bitmap = new egret.Bitmap(RES.getRes('penalty-mask_png'));
+        // bgMask02.x = 38;
+        // bgMask02.y = 30;
+        // this.addChild(bgMask02);
          // 下边队伍icon
         this.bottomTeam = new eui.Image();
         // this.bottomTeam.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
@@ -46,7 +46,7 @@ class Penalty01 extends eui.UILayer {
         this.bottomTeam.height = 24;
         this.bottomTeam.x = 38;
         this.bottomTeam.y = 30;
-        // this.bottomTeam.mask = bgMask02;// 这里见鬼了，添加遮罩会使整个队伍logo不显示，原因找不到。
+        // this.bottomTeam.mask = bgMask02;// 不需要遮罩了
         this.addChild(this.bottomTeam);
 
         // 时间轴
@@ -58,23 +58,18 @@ class Penalty01 extends eui.UILayer {
 
         //进度条
         this.lineTime = new egret.Shape();
-        this.lineTime.graphics.lineStyle(7,0xdf0000);
+        this.lineTime.graphics.lineStyle(7,0xffffff);
         this.lineTime.graphics.moveTo(91,29);
-        //lineTime.graphics.lineTo(358,29);   //358是90分钟位置，如果有胜负就停止，不然继续走到449位置
         this.lineTime.graphics.lineTo(449,29);
         this.lineTime.graphics.endFill();
-
-        // this.addChild( this.lineTime );
+        this.addChild( this.lineTime );
 
         this.lineTimeMask = new egret.Bitmap(RES.getRes('scoreMask_png'));
-
-        // this.lineTimeMask.x = 80;
-        // this.lineTimeMask.y = 24;
-
-        // this.lineTimeMask.mask = this.lineTime ;
-
-        // this.addChild(this.lineTimeMask);
-        // egret.Tween.get( this.lineTimeMask ).to( { x : 358 } ,8000 ) 
+        this.lineTimeMask.x = 80;
+        this.lineTimeMask.y = 24;
+        this.lineTimeMask.mask = this.lineTime ;
+        this.addChild(this.lineTimeMask);
+        // egret.Tween.get( this.lineTimeMask ).to( { x : 449 } ,8000 ) //358/449
 
          //上边队伍点球情况  (上面进球y=1，下面y=34， x>90&&x<426)
         // let penaltyIn = this.drawIn();
@@ -82,7 +77,7 @@ class Penalty01 extends eui.UILayer {
         // penaltyIn.y = 1;
         // this.addChild(penaltyIn);
         // //下边队伍点球情况
-        // let penaltyIn2 = this.drawIn();
+        // let penaltyIn2 = this.drawIn(); 
         // penaltyIn2.x = 426;
         // penaltyIn2.y = 34;
         // this.addChild(penaltyIn2);
@@ -112,21 +107,24 @@ class Penalty01 extends eui.UILayer {
         let l_score = 0 ;
         let r_score = 0 ;
 
-        if( this.lineTime.parent ){
-            this.addChild( this.lineTime );
-        }
-        if( this.lineTimeMask ){
-            this.lineTimeMask.x = 80 ;
-            this.lineTimeMask.y = 24 ;
-            this.lineTimeMask.mask = this.lineTime ;
-            this.addChild(this.lineTimeMask) ;
-        }
+        // if( this.lineTime.parent ){
+        //     this.addChild( this.lineTime );
+        // }
+        // if( this.lineTimeMask ){
+        //     this.lineTimeMask.x = 80 ;
+        //     this.lineTimeMask.y = 24 ;
+        //     this.lineTimeMask.mask = this.lineTime ;
+        //     this.addChild(this.lineTimeMask) ;
+        // }
 
         if( is_extratime ){
+            console.log('1825')
             if( is_extratime === '0' ){
                 egret.Tween.get( this.lineTimeMask ).to( { x : 358 } , 18000 ) 
+                console.log('18000')
             }else if( is_extratime === '1' ){
                 egret.Tween.get( this.lineTimeMask ).to( { x : 449 } , 25000 ) 
+                console.log('25000')
             }
         }
 
@@ -185,7 +183,8 @@ class Penalty01 extends eui.UILayer {
             this.removeChild( this.lineTime );
         }
         if( this.lineTimeMask.parent ){
-            this.removeChild(this.lineTimeMask) ;
+            // this.removeChild(this.lineTimeMask) ;
+            console.log('remove')
         }
     }
 
