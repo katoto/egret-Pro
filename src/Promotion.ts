@@ -20,9 +20,6 @@ class Promotion extends eui.UILayer{
     private leftTeam11;
     private rightTeam11;
 
-<<<<<<< HEAD
-
-=======
     private teamF41:egret.TextField;
     private teamF42:egret.TextField;
     private teamF43:egret.TextField;
@@ -30,7 +27,6 @@ class Promotion extends eui.UILayer{
     private teamF21:egret.TextField;
     private teamF22:egret.TextField;
     private teamF11:egret.TextField;
->>>>>>> f24d1938b2579efca055879d20b3367481f73185
 
     private drawPromotion(){
         //蒙版
@@ -429,88 +425,7 @@ class Promotion extends eui.UILayer{
         // proWin01.y = 41;
         // wrap.addChild(proWin01);
 
-<<<<<<< HEAD
-
-
-         
-//决赛
-        let wrap11:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
-        wrap11.x = 176;
-        wrap11.y = 522;
-        wrap11.width = 300;
-        wrap11.height = 68;
-         // 左边队伍头像容器
-        let leftUserBox11:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
-        leftUserBox11.width = 68;
-        leftUserBox11.height = 68;
-        leftUserBox11.x = 32;
-        leftUserBox11.y = 0;  
-        wrap11.addChild(leftUserBox11); 
-        // 插入边框
-        let lbgBorder11:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
-        leftUserBox11.addChild(lbgBorder11);
-        //队伍icon
-        this.leftTeam11 = new eui.Image();
-        this.leftTeam11.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
-        this.leftTeam11.width = 62;
-        this.leftTeam11.height = 62;
-        this.leftTeam11.x = 3;
-        this.leftTeam11.y = 3;
-        leftUserBox11.addChild(this.leftTeam11);
-        //  右边队伍头像容器
-        let rightUserBox11:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
-        rightUserBox11.width = 68;
-        rightUserBox11.height = 68;
-        rightUserBox11.x = 195;
-        rightUserBox11.y = 0;  
-        wrap11.addChild(rightUserBox11); 
-        // 插入边框
-        let rbgBorder11:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
-        rightUserBox11.addChild(rbgBorder11);
-        //队伍icon
-        this.rightTeam11 = new eui.Image();
-        this.rightTeam11.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
-        this.rightTeam11.width = 62;
-        this.rightTeam11.height = 62;
-        this.rightTeam11.x = 3;
-        this.rightTeam11.y = 3;
-        rightUserBox11.addChild(this.rightTeam11);
-        let teamF11:egret.TextField = new egret.TextField();
-        teamF11.text = '3:2';
-        teamF11.size = 32;
-        teamF11.textColor = 0xffffff;
-        teamF11.width = 300;
-        teamF11.height = 68;
-        teamF11.bold = true;
-        teamF11.textAlign = egret.HorizontalAlign.CENTER;
-        teamF11.verticalAlign = egret.VerticalAlign.MIDDLE;
-        wrap11.addChild(teamF11); 
-
-
-
-        let proWin01 = this.proWin();
-        proWin01.x = 16;
-        proWin01.y = -16;
-        wrap41.addChild(proWin01);
-
-        let proWin02 = this.proWin();
-        proWin02.x = 179;
-        proWin02.y = -16;
-        wrap41.addChild(proWin02);
-
-
-        wrap.addChild(wrap41);
-        wrap.addChild(wrap42);
-        wrap.addChild(wrap43);
-        wrap.addChild(wrap44);
-        wrap.addChild(wrap21);
-        wrap.addChild(wrap22);
-        wrap.addChild(wrap11);
-       
-=======
->>>>>>> f24d1938b2579efca055879d20b3367481f73185
     }
-
     private proWin(){
         let img = new egret.Bitmap(RES.getRes('proWin_png'));
         return img;

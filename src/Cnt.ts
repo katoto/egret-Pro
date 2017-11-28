@@ -641,14 +641,13 @@ class Cnt extends egret.DisplayObjectContainer{
         let curFindField = '' ;
         let allShowWinNum = 0 ;
 
-
+        let userImgArr = [] ;
 // delIndex = window['store']['userPositionLocal'][uid] ;
 // let choseUserImg = 'userImg'+ ( delIndex ) ;
-
         if( settleData ){
             for( let i=0,len = settleData.length ;i<len ; i++ ){
+                choseUser = $store['userPositionLocal'][ settleData[i].uid ] ;
                 if( settleData[i].prize_info &&  settleData[i].prize_info.length > 0 ){
-                    choseUser = $store['userPositionLocal'][ settleData[i].uid ] ;
                     console.log( baseImg + choseUser ) ;
                     console.log( '++++++++++' ) ;
                     allShowWinNum = 0 ;
@@ -665,23 +664,26 @@ class Cnt extends egret.DisplayObjectContainer{
                     if( this[ baseImg + choseUser ] && allShowWinNum ){
                         console.log('---------');
                         console.log( allShowWinNum )
-                        this[ baseImg + choseUser ].isShowWinGold( allShowWinNum )
+                        this[ baseImg + choseUser ].isShowWinGold( allShowWinNum );
+                        userImgArr.push( this[ baseImg + choseUser ] )
                     }
-                    // setTimeout(()=>{
-                    //    this[choseUserImg].isHideWinGold() 
-                    // },1000)
                 }
-
                 //  更新每个用户的信息 可能要再动画之后
-                // if( settleData[i].uid && settleData[i].total ){
-                //     if( choseUser && this[ baseImg + choseUser ] ){
-                //         this[ baseImg + choseUser ]['setMyGold']( settleData[i].total )
-                //     }else{
-                //         // 没找到对应的用户
-                //         console.error('没找到对应的用户 at 2007 websock')
-                //     }
-                // }
+                if( settleData[i].uid && settleData[i].total ){
+                    this[ baseImg + choseUser ]['setMyGold']( settleData[i].total )
+                }else{
+                    // 没找到对应的用户
+                    console.error('没找到对应的用户 at 2007 websock')
+                }
             }
+
+            // 清除对应的奖
+            setTimeout(()=>{
+                for( let i = 0; i< userImgArr.length;i++ ){
+                    userImgArr[i].isHideWinGold() 
+                }
+            }, 2200 )
+
         }
         // let startString = 'field41_l';
         // let uid = '10015140' ;
