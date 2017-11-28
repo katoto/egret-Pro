@@ -397,7 +397,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                             // 切换场地  用
                             // this.cnt.proTeam('https://www.google.co.jp/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png');
                              //晋升
-                           
 
                         }
 
@@ -406,7 +405,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         // clean all  点球、进球黑框
                         this.cnt.cleanAllPenalty() ;
                         // clean all 自己投注和他人投注
-
 
                     }
                 break;
@@ -617,6 +615,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
     }
 
     
+
     /**
      *  onIOError  websock 接收消息
      */

@@ -24,13 +24,6 @@ class Promotion extends eui.UILayer{
 
 
 
-
-
-
-
-
-
-
     private drawPromotion(){
         //蒙版
        let layer:egret.Shape = new egret.Shape();
@@ -464,9 +457,9 @@ class Promotion extends eui.UILayer{
         wrap.addChild(wrap21);
         wrap.addChild(wrap22);
         wrap.addChild(wrap11);
-
        
     }
+
     private proWin(){
         let img = new egret.Bitmap(RES.getRes('proWin_png'));
         return img;
