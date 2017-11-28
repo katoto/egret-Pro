@@ -377,6 +377,14 @@ class Cnt extends egret.DisplayObjectContainer{
             egret.Tween.get( this[penaltyStr] ).to( {y: curr_local[i] }, 300 );
             this[penaltyStr].createFootball( allResult[i].timeline , allResult[i].is_extratime ,allResult[i].matchid );
 
+            if( $store['matFindField'][ allResult[i].matchid ] ){
+                if( parseInt ( allResult[i].score[0] ) > parseInt ( allResult[i].score[2] ) ){
+                    $store['fieldLeftOrRight'][allResult[i].matchid] = $store['matFindField'][ allResult[i].matchid ] + '_l'
+                }else{
+                    $store['fieldLeftOrRight'][allResult[i].matchid] = $store['matFindField'][ allResult[i].matchid ] + '_r'
+                }
+            }
+
         }
         //  开始点球判断
 
@@ -654,9 +662,11 @@ class Cnt extends egret.DisplayObjectContainer{
                     // 派金币
                     for( let j = 0;j< settleData[i].prize_info.length ;j++ ){
                         if( settleData[i].prize_info[j] && settleData[i].prize_info[j].matchid ){
-                            curFindField = $store['matFindField'][ settleData[i].prize_info[j].matchid ] ;
+                            // curFindField = $store['matFindField'][ settleData[i].prize_info[j].matchid ] ;
+                            curFindField = $store['fieldLeftOrRight'][settleData[i].prize_info[j].matchid];
+                            console.log( curFindField )
                             // this.fieldContain[curFindField]   left  or right 动画
-                            curFindField = curFindField + '_l';
+                            // curFindField = curFindField + '_l';
                             allShowWinNum =  allShowWinNum + parseInt( settleData[i].prize_info[j].prize );
                             await this.fieldContain.sendEndCoin( curFindField , settleData[i].uid ) ;
                         }
@@ -682,7 +692,7 @@ class Cnt extends egret.DisplayObjectContainer{
                 for( let i = 0; i< userImgArr.length;i++ ){
                     userImgArr[i].isHideWinGold() 
                 }
-            }, 2200 )
+            }, 2800 )
 
         }
         // let startString = 'field41_l';
