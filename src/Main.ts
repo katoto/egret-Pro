@@ -137,6 +137,7 @@ class Main extends egret.DisplayObjectContainer {
             this.loadingView.setProgress(event.itemsLoaded, event.itemsTotal);
         }
     }
+
     
 
     /**
@@ -178,6 +179,7 @@ class Main extends egret.DisplayObjectContainer {
         this.bottom.y = this.Height;
         this.addChild(this.bottom);
 
+     
 
         // 晋级  缺动画
         // this.promotion = new Promotion();
@@ -189,8 +191,13 @@ class Main extends egret.DisplayObjectContainer {
         // this.addChild(this.pop);
 
         //杯赛过场change
+<<<<<<< HEAD
         this.change = new Change();
         this.change.x = 0;
+=======
+        // this.change = new Change();
+        // this.change.x = 0;
+>>>>>>> cfedf71417994208558c424b58c8dd04f9b01cfc
         // this.addChild( this.change );
 
         // setTimeout(()=>{
