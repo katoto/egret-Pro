@@ -1401,7 +1401,8 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             ;break;
             case 'field44':
                 // y>750 && y <860
-                newField_y = Math.random() * 110 + 750;
+                // newField_y = Math.random() * 110 + 750;
+                newField_y = Math.random() * 60 + 775;
                 if( !$store['allCoinObj']['field44'] ){
                     window['Object'].assign($store['allCoinObj'] ,{ 'field44':{
                             coin_left:[],
@@ -1434,12 +1435,14 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         if( selection ){
             if( selection === '1' ){
                 // 150<x && x<350
-                newField_x = Math.random() * 200 + 150;
+                // newField_x = Math.random() * 200 + 150;
+                newField_x = Math.random() * 100 + 200;
                 this.create_other_Coin( newUser_x , newUser_y , newField_x , newField_y , $store['allCoinObj'][currFieldStr].coin_left , moreCoin )
                 this[currFieldStr].addLeftAllCoin( window['formateGold']( $store_coinNum[matchid]['home_golds'] ) ); //  总的金额  
             }else if( selection === '2' ){
                 // 410<x && x<600
-                newField_x = Math.random() * 200 + 410;
+                // newField_x = Math.random() * 200 + 410;
+                newField_x = Math.random() * 100 + 460;
                 this[currFieldStr].addRightAllCoin( window['formateGold']( $store_coinNum[matchid]['away_golds'] ) ); //  总的金额  
                 this.create_other_Coin( newUser_x , newUser_y , newField_x , newField_y , $store['allCoinObj'][currFieldStr].coin_right , moreCoin )
             }
@@ -1469,25 +1472,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             // 没找到 赢的比赛
             console.warn( '没找到 赢的Icon' )
         }
-
-
-        // let $store = window['store'] ;
-        // let findStr = '';
-
-        // if( matchid && $store['matFindField'] && $store['matFindField'][matchid] ){
-        //     findStr = this[ $store['matFindField'][matchid] ].findLocal( winid ) ;
-        //     if( findStr ==='_l' ){
-
-        //        this[ $store['matFindField'][matchid] ].addwinIcon_l() ;
-        //     }else if( findStr === '_r' ){
-
-        //         this[ $store['matFindField'][matchid] ].addwinIcon_r() ;
-        //     }
-        //     return ;
-        // }else{
-        //     // 没找到 赢的比赛
-        //     console.warn( '没找到 赢的Icon' )
-        // }
     }
 
     /**

@@ -378,10 +378,18 @@ class Cnt extends egret.DisplayObjectContainer{
             this[penaltyStr].createFootball( allResult[i].timeline , allResult[i].is_extratime ,allResult[i].matchid );
 
             if( $store['matFindField'][ allResult[i].matchid ] ){
-                if( parseInt ( allResult[i].score[0] ) > parseInt ( allResult[i].score[2] ) ){
-                    $store['fieldLeftOrRight'][allResult[i].matchid] = $store['matFindField'][ allResult[i].matchid ] + '_l'
+                if( allResult[i].is_spotkick === '0' ){
+                    if( parseInt ( allResult[i].score[0] ) > parseInt ( allResult[i].score[2] ) ){
+                        $store['fieldLeftOrRight'][allResult[i].matchid] = $store['matFindField'][ allResult[i].matchid ] + '_l'
+                    }else{
+                        $store['fieldLeftOrRight'][allResult[i].matchid] = $store['matFindField'][ allResult[i].matchid ] + '_r'
+                    }
                 }else{
-                    $store['fieldLeftOrRight'][allResult[i].matchid] = $store['matFindField'][ allResult[i].matchid ] + '_r'
+                    if( parseInt ( allResult[i].spotkick[0] ) > parseInt ( allResult[i].spotkick[2] ) ){
+                        $store['fieldLeftOrRight'][allResult[i].matchid] = $store['matFindField'][ allResult[i].matchid ] + '_l'
+                    }else{
+                        $store['fieldLeftOrRight'][allResult[i].matchid] = $store['matFindField'][ allResult[i].matchid ] + '_r'
+                    }
                 }
             }
 
@@ -665,6 +673,8 @@ class Cnt extends egret.DisplayObjectContainer{
                             // curFindField = $store['matFindField'][ settleData[i].prize_info[j].matchid ] ;
                             curFindField = $store['fieldLeftOrRight'][settleData[i].prize_info[j].matchid];
                             console.log( curFindField )
+                            // curFindField = 'field42_r';
+
                             // this.fieldContain[curFindField]   left  or right 动画
                             // curFindField = curFindField + '_l';
                             allShowWinNum =  allShowWinNum + parseInt( settleData[i].prize_info[j].prize );
