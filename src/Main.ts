@@ -193,8 +193,7 @@ class Main extends egret.DisplayObjectContainer {
         //杯赛过场change
         this.change = new Change();
         this.change.x = 0;
-        // this.change = new Change();
-        // this.change.x = 0;
+        
         // this.addChild( this.change );
 
         // setTimeout(()=>{
@@ -412,25 +411,38 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                              //晋升
                         }
 
-                        if( $msgObjBody.stageid === '1' ){
-                            // 出现换产
-                            if( $msgObjBody.matches && $msgObjBody.room_info ){
-                                // 更新数据
-                                this.change.upChangeMsg(  $msgObjBody.matches , $msgObjBody.room_info );
-                                if( !!this.change ){
-                                    this.addChild( this.change );
+                        
+                        if( $msgObjBody.stageid){
+                            switch( $msgObjBody.stageid  ){
+                                case '1':
+                                    // 出现换厂
+                                    if( $msgObjBody.matches && $msgObjBody.room_info ){
+                                        // 更新数据
+                                        this.change.upChangeMsg(  $msgObjBody.matches , $msgObjBody.room_info );
+                                        if( !!this.change ){
+                                            this.addChild( this.change );
+                                            setTimeout(()=>{
+                                                egret.Tween.get( this.change ).to( { x : -750 }, 600 ).call(()=>{
+                                                    if( this.change.parent ){
+                                                        this.removeChild( this.change ) ;
+                                                    }
+                                                });  
+                                            },2500)                                    
+                                        }
+                                    }
+                                ;break;
+                                case '2':
+                                    // 4 ==> 2 的动画
 
-                                    setTimeout(()=>{
-                                        egret.Tween.get( this.change ).to( {x:-750},300 ).call(()=>{
-                                            if( this.change.parent ){
-                                                this.removeChild( this.change ) ;
-                                            }
-                                        });  
-                                    },2500)                                    
-                                }
+                                ;break;
+                                case '3':
+                                    // 2 == > 1 动画
 
+                                ;break;
                             }
+
                         }
+
                         // clean all  win
                         this.cnt.cnt_removeAllWinIcon();
                         // clean all  点球、进球黑框
@@ -605,10 +617,16 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 case '2025':
                     // 提出用户 展现弹窗
                 ;break;
-
-
+                case '2016':
+                    // 被提出
+                    alert('你已经被踢出')
+                ;break;
+                case '2017':
+                    this.cnt.showTips('使用了旧的房间号 error at 2017') ;
+                ;break
             }
             setTimeout(()=>{
+
                 // this.cnt.cnt_Other_Coin('10015131' , '1' ,'' ,'111' )
                 // console.log('收起金币 测试 ok')
                 // this.cnt.cnt_collectCoin()

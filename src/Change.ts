@@ -25,7 +25,6 @@ class Change extends eui.UILayer{
     private teamImg03_r ;
     private teamImg04_r ;
 
-
     private drawChange(){
         let bg:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-change_jpg'));
         this.addChild(bg);
@@ -166,10 +165,6 @@ class Change extends eui.UILayer{
         return wrap;
     }
 
-
-
-
-
     /**
      *  更新对应的数据
      */
@@ -177,6 +172,8 @@ class Change extends eui.UILayer{
         let logoName = ''; 
         let baselogoStr = 'teamImg0' ;
         if( room_info ){
+            // 清除所有的 logo
+            this.clearAllLogo();
             switch ( room_info.leagueid ){
                 // 200 世界 202 欧洲 201 亚洲 203 非 204 美
                 case '200':
@@ -203,7 +200,7 @@ class Change extends eui.UILayer{
             }
             setTimeout(()=>{
                 egret.Tween.get( this[logoName] ).to({x:window['store']['stage_anWidth'],y:206},200);
-            },500 )
+            },400 )
 
         }
 
@@ -219,7 +216,27 @@ class Change extends eui.UILayer{
         }
     }
 
+    /**
+     *  clear all logo
+     */
+    private clearAllLogo(){
 
+        if( this.logo_fz.parent ){
+            this.removeChild( this.logo_fz )
+        }
+        if( this.logo_mz.parent ){
+            this.removeChild( this.logo_mz )
+        }
+        if( this.logo_oz.parent ){
+            this.removeChild( this.logo_oz )
+        }
+        if( this.logo_yz.parent ){
+            this.removeChild( this.logo_yz )
+        }
+        if( this.logo_sj.parent ){
+            this.removeChild( this.logo_sj )
+        }                        
+    }
 
 
 }
