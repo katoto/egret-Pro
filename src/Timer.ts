@@ -61,6 +61,21 @@ class Timer extends egret.DisplayObjectContainer{
         this.addChild(this.wrapTimer);
     }
 
+    //  竞猜开始
+     private timerFunc(event:egret.TimerEvent) {
+        // egret.log("timerFunc count" + (<egret.Timer>event.target).currentCount);
+        console.log( this.timerNum );
+        console.log('aaaa')
+        this.timerNum--;
+        this.textSS.text = ( this.timerNum ).toString()+ '"';
+    }
+
+    private timerRemove( ) {
+        if( this.wrapTimer.parent ){
+            this.removeChild(this.wrapTimer);
+        }
+    }
+
     // 等待竞猜开始
     private setStartPop (){
         // this.timer.start();
@@ -78,26 +93,5 @@ class Timer extends egret.DisplayObjectContainer{
         // })
 
     }
-    //  竞猜开始
 
-
-     private timerFunc(event:egret.TimerEvent) {
-        // egret.log("timerFunc count" + (<egret.Timer>event.target).currentCount);
-        this.timerNum--;
-        this.textSS.text = (this.timerNum).toString()+ '"';
-    }
-
-    private timerRemove( ) {
-
-        if( this.wrapTimer.parent ){
-            this.removeChild(this.wrapTimer);
-        }
-
-        // 出现竞猜 结束  竞猜开始
-        // let end_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-over_png');
-        // window['store']['this_main'].addChild( end_pop )
-
-        // cnt.textT.textTips.text = '正在开奖'
-        ////timerFunc count5
-    }
 }

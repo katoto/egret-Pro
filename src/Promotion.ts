@@ -111,7 +111,6 @@ class Promotion extends eui.UILayer{
         this.teamF11.verticalAlign = egret.VerticalAlign.MIDDLE;
         this.wrap.addChild(this.teamF11); 
 
-
          //1/2 top
         // 左边
         // 插入边框
