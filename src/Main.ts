@@ -42,6 +42,7 @@ class Main extends egret.DisplayObjectContainer {
     // 竞猜开始文案
     private start_pop = null;
     private stop_pop = null ;
+   
 
     public constructor() {
         super();
@@ -136,6 +137,7 @@ class Main extends egret.DisplayObjectContainer {
             this.loadingView.setProgress(event.itemsLoaded, event.itemsTotal);
         }
     }
+    
 
     /**
      * 创建游戏场景 ( 申请房间 、建立websocket)
@@ -175,6 +177,8 @@ class Main extends egret.DisplayObjectContainer {
         this.bottom.x = 0;
         this.bottom.y = this.Height;
         this.addChild(this.bottom);
+
+       
 
         // 晋级
         // this.promotion = new Promotion();
