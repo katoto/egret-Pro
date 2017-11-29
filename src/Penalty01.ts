@@ -149,6 +149,7 @@ class Penalty01 extends eui.UILayer {
                         penaltyIn2.y = 34;
                         this.collFootball.push( penaltyIn2 );
                         this.addChild(penaltyIn2);
+                        egret.Tween.get(penaltyIn2).to({y:44},100).to({y:24},100).to({y:34},100)
                         if( matchid ){
                             r_score++ ;
                         }

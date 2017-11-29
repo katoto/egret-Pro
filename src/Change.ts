@@ -9,7 +9,9 @@ class Change extends eui.UILayer{
         let bg:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-change_jpg'));
         this.addChild(bg);
 
-        let logo:egret.Bitmap = new egret.Bitmap(RES.getRes('logo-yz_png'));
+        let logo:egret.Bitmap = new egret.Bitmap();
+        logo.texture = RES.getRes('logo-yz_png');
+        
         logo.anchorOffsetX = logo.width/2;
         logo.x = window['store']['stage_anWidth'];
         logo.y = -500;
