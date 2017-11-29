@@ -182,7 +182,7 @@ class Main extends egret.DisplayObjectContainer {
      
 
         // 晋级  缺动画
-        // this.promotion = new Promotion();
+        this.promotion = new Promotion();
         // this.addChild(this.promotion)
 
         // 弹窗实例,竞猜开始or竞猜完毕
@@ -432,12 +432,28 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                     }
                                 ;break;
                                 case '2':
-                                    // 4 ==> 2 的动画
-                                    this.promotion.moveSecond( $msgObjBody.pre_result )
+                                    // 4 ==> 2 的动画  ( 转场的声音 )
+                                    if( !!this.promotion ){
+                                        this.addChild(this.promotion)
+                                    }
+                                    this.promotion.moveSecond( $msgObjBody.pre_result );
+                                    setTimeout(()=>{
+                                        if( this.promotion.parent ){
+                                            this.removeChild( this.promotion )
+                                        }
+                                    },2500)
                                 ;break;
                                 case '3':
-                                    // 2 == > 1 动画
-                                    this.promotion.moveSecond( $msgObjBody.pre_result )
+                                    // 2 == > 1 动画 ( 转场的声音 )
+                                    if( !!this.promotion ){
+                                        this.addChild(this.promotion)
+                                    }
+                                    this.promotion.moveThree( $msgObjBody.pre_result ) ;
+                                    setTimeout(()=>{
+                                        if( this.promotion.parent ){
+                                            this.removeChild( this.promotion )
+                                        }
+                                    },2500)
                                 ;break;
                             }
 
@@ -619,7 +635,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 ;break;
                 case '2016':
                     // 被提出
-                    alert('你已经被踢出')
+                    this.cnt.showTips('你已经被踢出') ;
                 ;break;
                 case '2017':
                     this.cnt.showTips('使用了旧的房间号 error at 2017') ;

@@ -450,12 +450,13 @@ class Promotion extends eui.UILayer{
         // this.leftTeam41.source = leftTeam41;
         // this.rightTeam41.source = rightTeam41;
         if( pre_result ){
+            // 清除之前的数据
+            this.clearPromoMsg() ;
             if( pre_result.first ){
                 for( let i=0;i<4;i++ ){
                     if( pre_result.first[i] ){
 
                         if( pre_result.first[i].awaylogo ){
-                            console.log( pre_result.first[i].awaylogo  )
                             this['rightTeam4'+( i+1 )].source = pre_result.first[i].awaylogo;
                         }
                         if( pre_result.first[i].homelogo ){
@@ -546,5 +547,59 @@ class Promotion extends eui.UILayer{
     private moveThree( preResult:any ){
         this.upPromotionMsg( preResult );
     }
+
+
+    /**
+     *  清除之前的所有数据
+     * 
+     */
+    private clearPromoMsg(){
+        let baseLeftTeam = 'leftTeam4' ;
+        let baseRightTeam = 'rightTeam4' ;
+        let baseTeamF = 'teamF4' ;
+        let baseProWin = 'proWin4' ;
+
+        let baseTeamF2 = 'teamF2' ;
+        let baseProWin2 = 'proWin2' ;
+        let baseLeftTeam2 = 'leftTeam2' ;
+        let baseRightTeam2 = 'rightTeam2' ;
+
+        for( let i=1;i<=4;i++ ){
+            if( this[ baseLeftTeam + i ] ){
+                this[ baseLeftTeam + i ].source = '' ;
+            }
+            if( this[ baseRightTeam + i ] ){
+                this[ baseRightTeam + i ].source = '' ;
+            }
+            if( this[ baseTeamF + i ] ){
+                this[ baseTeamF + i ].text = '' ;
+            }
+            if( this[ baseProWin + i +'_l' ].parent ){
+                this.wrap.removeChild( this[ baseProWin + i +'_l' ] )
+            }
+            if( this[ baseProWin + i +'_r' ].parent ){
+                this.wrap.removeChild( this[ baseProWin + i +'_r' ] )
+            }            
+        }
+
+        for( let i=1;i<=2;i++ ){
+            if( this[ baseLeftTeam2 + i ] ){
+                this[ baseLeftTeam2+ i ].source = '' ;
+            }
+            if( this[ baseRightTeam2 + i ] ){
+                this[ baseRightTeam2 + i ].source = '' ;
+            }
+            if( this[ baseTeamF2 + i ] ){
+                this[ baseTeamF2 + i ].text = '' ;
+            }
+            if( this[ baseProWin2 + i +'_l' ].parent ){
+                this.wrap.removeChild( this[ baseProWin2 + i +'_l' ] )
+            }
+            if( this[ baseProWin2 + i +'_r' ].parent ){
+                this.wrap.removeChild( this[ baseProWin2 + i +'_r' ] )
+            }            
+        }
+    }
+
 
 }
