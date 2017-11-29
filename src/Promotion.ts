@@ -536,10 +536,15 @@ class Promotion extends eui.UILayer{
     /**
      *  第一阶段 动画过渡
      */
+    private moveSecond( preResult:any ){
+        this.upPromotionMsg( preResult );
+    }
 
      /**
      *  第二阶段 动画过渡
      */ 
-    
+    private moveThree( preResult:any ){
+        this.upPromotionMsg( preResult );
+    }
 
 }

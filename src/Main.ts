@@ -193,7 +193,7 @@ class Main extends egret.DisplayObjectContainer {
         //杯赛过场change
         this.change = new Change();
         this.change.x = 0;
-        
+
         // this.addChild( this.change );
 
         // setTimeout(()=>{
@@ -433,11 +433,11 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                 ;break;
                                 case '2':
                                     // 4 ==> 2 的动画
-
+                                    this.promotion.moveSecond( $msgObjBody.pre_result )
                                 ;break;
                                 case '3':
                                     // 2 == > 1 动画
-
+                                    this.promotion.moveSecond( $msgObjBody.pre_result )
                                 ;break;
                             }
 
