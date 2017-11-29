@@ -45,7 +45,6 @@ class Timer extends egret.DisplayObjectContainer{
     }
 
     async createTimer( setTime:string ){
-
         //  ?
         // this.timer.removeEventListener(egret.TimerEvent.TIMER, this.timerFunc, this);
         // this.timer.removeEventListener(egret.TimerEvent.TIMER_COMPLETE, this.timerComFunc, this);
@@ -89,18 +88,14 @@ class Timer extends egret.DisplayObjectContainer{
     }
 
     private timerRemove( ) {
-        egret.log('倒计时结束');
 
         if( this.wrapTimer.parent ){
             this.removeChild(this.wrapTimer);
         }
 
         // 出现竞猜 结束  竞猜开始
-
         // let end_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-over_png');
         // window['store']['this_main'].addChild( end_pop )
-
-
 
         // cnt.textT.textTips.text = '正在开奖'
         ////timerFunc count5

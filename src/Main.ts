@@ -26,7 +26,7 @@ class Main extends egret.DisplayObjectContainer {
     // 聊天实例
     // private popChat;
     // 杯赛过场
-    // private change;
+    private change;
     // 晋升
     private promotion;  
 
@@ -178,9 +178,8 @@ class Main extends egret.DisplayObjectContainer {
         this.bottom.y = this.Height;
         this.addChild(this.bottom);
 
-       
 
-        // 晋级
+        // 晋级  缺动画
         // this.promotion = new Promotion();
         // this.addChild(this.promotion)
 
@@ -190,11 +189,12 @@ class Main extends egret.DisplayObjectContainer {
         // this.addChild(this.pop);
 
         //杯赛过场change
-        // let change = new Change();
-        // change.x = 0;
-        // this.addChild(change);
+        this.change = new Change();
+        this.change.x = 0;
+        this.addChild( this.change );
+
         // setTimeout(()=>{
-        //     egret.Tween.get(change).to({x:-750},200);   //如果这里用this.change ，就没办法执行这个动画，原因未知
+        //     egret.Tween.get( this.change ).to({x:-750},200);  
         //     console.log('move')
         // },2000)
 
@@ -363,6 +363,11 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                             // }
                             // this.cnt.initFieldCon();
                         }
+                        // 初始化 进场的数据
+                        if( $msgObjBody.pre_result && !!this.promotion ){
+                            this.promotion.upPromotionMsg( $msgObjBody.pre_result ) ;
+                        }
+
                     }
                     ;break;
                 case '2012':
@@ -601,6 +606,9 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 // setTimeout(()=>{
                 //     this.cnt.cleanAllPenalty() ;
                 // },5000)
+
+                this.cnt.showTips('tips 测试')
+
             },3000)
         }
     }
@@ -674,9 +682,12 @@ window['store'] = {
     matFindField:{  
         // 112300330:'field41'
     },
-    fieldLeftOrRight:{ // 找左右
+    fieldLeftOrRight:{ // 找左右 分发金币
 
     },
+    // idFindImg:{ // matchid 找
+
+    // },
     coin_Num:{
         // 112228430:{ // eg 累加金币
         //     home_golds:'0',
