@@ -134,42 +134,61 @@ class Penalty02 extends eui.UILayer {
                 if( penaltyArr[i] ){
                     if( penaltyArr[i][0] === '1' ){
                         let penaltyIn = this.drawIn();
+                        penaltyIn.width = 0;
+                        penaltyIn.height = 0;
+                        penaltyIn.anchorOffsetX = 11.5;
+                        penaltyIn.anchorOffsetY = 11.5;
                         penaltyIn.x = 123+i*44;     
-                        penaltyIn.y = 1;
+                        penaltyIn.y = 12.5;
                         colectPenalt.push( penaltyIn )
                         await this.wait( )
-
                         this.addChild(penaltyIn);
+                         egret.Tween.get(penaltyIn).to({width:25,height:25},200).to({width:23,height:23},200);
                         topNum ++ ;
                         if( currFieldStr ){
                             $store['$fieldContain'][currFieldStr].writeScore(  ( basescore + topNum ) + ':' + ( basescore + botNum)  )
                         }
                     }else if( penaltyArr[i][0] === '0' ) {
                         let penaltyOut = this.drawOut();
+                        penaltyOut.width = 0;
+                        penaltyOut.height = 0;
+                        penaltyOut.anchorOffsetX = 11.5;
+                        penaltyOut.anchorOffsetY = 11.5;
                         penaltyOut.x = 123+i*44;
-                        penaltyOut.y = 1;
+                        penaltyOut.y = 12.5;
                         colectPenalt.push( penaltyOut )
                         await this.wait( )
                         this.addChild(penaltyOut);
+                         egret.Tween.get(penaltyOut).to({width:25,height:25},200).to({width:23,height:23},200);
                     }
                     if( penaltyArr[i][1] === '1' ){
                         let penaltyIn = this.drawIn();
+                        penaltyIn.width = 0;
+                        penaltyIn.height = 0;
+                        penaltyIn.anchorOffsetX = 11.5;
+                        penaltyIn.anchorOffsetY = 11.5;
                         penaltyIn.x = 123+i*44;     
-                        penaltyIn.y = 34;
+                        penaltyIn.y = 45.5;
                         colectPenalt.push( penaltyIn )
                         await this.wait( )
                         this.addChild(penaltyIn);
+                         egret.Tween.get(penaltyIn).to({width:25,height:25},200).to({width:23,height:23},200);
                         botNum ++ ;
                         if( currFieldStr ){
                             $store['$fieldContain'][currFieldStr].writeScore(  ( basescore + topNum ) + ':' + ( basescore + botNum)  )
                         }
                     }else if( penaltyArr[i][1] === '0' ){
                         let penaltyOut = this.drawOut();
+                        penaltyOut.width = 0;
+                        penaltyOut.height = 0;
+                        penaltyOut.anchorOffsetX = 11.5;
+                        penaltyOut.anchorOffsetY = 11.5;
                         penaltyOut.x = 123+i*44;
-                        penaltyOut.y = 34;
+                        penaltyOut.y = 45.5;
                         colectPenalt.push( penaltyOut )
                         await this.wait( )
                         this.addChild(penaltyOut);
+                        egret.Tween.get(penaltyOut).to({width:25,height:25},200).to({width:23,height:23},200);
                     }
                     
                 }

@@ -254,10 +254,14 @@ class Field_ball extends eui.UILayer {
             this.addChild(this.winIcon_l);
         }else{
             this.winIcon_l = new egret.Bitmap(RES.getRes('win2_png'));
+            this.winIcon_l.width = 0;
+            this.winIcon_l.height = 0;
             this.winIcon_l.anchorOffsetY = 101;
             this.winIcon_l.y = this.courtAnHeight;
             this.winIcon_l.x = -80;
             this.addChild(this.winIcon_l);
+            egret.Tween.get(this.winIcon_l).to({width:223,height:222},200).to({width:203,height:202},200);
+            // 先放大1.1倍，然后复原
         }
     }
     // right add icon
@@ -266,11 +270,14 @@ class Field_ball extends eui.UILayer {
             this.addChild(this.winIcon_r);
         }else{
             this.winIcon_r = new egret.Bitmap(RES.getRes('win2_png'));
+            this.winIcon_r.width = 0;
+            this.winIcon_r.height = 0;
             this.winIcon_r.anchorOffsetY = 101;
             this.winIcon_r.x = 350;
             this.winIcon_r.y = this.courtAnHeight;
             this.winIcon_r.y = 90;
             this.addChild(this.winIcon_r);
+            egret.Tween.get(this.winIcon_r).to({width:223,height:222},200).to({width:203,height:202},200);
         }
     }
 

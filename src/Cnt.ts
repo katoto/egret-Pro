@@ -52,7 +52,7 @@ class Cnt extends egret.DisplayObjectContainer{
     //toast
     private toastText:egret.TextField;
     private toast;
-    private toastBg:egret.Shape ;
+    private toastBg:egret.Bitmap ;
 
     private drawCnt(Width,Height,anWidth,anHeight){
         // 内容区
@@ -192,11 +192,7 @@ class Cnt extends egret.DisplayObjectContainer{
         this.toast.y =  window['store']['stage_anHeight'] ;
         this.addChild(this.toast);
  
-        this.toastBg = new egret.Shape();
-        this.toastBg.graphics.beginFill(0x000000,0.6);
-        this.toastBg.graphics.drawRect(0,0,430,90);
-        this.toastBg.graphics.endFill();
-
+        this.toastBg = new egret.Bitmap(RES.getRes('bg-toast_png'));
         this.toastText = new egret.TextField();
         this.toastText.textColor = 0xffffff;
         this.toastText.size = 30;
