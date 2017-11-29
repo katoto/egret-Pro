@@ -611,7 +611,6 @@ class Cnt extends egret.DisplayObjectContainer{
     // main => cnt => Timer
     private cnt_timer( setTime:string ){
         this.timer['createTimer']( setTime );
-
     }
 
     private cnt_timerRemove(){
@@ -632,18 +631,58 @@ class Cnt extends egret.DisplayObjectContainer{
     // 金币发出 ( 分发 )   
     //  settle-list 处理函数 更新用户的金币（延迟一下吧）
     //  通过matchid 找到 开始位置 通过uid 找到头像位置
+    // 没有告知是左还是右 ？ 
     // 
     async settle_listFn( settleData:any ){
+        let choseUser = null ;
+        let $store = window['store'] ;
 
-        // let choseUser = null ;
+        let baseImg = 'userImg' ; 
+        let curFindField = '' ;
+        let allShowWinNum = 0 ;
 
-        // if( settleData ){
-        //     for( let i=0,len = settleData.length ;i<len ; i++ ){
-        //         if( settleData[i].prize_info &&  settleData[i].prize_info.length > 0 ){
-        //         }
-        //     }
-        // }
 
+// delIndex = window['store']['userPositionLocal'][uid] ;
+// let choseUserImg = 'userImg'+ ( delIndex ) ;
+
+        if( settleData ){
+            for( let i=0,len = settleData.length ;i<len ; i++ ){
+                if( settleData[i].prize_info &&  settleData[i].prize_info.length > 0 ){
+                    choseUser = $store['userPositionLocal'][ settleData[i].uid ] ;
+                    console.log( baseImg + choseUser ) ;
+                    console.log( '++++++++++' ) ;
+                    allShowWinNum = 0 ;
+                    // 派金币
+                    for( let j = 0;j< settleData[i].prize_info.length ;j++ ){
+                        if( settleData[i].prize_info[j] && settleData[i].prize_info[j].matchid ){
+                            curFindField = $store['matFindField'][ settleData[i].prize_info[j].matchid ] ;
+                            // this.fieldContain[curFindField]   left  or right 动画
+                            curFindField = curFindField + '_l';
+                            allShowWinNum =  allShowWinNum + parseInt( settleData[i].prize_info[j].prize );
+                            await this.fieldContain.sendEndCoin( curFindField , settleData[i].uid ) ;
+                        }
+                    }
+                    if( this[ baseImg + choseUser ] && allShowWinNum ){
+                        console.log('---------');
+                        console.log( allShowWinNum )
+                        this[ baseImg + choseUser ].isShowWinGold( allShowWinNum )
+                    }
+                    // setTimeout(()=>{
+                    //    this[choseUserImg].isHideWinGold() 
+                    // },1000)
+                }
+
+                //  更新每个用户的信息 可能要再动画之后
+                // if( settleData[i].uid && settleData[i].total ){
+                //     if( choseUser && this[ baseImg + choseUser ] ){
+                //         this[ baseImg + choseUser ]['setMyGold']( settleData[i].total )
+                //     }else{
+                //         // 没找到对应的用户
+                //         console.error('没找到对应的用户 at 2007 websock')
+                //     }
+                // }
+            }
+        }
         // let startString = 'field41_l';
         // let uid = '10015140' ;
         // await this.fieldContain.sendEndCoin( startString , uid.toString() )
