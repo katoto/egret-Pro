@@ -417,12 +417,12 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                     this.addChild( this.change );
 
                                     setTimeout(()=>{
-                                        egret.Tween.get( this.change ).to({x:-750},200).call(()=>{
+                                        egret.Tween.get( this.change ).to( {x:-750},300 ).call(()=>{
                                             if( this.change.parent ){
                                                 this.removeChild( this.change ) ;
                                             }
                                         });  
-                                    },2000)                                    
+                                    },2500)                                    
                                 }
 
                             }

@@ -4,20 +4,45 @@ class Change extends eui.UILayer{
         super();
         this.drawChange();
     }
+
+    // 各种奖池的情况
+    private logo_mz:egret.Bitmap;  // 美洲
+    private logo_oz:egret.Bitmap ; // 欧洲
+    private logo_fz:egret.Bitmap ; // 非洲
+    private logo_yz:egret.Bitmap ; // 亚洲
+    private logo_sj:egret.Bitmap ; // 世界
+
     private teamName:egret.TextField;
+
+    // 修改对用容器的图片
+    private teamImg01_l ;
+    private teamImg02_l ;
+    private teamImg03_l ;
+    private teamImg04_l ;
+
+    private teamImg01_r ;
+    private teamImg02_r ;
+    private teamImg03_r ;
+    private teamImg04_r ;
+
+
     private drawChange(){
         let bg:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-change_jpg'));
         this.addChild(bg);
 
-        let logo:egret.Bitmap = new egret.Bitmap();
-        logo.texture = RES.getRes('logo-yz_png');
-        
-        logo.anchorOffsetX = logo.width/2;
-        logo.x = window['store']['stage_anWidth'];
-        logo.y = -500;
-        this.addChild(logo);
+        this.logo_mz = this.createLogoBitmap( 'logo-mz_png' ) ;
+        this.logo_oz = this.createLogoBitmap( 'logo-oz_png' ) ;
+        this.logo_fz = this.createLogoBitmap( 'logo-fz_png' ) ;
+        this.logo_yz = this.createLogoBitmap( 'logo-yz_png' ) ;
+        this.logo_sj = this.createLogoBitmap( 'logo-sj_png' ) ;
+
+        // this.addChild( this.logo_mz );
+        // setTimeout(()=>{
+        //     egret.Tween.get( this.logo_mz ).to({x:window['store']['stage_anWidth'],y:206},200);
+        // },500 )
+
         this.teamName = new egret.TextField();
-        this.teamName.text = '亚洲杯';
+        // this.teamName.text = '亚洲杯';
         this.teamName.size = 46;
         this.teamName.textColor = 0xffffff;
         this.teamName.bold = true;
@@ -25,12 +50,8 @@ class Change extends eui.UILayer{
         this.teamName.x = 160;
         this.teamName.y = 533;
         this.addChild(this.teamName);
-        setTimeout(function(){
-            egret.Tween.get(logo).to({x:window['store']['stage_anWidth'],y:206},200);
-        },500)
 
-
-        let teamWrap01 = this.teamWrap( 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png');
+        let teamWrap01 = this.teamWrap( 'teamImg01' );
         teamWrap01.anchorOffsetX = 283;
         teamWrap01.x = window['store']['stage_anWidth'];
         teamWrap01.y = 630;
@@ -39,27 +60,44 @@ class Change extends eui.UILayer{
         //     egret.Tween.get(teamWrap01).to({y:630},200);
         // },600)
 
-        let teamWrap02 = this.teamWrap( 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png');
+        let teamWrap02 = this.teamWrap( 'teamImg02' );
         teamWrap02.anchorOffsetX = 283;
         teamWrap02.x = window['store']['stage_anWidth'];
         teamWrap02.y = 750;
         this.addChild(teamWrap02);
 
-        let teamWrap03 = this.teamWrap( 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png');
+        let teamWrap03 = this.teamWrap( 'teamImg03' );
         teamWrap03.anchorOffsetX = 283;
         teamWrap03.x = window['store']['stage_anWidth'];
         teamWrap03.y = 870;
         this.addChild(teamWrap03);
 
-        let teamWrap04 = this.teamWrap( 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png');
+        let teamWrap04 = this.teamWrap( 'teamImg04' );
         teamWrap04.anchorOffsetX = 283;
         teamWrap04.x = window['store']['stage_anWidth'];
         teamWrap04.y = 990;
         this.addChild(teamWrap04);
-        
 
     }
-    private teamWrap(urlLeft,urlRight){
+
+    /**
+     *  抽离是否合理
+     */
+    private createLogoBitmap( imgStr:string ){
+        let nameObj = new egret.Bitmap();
+        nameObj.texture = RES.getRes( imgStr );
+
+        nameObj.anchorOffsetX = nameObj.width/2;
+        nameObj.x = window['store']['stage_anWidth'];
+        nameObj.y = -500;
+        return nameObj;
+    }
+
+    /**
+     *  容器的初始化
+     */
+    private teamWrap( baseName ){
+
         let wrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
         wrap.width = 566;
         wrap.height = 68;
@@ -79,14 +117,14 @@ class Change extends eui.UILayer{
         bgMask.y = 3;
         leftUserBox.addChild(bgMask);
         //队伍icon
-        let leftTeam = new eui.Image();
-        leftTeam.source = urlLeft;
-        leftTeam.width = 62;
-        leftTeam.height = 62;
-        leftTeam.x = 3;
-        leftTeam.y = 3;
-        leftUserBox.addChild(leftTeam);
-        leftTeam.mask = bgMask;
+        this[baseName+'_l' ] = new eui.Image();
+        // this[baseName+'_l' ].source = urlLeft;
+        this[baseName+'_l' ].width = 62;
+        this[baseName+'_l' ].height = 62;
+        this[baseName+'_l' ].x = 3;
+        this[baseName+'_l' ].y = 3;
+        leftUserBox.addChild (this[baseName+'_l' ]);
+        this[baseName+'_l' ].mask = bgMask;
         wrap.addChild(leftUserBox); 
 
         //  右边队伍头像容器
@@ -105,14 +143,14 @@ class Change extends eui.UILayer{
         bgMask2.y = 3;
         rightUserBox.addChild(bgMask2);
         //队伍icon
-        let rightTeam = new eui.Image();
-        rightTeam.source = urlRight;
-        rightTeam.width = 62;
-        rightTeam.height = 62;
-        rightTeam.x = 3;
-        rightTeam.y = 3;
-        rightUserBox.addChild(rightTeam);
-        rightTeam.mask = bgMask2;
+        this[ baseName+'_r' ]= new eui.Image();
+        // this[ baseName+'_r' ].source = urlRight;
+        this[ baseName+'_r' ].width = 62;
+        this[ baseName+'_r' ].height = 62;
+        this[ baseName+'_r' ].x = 3;
+        this[ baseName+'_r' ].y = 3;
+        rightUserBox.addChild(this[ baseName+'_r' ]);
+        this[ baseName+'_r' ].mask = bgMask2;
         wrap.addChild(rightUserBox); 
 
         let teamVs:egret.TextField = new egret.TextField();
@@ -128,8 +166,60 @@ class Change extends eui.UILayer{
         return wrap;
     }
 
-    private upChangeMsg(){
-        
+
+
+
+
+    /**
+     *  更新对应的数据
+     */
+    private upChangeMsg( matches:any , room_info:any ){
+        let logoName = ''; 
+        let baselogoStr = 'teamImg0' ;
+        if( room_info ){
+            switch ( room_info.leagueid ){
+                // 200 世界 202 欧洲 201 亚洲 203 非 204 美
+                case '200':
+                    logoName = 'logo_sj'
+                ;break;
+                case '201':
+                     logoName = 'logo_yz'
+                ;break;
+                case '202':
+                    logoName = 'logo_oz'
+                ;break;
+                case '203':
+                    logoName = 'logo_fz'
+                ;break;
+                case '204':
+                    logoName = 'logo_mz'
+                ;break;
+            }
+            if( room_info.leaguename ){
+                this.teamName.text = room_info.leaguename ;
+            }
+            if( !!this[logoName] ){
+                this.addChild( this[logoName] );
+            }
+            setTimeout(()=>{
+                egret.Tween.get( this[logoName] ).to({x:window['store']['stage_anWidth'],y:206},200);
+            },500 )
+
+        }
+
+        if( matches && matches.length === 4 ){
+            for( let i=0;i<4;i++ ){
+                if( matches[i].awaylogo ){
+                    this[ baselogoStr +( i+1 )+'_r' ].source = matches[i].awaylogo
+                }
+                if( matches[i].homelogo ){
+                    this[ baselogoStr +( i+1 )+'_l' ].source = matches[i].homelogo
+                }
+            }
+        }
     }
+
+
+
 
 }
