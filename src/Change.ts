@@ -58,14 +58,6 @@ class Change extends eui.UILayer{
         this.addChild(teamWrap04);
         
 
-        
-
-
-
-
-
-
-
     }
     private teamWrap(urlLeft,urlRight){
         let wrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
@@ -135,4 +127,9 @@ class Change extends eui.UILayer{
 
         return wrap;
     }
+
+    private upChangeMsg(){
+        
+    }
+
 }

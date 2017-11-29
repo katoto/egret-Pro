@@ -51,6 +51,8 @@ class Cnt extends egret.DisplayObjectContainer{
 
     //toast
     private toastText:egret.TextField;
+    private toast;
+    private toastBg:egret.Shape ;
 
     private drawCnt(Width,Height,anWidth,anHeight){
         // 内容区
@@ -109,31 +111,6 @@ class Cnt extends egret.DisplayObjectContainer{
         window['store']['$fieldContain'] = this.fieldContain ;
         this.bgCourtWrap.addChild(this.fieldContain);
 
-        //toast
-        // let toast = new egret.DisplayObjectContainer();
-        // toast.width = 430;
-        // toast.height = 90; 
-        // toast.anchorOffsetX = 215;
-        // toast.anchorOffsetY = 45;
-        // toast.x =  window['store']['stage_anWidth'] ;
-        // toast.y =  window['store']['stage_anHeight'] ;
-        // this.addChild(toast);
- 
-        // let toastBg:egret.Shape = new egret.Shape();
-        // toastBg.graphics.beginFill(0x000000,0.6);
-        // toastBg.graphics.drawRect(0,0,430,90);
-        // toastBg.graphics.endFill();
-        // toast.addChild(toastBg);
-
-        // this.toastText = new egret.TextField();
-        // this.toastText.text = 'toast提示';
-        // this.toastText.textColor = 0xffffff;
-        // this.toastText.size = 30;
-        // this.toastText.width =430;
-        // this.toastText.height = 90;
-        // this.toastText.textAlign = egret.HorizontalAlign.CENTER;
-        // this.toastText.verticalAlign = egret.VerticalAlign.MIDDLE;
-        // toast.addChild(this.toastText);   
 
 
 
@@ -204,7 +181,65 @@ class Cnt extends egret.DisplayObjectContainer{
         // this.bgCourtWrap.addChild(this.champion);
         // this.champion.addChild(this.championText); 
 
-        
+
+        //toast
+        this.toast = new egret.DisplayObjectContainer();
+        this.toast.width = 430;
+        this.toast.height = 90; 
+        this.toast.anchorOffsetX = 215;
+        this.toast.anchorOffsetY = 45;
+        this.toast.x =  window['store']['stage_anWidth'] ;
+        this.toast.y =  window['store']['stage_anHeight'] ;
+        this.addChild(this.toast);
+ 
+        this.toastBg = new egret.Shape();
+        this.toastBg.graphics.beginFill(0x000000,0.6);
+        this.toastBg.graphics.drawRect(0,0,430,90);
+        this.toastBg.graphics.endFill();
+
+        this.toastText = new egret.TextField();
+        this.toastText.textColor = 0xffffff;
+        this.toastText.size = 30;
+        this.toastText.width =430;
+        this.toastText.height = 90;
+        this.toastText.textAlign = egret.HorizontalAlign.CENTER;
+        this.toastText.verticalAlign = egret.VerticalAlign.MIDDLE;
+
+        // this.toastText.text = 'toast提示';
+        // this.toast.addChild(this.toastBg);
+        // this.toast.addChild(this.toastText);   
+
+    }
+
+    /**
+     *  tips 提示
+     */
+    private showTips( val:string ){
+        if( val !== '' ){
+            this.toastText.text = val ;
+            if( !!this.toastBg ){
+                this.toast.addChild(this.toastBg);
+            }
+            if( !!this.toastText ){
+                this.toast.addChild(this.toastText);   
+            }
+            setTimeout(()=>{
+                if( this.toastBg.parent  ){
+                    this.toast.removeChild(this.toastBg);
+                }
+                if( this.toastText.parent ){
+                    this.toast.removeChild(this.toastText);   
+                }
+            },1700)
+
+        }else{
+            if( this.toastBg.parent  ){
+                this.toast.removeChild(this.toastBg);
+            }
+            if( this.toastText.parent ){
+                this.toast.removeChild(this.toastText);   
+            }
+        }
     }
 
     /**
@@ -378,10 +413,18 @@ class Cnt extends egret.DisplayObjectContainer{
             this[penaltyStr].createFootball( allResult[i].timeline , allResult[i].is_extratime ,allResult[i].matchid );
 
             if( $store['matFindField'][ allResult[i].matchid ] ){
-                if( parseInt ( allResult[i].score[0] ) > parseInt ( allResult[i].score[2] ) ){
-                    $store['fieldLeftOrRight'][allResult[i].matchid] = $store['matFindField'][ allResult[i].matchid ] + '_l'
+                if( allResult[i].is_spotkick === '0' ){
+                    if( parseInt ( allResult[i].score[0] ) > parseInt ( allResult[i].score[2] ) ){
+                        $store['fieldLeftOrRight'][allResult[i].matchid] = $store['matFindField'][ allResult[i].matchid ] + '_l'
+                    }else{
+                        $store['fieldLeftOrRight'][allResult[i].matchid] = $store['matFindField'][ allResult[i].matchid ] + '_r'
+                    }
                 }else{
-                    $store['fieldLeftOrRight'][allResult[i].matchid] = $store['matFindField'][ allResult[i].matchid ] + '_r'
+                    if( parseInt ( allResult[i].spotkick[0] ) > parseInt ( allResult[i].spotkick[2] ) ){
+                        $store['fieldLeftOrRight'][allResult[i].matchid] = $store['matFindField'][ allResult[i].matchid ] + '_l'
+                    }else{
+                        $store['fieldLeftOrRight'][allResult[i].matchid] = $store['matFindField'][ allResult[i].matchid ] + '_r'
+                    }
                 }
             }
 
@@ -665,6 +708,8 @@ class Cnt extends egret.DisplayObjectContainer{
                             // curFindField = $store['matFindField'][ settleData[i].prize_info[j].matchid ] ;
                             curFindField = $store['fieldLeftOrRight'][settleData[i].prize_info[j].matchid];
                             console.log( curFindField )
+                            // curFindField = 'field42_r';
+
                             // this.fieldContain[curFindField]   left  or right 动画
                             // curFindField = curFindField + '_l';
                             allShowWinNum =  allShowWinNum + parseInt( settleData[i].prize_info[j].prize );

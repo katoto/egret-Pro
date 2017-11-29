@@ -28,6 +28,26 @@ class Promotion extends eui.UILayer{
     private teamF22:egret.TextField;
     private teamF11:egret.TextField;
 
+    // win 
+    private proWin41_l ;
+    private proWin41_r ;
+    private proWin42_l ;
+    private proWin42_r ;
+    private proWin43_l ;
+    private proWin43_r ;
+    private proWin44_l ;
+    private proWin44_r ;
+
+    private proWin21_l ;
+    private proWin21_r ;
+    private proWin22_l ;
+    private proWin22_r ;
+
+    // private proWin11_l ;
+    // private proWin11_r ;        
+    private wrap:egret.DisplayObjectContainer
+
+
     private drawPromotion(){
         //蒙版
        let layer:egret.Shape = new egret.Shape();
@@ -36,19 +56,19 @@ class Promotion extends eui.UILayer{
        layer.graphics.endFill();
        this.addChild(layer);
        //容器
-       let wrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
-       wrap.width = 664;
-       wrap.height = 1092;
-       wrap.anchorOffsetX = 332;
-       wrap.anchorOffsetY = 546;
-       wrap.x = window['store']['stage_anWidth'];
-       wrap.y = window['store']['stage_anHeight'];
-       wrap.scaleX= window['store'].scale;
-       wrap.scaleY= window['store'].scale;
-       this.addChild(wrap);
+       this.wrap = new egret.DisplayObjectContainer();
+       this.wrap.width = 664;
+       this.wrap.height = 1092;
+       this.wrap.anchorOffsetX = 332;
+       this.wrap.anchorOffsetY = 546;
+       this.wrap.x = window['store']['stage_anWidth'];
+       this.wrap.y = window['store']['stage_anHeight'];
+       this.wrap.scaleX= window['store'].scale;
+       this.wrap.scaleY= window['store'].scale;
+       this.addChild(this.wrap);
        //bg
        let bg:egret.Bitmap = new egret.Bitmap(RES.getRes('pop-promotion_png'));
-       wrap.addChild(bg);
+       this.wrap.addChild(bg);
        
         //决赛
         // 左边
@@ -56,34 +76,34 @@ class Promotion extends eui.UILayer{
         let lbgBorder11:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         lbgBorder11.x = 208;
         lbgBorder11.y = 521;
-        wrap.addChild(lbgBorder11);
+        this.wrap.addChild(lbgBorder11);
         //队伍icon
         this.leftTeam11 = new eui.Image();
-        this.leftTeam11.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
+        // this.leftTeam11.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.leftTeam11.width = 62;
         this.leftTeam11.height = 62;
         this.leftTeam11.x = 211;
         this.leftTeam11.y = 524;
-        wrap.addChild(this.leftTeam11);
+        this.wrap.addChild(this.leftTeam11);
         //  右边
         // 插入边框
         let rbgBorder11:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         rbgBorder11.x = 371;
         rbgBorder11.y = 521;
-        wrap.addChild(rbgBorder11);
+        this.wrap.addChild(rbgBorder11);
         //队伍icon
         this.rightTeam11 = new eui.Image();
-        this.rightTeam11.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
+        // this.rightTeam11.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.rightTeam11.width = 62;
         this.rightTeam11.height = 62;
         this.rightTeam11.x = 374;
         this.rightTeam11.y = 524;
-        wrap.addChild(this.rightTeam11);
+        this.wrap.addChild(this.rightTeam11);
 
         this.teamF11 = new egret.TextField();
         this.teamF11.x = 176;
         this.teamF11.y = 522;
-        this.teamF11.text = '3:2';
+        // this.teamF11.text = '3:2';
         this.teamF11.size = 32;
         this.teamF11.textColor = 0xffffff;
         this.teamF11.width = 300;
@@ -91,7 +111,7 @@ class Promotion extends eui.UILayer{
         this.teamF11.bold = true;
         this.teamF11.textAlign = egret.HorizontalAlign.CENTER;
         this.teamF11.verticalAlign = egret.VerticalAlign.MIDDLE;
-        wrap.addChild(this.teamF11); 
+        this.wrap.addChild(this.teamF11); 
 
 
          //1/2 top
@@ -100,44 +120,44 @@ class Promotion extends eui.UILayer{
         let lbgBorder21:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         lbgBorder21.x = 208;
         lbgBorder21.y = 300;
-        wrap.addChild(lbgBorder21);
+        this.wrap.addChild(lbgBorder21);
         //win
-        let proWin09 = this.proWin();
-        proWin09.x = 192;
-        proWin09.y = 283;
-        wrap.addChild(proWin09)
+        this.proWin21_l = this.proWin();
+        this.proWin21_l.x = 192;
+        this.proWin21_l.y = 283;
+        // wrap.addChild( this.proWin21_l )
         //队伍icon
         this.leftTeam21 = new eui.Image();
-        this.leftTeam21.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
+        // this.leftTeam21.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.leftTeam21.width = 62;
         this.leftTeam21.height = 62;
         this.leftTeam21.x = 211;
         this.leftTeam21.y = 303;
-        wrap.addChild(this.leftTeam21);
+        this.wrap.addChild(this.leftTeam21);
         //  右边
         // 插入边框
         let rbgBorder21:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         rbgBorder21.x = 371;
         rbgBorder21.y = 300;
-        wrap.addChild(rbgBorder21);
+        this.wrap.addChild(rbgBorder21);
         //win
-        let proWin010 = this.proWin();
-        proWin010.x = 355;
-        proWin010.y = 283;
-        wrap.addChild(proWin010)
+        this.proWin21_r = this.proWin();
+        this.proWin21_r.x = 355;
+        this.proWin21_r.y = 283;
+        // wrap.addChild(proWin010)
         //队伍icon
         this.rightTeam21 = new eui.Image();
-        this.rightTeam21.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
+        // this.rightTeam21.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.rightTeam21.width = 62;
         this.rightTeam21.height = 62;
         this.rightTeam21.x = 374;
         this.rightTeam21.y = 303;
-        wrap.addChild(this.rightTeam21);
+        this.wrap.addChild(this.rightTeam21);
 
         this.teamF21 = new egret.TextField();
         this.teamF21.x = 176;
         this.teamF21.y = 300;
-        this.teamF21.text = '3:2';
+        // this.teamF21.text = '3:2';
         this.teamF21.size = 32;
         this.teamF21.textColor = 0xffffff;
         this.teamF21.width = 300;
@@ -145,7 +165,7 @@ class Promotion extends eui.UILayer{
         this.teamF21.bold = true;
         this.teamF21.textAlign = egret.HorizontalAlign.CENTER;
         this.teamF21.verticalAlign = egret.VerticalAlign.MIDDLE;
-        wrap.addChild(this.teamF21); 
+        this.wrap.addChild(this.teamF21); 
 
 
          //1/2 bottom
@@ -154,44 +174,44 @@ class Promotion extends eui.UILayer{
         let lbgBorder22:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         lbgBorder22.x = 208;
         lbgBorder22.y = 743;
-        wrap.addChild(lbgBorder22);
+        this.wrap.addChild(lbgBorder22);
         //win
-        let proWin11 = this.proWin();
-        proWin11.x = 192;
-        proWin11.y = 726;
-        wrap.addChild(proWin11)
+        this.proWin22_l = this.proWin();
+        this.proWin22_l.x = 192;
+        this.proWin22_l.y = 726;
+        // wrap.addChild( this.proWin22_l )
         //队伍icon
         this.leftTeam22 = new eui.Image();
-        this.leftTeam22.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
+        // this.leftTeam22.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.leftTeam22.width = 62;
         this.leftTeam22.height = 62;
         this.leftTeam22.x = 211;
         this.leftTeam22.y = 746;
-        wrap.addChild(this.leftTeam22);
+        this.wrap.addChild(this.leftTeam22);
         //  右边
         // 插入边框
         let rbgBorder22:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         rbgBorder22.x = 371;
         rbgBorder22.y = 743;
-        wrap.addChild(rbgBorder22);
+        this.wrap.addChild(rbgBorder22);
          //win
-        let proWin012 = this.proWin();
-        proWin012.x = 355;
-        proWin012.y = 726;
-        wrap.addChild(proWin012)
+        this.proWin22_r = this.proWin();
+        this.proWin22_r.x = 355;
+        this.proWin22_r.y = 726;
+        // this.wrap.addChild(this.proWin22_r)
         //队伍icon
         this.rightTeam22 = new eui.Image();
-        this.rightTeam22.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
+        // this.rightTeam22.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.rightTeam22.width = 62;
         this.rightTeam22.height = 62;
         this.rightTeam22.x = 374;
         this.rightTeam22.y = 746;
-        wrap.addChild(this.rightTeam22);
+        this.wrap.addChild(this.rightTeam22);
 
         this.teamF22 = new egret.TextField();
         this.teamF22.x = 176;
         this.teamF22.y = 743;
-        this.teamF22.text = '3:2';
+        // this.teamF22.text = '3:2';
         this.teamF22.size = 32;
         this.teamF22.textColor = 0xffffff;
         this.teamF22.width = 300;
@@ -199,9 +219,7 @@ class Promotion extends eui.UILayer{
         this.teamF22.bold = true;
         this.teamF22.textAlign = egret.HorizontalAlign.CENTER;
         this.teamF22.verticalAlign = egret.VerticalAlign.MIDDLE;
-        wrap.addChild(this.teamF22); 
-
-
+        this.wrap.addChild(this.teamF22); 
 
         //1/4 1
         // 左边
@@ -209,45 +227,45 @@ class Promotion extends eui.UILayer{
         let lbgBorder41:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         lbgBorder41.x = 32;
         lbgBorder41.y = 57;
-        wrap.addChild(lbgBorder41);
+        this.wrap.addChild(lbgBorder41);
         //win
-        let proWin01 = this.proWin();
-        proWin01.x = 16;
-        proWin01.y = 40;
-        wrap.addChild(proWin01)
+        this.proWin41_l = this.proWin();
+        this.proWin41_l.x = 16;
+        this.proWin41_l.y = 40;
+        // wrap.addChild(proWin01)
         
         //队伍icon
         this.leftTeam41 = new eui.Image();
-        this.leftTeam41.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
+        // this.leftTeam41.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.leftTeam41.width = 62;
         this.leftTeam41.height = 62;
         this.leftTeam41.x = 35;
         this.leftTeam41.y = 60;
-        wrap.addChild(this.leftTeam41);
+        this.wrap.addChild(this.leftTeam41);
         //  右边
         // 插入边框
         let rbgBorder41:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         rbgBorder41.x = 195;
         rbgBorder41.y = 57;
-        wrap.addChild(rbgBorder41);
+        this.wrap.addChild(rbgBorder41);
          //win
-        let proWin02 = this.proWin();
-        proWin02.x = 179;
-        proWin02.y = 40;
-        wrap.addChild(proWin02)
+        this.proWin41_r = this.proWin();
+        this.proWin41_r.x = 179;
+        this.proWin41_r.y = 40;
+        // wrap.addChild(proWin02)
         //队伍icon
         this.rightTeam41 = new eui.Image();
-        this.rightTeam41.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
+        // this.rightTeam41.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.rightTeam41.width = 62;
         this.rightTeam41.height = 62;
         this.rightTeam41.x = 198;
         this.rightTeam41.y = 60;
-        wrap.addChild(this.rightTeam41);
+        this.wrap.addChild(this.rightTeam41);
 
         this.teamF41 = new egret.TextField();
         this.teamF41.x = 0;
         this.teamF41.y = 57;
-        this.teamF41.text = '3:2';
+        // this.teamF41.text = '3:2';
         this.teamF41.size = 32;
         this.teamF41.textColor = 0xffffff;
         this.teamF41.width = 300;
@@ -255,7 +273,7 @@ class Promotion extends eui.UILayer{
         this.teamF41.bold = true;
         this.teamF41.textAlign = egret.HorizontalAlign.CENTER;
         this.teamF41.verticalAlign = egret.VerticalAlign.MIDDLE;
-        wrap.addChild(this.teamF41); 
+        this.wrap.addChild(this.teamF41); 
 
 
          //1/4 2
@@ -264,44 +282,44 @@ class Promotion extends eui.UILayer{
         let lbgBorder42:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         lbgBorder42.x = 395;
         lbgBorder42.y = 57;
-        wrap.addChild(lbgBorder42);
+        this.wrap.addChild(lbgBorder42);
          //win
-        let proWin03 = this.proWin();
-        proWin03.x = 379;
-        proWin03.y = 40;
-        wrap.addChild(proWin03)
+        this.proWin42_l = this.proWin();
+        this.proWin42_l.x = 379;
+        this.proWin42_l.y = 40;
+        // wrap.addChild(proWin03)
         //队伍icon
         this.leftTeam42 = new eui.Image();
-        this.leftTeam42.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
+        // this.leftTeam42.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.leftTeam42.width = 62;
         this.leftTeam42.height = 62;
         this.leftTeam42.x = 398;
         this.leftTeam42.y = 60;
-        wrap.addChild(this.leftTeam42);
+        this.wrap.addChild(this.leftTeam42);
         //  右边
         // 插入边框
         let rbgBorder42:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         rbgBorder42.x = 558;
         rbgBorder42.y = 57;
-        wrap.addChild(rbgBorder42);
+        this.wrap.addChild(rbgBorder42);
          //win
-        let proWin04 = this.proWin();
-        proWin04.x = 542;
-        proWin04.y = 40;
-        wrap.addChild(proWin04)
+        this.proWin42_r = this.proWin();
+        this.proWin42_r.x = 542;
+        this.proWin42_r.y = 40;
+        // wrap.addChild(proWin04)
         //队伍icon
         this.rightTeam42 = new eui.Image();
-        this.rightTeam42.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
+        // this.rightTeam42.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.rightTeam42.width = 62;
         this.rightTeam42.height = 62;
         this.rightTeam42.x = 561;
         this.rightTeam42.y = 60;
-        wrap.addChild(this.rightTeam42);
+        this.wrap.addChild(this.rightTeam42);
 
         this.teamF42 = new egret.TextField();
         this.teamF42.x = 363;
         this.teamF42.y = 57;
-        this.teamF42.text = '3:2';
+        // this.teamF42.text = '3:2';
         this.teamF42.size = 32;
         this.teamF42.textColor = 0xffffff;
         this.teamF42.width = 300;
@@ -309,7 +327,7 @@ class Promotion extends eui.UILayer{
         this.teamF42.bold = true;
         this.teamF42.textAlign = egret.HorizontalAlign.CENTER;
         this.teamF42.verticalAlign = egret.VerticalAlign.MIDDLE;
-        wrap.addChild(this.teamF42); 
+        this.wrap.addChild(this.teamF42); 
 
 
         //1/4 3
@@ -318,44 +336,44 @@ class Promotion extends eui.UILayer{
         let lbgBorder43:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         lbgBorder43.x = 32;
         lbgBorder43.y = 968;
-        wrap.addChild(lbgBorder43);
+        this.wrap.addChild(lbgBorder43);
          //win
-        let proWin05 = this.proWin();
-        proWin05.x = 16;
-        proWin05.y = 951;
-        wrap.addChild(proWin05)
+        this.proWin43_l = this.proWin();
+        this.proWin43_l.x = 16;
+        this.proWin43_l.y = 951;
+        // wrap.addChild(proWin05)
         //队伍icon
         this.leftTeam43 = new eui.Image();
-        this.leftTeam43.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
+        // this.leftTeam43.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.leftTeam43.width = 62;
         this.leftTeam43.height = 62;
         this.leftTeam43.x = 35;
         this.leftTeam43.y = 971;
-        wrap.addChild(this.leftTeam43);
+        this.wrap.addChild(this.leftTeam43);
         //  右边
         // 插入边框
         let rbgBorder43:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         rbgBorder43.x = 195;
         rbgBorder43.y = 968;
-        wrap.addChild(rbgBorder43);
+        this.wrap.addChild(rbgBorder43);
         //win
-        let proWin06 = this.proWin();
-        proWin06.x = 179;
-        proWin06.y = 951;
-        wrap.addChild(proWin06)
+        this.proWin43_r = this.proWin();
+        this.proWin43_r.x = 179;
+        this.proWin43_r.y = 951;
+        // wrap.addChild(proWin06)
         //队伍icon
         this.rightTeam43 = new eui.Image();
-        this.rightTeam43.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
+        // this.rightTeam43.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.rightTeam43.width = 62;
         this.rightTeam43.height = 62;
         this.rightTeam43.x = 198;
         this.rightTeam43.y = 971;
-        wrap.addChild(this.rightTeam43);
+        this.wrap.addChild(this.rightTeam43);
 
         this.teamF43 = new egret.TextField();
         this.teamF43.x = 0;
         this.teamF43.y = 968;
-        this.teamF43.text = '3:2';
+        // this.teamF43.text = '3:2';
         this.teamF43.size = 32;
         this.teamF43.textColor = 0xffffff;
         this.teamF43.width = 300;
@@ -363,7 +381,7 @@ class Promotion extends eui.UILayer{
         this.teamF43.bold = true;
         this.teamF43.textAlign = egret.HorizontalAlign.CENTER;
         this.teamF43.verticalAlign = egret.VerticalAlign.MIDDLE;
-        wrap.addChild(this.teamF43); 
+        this.wrap.addChild(this.teamF43); 
 
 
          //1/4 4
@@ -372,43 +390,43 @@ class Promotion extends eui.UILayer{
         let lbgBorder44:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         lbgBorder44.x = 395;
         lbgBorder44.y = 968;
-        wrap.addChild(lbgBorder44);
+        this.wrap.addChild(lbgBorder44);
           //win
-        let proWin07 = this.proWin();
-        proWin07.x = 379;
-        proWin07.y = 951;
-        wrap.addChild(proWin07)
+        this.proWin44_l = this.proWin();
+        this.proWin44_l.x = 379;
+        this.proWin44_l.y = 951;
+        // wrap.addChild(proWin07)
         //队伍icon
         this.leftTeam44 = new eui.Image();
-        this.leftTeam44.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
+        // this.leftTeam44.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.leftTeam44.width = 62;
         this.leftTeam44.height = 62;
         this.leftTeam44.x = 398;
         this.leftTeam44.y = 971;
-        wrap.addChild(this.leftTeam44);
+        this.wrap.addChild(this.leftTeam44);
         //  右边
         // 插入边框
         let rbgBorder44:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         rbgBorder44.x = 558;
         rbgBorder44.y = 968;
-        wrap.addChild(rbgBorder44);
+        this.wrap.addChild(rbgBorder44);
         //win
-        let proWin08 = this.proWin();
-        proWin08.x = 542;
-        proWin08.y = 951;
-        wrap.addChild(proWin08)
+        this.proWin44_r = this.proWin();
+        this.proWin44_r.x = 542;
+        this.proWin44_r.y = 951;
+        // wrap.addChild(proWin08)
         //队伍icon
         this.rightTeam44 = new eui.Image();
-        this.rightTeam44.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
+        // this.rightTeam44.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.rightTeam44.width = 62;
         this.rightTeam44.height = 62;
         this.rightTeam44.x = 561;
         this.rightTeam44.y = 971;
-        wrap.addChild(this.rightTeam44);
+        this.wrap.addChild(this.rightTeam44);
         this.teamF44 = new egret.TextField();
         this.teamF44.x = 363;
         this.teamF44.y = 968;
-        this.teamF44.text = '3:2';
+        // this.teamF44.text = '3:2';
         this.teamF44.size = 32;
         this.teamF44.textColor = 0xffffff;
         this.teamF44.width = 300;
@@ -416,8 +434,7 @@ class Promotion extends eui.UILayer{
         this.teamF44.bold = true;
         this.teamF44.textAlign = egret.HorizontalAlign.CENTER;
         this.teamF44.verticalAlign = egret.VerticalAlign.MIDDLE;
-        wrap.addChild(this.teamF44); 
-
+        this.wrap.addChild(this.teamF44); 
 
         // [{211,524}]
         // let proWin01 = this.proWin();
@@ -430,9 +447,104 @@ class Promotion extends eui.UILayer{
         let img = new egret.Bitmap(RES.getRes('proWin_png'));
         return img;
     }
-    private upTeamData(leftTeam41,rightTeam41){
-        this.leftTeam41.source = leftTeam41;
-        this.rightTeam41.source = rightTeam41;
+    /**
+     *  更新各阶段数据
+     */
+    private upPromotionMsg( pre_result:any ){
+        let score_num = 0 ;
+        // this.leftTeam41.source = leftTeam41;
+        // this.rightTeam41.source = rightTeam41;
+        if( pre_result ){
+            if( pre_result.first ){
+                for( let i=0;i<4;i++ ){
+                    if( pre_result.first[i] ){
+
+                        if( pre_result.first[i].awaylogo ){
+                            console.log( pre_result.first[i].awaylogo  )
+                            this['rightTeam4'+( i+1 )].source = pre_result.first[i].awaylogo;
+                        }
+                        if( pre_result.first[i].homelogo ){
+                            this['leftTeam4'+( i+1 )].source = pre_result.first[i].homelogo;
+                        }
+
+                        score_num = parseInt( pre_result.first[i].score[0] ) ;
+                        
+                        if( pre_result.first[i].is_spotkick === '0' ){
+                            this[ 'teamF4'+( i + 1 ) ].text = pre_result.first[i].score ;
+                            // 显示冠军标志
+                            if( parseInt( pre_result.first[i].score[0] ) > parseInt( pre_result.first[i].score[2] ) ){
+                                if( !!this['proWin4'+ ( i+1 ) +'_l'] ){
+                                    this.wrap.addChild( this['proWin4'+ ( i+1 ) +'_l'] )
+                                }
+                            }else{
+                                if( !!this['proWin4'+ ( i+1 ) +'_r'] ){
+                                    this.wrap.addChild( this['proWin4'+ ( i+1 ) +'_r'] )
+                                }
+                            }
+                        }else{
+                            this[ 'teamF4'+( i + 1 ) ].text = parseInt( pre_result.first[i].spotkick[0] )+score_num + ':' + ( parseInt( pre_result.first[i].spotkick[2] ) + score_num );
+                            if( parseInt( pre_result.first[i].spotkick[0] ) > parseInt( pre_result.first[i].spotkick[2] ) ){
+                                if( !!this['proWin4'+ ( i+1 ) +'_l'] ){
+                                    this.wrap.addChild( this['proWin4'+ ( i+1 ) +'_l'] )
+                                }
+                            }else{
+                                if( !!this['proWin4'+ ( i+1 ) +'_r'] ){
+                                    this.wrap.addChild( this['proWin4'+ ( i+1 ) +'_r'] )
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+            if( pre_result.second ){
+                for( let i=0;i<2;i++ ){
+                    if( pre_result.second[i] ){
+                        if( pre_result.second[i].awaylogo ){
+                            this['rightTeam2'+( i+1 )].source = pre_result.second[i].awaylogo;
+                        }
+                        if( pre_result.second[i].homelogo ){
+                            this['leftTeam2'+( i+1 )].source = pre_result.second[i].homelogo;
+                        }
+                        score_num = parseInt( pre_result.second[i].score[0] ) ;
+                        
+                        if( pre_result.second[i].is_spotkick === '0' ){
+                            this[ 'teamF2'+( i + 1 ) ].text = pre_result.second[i].score ;
+                            // 显示冠军标志
+                            if( parseInt( pre_result.second[i].score[0] ) > parseInt( pre_result.second[i].score[2] ) ){
+                                if( !!this['proWin2'+ ( i+1 ) +'_l'] ){
+                                    this.wrap.addChild( this['proWin2'+ ( i+1 ) +'_l'] )
+                                }
+                            }else{
+                                if( !!this['proWin2'+ ( i+1 ) +'_r'] ){
+                                    this.wrap.addChild( this['proWin2'+ ( i+1 ) +'_r'] )
+                                }
+                            }
+                        }else{
+                            this[ 'teamF2'+( i + 1 ) ].text = parseInt( pre_result.second[i].spotkick[0] )+score_num + ':' + ( parseInt( pre_result.second[i].spotkick[2] ) + score_num );
+                            if( parseInt( pre_result.second[i].spotkick[0] ) > parseInt( pre_result.second[i].spotkick[2] ) ){
+                                if( !!this['proWin2'+ ( i+1 ) +'_l'] ){
+                                    this.wrap.addChild( this['proWin2'+ ( i+1 ) +'_l'] )
+                                }
+                            }else{
+                                if( !!this['proWin2'+ ( i+1 ) +'_r'] ){
+                                    this.wrap.addChild( this['proWin2'+ ( i+1 ) +'_r'] )
+                                }
+                            }
+                        }
+                    }
+                } 
+            }
+        }
     }
+
+    /**
+     *  第一阶段 动画过渡
+     */
+
+     /**
+     *  第二阶段 动画过渡
+     */ 
+    
 
 }
