@@ -377,6 +377,14 @@ class Cnt extends egret.DisplayObjectContainer{
             egret.Tween.get( this[penaltyStr] ).to( {y: curr_local[i] }, 300 );
             this[penaltyStr].createFootball( allResult[i].timeline , allResult[i].is_extratime ,allResult[i].matchid );
 
+            if( $store['matFindField'][ allResult[i].matchid ] ){
+                if( parseInt ( allResult[i].score[0] ) > parseInt ( allResult[i].score[2] ) ){
+                    $store['fieldLeftOrRight'][allResult[i].matchid] = $store['matFindField'][ allResult[i].matchid ] + '_l'
+                }else{
+                    $store['fieldLeftOrRight'][allResult[i].matchid] = $store['matFindField'][ allResult[i].matchid ] + '_r'
+                }
+            }
+
         }
         //  开始点球判断
 
@@ -641,23 +649,24 @@ class Cnt extends egret.DisplayObjectContainer{
         let curFindField = '' ;
         let allShowWinNum = 0 ;
 
-
+        let userImgArr = [] ;
 // delIndex = window['store']['userPositionLocal'][uid] ;
 // let choseUserImg = 'userImg'+ ( delIndex ) ;
-
         if( settleData ){
             for( let i=0,len = settleData.length ;i<len ; i++ ){
+                choseUser = $store['userPositionLocal'][ settleData[i].uid ] ;
                 if( settleData[i].prize_info &&  settleData[i].prize_info.length > 0 ){
-                    choseUser = $store['userPositionLocal'][ settleData[i].uid ] ;
                     console.log( baseImg + choseUser ) ;
                     console.log( '++++++++++' ) ;
                     allShowWinNum = 0 ;
                     // 派金币
                     for( let j = 0;j< settleData[i].prize_info.length ;j++ ){
                         if( settleData[i].prize_info[j] && settleData[i].prize_info[j].matchid ){
-                            curFindField = $store['matFindField'][ settleData[i].prize_info[j].matchid ] ;
+                            // curFindField = $store['matFindField'][ settleData[i].prize_info[j].matchid ] ;
+                            curFindField = $store['fieldLeftOrRight'][settleData[i].prize_info[j].matchid];
+                            console.log( curFindField )
                             // this.fieldContain[curFindField]   left  or right 动画
-                            curFindField = curFindField + '_l';
+                            // curFindField = curFindField + '_l';
                             allShowWinNum =  allShowWinNum + parseInt( settleData[i].prize_info[j].prize );
                             await this.fieldContain.sendEndCoin( curFindField , settleData[i].uid ) ;
                         }
@@ -665,23 +674,26 @@ class Cnt extends egret.DisplayObjectContainer{
                     if( this[ baseImg + choseUser ] && allShowWinNum ){
                         console.log('---------');
                         console.log( allShowWinNum )
-                        this[ baseImg + choseUser ].isShowWinGold( allShowWinNum )
+                        this[ baseImg + choseUser ].isShowWinGold( allShowWinNum );
+                        userImgArr.push( this[ baseImg + choseUser ] )
                     }
-                    // setTimeout(()=>{
-                    //    this[choseUserImg].isHideWinGold() 
-                    // },1000)
                 }
-
                 //  更新每个用户的信息 可能要再动画之后
-                // if( settleData[i].uid && settleData[i].total ){
-                //     if( choseUser && this[ baseImg + choseUser ] ){
-                //         this[ baseImg + choseUser ]['setMyGold']( settleData[i].total )
-                //     }else{
-                //         // 没找到对应的用户
-                //         console.error('没找到对应的用户 at 2007 websock')
-                //     }
-                // }
+                if( settleData[i].uid && settleData[i].total ){
+                    this[ baseImg + choseUser ]['setMyGold']( settleData[i].total )
+                }else{
+                    // 没找到对应的用户
+                    console.error('没找到对应的用户 at 2007 websock')
+                }
             }
+
+            // 清除对应的奖
+            setTimeout(()=>{
+                for( let i = 0; i< userImgArr.length;i++ ){
+                    userImgArr[i].isHideWinGold() 
+                }
+            }, 2800 )
+
         }
         // let startString = 'field41_l';
         // let uid = '10015140' ;

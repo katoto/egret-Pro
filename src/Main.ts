@@ -674,6 +674,9 @@ window['store'] = {
     matFindField:{  
         // 112300330:'field41'
     },
+    fieldLeftOrRight:{ // 找左右
+
+    },
     coin_Num:{
         // 112228430:{ // eg 累加金币
         //     home_golds:'0',

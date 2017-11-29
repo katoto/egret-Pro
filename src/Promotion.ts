@@ -425,9 +425,7 @@ class Promotion extends eui.UILayer{
         // proWin01.y = 41;
         // wrap.addChild(proWin01);
 
-       
     }
-
     private proWin(){
         let img = new egret.Bitmap(RES.getRes('proWin_png'));
         return img;

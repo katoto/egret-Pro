@@ -1106,8 +1106,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             return false ;
         }
 
-        for( let i=0;i<4; i++ ){
-
+        for( let i=0;i<3; i++ ){
             let gold = new Gold();
             gold.anchorOffsetX = gold.width/2;
             gold.anchorOffsetY = gold.height/2;
@@ -1200,7 +1199,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             egret.Tween.get( gold ).to( { x: end_x,y: end_y },200 );
         }else{
             // more  飞金币
-            for( let i=0;i<4; i++ ){
+            for( let i=0;i<3; i++ ){
                 let gold = new Gold();
                 gold.anchorOffsetX = gold.width/2;
                 gold.anchorOffsetY = gold.height/2;
