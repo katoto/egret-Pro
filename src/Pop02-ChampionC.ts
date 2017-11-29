@@ -7,11 +7,11 @@ class Pop02Cham extends egret.DisplayObjectContainer{
 
     private popTitle:egret.TextField;
     private drawPop(){
-
+        let $store = window['store'] ;
         // 大容器
        let BigWrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
-       BigWrap.width = window['store']['stage_Width'];
-       BigWrap.height = window['store']['stage_Height'];
+       BigWrap.width = $store['stage_Width'];
+       BigWrap.height = $store['stage_Height'];
        BigWrap.x = 0;
        BigWrap.y = 0;
        this.addChild(BigWrap);
@@ -19,7 +19,7 @@ class Pop02Cham extends egret.DisplayObjectContainer{
        //弹窗蒙层
        let popLayer:egret.Shape = new egret.Shape();
        popLayer.graphics.beginFill(0x000000,0.6);
-       popLayer.graphics.drawRect(0,0,window['store']['stage_Width'],window['store']['stage_Height'])
+       popLayer.graphics.drawRect(0,0, $store['stage_Width'], $store['stage_Height'])
        popLayer.graphics.endFill();
        BigWrap.addChild(popLayer);
 
@@ -27,8 +27,8 @@ class Pop02Cham extends egret.DisplayObjectContainer{
        let popBg:egret.Bitmap = new egret.Bitmap(RES.getRes('pop-02_png'));
        popBg.anchorOffsetX = popBg.width/2;
        popBg.anchorOffsetY = popBg.height/2;
-       popBg.x = window['store']['stage_anWidth'];
-       popBg.y = window['store']['stage_anHeight'];
+       popBg.x = $store['stage_anWidth'];
+       popBg.y = $store['stage_anHeight'];
        BigWrap.addChild(popBg);
 
        //容器
@@ -37,8 +37,8 @@ class Pop02Cham extends egret.DisplayObjectContainer{
        popWrap.height = 953;
        popWrap.anchorOffsetX = popWrap.width/2;
        popWrap.anchorOffsetY = popWrap.height/2;
-       popWrap.x = window['store']['stage_anWidth'];
-       popWrap.y = window['store']['stage_anHeight'];
+       popWrap.x = $store['stage_anWidth'];
+       popWrap.y = $store['stage_anHeight'];
        BigWrap.addChild(popWrap);
 
        //标题
@@ -67,7 +67,6 @@ class Pop02Cham extends egret.DisplayObjectContainer{
        let popChamC = new ChampionC();
        popChamC.y = 83;
        popWrap.addChild(popChamC);
-
 
     }
 }

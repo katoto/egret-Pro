@@ -222,7 +222,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
             if($store['unableClick']){
                 // 不可点击
-                alert('现在不能投注,bug 被我设置了')
+                if( window['store']['$cnt'] ){
+                    window['store']['$cnt'].showTips('现在不能投注,bug 被我设置了');
+                }
                 return false ;
             }
 
@@ -280,7 +282,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
                         this.tween_Coin(x,y, $store['allCoinObj']['field41'].coin_left )
                     }else{
-                        alert( res.message )
+                        if( window['store']['$cnt'] ){
+                            window['store']['$cnt'].showTips( res.message );
+                        }
                     }
 
                 })
@@ -318,7 +322,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         this.field41.addRightAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['away_golds']) ); //  总的金额 
                         this.tween_Coin(x,y, $store['allCoinObj']['field41'].coin_right )
                     }else{
-                        alert( res.message )
+                        if( window['store']['$cnt'] ){
+                            window['store']['$cnt'].showTips( res.message );
+                        }
                     }
                 })
             }
@@ -394,7 +400,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         this.field42.addLeftAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['home_golds']) ); //  总的金额
                         this.tween_Coin(x,y, $store['allCoinObj']['field42'].coin_left )
                     }else{
-                        alert( res.message )
+                        if( window['store']['$cnt'] ){
+                            window['store']['$cnt'].showTips( res.message );
+                        }
                     }
                 })
 
@@ -433,7 +441,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         this.field42.addRightAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['away_golds'] ) ); //  总的金额
                         this.tween_Coin(x,y, $store['allCoinObj']['field42'].coin_right )
                     }else{
-                        alert( res.message )
+                        if( window['store']['$cnt'] ){
+                            window['store']['$cnt'].showTips( res.message );
+                        }
                     }
                 })
 
@@ -512,7 +522,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         this.field43.addLeftAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['home_golds'] ) ); //  总的金额 
                         this.tween_Coin(x,y, $store['allCoinObj']['field43'].coin_left )
                     }else{
-                        alert( res.message )
+                        if( window['store']['$cnt'] ){
+                            window['store']['$cnt'].showTips( res.message );
+                        }
                     }
                     // window['store']['userMySelf'].setMyGold('222');
                 })
@@ -551,7 +563,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         this.field43.addRightAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['away_golds'] ) );
                         this.tween_Coin(x,y, $store['allCoinObj']['field43'].coin_right )
                     }else{
-                        alert( res.message )
+                        if( window['store']['$cnt'] ){
+                            window['store']['$cnt'].showTips( res.message );
+                        }
                     }
                 })
 
@@ -626,7 +640,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         this.field44.addLeftAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['home_golds'] ) ); //  总的金额
                         this.tween_Coin(x,y, $store['allCoinObj']['field44'].coin_left )
                     }else{
-                        alert( res.message )
+                        if( window['store']['$cnt'] ){
+                            window['store']['$cnt'].showTips( res.message );
+                        }
                     }
                     // window['store']['userMySelf'].setMyGold('222');
                 })
@@ -663,7 +679,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         this.field44.addRightAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['away_golds'] ) ); //  总的金额 ??                
                         this.tween_Coin(x,y, $store['allCoinObj']['field44'].coin_right )
                     }else{
-                        alert( res.message )
+                        if( window['store']['$cnt'] ){
+                            window['store']['$cnt'].showTips( res.message );
+                        }
                     }
                 })
 
@@ -740,7 +758,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         this.field21.addLeftAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['home_golds'] ) ); //  总的金额 ??                
                         this.tween_Coin(x,y, $store['allCoinObj']['field21'].coin_left )
                     }else{
-                        alert( res.message )
+                        if( window['store']['$cnt'] ){
+                            window['store']['$cnt'].showTips( res.message );
+                        }
                     }
 
                 })
@@ -778,7 +798,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         this.field21.addRightAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['away_golds'] ) ); //  总的金额 ??                  
                         this.tween_Coin(x,y, $store['allCoinObj']['field21'].coin_right )
                     }else{
-                        alert( res.message )
+                        if( window['store']['$cnt'] ){
+                            window['store']['$cnt'].showTips( res.message );
+                        }
                     }
                 })
 
@@ -856,7 +878,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         this.field22.addLeftAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['home_golds'] ) ); //  总的金额 ??                  
                         this.tween_Coin(x,y, $store['allCoinObj']['field22'].coin_left )
                     }else{
-                        alert( res.message )
+                        if( window['store']['$cnt'] ){
+                            window['store']['$cnt'].showTips( res.message );
+                        }
                     }
                 })
 
@@ -895,7 +919,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         this.field22.addRightAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['away_golds'] ) ); //  总的金额 ??                   
                         this.tween_Coin(x,y, $store['allCoinObj']['field22'].coin_right )
                     }else{
-                        alert( res.message )
+                        if( window['store']['$cnt'] ){
+                            window['store']['$cnt'].showTips( res.message );
+                        }
                     }
                     // window['store']['userMySelf'].setMyGold('222');
                 })
@@ -973,7 +999,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         this.field1.addLeftAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['home_golds'] ) ); //  总的金额                     
                         this.tween_Coin(x,y, $store['allCoinObj']['field1'].coin_left )
                     }else{
-                        alert( res.message )
+                        if( window['store']['$cnt'] ){
+                            window['store']['$cnt'].showTips( res.message );
+                        }
                     }
                 })
 
@@ -1013,7 +1041,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         this.field1.addRightAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['away_golds'] ) ); //  总的金额                
                         this.tween_Coin(x,y, $store['allCoinObj']['field1'].coin_right )
                     }else{
-                        alert( res.message )
+                        if( window['store']['$cnt'] ){
+                            window['store']['$cnt'].showTips( res.message );
+                        }
                     }
                 })
 

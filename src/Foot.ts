@@ -85,27 +85,28 @@ class Foot extends egret.DisplayObjectContainer{
         this.soundChannel = channel;
     }
     public initBtn(){
+        let $store = window['store'] ;
         //三个投注按钮
-        if( window['store']['user_info'] && window['store']['user_info'][0] && window['store']['user_info'][0].total ){
-            if( parseInt ( window['store']['user_info'][0].total ) < 100000  ){
+        if( $store['user_info'] && $store['user_info'][0] && $store['user_info'][0].total ){
+            if( parseInt ( $store['user_info'][0].total ) < 100000  ){
                 this.btn_one = new FootBtn(100);
                 this.btn_two = new FootBtn(500);
                 this.btn_three = new FootBtn(1000);
-                window['store']['curr_btn_arr'] = [ 100 ,500 , 1000 ];
-            }else if( parseInt ( window['store']['user_info'][0].total ) >= 1000000  ){
+                $store['curr_btn_arr'] = [ 100 ,500 , 1000 ];
+            }else if( parseInt ( $store['user_info'][0].total ) >= 1000000  ){
                 this.btn_one = new FootBtn(1000);
                 this.btn_two = new FootBtn(10000);
                 this.btn_three = new FootBtn(50000);
-                window['store']['curr_btn_arr'] = [ 1000 ,10000 , 50000 ];
+                $store['curr_btn_arr'] = [ 1000 ,10000 , 50000 ];
             }else{
                 this.btn_one = new FootBtn(500);
                 this.btn_two = new FootBtn(1000);
                 this.btn_three = new FootBtn(10000);
-                window['store']['curr_btn_arr'] = [ 500 ,1000 , 10000 ];
+                $store['curr_btn_arr'] = [ 500 ,1000 , 10000 ];
             }
 
             this.btn_one.x = 188;
-            this.btn_two.x = window['store']['stage_Width'] / 2;
+            this.btn_two.x = $store['stage_Width'] / 2;
             this.btn_three.x = 560;
             this.addChild( this.btn_one );
             this.addChild( this.btn_two );
@@ -114,7 +115,7 @@ class Foot extends egret.DisplayObjectContainer{
             this.btn_one['init_scale']( 1 )
             this.btn_two['init_scale']( 0.9 )
             this.btn_three['init_scale']( 0.9 )
-            window['store']['curr_btn_coin'] = window['store']['curr_btn_arr'][0]
+            $store['curr_btn_coin'] = $store['curr_btn_arr'][0]
 
             this.btn_one.addEventListener( egret.TouchEvent.TOUCH_TAP, this.btn_oneDown ,this )
             this.btn_two.addEventListener( egret.TouchEvent.TOUCH_TAP, this.btn_twoDown ,this )

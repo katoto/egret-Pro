@@ -191,7 +191,7 @@ class Main extends egret.DisplayObjectContainer {
         //杯赛过场change
         this.change = new Change();
         this.change.x = 0;
-        this.addChild( this.change );
+        // this.addChild( this.change );
 
         // setTimeout(()=>{
         //     egret.Tween.get( this.change ).to({x:-750},200);  
@@ -406,9 +406,27 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                             // 切换场地  用
                             // this.cnt.proTeam('https://www.google.co.jp/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png');
                              //晋升
-
                         }
 
+                        if( $msgObjBody.stageid === '1' ){
+                            // 出现换产
+                            if( $msgObjBody.matches && $msgObjBody.room_info ){
+                                // 更新数据
+                                this.change.upChangeMsg(  $msgObjBody.matches , $msgObjBody.room_info );
+                                if( !!this.change ){
+                                    this.addChild( this.change );
+
+                                    setTimeout(()=>{
+                                        egret.Tween.get( this.change ).to({x:-750},200).call(()=>{
+                                            if( this.change.parent ){
+                                                this.removeChild( this.change ) ;
+                                            }
+                                        });  
+                                    },2000)                                    
+                                }
+
+                            }
+                        }
                         // clean all  win
                         this.cnt.cnt_removeAllWinIcon();
                         // clean all  点球、进球黑框
