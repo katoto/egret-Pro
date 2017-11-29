@@ -191,13 +191,10 @@ class Main extends egret.DisplayObjectContainer {
         // this.addChild(this.pop);
 
         //杯赛过场change
-<<<<<<< HEAD
         this.change = new Change();
         this.change.x = 0;
-=======
         // this.change = new Change();
         // this.change.x = 0;
->>>>>>> cfedf71417994208558c424b58c8dd04f9b01cfc
         // this.addChild( this.change );
 
         // setTimeout(()=>{
@@ -632,7 +629,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 //     this.cnt.cleanAllPenalty() ;
                 // },5000)
 
-                this.cnt.showTips('tips 测试')
+                // this.cnt.showTips('tips 测试')
 
             },3000)
         }
