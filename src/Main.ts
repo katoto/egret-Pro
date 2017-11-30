@@ -31,6 +31,8 @@ class Main extends egret.DisplayObjectContainer {
     private promotion;  
     //离开
     private out;
+    //test
+    private penalty02;
 
     private textfield:egret.TextField;
     
@@ -208,6 +210,10 @@ class Main extends egret.DisplayObjectContainer {
         // this.addChild(this.out);
 
         //杯赛晋升
+
+        //test
+        let qqqq = new Test();
+        this.addChild(qqqq)
 
         // 层级控制
         // this.setChildIndex(header,0)

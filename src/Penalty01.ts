@@ -13,7 +13,7 @@ class Penalty01 extends eui.UILayer {
     
     //  进度使用
     private lineTimeMask:egret.Bitmap ;
-    private lineTime:egret.Shape ;
+    private lineTime:egret.Bitmap ;
 
     private drawPenalty01(){
         let bgPenalty:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-penalty_png'));
@@ -31,7 +31,7 @@ class Penalty01 extends eui.UILayer {
         this.topTeam.height = 24;
         this.topTeam.x = 38;
         this.topTeam.y = 2;
-        //this.topTeam.mask = bgMask;  // 不需要遮罩了
+        // this.topTeam.mask = bgMask;  // 不需要遮罩了
         this.addChild(this.topTeam);
        
         //插入遮罩层
@@ -55,21 +55,22 @@ class Penalty01 extends eui.UILayer {
         timer.y = 15;
         timer.scaleY = 0.98;
         this.addChild(timer);
+        // timer.mask = this.lineTime ;
 
         //进度条
-        this.lineTime = new egret.Shape();
-        this.lineTime.graphics.lineStyle(7,0xffffff);
-        this.lineTime.graphics.moveTo(91,29);
-        this.lineTime.graphics.lineTo(449,29);
-        this.lineTime.graphics.endFill();
-        this.addChild( this.lineTime );
+        // this.lineTime = new egret.Shape();
+        // this.lineTime.graphics.lineStyle(7,0xffffff);
+        // this.lineTime.graphics.moveTo(91,29);
+        // this.lineTime.graphics.lineTo(449,29);
+        // this.lineTime.graphics.endFill();
+        // this.addChild( this.lineTime );
 
-        this.lineTimeMask = new egret.Bitmap(RES.getRes('scoreMask_png'));
-        this.lineTimeMask.x = 80;
-        this.lineTimeMask.y = 24;
-        this.lineTimeMask.mask = this.lineTime ;
-        this.addChild(this.lineTimeMask);
-        // egret.Tween.get( this.lineTimeMask ).to( { x : 449 } ,8000 ) //358/449
+        // this.lineTimeMask = new egret.Bitmap(RES.getRes('scoreMask_png'));
+        // this.lineTimeMask.x = 80;
+        // this.lineTimeMask.y = 24;
+        // this.lineTimeMask.mask = this.lineTime ;
+        // this.addChild(this.lineTimeMask);
+        // egret.Tween.get( this.lineTimeMask ).to( { x : 200 } ,8000 ) //358/449
 
          //上边队伍点球情况  (上面进球y=1，下面y=34， x>90&&x<426)
         // let penaltyIn = this.drawIn();
@@ -108,20 +109,32 @@ class Penalty01 extends eui.UILayer {
         let r_score = 0 ;
 
         // if( this.lineTime.parent ){
-        //     this.addChild( this.lineTime );
+        //     console.log('a1')
+        // this.lineTime = new egret.Shape();
+        // this.lineTime.graphics.lineStyle(2, 0xff00ff);
+        // this.lineTime.graphics.moveTo(320, 400);
+        // this.lineTime.graphics.lineTo(380, 300);
+        // this.addChild( this.lineTime );
+        
         // }
         // if( this.lineTimeMask ){
-        //     this.lineTimeMask.x = 80 ;
-        //     this.lineTimeMask.y = 24 ;
-        //     this.lineTimeMask.mask = this.lineTime ;
-        //     this.addChild(this.lineTimeMask) ;
+        //     console.log('a2')
+        // this.lineTimeMask = new egret.Bitmap(RES.getRes('scoreMask_png'));
+        // this.lineTimeMask.x = 80 ;
+        // this.lineTimeMask.y = 24 ;
+        // this.addChild(this.lineTimeMask) ;
+        // this.lineTimeMask.mask = this.lineTime ;
         // }
-
-        if( is_extratime ){
+        this.lineTime = new egret.Bitmap(RES.getRes('scoreMask_png'));
+        this.lineTime.x = 85;
+        this.lineTime.y = 26;
+        this.lineTime.width = 1;
+        this.addChild(this.lineTime);
+        if( is_extratime ){  //358  449
             if( is_extratime === '0' ){
-                egret.Tween.get( this.lineTimeMask ).to( { x : 358 } , 18000 ) 
+                egret.Tween.get( this.lineTime ).to( { width : 358 } , 18000 );
             }else if( is_extratime === '1' ){
-                egret.Tween.get( this.lineTimeMask ).to( { x : 449 } , 25000 ) 
+                egret.Tween.get( this.lineTime ).to( { width : 449 } , 25000 );
             }
         }
         //  显示出 0 ：0
