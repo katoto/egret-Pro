@@ -4,6 +4,7 @@ class Promotion extends eui.UILayer{
         super();
         this.drawPromotion();
     }
+    private localObj = {} ;
 
     private leftTeam41;
     private rightTeam41;
@@ -19,6 +20,21 @@ class Promotion extends eui.UILayer{
     private rightTeam22;
     private leftTeam11;
     private rightTeam11;
+
+    // 移动
+    private leftTeam41_copy;
+    private rightTeam41_copy;
+    private leftTeam42_copy;
+    private rightTeam42_copy;
+    private leftTeam43_copy;
+    private rightTeam43_copy;
+    private leftTeam44_copy;
+    private rightTeam44_copy;
+    private leftTeam21_copy;
+    private rightTeam21_copy;
+    private leftTeam22_copy;
+    private rightTeam22_copy;
+
 
     private teamF41:egret.TextField;
     private teamF42:egret.TextField;
@@ -70,7 +86,6 @@ class Promotion extends eui.UILayer{
        
         //决赛
         // 左边
-        // 插入边框
         let lbgBorder11:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         lbgBorder11.x = 208;
         lbgBorder11.y = 521;
@@ -83,6 +98,12 @@ class Promotion extends eui.UILayer{
         this.leftTeam11.x = 211;
         this.leftTeam11.y = 524;
         this.wrap.addChild(this.leftTeam11);
+
+        this.localObj['leftTeam11'] = {
+            x:211 ,
+            y:524 ,
+        }
+
         //  右边
         // 插入边框
         let rbgBorder11:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
@@ -97,6 +118,11 @@ class Promotion extends eui.UILayer{
         this.rightTeam11.x = 374;
         this.rightTeam11.y = 524;
         this.wrap.addChild(this.rightTeam11);
+
+        this.localObj['rightTeam11'] = {
+            x:374 ,
+            y:524 ,
+        }
 
         this.teamF11 = new egret.TextField();
         this.teamF11.x = 176;
@@ -131,6 +157,20 @@ class Promotion extends eui.UILayer{
         this.leftTeam21.x = 211;
         this.leftTeam21.y = 303;
         this.wrap.addChild(this.leftTeam21);
+
+        this.leftTeam21_copy = new eui.Image();
+        // this.leftTeam21.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
+        this.leftTeam21_copy.width = 62;
+        this.leftTeam21_copy.height = 62;
+        this.leftTeam21_copy.x = 211;
+        this.leftTeam21_copy.y = 303;
+        this.wrap.addChild(this.leftTeam21_copy);
+
+        this.localObj['leftTeam21'] = {
+            x:211 ,
+            y:303 ,
+        }
+
         //  右边
         // 插入边框
         let rbgBorder21:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
@@ -144,17 +184,27 @@ class Promotion extends eui.UILayer{
         // wrap.addChild(proWin010)
         //队伍icon
         this.rightTeam21 = new eui.Image();
-        // this.rightTeam21.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.rightTeam21.width = 62;
         this.rightTeam21.height = 62;
         this.rightTeam21.x = 374;
         this.rightTeam21.y = 303;
         this.wrap.addChild(this.rightTeam21);
 
+        this.rightTeam21_copy = new eui.Image();
+        this.rightTeam21_copy.width = 62;
+        this.rightTeam21_copy.height = 62;
+        this.rightTeam21_copy.x = 374;
+        this.rightTeam21_copy.y = 303;
+        this.wrap.addChild( this.rightTeam21_copy );
+
+        this.localObj['rightTeam21'] = {
+            x:374 ,
+            y:303 ,
+        }
+
         this.teamF21 = new egret.TextField();
         this.teamF21.x = 176;
         this.teamF21.y = 300;
-        // this.teamF21.text = '3:2';
         this.teamF21.size = 32;
         this.teamF21.textColor = 0xffffff;
         this.teamF21.width = 300;
@@ -178,13 +228,24 @@ class Promotion extends eui.UILayer{
         // wrap.addChild( this.proWin22_l )
         //队伍icon
         this.leftTeam22 = new eui.Image();
-        // this.leftTeam22.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.leftTeam22.width = 62;
         this.leftTeam22.height = 62;
         this.leftTeam22.x = 211;
         this.leftTeam22.y = 746;
         this.wrap.addChild(this.leftTeam22);
-        //  右边
+
+        this.leftTeam22_copy = new eui.Image();
+        this.leftTeam22_copy.width = 62;
+        this.leftTeam22_copy.height = 62;
+        this.leftTeam22_copy.x = 211;
+        this.leftTeam22_copy.y = 746;
+        this.wrap.addChild( this.leftTeam22_copy );
+
+        this.localObj['leftTeam22'] = {
+            x:211 ,
+            y:746 ,
+        }
+
         // 插入边框
         let rbgBorder22:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         rbgBorder22.x = 371;
@@ -197,11 +258,23 @@ class Promotion extends eui.UILayer{
         // this.wrap.addChild(this.proWin22_r)
         //队伍icon
         this.rightTeam22 = new eui.Image();
-        // this.rightTeam22.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.rightTeam22.width = 62;
         this.rightTeam22.height = 62;
         this.rightTeam22.x = 374;
         this.rightTeam22.y = 746;
+
+        this.rightTeam22_copy = new eui.Image();
+        this.rightTeam22_copy.width = 62;
+        this.rightTeam22_copy.height = 62;
+        this.rightTeam22_copy.x = 374;
+        this.rightTeam22_copy.y = 746;
+        this.wrap.addChild( this.rightTeam22_copy );
+
+        this.localObj['rightTeam22'] = {
+            x:374 ,
+            y:746 ,
+        }
+
         this.wrap.addChild(this.rightTeam22);
 
         this.teamF22 = new egret.TextField();
@@ -216,8 +289,6 @@ class Promotion extends eui.UILayer{
         this.teamF22.verticalAlign = egret.VerticalAlign.MIDDLE;
         this.wrap.addChild(this.teamF22); 
 
-        //1/4 1
-        // 左边
         // 插入边框
         let lbgBorder41:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         lbgBorder41.x = 32;
@@ -229,15 +300,25 @@ class Promotion extends eui.UILayer{
         this.proWin41_l.y = 40;
         // wrap.addChild(proWin01)
         
-        //队伍icon
         this.leftTeam41 = new eui.Image();
-        // this.leftTeam41.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.leftTeam41.width = 62;
         this.leftTeam41.height = 62;
         this.leftTeam41.x = 35;
         this.leftTeam41.y = 60;
         this.wrap.addChild(this.leftTeam41);
-        //  右边
+
+        this.leftTeam41_copy = new eui.Image();
+        this.leftTeam41_copy.width = 62;
+        this.leftTeam41_copy.height = 62;
+        this.leftTeam41_copy.x = 35;
+        this.leftTeam41_copy.y = 60;
+        this.wrap.addChild(this.leftTeam41_copy);
+
+        this.localObj['leftTeam41'] = {
+            x:35 ,
+            y:60 ,
+        }
+
         // 插入边框
         let rbgBorder41:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         rbgBorder41.x = 195;
@@ -250,12 +331,22 @@ class Promotion extends eui.UILayer{
         // wrap.addChild(proWin02)
         //队伍icon
         this.rightTeam41 = new eui.Image();
-        // this.rightTeam41.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.rightTeam41.width = 62;
         this.rightTeam41.height = 62;
         this.rightTeam41.x = 198;
         this.rightTeam41.y = 60;
         this.wrap.addChild(this.rightTeam41);
+
+        this.rightTeam41_copy = new eui.Image();
+        this.rightTeam41_copy.width = 62;
+        this.rightTeam41_copy.height = 62;
+        this.rightTeam41_copy.x = 198;
+        this.rightTeam41_copy.y = 60;
+        this.wrap.addChild(this.rightTeam41_copy);
+this.localObj['rightTeam41'] = {
+            x:198 ,
+            y:60 ,
+        }
 
         this.teamF41 = new egret.TextField();
         this.teamF41.x = 0;
@@ -270,10 +361,7 @@ class Promotion extends eui.UILayer{
         this.teamF41.verticalAlign = egret.VerticalAlign.MIDDLE;
         this.wrap.addChild(this.teamF41); 
 
-
          //1/4 2
-        // 左边
-        // 插入边框
         let lbgBorder42:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         lbgBorder42.x = 395;
         lbgBorder42.y = 57;
@@ -285,14 +373,24 @@ class Promotion extends eui.UILayer{
         // wrap.addChild(proWin03)
         //队伍icon
         this.leftTeam42 = new eui.Image();
-        // this.leftTeam42.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.leftTeam42.width = 62;
         this.leftTeam42.height = 62;
         this.leftTeam42.x = 398;
         this.leftTeam42.y = 60;
         this.wrap.addChild(this.leftTeam42);
-        //  右边
-        // 插入边框
+
+        this.leftTeam42_copy = new eui.Image();
+        this.leftTeam42_copy.width = 62;
+        this.leftTeam42_copy.height = 62;
+        this.leftTeam42_copy.x = 398;
+        this.leftTeam42_copy.y = 60;
+        this.wrap.addChild( this.leftTeam42_copy );
+
+        this.localObj['leftTeam42'] = {
+            x:398 ,
+            y:60 ,
+        }
+
         let rbgBorder42:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         rbgBorder42.x = 558;
         rbgBorder42.y = 57;
@@ -304,17 +402,27 @@ class Promotion extends eui.UILayer{
         // wrap.addChild(proWin04)
         //队伍icon
         this.rightTeam42 = new eui.Image();
-        // this.rightTeam42.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.rightTeam42.width = 62;
         this.rightTeam42.height = 62;
         this.rightTeam42.x = 561;
         this.rightTeam42.y = 60;
         this.wrap.addChild(this.rightTeam42);
 
+        this.rightTeam42_copy = new eui.Image();
+        this.rightTeam42_copy.width = 62;
+        this.rightTeam42_copy.height = 62;
+        this.rightTeam42_copy.x = 561;
+        this.rightTeam42_copy.y = 60;
+        this.wrap.addChild(this.rightTeam42_copy);
+
+        this.localObj['rightTeam42'] = {
+            x:561 ,
+            y:60 ,
+        }
+
         this.teamF42 = new egret.TextField();
         this.teamF42.x = 363;
         this.teamF42.y = 57;
-        // this.teamF42.text = '3:2';
         this.teamF42.size = 32;
         this.teamF42.textColor = 0xffffff;
         this.teamF42.width = 300;
@@ -324,9 +432,6 @@ class Promotion extends eui.UILayer{
         this.teamF42.verticalAlign = egret.VerticalAlign.MIDDLE;
         this.wrap.addChild(this.teamF42); 
 
-
-        //1/4 3
-        // 左边
         // 插入边框
         let lbgBorder43:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         lbgBorder43.x = 32;
@@ -339,12 +444,24 @@ class Promotion extends eui.UILayer{
         // wrap.addChild(proWin05)
         //队伍icon
         this.leftTeam43 = new eui.Image();
-        // this.leftTeam43.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.leftTeam43.width = 62;
         this.leftTeam43.height = 62;
         this.leftTeam43.x = 35;
         this.leftTeam43.y = 971;
         this.wrap.addChild(this.leftTeam43);
+
+        this.leftTeam43_copy = new eui.Image();
+        this.leftTeam43_copy.width = 62;
+        this.leftTeam43_copy.height = 62;
+        this.leftTeam43_copy.x = 35;
+        this.leftTeam43_copy.y = 971;
+        this.wrap.addChild(this.leftTeam43_copy);
+
+        this.localObj['leftTeam43'] = {
+            x:35 ,
+            y:971 ,
+        }
+
         //  右边
         // 插入边框
         let rbgBorder43:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
@@ -358,17 +475,27 @@ class Promotion extends eui.UILayer{
         // wrap.addChild(proWin06)
         //队伍icon
         this.rightTeam43 = new eui.Image();
-        // this.rightTeam43.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.rightTeam43.width = 62;
         this.rightTeam43.height = 62;
         this.rightTeam43.x = 198;
         this.rightTeam43.y = 971;
         this.wrap.addChild(this.rightTeam43);
 
+        this.rightTeam43_copy = new eui.Image();
+        this.rightTeam43_copy.width = 62;
+        this.rightTeam43_copy.height = 62;
+        this.rightTeam43_copy.x = 198;
+        this.rightTeam43_copy.y = 971;
+        this.wrap.addChild(this.rightTeam43_copy);
+
+        this.localObj['rightTeam43'] = {
+            x:198 ,
+            y:971 ,
+        }
+
         this.teamF43 = new egret.TextField();
         this.teamF43.x = 0;
         this.teamF43.y = 968;
-        // this.teamF43.text = '3:2';
         this.teamF43.size = 32;
         this.teamF43.textColor = 0xffffff;
         this.teamF43.width = 300;
@@ -378,9 +505,6 @@ class Promotion extends eui.UILayer{
         this.teamF43.verticalAlign = egret.VerticalAlign.MIDDLE;
         this.wrap.addChild(this.teamF43); 
 
-
-         //1/4 4
-        // 左边
         // 插入边框
         let lbgBorder44:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         lbgBorder44.x = 395;
@@ -393,14 +517,24 @@ class Promotion extends eui.UILayer{
         // wrap.addChild(proWin07)
         //队伍icon
         this.leftTeam44 = new eui.Image();
-        // this.leftTeam44.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.leftTeam44.width = 62;
         this.leftTeam44.height = 62;
         this.leftTeam44.x = 398;
         this.leftTeam44.y = 971;
         this.wrap.addChild(this.leftTeam44);
-        //  右边
-        // 插入边框
+
+        this.leftTeam44_copy = new eui.Image();
+        this.leftTeam44_copy.width = 62;
+        this.leftTeam44_copy.height = 62;
+        this.leftTeam44_copy.x = 398;
+        this.leftTeam44_copy.y = 971;
+        this.wrap.addChild(this.leftTeam44_copy);
+
+        this.localObj['leftTeam44'] = {
+            x:398 ,
+            y:971 ,
+        }
+
         let rbgBorder44:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         rbgBorder44.x = 558;
         rbgBorder44.y = 968;
@@ -410,18 +544,28 @@ class Promotion extends eui.UILayer{
         this.proWin44_r.x = 542;
         this.proWin44_r.y = 951;
         // wrap.addChild(proWin08)
-        //队伍icon
         this.rightTeam44 = new eui.Image();
-        // this.rightTeam44.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.rightTeam44.width = 62;
         this.rightTeam44.height = 62;
         this.rightTeam44.x = 561;
         this.rightTeam44.y = 971;
         this.wrap.addChild(this.rightTeam44);
+
+        this.rightTeam44_copy = new eui.Image();
+        this.rightTeam44_copy.width = 62;
+        this.rightTeam44_copy.height = 62;
+        this.rightTeam44_copy.x = 561;
+        this.rightTeam44_copy.y = 971;
+        this.wrap.addChild(this.rightTeam44_copy);
+
+        this.localObj['rightTeam44'] = {
+            x:561 ,
+            y:971 ,
+        }
+
         this.teamF44 = new egret.TextField();
         this.teamF44.x = 363;
         this.teamF44.y = 968;
-        // this.teamF44.text = '3:2';
         this.teamF44.size = 32;
         this.teamF44.textColor = 0xffffff;
         this.teamF44.width = 300;
@@ -431,23 +575,21 @@ class Promotion extends eui.UILayer{
         this.teamF44.verticalAlign = egret.VerticalAlign.MIDDLE;
         this.wrap.addChild(this.teamF44); 
 
-        // [{211,524}]
-        // let proWin01 = this.proWin();
-        // proWin01.x = 16;
-        // proWin01.y = 41;
-        // wrap.addChild(proWin01);
     }
+
     private proWin(){
         let img = new egret.Bitmap(RES.getRes('proWin_png'));
         return img;
     }
     /**
-     *  更新各阶段数据
+     *  更新各阶段数据  && 动画写到一起
+     *  @param 1 移动 4-2  2  2-1 
      */
-    private upPromotionMsg( pre_result:any ){
+    private upPromotionMsg( pre_result:any ,move:string ){
         let score_num = 0 ;
-        // this.leftTeam41.source = leftTeam41;
-        // this.rightTeam41.source = rightTeam41;
+        let firstWinName = [] ;
+        let secondWinName = [] ;
+
         if( pre_result ){
             // 清除之前的数据
             this.clearPromoMsg() ;
@@ -462,6 +604,13 @@ class Promotion extends eui.UILayer{
                             this['leftTeam4'+( i+1 )].source = pre_result.first[i].homelogo;
                         }
 
+                        if( pre_result.first[i].awaylogo ){
+                            this['rightTeam4'+( i+1 ) + '_copy'].source = pre_result.first[i].awaylogo;
+                        }
+                        if( pre_result.first[i].homelogo ){
+                            this['leftTeam4'+( i+1 )  + '_copy'].source = pre_result.first[i].homelogo;
+                        }
+
                         score_num = parseInt( pre_result.first[i].score[0] ) ;
                         
                         if( pre_result.first[i].is_spotkick === '0' ){
@@ -469,22 +618,26 @@ class Promotion extends eui.UILayer{
                             // 显示冠军标志
                             if( parseInt( pre_result.first[i].score[0] ) > parseInt( pre_result.first[i].score[2] ) ){
                                 if( !!this['proWin4'+ ( i+1 ) +'_l'] ){
-                                    this.wrap.addChild( this['proWin4'+ ( i+1 ) +'_l'] )
+                                    this.wrap.addChild( this['proWin4'+ ( i+1 ) +'_l'] ) ;
+                                    firstWinName.push( 'leftTeam4'+( i+1 ) ) ;
                                 }
                             }else{
                                 if( !!this['proWin4'+ ( i+1 ) +'_r'] ){
-                                    this.wrap.addChild( this['proWin4'+ ( i+1 ) +'_r'] )
+                                    this.wrap.addChild( this['proWin4'+ ( i+1 ) +'_r'] ) ;
+                                    firstWinName.push( 'rightTeam4'+( i+1 ) ) ;
                                 }
                             }
                         }else{
                             this[ 'teamF4'+( i + 1 ) ].text = parseInt( pre_result.first[i].spotkick[0] )+score_num + ':' + ( parseInt( pre_result.first[i].spotkick[2] ) + score_num );
                             if( parseInt( pre_result.first[i].spotkick[0] ) > parseInt( pre_result.first[i].spotkick[2] ) ){
                                 if( !!this['proWin4'+ ( i+1 ) +'_l'] ){
-                                    this.wrap.addChild( this['proWin4'+ ( i+1 ) +'_l'] )
+                                    this.wrap.addChild( this['proWin4'+ ( i+1 ) +'_l'] ) ;
+                                    firstWinName.push( 'leftTeam4'+( i+1 ) ) ;
                                 }
                             }else{
                                 if( !!this['proWin4'+ ( i+1 ) +'_r'] ){
-                                    this.wrap.addChild( this['proWin4'+ ( i+1 ) +'_r'] )
+                                    this.wrap.addChild( this['proWin4'+ ( i+1 ) +'_r'] ) ;
+                                    firstWinName.push( 'rightTeam4'+( i+1 ) ) ;
                                 }
                             }
 
@@ -501,6 +654,14 @@ class Promotion extends eui.UILayer{
                         if( pre_result.second[i].homelogo ){
                             this['leftTeam2'+( i+1 )].source = pre_result.second[i].homelogo;
                         }
+
+                        if( pre_result.second[i].awaylogo ){
+                            this['rightTeam2'+( i+1 ) + '_copy' ].source = pre_result.second[i].awaylogo;
+                        }
+                        if( pre_result.second[i].homelogo ){
+                            this['leftTeam2'+( i+1 ) + '_copy' ].source = pre_result.second[i].homelogo;
+                        }
+
                         score_num = parseInt( pre_result.second[i].score[0] ) ;
                         
                         if( pre_result.second[i].is_spotkick === '0' ){
@@ -508,22 +669,26 @@ class Promotion extends eui.UILayer{
                             // 显示冠军标志
                             if( parseInt( pre_result.second[i].score[0] ) > parseInt( pre_result.second[i].score[2] ) ){
                                 if( !!this['proWin2'+ ( i+1 ) +'_l'] ){
-                                    this.wrap.addChild( this['proWin2'+ ( i+1 ) +'_l'] )
+                                    this.wrap.addChild( this['proWin2'+ ( i+1 ) +'_l'] ) ;
+                                    secondWinName.push( 'leftTeam2'+( i+1 ) ) ;
                                 }
                             }else{
                                 if( !!this['proWin2'+ ( i+1 ) +'_r'] ){
-                                    this.wrap.addChild( this['proWin2'+ ( i+1 ) +'_r'] )
+                                    this.wrap.addChild( this['proWin2'+ ( i+1 ) +'_r'] ) ;
+                                    secondWinName.push( 'rightTeam2'+( i+1 ) ) ;
                                 }
                             }
                         }else{
                             this[ 'teamF2'+( i + 1 ) ].text = parseInt( pre_result.second[i].spotkick[0] )+score_num + ':' + ( parseInt( pre_result.second[i].spotkick[2] ) + score_num );
                             if( parseInt( pre_result.second[i].spotkick[0] ) > parseInt( pre_result.second[i].spotkick[2] ) ){
                                 if( !!this['proWin2'+ ( i+1 ) +'_l'] ){
-                                    this.wrap.addChild( this['proWin2'+ ( i+1 ) +'_l'] )
+                                    this.wrap.addChild( this['proWin2'+ ( i+1 ) +'_l'] );
+                                    secondWinName.push( 'leftTeam2'+( i+1 ) ) ;
                                 }
                             }else{
                                 if( !!this['proWin2'+ ( i+1 ) +'_r'] ){
-                                    this.wrap.addChild( this['proWin2'+ ( i+1 ) +'_r'] )
+                                    this.wrap.addChild( this['proWin2'+ ( i+1 ) +'_r'] );
+                                    secondWinName.push( 'rightTeam2'+( i+1 ) ) ;
                                 }
                             }
                         }
@@ -531,22 +696,69 @@ class Promotion extends eui.UILayer{
                 } 
             }
         }
+
+        if( move === '1' ){
+            for( let i=0;i<4 ;i++ ){
+                if( ~firstWinName[i].indexOf( 'Team41' ) ){
+                    egret.Tween.get( this[ firstWinName[i] ] ).to( {
+                        x: this['leftTeam21'].x ,
+                        y: this['leftTeam21'].y
+                    }, 700 );
+                }
+                if( ~firstWinName[i].indexOf( 'Team42' ) ){
+                    egret.Tween.get( this[ firstWinName[i] ] ).to( {
+                        x: this['rightTeam21'].x ,
+                        y: this['rightTeam21'].y
+                    }, 700 );
+                }
+                if( ~firstWinName[i].indexOf( 'Team43' )){
+                    egret.Tween.get( this[ firstWinName[i] ] ).to( {
+                        x: this['leftTeam22'].x ,
+                        y: this['leftTeam22'].y
+                    }, 700 );
+                }
+                if( ~firstWinName[i].indexOf( 'Team44' ) ){
+                    egret.Tween.get( this[ firstWinName[i] ] ).to( {
+                        x: this['rightTeam22'].x ,
+                        y: this['rightTeam22'].y
+                    }, 700 );
+                }
+            }
+
+        }else if( move === '2' ){
+            console.log( secondWinName )
+            for( let i=0;i<2 ;i++ ){
+                if( ~secondWinName[i].indexOf( 'Team21' ) ){
+                    egret.Tween.get( this[ secondWinName[i] ] ).to( {
+                        x: this['leftTeam11'].x ,
+                        y: this['leftTeam11'].y
+                    }, 700 );
+                }
+                if( ~secondWinName[i].indexOf( 'Team22' ) ){
+                    egret.Tween.get( this[ secondWinName[i] ] ).to( {
+                        x: this['rightTeam11'].x ,
+                        y: this['rightTeam11'].y
+                    }, 700 );
+                }
+            }
+
+        }
     }
 
     /**
      *  第一阶段 动画过渡
      */
     private moveSecond( preResult:any ){
-        this.upPromotionMsg( preResult );
+        this.upPromotionMsg( preResult , '1' );
+
     }
 
      /**
      *  第二阶段 动画过渡
      */ 
     private moveThree( preResult:any ){
-        this.upPromotionMsg( preResult );
+        this.upPromotionMsg( preResult , '2' );
     }
-
 
     /**
      *  清除之前的所有数据
@@ -570,6 +782,14 @@ class Promotion extends eui.UILayer{
             if( this[ baseRightTeam + i ] ){
                 this[ baseRightTeam + i ].source = '' ;
             }
+
+            if( this[ baseLeftTeam + i + '_copy' ] ){
+                this[ baseLeftTeam + i + '_copy' ].source = '' ;
+            }
+            if( this[ baseRightTeam + i + '_copy' ] ){
+                this[ baseRightTeam + i + '_copy' ].source = '' ;
+            }
+
             if( this[ baseTeamF + i ] ){
                 this[ baseTeamF + i ].text = '' ;
             }
@@ -588,6 +808,14 @@ class Promotion extends eui.UILayer{
             if( this[ baseRightTeam2 + i ] ){
                 this[ baseRightTeam2 + i ].source = '' ;
             }
+
+            if( this[ baseLeftTeam2 + i + '_copy' ] ){
+                this[ baseLeftTeam2 + i + '_copy' ].source = '' ;
+            }
+            if( this[ baseRightTeam2 + i + '_copy'  ] ){
+                this[ baseRightTeam2 + i + '_copy'  ].source = '' ;
+            }
+
             if( this[ baseTeamF2 + i ] ){
                 this[ baseTeamF2 + i ].text = '' ;
             }

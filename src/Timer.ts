@@ -64,13 +64,14 @@ class Timer extends egret.DisplayObjectContainer{
     //  竞猜开始
      private timerFunc(event:egret.TimerEvent) {
         // egret.log("timerFunc count" + (<egret.Timer>event.target).currentCount);
-        console.log( this.timerNum );
-        console.log('aaaa')
+        // console.log( this.timerNum );
+        // console.log('aaaa')
         this.timerNum--;
         this.textSS.text = ( this.timerNum ).toString()+ '"';
     }
 
     private timerRemove( ) {
+        // 缺一个清除时间
         if( this.wrapTimer.parent ){
             this.removeChild(this.wrapTimer);
         }
