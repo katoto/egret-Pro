@@ -10,8 +10,18 @@
 		"promise/bin/promise.js"
 	],
 	"game": [
+<<<<<<< HEAD
 		"bin-debug/Penalty02.js",
 		"bin-debug/ChampionC.js",
+=======
+<<<<<<< HEAD
+		"bin-debug/Penalty02.js",
+		"bin-debug/ChampionC.js",
+=======
+		"bin-debug/Change.js",
+		"bin-debug/Penalty02.js",
+>>>>>>> 8e9007407ed9d7be7f1eedee0064c7e77f4d1e75
+>>>>>>> 7467e8f14e1af5c8cdd2ba09207f74929e2af0e3
 		"bin-debug/Cnt.js",
 		"bin-debug/field_ball_contain.js",
 		"bin-debug/Foot.js",
@@ -23,7 +33,15 @@
 		"bin-debug/LoadingUI.js",
 		"bin-debug/Main.js",
 		"bin-debug/Penalty01.js",
+<<<<<<< HEAD
 		"bin-debug/Change.js",
+=======
+<<<<<<< HEAD
+		"bin-debug/Change.js",
+=======
+		"bin-debug/ChampionC.js",
+>>>>>>> 8e9007407ed9d7be7f1eedee0064c7e77f4d1e75
+>>>>>>> 7467e8f14e1af5c8cdd2ba09207f74929e2af0e3
 		"bin-debug/Pop.js",
 		"bin-debug/Pop02-ChampionC.js",
 		"bin-debug/Pop02-Out.js",
