@@ -174,7 +174,6 @@ class Field_ball extends eui.UILayer {
        this.score.verticalAlign = egret.VerticalAlign.MIDDLE;
     //    this.addChild(this.score)
 
-
     }
 
     /**

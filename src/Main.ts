@@ -423,16 +423,14 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                         this.removeChild( this.stop_pop );
                                     }
                                     if( $msgObjBody.result && $msgObjBody.result.length > 0 ){
-                                        if( parseInt ( $msgObjBody.process_time ) < 6 ){
+                                        if( parseInt ( $msgObjBody.process_time ) < 5 ){
                                             this.cnt.adjustPenalty( $msgObjBody.result )
                                         }else{
                                             // 直接显示出win的结果 
-                                            console.log('show win 2')
                                             this.cnt.showFieldWin( $msgObjBody.result ) ;
                                         }
                                     }
                                 ;break;
-
                             }
                         }
 

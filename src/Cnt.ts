@@ -473,7 +473,6 @@ class Cnt extends egret.DisplayObjectContainer{
             await this.wait(300);
             if( $store['matFindField'][ endResult.matchid ] ){
                 championName = this.fieldContain[ $store['matFindField'][ endResult.matchid ] ].getFieldImg();
-                // console.log( this.fieldContain[ $store['matFindField'][ endResult.matchid ] ].getFieldImg() )
                 
                 if( parseInt ( endResult.score[0] ) > parseInt ( endResult.score[2] ) ){
                      this.showChampion( championName['l_name'] )
@@ -492,6 +491,8 @@ class Cnt extends egret.DisplayObjectContainer{
      */
     private showFieldWin( allResult ){
         let len = allResult.length ;
+        let $store = window['store'] ;
+
         for( let i = 0;i < len; i++ ){
             if( allResult[i].is_spotkick === '0' ){
                 if( parseInt ( allResult[i].score[0] ) > parseInt ( allResult[i].score[2] ) ){
@@ -507,6 +508,44 @@ class Cnt extends egret.DisplayObjectContainer{
                 }
             }
         }
+
+        // 显示冠军 (快捷)
+        console.log( allResult )
+        if( allResult && allResult.length === 1 ){
+            let championName = null;
+            console.log( $store['matFindField'][ allResult.matchid ] )
+            if( $store['matFindField'][ allResult.matchid ] ){
+                championName = this.fieldContain[ $store['matFindField'][ allResult.matchid ] ].getFieldImg();
+                console.log( championName ) ;
+
+                    // if( parseInt ( allResult.score[0] ) > parseInt ( allResult.score[2] ) ){
+                    //     this.showChampion( championName['l_name'] )
+                    // }else{
+                    //     this.showChampion( championName['r_name'] )
+                    // }
+
+                // if( allResult[i].is_spotkick === '0' ){
+                //     if( parseInt ( allResult.score[0] ) > parseInt ( allResult.score[2] ) ){
+                //         this.showChampion( championName['l_name'] )
+                //     }else{
+                //         this.showChampion( championName['r_name'] )
+                //     }
+                // }else{
+                //     if( parseInt( allResult[i].spotkick[0] ) > parseInt( allResult[i].spotkick[2] ) ){
+                //         this.fieldContain.showWinLocation( allResult[i].matchid , '_l' ) ;
+                //     }else{
+                //         this.fieldContain.showWinLocation( allResult[i].matchid , '_r' ) ;
+                //     }
+                // }
+
+
+
+
+
+            }
+        }
+
+
     }
     /**
      *  隐藏进球 出现win
@@ -722,11 +761,12 @@ class Cnt extends egret.DisplayObjectContainer{
                             curFindField = $store['fieldLeftOrRight'][settleData[i].prize_info[j].matchid];
                             console.log( curFindField )
                             // curFindField = 'field42_r';
-
                             // this.fieldContain[curFindField]   left  or right 动画
                             // curFindField = curFindField + '_l';
                             allShowWinNum =  allShowWinNum + parseInt( settleData[i].prize_info[j].prize );
-                            await this.fieldContain.sendEndCoin( curFindField , settleData[i].uid ) ;
+                            if( !curFindField ){
+                                await this.fieldContain.sendEndCoin( curFindField , settleData[i].uid ) ;
+                            }
                         }
                     }
                     if( this[ baseImg + choseUser ] && allShowWinNum ){
