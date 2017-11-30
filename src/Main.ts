@@ -29,6 +29,8 @@ class Main extends egret.DisplayObjectContainer {
     private change;
     // 晋升
     private promotion;  
+    //离开
+    private out;
 
     private textfield:egret.TextField;
     
@@ -193,6 +195,11 @@ class Main extends egret.DisplayObjectContainer {
         //杯赛过场change
         this.change = new Change();
         this.change.x = 0;
+
+        //被踢出房间
+        this.out = new Pop02Out();
+        this.addChild(this.out);
+
 
         // this.addChild( this.change );
 

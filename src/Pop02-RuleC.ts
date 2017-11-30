@@ -32,7 +32,7 @@ class Pop02RuleC extends egret.DisplayObjectContainer{
        popWrap.y = window['store']['stage_anHeight'];
        BigWrap.addChild(popWrap);
         //背景
-       let popBg:egret.Bitmap = new egret.Bitmap(RES.getRes('pop-02-bak_png'));
+       let popBg:egret.Bitmap = new egret.Bitmap(RES.getRes('pop-rule_png'));
        popWrap.addChild(popBg);
 
        //标题
