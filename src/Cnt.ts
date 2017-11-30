@@ -398,7 +398,7 @@ class Cnt extends egret.DisplayObjectContainer{
             }
             this[penaltyStr].clearAllball();
             // 更新头像  获取头像  
-               
+
             this[penaltyStr].upFootballImg(  this.cnt_getFieldImg( allResult[i].matchid ) )
             // 等等正常比分
 
@@ -422,7 +422,6 @@ class Cnt extends egret.DisplayObjectContainer{
             }
 
         }
-        //  开始点球判断
 
         // 在外面  await 18s  25s  
         await this.wait( 18000 );  
@@ -474,7 +473,8 @@ class Cnt extends egret.DisplayObjectContainer{
             await this.wait(300);
             if( $store['matFindField'][ endResult.matchid ] ){
                 championName = this.fieldContain[ $store['matFindField'][ endResult.matchid ] ].getFieldImg();
-                console.log( this.fieldContain[ $store['matFindField'][ endResult.matchid ] ].getFieldImg() )
+                // console.log( this.fieldContain[ $store['matFindField'][ endResult.matchid ] ].getFieldImg() )
+                
                 if( parseInt ( endResult.score[0] ) > parseInt ( endResult.score[2] ) ){
                      this.showChampion( championName['l_name'] )
                 }else{
@@ -485,14 +485,35 @@ class Cnt extends egret.DisplayObjectContainer{
 
     }
 
+
+    /**
+     *  直接显示  win 的 结果
+     *  allResult
+     */
+    private showFieldWin( allResult ){
+        let len = allResult.length ;
+        for( let i = 0;i < len; i++ ){
+            if( allResult[i].is_spotkick === '0' ){
+                if( parseInt ( allResult[i].score[0] ) > parseInt ( allResult[i].score[2] ) ){
+                    this.fieldContain.showWinLocation( allResult[i].matchid , '_l' ) ;
+                }else{
+                    this.fieldContain.showWinLocation( allResult[i].matchid , '_r' ) ;
+                }
+            }else{
+                if( parseInt( allResult[i].spotkick[0] ) > parseInt( allResult[i].spotkick[2] ) ){
+                    this.fieldContain.showWinLocation( allResult[i].matchid , '_l' ) ;
+                }else{
+                    this.fieldContain.showWinLocation( allResult[i].matchid , '_r' ) ;
+                }
+            }
+        }
+    }
     /**
      *  隐藏进球 出现win
-     *  
      */
     async is_extratimeFn(allResult , bgMaskStr ,penaltyStr ){
         await this.wait( 7000 );
         if( allResult.score ){
-
             if( this[bgMaskStr].parent ){
                 this.bgCourtWrap.removeChild( this[bgMaskStr] );
             }
@@ -541,7 +562,6 @@ class Cnt extends egret.DisplayObjectContainer{
         }
         return {}
     }
-
 
     /**
      *  根据 matchid  找 对应的点球

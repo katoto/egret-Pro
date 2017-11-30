@@ -196,27 +196,21 @@ class Main extends egret.DisplayObjectContainer {
         //杯赛过场change
         this.change = new Change();
         this.change.x = 0;
-<<<<<<< HEAD
 
-        //被踢出房间
-        setTimeout(()=>{
-            this.out = new Pop02Out();
-        },2000)
-
-=======
->>>>>>> eaf7fa1582937585edf4170f87ab84cf0ee6cc9e
         // this.addChild( this.change );
-
         // setTimeout(()=>{
         //     egret.Tween.get( this.change ).to({x:-750},200);  
         //     console.log('move')
         // },2000)
 
+        //被踢出房间 的实例
+        setTimeout(()=>{
+            this.out = new Pop02Out();
+        },2000)
+
          //被踢出房间
         this.out = new Pop02Out();
         // this.addChild(this.out);
-
-        //杯赛晋升
 
         // 层级控制
         // this.setChildIndex(header,0)
@@ -339,7 +333,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
         if(~msg.indexOf('You said')|| !~msg.indexOf('{')){
             // console.log(msg)
         }else{
-            // 可能的变量
             //  后台数据  分发
             let msgObj = JSON.parse( msg );
             let $msgObjBody = msgObj.body;
@@ -434,18 +427,18 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                         this.removeChild( this.stop_pop );
                                     }
                                     if( $msgObjBody.result && $msgObjBody.result.length > 0 ){
-                                        if( parseInt ( $msgObjBody.process_time ) < 5 ){
+                                        if( parseInt ( $msgObjBody.process_time ) < 6 ){
                                             this.cnt.adjustPenalty( $msgObjBody.result )
                                         }else{
                                             // 直接显示出win的结果 
-                                            
+                                            console.log('show win 2')
+                                            this.cnt.showFieldWin( $msgObjBody.result ) ;
                                         }
                                     }
-
                                 ;break;
+
                             }
                         }
-
 
                     }
                     ;break;
