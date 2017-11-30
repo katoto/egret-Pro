@@ -183,7 +183,8 @@ class Main extends egret.DisplayObjectContainer {
 
         // 晋级  缺动画
         this.promotion = new Promotion();
-        // this.addChild(this.promotion)
+        // this.addChild(this.promotion) ;
+
 
         // 弹窗实例,竞猜开始or竞猜完毕
         // text-begin_png text-over_png
@@ -368,7 +369,9 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         }
                         // 初始化 进场的数据
                         if( $msgObjBody.pre_result && !!this.promotion ){
-                            this.promotion.upPromotionMsg( $msgObjBody.pre_result ) ;
+                            // 临时去
+                            // this.promotion.upPromotionMsg( $msgObjBody.pre_result ) ;
+
                         }
 
                     }
@@ -412,7 +415,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         }
 
                         
-                        if( $msgObjBody.stageid){
+                        if( $msgObjBody.stageid ){
                             switch( $msgObjBody.stageid  ){
                                 case '1':
                                     // 出现换厂
