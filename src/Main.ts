@@ -396,11 +396,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                         this.cnt.cnt_upTextTips('等待开奖');
                                     }
                                 ;break;
-                                case '2005':
-                                    if( !!this.cnt ){
-                                        this.cnt.cnt_upTextTips('正在开奖...');
-                                    }
-                                ;break;
                                 // 可投注阶段
                                 case '2003': 
                                     $store['unableClick'] = false ;
@@ -420,9 +415,10 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                             this.cnt.cnt_upTextTips('请下注');
                                         }
                                 ;break;
-
                                 case '2005':
-                                    this.cnt.cnt_upTextTips('正在开奖...');
+                                    if( !!this.cnt ){
+                                        this.cnt.cnt_upTextTips('正在开奖...');
+                                    }
                                     if( this.stop_pop && this.stop_pop.parent ){
                                         this.removeChild( this.stop_pop );
                                     }
