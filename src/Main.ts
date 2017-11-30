@@ -427,7 +427,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                         this.removeChild( this.stop_pop );
                                     }
                                     if( $msgObjBody.result && $msgObjBody.result.length > 0 ){
-                                        if( parseInt ( $msgObjBody.process_time ) < 3 ){
+                                        if( parseInt ( $msgObjBody.process_time ) < 5 ){
                                             this.cnt.adjustPenalty( $msgObjBody.result )
                                         }else{
                                             // 直接显示出win的结果 
@@ -633,12 +633,11 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         //     this.cnt.cnt_removeAllWinIcon() ;
                         // },5000)
 
-                        // 模拟点球
-
                     }
-
-
-
+                    // again 收集金币
+                    if( this.cnt ){
+                        this.cnt.cnt_collectCoin();
+                    }
 
                 ;break;
                 case'2006':
@@ -659,7 +658,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     }
 
                     //  去除所有的 进球投注区
-
                     // this.cnt.cnt_sendEndCoin( '1002999','' )
                 ;break;
 
