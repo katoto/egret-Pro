@@ -118,10 +118,8 @@ class Change extends eui.UILayer{
         //队伍icon
         this[baseName+'_l' ] = new eui.Image();
         // this[baseName+'_l' ].source = urlLeft;
-        this[baseName+'_l' ].width = 62;
-        this[baseName+'_l' ].height = 62;
-        this[baseName+'_l' ].x = 3;
-        this[baseName+'_l' ].y = 3;
+        this[baseName+'_l' ].width = 68;
+        this[baseName+'_l' ].height = 68;
         leftUserBox.addChild (this[baseName+'_l' ]);
         this[baseName+'_l' ].mask = bgMask;
         wrap.addChild(leftUserBox); 
@@ -144,10 +142,8 @@ class Change extends eui.UILayer{
         //队伍icon
         this[ baseName+'_r' ]= new eui.Image();
         // this[ baseName+'_r' ].source = urlRight;
-        this[ baseName+'_r' ].width = 62;
-        this[ baseName+'_r' ].height = 62;
-        this[ baseName+'_r' ].x = 3;
-        this[ baseName+'_r' ].y = 3;
+        this[ baseName+'_r' ].width = 68;
+        this[ baseName+'_r' ].height = 68;
         rightUserBox.addChild(this[ baseName+'_r' ]);
         this[ baseName+'_r' ].mask = bgMask2;
         wrap.addChild(rightUserBox); 

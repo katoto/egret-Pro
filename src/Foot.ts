@@ -33,16 +33,18 @@ class Foot extends egret.DisplayObjectContainer{
         this.addChild(this.bottom);
 
          // 规则
+         let popRule = new Pop02RuleC();
+         
          let btnRule:egret.Bitmap = new egret.Bitmap(RES.getRes('rule_png'));
          btnRule.x = 0;
          btnRule.y = 0;
          this.addChild(btnRule);
          btnRule.touchEnabled = true;
          btnRule.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
-            console.log('规则弹窗');
-            let popRule = new Pop02RuleC();
-            this.parent.addChild(popRule);
+              this.parent.addChild(popRule);
          },this)
+        
+       
 
 
          // 聊天  暂时隐藏处理

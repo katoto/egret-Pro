@@ -59,10 +59,8 @@ var Field_ball = (function (_super) {
         //队伍icon
         this.leftTeam = new eui.Image();
         // leftTeam.source = leftImg;
-        this.leftTeam.width = 62;
-        this.leftTeam.height = 62;
-        this.leftTeam.x = 3;
-        this.leftTeam.y = 3;
+        this.leftTeam.width = 68;
+        this.leftTeam.height = 68;
         leftUserBox.addChild(this.leftTeam);
         this.leftTeam.mask = bgMask;
         // this.addChild( leftTeam )
@@ -98,10 +96,8 @@ var Field_ball = (function (_super) {
         // rightUserBox.addChild(bgMask02);
         //队伍icon
         this.rightTeam = new eui.Image();
-        this.rightTeam.width = 62;
-        this.rightTeam.height = 62;
-        this.rightTeam.x = 3;
-        this.rightTeam.y = 3;
+        this.rightTeam.width = 68;
+        this.rightTeam.height = 68;
         rightUserBox.addChild(this.rightTeam);
         this.rightTeam.mask = bgMask02;
         this.rightTitle = new egret.TextField();
