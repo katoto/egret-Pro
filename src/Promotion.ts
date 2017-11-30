@@ -726,7 +726,6 @@ this.localObj['rightTeam41'] = {
             }
 
         }else if( move === '2' ){
-            console.log( secondWinName )
             for( let i=0;i<2 ;i++ ){
                 if( ~secondWinName[i].indexOf( 'Team21' ) ){
                     egret.Tween.get( this[ secondWinName[i] ] ).to( {

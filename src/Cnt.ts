@@ -397,9 +397,11 @@ class Cnt extends egret.DisplayObjectContainer{
                 this.bgCourtWrap.addChild( this[penaltyStr_p] );
             }
             this[penaltyStr].clearAllball();
-            // 更新头像  获取头像     
+            // 更新头像  获取头像  
+               
             this[penaltyStr].upFootballImg(  this.cnt_getFieldImg( allResult[i].matchid ) )
             // 等等正常比分
+
             egret.Tween.get( this[penaltyStr] ).to( {y: curr_local[i] }, 300 );
             this[penaltyStr].createFootball( allResult[i].timeline , allResult[i].is_extratime ,allResult[i].matchid );
 

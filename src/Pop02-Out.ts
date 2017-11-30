@@ -32,7 +32,6 @@ class Pop02Out extends egret.DisplayObjectContainer{
        this.addChild(popWrap);
     //    egret.Tween.get( popWrap ).to({width:680,height:440},2000);  
 
-
         //背景    
        let popBg:egret.Bitmap = new egret.Bitmap(RES.getRes('pop-out_png'));
        popWrap.addChild(popBg);
@@ -55,9 +54,9 @@ class Pop02Out extends egret.DisplayObjectContainer{
        popWrap.addChild(popClose);
        popClose.touchEnabled = true;
        popClose.addEventListener(egret.TouchEvent.TOUCH_TAP,()=>{
-           this.parent.removeChild(this)
+           this.parent.removeChild(this) ;
+        //    window.location.href = 'https:www.baidu.com' ;
        },this)
-
 
     }
 }
