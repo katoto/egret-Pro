@@ -510,41 +510,29 @@ class Cnt extends egret.DisplayObjectContainer{
         }
 
         // 显示冠军 (快捷)
-        console.log( allResult )
         if( allResult && allResult.length === 1 ){
             let championName = null;
-            console.log( $store['matFindField'][ allResult.matchid ] )
-            if( $store['matFindField'][ allResult.matchid ] ){
-                championName = this.fieldContain[ $store['matFindField'][ allResult.matchid ] ].getFieldImg();
-                console.log( championName ) ;
+            if( $store['matFindField'][ allResult[0].matchid ] ){
+                championName = this.fieldContain[ $store['matFindField'][ allResult[0].matchid ] ].getFieldImg();
 
-                // if( parseInt ( allResult.score[0] ) > parseInt ( allResult.score[2] ) ){
-                //     this.showChampion( championName['l_name'] )
-                // }else{
-                //     this.showChampion( championName['r_name'] )
-                // }
-
-                if( allResult.is_spotkick === '0' ){
-                    if( parseInt ( allResult.score[0] ) > parseInt ( allResult.score[2] ) ){
-                        this.showChampion( championName['l_name'] )
+                setTimeout(()=>{
+                    if( allResult[0].is_spotkick === '0' ){
+                        if( parseInt ( allResult[0].score[0] ) > parseInt ( allResult[0].score[2] ) ){
+                            this.showChampion( championName['l_name'] )
+                        }else{
+                            this.showChampion( championName['r_name'] )
+                        }
                     }else{
-                        this.showChampion( championName['r_name'] )
+                        if( parseInt ( allResult[0].spotkick[0] ) > parseInt ( allResult[0].spotkick[2] ) ){
+                            this.showChampion( championName['l_name'] )
+                        }else{
+                            this.showChampion( championName['r_name'] )
+                        }
                     }
-                }else{
-                    if( parseInt ( allResult.spotkick[0] ) > parseInt ( allResult.spotkick[2] ) ){
-                        this.showChampion( championName['l_name'] )
-                    }else{
-                        this.showChampion( championName['r_name'] )
-                    }
-                }
-
-
-
-
+                },1800 )
 
             }
         }
-
 
     }
     /**

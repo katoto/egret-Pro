@@ -714,7 +714,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 ;break
             }
             setTimeout(()=>{
-
                 // this.cnt.cnt_Other_Coin('10015131' , '1' ,'' ,'111' )
                 // console.log('收起金币 测试 ok')
                 // this.cnt.cnt_collectCoin()
@@ -733,7 +732,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 // setTimeout(()=>{
                 //     this.cnt.cleanAllPenalty() ;
                 // },5000)
-
                 // this.cnt.showTips('tips 测试')
 
             },3000)
