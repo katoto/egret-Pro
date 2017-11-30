@@ -198,23 +198,31 @@ class Main extends egret.DisplayObjectContainer {
         //杯赛过场change
         this.change = new Change();
         this.change.x = 0;
-        // this.addChild( this.change );
 
+        // this.addChild( this.change );
         // setTimeout(()=>{
         //     egret.Tween.get( this.change ).to({x:-750},200);  
         //     console.log('move')
         // },2000)
 
+        //被踢出房间 的实例
+        setTimeout(()=>{
+            this.out = new Pop02Out();
+        },2000)
+
          //被踢出房间
         this.out = new Pop02Out();
         // this.addChild(this.out);
 
+<<<<<<< HEAD
         //杯赛晋升
 
         //test
         let qqqq = new Test();
         this.addChild(qqqq)
 
+=======
+>>>>>>> 8e9007407ed9d7be7f1eedee0064c7e77f4d1e75
         // 层级控制
         // this.setChildIndex(header,0)
         // this.setChildIndex(this.cnt,1)
@@ -228,7 +236,6 @@ class Main extends egret.DisplayObjectContainer {
         1.图片合并，使用纹理集
         2. 函数
         */
-
         this.initStage();
 
         if( $store['env_variable'].ck === '' || !$store['env_variable'].ck ){
@@ -317,7 +324,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
      * 声音
      */
     private music(){
-        
     }
 
     // 函数：生成图片
@@ -338,7 +344,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
         if(~msg.indexOf('You said')|| !~msg.indexOf('{')){
             // console.log(msg)
         }else{
-            // 可能的变量
             //  后台数据  分发
             let msgObj = JSON.parse( msg );
             let $msgObjBody = msgObj.body;
@@ -367,7 +372,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                             this.cnt.initUserMsg();
                             // 初始化底部按钮
                             this.bottom.initBtn();
-
                         }
                         if( $msgObjBody.matches ){
                             $store.matches =  $msgObjBody.matches; 
@@ -382,7 +386,69 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         if( $msgObjBody.pre_result && !!this.promotion ){
                             // 临时去
                             // this.promotion.upPromotionMsg( $msgObjBody.pre_result ) ;
+                        }
 
+                        // 处理其他阶段进入的时间 ( 用于不同阶段进入的情况 )
+                        if( $msgObjBody.curr_messageid ){
+                            switch( $msgObjBody.curr_messageid ){
+                                case '2006':
+                                    if( !!this.cnt ){
+                                        this.cnt.cnt_upTextTips('正在派奖...');
+                                    }
+                                ;break;
+
+                                case '2002':
+                                    if( !!this.cnt ){
+                                        this.cnt.cnt_upTextTips('竞猜即将开始...');
+                                    }
+                                ;break;
+                                case '2004':
+                                    if( !!this.cnt ){
+                                        this.cnt.cnt_upTextTips('等待开奖');
+                                    }
+                                ;break;
+                                case '2005':
+                                    if( !!this.cnt ){
+                                        this.cnt.cnt_upTextTips('正在开奖...');
+                                    }
+                                ;break;
+                                // 可投注阶段
+                                case '2003': 
+                                    $store['unableClick'] = false ;
+                                        // 请下注
+                                        switch ( $msgObjBody.stageid ){
+                                            case '1':
+                                                this.cnt.cnt_timer(( 30 - parseInt( $msgObjBody.process_time )).toString());
+                                            ;break;
+                                            case '2':
+                                                this.cnt.cnt_timer(( 25 - parseInt( $msgObjBody.process_time )).toString());
+                                            ;break;
+                                            case '3':
+                                                this.cnt.cnt_timer(( 20 - parseInt( $msgObjBody.process_time )).toString());
+                                            ;break;
+                                        }
+                                        if( !!this.cnt ){
+                                            this.cnt.cnt_upTextTips('请下注');
+                                        }
+                                ;break;
+
+                                case '2005':
+                                    this.cnt.cnt_upTextTips('正在开奖...');
+                                    if( this.stop_pop && this.stop_pop.parent ){
+                                        this.removeChild( this.stop_pop );
+                                    }
+                                    if( $msgObjBody.result && $msgObjBody.result.length > 0 ){
+                                        if( parseInt ( $msgObjBody.process_time ) < 6 ){
+                                            this.cnt.adjustPenalty( $msgObjBody.result )
+                                        }else{
+                                            // 直接显示出win的结果 
+                                            console.log('show win 2')
+                                            this.cnt.showFieldWin( $msgObjBody.result ) ;
+                                        }
+                                    }
+                                ;break;
+
+                            }
                         }
 
                     }
@@ -424,7 +490,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                             // this.cnt.proTeam('https://www.google.co.jp/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png');
                              //晋升
                         }
-
                         
                         if( $msgObjBody.stageid ){
                             switch( $msgObjBody.stageid  ){
@@ -436,7 +501,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                         if( !!this.change ){
                                             this.addChild( this.change );
                                             setTimeout(()=>{
-                                                egret.Tween.get( this.change ).to( { x : -750 }, 600 ).call(()=>{
+                                                egret.Tween.get( this.change ).to( { x : -750 }, 700 ).call(()=>{
                                                     if( this.change.parent ){
                                                         this.removeChild( this.change ) ;
                                                     }
@@ -581,18 +646,16 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         }else{
                             console.warn('2005 data error not find result');
                         }
-
                         // 去除中奖图标 
                         // setTimeout(()=>{
                         //     this.cnt.cnt_removeAllWinIcon() ;
                         // },5000)
 
-                        // 模拟点球
-
                     }
-
-
-
+                    // again 收集金币
+                    if( this.cnt ){
+                        this.cnt.cnt_collectCoin();
+                    }
 
                 ;break;
                 case'2006':
@@ -613,7 +676,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     }
 
                     //  去除所有的 进球投注区
-
                     // this.cnt.cnt_sendEndCoin( '1002999','' )
                 ;break;
 
@@ -657,6 +719,10 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 case '2016':
                     // 被提出
                     this.cnt.showTips('你已经被踢出') ;
+                    if( !!this.out ){
+                        this.addChild( this.out );
+                    }
+                    
                 ;break;
                 case '2017':
                     this.cnt.showTips('使用了旧的房间号 error at 2017') ;
@@ -671,7 +737,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 // this.cnt.cnt_sendEndCoin( '1002988','' )
 
                 // this.cnt.cnt_timer('6')
-
 
                 // 模拟点球
                 // var spotkick_style = [["1", "1"], ["0", "1"], ["1", "1"], ["0", "0"], ["0", "0"]]
