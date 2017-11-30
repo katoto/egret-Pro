@@ -5,7 +5,6 @@ class Cnt extends egret.DisplayObjectContainer{
     }
     // 缩放系数
     private scale:number = window['store'].scale;
-   
 
     // 比赛进程 1/4 / 1/2  / 决赛
     private matchPro = '决赛';
@@ -44,7 +43,6 @@ class Cnt extends egret.DisplayObjectContainer{
 
     private penalty3 ; private bgMask3;
     private penalty_point3 ; private bgMask_point3;
-
     //冠军
     private champion:egret.DisplayObjectContainer;
     private championText:egret.TextField;
@@ -106,12 +104,9 @@ class Cnt extends egret.DisplayObjectContainer{
         this.textT.y = 66;
         this.bgCourtWrap.addChild( this.textT );
 
-
         this.fieldContain = new Field_ball_contain();
         window['store']['$fieldContain'] = this.fieldContain ;
         this.bgCourtWrap.addChild(this.fieldContain);
-
-
 
 
     //     //决赛的开奖-点球

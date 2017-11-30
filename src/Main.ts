@@ -182,7 +182,7 @@ class Main extends egret.DisplayObjectContainer {
      
 
         // 晋级  缺动画
-        // this.promotion = new Promotion();
+        this.promotion = new Promotion();
         // this.addChild(this.promotion)
 
         // 弹窗实例,竞猜开始or竞猜完毕
@@ -191,8 +191,9 @@ class Main extends egret.DisplayObjectContainer {
         // this.addChild(this.pop);
 
         //杯赛过场change
-        // this.change = new Change();
-        // this.change.x = 0;
+        this.change = new Change();
+        this.change.x = 0;
+
         // this.addChild( this.change );
 
         // setTimeout(()=>{
@@ -408,6 +409,53 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                             // 切换场地  用
                             // this.cnt.proTeam('https://www.google.co.jp/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png');
                              //晋升
+                        }
+
+                        
+                        if( $msgObjBody.stageid){
+                            switch( $msgObjBody.stageid  ){
+                                case '1':
+                                    // 出现换厂
+                                    if( $msgObjBody.matches && $msgObjBody.room_info ){
+                                        // 更新数据
+                                        this.change.upChangeMsg(  $msgObjBody.matches , $msgObjBody.room_info );
+                                        if( !!this.change ){
+                                            this.addChild( this.change );
+                                            setTimeout(()=>{
+                                                egret.Tween.get( this.change ).to( { x : -750 }, 600 ).call(()=>{
+                                                    if( this.change.parent ){
+                                                        this.removeChild( this.change ) ;
+                                                    }
+                                                });  
+                                            },2500)                                    
+                                        }
+                                    }
+                                ;break;
+                                case '2':
+                                    // 4 ==> 2 的动画  ( 转场的声音 )
+                                    if( !!this.promotion ){
+                                        this.addChild(this.promotion)
+                                    }
+                                    this.promotion.moveSecond( $msgObjBody.pre_result );
+                                    setTimeout(()=>{
+                                        if( this.promotion.parent ){
+                                            this.removeChild( this.promotion )
+                                        }
+                                    },2500)
+                                ;break;
+                                case '3':
+                                    // 2 == > 1 动画 ( 转场的声音 )
+                                    if( !!this.promotion ){
+                                        this.addChild(this.promotion)
+                                    }
+                                    this.promotion.moveThree( $msgObjBody.pre_result ) ;
+                                    setTimeout(()=>{
+                                        if( this.promotion.parent ){
+                                            this.removeChild( this.promotion )
+                                        }
+                                    },2500)
+                                ;break;
+                            }
 
                         }
 
@@ -585,10 +633,16 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 case '2025':
                     // 提出用户 展现弹窗
                 ;break;
-
-
+                case '2016':
+                    // 被提出
+                    this.cnt.showTips('你已经被踢出') ;
+                ;break;
+                case '2017':
+                    this.cnt.showTips('使用了旧的房间号 error at 2017') ;
+                ;break
             }
             setTimeout(()=>{
+
                 // this.cnt.cnt_Other_Coin('10015131' , '1' ,'' ,'111' )
                 // console.log('收起金币 测试 ok')
                 // this.cnt.cnt_collectCoin()
@@ -609,7 +663,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 //     this.cnt.cleanAllPenalty() ;
                 // },5000)
 
-                this.cnt.showTips('tips 测试')
+                // this.cnt.showTips('tips 测试')
 
             },3000)
         }
