@@ -518,25 +518,25 @@ class Cnt extends egret.DisplayObjectContainer{
                 championName = this.fieldContain[ $store['matFindField'][ allResult.matchid ] ].getFieldImg();
                 console.log( championName ) ;
 
-                    // if( parseInt ( allResult.score[0] ) > parseInt ( allResult.score[2] ) ){
-                    //     this.showChampion( championName['l_name'] )
-                    // }else{
-                    //     this.showChampion( championName['r_name'] )
-                    // }
-
-                // if( allResult[i].is_spotkick === '0' ){
-                //     if( parseInt ( allResult.score[0] ) > parseInt ( allResult.score[2] ) ){
-                //         this.showChampion( championName['l_name'] )
-                //     }else{
-                //         this.showChampion( championName['r_name'] )
-                //     }
+                // if( parseInt ( allResult.score[0] ) > parseInt ( allResult.score[2] ) ){
+                //     this.showChampion( championName['l_name'] )
                 // }else{
-                //     if( parseInt( allResult[i].spotkick[0] ) > parseInt( allResult[i].spotkick[2] ) ){
-                //         this.fieldContain.showWinLocation( allResult[i].matchid , '_l' ) ;
-                //     }else{
-                //         this.fieldContain.showWinLocation( allResult[i].matchid , '_r' ) ;
-                //     }
+                //     this.showChampion( championName['r_name'] )
                 // }
+
+                if( allResult.is_spotkick === '0' ){
+                    if( parseInt ( allResult.score[0] ) > parseInt ( allResult.score[2] ) ){
+                        this.showChampion( championName['l_name'] )
+                    }else{
+                        this.showChampion( championName['r_name'] )
+                    }
+                }else{
+                    if( parseInt ( allResult.spotkick[0] ) > parseInt ( allResult.spotkick[2] ) ){
+                        this.showChampion( championName['l_name'] )
+                    }else{
+                        this.showChampion( championName['r_name'] )
+                    }
+                }
 
 
 
