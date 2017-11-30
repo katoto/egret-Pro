@@ -195,18 +195,16 @@ class Main extends egret.DisplayObjectContainer {
         //杯赛过场change
         this.change = new Change();
         this.change.x = 0;
-
-        //被踢出房间
-        this.out = new Pop02Out();
-        this.addChild(this.out);
-
-
         // this.addChild( this.change );
 
         // setTimeout(()=>{
         //     egret.Tween.get( this.change ).to({x:-750},200);  
         //     console.log('move')
         // },2000)
+
+         //被踢出房间
+        this.out = new Pop02Out();
+        // this.addChild(this.out);
 
         //杯赛晋升
 
@@ -487,7 +485,10 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 case '2019':
                     // start_guess  去文案
                     this.start_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-begin_png');
+                    this.start_pop.y = 227;
+                    this.start_pop.alpha = 0;
                     this.addChild( this.start_pop );
+                    egret.Tween.get( this.start_pop ).to({alpha:1},200).to({y:0},200);
 
                     if( $msgObjBody ){
                         $store['orderObj']['expect'] = $msgObjBody.expect ;
@@ -529,7 +530,11 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
 
                     // 停止竞猜 直接移除定时器 加入开始
                     this.stop_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-over_png' );
+                    this.stop_pop.y = 227;
+                    this.stop_pop.alpha = 0;
                     this.addChild( this.stop_pop );
+                    egret.Tween.get( this.stop_pop ).to({alpha:1},200).to({y:0},200);
+                    
 
                     // 移除文案
                     this.cnt.cnt_upTextTips('');

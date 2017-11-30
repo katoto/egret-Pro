@@ -67,6 +67,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         this.field44.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_44Evt ,this)
         this.courtWrap4.addChild(this.field44);
 
+ 
     }
 
         // 放入4个场地

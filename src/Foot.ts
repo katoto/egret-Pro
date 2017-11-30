@@ -12,7 +12,11 @@ class Foot extends egret.DisplayObjectContainer{
         super();
         this.drawFoot();
     }
+    private start_pop = null;
+    private stop_pop = null ;
+    
     private drawFoot(){
+
         //创建 URLLoader 对象
         var loader:egret.URLLoader = new egret.URLLoader();
         //设置加载方式为声音
@@ -34,7 +38,7 @@ class Foot extends egret.DisplayObjectContainer{
 
          // 规则
          let popRule = new Pop02RuleC();
-         
+
          let btnRule:egret.Bitmap = new egret.Bitmap(RES.getRes('rule_png'));
          btnRule.x = 0;
          btnRule.y = 0;
