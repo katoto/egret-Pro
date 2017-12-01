@@ -542,8 +542,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let currQueryStr = '';
         let currMatchData = this.field22.getCurrMatchData();
 
-        console.log(x);
-        console.log(y)
         if( y>594 && y <770 ){
             if($store['unableClick']){
                 // 不可点击
