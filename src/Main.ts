@@ -598,8 +598,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     this.stop_pop.y = 227;
                     this.addChild( this.stop_pop );
                     egret.Tween.get( this.stop_pop ).to({y:0},200);
-                    
-                    
 
                     // 移除文案
                     this.cnt.cnt_upTextTips('');
@@ -668,7 +666,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     }else{
                         console.warn( '2007 派奖数据有误' )
                     }
-
                     //  去除所有的 进球投注区
                     // this.cnt.cnt_sendEndCoin( '1002999','' )
                 ;break;

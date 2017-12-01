@@ -280,7 +280,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
             if( res && res.status === '100' ){
                 this.onTouch();
-                
+
     $store_coinNum[currMatchData.matchid]['my_golds_r'] = $store_coinNum[currMatchData.matchid]['my_golds_r'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) + $store.curr_btn_coin :
     parseInt ( $store.curr_btn_coin );  
     $store_coinNum[currMatchData.matchid]['away_golds'] = $store_coinNum[currMatchData.matchid]['away_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['away_golds'] ) + $store.curr_btn_coin : 
@@ -709,7 +709,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             this.addChild(gold);
         }
 
-
         if( $store['userPositionLocal'][uid] && $store['userPositionLocal'][uid] === '1'){
             $store['userPositionObj'][0].x = $store['stage_anWidth'] ;
             $store['userPositionObj'][0].y = 1000
@@ -726,6 +725,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             newEndLocal_x = $store['userPositionObj'][newEndNum].x + 584;
         }
         newEndLocal_y =  $store['userPositionObj'][newEndNum].y + 72;
+
+        console.log( newEndLocal_x )
+        console.log( newEndLocal_y )
+
         setTimeout(()=>{
             egret.Tween.get( goldArr[0] ).to({
                 x: newEndLocal_x ,
