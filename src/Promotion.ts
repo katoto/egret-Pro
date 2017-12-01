@@ -115,12 +115,12 @@ class Promotion extends eui.UILayer{
         // this.rightTeam11.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.rightTeam11.width = 68;
         this.rightTeam11.height = 68;
-        this.rightTeam11.x = 374;
+        this.rightTeam11.x = 371;
         this.rightTeam11.y = 521;
         this.wrap.addChild(this.rightTeam11);
 
         this.localObj['rightTeam11'] = {
-            x:374 ,
+            x:371 ,
             y:521 ,
         }
 
@@ -260,18 +260,18 @@ class Promotion extends eui.UILayer{
         this.rightTeam22 = new eui.Image();
         this.rightTeam22.width = 68;
         this.rightTeam22.height = 68;
-        this.rightTeam22.x = 374;
+        this.rightTeam22.x = 371;
         this.rightTeam22.y = 743;
 
         this.rightTeam22_copy = new eui.Image();
         this.rightTeam22_copy.width = 68;
         this.rightTeam22_copy.height = 68;
-        this.rightTeam22_copy.x = 374;
+        this.rightTeam22_copy.x = 371;
         this.rightTeam22_copy.y = 743;
         this.wrap.addChild( this.rightTeam22_copy );
 
         this.localObj['rightTeam22'] = {
-            x:374 ,
+            x:371 ,
             y:743 ,
         }
 

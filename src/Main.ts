@@ -207,8 +207,11 @@ class Main extends egret.DisplayObjectContainer {
             this.out = new Pop02Out();
         },2000)
 
+<<<<<<< HEAD
         //提示 网络异常  是否重新连接 之类的
 
+=======
+>>>>>>> 65dcfd4f80b9c186a138e6f47ef805d80d5588d9
         //杯赛晋升
 
         //test
