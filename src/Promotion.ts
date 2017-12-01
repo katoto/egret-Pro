@@ -93,15 +93,15 @@ class Promotion extends eui.UILayer{
         //队伍icon
         this.leftTeam11 = new eui.Image();
         // this.leftTeam11.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
-        this.leftTeam11.width = 62;
-        this.leftTeam11.height = 62;
-        this.leftTeam11.x = 211;
-        this.leftTeam11.y = 524;
+        this.leftTeam11.width = 68;
+        this.leftTeam11.height = 68;
+        this.leftTeam11.x = 208;
+        this.leftTeam11.y = 521;
         this.wrap.addChild(this.leftTeam11);
 
         this.localObj['leftTeam11'] = {
-            x:211 ,
-            y:524 ,
+            x:208 ,
+            y:521 ,
         }
 
         //  右边
@@ -113,15 +113,15 @@ class Promotion extends eui.UILayer{
         //队伍icon
         this.rightTeam11 = new eui.Image();
         // this.rightTeam11.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
-        this.rightTeam11.width = 62;
-        this.rightTeam11.height = 62;
+        this.rightTeam11.width = 68;
+        this.rightTeam11.height = 68;
         this.rightTeam11.x = 374;
-        this.rightTeam11.y = 524;
+        this.rightTeam11.y = 521;
         this.wrap.addChild(this.rightTeam11);
 
         this.localObj['rightTeam11'] = {
             x:374 ,
-            y:524 ,
+            y:521 ,
         }
 
         this.teamF11 = new egret.TextField();
@@ -152,23 +152,23 @@ class Promotion extends eui.UILayer{
         //队伍icon
         this.leftTeam21 = new eui.Image();
         // this.leftTeam21.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
-        this.leftTeam21.width = 62;
-        this.leftTeam21.height = 62;
-        this.leftTeam21.x = 211;
-        this.leftTeam21.y = 303;
+        this.leftTeam21.width = 68;
+        this.leftTeam21.height = 68;
+        this.leftTeam21.x = 208;
+        this.leftTeam21.y = 300;
         this.wrap.addChild(this.leftTeam21);
 
         this.leftTeam21_copy = new eui.Image();
         // this.leftTeam21.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
-        this.leftTeam21_copy.width = 62;
-        this.leftTeam21_copy.height = 62;
-        this.leftTeam21_copy.x = 211;
-        this.leftTeam21_copy.y = 303;
+        this.leftTeam21_copy.width = 68;
+        this.leftTeam21_copy.height = 68;
+        this.leftTeam21_copy.x = 208;
+        this.leftTeam21_copy.y = 300;
         this.wrap.addChild(this.leftTeam21_copy);
 
         this.localObj['leftTeam21'] = {
-            x:211 ,
-            y:303 ,
+            x:208 ,
+            y:300 ,
         }
 
         //  右边
@@ -184,22 +184,22 @@ class Promotion extends eui.UILayer{
         // wrap.addChild(proWin010)
         //队伍icon
         this.rightTeam21 = new eui.Image();
-        this.rightTeam21.width = 62;
-        this.rightTeam21.height = 62;
-        this.rightTeam21.x = 374;
-        this.rightTeam21.y = 303;
+        this.rightTeam21.width = 68;
+        this.rightTeam21.height = 68;
+        this.rightTeam21.x = 371;
+        this.rightTeam21.y = 300;
         this.wrap.addChild(this.rightTeam21);
 
         this.rightTeam21_copy = new eui.Image();
-        this.rightTeam21_copy.width = 62;
-        this.rightTeam21_copy.height = 62;
-        this.rightTeam21_copy.x = 374;
-        this.rightTeam21_copy.y = 303;
+        this.rightTeam21_copy.width = 68;
+        this.rightTeam21_copy.height = 68;
+        this.rightTeam21_copy.x = 371;
+        this.rightTeam21_copy.y = 300;
         this.wrap.addChild( this.rightTeam21_copy );
 
         this.localObj['rightTeam21'] = {
-            x:374 ,
-            y:303 ,
+            x:371 ,
+            y:300 ,
         }
 
         this.teamF21 = new egret.TextField();
@@ -228,22 +228,22 @@ class Promotion extends eui.UILayer{
         // wrap.addChild( this.proWin22_l )
         //队伍icon
         this.leftTeam22 = new eui.Image();
-        this.leftTeam22.width = 62;
-        this.leftTeam22.height = 62;
-        this.leftTeam22.x = 211;
-        this.leftTeam22.y = 746;
+        this.leftTeam22.width = 68;
+        this.leftTeam22.height = 68;
+        this.leftTeam22.x = 208;
+        this.leftTeam22.y = 743;
         this.wrap.addChild(this.leftTeam22);
 
         this.leftTeam22_copy = new eui.Image();
-        this.leftTeam22_copy.width = 62;
-        this.leftTeam22_copy.height = 62;
-        this.leftTeam22_copy.x = 211;
-        this.leftTeam22_copy.y = 746;
+        this.leftTeam22_copy.width = 68;
+        this.leftTeam22_copy.height = 68;
+        this.leftTeam22_copy.x = 208;
+        this.leftTeam22_copy.y = 743;
         this.wrap.addChild( this.leftTeam22_copy );
 
         this.localObj['leftTeam22'] = {
-            x:211 ,
-            y:746 ,
+            x:208 ,
+            y:743 ,
         }
 
         // 插入边框
@@ -258,21 +258,21 @@ class Promotion extends eui.UILayer{
         // this.wrap.addChild(this.proWin22_r)
         //队伍icon
         this.rightTeam22 = new eui.Image();
-        this.rightTeam22.width = 62;
-        this.rightTeam22.height = 62;
+        this.rightTeam22.width = 68;
+        this.rightTeam22.height = 68;
         this.rightTeam22.x = 374;
-        this.rightTeam22.y = 746;
+        this.rightTeam22.y = 743;
 
         this.rightTeam22_copy = new eui.Image();
-        this.rightTeam22_copy.width = 62;
-        this.rightTeam22_copy.height = 62;
+        this.rightTeam22_copy.width = 68;
+        this.rightTeam22_copy.height = 68;
         this.rightTeam22_copy.x = 374;
-        this.rightTeam22_copy.y = 746;
+        this.rightTeam22_copy.y = 743;
         this.wrap.addChild( this.rightTeam22_copy );
 
         this.localObj['rightTeam22'] = {
             x:374 ,
-            y:746 ,
+            y:743 ,
         }
 
         this.wrap.addChild(this.rightTeam22);
@@ -301,22 +301,22 @@ class Promotion extends eui.UILayer{
         // wrap.addChild(proWin01)
         
         this.leftTeam41 = new eui.Image();
-        this.leftTeam41.width = 62;
-        this.leftTeam41.height = 62;
-        this.leftTeam41.x = 35;
-        this.leftTeam41.y = 60;
+        this.leftTeam41.width = 68;
+        this.leftTeam41.height = 68;
+        this.leftTeam41.x = 32;
+        this.leftTeam41.y = 57;
         this.wrap.addChild(this.leftTeam41);
 
         this.leftTeam41_copy = new eui.Image();
-        this.leftTeam41_copy.width = 62;
-        this.leftTeam41_copy.height = 62;
-        this.leftTeam41_copy.x = 35;
-        this.leftTeam41_copy.y = 60;
+        this.leftTeam41_copy.width = 68;
+        this.leftTeam41_copy.height = 68;
+        this.leftTeam41_copy.x = 32;
+        this.leftTeam41_copy.y = 57;
         this.wrap.addChild(this.leftTeam41_copy);
 
         this.localObj['leftTeam41'] = {
-            x:35 ,
-            y:60 ,
+            x:32 ,
+            y:57 ,
         }
 
         // 插入边框
@@ -331,21 +331,21 @@ class Promotion extends eui.UILayer{
         // wrap.addChild(proWin02)
         //队伍icon
         this.rightTeam41 = new eui.Image();
-        this.rightTeam41.width = 62;
-        this.rightTeam41.height = 62;
-        this.rightTeam41.x = 198;
-        this.rightTeam41.y = 60;
+        this.rightTeam41.width = 68;
+        this.rightTeam41.height = 68;
+        this.rightTeam41.x = 195;
+        this.rightTeam41.y = 57;
         this.wrap.addChild(this.rightTeam41);
 
         this.rightTeam41_copy = new eui.Image();
-        this.rightTeam41_copy.width = 62;
-        this.rightTeam41_copy.height = 62;
-        this.rightTeam41_copy.x = 198;
-        this.rightTeam41_copy.y = 60;
+        this.rightTeam41_copy.width = 68;
+        this.rightTeam41_copy.height = 68;
+        this.rightTeam41_copy.x = 195;
+        this.rightTeam41_copy.y = 57;
         this.wrap.addChild(this.rightTeam41_copy);
 this.localObj['rightTeam41'] = {
-            x:198 ,
-            y:60 ,
+            x:195 ,
+            y:57 ,
         }
 
         this.teamF41 = new egret.TextField();
@@ -373,22 +373,22 @@ this.localObj['rightTeam41'] = {
         // wrap.addChild(proWin03)
         //队伍icon
         this.leftTeam42 = new eui.Image();
-        this.leftTeam42.width = 62;
-        this.leftTeam42.height = 62;
-        this.leftTeam42.x = 398;
-        this.leftTeam42.y = 60;
+        this.leftTeam42.width = 68;
+        this.leftTeam42.height = 68;
+        this.leftTeam42.x = 395;
+        this.leftTeam42.y = 57;
         this.wrap.addChild(this.leftTeam42);
 
         this.leftTeam42_copy = new eui.Image();
-        this.leftTeam42_copy.width = 62;
-        this.leftTeam42_copy.height = 62;
-        this.leftTeam42_copy.x = 398;
-        this.leftTeam42_copy.y = 60;
+        this.leftTeam42_copy.width = 68;
+        this.leftTeam42_copy.height = 68;
+        this.leftTeam42_copy.x = 395;
+        this.leftTeam42_copy.y = 57;
         this.wrap.addChild( this.leftTeam42_copy );
 
         this.localObj['leftTeam42'] = {
-            x:398 ,
-            y:60 ,
+            x:395 ,
+            y:57 ,
         }
 
         let rbgBorder42:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
@@ -402,22 +402,22 @@ this.localObj['rightTeam41'] = {
         // wrap.addChild(proWin04)
         //队伍icon
         this.rightTeam42 = new eui.Image();
-        this.rightTeam42.width = 62;
-        this.rightTeam42.height = 62;
-        this.rightTeam42.x = 561;
-        this.rightTeam42.y = 60;
+        this.rightTeam42.width = 68;
+        this.rightTeam42.height = 68;
+        this.rightTeam42.x = 558;
+        this.rightTeam42.y = 57;
         this.wrap.addChild(this.rightTeam42);
 
         this.rightTeam42_copy = new eui.Image();
-        this.rightTeam42_copy.width = 62;
-        this.rightTeam42_copy.height = 62;
-        this.rightTeam42_copy.x = 561;
-        this.rightTeam42_copy.y = 60;
+        this.rightTeam42_copy.width = 68;
+        this.rightTeam42_copy.height = 68;
+        this.rightTeam42_copy.x = 558;
+        this.rightTeam42_copy.y = 57;
         this.wrap.addChild(this.rightTeam42_copy);
 
         this.localObj['rightTeam42'] = {
-            x:561 ,
-            y:60 ,
+            x:558 ,
+            y:57 ,
         }
 
         this.teamF42 = new egret.TextField();
@@ -444,22 +444,22 @@ this.localObj['rightTeam41'] = {
         // wrap.addChild(proWin05)
         //队伍icon
         this.leftTeam43 = new eui.Image();
-        this.leftTeam43.width = 62;
-        this.leftTeam43.height = 62;
-        this.leftTeam43.x = 35;
-        this.leftTeam43.y = 971;
+        this.leftTeam43.width = 68;
+        this.leftTeam43.height = 68;
+        this.leftTeam43.x = 32;
+        this.leftTeam43.y = 968;
         this.wrap.addChild(this.leftTeam43);
 
         this.leftTeam43_copy = new eui.Image();
-        this.leftTeam43_copy.width = 62;
-        this.leftTeam43_copy.height = 62;
-        this.leftTeam43_copy.x = 35;
-        this.leftTeam43_copy.y = 971;
+        this.leftTeam43_copy.width = 68;
+        this.leftTeam43_copy.height = 68;
+        this.leftTeam43_copy.x = 32;
+        this.leftTeam43_copy.y = 968;
         this.wrap.addChild(this.leftTeam43_copy);
 
         this.localObj['leftTeam43'] = {
-            x:35 ,
-            y:971 ,
+            x:32 ,
+            y:968 ,
         }
 
         //  右边
@@ -475,22 +475,22 @@ this.localObj['rightTeam41'] = {
         // wrap.addChild(proWin06)
         //队伍icon
         this.rightTeam43 = new eui.Image();
-        this.rightTeam43.width = 62;
-        this.rightTeam43.height = 62;
-        this.rightTeam43.x = 198;
-        this.rightTeam43.y = 971;
+        this.rightTeam43.width = 68;
+        this.rightTeam43.height = 68;
+        this.rightTeam43.x = 195;
+        this.rightTeam43.y = 968;
         this.wrap.addChild(this.rightTeam43);
 
         this.rightTeam43_copy = new eui.Image();
-        this.rightTeam43_copy.width = 62;
-        this.rightTeam43_copy.height = 62;
-        this.rightTeam43_copy.x = 198;
-        this.rightTeam43_copy.y = 971;
+        this.rightTeam43_copy.width = 68;
+        this.rightTeam43_copy.height = 68;
+        this.rightTeam43_copy.x = 195;
+        this.rightTeam43_copy.y = 968;
         this.wrap.addChild(this.rightTeam43_copy);
 
         this.localObj['rightTeam43'] = {
-            x:198 ,
-            y:971 ,
+            x:195 ,
+            y:968 ,
         }
 
         this.teamF43 = new egret.TextField();
@@ -517,22 +517,22 @@ this.localObj['rightTeam41'] = {
         // wrap.addChild(proWin07)
         //队伍icon
         this.leftTeam44 = new eui.Image();
-        this.leftTeam44.width = 62;
-        this.leftTeam44.height = 62;
-        this.leftTeam44.x = 398;
-        this.leftTeam44.y = 971;
+        this.leftTeam44.width = 68;
+        this.leftTeam44.height = 68;
+        this.leftTeam44.x = 395;
+        this.leftTeam44.y = 968;
         this.wrap.addChild(this.leftTeam44);
 
         this.leftTeam44_copy = new eui.Image();
-        this.leftTeam44_copy.width = 62;
-        this.leftTeam44_copy.height = 62;
-        this.leftTeam44_copy.x = 398;
-        this.leftTeam44_copy.y = 971;
+        this.leftTeam44_copy.width = 68;
+        this.leftTeam44_copy.height = 68;
+        this.leftTeam44_copy.x = 395;
+        this.leftTeam44_copy.y = 968;
         this.wrap.addChild(this.leftTeam44_copy);
 
         this.localObj['leftTeam44'] = {
-            x:398 ,
-            y:971 ,
+            x:395 ,
+            y:968 ,
         }
 
         let rbgBorder44:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
@@ -545,22 +545,22 @@ this.localObj['rightTeam41'] = {
         this.proWin44_r.y = 951;
         // wrap.addChild(proWin08)
         this.rightTeam44 = new eui.Image();
-        this.rightTeam44.width = 62;
-        this.rightTeam44.height = 62;
-        this.rightTeam44.x = 561;
-        this.rightTeam44.y = 971;
+        this.rightTeam44.width = 68;
+        this.rightTeam44.height = 68;
+        this.rightTeam44.x = 558;
+        this.rightTeam44.y = 968;
         this.wrap.addChild(this.rightTeam44);
 
         this.rightTeam44_copy = new eui.Image();
-        this.rightTeam44_copy.width = 62;
-        this.rightTeam44_copy.height = 62;
-        this.rightTeam44_copy.x = 561;
-        this.rightTeam44_copy.y = 971;
+        this.rightTeam44_copy.width = 68;
+        this.rightTeam44_copy.height = 68;
+        this.rightTeam44_copy.x = 558;
+        this.rightTeam44_copy.y = 968;
         this.wrap.addChild(this.rightTeam44_copy);
 
         this.localObj['rightTeam44'] = {
-            x:561 ,
-            y:971 ,
+            x:558 ,
+            y:968 ,
         }
 
         this.teamF44 = new egret.TextField();
