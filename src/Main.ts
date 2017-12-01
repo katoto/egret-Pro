@@ -207,11 +207,8 @@ class Main extends egret.DisplayObjectContainer {
             this.out = new Pop02Out();
         },2000)
 
-<<<<<<< HEAD
         //提示 网络异常  是否重新连接 之类的
 
-=======
->>>>>>> 65dcfd4f80b9c186a138e6f47ef805d80d5588d9
         //杯赛晋升
 
         //test
@@ -690,11 +687,8 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
             $store_coinNum[$msgObjBody.matchid].away_golds = $store_coinNum[$msgObjBody.matchid]['away_golds'] ? parseInt ( $store_coinNum[$msgObjBody.matchid]['away_golds'] ) + parseInt( $msgObjBody.bet_golds )  :
             $msgObjBody.bet_golds ;
                         }
-
-                        // 更新对应的总的数据 。。。
-                        
                         //  执行金币动画  
-                        // matchid:string , selection:string , uid:string , bet_golds:string
+                        //  matchid:string , selection:string , uid:string , bet_golds:string
                         this.cnt.cnt_Other_Coin( $msgObjBody.matchid , $msgObjBody.selection ,$msgObjBody.uid, $msgObjBody.bet_golds );
                     }
 

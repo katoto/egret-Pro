@@ -726,18 +726,30 @@ this.localObj['rightTeam41'] = {
             }
 
         }else if( move === '2' ){
+            let oldLocalObj = {} ;
             for( let i=0;i<2 ;i++ ){
+                // 移动回去
+                oldLocalObj['oldLocal'+ i ] = {
+                    x : this[ secondWinName[i] ].x ,
+                    y : this[ secondWinName[i] ].y 
+                }
                 if( ~secondWinName[i].indexOf( 'Team21' ) ){
                     egret.Tween.get( this[ secondWinName[i] ] ).to( {
                         x: this['leftTeam11'].x ,
                         y: this['leftTeam11'].y
-                    }, 700 );
+                    }, 700 ).wait(2000).to({
+                        x: oldLocalObj['oldLocal'+ i ].x ,
+                        y: oldLocalObj['oldLocal'+ i ].y
+                    });
                 }
                 if( ~secondWinName[i].indexOf( 'Team22' ) ){
                     egret.Tween.get( this[ secondWinName[i] ] ).to( {
                         x: this['rightTeam11'].x ,
                         y: this['rightTeam11'].y
-                    }, 700 );
+                    }, 700 ).wait(2000).to({
+                        x: oldLocalObj['oldLocal'+ i ].x ,
+                        y: oldLocalObj['oldLocal'+ i ].y
+                    });
                 }
             }
 
