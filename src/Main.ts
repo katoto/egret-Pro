@@ -36,6 +36,11 @@ class Main extends egret.DisplayObjectContainer {
     private Height;
     private anWidth;
     private anHeight;
+
+    //声音
+    private startOver:egret.Sound;
+    private mpromotion:egret.Sound;
+    private mchange:egret.Sound;
     
     private position:Array<number> =  [];
 
@@ -146,9 +151,17 @@ class Main extends egret.DisplayObjectContainer {
         this.anWidth = $store['stage_anWidth'] = this.Width/2;
         const anHeight =  $store['stage_anHeight'] = this.Height/2;
         window['store'].scale = ( this.Height / 1334 ).toFixed(2) ;
-        
 
-
+        // 声音
+        /**
+         * mchange 登场
+         * startOver 比赛开始or结束
+         * mpromotion  晋级
+         * 
+         */
+        this.startOver = RES.getRes("start_mp3");
+        this.mpromotion = RES.getRes("promotion_mp3");
+        this.mchange = RES.getRes("change_mp3");
 
         // let sky = this.createBitmapByName("btn-500_png");
         // this.addChild(sky)
@@ -490,6 +503,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                         // 更新数据
                                         this.change.upChangeMsg(  $msgObjBody.matches , $msgObjBody.room_info );
                                         if( !!this.change ){
+                                            this.mchange.play(0,1);
                                             this.addChild( this.change );
                                             setTimeout(()=>{
                                                 egret.Tween.get( this.change ).to( { x : -750 }, 700 ).call(()=>{
@@ -504,7 +518,8 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                 case '2':
                                     // 4 ==> 2 的动画  ( 转场的声音 )
                                     if( !!this.promotion ){
-                                        this.addChild(this.promotion)
+                                        this.mpromotion.play(0,1);
+                                        this.addChild(this.promotion);
                                     }
                                     this.promotion.moveSecond( $msgObjBody.pre_result );
                                     setTimeout(()=>{
@@ -516,6 +531,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                 case '3':
                                     // 2 == > 1 动画 ( 转场的声音 )
                                     if( !!this.promotion ){
+                                        this.mpromotion.play(0,1);
                                         this.addChild(this.promotion)
                                     }
                                     this.promotion.moveThree( $msgObjBody.pre_result ) ;
@@ -552,6 +568,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     this.start_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-begin_png');
                     this.start_pop.y = 227;
                     this.addChild( this.start_pop );
+                    this.startOver.play(0,1);
                     egret.Tween.get( this.start_pop ).to({y:0},200);
                     if( $msgObjBody ){
                         $store['orderObj']['expect'] = $msgObjBody.expect ;
@@ -597,6 +614,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     this.stop_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-over_png' );
                     this.stop_pop.y = 227;
                     this.addChild( this.stop_pop );
+                    this.startOver.play(0,1);
                     egret.Tween.get( this.stop_pop ).to({y:0},200);
                     
                     

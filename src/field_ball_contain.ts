@@ -16,33 +16,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         super();
         this.drawField();
     }
-    private onLoadComplete(event:egret.Event):void {
-        var loader:egret.URLLoader = <egret.URLLoader>event.target;
-        //获取加载到的 Sound 对象
-        var sound:egret.Sound = <egret.Sound>loader.data;
-        this.sound = sound;
-    }
-    private sound:egret.Sound;
-    private soundChannel:egret.SoundChannel;
-    private onTouch( ){
-        var sound = this.sound;
-        var channel:egret.SoundChannel = this.soundChannel;
-        //使用SoundChannel播放音频
-        channel = sound.play(0,1);
-        //Egret 3.0.4 新增获取音频长度 length 属性。
-        //保存soundChannel对象
-        this.soundChannel = channel;
-    }
+    //声音
+    private musicgold:egret.Sound;
     private drawField(){
-        //创建 URLLoader 对象
-        var loader:egret.URLLoader = new egret.URLLoader();
-        //设置加载方式为声音
-        loader.dataFormat = egret.URLLoaderDataFormat.SOUND;
-        //添加加载完成侦听
-        loader.addEventListener(egret.Event.COMPLETE, this.onLoadComplete, this);
-        //开始加载
-        loader.load(new egret.URLRequest("resource/assets/music/bet.mp3"));
-
+         this.musicgold = RES.getRes("bet_mp3");
 
         // 放出舞台是否去除事件绑定提高性能？
 
@@ -232,7 +209,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
     $store_coinNum[currMatchData.matchid]['home_golds'] = $store_coinNum[currMatchData.matchid]['home_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['home_golds'] ) + $store.curr_btn_coin :
     parseInt ( $store.curr_btn_coin );
 
-                this.onTouch();
+                this.musicgold.play(0,1);
 
                 if( res.data && res.data.total ){
                     $store['userMySelf'].setMyGold( res.data.total );
@@ -279,7 +256,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
         await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
             if( res && res.status === '100' ){
-                this.onTouch();
+                this.musicgold.play(0,1);
     $store_coinNum[currMatchData.matchid]['my_golds_r'] = $store_coinNum[currMatchData.matchid]['my_golds_r'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) + $store.curr_btn_coin :
     parseInt ( $store.curr_btn_coin );  
     $store_coinNum[currMatchData.matchid]['away_golds'] = $store_coinNum[currMatchData.matchid]['away_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['away_golds'] ) + $store.curr_btn_coin : 
