@@ -127,7 +127,7 @@ class Promotion extends eui.UILayer{
         this.teamF11 = new egret.TextField();
         this.teamF11.x = 176;
         this.teamF11.y = 522;
-        // this.teamF11.text = '3:2';
+        this.teamF11.text = 'VS';
         this.teamF11.size = 32;
         this.teamF11.textColor = 0xffffff;
         this.teamF11.width = 300;
