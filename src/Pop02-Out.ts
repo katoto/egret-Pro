@@ -7,6 +7,9 @@ class Pop02Out extends egret.DisplayObjectContainer{
     private popTitle:egret.TextField;
     private cntText01:egret.TextField;
     private cntText02:egret.TextField;
+
+    private popClose:egret.Bitmap ;
+
     private drawPop(){
     
        //弹窗蒙层
@@ -46,7 +49,7 @@ class Pop02Out extends egret.DisplayObjectContainer{
        //段落1
        this.cntText01 = new egret.TextField();
        this.cntText01.y = 140;
-       this.cntText01.text = '您很久未操作了，是不是太累了，';
+    //    this.cntText01.text = '您很久未操作了，是不是太累了，';
        this.cntText01.size = 28;
        this.cntText01.textColor = 0xffffff;
        this.cntText01.width = 680;
@@ -58,7 +61,7 @@ class Pop02Out extends egret.DisplayObjectContainer{
        //段落2
        this.cntText02 = new egret.TextField();
        this.cntText02.y = 188;
-       this.cntText02.text = '休息一下，再开始游戏吧！';
+    //    this.cntText02.text = '休息一下，再开始游戏吧！';
        this.cntText02.size = 28;
        this.cntText02.textColor = 0xffffff;
        this.cntText02.width = 680;
@@ -68,15 +71,51 @@ class Pop02Out extends egret.DisplayObjectContainer{
        popWrap.addChild(this.cntText02); 
 
        //关闭按钮54*80
-       let popClose:egret.Bitmap = new egret.Bitmap(RES.getRes('pop-btn_png'));
-       popClose.x = 183;
-       popClose.y = 320;
-       popWrap.addChild(popClose);
-       popClose.touchEnabled = true;
-       popClose.addEventListener(egret.TouchEvent.TOUCH_TAP,()=>{
-           this.parent.removeChild(this) ;
-        //    window.location.href = 'https:www.baidu.com' ;
-       },this)
+       this.popClose = new egret.Bitmap(RES.getRes('pop-btn_png'));
+       this.popClose.x = 183;
+       this.popClose.y = 320;
+       popWrap.addChild(this.popClose);
+       this.popClose.touchEnabled = true;
+        // RES.removeEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
 
+    }
+
+    /**
+     *   长时间未操作 函数
+     */
+    private longTime_Fn(){
+        this.parent.removeChild(this) ;
+        // window.location.href = 'https:www.baidu.com' ;
+    }
+
+    /**
+     *  websocket error 函数
+     */
+    private socketErr_Fn(){
+        window.location.reload() ;
+    }
+
+    /**
+     *  长时间未操作
+     */
+    private showLongTime(){
+        this.cntText01.text = '您很久未操作了，是不是太累了，';
+        this.cntText02.text = '休息一下，再开始游戏吧！';
+
+        this.popClose.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.socketErr_Fn ,this) ;
+
+        this.popClose.addEventListener(egret.TouchEvent.TOUCH_TAP, this.longTime_Fn ,this) ;
+
+    }
+    /**
+     * websocket 链接error
+     */
+    private showSocketErr(){
+        this.cntText01.text = '网络连接异常，请重新连接';
+        this.cntText02.text = '';
+
+        this.popClose.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.longTime_Fn ,this) ;
+        
+        this.popClose.addEventListener(egret.TouchEvent.TOUCH_TAP, this.socketErr_Fn ,this) ;
     }
 }

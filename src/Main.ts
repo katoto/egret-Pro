@@ -1,21 +1,17 @@
 /**
  *  虚拟杯
- * ( 用户信息和场地优化 new实例减少 )
  */
 
 class Main extends egret.DisplayObjectContainer {
 
     /**
-     * 加载进度界面
-     * Process interface loading
+     *  loading
      */
     private loadingView: LoadingUI;
-
     /**
      * websocket
      */
     private webSocket:egret.WebSocket;
-
     //  头部lei
     private top;
     private cnt;
@@ -46,7 +42,6 @@ class Main extends egret.DisplayObjectContainer {
     // 竞猜开始文案
     private start_pop = null;
     private stop_pop = null ;
-   
 
     public constructor() {
         super();
@@ -55,7 +50,6 @@ class Main extends egret.DisplayObjectContainer {
    
     private onAddToStage(event: egret.Event) {
         egret.lifecycle.addLifecycleListener((context) => {
-            // custom lifecycle plugin
             context.onUpdate = () => {
             }
         })
@@ -74,7 +68,6 @@ class Main extends egret.DisplayObjectContainer {
         // this.stage.addChild(this.loadingView);
  
         //初始化Resource资源加载库
-        //initiate Resource loading library
         RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
         RES.loadConfig("resource/default.res.json", "resource/");
     }
@@ -142,8 +135,6 @@ class Main extends egret.DisplayObjectContainer {
         }
     }
 
-    
-
     /**
      * 创建游戏场景 ( 申请房间 、建立websocket)
      */
@@ -169,6 +160,12 @@ class Main extends egret.DisplayObjectContainer {
         this.cnt.y = 0;
         window['store']['$cnt'] = this.cnt ;
         this.addChild(this.cnt);
+
+        // setInterval(()=>{
+        //     console.log('++++++++++++++++')
+        //     console.log( this.cnt.numChildren )
+        //     console.log('-------------')
+        // },10000)
 
          //头部实例2
         this.top = new Top(this.Width);
@@ -206,21 +203,25 @@ class Main extends egret.DisplayObjectContainer {
         // },2000)
 
         //被踢出房间 的实例
-        // setTimeout(()=>{
-        //     this.out = new Pop02Out();
-        // },2000)
+        setTimeout(()=>{
+            this.out = new Pop02Out();
+        },2000)
 
         //提示 网络异常  是否重新连接 之类的
+<<<<<<< HEAD
+        // let out = new Pop02Out();
+=======
         let out = new Pop02Out();
         // this.addChild(out)
 
 
+>>>>>>> 8dcb6900f0edd93963c106bb9ddecd66f5b91c4c
 
         //杯赛晋升
 
         //test
-        let qqqq = new Test();
-        this.addChild(qqqq)
+        // let qqqq = new Test();
+        // this.addChild(qqqq)
         // 层级控制
         // this.setChildIndex(header,0)
         // this.setChildIndex(this.cnt,1)
@@ -337,7 +338,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
      */
     private onReceiveMess(e:egret.Event):void{
         let $store = window['store'];
-// event.updateAfterEvent();  //  什么时候进行强制刷新 ??????手机上用户立场 舞台不刷新 
+        // event.updateAfterEvent();  //  什么时候进行强制刷新 ??????手机上用户立场 舞台不刷新 
         let msg = this.webSocket.readUTF();
         if(~msg.indexOf('You said')|| !~msg.indexOf('{')){
             // console.log(msg)
@@ -408,21 +409,23 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                 // 可投注阶段
                                 case '2003': 
                                     $store['unableClick'] = false ;
-                                        // 请下注
-                                        switch ( $msgObjBody.stageid ){
-                                            case '1':
-                                                this.cnt.cnt_timer(( 30 - parseInt( $msgObjBody.process_time )).toString());
-                                            ;break;
-                                            case '2':
-                                                this.cnt.cnt_timer(( 25 - parseInt( $msgObjBody.process_time )).toString());
-                                            ;break;
-                                            case '3':
-                                                this.cnt.cnt_timer(( 20 - parseInt( $msgObjBody.process_time )).toString());
-                                            ;break;
-                                        }
-                                        if( !!this.cnt ){
-                                            this.cnt.cnt_upTextTips('请下注');
-                                        }
+                                    // 请下注
+                                    switch ( $msgObjBody.stageid ){
+                                        case '1':
+                                            this.cnt.cnt_timer(( 30 - parseInt( $msgObjBody.process_time )).toString());
+                                        ;break;
+                                        case '2':
+                                            this.cnt.cnt_timer(( 25 - parseInt( $msgObjBody.process_time )).toString());
+                                        ;break;
+                                        case '3':
+                                            this.cnt.cnt_timer(( 20 - parseInt( $msgObjBody.process_time )).toString());
+                                        ;break;
+                                    }
+                                    if( !!this.cnt ){
+                                        this.cnt.cnt_upTextTips('请下注');
+                                    }
+                                    // 处理 总金额的显示。
+
                                 ;break;
                                 case '2005':
                                     if( !!this.cnt ){
@@ -712,7 +715,8 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     // 被提出
                     this.cnt.showTips('你已经被踢出') ;
                     if( !!this.out ){
-                        this.addChild( this.out );
+                        this.out.showLongTime();
+                        this.addChild(this.out) ;
                     }
                     
                 ;break;
@@ -721,6 +725,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 ;break
             }
             setTimeout(()=>{
+
                 // this.cnt.cnt_Other_Coin('10015131' , '1' ,'' ,'111' )
                 // console.log('收起金币 测试 ok')
                 // this.cnt.cnt_collectCoin()
@@ -753,7 +758,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
         this.stage.removeChild(this.loadingView);
         setInterval(()=>{
             this.webSocket.writeUTF('p')
-
         },5000)
         this.webSocket.flush();
     }
@@ -764,13 +768,26 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
      *  onIOError  websock 接收消息
      */
     private onIOError():void{
-        console.error('linsten error')
+        if( !this.out.parent ){
+            if( !!this.out ){
+                this.out.showSocketErr();
+                this.addChild(this.out) ;
+            }
+            console.error('linsten error')
+        }
+
     }
     /**
      *  onCloseSock  websock 接收消息
      */
     private onCloseSock():void{
-        console.error( 'websock error' ) ;   
+        if( !this.out.parent ){
+            if( !!this.out ){
+                this.out.showSocketErr();
+                this.addChild(this.out) ;
+            }
+            console.error( 'websock error' ) ;   
+        }
     }
 
 }

@@ -176,7 +176,6 @@ class Cnt extends egret.DisplayObjectContainer{
         // this.bgCourtWrap.addChild(this.champion);
         // this.champion.addChild(this.championText); 
 
-
         //toast
         this.toast = new egret.DisplayObjectContainer();
         this.toast.width = 430;
@@ -185,7 +184,6 @@ class Cnt extends egret.DisplayObjectContainer{
         this.toast.anchorOffsetY = 45;
         this.toast.x =  window['store']['stage_anWidth'] ;
         this.toast.y =  window['store']['stage_anHeight'] ;
-        this.addChild(this.toast);
  
         this.toastBg = new egret.Bitmap(RES.getRes('bg-toast_png'));
         this.toastText = new egret.TextField();
@@ -196,9 +194,10 @@ class Cnt extends egret.DisplayObjectContainer{
         this.toastText.textAlign = egret.HorizontalAlign.CENTER;
         this.toastText.verticalAlign = egret.VerticalAlign.MIDDLE;
 
+        // this.addChild(this.toast);
         // this.toastText.text = 'toast提示';
         // this.toast.addChild(this.toastBg);
-        // this.toast.addChild(this.toastText);   
+        // this.toast.addChild(this.toastText); 
 
     }
 
@@ -210,6 +209,9 @@ class Cnt extends egret.DisplayObjectContainer{
             this.toastText.text = val ;
             if( !!this.toastBg ){
                 this.toast.addChild(this.toastBg);
+            }
+            if( !!this.toast ){
+                this.addChild(this.toast);
             }
             if( !!this.toastText ){
                 this.toast.addChild(this.toastText);   
@@ -224,6 +226,9 @@ class Cnt extends egret.DisplayObjectContainer{
             },1700)
 
         }else{
+            if( !!this.toast ){
+                this.removeChild(this.toast);
+            }
             if( this.toastBg.parent  ){
                 this.toast.removeChild(this.toastBg);
             }
@@ -333,9 +338,7 @@ class Cnt extends egret.DisplayObjectContainer{
 
     /**
      *  传入结算 长度  调整 4 2 1 的位置  
-     * 
      *  显示比分 记得加上点球的比分  要做判断
-     * 
      *  调整位置 -- 放入舞台 -- 执行动画 
      *  @param result  所有的数据 2005
      */
@@ -848,8 +851,11 @@ class Cnt extends egret.DisplayObjectContainer{
 
 
     // 金币收起  main ==> cnt ==> fieldcontain
+    // app 上是延迟 收集
     private cnt_collectCoin(){
-        this.fieldContain.collectCoin();
+        setTimeout(()=>{
+            this.fieldContain.collectCoin();
+        },1500)
     }
 
     // 调研初始化场地
