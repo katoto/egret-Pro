@@ -1,6 +1,5 @@
 /**
  *  虚拟杯
- * ( 用户信息和场地优化 new实例减少 )
  */
 
 class Main extends egret.DisplayObjectContainer {
@@ -142,8 +141,6 @@ class Main extends egret.DisplayObjectContainer {
         }
     }
 
-    
-
     /**
      * 创建游戏场景 ( 申请房间 、建立websocket)
      */
@@ -169,6 +166,13 @@ class Main extends egret.DisplayObjectContainer {
         this.cnt.y = 0;
         window['store']['$cnt'] = this.cnt ;
         this.addChild(this.cnt);
+
+        setInterval(()=>{
+            console.log('++++++++++++++++')
+            console.log( this.cnt.numChildren )
+            console.log( this.cnt )
+            console.log('-------------')
+        },10000)
 
          //头部实例2
         this.top = new Top(this.Width);
@@ -401,21 +405,23 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                 // 可投注阶段
                                 case '2003': 
                                     $store['unableClick'] = false ;
-                                        // 请下注
-                                        switch ( $msgObjBody.stageid ){
-                                            case '1':
-                                                this.cnt.cnt_timer(( 30 - parseInt( $msgObjBody.process_time )).toString());
-                                            ;break;
-                                            case '2':
-                                                this.cnt.cnt_timer(( 25 - parseInt( $msgObjBody.process_time )).toString());
-                                            ;break;
-                                            case '3':
-                                                this.cnt.cnt_timer(( 20 - parseInt( $msgObjBody.process_time )).toString());
-                                            ;break;
-                                        }
-                                        if( !!this.cnt ){
-                                            this.cnt.cnt_upTextTips('请下注');
-                                        }
+                                    // 请下注
+                                    switch ( $msgObjBody.stageid ){
+                                        case '1':
+                                            this.cnt.cnt_timer(( 30 - parseInt( $msgObjBody.process_time )).toString());
+                                        ;break;
+                                        case '2':
+                                            this.cnt.cnt_timer(( 25 - parseInt( $msgObjBody.process_time )).toString());
+                                        ;break;
+                                        case '3':
+                                            this.cnt.cnt_timer(( 20 - parseInt( $msgObjBody.process_time )).toString());
+                                        ;break;
+                                    }
+                                    if( !!this.cnt ){
+                                        this.cnt.cnt_upTextTips('请下注');
+                                    }
+                                    // 处理 总金额的显示。
+
                                 ;break;
                                 case '2005':
                                     if( !!this.cnt ){
@@ -714,6 +720,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 ;break
             }
             setTimeout(()=>{
+
                 // this.cnt.cnt_Other_Coin('10015131' , '1' ,'' ,'111' )
                 // console.log('收起金币 测试 ok')
                 // this.cnt.cnt_collectCoin()
