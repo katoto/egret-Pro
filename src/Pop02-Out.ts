@@ -5,14 +5,9 @@ class Pop02Out extends egret.DisplayObjectContainer{
         this.drawPop();
     }
     private popTitle:egret.TextField;
+    private cntText01:egret.TextField;
+    private cntText02:egret.TextField;
     private drawPop(){
-          // 大容器
-    //    let BigWrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
-    //    BigWrap.width = window['store']['stage_Width'];
-    //    BigWrap.height = window['store']['stage_Height'];
-    //    BigWrap.x = 0;
-    //    BigWrap.y = 0;
-    //    this.addChild(BigWrap);
     
        //弹窗蒙层
        let popLayer:egret.Shape = new egret.Shape();
@@ -46,6 +41,31 @@ class Pop02Out extends egret.DisplayObjectContainer{
        this.popTitle.verticalAlign = egret.VerticalAlign.MIDDLE;
        this.popTitle.textAlign = egret.HorizontalAlign.CENTER;
        popWrap.addChild(this.popTitle); 
+
+         //内容
+       //段落1
+       this.cntText01 = new egret.TextField();
+       this.cntText01.y = 140;
+       this.cntText01.text = '您很久未操作了，是不是太累了，';
+       this.cntText01.size = 28;
+       this.cntText01.textColor = 0xffffff;
+       this.cntText01.width = 680;
+       this.cntText01.height = 48;
+       this.cntText01.verticalAlign = egret.VerticalAlign.MIDDLE;
+       this.cntText01.textAlign = egret.HorizontalAlign.CENTER;
+       popWrap.addChild(this.cntText01); 
+
+       //段落2
+       this.cntText02 = new egret.TextField();
+       this.cntText02.y = 188;
+       this.cntText02.text = '休息一下，再开始游戏吧！';
+       this.cntText02.size = 28;
+       this.cntText02.textColor = 0xffffff;
+       this.cntText02.width = 680;
+       this.cntText02.height = 48;
+       this.cntText02.verticalAlign = egret.VerticalAlign.MIDDLE;
+       this.cntText02.textAlign = egret.HorizontalAlign.CENTER;
+       popWrap.addChild(this.cntText02); 
 
        //关闭按钮54*80
        let popClose:egret.Bitmap = new egret.Bitmap(RES.getRes('pop-btn_png'));

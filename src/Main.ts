@@ -206,13 +206,15 @@ class Main extends egret.DisplayObjectContainer {
         // },2000)
 
         //被踢出房间 的实例
-        setTimeout(()=>{
-            this.out = new Pop02Out();
-        },2000)
+        // setTimeout(()=>{
+        //     this.out = new Pop02Out();
+        // },2000)
 
-         //被踢出房间
-        this.out = new Pop02Out();
-        // this.addChild(this.out);
+        //提示 网络异常  是否重新连接 之类的
+        let out = new Pop02Out();
+        this.addChild(out)
+
+
 
         //杯赛晋升
 
