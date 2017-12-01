@@ -219,7 +219,6 @@ class Main extends egret.DisplayObjectContainer {
         //test
         let qqqq = new Test();
         this.addChild(qqqq)
-
         // 层级控制
         // this.setChildIndex(header,0)
         // this.setChildIndex(this.cnt,1)
@@ -404,11 +403,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                         this.cnt.cnt_upTextTips('等待开奖');
                                     }
                                 ;break;
-                                case '2005':
-                                    if( !!this.cnt ){
-                                        this.cnt.cnt_upTextTips('正在开奖...');
-                                    }
-                                ;break;
                                 // 可投注阶段
                                 case '2003': 
                                     $store['unableClick'] = false ;
@@ -428,23 +422,22 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                             this.cnt.cnt_upTextTips('请下注');
                                         }
                                 ;break;
-
                                 case '2005':
-                                    this.cnt.cnt_upTextTips('正在开奖...');
+                                    if( !!this.cnt ){
+                                        this.cnt.cnt_upTextTips('正在开奖...');
+                                    }
                                     if( this.stop_pop && this.stop_pop.parent ){
                                         this.removeChild( this.stop_pop );
                                     }
                                     if( $msgObjBody.result && $msgObjBody.result.length > 0 ){
-                                        if( parseInt ( $msgObjBody.process_time ) < 6 ){
+                                        if( parseInt ( $msgObjBody.process_time ) < 5 ){
                                             this.cnt.adjustPenalty( $msgObjBody.result )
                                         }else{
                                             // 直接显示出win的结果 
-                                            console.log('show win 2')
                                             this.cnt.showFieldWin( $msgObjBody.result ) ;
                                         }
                                     }
                                 ;break;
-
                             }
                         }
 
@@ -726,7 +719,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 ;break
             }
             setTimeout(()=>{
-
                 // this.cnt.cnt_Other_Coin('10015131' , '1' ,'' ,'111' )
                 // console.log('收起金币 测试 ok')
                 // this.cnt.cnt_collectCoin()
@@ -745,7 +737,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 // setTimeout(()=>{
                 //     this.cnt.cleanAllPenalty() ;
                 // },5000)
-
                 // this.cnt.showTips('tips 测试')
 
             },3000)

@@ -83,6 +83,10 @@ class Penalty01 extends eui.UILayer {
         // penaltyIn2.y = 34;
         // this.addChild(penaltyIn2);
 
+        this.lineTime = new egret.Bitmap(RES.getRes('scoreMask_png'));
+        this.lineTime.x = 85;
+        this.lineTime.y = 26;
+
     }
 
     /**
@@ -125,11 +129,10 @@ class Penalty01 extends eui.UILayer {
         // this.addChild(this.lineTimeMask) ;
         // this.lineTimeMask.mask = this.lineTime ;
         // }
-        this.lineTime = new egret.Bitmap(RES.getRes('scoreMask_png'));
-        this.lineTime.x = 85;
-        this.lineTime.y = 26;
         this.lineTime.width = 1;
+
         this.addChild(this.lineTime);
+
         if( is_extratime ){  //358  449
             if( is_extratime === '0' ){
                 egret.Tween.get( this.lineTime ).to( { width : 273 } , 18000 );
@@ -191,6 +194,9 @@ class Penalty01 extends eui.UILayer {
                 }
             }
         }
+        
+        this.lineTime.width = 1;
+
         // if( this.lineTime.parent ){
         //     this.removeChild( this.lineTime );
         // }
