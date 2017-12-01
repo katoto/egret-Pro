@@ -280,6 +280,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
             if( res && res.status === '100' ){
                 this.onTouch();
+                
     $store_coinNum[currMatchData.matchid]['my_golds_r'] = $store_coinNum[currMatchData.matchid]['my_golds_r'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) + $store.curr_btn_coin :
     parseInt ( $store.curr_btn_coin );  
     $store_coinNum[currMatchData.matchid]['away_golds'] = $store_coinNum[currMatchData.matchid]['away_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['away_golds'] ) + $store.curr_btn_coin : 
