@@ -92,7 +92,6 @@ class Promotion extends eui.UILayer{
         this.wrap.addChild(lbgBorder11);
         //队伍icon
         this.leftTeam11 = new eui.Image();
-        // this.leftTeam11.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.leftTeam11.width = 68;
         this.leftTeam11.height = 68;
         this.leftTeam11.x = 208;
@@ -105,14 +104,12 @@ class Promotion extends eui.UILayer{
         }
 
         //  右边
-        // 插入边框
         let rbgBorder11:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         rbgBorder11.x = 371;
         rbgBorder11.y = 521;
         this.wrap.addChild(rbgBorder11);
         //队伍icon
         this.rightTeam11 = new eui.Image();
-        // this.rightTeam11.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.rightTeam11.width = 68;
         this.rightTeam11.height = 68;
         this.rightTeam11.x = 371;
@@ -139,7 +136,6 @@ class Promotion extends eui.UILayer{
 
          //1/2 top
         // 左边
-        // 插入边框
         let lbgBorder21:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         lbgBorder21.x = 208;
         lbgBorder21.y = 300;
@@ -172,7 +168,6 @@ class Promotion extends eui.UILayer{
         }
 
         //  右边
-        // 插入边框
         let rbgBorder21:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         rbgBorder21.x = 371;
         rbgBorder21.y = 300;
@@ -216,7 +211,6 @@ class Promotion extends eui.UILayer{
 
          //1/2 bottom
         // 左边
-        // 插入边框
         let lbgBorder22:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-item_png'));
         lbgBorder22.x = 208;
         lbgBorder22.y = 743;
@@ -698,30 +692,48 @@ this.localObj['rightTeam41'] = {
         }
 
         if( move === '1' ){
+            // 移动回去
+            let oldFirstObj = {} ;
             for( let i=0;i<4 ;i++ ){
+                oldFirstObj['oldLocal'+ i ] = {
+                    x : this[ firstWinName[i] ].x ,
+                    y : this[ firstWinName[i] ].y 
+                }
                 if( ~firstWinName[i].indexOf( 'Team41' ) ){
                     egret.Tween.get( this[ firstWinName[i] ] ).to( {
                         x: this['leftTeam21'].x ,
                         y: this['leftTeam21'].y
-                    }, 700 );
+                    }, 700 ).wait(2000).to({
+                        x: oldFirstObj['oldLocal'+ i ].x ,
+                        y: oldFirstObj['oldLocal'+ i ].y
+                    });
                 }
                 if( ~firstWinName[i].indexOf( 'Team42' ) ){
                     egret.Tween.get( this[ firstWinName[i] ] ).to( {
                         x: this['rightTeam21'].x ,
                         y: this['rightTeam21'].y
-                    }, 700 );
+                    }, 700 ).wait(2000).to({
+                        x: oldFirstObj['oldLocal'+ i ].x ,
+                        y: oldFirstObj['oldLocal'+ i ].y
+                    });
                 }
                 if( ~firstWinName[i].indexOf( 'Team43' )){
                     egret.Tween.get( this[ firstWinName[i] ] ).to( {
                         x: this['leftTeam22'].x ,
                         y: this['leftTeam22'].y
-                    }, 700 );
+                    }, 700 ).wait(2000).to({
+                        x: oldFirstObj['oldLocal'+ i ].x ,
+                        y: oldFirstObj['oldLocal'+ i ].y
+                    });
                 }
                 if( ~firstWinName[i].indexOf( 'Team44' ) ){
                     egret.Tween.get( this[ firstWinName[i] ] ).to( {
                         x: this['rightTeam22'].x ,
                         y: this['rightTeam22'].y
-                    }, 700 );
+                    }, 700 ).wait(2000).to({
+                        x: oldFirstObj['oldLocal'+ i ].x ,
+                        y: oldFirstObj['oldLocal'+ i ].y
+                    });
                 }
             }
 
@@ -752,7 +764,6 @@ this.localObj['rightTeam41'] = {
                     });
                 }
             }
-
         }
     }
 
@@ -838,6 +849,5 @@ this.localObj['rightTeam41'] = {
             }            
         }
     }
-
 
 }
