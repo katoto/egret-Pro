@@ -754,7 +754,7 @@ class Cnt extends egret.DisplayObjectContainer{
                             // this.fieldContain[curFindField]   left  or right 动画
                             // curFindField = curFindField + '_l';
                             allShowWinNum =  allShowWinNum + parseInt( settleData[i].prize_info[j].prize );
-                            if( !curFindField ){
+                            if( curFindField ){
                                 await this.fieldContain.sendEndCoin( curFindField , settleData[i].uid ) ;
                             }
                         }
@@ -931,7 +931,7 @@ class Cnt extends egret.DisplayObjectContainer{
             this.bgCourtWrap.addChild(this[choseUserImg]);
 
             setTimeout(()=>{
-                if( !$store['unableClick'] && !!this.fieldContain && !!this[choseUserImg] && this.fieldContain.parent && this[choseUserImg].parent ){
+                if( !!this.fieldContain && !!this[choseUserImg] && this.fieldContain.parent && this[choseUserImg].parent ){
                     this.bgCourtWrap.swapChildren( this.fieldContain , this[choseUserImg] ) ;
                 }
             },1000)
@@ -961,7 +961,8 @@ class Cnt extends egret.DisplayObjectContainer{
         this.bgCourtWrap.addChild(this[choseUserImg]);
 
         setTimeout(()=>{
-            if( !$store['unableClick'] && !!this.fieldContain && !!this[choseUserImg] && this.fieldContain.parent && this[choseUserImg].parent ){
+            //  !$store['unableClick'] && 
+            if(!!this.fieldContain && !!this[choseUserImg] && this.fieldContain.parent && this[choseUserImg].parent ){
                 this.bgCourtWrap.swapChildren( this.fieldContain , this[choseUserImg] ) ;
             }
         },1000)

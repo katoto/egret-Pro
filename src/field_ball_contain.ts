@@ -674,6 +674,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             console.error('sendEndCoin error  no find uid');
             return false ;
         }
+        if( !start ){
+            console.warn( 'sendEndCoin error' )
+        }
 
         for( let i=0;i<3; i++ ){
             let gold = new Gold();

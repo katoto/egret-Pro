@@ -626,9 +626,10 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     setTimeout(()=>{
                         if( this.stop_pop && this.stop_pop.parent ){
                             egret.Tween.get( this.stop_pop ).to({y:227},200).call(()=>{
-                               this.removeChild( this.stop_pop );
+                                if( this.stop_pop.parent ){
+                                    this.removeChild( this.stop_pop );
+                                }
                             });
-                           
                         }
                         setTimeout(()=>{
                             this.cnt.cnt_upTextTips('等待开奖');
