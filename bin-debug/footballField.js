@@ -244,7 +244,6 @@ var Field_ball = (function (_super) {
     Field_ball.prototype.addLeftAllCoin = function (coin) {
         // 左边队伍金币收集
         if (!!this.allLeftCoin) {
-            console.log(this.allLeftCoin);
             this.allLeftCoin.text = coin;
             if (!this.goldItems_left02.parent) {
                 this.addChild(this.goldItems_left02);
@@ -300,6 +299,9 @@ var Field_ball = (function (_super) {
     Field_ball.prototype.upLeftMyMoney = function (coin) {
         if (!!this.leftMyMoneyBox) {
             this.leftMyMoneyText.text = coin;
+            if (!this.leftMyMoneyBox.parent) {
+                this.addChild(this.leftMyMoneyBox);
+            }
         }
         else {
             this.leftMyMoneyBox = new egret.DisplayObjectContainer();
@@ -326,6 +328,9 @@ var Field_ball = (function (_super) {
     Field_ball.prototype.upRightMyMoney = function (coin) {
         if (!!this.rightMyMoneyBox) {
             this.rightMyMoneyText.text = coin;
+            if (!this.rightMyMoneyBox.parent) {
+                this.addChild(this.rightMyMoneyBox);
+            }
         }
         else {
             this.rightMyMoneyBox = new egret.DisplayObjectContainer();
