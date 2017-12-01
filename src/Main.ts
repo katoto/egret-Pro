@@ -522,7 +522,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                     this.promotion.moveThree( $msgObjBody.pre_result ) ;
                                     setTimeout(()=>{
                                         if( this.promotion.parent ){
-                                            // this.removeChild( this.promotion )
+                                            this.removeChild( this.promotion )
                                         }
                                     },2500)
                                 ;break;
