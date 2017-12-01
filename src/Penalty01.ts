@@ -53,7 +53,7 @@ class Penalty01 extends eui.UILayer {
         let timer:egret.Bitmap = new egret.Bitmap(RES.getRes('penalty-time_png'));
         timer.x = 80;
         timer.y = 15;
-        timer.scaleY = 0.98;
+        // timer.scaleY = 0.98;
         this.addChild(timer);
         // timer.mask = this.lineTime ;
 
@@ -83,8 +83,12 @@ class Penalty01 extends eui.UILayer {
         // penaltyIn2.y = 34;
         // this.addChild(penaltyIn2);
 
-       
-
+        this.lineTime = new egret.Bitmap(RES.getRes('scoreMask_png'));
+        this.lineTime.x = 85;
+        this.lineTime.y = 26;
+        this.lineTime.width = 1;
+        this.addChild(this.lineTime);
+        
     }
 
     /**
@@ -109,38 +113,16 @@ class Penalty01 extends eui.UILayer {
         let currFieldStr = '';
         let l_score = 0 ;
         let r_score = 0 ;
-
-        // if( this.lineTime.parent ){
-        //     console.log('a1')
-        // this.lineTime = new egret.Shape();
-        // this.lineTime.graphics.lineStyle(2, 0xff00ff);
-        // this.lineTime.graphics.moveTo(320, 400);
-        // this.lineTime.graphics.lineTo(380, 300);
-        // this.addChild( this.lineTime );
-        
-        // }
-        // if( this.lineTimeMask ){
-        //     console.log('a2')
-        // this.lineTimeMask = new egret.Bitmap(RES.getRes('scoreMask_png'));
-        // this.lineTimeMask.x = 80 ;
-        // this.lineTimeMask.y = 24 ;
-        // this.addChild(this.lineTimeMask) ;
-        // this.lineTimeMask.mask = this.lineTime ;
-        // }
-        if(this.lineTime){
-            this.removeChild(this.lineTime);
-        }
-        this.lineTime = new egret.Bitmap(RES.getRes('scoreMask_png'));
-        this.lineTime.x = 85;
-        this.lineTime.y = 26;
-        this.lineTime.width = 1;
-        this.addChild(this.lineTime);
-
+        var self = this;
         if( is_extratime ){  //358  449
             if( is_extratime === '0' ){
-                egret.Tween.get( this.lineTime ).to( { width : 273 } , 18000 );
+                egret.Tween.get( this.lineTime ).to( { width : 273 } , 18000 ).call(()=>{
+                    self.lineTime.width = 0;
+                });
             }else if( is_extratime === '1' ){
-                egret.Tween.get( this.lineTime ).to( { width : 360 } , 25000 );
+                egret.Tween.get( this.lineTime ).to( { width : 360 } , 25000 ).call(()=>{
+                    self.lineTime.width = 0;
+                });
             }
         }
         //  显示出 0 ：0
@@ -198,7 +180,7 @@ class Penalty01 extends eui.UILayer {
             }
         }
         
-        this.lineTime.width = 1;
+        // this.lineTime.width = 1;
 
         // if( this.lineTime.parent ){
         //     this.removeChild( this.lineTime );

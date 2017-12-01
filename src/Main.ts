@@ -212,7 +212,7 @@ class Main extends egret.DisplayObjectContainer {
 
         //提示 网络异常  是否重新连接 之类的
         let out = new Pop02Out();
-        this.addChild(out)
+        // this.addChild(out)
 
 
 
@@ -522,7 +522,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                     this.promotion.moveThree( $msgObjBody.pre_result ) ;
                                     setTimeout(()=>{
                                         if( this.promotion.parent ){
-                                            this.removeChild( this.promotion )
+                                            // this.removeChild( this.promotion )
                                         }
                                     },2500)
                                 ;break;
