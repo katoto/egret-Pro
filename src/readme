@@ -40,7 +40,9 @@ utils 是工具类函数 全局的
 	 TextTips 文字提示
 	 FootballField  足球场
 	 UserImage 用户头像
-	 Pop 竞猜开始结束弹窗
+
+
+	 Pop 竞猜开始 结束弹窗
 	 ---二合一
 	 Pop02-ChampionC 冠军记录弹窗
 	 ChampionC 冠军记录弹窗的内容
