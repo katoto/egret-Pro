@@ -106,8 +106,7 @@ class Cnt extends egret.DisplayObjectContainer{
 
         this.fieldContain = new Field_ball_contain();
         window['store']['$fieldContain'] = this.fieldContain ;
-        this.bgCourtWrap.addChild(this.fieldContain);
-
+        this.bgCourtWrap.addChild( this.fieldContain );
 
     //     //决赛的开奖-点球
     //     // 插入遮罩层,正常进球和点球要分开两个遮罩
@@ -841,7 +840,7 @@ class Cnt extends egret.DisplayObjectContainer{
         }
         // setMyGold
         this[ 'userImg'+choseOther ]['setMyGold']( oldCoin - parseInt( bet_golds ) );
-        
+
         this.fieldContain.other_Coin( matchid , selection , selOtherCoin - 1 , bet_golds );
 
     }
@@ -928,15 +927,11 @@ class Cnt extends egret.DisplayObjectContainer{
                     window['store']['user_info'][i].total );
             }
 
-
-            //  中奖的处理 对应用户头像 ！
-            // this[choseUserImg].isShowWinGold('3333333')
-            // setTimeout(()=>{
-            //    this[choseUserImg].isHideWinGold() 
-            // },1000)
-
             this.bgCourtWrap.addChild(this[choseUserImg]);
-            // console.log( choseUserImg  )
+
+             if( !!this.fieldContain && !!this[choseUserImg] ){
+                this.bgCourtWrap.swapChildren( this.fieldContain , this[choseUserImg] ) ;
+             }
         }
     }
 
@@ -960,7 +955,10 @@ class Cnt extends egret.DisplayObjectContainer{
         }
 
         this.bgCourtWrap.addChild(this[choseUserImg]);
-        
+
+        if( !!this.fieldContain && !!this[choseUserImg] ){
+            this.bgCourtWrap.swapChildren( this.fieldContain , this[choseUserImg] ) ;
+            }
         // //  注意层级控制，不然事件会有问题 ！
         // this.bgCourtWrap.setChildIndex( this.fieldContain  , this.bgCourtWrap.getChildIndex( this[choseUserImg] ))    
 
