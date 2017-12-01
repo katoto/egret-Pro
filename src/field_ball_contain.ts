@@ -1243,20 +1243,20 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 egret.Tween.get( goldArr[0] ).to({
                     x: parseInt( end_x ) + 2 ,
                     y: parseInt( end_y ) + 3 ,
-                }, 500,egret.Ease.circInOut )
+                }, 800,egret.Ease.circInOut )
                 
                 setTimeout(()=>{
                     egret.Tween.get( goldArr[1] ).to({
                         x: parseInt( end_x ) + 6 ,
                         y: parseInt( end_y ) + 8 ,
-                    }, 500,egret.Ease.circInOut )
+                    }, 800,egret.Ease.circInOut )
 
                 },80)
                 setTimeout(()=>{
                     egret.Tween.get( goldArr[2] ).to({
                         x: parseInt( end_x ) + 12 ,
                         y: parseInt( end_y ) + 15 ,
-                    }, 500,egret.Ease.circInOut )
+                    }, 800,egret.Ease.circInOut )
                 },180 )
             },0)
 
