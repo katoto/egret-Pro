@@ -214,10 +214,14 @@ class Main extends egret.DisplayObjectContainer {
             this.out = new Pop02Out();
         },2000)
 
-         //被踢出房间
-        this.out = new Pop02Out();
-        // this.addChild(this.out);
+        //提示 网络异常  是否重新连接 之类的
+        // let out = new Pop02Out();
 
+        //杯赛晋升
+
+        //test
+        let qqqq = new Test();
+        this.addChild(qqqq)
         // 层级控制
         // this.setChildIndex(header,0)
         // this.setChildIndex(this.cnt,1)
@@ -334,7 +338,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
      */
     private onReceiveMess(e:egret.Event):void{
         let $store = window['store'];
-// event.updateAfterEvent();  //  什么时候进行强制刷新 ??????手机上用户立场 舞台不刷新 
+        // event.updateAfterEvent();  //  什么时候进行强制刷新 ??????手机上用户立场 舞台不刷新 
         let msg = this.webSocket.readUTF();
         if(~msg.indexOf('You said')|| !~msg.indexOf('{')){
             // console.log(msg)
@@ -711,7 +715,8 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     // 被提出
                     this.cnt.showTips('你已经被踢出') ;
                     if( !!this.out ){
-                        this.addChild( this.out );
+                        this.out.showLongTime();
+                        this.addChild(this.out) ;
                     }
                     
                 ;break;
@@ -764,12 +769,20 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
      *  onIOError  websock 接收消息
      */
     private onIOError():void{
+        if( !!this.out ){
+            this.out.showSocketErr();
+            this.addChild(this.out) ;
+        }
         console.error('linsten error')
     }
     /**
      *  onCloseSock  websock 接收消息
      */
     private onCloseSock():void{
+        if( !!this.out ){
+            this.out.showSocketErr();
+            this.addChild(this.out) ;
+        }
         console.error( 'websock error' ) ;   
     }
 

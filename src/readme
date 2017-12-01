@@ -46,6 +46,9 @@ utils 是工具类函数 全局的
 	 ChampionC 冠军记录弹窗的内容
 	 ---
 	 Pop02-RuleC 聊天记录弹窗
+	 Pop02-Tips 提示 网络异常  是否重新连接 之类的
+	 Pop02-Out 被踢出房间
+
 
 	 Penalty  进球过程
 	 Promotion 晋级

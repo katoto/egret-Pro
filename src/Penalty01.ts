@@ -83,9 +83,7 @@ class Penalty01 extends eui.UILayer {
         // penaltyIn2.y = 34;
         // this.addChild(penaltyIn2);
 
-        this.lineTime = new egret.Bitmap(RES.getRes('scoreMask_png'));
-        this.lineTime.x = 85;
-        this.lineTime.y = 26;
+       
 
     }
 
@@ -129,8 +127,13 @@ class Penalty01 extends eui.UILayer {
         // this.addChild(this.lineTimeMask) ;
         // this.lineTimeMask.mask = this.lineTime ;
         // }
+        if(this.lineTime){
+            this.removeChild(this.lineTime);
+        }
+        this.lineTime = new egret.Bitmap(RES.getRes('scoreMask_png'));
+        this.lineTime.x = 85;
+        this.lineTime.y = 26;
         this.lineTime.width = 1;
-
         this.addChild(this.lineTime);
 
         if( is_extratime ){  //358  449
