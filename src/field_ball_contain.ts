@@ -351,8 +351,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             }
             if(150<x && x<350){
                 this.leftSend_evt( 'field41' , x , y  ) ;
+
             }else if(410<x && x<600){
-                
+
                 this.rightSend_evt( 'field41' ,x , y ) ;
 
             }
@@ -396,12 +397,8 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
             if(150<x && x<350){
                 this.leftSend_evt( 'field42' , x , y  ) ;
-
-
             }else if(410<x && x<600){
-
                 this.rightSend_evt( 'field42' ,x,y ) ;
-
             }
         }
     }
@@ -417,10 +414,8 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let currQueryStr = '';
         let currMatchData = this.field43.getCurrMatchData();
 
-
         if( y>550 && y <660 ){
             if($store['unableClick']){
-                // 不可点击
                 return false ;
             }
 
@@ -448,7 +443,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
             }else if(410<x && x<600){
                 this.rightSend_evt( 'field43' ,x,y ) ;
-
             }
         }
     }
@@ -488,14 +482,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             }
 
             if(150<x && x<350){
-
                 this.leftSend_evt( 'field44' , x , y  ) ;
 
-
             }else if(410<x && x<600){
-
                 this.rightSend_evt( 'field44' ,x,y ) ;
-
             }
         }
     }
@@ -536,13 +526,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             }
 
             if(150<x && x<350){
-
                 this.leftSend_evt( 'field21' , x , y  ) ;
-
             }else if(410<x && x<600){
-
                 this.rightSend_evt( 'field21' ,x,y ) ;
-
             }
         }
     }
@@ -622,9 +608,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 }
             }
             if(150<x && x<350){
-
                 this.leftSend_evt( 'field1' , x , y  ) ;
-
             }else if(410<x && x<600){
                 this.rightSend_evt( 'field1' ,x,y ) ;
 
