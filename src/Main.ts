@@ -39,9 +39,7 @@ class Main extends egret.DisplayObjectContainer {
     
     private position:Array<number> =  [];
 
-    //蒙层
-    private mask01:egret.Shape;
-    private mask02:egret.Shape;
+
     // 竞猜开始文案
     private start_pop = null;
     private stop_pop = null ;
@@ -150,23 +148,7 @@ class Main extends egret.DisplayObjectContainer {
         window['store'].scale = ( this.Height / 1334 ).toFixed(2) ;
 
 
-         //popWrap
-        this.mask01 = new egret.Shape();
-        this.mask01.anchorOffsetX = 371;
-        this.mask01.anchorOffsetY = 113.5;
-        this.mask01.graphics.beginFill(0x0000ff,0);
-        this.mask01.graphics.drawRect(window['store']['stage_anWidth'],window['store']['stage_anHeight'],742,227);
-        this.mask01.graphics.endFill();
-        this.addChild(this.mask01);
-        this.mask02 = new egret.Shape();
-        this.mask02.anchorOffsetX = 371;
-        this.mask02.anchorOffsetY = 113.5;
-        this.mask02.graphics.beginFill(0x0000ff,0);
-        this.mask02.graphics.drawRect(window['store']['stage_anWidth'],window['store']['stage_anHeight'],742,227);
-        this.mask02.graphics.endFill();
-        this.addChild(this.mask02);
 
-        
         // let sky = this.createBitmapByName("btn-500_png");
         // this.addChild(sky)
 
@@ -569,8 +551,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     this.start_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-begin_png');
                     this.start_pop.y = 227;
                     this.addChild( this.start_pop );
-                    // this.start_pop.mask = self.mask01;
-                    egret.Tween.get( this.start_pop ).to({y:0},200);
+                    egret.Tween.get( this.start_pop ).to({y:0},2000);
                     if( $msgObjBody ){
                         $store['orderObj']['expect'] = $msgObjBody.expect ;
                         $store['orderObj']['stageid'] = $msgObjBody.stageid ;
@@ -615,7 +596,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     this.stop_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-over_png' );
                     this.stop_pop.y = 227;
                     this.addChild( this.stop_pop );
-                    // this.stop_pop.mask = self.mask02;
                     egret.Tween.get( this.stop_pop ).to({y:0},200);
                     
                     
