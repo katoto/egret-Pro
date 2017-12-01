@@ -16,12 +16,45 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         super();
         this.drawField();
     }
+    private onLoadComplete(event:egret.Event):void {
+        var loader:egret.URLLoader = <egret.URLLoader>event.target;
+        //获取加载到的 Sound 对象
+        var sound:egret.Sound = <egret.Sound>loader.data;
+        this.sound = sound;
+    }
+    private sound:egret.Sound;
+    private soundChannel:egret.SoundChannel;
+    private onTouch( ){
+        var sound = this.sound;
+        var channel:egret.SoundChannel = this.soundChannel;
+        //使用SoundChannel播放音频
+        channel = sound.play(0,1);
+        //Egret 3.0.4 新增获取音频长度 length 属性。
+        //保存soundChannel对象
+        this.soundChannel = channel;
+    }
     private drawField(){
+        //创建 URLLoader 对象
+        var loader:egret.URLLoader = new egret.URLLoader();
+        //设置加载方式为声音
+        loader.dataFormat = egret.URLLoaderDataFormat.SOUND;
+        //添加加载完成侦听
+        loader.addEventListener(egret.Event.COMPLETE, this.onLoadComplete, this);
+        //开始加载
+        loader.load(new egret.URLRequest("resource/assets/music/bet.mp3"));
+
+
         // 放出舞台是否去除事件绑定提高性能？
 
         this.courtWrap1 = this.courtWrap();
         this.courtWrap2 = this.courtWrap();
         this.courtWrap4 = this.courtWrap();
+        // this.courtWrap1.touchEnabled = true;
+        // this.courtWrap1.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onTouch,this);
+        // this.courtWrap2.touchEnabled = true;
+        // this.courtWrap2.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onTouch,this);
+        // this.courtWrap4.touchEnabled = true;
+        // this.courtWrap4.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onTouch,this);
         // 三选一插入
 
         this.field1 = new Field_ball('bg-court1_png');
@@ -67,8 +100,11 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         this.field44.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_44Evt ,this)
         this.courtWrap4.addChild(this.field44);
 
- 
+
+
+
     }
+    
 
         // 放入4个场地
     private addcourtWrap4(){
@@ -265,12 +301,12 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
                     // 更新 自己头像 金币   下单之后
                     if( res && res.status === '100' ){
-
+                        this.onTouch();
                 // 记录自己的金币 (派发之后，清空)
-            $store_coinNum[currMatchData.matchid]['my_golds_l'] = $store_coinNum[currMatchData.matchid]['my_golds_l'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_l'] ) + $store.curr_btn_coin :
-            $store.curr_btn_coin;  
-            $store_coinNum[currMatchData.matchid]['home_golds'] = $store_coinNum[currMatchData.matchid]['home_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['home_golds'] ) + $store.curr_btn_coin :
-            $store.curr_btn_coin ;
+                        $store_coinNum[currMatchData.matchid]['my_golds_l'] = $store_coinNum[currMatchData.matchid]['my_golds_l'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_l'] ) + $store.curr_btn_coin :
+                        $store.curr_btn_coin;  
+                        $store_coinNum[currMatchData.matchid]['home_golds'] = $store_coinNum[currMatchData.matchid]['home_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['home_golds'] ) + $store.curr_btn_coin :
+                        $store.curr_btn_coin ;
 
                         if( res.data && res.data.total ){
                             window['store']['userMySelf'].setMyGold( res.data.total );
@@ -308,6 +344,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
                 await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
                     if( res && res.status === '100' ){
+                        this.onTouch();
             $store_coinNum[currMatchData.matchid]['my_golds_r'] = $store_coinNum[currMatchData.matchid]['my_golds_r'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) + $store.curr_btn_coin :
             $store.curr_btn_coin;  
             $store_coinNum[currMatchData.matchid]['away_golds'] = $store_coinNum[currMatchData.matchid]['away_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['away_golds'] ) + $store.curr_btn_coin : 
@@ -384,6 +421,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 })
                 await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
                     if( res && res.status === '100' ){
+                        this.onTouch();
 
                 // 记录自己的金币 (派发之后，清空)
             $store_coinNum[currMatchData.matchid]['my_golds_l'] = $store_coinNum[currMatchData.matchid]['my_golds_l'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_l'] ) + $store.curr_btn_coin :
@@ -426,6 +464,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
                     // 更新 自己头像 金币   下单之后
                     if( res && res.status === '100' ){
+                        this.onTouch();
 
             $store_coinNum[currMatchData.matchid]['my_golds_r'] = $store_coinNum[currMatchData.matchid]['my_golds_r'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) + $store.curr_btn_coin :
             $store.curr_btn_coin;  
@@ -507,6 +546,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
                     // 更新 自己头像 金币   下单之后
                     if( res && res.status === '100' ){
+                        this.onTouch();
 
             $store_coinNum[currMatchData.matchid]['my_golds_l'] = $store_coinNum[currMatchData.matchid]['my_golds_l'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_l'] ) + $store.curr_btn_coin :
             $store.curr_btn_coin;  
@@ -550,6 +590,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     // 更新 自己头像 金币   下单之后
                     console.log( res )
                     if( res && res.status === '100' ){
+                        this.onTouch();
 
             $store_coinNum[currMatchData.matchid]['my_golds_r'] = $store_coinNum[currMatchData.matchid]['my_golds_r'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) + $store.curr_btn_coin :
             $store.curr_btn_coin;  
@@ -626,6 +667,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
                     // 更新 自己头像 金币   下单之后
                     if( res && res.status === '100' ){
+                        this.onTouch();
 
             $store_coinNum[currMatchData.matchid]['my_golds_l'] = $store_coinNum[currMatchData.matchid]['my_golds_l'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_l'] ) + $store.curr_btn_coin :
             $store.curr_btn_coin;  
@@ -666,6 +708,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
                     // 更新 自己头像 金币   下单之后
                     if( res && res.status === '100' ){
+                        this.onTouch();
             $store_coinNum[currMatchData.matchid]['my_golds_r'] = $store_coinNum[currMatchData.matchid]['my_golds_r'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) + $store.curr_btn_coin :
             $store.curr_btn_coin;  
             $store_coinNum[currMatchData.matchid]['away_golds'] = $store_coinNum[currMatchData.matchid]['away_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['away_golds'] ) + $store.curr_btn_coin : 
@@ -744,6 +787,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
                     // 更新 自己头像 金币   下单之后
                     if( res && res.status === '100' ){
+                        this.onTouch();
 
             $store_coinNum[currMatchData.matchid]['my_golds_l'] = $store_coinNum[currMatchData.matchid]['my_golds_l'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_l'] ) + $store.curr_btn_coin :
             $store.curr_btn_coin;  
@@ -786,6 +830,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     // 更新 自己头像 金币   下单之后
                     console.log( res )
                     if( res && res.status === '100' ){
+                        this.onTouch();
             $store_coinNum[currMatchData.matchid]['my_golds_r'] = $store_coinNum[currMatchData.matchid]['my_golds_r'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) + $store.curr_btn_coin :
             $store.curr_btn_coin;  
             $store_coinNum[currMatchData.matchid]['away_golds'] = $store_coinNum[currMatchData.matchid]['away_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['away_golds'] ) + $store.curr_btn_coin : 
@@ -864,6 +909,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     // 更新 自己头像 金币   下单之后
                     console.log( res )
                     if( res && res.status === '100' ){
+                        this.onTouch();
 
             $store_coinNum[currMatchData.matchid]['my_golds_l'] = $store_coinNum[currMatchData.matchid]['my_golds_l'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_l'] ) + $store.curr_btn_coin :
             $store.curr_btn_coin;  
@@ -905,6 +951,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     // 更新 自己头像 金币   下单之后
                     console.log( res )
                     if( res && res.status === '100' ){
+                        this.onTouch();
             $store_coinNum[currMatchData.matchid]['my_golds_r'] = $store_coinNum[currMatchData.matchid]['my_golds_r'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) + $store.curr_btn_coin :
             $store.curr_btn_coin;  
             $store_coinNum[currMatchData.matchid]['away_golds'] = $store_coinNum[currMatchData.matchid]['away_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['away_golds'] ) + $store.curr_btn_coin : 
@@ -983,6 +1030,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     // 更新 自己头像 金币   下单之后
                     console.log( res )
                     if( res && res.status === '100' ){
+                        this.onTouch();
 
             $store_coinNum[currMatchData.matchid]['my_golds_l'] = $store_coinNum[currMatchData.matchid]['my_golds_l'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_l'] ) + $store.curr_btn_coin :
             $store.curr_btn_coin;  
@@ -1027,6 +1075,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     // 更新 自己头像 金币   下单之后
                     console.log( res )
                     if( res && res.status === '100' ){
+                        this.onTouch();
             $store_coinNum[currMatchData.matchid]['my_golds_r'] = $store_coinNum[currMatchData.matchid]['my_golds_r'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) + $store.curr_btn_coin :
             $store.curr_btn_coin;  
             $store_coinNum[currMatchData.matchid]['away_golds'] = $store_coinNum[currMatchData.matchid]['away_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['away_golds'] ) + $store.curr_btn_coin : 
