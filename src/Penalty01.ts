@@ -132,9 +132,9 @@ class Penalty01 extends eui.UILayer {
         this.addChild(this.lineTime);
         if( is_extratime ){  //358  449
             if( is_extratime === '0' ){
-                egret.Tween.get( this.lineTime ).to( { width : 358 } , 18000 );
+                egret.Tween.get( this.lineTime ).to( { width : 273 } , 18000 );
             }else if( is_extratime === '1' ){
-                egret.Tween.get( this.lineTime ).to( { width : 449 } , 25000 );
+                egret.Tween.get( this.lineTime ).to( { width : 360 } , 25000 );
             }
         }
         //  显示出 0 ：0

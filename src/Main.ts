@@ -214,15 +214,12 @@ class Main extends egret.DisplayObjectContainer {
         this.out = new Pop02Out();
         // this.addChild(this.out);
 
-<<<<<<< HEAD
         //杯赛晋升
 
         //test
         let qqqq = new Test();
         this.addChild(qqqq)
 
-=======
->>>>>>> 8e9007407ed9d7be7f1eedee0064c7e77f4d1e75
         // 层级控制
         // this.setChildIndex(header,0)
         // this.setChildIndex(this.cnt,1)
