@@ -184,8 +184,6 @@ class Main extends egret.DisplayObjectContainer {
         this.bottom.y = this.Height;
         this.addChild(this.bottom);
 
-       
-       
 
         // 晋级  缺动画
         this.promotion = new Promotion();

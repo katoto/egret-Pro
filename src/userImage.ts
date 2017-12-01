@@ -81,7 +81,6 @@ class userImage extends eui.UILayer {
 
 
         //聊天
-        
         // let chatWrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
         // chatWrap.y = -55;
 
@@ -104,7 +103,6 @@ class userImage extends eui.UILayer {
         // chatWrap.addChild(chatBg);
         // chatWrap.addChild(myChat);
          
-
     }
 
     // 用户头像的 名称 头像 金币
