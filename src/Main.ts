@@ -681,11 +681,11 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         }
                         if( $msgObjBody.selection === '1' ){
             $store_coinNum[$msgObjBody.matchid].home_golds = $store_coinNum[$msgObjBody.matchid]['home_golds'] ? parseInt ( $store_coinNum[$msgObjBody.matchid]['home_golds'] ) + parseInt( $msgObjBody.bet_golds )  :
-            $msgObjBody.bet_golds ;
+            parseInt ( $msgObjBody.bet_golds ) ;
                             
                         }else if( $msgObjBody.selection === '2' ){
             $store_coinNum[$msgObjBody.matchid].away_golds = $store_coinNum[$msgObjBody.matchid]['away_golds'] ? parseInt ( $store_coinNum[$msgObjBody.matchid]['away_golds'] ) + parseInt( $msgObjBody.bet_golds )  :
-            $msgObjBody.bet_golds ;
+            parseInt ( $msgObjBody.bet_golds ) ;
                         }
                         //  执行金币动画  
                         //  matchid:string , selection:string , uid:string , bet_golds:string

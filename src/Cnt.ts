@@ -833,18 +833,15 @@ class Cnt extends egret.DisplayObjectContainer{
         // this[ baseImg + 8 ]['getCurGold']()
         // this[ baseImg + 9 ]['getCurGold']()
         // console.log('==========================')
-
         // console.log( this[ baseImg + choseOther ]['getCurGold']() )
         if( isNaN( this[ baseImg + choseOther ]['getCurGold']() ) ){
             console.log( 'isNaN 了 cnt.ts' )
         }else{
             oldCoin = parseInt( this[ baseImg + choseOther ]['getCurGold']() ) ;
         }
-
-
-        this[ 'userImg'+choseOther ]['setMyGold']( oldCoin - parseInt( bet_golds ) )
-
         // setMyGold
+        this[ 'userImg'+choseOther ]['setMyGold']( oldCoin - parseInt( bet_golds ) );
+        
         this.fieldContain.other_Coin( matchid , selection , selOtherCoin - 1 , bet_golds );
 
     }

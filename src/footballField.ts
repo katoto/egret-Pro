@@ -305,6 +305,13 @@ class Field_ball extends eui.UILayer {
         // 左边队伍金币收集
         if( !!this.allLeftCoin ){
             this.allLeftCoin.text = coin;
+            if( !this.goldItems_left02.parent ){
+                this.addChild(this.goldItems_left02);
+            }            
+            if( !this.allLeftCoin.parent ){
+                this.addChild(this.allLeftCoin);
+            }
+
         }else{
             this.allLeftCoin = new egret.TextField();
             this.allLeftCoin.text = coin;
@@ -325,7 +332,13 @@ class Field_ball extends eui.UILayer {
     //  创建 右边 收起的类
     private addRightAllCoin( coin:string ){
         if( !!this.allRightCoin ){
-            this.allRightCoin.text = coin
+            this.allRightCoin.text = coin ;
+            if( !this.goldItems_right02.parent ){
+                this.addChild(this.goldItems_right02);
+            }              
+            if( !this.allRightCoin.parent ){
+                this.addChild(this.allRightCoin);
+            }
         }else{
             this.allRightCoin = new egret.TextField();
             this.allRightCoin.text = coin;
@@ -348,6 +361,9 @@ class Field_ball extends eui.UILayer {
     private upLeftMyMoney( coin:string ){
         if( !!this.leftMyMoneyBox ){
             this.leftMyMoneyText.text = coin ;
+            if( !this.leftMyMoneyBox.parent ){
+                this.addChild(this.leftMyMoneyBox);
+            }
         }else{
             this.leftMyMoneyBox = new egret.DisplayObjectContainer();
             this.leftMyMoneyBox.width = 196;
@@ -374,6 +390,9 @@ class Field_ball extends eui.UILayer {
     private upRightMyMoney( coin:string ){
         if( !!this.rightMyMoneyBox ){
             this.rightMyMoneyText.text = coin ;
+            if( !this.rightMyMoneyBox.parent ){
+                this.addChild(this.rightMyMoneyBox);
+            }
         }else{
             this.rightMyMoneyBox = new egret.DisplayObjectContainer();
             this.rightMyMoneyBox.width = 196;
