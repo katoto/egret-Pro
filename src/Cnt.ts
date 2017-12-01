@@ -929,9 +929,11 @@ class Cnt extends egret.DisplayObjectContainer{
 
             this.bgCourtWrap.addChild(this[choseUserImg]);
 
-             if( !!this.fieldContain && !!this[choseUserImg] ){
-                this.bgCourtWrap.swapChildren( this.fieldContain , this[choseUserImg] ) ;
-             }
+            setTimeout(()=>{
+                if( !!this.fieldContain && !!this[choseUserImg]  ){
+                    this.bgCourtWrap.swapChildren( this.fieldContain , this[choseUserImg] ) ;
+                }
+            },1000)
         }
     }
 
@@ -956,11 +958,11 @@ class Cnt extends egret.DisplayObjectContainer{
 
         this.bgCourtWrap.addChild(this[choseUserImg]);
 
-        if( !!this.fieldContain && !!this[choseUserImg] ){
-            this.bgCourtWrap.swapChildren( this.fieldContain , this[choseUserImg] ) ;
+        setTimeout(()=>{
+            if( !!this.fieldContain && !!this[choseUserImg] ){
+                this.bgCourtWrap.swapChildren( this.fieldContain , this[choseUserImg] ) ;
             }
-        // //  注意层级控制，不然事件会有问题 ！
-        // this.bgCourtWrap.setChildIndex( this.fieldContain  , this.bgCourtWrap.getChildIndex( this[choseUserImg] ))    
+        },1000)
 
     }
     // 用户 离开  new
