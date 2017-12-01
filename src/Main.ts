@@ -5,16 +5,13 @@
 class Main extends egret.DisplayObjectContainer {
 
     /**
-     * 加载进度界面
-     * Process interface loading
+     *  loading
      */
     private loadingView: LoadingUI;
-
     /**
      * websocket
      */
     private webSocket:egret.WebSocket;
-
     //  头部lei
     private top;
     private cnt;
@@ -45,7 +42,6 @@ class Main extends egret.DisplayObjectContainer {
     // 竞猜开始文案
     private start_pop = null;
     private stop_pop = null ;
-   
 
     public constructor() {
         super();
@@ -54,7 +50,6 @@ class Main extends egret.DisplayObjectContainer {
    
     private onAddToStage(event: egret.Event) {
         egret.lifecycle.addLifecycleListener((context) => {
-            // custom lifecycle plugin
             context.onUpdate = () => {
             }
         })
@@ -73,7 +68,6 @@ class Main extends egret.DisplayObjectContainer {
         // this.stage.addChild(this.loadingView);
  
         //初始化Resource资源加载库
-        //initiate Resource loading library
         RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
         RES.loadConfig("resource/default.res.json", "resource/");
     }
@@ -167,12 +161,11 @@ class Main extends egret.DisplayObjectContainer {
         window['store']['$cnt'] = this.cnt ;
         this.addChild(this.cnt);
 
-        setInterval(()=>{
-            console.log('++++++++++++++++')
-            console.log( this.cnt.numChildren )
-            console.log( this.cnt )
-            console.log('-------------')
-        },10000)
+        // setInterval(()=>{
+        //     console.log('++++++++++++++++')
+        //     console.log( this.cnt.numChildren )
+        //     console.log('-------------')
+        // },10000)
 
          //头部实例2
         this.top = new Top(this.Width);
@@ -220,8 +213,8 @@ class Main extends egret.DisplayObjectContainer {
         //杯赛晋升
 
         //test
-        let qqqq = new Test();
-        this.addChild(qqqq)
+        // let qqqq = new Test();
+        // this.addChild(qqqq)
         // 层级控制
         // this.setChildIndex(header,0)
         // this.setChildIndex(this.cnt,1)
@@ -758,7 +751,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
         this.stage.removeChild(this.loadingView);
         setInterval(()=>{
             this.webSocket.writeUTF('p')
-
         },5000)
         this.webSocket.flush();
     }
@@ -769,21 +761,26 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
      *  onIOError  websock 接收消息
      */
     private onIOError():void{
-        if( !!this.out ){
-            this.out.showSocketErr();
-            this.addChild(this.out) ;
+        if( !this.out.parent ){
+            if( !!this.out ){
+                this.out.showSocketErr();
+                this.addChild(this.out) ;
+            }
+            console.error('linsten error')
         }
-        console.error('linsten error')
+
     }
     /**
      *  onCloseSock  websock 接收消息
      */
     private onCloseSock():void{
-        if( !!this.out ){
-            this.out.showSocketErr();
-            this.addChild(this.out) ;
+        if( !this.out.parent ){
+            if( !!this.out ){
+                this.out.showSocketErr();
+                this.addChild(this.out) ;
+            }
+            console.error( 'websock error' ) ;   
         }
-        console.error( 'websock error' ) ;   
     }
 
 }
