@@ -685,7 +685,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             this.addChild(gold);
         }
 
-
         if( $store['userPositionLocal'][uid] && $store['userPositionLocal'][uid] === '1'){
             $store['userPositionObj'][0].x = $store['stage_anWidth'] ;
             $store['userPositionObj'][0].y = 1000
@@ -702,6 +701,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             newEndLocal_x = $store['userPositionObj'][newEndNum].x + 584;
         }
         newEndLocal_y =  $store['userPositionObj'][newEndNum].y + 72;
+
+        console.log( newEndLocal_x )
+        console.log( newEndLocal_y )
+
         setTimeout(()=>{
             egret.Tween.get( goldArr[0] ).to({
                 x: newEndLocal_x ,

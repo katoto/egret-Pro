@@ -883,7 +883,8 @@ class Cnt extends egret.DisplayObjectContainer{
     //  初始的用户信息  new
     public initUserMsg(){
         // 调整原数组
-        let len = window['store']['user_info'].length
+        let $store = window['store'] ;
+        let len = $store['user_info'].length
         let newUserInfo = [];
         let firstUser = null ;
 
@@ -892,29 +893,29 @@ class Cnt extends egret.DisplayObjectContainer{
         }
 
         for( let i =0 ;i< len ;i++ ){
-            if(  window['store']['user_info'][i].uid === window['store']['env_variable']['uid'] ){
-                firstUser = window['store']['user_info'][i];
+            if(  $store['user_info'][i].uid === $store['env_variable']['uid'] ){
+                firstUser = $store['user_info'][i];
             }else{
-                newUserInfo.push( window['store']['user_info'][i] )
+                newUserInfo.push( $store['user_info'][i] )
             }
         }
         if( firstUser !== null ){
             newUserInfo.unshift( firstUser )
         }
-        window['store']['user_info'] = newUserInfo ;
+        $store['user_info'] = newUserInfo ;
 
-        window['store']['emptyUserPosition'] = [];
+        $store['emptyUserPosition'] = [];
         for( let i=0;i<9 ; i++ ){
             if( i >=len ){
-                window['store']['emptyUserPosition'].push( i+1 )
+                $store['emptyUserPosition'].push( i+1 )
             }
         }
         for(let i=0; i<len ;i++){
-            if( window['store']['user_info'][i] && window['store']['user_info'][i].photo === '' ){
-                window['store']['user_info'][i].photo = 'http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1213.png'
+            if( $store['user_info'][i] && $store['user_info'][i].photo === '' ){
+                $store['user_info'][i].photo = 'http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1213.png'
             }
-            if( window['store']['user_info'][i].uid ){
-                window['store']['userPositionLocal'][window['store']['user_info'][i].uid] = ( i + 1 ) 
+            if( $store['user_info'][i].uid ){
+                $store['userPositionLocal'][$store['user_info'][i].uid] = ( i + 1 ) 
 
             }else{
                 console.error( 'websock 无uid' )
@@ -923,26 +924,29 @@ class Cnt extends egret.DisplayObjectContainer{
             var choseUserImg = 'userImg'+(i+1) ;
 
             if( this[choseUserImg] ){
-                this[choseUserImg].upDataUseMsg( window['formateName'] ( window['store']['user_info'][i].username ) , window['store']['user_info'][i].photo ,
-                    window['store']['user_info'][i].total );
+                this[choseUserImg].upDataUseMsg( window['formateName'] ( $store['user_info'][i].username ) , $store['user_info'][i].photo ,
+                    $store['user_info'][i].total );
             }
 
             this.bgCourtWrap.addChild(this[choseUserImg]);
 
-             if( !!this.fieldContain && !!this[choseUserImg] ){
-                this.bgCourtWrap.swapChildren( this.fieldContain , this[choseUserImg] ) ;
-             }
+            setTimeout(()=>{
+                if( !$store['unableClick'] && !!this.fieldContain && !!this[choseUserImg] && this.fieldContain.parent && this[choseUserImg].parent ){
+                    this.bgCourtWrap.swapChildren( this.fieldContain , this[choseUserImg] ) ;
+                }
+            },1000)
         }
     }
 
     // 用户 进入  new
     private addUserImage( username:string , photo:string , total:string , uid:string ){
-        var userI = window['store']['emptyUserPosition'].shift() ;
+        let $store = window['store'] ;
+        var userI = $store['emptyUserPosition'].shift() ;
         if( !userI ){
             console.error('无空闲房间')
             return false;
         }
-        window['store']['userPositionLocal'][uid] = userI
+        $store['userPositionLocal'][uid] = userI
         var choseUserImg = 'userImg' + ( userI )
         console.log( choseUserImg )
         if( photo === '' ){
@@ -956,11 +960,11 @@ class Cnt extends egret.DisplayObjectContainer{
 
         this.bgCourtWrap.addChild(this[choseUserImg]);
 
-        if( !!this.fieldContain && !!this[choseUserImg] ){
-            this.bgCourtWrap.swapChildren( this.fieldContain , this[choseUserImg] ) ;
+        setTimeout(()=>{
+            if( !$store['unableClick'] && !!this.fieldContain && !!this[choseUserImg] && this.fieldContain.parent && this[choseUserImg].parent ){
+                this.bgCourtWrap.swapChildren( this.fieldContain , this[choseUserImg] ) ;
             }
-        // //  注意层级控制，不然事件会有问题 ！
-        // this.bgCourtWrap.setChildIndex( this.fieldContain  , this.bgCourtWrap.getChildIndex( this[choseUserImg] ))    
+        },1000)
 
     }
     // 用户 离开  new
