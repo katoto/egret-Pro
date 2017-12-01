@@ -551,7 +551,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     this.start_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-begin_png');
                     this.start_pop.y = 227;
                     this.addChild( this.start_pop );
-                    egret.Tween.get( this.start_pop ).to({y:0},2000);
+                    egret.Tween.get( this.start_pop ).to({y:0},200);
                     if( $msgObjBody ){
                         $store['orderObj']['expect'] = $msgObjBody.expect ;
                         $store['orderObj']['stageid'] = $msgObjBody.stageid ;
