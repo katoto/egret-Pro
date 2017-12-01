@@ -157,13 +157,14 @@ class Cnt extends egret.DisplayObjectContainer{
         this.champion = new egret.DisplayObjectContainer();
         this.champion.width = 241;
         this.champion.height = 200; 
-        this.champion.x = 254.5;
+        this.champion.x = 750;
         this.champion.y = 93;
 
         let championImg:egret.Bitmap = new egret.Bitmap(RES.getRes('champion_png'));
         this.champion.addChild(championImg);   
 
         this.championText = new egret.TextField();
+        this.championText.alpha = 0;
         this.championText.text = '';
         this.championText.textColor = 0xffffff;
         this.championText.size = 36;
@@ -173,6 +174,7 @@ class Cnt extends egret.DisplayObjectContainer{
         this.championText.verticalAlign = egret.VerticalAlign.BOTTOM;
 
         // this.bgCourtWrap.addChild(this.champion);
+       
         // this.champion.addChild(this.championText); 
 
         //toast
@@ -243,10 +245,12 @@ class Cnt extends egret.DisplayObjectContainer{
     private showChampion( name:string ){
         if( !!this.champion ){
             this.bgCourtWrap.addChild( this.champion ) ;
+            egret.Tween.get(this.champion).to({x:254.5},200)
         }
         if( !!this.championText ){
             this.championText.text = name ;
             this.champion.addChild(this.championText) ; 
+            egret.Tween.get(this.championText).to({alpha:1},200)
         }
     }
 
