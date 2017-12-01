@@ -33,7 +33,7 @@ class Change extends eui.UILayer{
         this.logo_oz = this.createLogoBitmap( 'logo-oz_png' ) ;
         this.logo_fz = this.createLogoBitmap( 'logo-fz_png' ) ;
         this.logo_yz = this.createLogoBitmap( 'logo-yz_png' ) ;
-        this.logo_sj = this.createLogoBitmap( 'logo-sj_png' ) ;
+        this.logo_sj = this.createLogoBitmap( 'logo-sjb_png' ) ;
 
         // this.addChild( this.logo_mz );
         // setTimeout(()=>{

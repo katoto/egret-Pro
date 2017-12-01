@@ -39,6 +39,9 @@ class Main extends egret.DisplayObjectContainer {
     
     private position:Array<number> =  [];
 
+    //蒙层
+    private mask01:egret.Shape;
+    private mask02:egret.Shape;
     // 竞猜开始文案
     private start_pop = null;
     private stop_pop = null ;
@@ -145,6 +148,25 @@ class Main extends egret.DisplayObjectContainer {
         this.anWidth = $store['stage_anWidth'] = this.Width/2;
         const anHeight =  $store['stage_anHeight'] = this.Height/2;
         window['store'].scale = ( this.Height / 1334 ).toFixed(2) ;
+
+
+         //popWrap
+        this.mask01 = new egret.Shape();
+        this.mask01.anchorOffsetX = 371;
+        this.mask01.anchorOffsetY = 113.5;
+        this.mask01.graphics.beginFill(0x0000ff,0);
+        this.mask01.graphics.drawRect(window['store']['stage_anWidth'],window['store']['stage_anHeight'],742,227);
+        this.mask01.graphics.endFill();
+        this.addChild(this.mask01);
+        this.mask02 = new egret.Shape();
+        this.mask02.anchorOffsetX = 371;
+        this.mask02.anchorOffsetY = 113.5;
+        this.mask02.graphics.beginFill(0x0000ff,0);
+        this.mask02.graphics.drawRect(window['store']['stage_anWidth'],window['store']['stage_anHeight'],742,227);
+        this.mask02.graphics.endFill();
+        this.addChild(this.mask02);
+
+        
         // let sky = this.createBitmapByName("btn-500_png");
         // this.addChild(sky)
 
@@ -180,7 +202,8 @@ class Main extends egret.DisplayObjectContainer {
         this.bottom.y = this.Height;
         this.addChild(this.bottom);
 
-     
+       
+       
 
         // 晋级  缺动画
         this.promotion = new Promotion();
@@ -210,8 +233,7 @@ class Main extends egret.DisplayObjectContainer {
         //杯赛晋升
 
         //test
-        // let qqqq = new Test();
-        // this.addChild(qqqq)
+
         // 层级控制
         // this.setChildIndex(header,0)
         // this.setChildIndex(this.cnt,1)
@@ -327,6 +349,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
      *  onReceiveMess  websock 接收消息
      */
     private onReceiveMess(e:egret.Event):void{
+        var self = this;
         let $store = window['store'];
         // event.updateAfterEvent();  //  什么时候进行强制刷新 ??????手机上用户立场 舞台不刷新 
         let msg = this.webSocket.readUTF();
@@ -545,10 +568,9 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     // start_guess  去文案
                     this.start_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-begin_png');
                     this.start_pop.y = 227;
-                    this.start_pop.alpha = 0;
                     this.addChild( this.start_pop );
-                    egret.Tween.get( this.start_pop ).to({alpha:1},200).to({y:0},200);
-
+                    // this.start_pop.mask = self.mask01;
+                    egret.Tween.get( this.start_pop ).to({y:0},200);
                     if( $msgObjBody ){
                         $store['orderObj']['expect'] = $msgObjBody.expect ;
                         $store['orderObj']['stageid'] = $msgObjBody.stageid ;
@@ -578,7 +600,9 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                     this.cnt.cnt_timer('20');
                                 ;break;
                             }
-                            this.removeChild( this.start_pop );
+                            egret.Tween.get( this.start_pop ).to({y:227},200).call(()=>{
+                                this.removeChild( this.start_pop );
+                            });
                         }
                     }
 
@@ -590,9 +614,10 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     // 停止竞猜 直接移除定时器 加入开始
                     this.stop_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-over_png' );
                     this.stop_pop.y = 227;
-                    this.stop_pop.alpha = 0;
                     this.addChild( this.stop_pop );
-                    egret.Tween.get( this.stop_pop ).to({alpha:1},200).to({y:0},200);
+                    // this.stop_pop.mask = self.mask02;
+                    egret.Tween.get( this.stop_pop ).to({y:0},200);
+                    
                     
 
                     // 移除文案
@@ -603,7 +628,10 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
 
                     setTimeout(()=>{
                         if( this.stop_pop && this.stop_pop.parent ){
-                            this.removeChild( this.stop_pop );
+                            egret.Tween.get( this.stop_pop ).to({y:227},200).call(()=>{
+                               this.removeChild( this.stop_pop );
+                            });
+                           
                         }
                         setTimeout(()=>{
                             this.cnt.cnt_upTextTips('等待开奖');
