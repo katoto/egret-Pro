@@ -144,8 +144,9 @@ var Field_ball = (function (_super) {
             }
         }
     };
-    // 更新场地数据 赔率， 对阵 ，homeid awayid 
-    Field_ball.prototype.upFieldAllData = function (leftImg, leftT, leftO, rightImg, rightT, rightO, homeid, awayid, matchid) {
+    // 更新场地数据 赔率， 对阵 ，homeid awayid   ( 初始的 投注数据 )
+    Field_ball.prototype.upFieldAllData = function (leftImg, leftT, leftO, rightImg, rightT, rightO, homeid, awayid, matchid, home_golds, away_golds) {
+        var $store_coinNum = window['store']['coin_Num'];
         this.leftTeam.source = leftImg;
         this.leftTitle.text = leftT;
         this.leftOdds.text = leftO;
@@ -155,6 +156,19 @@ var Field_ball = (function (_super) {
         this.homeid = homeid;
         this.awayid = awayid;
         this.matchid = matchid;
+        console.log('###########');
+        console.log(home_golds);
+        if (home_golds && home_golds !== '0') {
+            $store_coinNum[matchid]['my_golds_l'] = $store_coinNum[matchid]['my_golds_l'] ? parseInt($store_coinNum[matchid]['my_golds_l']) + home_golds :
+                parseInt(home_golds);
+            this.addLeftAllCoin(window['formateGold'](home_golds));
+        }
+        if (home_golds && away_golds !== '0') {
+            $store_coinNum[matchid]['home_golds'] = $store_coinNum[matchid]['home_golds'] ? parseInt($store_coinNum[matchid]['home_golds']) + away_golds :
+                parseInt(away_golds);
+            this.addRightAllCoin(window['formateGold'](away_golds));
+        }
+        console.log(away_golds);
     };
     /**
      *  获取 对应场地的 img & name

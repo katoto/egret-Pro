@@ -78,11 +78,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         this.courtWrap4.addChild(this.field44);
 
 
-
-
     }
-    
-
         // 放入4个场地
     private addcourtWrap4(){
         if( this.courtWrap2.parent ){
@@ -128,7 +124,8 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     if( $store['matches'][0] ){
                         this.field1.upFieldAllData( $store['matches'][0].homelogo , $store['matches'][0].homename ,  $store['matches'][0].homeodds ,
                         $store['matches'][0].awaylogo , $store['matches'][0].awayname , $store['matches'][0].awayodds ,
-                        $store['matches'][0].homeid , $store['matches'][0].awayid , $store['matches'][0].matchid
+                        $store['matches'][0].homeid , $store['matches'][0].awayid , $store['matches'][0].matchid ,
+                        $store['matches'][0].home_golds , $store['matches'][0].away_golds
                          )  
                         this.addcourtWrap1()
                         // 记录位置  切换
@@ -142,7 +139,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         if( $store['matches'][i] ){
                             this['field2'+( i + 1 )].upFieldAllData( $store['matches'][i].homelogo , $store['matches'][i].homename ,  $store['matches'][i].homeodds ,
                                 $store['matches'][i].awaylogo , $store['matches'][i].awayname , $store['matches'][i].awayodds ,
-                                $store['matches'][i].homeid , $store['matches'][i].awayid , $store['matches'][i].matchid )
+                                $store['matches'][i].homeid , $store['matches'][i].awayid , $store['matches'][i].matchid,
+                                $store['matches'][i].home_golds , $store['matches'][i].away_golds
+                                 )
                                 // 记录位置
                                 $store['matFindField'][$store['matches'][i].matchid] = 'field2' +( i+1 );
                         } else {
@@ -157,7 +156,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         if( $store['matches'][i] ){
                             this['field4'+( i + 1 )].upFieldAllData( $store['matches'][i].homelogo , $store['matches'][i].homename ,  $store['matches'][i].homeodds ,
                                 $store['matches'][i].awaylogo , $store['matches'][i].awayname , $store['matches'][i].awayodds ,
-                                $store['matches'][i].homeid , $store['matches'][i].awayid , $store['matches'][i].matchid )
+                                $store['matches'][i].homeid , $store['matches'][i].awayid , $store['matches'][i].matchid,
+                                $store['matches'][i].home_golds , $store['matches'][i].away_golds
+                                 )
                                 // 记录位置
                                 $store['matFindField'][$store['matches'][i].matchid] = 'field4' +( i+1 );
                         } else {
@@ -689,8 +690,8 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         }
 
         if( $store['userPositionLocal'][uid] === '1' || $store['userPositionLocal'][uid] === 1 ){
-            $store['userPositionObj'][0].x = $store['stage_anWidth'] ;
-            $store['userPositionObj'][0].y = 1000
+            $store['userPositionObj'][0].x = $store['stage_anWidth'] - 46 ;
+            $store['userPositionObj'][0].y = 902 ;
         }
 
         //  取到随机的位置
