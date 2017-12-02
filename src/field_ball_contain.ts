@@ -678,7 +678,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             console.warn( 'sendEndCoin error' )
         }
 
-        for( let i=0;i<3; i++ ){
+        for( let i=0;i<5; i++ ){
             let gold = new Gold();
             gold.anchorOffsetX = gold.width/2;
             gold.anchorOffsetY = gold.height/2;
@@ -688,7 +688,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             this.addChild(gold);
         }
 
-        if( $store['userPositionLocal'][uid] && $store['userPositionLocal'][uid] === '1'){
+        if( $store['userPositionLocal'][uid] === '1' || $store['userPositionLocal'][uid] === 1 ){
             $store['userPositionObj'][0].x = $store['stage_anWidth'] ;
             $store['userPositionObj'][0].y = 1000
         }
@@ -712,7 +712,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             egret.Tween.get( goldArr[0] ).to({
                 x: newEndLocal_x ,
                 y: newEndLocal_y ,
-            }, 500 ).call(()=>{
+            }, 300 ).call(()=>{
                 if( goldArr[0] && goldArr[0].parent ){
                     this.removeChild( goldArr[0] )
                 }
@@ -721,23 +721,42 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 egret.Tween.get( goldArr[1] ).to({
                     x: newEndLocal_x ,
                     y: newEndLocal_y ,
-                }, 500 ).call(()=>{
+                }, 350 ).call(()=>{
                     if( goldArr[1] && goldArr[1].parent ){
                         this.removeChild( goldArr[1] )
                     }
                 })
-            },100)
+            },80)
             setTimeout(()=>{
                 egret.Tween.get( goldArr[2] ).to({
                     x: newEndLocal_x ,
                     y: newEndLocal_y ,
-                }, 500 ).call(()=>{
-                    // 移除 。。 用户中奖展现 （自定义事件？）
+                }, 400 ).call(()=>{
                     if( goldArr[2] && goldArr[2].parent ){
                         this.removeChild( goldArr[2] )
                     }
                 })
-            },250)
+            },130)            
+            setTimeout(()=>{
+                egret.Tween.get( goldArr[3] ).to({
+                    x: newEndLocal_x ,
+                    y: newEndLocal_y ,
+                }, 500 ).call(()=>{
+                    if( goldArr[3] && goldArr[3].parent ){
+                        this.removeChild( goldArr[3] )
+                    }
+                })
+            },200)
+            setTimeout(()=>{
+                egret.Tween.get( goldArr[4] ).to({
+                    x: newEndLocal_x ,
+                    y: newEndLocal_y ,
+                }, 500 ).call(()=>{
+                    if( goldArr[4] && goldArr[4].parent ){
+                        this.removeChild( goldArr[4] )
+                    }
+                })
+            },250)            
         },0)
     }
 

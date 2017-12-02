@@ -600,7 +600,9 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                 ;break;
                             }
                             egret.Tween.get( this.start_pop ).to({y:227},200).call(()=>{
-                                this.removeChild( this.start_pop );
+                                if( this.start_pop.parent ){
+                                    this.removeChild( this.start_pop );
+                                }
                             });
                         }
                     }
