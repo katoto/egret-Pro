@@ -55,18 +55,20 @@ class Main extends egret.DisplayObjectContainer {
     }
    
     private onAddToStage(event: egret.Event) {
-        egret.lifecycle.addLifecycleListener((context) => {
-            context.onUpdate = () => {
-            }
-        })
 
-        egret.lifecycle.onPause = () => {
-            egret.ticker.pause();
-        }
+        // egret.lifecycle.addLifecycleListener((context) => {
+        //     context.onUpdate = () => {
+        //     }
+        // })
 
-        egret.lifecycle.onResume = () => {
-            egret.ticker.resume();
-        }
+        // egret.lifecycle.onPause = () => {
+        //     egret.ticker.pause();
+        // }
+
+        // egret.lifecycle.onResume = () => {
+        //     egret.ticker.resume();
+        // }
+
         //设置加载进度界面
         //Config to load process interface
 
@@ -398,6 +400,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
 
                         // 处理其他阶段进入的时间 ( 用于不同阶段进入的情况 )
                         if( $msgObjBody.curr_messageid ){
+                            $store['unableClick'] = true ;
                             switch( $msgObjBody.curr_messageid ){
                                 case '2006':
                                     if( !!this.cnt ){
@@ -433,7 +436,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                     if( !!this.cnt ){
                                         this.cnt.cnt_upTextTips('请下注');
                                     }
-                                    // 处理 总金额的显示。
 
                                 ;break;
                                 case '2005':
@@ -584,19 +586,47 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
 
                         $store['unableClick'] = false ;
 
+                        // 处理层级
+                        if( $store.userPositionLocal ){
+                            let item = null ;
+                            var choseUserImg = 'userImg';
+                            let bigIndex = 0;
+                            let bigUserImg = null ;
+                            for( item  in $store.userPositionLocal ){
+                                // console.log( item )
+                                if( $store.userPositionLocal[item] ){
+                                    // console.log( choseUserImg +  $store.userPositionLocal[item] ) ;
+                                    // console.log( $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) )
+                                    if( $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) > bigIndex ){
+                                        bigIndex = $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) ;
+                                        bigUserImg = this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ;
+                                    }
+                                }
+
+                            }
+                            if( !bigUserImg ){
+                                if( !$store['unableClick'] && !!$store['$fieldContain'] && !! bigUserImg
+                                    && $store['$fieldContain'].parent && bigUserImg.parent ){
+                                    $store['$bgCourtWrap'].swapChildren( $store['$fieldContain'] , bigUserImg ) ;
+                                }
+                            }
+
+                        }
+
+
                         if( this.start_pop && this.start_pop.parent ){
                             // 请下注
                             this.cnt.cnt_upTextTips('请下注');
 
                             switch ( $msgObjBody.stageid ){
                                 case '1':
-                                    this.cnt.cnt_timer('30');
+                                    this.cnt.cnt_timer('31');
                                 ;break;
                                 case '2':
-                                    this.cnt.cnt_timer('25');
+                                    this.cnt.cnt_timer('26');
                                 ;break;
                                 case '3':
-                                    this.cnt.cnt_timer('20');
+                                    this.cnt.cnt_timer('21');
                                 ;break;
                             }
                             egret.Tween.get( this.start_pop ).to({y:227},200).call(()=>{
@@ -646,6 +676,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
 
                 case '2005':
                     // 正在开奖 出现 进度条 比分的进度等等
+                    $store['unableClick'] = true ;
                     this.cnt.cnt_upTextTips('正在开奖...');
                     if( this.stop_pop && this.stop_pop.parent ){
                         this.removeChild( this.stop_pop );
@@ -673,6 +704,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 ;break;
                 case'2006':
                     // 正在派奖
+                    $store['unableClick'] = true ;
                     this.cnt.cnt_upTextTips('正在派奖...');
                 ;break;
 
@@ -738,14 +770,13 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     this.cnt.showTips('使用了旧的房间号 error at 2017') ;
                 ;break
             }
-            setTimeout(()=>{
 
+            // setTimeout(()=>{
                 // this.cnt.cnt_Other_Coin('10015131' , '1' ,'' ,'111' )
                 // console.log('收起金币 测试 ok')
                 // this.cnt.cnt_collectCoin()
                 // this.cnt.cnt_sendEndCoin( '1002999','' )
                 // this.cnt.cnt_sendEndCoin( '1002988','' )
-
                 // this.cnt.cnt_timer('6')
 
                 // 模拟点球
@@ -760,7 +791,8 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 // },5000)
                 // this.cnt.showTips('tips 测试')
 
-            },3000)
+            // },3000)
+
         }
     }
     

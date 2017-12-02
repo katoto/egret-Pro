@@ -936,7 +936,11 @@ class Cnt extends egret.DisplayObjectContainer{
 
             setTimeout(()=>{
                 if( !!this.fieldContain && !!this[choseUserImg] && this.fieldContain.parent && this[choseUserImg].parent ){
-                    this.bgCourtWrap.swapChildren( this.fieldContain , this[choseUserImg] ) ;
+                    try{
+                        this.bgCourtWrap.swapChildren( this.fieldContain , this[choseUserImg] ) ;
+                    }catch(e){
+                        alert('不支持swapchildren')
+                    }
                 }
             },1000)
         }
@@ -965,12 +969,10 @@ class Cnt extends egret.DisplayObjectContainer{
         this.bgCourtWrap.addChild(this[choseUserImg]);
 
         console.log( $store['unableClick'] ) ;
-        console.log('*****************')
+        console.log('*****************');
 
         setTimeout(()=>{
-            //  !$store['unableClick'] && 
             if( !$store['unableClick'] && !!this.fieldContain && !!this[choseUserImg] && this.fieldContain.parent && this[choseUserImg].parent ){
-                console.log(1234)
                 this.bgCourtWrap.swapChildren( this.fieldContain , this[choseUserImg] ) ;
             }
         },1000)

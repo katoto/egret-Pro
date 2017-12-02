@@ -158,13 +158,21 @@ var Field_ball = (function (_super) {
         this.matchid = matchid;
         console.log('###########');
         console.log(home_golds);
+        if (!$store_coinNum[matchid]) {
+            $store_coinNum[matchid] = {
+                home_golds: null,
+                my_golds_l: null,
+                my_golds_r: null,
+                away_golds: null,
+            };
+        }
         if (home_golds && home_golds !== '0') {
-            $store_coinNum[matchid]['my_golds_l'] = $store_coinNum[matchid]['my_golds_l'] ? parseInt($store_coinNum[matchid]['my_golds_l']) + home_golds :
+            $store_coinNum[matchid]['home_golds'] = $store_coinNum[matchid]['home_golds'] ? parseInt($store_coinNum[matchid]['home_golds']) + home_golds :
                 parseInt(home_golds);
             this.addLeftAllCoin(window['formateGold'](home_golds));
         }
-        if (home_golds && away_golds !== '0') {
-            $store_coinNum[matchid]['home_golds'] = $store_coinNum[matchid]['home_golds'] ? parseInt($store_coinNum[matchid]['home_golds']) + away_golds :
+        if (away_golds && away_golds !== '0') {
+            $store_coinNum[matchid]['away_golds'] = $store_coinNum[matchid]['away_golds'] ? parseInt($store_coinNum[matchid]['away_golds']) + away_golds :
                 parseInt(away_golds);
             this.addRightAllCoin(window['formateGold'](away_golds));
         }
@@ -390,12 +398,12 @@ var Field_ball = (function (_super) {
         if (this.goldItems_left && this.goldItems_left.parent) {
             this.removeChild(this.goldItems_left);
         }
-        // if( this.goldItems_left02 && this.goldItems_left02.parent ){
-        //     this.removeChild( this.goldItems_left02 );
-        // }
-        // if( this.goldItems_right02 && this.goldItems_right02.parent ){
-        //     this.removeChild( this.goldItems_right02 );
-        // }
+        if (this.goldItems_left02 && this.goldItems_left02.parent) {
+            this.removeChild(this.goldItems_left02);
+        }
+        if (this.goldItems_right02 && this.goldItems_right02.parent) {
+            this.removeChild(this.goldItems_right02);
+        }
     };
     // findWinLocation  ==> findLocal 
     /**
