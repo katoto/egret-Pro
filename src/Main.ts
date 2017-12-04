@@ -3,7 +3,6 @@
  */
 
 class Main extends egret.DisplayObjectContainer {
-
     /**
      *  loading
      */
@@ -226,16 +225,6 @@ class Main extends egret.DisplayObjectContainer {
             this.out = new Pop02Out();
         },2000)
 
-        //提示 网络异常  是否重新连接 之类的
-
-        //杯赛晋升
-
-        //test
-
-        // 层级控制
-        // this.setChildIndex(header,0)
-        // this.setChildIndex(this.cnt,1)
-        // this.setChildIndex(this.top,2)
         // this.setChildIndex(this.bottom,3)
         // this.setChildIndex(this.pop,4)
         // this.setChildIndex(this.popChampionRecord,4)
@@ -877,6 +866,8 @@ window['store'] = {
     orderDomain:'http://10.0.1.41:9899',
     initDomain:'http://10.0.1.41:2332',
 
+    $Top:null, // 往期弹窗
+    $pop02Cham:null,
     $fieldContain:null ,
     $cnt:null, // cnt 实例
     $bgCourtWrap:null,  // 清除点球
@@ -941,10 +932,6 @@ window['store'] = {
         node:null,
     },
     matches:[],  // 赛事信息原
-    commit:function(key,val){
-        console.log(key)
-        console.log(val)
-    },
 
     // 记录 投注的金币数 ( 可能的金币 )
     allCoinObj:{
