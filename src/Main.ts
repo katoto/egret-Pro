@@ -592,11 +592,14 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 ;break;
                 case '2019':
                     // start_guess  去文案
-                    this.start_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-begin_png');
-                    this.start_pop.y = 227;
-                    this.addChild( this.start_pop );
-                    this.startOver.play(0,1);
-                    egret.Tween.get( this.start_pop ).to({y:0},200);
+                    if( !this.out.parent ){
+                        this.start_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-begin_png');
+                        this.start_pop.y = 227;
+                        this.addChild( this.start_pop );
+                        this.startOver.play(0,1);
+                        egret.Tween.get( this.start_pop ).to({y:0},200);
+                    }
+
                     if( $msgObjBody ){
                         $store['orderObj']['expect'] = $msgObjBody.expect ;
                         $store['orderObj']['stageid'] = $msgObjBody.stageid ;
@@ -688,16 +691,17 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     $store['unableClick'] = true ;
 
                     // 停止竞猜 直接移除定时器 加入开始
-                    this.stop_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-over_png' );
-                    this.stop_pop.y = 227;
-                    this.addChild( this.stop_pop );
-                    this.startOver.play(0,1);
-                    egret.Tween.get( this.stop_pop ).to({y:0},200);
+                    if( !this.out.parent ){
+                        this.stop_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-over_png' );
+                        this.stop_pop.y = 227;
+                        this.addChild( this.stop_pop );
+                        this.startOver.play(0,1);
+                        egret.Tween.get( this.stop_pop ).to({y:0},200);
+                    }
 
                     // 移除文案
                     this.cnt.cnt_upTextTips('');
                     this.cnt.cnt_timerRemove();
-
 
                     setTimeout(()=>{
                         // 收集金币
