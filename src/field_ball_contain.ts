@@ -816,13 +816,13 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             setTimeout(()=>{
                 egret.Tween.get( newGold[0] ).to( { x:stage_x,y:stage_y },200 );
                 setTimeout(()=>{
-                    egret.Tween.get( newGold[1] ).to( { x:stage_x + 4 ,y:stage_y + 4 },200 );
+                    egret.Tween.get( newGold[1] ).to( { x:stage_x + 6 ,y:stage_y + 6 },200 );
                 },60);
                 setTimeout(()=>{
-                    egret.Tween.get( newGold[2] ).to( { x:stage_x + 4 ,y:stage_y - 4 },200 );
+                    egret.Tween.get( newGold[2] ).to( { x:stage_x + 6 ,y:stage_y - 6 },200 );
                 },100);
                 setTimeout(()=>{
-                    egret.Tween.get( newGold[3] ).to( { x:stage_x - 4 ,y:stage_y - 4 },200 ).call(()=>{
+                    egret.Tween.get( newGold[3] ).to( { x:stage_x - 6 ,y:stage_y - 6 },200 ).call(()=>{
                         newGold = [] ;
                     });
                 },150)                                        
