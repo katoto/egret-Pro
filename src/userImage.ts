@@ -132,7 +132,7 @@ class userImage extends eui.UILayer {
         if( !winCoin || winCoin === 'undefined' ){
             winCoin = '0'
         }
-        this.winGold.text = window['formateGold']( winCoin )
+        this.winGold.text = '+'+ window['formateGold']( winCoin ) ;
         this.addChild(this.bgBorder);
         this.addChild(this.winGold);
     }

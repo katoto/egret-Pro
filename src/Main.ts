@@ -387,15 +387,12 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                             $store.matches =  $msgObjBody.matches; 
                             //  初始化场地容器 数据
                             this.cnt.initFieldCon();
-                            // if( $msgObjBody.matches && $msgObjBody.matches.length > 0 ){
-                            //     $store.matchesObj = window['convertArrToObj']( $msgObjBody.matches , 'matchid') // 好像用不到
-                            // }
-                            // this.cnt.initFieldCon();
+
                         }
                         // 初始化 进场的数据
                         if( $msgObjBody.pre_result && !!this.promotion ){
                             // 临时去
-                            // this.promotion.upPromotionMsg( $msgObjBody.pre_result ) ;
+                            this.promotion.upPromotionMsg( $msgObjBody.pre_result ) ;
                         }
 
                         // 处理其他阶段进入的时间 ( 用于不同阶段进入的情况 )
@@ -456,7 +453,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                 ;break;
                             }
                         }
-
                     }
                     ;break;
                 case '2012':
@@ -907,7 +903,6 @@ window['store'] = {
         node:null,
     },
     matches:[],  // 赛事信息原
-    matchesObj:{}, // 数组转对象
     commit:function(key,val){
         console.log(key)
         console.log(val)

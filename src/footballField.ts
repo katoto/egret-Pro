@@ -208,8 +208,6 @@ class Field_ball extends eui.UILayer {
         this.awayid = awayid;
         this.matchid = matchid ;
 
-        console.log('###########')
-        console.log( home_golds )
         if( !$store_coinNum[matchid] ){
             $store_coinNum[matchid] = {
                 home_golds : null,
@@ -230,8 +228,7 @@ class Field_ball extends eui.UILayer {
             parseInt ( away_golds );
             this.addRightAllCoin( window['formateGold'](  away_golds ) ) ;
         }
-        
-        console.log( away_golds )
+
     }
 
     /**

@@ -156,8 +156,6 @@ var Field_ball = (function (_super) {
         this.homeid = homeid;
         this.awayid = awayid;
         this.matchid = matchid;
-        console.log('###########');
-        console.log(home_golds);
         if (!$store_coinNum[matchid]) {
             $store_coinNum[matchid] = {
                 home_golds: null,
@@ -176,7 +174,6 @@ var Field_ball = (function (_super) {
                 parseInt(away_golds);
             this.addRightAllCoin(window['formateGold'](away_golds));
         }
-        console.log(away_golds);
     };
     /**
      *  获取 对应场地的 img & name

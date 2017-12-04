@@ -728,7 +728,6 @@ class Cnt extends egret.DisplayObjectContainer{
     // 金币发出 ( 分发 )   
     //  settle-list 处理函数 更新用户的金币（延迟一下吧）
     //  通过matchid 找到 开始位置 通过uid 找到头像位置
-    // 没有告知是左还是右 ？ 
     // 
     async settle_listFn( settleData:any ){
         let choseUser = null ;
@@ -753,7 +752,7 @@ class Cnt extends egret.DisplayObjectContainer{
                         if( settleData[i].prize_info[j] && settleData[i].prize_info[j].matchid ){
                             // curFindField = $store['matFindField'][ settleData[i].prize_info[j].matchid ] ;
                             curFindField = $store['fieldLeftOrRight'][settleData[i].prize_info[j].matchid];
-                            console.log( curFindField )
+                            // console.log( curFindField )
                             // curFindField = 'field42_r';
                             // this.fieldContain[curFindField]   left  or right 动画
                             // curFindField = curFindField + '_l';
@@ -764,8 +763,8 @@ class Cnt extends egret.DisplayObjectContainer{
                         }
                     }
                     if( this[ baseImg + choseUser ] && allShowWinNum ){
-                        console.log('---------');
-                        console.log( allShowWinNum )
+                        // console.log('---------');
+                        // console.log( allShowWinNum )
                         this[ baseImg + choseUser ].isShowWinGold( allShowWinNum );
                         userImgArr.push( this[ baseImg + choseUser ] )
                     }
@@ -1004,7 +1003,6 @@ class Cnt extends egret.DisplayObjectContainer{
 
             window['store']['emptyUserPosition'].push( delIndex );
 
-            // console.log( delIndex )
             if( this.bgCourtWrap && this[choseUserImg] && this[choseUserImg].parent ){
                 this.bgCourtWrap.removeChild(this[choseUserImg]);
             }
