@@ -161,7 +161,7 @@ class Change extends eui.UILayer{
         let teamName_r:egret.TextField = new egret.TextField();
         teamName_r.width = 180;
         teamName_r.anchorOffsetX = 180;
-        teamName_r.text = '队伍名称队伍名称';
+        teamName_r.text = '队伍名';
         teamName_r.height = 68;
         teamName_r.size = 22;
         teamName_r.textColor = 0xffffff;
