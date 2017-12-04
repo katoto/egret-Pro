@@ -84,8 +84,8 @@ class Pop02Out extends egret.DisplayObjectContainer{
      *   长时间未操作 函数
      */
     private longTime_Fn(){
-        this.parent.removeChild(this) ;
-        // window.location.href = 'https:www.baidu.com' ;
+        // this.parent.removeChild(this) ;
+        window.location.href = 'https:www.baidu.com' ;
     }
 
     /**
