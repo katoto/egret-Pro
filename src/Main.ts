@@ -440,7 +440,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                         let bigIndex = 0;
                                         let bigUserImg = null ;
 
-                                        console.log('change 提高层级')
+                                        console.log('change 提高层级 at 2003')
 
                                         for( item  in $store.userPositionLocal ){
                                             if( $store.userPositionLocal[item] ){

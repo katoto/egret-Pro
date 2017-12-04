@@ -209,7 +209,6 @@ class Penalty02 extends eui.UILayer {
             //  显示win showWinLocation(res05[i].matchid);  _l left  _r right
 
             // movePenalty
-
             await this.wait( 350 ) ;
             if( !!$store['$fieldContain'] ){
                 $store['$fieldContain'].showWinLocation( matchid , leftOrRig );

@@ -431,6 +431,15 @@ class Cnt extends egret.DisplayObjectContainer{
 
         // 在外面  await 18s  25s  
         await this.wait( 18000 );  
+
+        if( len === 4 ){
+            // 处理层级
+            console.log('减低层级 为了 派奖' )
+            if( this.bgCourtWrap.getChildIndex( this['userImg1'] ) < this.bgCourtWrap.getChildIndex( this.fieldContain )  ){
+                this.bgCourtWrap.swapChildren( this['userImg1'] , this.fieldContain ) ;
+            }
+        }
+
         // 同步  执行 点球
         // await this.start_showPenalty( allResult ,  curr_local);
         for( let i = 0; i < len ;i ++ ){
@@ -489,7 +498,6 @@ class Cnt extends egret.DisplayObjectContainer{
         }
 
     }
-
 
     /**
      *  直接显示  win 的 结果
@@ -748,7 +756,7 @@ class Cnt extends egret.DisplayObjectContainer{
                     console.log( '++++++++++' ) ;
                     allShowWinNum = 0 ;
                     // 派金币
-                    for( let j = 0;j< settleData[i].prize_info.length ;j++ ){
+                    for( let j = 0;j < settleData[i].prize_info.length ; j++ ){
                         if( settleData[i].prize_info[j] && settleData[i].prize_info[j].matchid ){
                             // curFindField = $store['matFindField'][ settleData[i].prize_info[j].matchid ] ;
                             curFindField = $store['fieldLeftOrRight'][settleData[i].prize_info[j].matchid];
@@ -783,14 +791,13 @@ class Cnt extends egret.DisplayObjectContainer{
                 for( let i = 0; i< userImgArr.length;i++ ){
                     userImgArr[i].isHideWinGold() 
                 }
-            }, 2800 )
+            }, 3000 )
 
         }
         // let startString = 'field41_l';
         // let uid = '10015140' ;
         // await this.fieldContain.sendEndCoin( startString , uid.toString() )
         // 中奖展示 
-
     }
 
     // 他人金币 发出
