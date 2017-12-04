@@ -8,8 +8,10 @@ class Top extends egret.DisplayObjectContainer{
     private pop02Cham;
     private textTitle:egret.TextField;
     private textDate:egret.TextField;
+
     private drawTop(Width){
 
+        window['store'].$Top = this ;
         //    左上角标题
         this.textTitle = new egret.TextField();
         this.textTitle.text = '欧洲杯1/4决赛';
@@ -33,9 +35,12 @@ class Top extends egret.DisplayObjectContainer{
         btnPast.x = Width - 163;
         btnPast.y = 21;
         this.addChild(btnPast);
+        this.pop02Cham = new Pop02Cham();
+        
+        window['store'].$pop02Cham = this.pop02Cham ;
+
         btnPast.touchEnabled = true;
         btnPast.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
-            console.log('往期弹窗');
             this.addChild(this.pop02Cham);
         },this)
 

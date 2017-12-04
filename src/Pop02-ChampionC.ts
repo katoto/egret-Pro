@@ -53,7 +53,10 @@ class Pop02Cham extends egret.DisplayObjectContainer{
        popWrap.addChild(popClose);
        popClose.touchEnabled = true;
        popClose.addEventListener(egret.TouchEvent.TOUCH_TAP,()=>{
-           this.parent.removeChild(this);
+            //    this.removeChild(BigWrap);
+            if( window['store'].$pop02Cham.parent ){
+                window['store'].$Top.removeChild( window['store'].$pop02Cham )
+            }
        },this)
 
        //以下是冠军记录特有内容
@@ -62,4 +65,12 @@ class Pop02Cham extends egret.DisplayObjectContainer{
        popWrap.addChild(popChamC);
 
     }
+
+    /**
+     *  更新 列表数据
+     */
+    private upPopWrapMsg(){
+        
+    }
+
 }
