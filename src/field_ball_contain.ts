@@ -204,30 +204,31 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
             // 更新 自己头像 金币   下单之后
             if( res && res.status === '100' ){
-        // 记录自己的金币 (派发之后，清空)
-    $store_coinNum[currMatchData.matchid]['my_golds_l'] = $store_coinNum[currMatchData.matchid]['my_golds_l'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_l'] ) + $store.curr_btn_coin :
-    parseInt ( $store.curr_btn_coin );  
-    $store_coinNum[currMatchData.matchid]['home_golds'] = $store_coinNum[currMatchData.matchid]['home_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['home_golds'] ) + $store.curr_btn_coin :
-    parseInt ( $store.curr_btn_coin );
+                if( $store['userMySelf'].getCurGold() != res.data.total ){
+                    // 记录自己的金币 (派发之后，清空)
+                $store_coinNum[currMatchData.matchid]['my_golds_l'] = $store_coinNum[currMatchData.matchid]['my_golds_l'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_l'] ) + $store.curr_btn_coin :
+                parseInt ( $store.curr_btn_coin );  
+                $store_coinNum[currMatchData.matchid]['home_golds'] = $store_coinNum[currMatchData.matchid]['home_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['home_golds'] ) + $store.curr_btn_coin :
+                parseInt ( $store.curr_btn_coin );
 
-                this.musicgold.play(0,1);
+                    this.musicgold.play(0,1);
 
-                if( res.data && res.data.total ){
-                    $store['userMySelf'].setMyGold( res.data.total );
-                }else{
-                    console.error( 'field_ball_contain userMySelf Gold error' )
+                    if( res.data && res.data.total ){
+                        $store['userMySelf'].setMyGold( res.data.total );
+                    }else{
+                        console.error( 'field_ball_contain userMySelf Gold error' )
+                    }
+
+                    this[fieldName].upLeftMyMoney( window['formateGold'] ( $store_coinNum[currMatchData.matchid]['my_golds_l']) )  
+                    this[fieldName].addLeftAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['home_golds']) ); 
+                    this.tween_Coin( x , y , $store['allCoinObj'][fieldName].coin_left )
                 }
 
-                this[fieldName].upLeftMyMoney( window['formateGold'] ( $store_coinNum[currMatchData.matchid]['my_golds_l']) )  
-                this[fieldName].addLeftAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['home_golds']) ); 
-
-                this.tween_Coin( x , y , $store['allCoinObj'][fieldName].coin_left )
             }else{
                 if( $store['$cnt'] ){
                     $store['$cnt'].showTips( res.message );
                 }
             }
-
         })
     }
 
@@ -257,33 +258,27 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
         await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
             if( res && res.status === '100' ){
-                this.musicgold.play(0,1);
 
-                // 可以利用 自身金币的变化走 动画 。。 服务端bug ?
-                console.log('-----------------')
-                console.log( $store['userMySelf'].getCurGold() )
-                console.log( res.data.total )
-                console.log( $store['userMySelf'].getCurGold() != res.data.total )
-                console.log('-+++++++++++++++---')
-
-                // 临时处理 用大于 判断 好些 验证ok
+                // 可以利用 自身金币的变化走
+                // 临时处理 验证ok
                 if( $store['userMySelf'].getCurGold() != res.data.total ){
+                    this.musicgold.play(0,1);
 
-    $store_coinNum[currMatchData.matchid]['my_golds_r'] = $store_coinNum[currMatchData.matchid]['my_golds_r'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) + $store.curr_btn_coin :
-    parseInt ( $store.curr_btn_coin );  
-    $store_coinNum[currMatchData.matchid]['away_golds'] = $store_coinNum[currMatchData.matchid]['away_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['away_golds'] ) + $store.curr_btn_coin : 
-    parseInt ( $store.curr_btn_coin );
+                $store_coinNum[currMatchData.matchid]['my_golds_r'] = $store_coinNum[currMatchData.matchid]['my_golds_r'] ? parseInt ( $store_coinNum[currMatchData.matchid]['my_golds_r'] ) + $store.curr_btn_coin :
+                parseInt ( $store.curr_btn_coin );  
+                $store_coinNum[currMatchData.matchid]['away_golds'] = $store_coinNum[currMatchData.matchid]['away_golds'] ? parseInt ( $store_coinNum[currMatchData.matchid]['away_golds'] ) + $store.curr_btn_coin : 
+                parseInt ( $store.curr_btn_coin );
 
                     this[fieldName].upRightMyMoney( window['formateGold']( $store_coinNum[currMatchData.matchid]['my_golds_r'] ))  // 个人金额
                     this[fieldName].addRightAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['away_golds']) ); //  总的金额 
-                    this.tween_Coin(x,y, $store['allCoinObj'][fieldName].coin_right )
+                    this.tween_Coin(x,y, $store['allCoinObj'][fieldName].coin_right ) ;
 
-                }
+                    if( res.data && res.data.total ){
+                        $store['userMySelf'].setMyGold( res.data.total );
+                    }else{
+                        console.error( 'field_ball_contain userMySelf Gold error' )
+                    }
 
-                if( res.data && res.data.total ){
-                    $store['userMySelf'].setMyGold( res.data.total );
-                }else{
-                    console.error( 'field_ball_contain userMySelf Gold error' )
                 }
 
             }else{
@@ -551,7 +546,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             }
             if( !$store['allCoinObj']['field22'] ){
 
-                $store['allCoinObj']['field21'] = {
+                $store['allCoinObj']['field22'] = {
                     coin_left:[],
                     coin_right:[],
                     coin_left_local: $store['coin_local']['field22_l'] ,
