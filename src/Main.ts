@@ -651,10 +651,11 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     // 移除文案
                     this.cnt.cnt_upTextTips('');
                     this.cnt.cnt_timerRemove();
-                    // 收集金币
-                    this.cnt.cnt_collectCoin();
+
 
                     setTimeout(()=>{
+                        // 收集金币
+                        this.cnt.cnt_collectCoin();
                         if( this.stop_pop && this.stop_pop.parent ){
                             egret.Tween.get( this.stop_pop ).to({y:227},200).call(()=>{
                                 if( this.stop_pop.parent ){

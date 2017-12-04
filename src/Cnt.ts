@@ -937,7 +937,9 @@ class Cnt extends egret.DisplayObjectContainer{
             setTimeout(()=>{
                 if( !!this.fieldContain && !!this[choseUserImg] && this.fieldContain.parent && this[choseUserImg].parent ){
                     try{
-                        this.bgCourtWrap.swapChildren( this.fieldContain , this[choseUserImg] ) ;
+                        if( this.bgCourtWrap.getChildIndex( this[choseUserImg] ) > this.bgCourtWrap.getChildIndex( this.fieldContain )  ){
+                            this.bgCourtWrap.swapChildren( this.fieldContain , this[choseUserImg] ) ;
+                        }
                     }catch(e){
                         alert('不支持swapchildren')
                     }
