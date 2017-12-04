@@ -122,7 +122,18 @@ class Change extends eui.UILayer{
         this[baseName+'_l' ].height = 68;
         leftUserBox.addChild (this[baseName+'_l' ]);
         this[baseName+'_l' ].mask = bgMask;
+        //左边队伍名称
+        let teamName_l:egret.TextField = new egret.TextField();
+        teamName_l.text = '队伍名称';
+        teamName_l.height = 68;
+        teamName_l.size = 22;
+        teamName_l.textColor = 0xffffff;
+        teamName_l.alpha = 0.6;
+        teamName_l.verticalAlign = egret.VerticalAlign.MIDDLE;
+        teamName_l.x = 80;
+        leftUserBox.addChild(teamName_l)
         wrap.addChild(leftUserBox); 
+
 
         //  右边队伍头像容器
         let rightUserBox:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
@@ -146,6 +157,19 @@ class Change extends eui.UILayer{
         this[ baseName+'_r' ].height = 68;
         rightUserBox.addChild(this[ baseName+'_r' ]);
         this[ baseName+'_r' ].mask = bgMask2;
+         //右边队伍名称
+        let teamName_r:egret.TextField = new egret.TextField();
+        teamName_r.width = 180;
+        teamName_r.anchorOffsetX = 180;
+        teamName_r.text = '队伍名称队伍名称';
+        teamName_r.height = 68;
+        teamName_r.size = 22;
+        teamName_r.textColor = 0xffffff;
+        teamName_r.alpha = 0.6;
+        teamName_r.textAlign = egret.HorizontalAlign.RIGHT;
+        teamName_r.verticalAlign = egret.VerticalAlign.MIDDLE;
+        teamName_r.x = -14;
+        rightUserBox.addChild(teamName_r)
         wrap.addChild(rightUserBox); 
 
         let teamVs:egret.TextField = new egret.TextField();
@@ -157,7 +181,6 @@ class Change extends eui.UILayer{
         teamVs.textAlign = egret.HorizontalAlign.CENTER;
         teamVs.verticalAlign = egret.VerticalAlign.MIDDLE;
         wrap.addChild(teamVs); 
-
         return wrap;
     }
 
