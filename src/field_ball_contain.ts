@@ -116,7 +116,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let fieldStr = 'field';
         let $store = window['store']
         let matchLen = $store['matches'].length
-        console.log( matchLen +'matchListLength+++' );
         $store['matFindField'] = {};  // 切换场地 清空数据
         if( $store['matches'] && matchLen ){
             switch( matchLen ){
@@ -727,9 +726,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             newEndLocal_x = $store['userPositionObj'][newEndNum].x + 584;
         }
         newEndLocal_y =  $store['userPositionObj'][newEndNum].y + 72;
-
-        console.log( newEndLocal_x )
-        console.log( newEndLocal_y )
 
         setTimeout(()=>{
             egret.Tween.get( goldArr[0] ).to({
