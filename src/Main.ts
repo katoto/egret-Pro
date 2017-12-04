@@ -218,7 +218,6 @@ class Main extends egret.DisplayObjectContainer {
         // this.addChild( this.change );
         // setTimeout(()=>{
         //     egret.Tween.get( this.change ).to({x:-750},200);  
-        //     console.log('move')
         // },2000)
 
         //被踢出房间 的实例
