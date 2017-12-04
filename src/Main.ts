@@ -53,21 +53,20 @@ class Main extends egret.DisplayObjectContainer {
     }
    
     private onAddToStage(event: egret.Event) {
+
         // egret.lifecycle.addLifecycleListener((context) => {
         //     context.onUpdate = () => {
         //     }
         // })
 
         // egret.lifecycle.onPause = () => {
+        //     // this.cnt.showTips('页面失去焦点，请重新获得焦点') ;
         //     egret.ticker.pause();
         // }
 
         // egret.lifecycle.onResume = () => {
         //     egret.ticker.resume();
         // }
-
-        //设置加载进度界面
-        //Config to load process interface
 
         // this.loadingView = new LoadingUI(750,1334);
         // this.stage.addChild(this.loadingView);
@@ -998,8 +997,4 @@ window['store'] = {
             'y':740
         }
     ],
-        // 冠军记录
-    recording:[
-        {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
-    ], 
 } 

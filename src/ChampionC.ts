@@ -207,7 +207,12 @@ class ChampionC extends eui.Group{
     /**
      *  remove ALl data
      */
-
-
-
+    private clearAllWrap(){
+        for( let i=0,len = this.arrWrap01.length;i<len ;i++ ){
+            if( this.arrWrap01[i].parent ){
+                this.removeChild( this.arrWrap01[i] ) ;
+            }
+        }
+    }
+    
 }
