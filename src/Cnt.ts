@@ -977,7 +977,11 @@ class Cnt extends egret.DisplayObjectContainer{
         this.bgCourtWrap.addChild(this[choseUserImg]);
 
         // console.log( $store['unableClick'] ) ;
-        // console.log('*****************');
+        console.log('================')
+        console.log( this.bgCourtWrap.getChildIndex( this[choseUserImg] )  )
+        console.log( this.bgCourtWrap.getChildIndex( this.fieldContain )  )
+        console.log('*****************');
+
         setTimeout(()=>{
             if( !$store['unableClick'] && !!this.fieldContain && !!this[choseUserImg] && this.fieldContain.parent && this[choseUserImg].parent ){
                 if( this.bgCourtWrap.getChildIndex( this[choseUserImg] ) > this.bgCourtWrap.getChildIndex( this.fieldContain )  ){

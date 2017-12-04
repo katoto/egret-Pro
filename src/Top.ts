@@ -42,6 +42,8 @@ class Top extends egret.DisplayObjectContainer{
         btnPast.touchEnabled = true;
         btnPast.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
             this.addChild(this.pop02Cham);
+            // 更新 数据
+            this.pop02Cham.upPopWrapMsg();
         },this)
 
         let btnRecharge:egret.Bitmap = new egret.Bitmap(RES.getRes('btn-recharge_png'));

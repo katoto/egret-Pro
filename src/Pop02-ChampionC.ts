@@ -6,6 +6,8 @@ class Pop02Cham extends egret.DisplayObjectContainer{
     }
 
     private popTitle:egret.TextField;
+    private popChamC ;
+
     private drawPop(){
        let $store = window['store'] ;
 
@@ -60,17 +62,25 @@ class Pop02Cham extends egret.DisplayObjectContainer{
        },this)
 
        //以下是冠军记录特有内容
-       let popChamC = new ChampionC();
-       popChamC.y = 83;
-       popWrap.addChild(popChamC);
+       this.popChamC = new ChampionC();
+       this.popChamC.y = 83;
+       popWrap.addChild( this.popChamC );
 
     }
 
     /**
      *  更新 列表数据
      */
-    private upPopWrapMsg(){
-        
+    async upPopWrapMsg(){
+        let $store = window['store'] ;
+        //  请求 更新数据
+        await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/matches/result/list' ,dataType:'json'} ).then(( res )=>{
+            console.log( res );
+            if( res && res.status === '100' ){
+                this.popChamC.upPopWrapCMsg(  res.data ) ;
+            }
+        })
+
     }
 
 }
