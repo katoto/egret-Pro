@@ -7,21 +7,14 @@ class Pop02Cham extends egret.DisplayObjectContainer{
 
     private popTitle:egret.TextField;
     private drawPop(){
-        let $store = window['store'] ;
-        // 大容器
-       let BigWrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
-       BigWrap.width = $store['stage_Width'];
-       BigWrap.height = $store['stage_Height'];
-       BigWrap.x = 0;
-       BigWrap.y = 0;
-       this.addChild(BigWrap);
+       let $store = window['store'] ;
 
        //弹窗蒙层
        let popLayer:egret.Shape = new egret.Shape();
        popLayer.graphics.beginFill(0x000000,0.6);
        popLayer.graphics.drawRect(0,0, $store['stage_Width'], $store['stage_Height'])
        popLayer.graphics.endFill();
-       BigWrap.addChild(popLayer);
+       this.addChild(popLayer);
 
        //背景
        let popBg:egret.Bitmap = new egret.Bitmap(RES.getRes('pop-02_png'));
@@ -29,7 +22,7 @@ class Pop02Cham extends egret.DisplayObjectContainer{
        popBg.anchorOffsetY = popBg.height/2;
        popBg.x = $store['stage_anWidth'];
        popBg.y = $store['stage_anHeight'];
-       BigWrap.addChild(popBg);
+       this.addChild(popBg);
 
        //容器
        let popWrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
@@ -39,7 +32,7 @@ class Pop02Cham extends egret.DisplayObjectContainer{
        popWrap.anchorOffsetY = popWrap.height/2;
        popWrap.x = $store['stage_anWidth'];
        popWrap.y = $store['stage_anHeight'];
-       BigWrap.addChild(popWrap);
+       this.addChild(popWrap);
 
        //标题
        this.popTitle = new egret.TextField();
