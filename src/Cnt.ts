@@ -957,7 +957,7 @@ class Cnt extends egret.DisplayObjectContainer{
         }
         $store['userPositionLocal'][uid] = userI
         var choseUserImg = 'userImg' + ( userI )
-        console.log( choseUserImg )
+        // console.log( choseUserImg )
         if( photo === '' ){
             photo = 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=547138142,3998729701&fm=27&gp=0.jpg'
         }
@@ -969,9 +969,8 @@ class Cnt extends egret.DisplayObjectContainer{
 
         this.bgCourtWrap.addChild(this[choseUserImg]);
 
-        console.log( $store['unableClick'] ) ;
-        console.log('*****************');
-
+        // console.log( $store['unableClick'] ) ;
+        // console.log('*****************');
         setTimeout(()=>{
             if( !$store['unableClick'] && !!this.fieldContain && !!this[choseUserImg] && this.fieldContain.parent && this[choseUserImg].parent ){
                 if( this.bgCourtWrap.getChildIndex( this[choseUserImg] ) > this.bgCourtWrap.getChildIndex( this.fieldContain )  ){

@@ -540,7 +540,28 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                     },2500)
                                 ;break;
                             }
+                        }
 
+                        // 处理层级
+                        if( $store.userPositionLocal ){
+                            let item = null ;
+                            var choseUserImg = 'userImg';
+                            let bigIndex = 0;
+                            let bigUserImg = null ;
+                            for( item  in $store.userPositionLocal ){
+                                if( $store.userPositionLocal[item] ){
+                                    if( $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) >= bigIndex ){
+                                        bigIndex = $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) ;
+                                        bigUserImg = this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ;
+                                    }
+                                }
+                            }
+                            if( !!bigUserImg ){
+                                if( !$store['unableClick'] && !!$store['$fieldContain']
+                                    && $store['$fieldContain'].parent && bigUserImg.parent ){
+                                    $store['$bgCourtWrap'].swapChildren( $store['$fieldContain'] , bigUserImg ) ;
+                                }
+                            }
                         }
 
                         // clean all  win
@@ -573,6 +594,29 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         $store['orderObj']['stageid'] = $msgObjBody.stageid ;
                     }
                     this.cnt.cnt_upTextTips('');
+
+                    // 处理层级
+                    if( $store.userPositionLocal ){
+                        let item = null ;
+                        var choseUserImg = 'userImg';
+                        let bigIndex = 0;
+                        let bigUserImg = null ;
+                        for( item  in $store.userPositionLocal ){
+                            if( $store.userPositionLocal[item] ){
+                                if( $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) >= bigIndex ){
+                                    bigIndex = $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) ;
+                                    bigUserImg = this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ;
+                                }
+                            }
+                        }
+                        if( !!bigUserImg ){
+                            if( !$store['unableClick'] && !!$store['$fieldContain']
+                                && $store['$fieldContain'].parent && bigUserImg.parent ){
+                                $store['$bgCourtWrap'].swapChildren( $store['$fieldContain'] , bigUserImg ) ;
+                            }
+                        }
+                    }
+
                 ;break;
                 case '2003':
                     // 开始 投注 显示文案，请下注 去除竞猜 开始定时器 start_bet  4 == 30s
@@ -589,19 +633,16 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                             let bigIndex = 0;
                             let bigUserImg = null ;
                             for( item  in $store.userPositionLocal ){
-                                // console.log( item )
                                 if( $store.userPositionLocal[item] ){
-                                    // console.log( choseUserImg +  $store.userPositionLocal[item] ) ;
-                                    // console.log( $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) )
-                                    if( $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) > bigIndex ){
+                                    if( $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) >= bigIndex ){
                                         bigIndex = $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) ;
                                         bigUserImg = this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ;
                                     }
                                 }
 
                             }
-                            if( !bigUserImg ){
-                                if( !$store['unableClick'] && !!$store['$fieldContain'] && !! bigUserImg
+                            if( !!bigUserImg ){
+                                if( !$store['unableClick'] && !!$store['$fieldContain']
                                     && $store['$fieldContain'].parent && bigUserImg.parent ){
                                     $store['$bgCourtWrap'].swapChildren( $store['$fieldContain'] , bigUserImg ) ;
                                 }
