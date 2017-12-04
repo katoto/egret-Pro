@@ -214,7 +214,7 @@ class Main extends egret.DisplayObjectContainer {
         //杯赛过场change
         this.change = new Change();
         this.change.x = 0;
-        
+
         // this.addChild( this.change );
         // setTimeout(()=>{
         //     egret.Tween.get( this.change ).to({x:-750},200);  
@@ -798,7 +798,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 case '2016':
                     // 被提出
                     this.cnt.showTips('你已经被踢出') ;
-                    if( !!this.out ){
+                    if( !!this.out || !this.out.parent ){
                         this.out.showLongTime();
                         this.addChild(this.out) ;
                     }
