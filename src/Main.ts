@@ -214,7 +214,7 @@ class Main extends egret.DisplayObjectContainer {
         //杯赛过场change
         this.change = new Change();
         this.change.x = 0;
-        
+
         // this.addChild( this.change );
         // setTimeout(()=>{
         //     egret.Tween.get( this.change ).to({x:-750},200);  
@@ -403,7 +403,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                         this.cnt.cnt_upTextTips('正在派奖...');
                                     }
                                 ;break;
-
                                 case '2002':
                                     if( !!this.cnt ){
                                         this.cnt.cnt_upTextTips('竞猜即将开始...');
@@ -420,17 +419,42 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                     // 请下注
                                     switch ( $msgObjBody.stageid ){
                                         case '1':
-                                            this.cnt.cnt_timer(( 30 - parseInt( $msgObjBody.process_time )).toString());
+                                            this.cnt.cnt_timer(( 31 - parseInt( $msgObjBody.process_time )).toString());
                                         ;break;
                                         case '2':
                                             this.cnt.cnt_timer(( 25 - parseInt( $msgObjBody.process_time )).toString());
                                         ;break;
                                         case '3':
-                                            this.cnt.cnt_timer(( 20 - parseInt( $msgObjBody.process_time )).toString());
+                                            this.cnt.cnt_timer(( 21 - parseInt( $msgObjBody.process_time )).toString());
                                         ;break;
                                     }
                                     if( !!this.cnt ){
                                         this.cnt.cnt_upTextTips('请下注');
+                                    }
+
+                                    // 处理层级
+                                    if( $store.userPositionLocal ){
+                                        let item = null ;
+                                        let choseUserImg = 'userImg';
+                                        let bigIndex = 0;
+                                        let bigUserImg = null ;
+
+                                        console.log('change 提高层级')
+
+                                        for( item  in $store.userPositionLocal ){
+                                            if( $store.userPositionLocal[item] ){
+                                                if( $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) > bigIndex ){
+                                                    bigIndex = $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) ;
+                                                    bigUserImg = this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ;
+                                                }
+                                            }
+                                        }
+                                        if( !!bigUserImg ){
+                                            if( !$store['unableClick'] && !!$store['$fieldContain']
+                                                && $store['$fieldContain'].parent && bigUserImg.parent ){
+                                                $store['$bgCourtWrap'].swapChildren( $store['$fieldContain'] , bigUserImg ) ;
+                                            }
+                                        }
                                     }
 
                                 ;break;
@@ -499,7 +523,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                     if( $msgObjBody.matches && $msgObjBody.room_info ){
                                         // 更新数据
                                         this.change.upChangeMsg(  $msgObjBody.matches , $msgObjBody.room_info );
-                                        if( !!this.change ){
+                                        if( !!this.change || !this.change.parent ){
                                             this.mchange.play(0,1);
                                             this.addChild( this.change );
                                             setTimeout(()=>{
@@ -544,12 +568,13 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         // 处理层级
                         if( $store.userPositionLocal ){
                             let item = null ;
-                            var choseUserImg = 'userImg';
+                            let choseUserImg = 'userImg';
                             let bigIndex = 0;
                             let bigUserImg = null ;
+                            console.log('change 提高层级 at 2001')
                             for( item  in $store.userPositionLocal ){
                                 if( $store.userPositionLocal[item] ){
-                                    if( $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) >= bigIndex ){
+                                    if( $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) > bigIndex ){
                                         bigIndex = $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) ;
                                         bigUserImg = this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ;
                                     }
@@ -597,12 +622,13 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     // 处理层级
                     if( $store.userPositionLocal ){
                         let item = null ;
-                        var choseUserImg = 'userImg';
+                        let choseUserImg = 'userImg';
                         let bigIndex = 0;
                         let bigUserImg = null ;
+                        console.log('change 提高层级 at 2019')
                         for( item  in $store.userPositionLocal ){
                             if( $store.userPositionLocal[item] ){
-                                if( $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) >= bigIndex ){
+                                if( $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) > bigIndex ){
                                     bigIndex = $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) ;
                                     bigUserImg = this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ;
                                 }
@@ -624,13 +650,14 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         $store['orderObj']['stageid'] = $msgObjBody.stageid ;
 
                         $store['unableClick'] = false ;
-
+                        console.log('change 提高层级 at 2003')
                         // 处理层级
                         if( $store.userPositionLocal ){
                             let item = null ;
-                            var choseUserImg = 'userImg';
+                            let choseUserImg = 'userImg';
                             let bigIndex = 0;
                             let bigUserImg = null ;
+                            
                             for( item  in $store.userPositionLocal ){
                                 if( $store.userPositionLocal[item] ){
                                     if( $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) >= bigIndex ){
@@ -723,14 +750,9 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         // 模拟显示中奖
                         if( $msgObjBody.result &&  $msgObjBody.result.length > 0 ){
                             this.cnt.adjustPenalty( $msgObjBody.result )
-                            // this.cnt.showWinLocation( $msgObjBody.result )
                         }else{
                             console.warn('2005 data error not find result');
                         }
-                        // 去除中奖图标 
-                        // setTimeout(()=>{
-                        //     this.cnt.cnt_removeAllWinIcon() ;
-                        // },5000)
 
                     }
                     // again 收集金币
@@ -789,7 +811,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
 
                 case '2025':
                     // 更新奖池
-
                 ;break;
                 case '2025':
                     // 提出用户 展现弹窗
@@ -797,7 +818,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 case '2016':
                     // 被提出
                     this.cnt.showTips('你已经被踢出') ;
-                    if( !!this.out ){
+                    if( !!this.out || !this.out.parent ){
                         this.out.showLongTime();
                         this.addChild(this.out) ;
                     }
@@ -807,28 +828,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     this.cnt.showTips('使用了旧的房间号 error at 2017') ;
                 ;break
             }
-
-            // setTimeout(()=>{
-                // this.cnt.cnt_Other_Coin('10015131' , '1' ,'' ,'111' )
-                // console.log('收起金币 测试 ok')
-                // this.cnt.cnt_collectCoin()
-                // this.cnt.cnt_sendEndCoin( '1002999','' )
-                // this.cnt.cnt_sendEndCoin( '1002988','' )
-                // this.cnt.cnt_timer('6')
-
-                // 模拟点球
-                // var spotkick_style = [["1", "1"], ["0", "1"], ["1", "1"], ["0", "0"], ["0", "0"]]
-                // this.cnt.showPenalty02( spotkick_style , '3:1' , '1' ) ;
-
-                // 点球蒙城
-                // this.cnt.adjustPenalty(4 , spotkick_style ) ;
-
-                // setTimeout(()=>{
-                //     this.cnt.cleanAllPenalty() ;
-                // },5000)
-                // this.cnt.showTips('tips 测试')
-
-            // },3000)
 
         }
     }
@@ -844,8 +843,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
         },5000)
         this.webSocket.flush();
     }
-
-    
 
     /**
      *  onIOError  websock 接收消息

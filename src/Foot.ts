@@ -46,6 +46,7 @@ class Foot extends egret.DisplayObjectContainer{
          btnRule.touchEnabled = true;
          btnRule.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
               this.parent.addChild(popRule);
+              popRule.scale();
          },this)
         
        

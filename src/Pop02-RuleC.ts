@@ -4,7 +4,7 @@ class Pop02RuleC extends egret.DisplayObjectContainer{
         super();
         this.drawPop();
     }
-
+    private popWrap;
     private popTitle:egret.TextField;
     private drawPop(){
           // 大容器
@@ -23,17 +23,20 @@ class Pop02RuleC extends egret.DisplayObjectContainer{
        BigWrap.addChild(popLayer);
 
        //容器
-       let popWrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
-       popWrap.width = 680;
-       popWrap.height = 900;
-       popWrap.anchorOffsetX = popWrap.width/2;
-       popWrap.anchorOffsetY = popWrap.height/2;
-       popWrap.x = window['store']['stage_anWidth'];
-       popWrap.y = window['store']['stage_anHeight'];
-       BigWrap.addChild(popWrap);
+       this.popWrap = new egret.DisplayObjectContainer();
+       this.popWrap.width = 680;
+       this.popWrap.height = 900;
+       this.popWrap.scaleX = 0;
+       this.popWrap.scaleY = 0;
+       this.popWrap.anchorOffsetX = this.popWrap.width/2;
+       this.popWrap.anchorOffsetY = this.popWrap.height/2;
+       this.popWrap.x = window['store']['stage_anWidth'];
+       this.popWrap.y = window['store']['stage_anHeight'];
+       BigWrap.addChild(this.popWrap);
+       
         //背景
        let popBg:egret.Bitmap = new egret.Bitmap(RES.getRes('pop-rule_png'));
-       popWrap.addChild(popBg);
+       this.popWrap.addChild(popBg);
 
        //标题
        this.popTitle = new egret.TextField();
@@ -44,17 +47,20 @@ class Pop02RuleC extends egret.DisplayObjectContainer{
        this.popTitle.height = 60;
        this.popTitle.verticalAlign = egret.VerticalAlign.MIDDLE;
        this.popTitle.textAlign = egret.HorizontalAlign.CENTER;
-       popWrap.addChild(this.popTitle); 
+       this.popWrap.addChild(this.popTitle); 
 
        //关闭按钮54*80
        let popClose:egret.Bitmap = new egret.Bitmap(RES.getRes('pop-close_png'));
        popClose.anchorOffsetX = 54;
        popClose.x = 680;
        popClose.y = 0;
-       popWrap.addChild(popClose);
+       this.popWrap.addChild(popClose);
        popClose.touchEnabled = true;
        popClose.addEventListener(egret.TouchEvent.TOUCH_TAP,()=>{
            this.parent.removeChild(this)
        },this)
+    }
+    public scale(){
+        egret.Tween.get(this.popWrap).to({scaleX:1,scaleY:1},500,egret.Ease.circInOut );
     }
 }

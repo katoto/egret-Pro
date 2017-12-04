@@ -636,6 +636,10 @@ this.localObj['rightTeam41'] = {
                             }
 
                         }
+
+                    this[ 'teamF21' ].text = 'VS';
+                    this[ 'teamF22' ].text = 'VS';
+
                     }
                 }
             }
