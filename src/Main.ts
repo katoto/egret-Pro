@@ -404,7 +404,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                         this.cnt.cnt_upTextTips('正在派奖...');
                                     }
                                 ;break;
-
                                 case '2002':
                                     if( !!this.cnt ){
                                         this.cnt.cnt_upTextTips('竞猜即将开始...');
@@ -421,17 +420,39 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                     // 请下注
                                     switch ( $msgObjBody.stageid ){
                                         case '1':
-                                            this.cnt.cnt_timer(( 30 - parseInt( $msgObjBody.process_time )).toString());
+                                            this.cnt.cnt_timer(( 31 - parseInt( $msgObjBody.process_time )).toString());
                                         ;break;
                                         case '2':
                                             this.cnt.cnt_timer(( 25 - parseInt( $msgObjBody.process_time )).toString());
                                         ;break;
                                         case '3':
-                                            this.cnt.cnt_timer(( 20 - parseInt( $msgObjBody.process_time )).toString());
+                                            this.cnt.cnt_timer(( 21 - parseInt( $msgObjBody.process_time )).toString());
                                         ;break;
                                     }
                                     if( !!this.cnt ){
                                         this.cnt.cnt_upTextTips('请下注');
+                                    }
+
+                                    // 处理层级
+                                    if( $store.userPositionLocal ){
+                                        let item = null ;
+                                        var choseUserImg = 'userImg';
+                                        let bigIndex = 0;
+                                        let bigUserImg = null ;
+                                        for( item  in $store.userPositionLocal ){
+                                            if( $store.userPositionLocal[item] ){
+                                                if( $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) >= bigIndex ){
+                                                    bigIndex = $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) ;
+                                                    bigUserImg = this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ;
+                                                }
+                                            }
+                                        }
+                                        if( !!bigUserImg ){
+                                            if( !$store['unableClick'] && !!$store['$fieldContain']
+                                                && $store['$fieldContain'].parent && bigUserImg.parent ){
+                                                $store['$bgCourtWrap'].swapChildren( $store['$fieldContain'] , bigUserImg ) ;
+                                            }
+                                        }
                                     }
 
                                 ;break;
@@ -724,14 +745,9 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         // 模拟显示中奖
                         if( $msgObjBody.result &&  $msgObjBody.result.length > 0 ){
                             this.cnt.adjustPenalty( $msgObjBody.result )
-                            // this.cnt.showWinLocation( $msgObjBody.result )
                         }else{
                             console.warn('2005 data error not find result');
                         }
-                        // 去除中奖图标 
-                        // setTimeout(()=>{
-                        //     this.cnt.cnt_removeAllWinIcon() ;
-                        // },5000)
 
                     }
                     // again 收集金币
