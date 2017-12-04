@@ -43,7 +43,6 @@ class Main extends egret.DisplayObjectContainer {
     
     private position:Array<number> =  [];
 
-
     // 竞猜开始文案
     private start_pop = null;
     private stop_pop = null ;
@@ -54,7 +53,6 @@ class Main extends egret.DisplayObjectContainer {
     }
    
     private onAddToStage(event: egret.Event) {
-
         // egret.lifecycle.addLifecycleListener((context) => {
         //     context.onUpdate = () => {
         //     }
@@ -199,11 +197,9 @@ class Main extends egret.DisplayObjectContainer {
         this.bottom.y = this.Height;
         this.addChild(this.bottom);
 
-
         // 晋级  缺动画
         this.promotion = new Promotion();
         // this.addChild(this.promotion) ;
-
 
         // 弹窗实例,竞猜开始or竞猜完毕
         // text-begin_png text-over_png
@@ -586,7 +582,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     }
                 break;
                 case '2002':
-                // 准备 prepare_bet   出现开始竞猜  
+                    // 准备 prepare_bet   出现开始竞猜  
 
                     if( $msgObjBody ){
                         $store['orderObj']['expect'] = $msgObjBody.expect ;
