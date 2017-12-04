@@ -193,9 +193,10 @@ class Field_ball extends eui.UILayer {
     }
 
 
-    // 更新场地数据 赔率， 对阵 ，homeid awayid 
-    private upFieldAllData( leftImg,leftT,leftO,rightImg,rightT,rightO ,homeid ,awayid ,matchid ){
-
+    // 更新场地数据 赔率， 对阵 ，homeid awayid   ( 初始的 投注数据 )
+    private upFieldAllData( leftImg,leftT,leftO,rightImg,rightT,rightO ,homeid ,awayid ,matchid , home_golds:string , away_golds:string ){
+        let $store_coinNum = window['store']['coin_Num'];
+        
         this.leftTeam.source = leftImg ;
         this.leftTitle.text = leftT;
         this.leftOdds.text = leftO;
@@ -205,8 +206,32 @@ class Field_ball extends eui.UILayer {
 
         this.homeid = homeid;
         this.awayid = awayid;
-        this.matchid = matchid
+        this.matchid = matchid ;
 
+        console.log('###########')
+        console.log( home_golds )
+        if( !$store_coinNum[matchid] ){
+            $store_coinNum[matchid] = {
+                home_golds : null,
+                my_golds_l : null,
+                my_golds_r : null ,
+                away_golds: null ,
+            }
+        }
+
+        if( home_golds && home_golds !== '0' ){
+            $store_coinNum[matchid]['home_golds'] = $store_coinNum[matchid]['home_golds'] ? parseInt ( $store_coinNum[matchid]['home_golds'] ) + home_golds :
+            parseInt ( home_golds );
+
+            this.addLeftAllCoin( window['formateGold'] ( home_golds ) ) ;
+        }
+        if( away_golds && away_golds !== '0' ){
+            $store_coinNum[matchid]['away_golds'] = $store_coinNum[matchid]['away_golds'] ? parseInt ( $store_coinNum[matchid]['away_golds'] ) + away_golds :
+            parseInt ( away_golds );
+            this.addRightAllCoin( window['formateGold'](  away_golds ) ) ;
+        }
+        
+        console.log( away_golds )
     }
 
     /**
@@ -439,14 +464,13 @@ class Field_ball extends eui.UILayer {
             this.removeChild( this.goldItems_left );
         }
 
-        // if( this.goldItems_left02 && this.goldItems_left02.parent ){
-        //     this.removeChild( this.goldItems_left02 );
-        // }
+        if( this.goldItems_left02 && this.goldItems_left02.parent ){
+            this.removeChild( this.goldItems_left02 );
+        }
 
-        // if( this.goldItems_right02 && this.goldItems_right02.parent ){
-        //     this.removeChild( this.goldItems_right02 );
-        // }
-
+        if( this.goldItems_right02 && this.goldItems_right02.parent ){
+            this.removeChild( this.goldItems_right02 );
+        }
         
     }
 
