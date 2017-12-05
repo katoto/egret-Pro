@@ -761,6 +761,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 })
             },80)
             setTimeout(()=>{
+                this.cleanAllText() ;
                 egret.Tween.get( goldArr[2] ).to({
                     x: newEndLocal_x ,
                     y: newEndLocal_y ,
@@ -1131,6 +1132,35 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             this.field44.writeScore(''); 
         }                             
     }
+
+    /**
+     *  清楚所有win 图标 & 投注的 数据 & 比分
+     */
+    private cleanAllText(){
+        if( this.field1  ){
+            this.field1.cleanAllCoinText();
+        }
+        if( this.field21  ){
+            this.field21.cleanAllCoinText();
+        }
+        if( this.field22  ){
+            this.field22.cleanAllCoinText();
+        }   
+        if( this.field41 ){
+            this.field41.cleanAllCoinText();
+        }
+        if( this.field42  ){
+            this.field42.cleanAllCoinText();
+        }
+        if( this.field43  ){
+            this.field43.cleanAllCoinText();
+        }
+        if(this.field44  ){
+            this.field44.cleanAllCoinText();
+        }                             
+    }
+
+
 
     private courtWrap(){
         let wrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
