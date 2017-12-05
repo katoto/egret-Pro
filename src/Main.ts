@@ -545,7 +545,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         // clean all  点球、进球黑框
                         this.cnt.cleanAllPenalty() ;
                         // clean all 自己投注和他人投注
-
                     }
                 break;
                 case '2002':
