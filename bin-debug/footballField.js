@@ -233,7 +233,7 @@ var Field_ball = (function (_super) {
             this.addChild(this.winIcon_r);
         }
         else {
-            this.winIcon_r = new egret.Bitmap(RES.getRes('win2_png'));
+            this.winIcon_r = new egret.Bitmap(RES.getRes('win_png'));
             this.winIcon_r.width = 0;
             this.winIcon_r.height = 0;
             this.winIcon_r.anchorOffsetY = 101;

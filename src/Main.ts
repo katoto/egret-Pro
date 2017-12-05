@@ -206,11 +206,6 @@ class Main extends egret.DisplayObjectContainer {
             this.out = new Pop02Out();
         },2000)
 
-        /*
-        优化：
-        1.图片合并，使用纹理集
-        2. 函数
-        */
         this.initStage();
 
         if( $store['env_variable'].ck === '' || !$store['env_variable'].ck ){
@@ -227,8 +222,7 @@ class Main extends egret.DisplayObjectContainer {
                 if( res.status && res.status === '100' ){
                     // 保存房间信息
                     let roomMsg = res.data;
-                    // 下单
-                    $store['orderObj']['roomid'] = roomMsg.roomid ;
+                    $store['orderObj']['roomid'] = roomMsg.roomid ;  // 下单 需要
                     $store['orderObj']['node'] = roomMsg.node ;
                     // websocket
                     try{
@@ -248,7 +242,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     console.log('申请房间出错')
                 }
             })
-
     }
 
     /**
@@ -257,26 +250,28 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
     private initStage(){
         // uid  还得有个uid ..
         let $store = window['store'];
+        let $urlData = window['urlData'];
         // 桌子缩放计算 
         // $store.scale = 0.91;
         // 取ck 按src+ck 的形式，防止串号 = 替换 $
-        if( window['urlData'] && window['urlData'].ck ){
-            $store['orderObj'].ck = window['urlData'].ck.replace(/\$/g,'=');
-            $store['env_variable'].ck = window['urlData'].ck.replace(/\$/g,'=');
-        }else{
-            $store['orderObj'].ck = egret.localStorage.getItem('ck');
-            $store['env_variable'].ck = egret.localStorage.getItem('ck');
+        if( $urlData ){
+            if( $urlData.ck ){
+                $store['orderObj'].ck = $urlData.ck.replace(/\$/g,'=');
+                $store['env_variable'].ck = $urlData.ck.replace(/\$/g,'=');
+            }else{
+                $store['orderObj'].ck = egret.localStorage.getItem('ck');
+                $store['env_variable'].ck = egret.localStorage.getItem('ck');
+            }
+            if( $urlData.src ){
+                $store['env_variable'].src = $urlData.src ;
+            }else{
+                $store['env_variable'].src = egret.localStorage.getItem('src')
+            }
+            if( $urlData.uid ){
+                $store['env_variable'].uid = $urlData.uid ;
+            }
         }
 
-        if( window['urlData'] && window['urlData'].src ){
-            $store['env_variable'].src = window['urlData'].src ;
-        }else{
-            $store['env_variable'].src = egret.localStorage.getItem('src')
-        }
-
-        if( window['urlData'] && window['urlData'].uid ){
-            $store['env_variable'].uid = window['urlData'].uid ;
-        }
         // platform
         if( window['platform'] ){
             $store['env_variable'].platform = window['platform'] ;
@@ -553,7 +548,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         // clean all  点球、进球黑框
                         this.cnt.cleanAllPenalty() ;
                         // clean all 自己投注和他人投注
-
                     }
                 break;
                 case '2002':
