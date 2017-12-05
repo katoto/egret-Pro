@@ -41,9 +41,12 @@ class Top extends egret.DisplayObjectContainer{
 
         btnPast.touchEnabled = true;
         btnPast.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
-            this.addChild(this.pop02Cham);
+            this.getFootballMsg();
+
+            document.querySelector('.Pop02-gj')['style']['display'] = 'block' ;
+            // this.addChild(this.pop02Cham);
             // 更新 数据
-            this.pop02Cham.upPopWrapMsg();
+            // this.pop02Cham.upPopWrapMsg();
         },this)
 
         let btnRecharge:egret.Bitmap = new egret.Bitmap(RES.getRes('btn-recharge_png'));
@@ -64,4 +67,18 @@ class Top extends egret.DisplayObjectContainer{
         this.textDate.text = title;
     }
     
+    /**
+     *  取数据
+     */
+    async getFootballMsg(){
+        let $store = window['store'] ;
+        //  请求 更新数据
+        await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/matches/result/list' ,dataType:'json'} ).then(( res )=>{
+            console.log( res );
+            if( res && res.status === '100' ){
+                window['upFootballList']( res.data ) ;
+            }
+        })
+    }
+
 }

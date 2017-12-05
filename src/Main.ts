@@ -664,7 +664,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     $store['unableClick'] = true ;
 
                     // 停止竞猜 直接移除定时器 加入开始
-                    if( !this.out.parent ){
+                    if( this.out && !this.out.parent ){
                         this.stop_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-over_png' );
                         this.stop_pop.y = 227;
                         this.addChild( this.stop_pop );
