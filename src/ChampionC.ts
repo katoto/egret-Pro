@@ -5,11 +5,12 @@ class ChampionC extends eui.Group{
         this.drawChampionC();
     }
     private text:egret.TextField;
-    private group;
+    private cWrap:eui.Group;
+    private myScroller;
+
     private arrWrap01 = [] ;
 
     private drawChampionC(){
-        
         //标题容器
         let tWrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
         tWrap.width = 680;
@@ -25,18 +26,18 @@ class ChampionC extends eui.Group{
         tWrap.addChild(text03);
         tWrap.addChild(text04);
 
-        
-
-        this.group = new eui.Group();
-        var img = new eui.Image("resource/assets/bg.jpg");
-        this.group.addChild(img);
-        var myScroller = new eui.Scroller();
-        myScroller.y = 50;
-        myScroller.width = 680;
-        myScroller.height = 800;
-        myScroller.viewport = this.group;
-        this.addChild(myScroller);
-        
+        this.cWrap = new eui.Group();
+        // this.cWrap.width = 680;
+        // this.cWrap.height = 700;
+        // var img = new eui.Image("resource/assets/bg.jpg");
+        // this.cWrap.addChild(img);
+        // 详细数据
+        this.myScroller = new eui.Scroller();
+        this.myScroller.y = 50;
+        this.myScroller.width = 680;
+        this.myScroller.height = 802;
+        this.myScroller.viewport = this.cWrap;
+        this.addChild(this.myScroller);
     }
     /**
      *  合并一起 
@@ -59,9 +60,9 @@ class ChampionC extends eui.Group{
 
         // 赛事
         let b = new egret.TextField();
-        b.textColor = 0x6f799a;
+        b.textColor = 0xd9ddff;
         b.text = data.leaguename ;
-        b.size = 24;
+        b.size = 30;
         b.x = 170;
         b.width = 170;
         b.height = 100;
@@ -131,15 +132,17 @@ class ChampionC extends eui.Group{
     private upPopWrapCMsg( arr ){
         for( let i=0,len = arr.length;i<len;i++ ){
             let wrap01 =  this.AllWrapMsg( arr[i] , i ) ;
-            this.arrWrap01.push( wrap01 );
-            this.group.addChild( wrap01 );
+            this.arrWrap01.push( wrap01 ) 
+            this.cWrap.addChild( wrap01 )
         }
+        // this.addChild(this.cWrap);
+        // this.myScroller.viewport = this.cWrap;
+        // this.addChild(this.myScroller);
+        // var img = new eui.Image("resource/assets/bg.jpg");
+        // this.cWrap.addChild(wrap01);
     }
 
     /**
      *  remove ALl data
      */
-
-
-
 }
