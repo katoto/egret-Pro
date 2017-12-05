@@ -1,4 +1,14 @@
 /**
+ * 
+ * 禁止滑动
+ */
+//   document.addEventListener('touchmove', 
+//       function(evt){
+//          evt.preventDefault()
+//       },
+//      {passive: false}
+//   );
+/**
  *  列表 函数处理
  */
 function upFootballList( msg ){
