@@ -211,7 +211,7 @@ var Field_ball = (function (_super) {
             this.addChild(this.winIcon_l);
         }
         else {
-            this.winIcon_l = new egret.Bitmap(RES.getRes('win2_png'));
+            this.winIcon_l = new egret.Bitmap(RES.getRes('win_png'));
             this.winIcon_l.width = 0;
             this.winIcon_l.height = 0;
             this.winIcon_l.anchorOffsetY = 101;
@@ -227,7 +227,7 @@ var Field_ball = (function (_super) {
             this.addChild(this.winIcon_r);
         }
         else {
-            this.winIcon_r = new egret.Bitmap(RES.getRes('win2_png'));
+            this.winIcon_r = new egret.Bitmap(RES.getRes('win_png'));
             this.winIcon_r.width = 0;
             this.winIcon_r.height = 0;
             this.winIcon_r.anchorOffsetY = 101;
