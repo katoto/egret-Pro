@@ -10,6 +10,8 @@ class ChampionC extends eui.Group{
 
     private arrWrap01 = [] ;
 
+    private cWrap:egret.DisplayObjectContainer ;
+
     private drawChampionC(){
         //标题容器
         let tWrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
@@ -132,6 +134,7 @@ class ChampionC extends eui.Group{
     private upPopWrapCMsg( arr ){
         for( let i=0,len = arr.length;i<len;i++ ){
             let wrap01 =  this.AllWrapMsg( arr[i] , i ) ;
+<<<<<<< HEAD
             this.arrWrap01.push( wrap01 ) 
             this.cWrap.addChild( wrap01 )
         }
@@ -140,9 +143,28 @@ class ChampionC extends eui.Group{
         // this.addChild(this.myScroller);
         // var img = new eui.Image("resource/assets/bg.jpg");
         // this.cWrap.addChild(wrap01);
+=======
+            // this.group.addChild( wrap01 );
+            // this.group.addChild( wrap01 );
+            this.cWrap.addChild( wrap01)
+            this.arrWrap01.push( wrap01 );
+        }
+        this.group.addChild( this.cWrap )
+>>>>>>> f04fd16a57e38b89b24ce192fdd964c93fe81509
     }
 
     /**
      *  remove ALl data
      */
+<<<<<<< HEAD
+=======
+    private clearAllWrap(){
+        for( let i=0,len = this.arrWrap01.length;i<len ;i++ ){
+            if( this.arrWrap01[i].parent ){
+                this.removeChild( this.arrWrap01[i] ) ;
+            }
+        }
+    }
+    
+>>>>>>> f04fd16a57e38b89b24ce192fdd964c93fe81509
 }

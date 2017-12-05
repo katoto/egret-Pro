@@ -53,21 +53,20 @@ class Main extends egret.DisplayObjectContainer {
     }
    
     private onAddToStage(event: egret.Event) {
+
         // egret.lifecycle.addLifecycleListener((context) => {
         //     context.onUpdate = () => {
         //     }
         // })
 
         // egret.lifecycle.onPause = () => {
+        //     // this.cnt.showTips('页面失去焦点，请重新获得焦点') ;
         //     egret.ticker.pause();
         // }
 
         // egret.lifecycle.onResume = () => {
         //     egret.ticker.resume();
         // }
-
-        //设置加载进度界面
-        //Config to load process interface
 
         // this.loadingView = new LoadingUI(750,1334);
         // this.stage.addChild(this.loadingView);
@@ -593,11 +592,14 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 ;break;
                 case '2019':
                     // start_guess  去文案
-                    this.start_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-begin_png');
-                    this.start_pop.y = 227;
-                    this.addChild( this.start_pop );
-                    this.startOver.play(0,1);
-                    egret.Tween.get( this.start_pop ).to({y:0},200);
+                    if( !this.out.parent ){
+                        this.start_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-begin_png');
+                        this.start_pop.y = 227;
+                        this.addChild( this.start_pop );
+                        this.startOver.play(0,1);
+                        egret.Tween.get( this.start_pop ).to({y:0},200);
+                    }
+
                     if( $msgObjBody ){
                         $store['orderObj']['expect'] = $msgObjBody.expect ;
                         $store['orderObj']['stageid'] = $msgObjBody.stageid ;
@@ -689,16 +691,17 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     $store['unableClick'] = true ;
 
                     // 停止竞猜 直接移除定时器 加入开始
-                    this.stop_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-over_png' );
-                    this.stop_pop.y = 227;
-                    this.addChild( this.stop_pop );
-                    this.startOver.play(0,1);
-                    egret.Tween.get( this.stop_pop ).to({y:0},200);
+                    if( !this.out.parent ){
+                        this.stop_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-over_png' );
+                        this.stop_pop.y = 227;
+                        this.addChild( this.stop_pop );
+                        this.startOver.play(0,1);
+                        egret.Tween.get( this.stop_pop ).to({y:0},200);
+                    }
 
                     // 移除文案
                     this.cnt.cnt_upTextTips('');
                     this.cnt.cnt_timerRemove();
-
 
                     setTimeout(()=>{
                         // 收集金币
@@ -998,8 +1001,4 @@ window['store'] = {
             'y':740
         }
     ],
-        // 冠军记录
-    recording:[
-        {'期号':121501,'赛事':'世界杯','url':'https://imgsa.baidu.com/news/pic/item/0df431adcbef7609ece86edb25dda3cc7dd99e97.jpg'},
-    ], 
 } 

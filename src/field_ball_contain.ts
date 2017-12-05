@@ -220,7 +220,13 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
                     this[fieldName].upLeftMyMoney( window['formateGold'] ( $store_coinNum[currMatchData.matchid]['my_golds_l']) )  
                     this[fieldName].addLeftAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['home_golds']) ); 
-                    this.tween_Coin( x , y , $store['allCoinObj'][fieldName].coin_left )
+
+                    if( parseInt ( $store['curr_btn_coin'] ) >= 1000  ){
+                        this.tween_Coin( x , y , $store['allCoinObj'][fieldName].coin_left , true )
+                    }else{
+                        this.tween_Coin( x , y , $store['allCoinObj'][fieldName].coin_left , false )
+                    }
+
                 }
 
             }else{
@@ -270,7 +276,15 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
                     this[fieldName].upRightMyMoney( window['formateGold']( $store_coinNum[currMatchData.matchid]['my_golds_r'] ))  // 个人金额
                     this[fieldName].addRightAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['away_golds']) ); //  总的金额 
-                    this.tween_Coin(x,y, $store['allCoinObj'][fieldName].coin_right ) ;
+
+                    if( parseInt ( $store['curr_btn_coin'] ) >= 1000  ){
+                        this.tween_Coin(x,y, $store['allCoinObj'][fieldName].coin_right , true ) ;
+                    }else{
+                        this.tween_Coin(x,y, $store['allCoinObj'][fieldName].coin_right , false ) ;
+                    }
+
+
+                    
 
                     if( res.data && res.data.total ){
                         $store['userMySelf'].setMyGold( res.data.total );
@@ -784,15 +798,47 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
      *  currArr 报错金币
      *  金币的场次id 比赛id 金币的额度， 金币的来源。。。。。好像很多
      */
-    private tween_Coin( stage_x:Number ,stage_y:Number ,currArr:any ){
-        let gold = new Gold();
-        gold.anchorOffsetX = gold.width/2;
-        gold.anchorOffsetY = gold.height/2;
-        gold.x = window['store']['stage_anWidth'];
-        gold.y = 1000;
-        currArr.push( gold )
-        this.addChild(gold);
-        egret.Tween.get( gold ).to( { x:stage_x,y:stage_y },200 )
+    private tween_Coin( stage_x:any ,stage_y:any ,currArr:any , isMore ){
+
+        if( isMore ){
+            let newGold = [];
+            for( let i=0;i<4;i++ ){
+                let gold = new Gold();
+                gold.anchorOffsetX = gold.width/2;
+                gold.anchorOffsetY = gold.height/2;
+                gold.x = window['store']['stage_anWidth'];
+                gold.y = 1000;
+                currArr.push( gold );
+                newGold.push( gold )
+                this.addChild(gold);
+            }
+
+            setTimeout(()=>{
+                egret.Tween.get( newGold[0] ).to( { x:stage_x,y:stage_y },200 );
+                setTimeout(()=>{
+                    egret.Tween.get( newGold[1] ).to( { x:stage_x + 6 ,y:stage_y + 6 },200 );
+                },60);
+                setTimeout(()=>{
+                    egret.Tween.get( newGold[2] ).to( { x:stage_x + 6 ,y:stage_y - 6 },200 );
+                },100);
+                setTimeout(()=>{
+                    egret.Tween.get( newGold[3] ).to( { x:stage_x - 6 ,y:stage_y - 6 },200 ).call(()=>{
+                        newGold = [] ;
+                    });
+                },150)                                        
+            },0)
+
+        }else{
+            let gold = new Gold();
+            gold.anchorOffsetX = gold.width/2;
+            gold.anchorOffsetY = gold.height/2;
+            gold.x = window['store']['stage_anWidth'];
+            gold.y = 1000;
+            currArr.push( gold )
+            this.addChild(gold);
+            egret.Tween.get( gold ).to( { x:stage_x,y:stage_y },200 )
+        }
+
     }
 
     /**
@@ -837,8 +883,8 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 },80)
                 setTimeout(()=>{
                     egret.Tween.get( goldArr[2] ).to({
-                        x: parseInt( end_x ) + 12 ,
-                        y: parseInt( end_y ) + 15 ,
+                        x: parseInt( end_x ) - 6 ,
+                        y: parseInt( end_y ) - 8 ,
                     }, 800,egret.Ease.circInOut )
                 },180 )
             },0)
