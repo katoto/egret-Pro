@@ -42,13 +42,13 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         this.courtWrap1.addChild(this.field1);
 
         this.field21 = new Field_ball('bg-court2_png');
-        this.field21.y = 184;   // (963-250*2)/3+30 
+        this.field21.y = 234;   // 184   +50
         this.field21.touchEnabled = true;
         this.field21.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_21Evt ,this)
         this.courtWrap2.addChild(this.field21);
 
         this.field22 = new Field_ball('bg-court2_png');
-        this.field22.y = 558;   //  
+        this.field22.y = 508;   //  558  -50
         this.field22.touchEnabled = true;
         this.field22.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_22Evt ,this)
         this.courtWrap2.addChild(this.field22);
@@ -499,7 +499,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
     async field_21Evt( e:egret.TouchEvent ){
         let x = e.localX + 133;
-        let y = e.localY + 184;
+        let y = e.localY + 234;
         let $store = window['store'];
         let $store_coinNum = $store['coin_Num'];
         let currBtnNumber = $store['curr_btn_coin'];
@@ -507,7 +507,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let currQueryStr = '';
         let currMatchData = this.field21.getCurrMatchData();
 
-        if( y>220 && y <395 ){
+        if( y>270 && y <445 ){
             if($store['unableClick']){
                 $store['$cnt'].showTips('unableClick ture');
                 // 不可点击
@@ -543,7 +543,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
     }
     async field_22Evt( e:egret.TouchEvent ){
         let x = e.localX + 133;
-        let y = e.localY + 558;
+        let y = e.localY + 508;
         let $store = window['store'];
         let $store_coinNum = $store['coin_Num'];
         let currBtnNumber = $store['curr_btn_coin'];
@@ -551,7 +551,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let currQueryStr = '';
         let currMatchData = this.field22.getCurrMatchData();
 
-        if( y>594 && y <770 ){
+        if( y>544 && y <720 ){
             if($store['unableClick']){
                 $store['$cnt'].showTips('unableClick ture');
                 // 不可点击
