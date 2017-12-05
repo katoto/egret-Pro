@@ -951,7 +951,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             ;break;
             case 'field21': 
                 // y>220 && y <395
-                newField_y = Math.random() * 175 + 220;
+                newField_y = Math.random() * 175 + 270;
 
                 if( !$store['allCoinObj']['field21'] ){
 
@@ -966,7 +966,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             ;break;
             case 'field22':
                 // y>594 && y <770
-                newField_y = Math.random() * 176 + 594;
+                newField_y = Math.random() * 176 + 544;
                 if( !$store['allCoinObj']['field22'] ){
 
                     $store['allCoinObj']['field22'] = {
