@@ -14,17 +14,18 @@ class Foot extends egret.DisplayObjectContainer{
     }
     private start_pop = null;
     private stop_pop = null ;
-    
+    //声音
+    private musicgold:egret.Sound;
     private drawFoot(){
-
-        //创建 URLLoader 对象
-        var loader:egret.URLLoader = new egret.URLLoader();
-        //设置加载方式为声音
-        loader.dataFormat = egret.URLLoaderDataFormat.SOUND;
-        //添加加载完成侦听
-        loader.addEventListener(egret.Event.COMPLETE, this.onLoadComplete, this);
-        //开始加载
-        loader.load(new egret.URLRequest("resource/assets/music/bet.mp3"));
+         this.musicgold = RES.getRes("bet_mp3");
+        // //创建 URLLoader 对象
+        // var loader:egret.URLLoader = new egret.URLLoader();
+        // //设置加载方式为声音
+        // loader.dataFormat = egret.URLLoaderDataFormat.SOUND;
+        // //添加加载完成侦听
+        // loader.addEventListener(egret.Event.COMPLETE, this.onLoadComplete, this);
+        // //开始加载
+        // loader.load(new egret.URLRequest("resource/assets/music/bet.mp3"));
         
         // 底部背景与投注按钮
         // 底部背景
@@ -74,23 +75,23 @@ class Foot extends egret.DisplayObjectContainer{
        
 
     }
-    private onLoadComplete(event:egret.Event):void {
-        var loader:egret.URLLoader = <egret.URLLoader>event.target;
-        //获取加载到的 Sound 对象
-        var sound:egret.Sound = <egret.Sound>loader.data;
-        this.sound = sound;
-    }
-    private sound:egret.Sound;
-    private soundChannel:egret.SoundChannel;
-    private onTouch(event:egret.Event){
-        var sound = this.sound;
-        var channel:egret.SoundChannel = this.soundChannel;
-        //使用SoundChannel播放音频
-        channel = sound.play(0,1);
-        //Egret 3.0.4 新增获取音频长度 length 属性。
-        //保存soundChannel对象
-        this.soundChannel = channel;
-    }
+    // private onLoadComplete(event:egret.Event):void {
+    //     var loader:egret.URLLoader = <egret.URLLoader>event.target;
+    //     //获取加载到的 Sound 对象
+    //     var sound:egret.Sound = <egret.Sound>loader.data;
+    //     this.sound = sound;
+    // }
+    // private sound:egret.Sound;
+    // private soundChannel:egret.SoundChannel;
+    // private onTouch(event:egret.Event){
+    //     var sound = this.sound;
+    //     var channel:egret.SoundChannel = this.soundChannel;
+    //     //使用SoundChannel播放音频
+    //     channel = sound.play(0,1);
+    //     //Egret 3.0.4 新增获取音频长度 length 属性。
+    //     //保存soundChannel对象
+    //     this.soundChannel = channel;
+    // }
     public initBtn(){
         let $store = window['store'] ;
         //三个投注按钮
@@ -128,9 +129,9 @@ class Foot extends egret.DisplayObjectContainer{
             this.btn_two.addEventListener( egret.TouchEvent.TOUCH_TAP, this.btn_twoDown ,this )
             this.btn_three.addEventListener( egret.TouchEvent.TOUCH_TAP, this.btn_threeDown ,this )
             //监听按钮的触摸事件
-            this.btn_one.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onTouch,this);
-            this.btn_two.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onTouch,this);
-            this.btn_three.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onTouch,this);
+            // this.btn_one.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onTouch,this);
+            // this.btn_two.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onTouch,this);
+            // this.btn_three.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onTouch,this);
 
         }else{
             console.error( 'user_info data error  at foot.ts' )
@@ -144,6 +145,7 @@ class Foot extends egret.DisplayObjectContainer{
             this.btn_one['init_scale']( 1 );
             window['store']['curr_btn_coin'] = window['store']['curr_btn_arr'][0] 
         }
+         this.musicgold.play(0,1);
     }
     private btn_twoDown( e:egret.Event){
         this.btn_one['init_scale']( 0.9 )
@@ -152,6 +154,7 @@ class Foot extends egret.DisplayObjectContainer{
             this.btn_two['init_scale']( 1 )
             window['store']['curr_btn_coin'] = window['store']['curr_btn_arr'][1]
         }
+         this.musicgold.play(0,1);
     }
     private btn_threeDown( e:egret.Event){
         this.btn_two['init_scale']( 0.9 )
@@ -160,6 +163,7 @@ class Foot extends egret.DisplayObjectContainer{
             this.btn_three['init_scale']( 1 )
             window['store']['curr_btn_coin'] = window['store']['curr_btn_arr'][2]
         }
+         this.musicgold.play(0,1);
     }
    
 }
