@@ -48,9 +48,9 @@ class Pop02Cham extends egret.DisplayObjectContainer{
        popWrap.addChild(this.popTitle);
 
        //以下是冠军记录特有内容
-       this.popChamC = new ChampionC();
-       this.popChamC.y = 83;
-       popWrap.addChild( this.popChamC );
+    //    this.popChamC = new ChampionC();
+    //    this.popChamC.y = 83;
+    //    popWrap.addChild( this.popChamC );
 
 
        //关闭按钮54*80
@@ -83,7 +83,6 @@ class Pop02Cham extends egret.DisplayObjectContainer{
                 this.popChamC.upPopWrapCMsg(  res.data ) ;
             }
         })
-
     }
 
 }

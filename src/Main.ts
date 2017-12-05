@@ -41,8 +41,6 @@ class Main extends egret.DisplayObjectContainer {
     private mpromotion:egret.Sound;
     private mchange:egret.Sound;
     
-    private position:Array<number> =  [];
-
     // 竞猜开始文案
     private start_pop = null;
     private stop_pop = null ;
@@ -53,7 +51,6 @@ class Main extends egret.DisplayObjectContainer {
     }
    
     private onAddToStage(event: egret.Event) {
-
         // egret.lifecycle.addLifecycleListener((context) => {
         //     context.onUpdate = () => {
         //     }
@@ -125,13 +122,11 @@ class Main extends egret.DisplayObjectContainer {
         //TODO
         console.warn("Group:" + event.groupName + " has failed to load");
         //忽略加载失败的项目
-        //Ignore the loading failed projects
         this.onResourceLoadComplete(event);
     }
 
     /**
      * preload资源组加载进度
-     * Loading process of preload resource group
      */
     private onResourceProgress(event: RES.ResourceEvent) {
         if (event.groupName == "preload") {
@@ -150,8 +145,8 @@ class Main extends egret.DisplayObjectContainer {
         const anHeight =  $store['stage_anHeight'] = this.Height/2;
         window['store'].scale = ( this.Height / 1334 ).toFixed(2) ;
 
-        // 声音
         /**
+         *  声音
          * mchange 登场
          * startOver 比赛开始or结束
          * mpromotion  晋级
@@ -177,12 +172,6 @@ class Main extends egret.DisplayObjectContainer {
         window['store']['$cnt'] = this.cnt ;
         this.addChild(this.cnt);
 
-        // setInterval(()=>{
-        //     console.log('++++++++++++++++')
-        //     console.log( this.cnt.numChildren )
-        //     console.log('-------------')
-        // },10000)
-
          //头部实例2
         this.top = new Top(this.Width);
         this.top.x = 0;
@@ -200,11 +189,6 @@ class Main extends egret.DisplayObjectContainer {
         this.promotion = new Promotion();
         // this.addChild(this.promotion) ;
 
-        // 弹窗实例,竞猜开始or竞猜完毕
-        // text-begin_png text-over_png
-        // this.pop = new Pop(this.Width,this.Height,'text-begin_png');
-        // this.addChild(this.pop);
-
         //杯赛过场change
         this.change = new Change();
         this.change.x = 0;
@@ -218,10 +202,6 @@ class Main extends egret.DisplayObjectContainer {
         setTimeout(()=>{
             this.out = new Pop02Out();
         },2000)
-
-        // this.setChildIndex(this.bottom,3)
-        // this.setChildIndex(this.pop,4)
-        // this.setChildIndex(this.popChampionRecord,4)
 
         /*
         优化：
@@ -306,16 +286,9 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
 
         //  用户头像的9个 实例对象 
         this.cnt.initUserImg();
-        //  场地容器 实例对象
 
         // 初始化点球
         this.cnt.initAllPenalty() ;
-    }
-
-    /**
-     * 声音
-     */
-    private music(){
     }
 
     // 函数：生成图片
@@ -691,7 +664,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     $store['unableClick'] = true ;
 
                     // 停止竞猜 直接移除定时器 加入开始
-                    if( !this.out.parent ){
+                    if( this.out && !this.out.parent ){
                         this.stop_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-over_png' );
                         this.stop_pop.y = 227;
                         this.addChild( this.stop_pop );

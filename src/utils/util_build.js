@@ -1,3 +1,29 @@
+/**
+ *  列表 函数处理
+ */
+function upFootballList( msg ){
+    var i,len,listStr;
+    if( msg ){
+        len = msg.length ;
+        listStr = '' ;
+        for( var i =0 ; i<len ;i++ ){
+            listStr+='<li>'
+                +  '<span class="cham-date">'+ msg[i].expect +'</span>'
+                +  '<span class="cham-race">'+ msg[i].leaguename +'</span>'
+                +  '<span class="cham-name">' + msg[i].champion + '</span>'
+                +  '<span class="cham-icon">';
+            
+            if( msg[i].champion === msg[i].homename ){
+                listStr += '<img src="'+ msg[i].homelogo +'" alt="">'
+            }else{
+                listStr += '<img src="'+ msg[i].awaylogo +'" alt="">'
+            }
+            listStr+= ' </span></li>' ;
+        }
+        document.querySelector('.box ul').innerHTML =  listStr
+    }
+}
+
 
 /**
  *  数组转对象
