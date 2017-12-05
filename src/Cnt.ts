@@ -101,7 +101,7 @@ class Cnt extends egret.DisplayObjectContainer{
         this.textT = new TextTips();
         this.textT.anchorOffsetX = this.textT.width/2;
         this.textT.x = anWidth;
-        this.textT.y = 66;
+        this.textT.y = 76;
         this.bgCourtWrap.addChild( this.textT );
 
         this.fieldContain = new Field_ball_contain();

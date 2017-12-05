@@ -22,7 +22,7 @@ class Timer extends egret.DisplayObjectContainer{
         //倒计时-文字
         let textTimer:egret.TextField = new egret.TextField();
         textTimer.text = '倒计时';
-        textTimer.textColor = 0x94d7bd;
+        textTimer.textColor = 0xffffff;
         textTimer.size = 22;
         textTimer.x = 36;
         textTimer.y = 17;

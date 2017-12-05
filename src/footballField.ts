@@ -3,6 +3,7 @@
 class Field_ball extends eui.UILayer {
 
     //比分
+    private bgScore:egret.Bitmap;
     private score:egret.TextField;
 
     //三种球场的高度和高度中心,重要参数
@@ -163,6 +164,10 @@ class Field_ball extends eui.UILayer {
 
 
        //比分
+       this.bgScore = new egret.Bitmap(RES.getRes('bg-vs_png'));
+       this.bgScore.anchorOffsetY = 29;
+       this.bgScore.x = 188;
+       this.bgScore.y = this.courtHeight/2;
        this.score = new egret.TextField();
     //    this.score.text= '2:0';
        this.score.textColor = 0xffffff;
@@ -182,11 +187,13 @@ class Field_ball extends eui.UILayer {
     private writeScore( num:string ){
         if( num === '' ){
             if( this.score.parent ){
+                this.removeChild( this.bgScore)
                 this.removeChild( this.score )
             }
         }else{
             this.score.text = num;
             if( !this.score.parent ){
+                this.addChild(this.bgScore)
                 this.addChild(this.score)
             }
         }
@@ -270,7 +277,7 @@ class Field_ball extends eui.UILayer {
         if( !!this.winIcon_l ){
             this.addChild(this.winIcon_l);
         }else{
-            this.winIcon_l = new egret.Bitmap(RES.getRes('win2_png'));
+            this.winIcon_l = new egret.Bitmap(RES.getRes('win_png'));
             this.winIcon_l.width = 0;
             this.winIcon_l.height = 0;
             this.winIcon_l.anchorOffsetY = 101;

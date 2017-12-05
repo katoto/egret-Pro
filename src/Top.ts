@@ -76,6 +76,7 @@ class Top extends egret.DisplayObjectContainer{
         await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/matches/result/list' ,dataType:'json'} ).then(( res )=>{
             if( res && res.status === '100' ){
                 window['upFootballList']( res.data ) ;
+                console.log(res.data)
             }
         })
     }

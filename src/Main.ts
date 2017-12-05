@@ -143,8 +143,11 @@ class Main extends egret.DisplayObjectContainer {
         this.Height = $store['stage_Height'] = this.stage.stageHeight;
         this.anWidth = $store['stage_anWidth'] = this.Width/2;
         const anHeight =  $store['stage_anHeight'] = this.Height/2;
-        window['store'].scale = ( this.Height / 1334 ).toFixed(2) ;
-
+        window['store'].scale = ( this.Height / 1334 ).toFixed(2);
+        if(parseFloat((window['store'].scale))<0.95){
+           window['store'].scale = parseFloat((window['store'].scale))+0.05;
+        }
+         console.log(window['store'].scale)
         /**
          *  声音
          * mchange 登场
