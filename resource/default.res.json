@@ -334,6 +334,21 @@
 			"name": "change_mp3",
 			"type": "sound",
 			"url": "assets/music/change.mp3"
+		},
+		{
+			"name": "pop-close2_png",
+			"type": "image",
+			"url": "assets/pop/pop-close.png"
+		},
+		{
+			"name": "pop-022_png",
+			"type": "image",
+			"url": "assets/pop/pop-02.png"
+		},
+		{
+			"name": "bg-item3_png",
+			"type": "image",
+			"url": "assets/pop/bg-item.png"
 		}
 	]
 }
