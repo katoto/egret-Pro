@@ -384,7 +384,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                         ;break;
                                     }
                                     if( !!this.cnt ){
-                                        this.cnt.cnt_upTextTips('请下注');
+                                        this.cnt.cnt_upTextTips('请选择球队下注...');
                                     }
 
                                     // 处理层级
@@ -635,7 +635,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
 
                         if( this.start_pop && this.start_pop.parent ){
                             // 请下注
-                            this.cnt.cnt_upTextTips('请下注');
+                            this.cnt.cnt_upTextTips('请选择球队下注...');
                             switch ( $msgObjBody.stageid ){
                                 case '1':
                                     this.cnt.cnt_timer('31');
