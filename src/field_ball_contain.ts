@@ -883,8 +883,8 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 },80)
                 setTimeout(()=>{
                     egret.Tween.get( goldArr[2] ).to({
-                        x: parseInt( end_x ) + 12 ,
-                        y: parseInt( end_y ) + 15 ,
+                        x: parseInt( end_x ) - 6 ,
+                        y: parseInt( end_y ) - 8 ,
                     }, 800,egret.Ease.circInOut )
                 },180 )
             },0)
