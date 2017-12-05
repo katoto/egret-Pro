@@ -144,8 +144,8 @@ class Main extends egret.DisplayObjectContainer {
         this.anWidth = $store['stage_anWidth'] = this.Width/2;
         const anHeight =  $store['stage_anHeight'] = this.Height/2;
         window['store'].scale = ( this.Height / 1334 ).toFixed(2);
-        if(parseFloat((window['store'].scale))<0.95){
-           window['store'].scale = parseFloat((window['store'].scale))+0.05;
+        if(parseFloat((window['store'].scale))<0.92){
+           window['store'].scale = parseFloat((window['store'].scale))+0.08;
         }
          console.log(window['store'].scale)
         /**
