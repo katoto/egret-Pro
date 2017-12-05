@@ -564,8 +564,8 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     
                 ;break;
                 case '2019':
-                    // start_guess  去文案
-                    if( !this.out.parent ){
+                    // start_guess   去文案 
+                    if( this.out && !this.out.parent ){
                         this.start_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-begin_png');
                         this.start_pop.y = 227;
                         this.addChild( this.start_pop );
@@ -807,7 +807,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
      *  onIOError  websock 接收消息
      */
     private onIOError():void{
-        if( !this.out.parent ){
+        if( this.out && !this.out.parent ){
             if( !!this.out ){
                 this.out.showSocketErr();
                 this.addChild(this.out) ;
@@ -820,7 +820,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
      *  onCloseSock  websock 接收消息
      */
     private onCloseSock():void{
-        if( !this.out.parent ){
+        if( this.out && !this.out.parent ){
             if( !!this.out ){
                 this.out.showSocketErr();
                 this.addChild(this.out) ;
