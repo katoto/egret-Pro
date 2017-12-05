@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "bg_jpg,description_json,btn-recharge_png,btn-past_png,rule_png,chat_png,pop-game_png,text-over_png,text-begin_png,back_png,bg-time_png,bg-court_png,bg-court4_png,team-01_jpg,team-02_jpg,bg-avatar_png,bg-textTips_png,btnOn_png,btn_png,gold_png,userimg_png,win_png,gold-items_png,bg-betting_png,bg-user_png,bg-item_png,bg-betting2_png,bg-item2_png,bg-user2_png,gold-items2_png,gold2_png,userimg2_png,win2_png,bg-border_png,gold-items02_png,pop-close_png,pop-02_png,bg-chat_png,bgChatClose_png,bg-court1_png,bg-court2_png,penalty-in_png,penalty-out_png,bg-penalty_png,penalty-mask_png,penalty-win_png,penaltyWrap-mask_png,penalty-time_png,bg-myChat_png,bg-change_jpg,logo-mz_png,logo-fz_png,logo-oz_png,logo-yz_png,pop-rule_png,pop-promotion_png,champion_png,scoreMask_png,noBet_mp3,bet_mp3,proWin_png,logo-sjb_png,bg-toast_png,pop-out_png,pop-btn_png,start_mp3,promotion_mp3,change_mp3,pop-close2_png,pop-022_png,bg-item3_png",
+			"keys": "bg_jpg,description_json,btn-recharge_png,btn-past_png,rule_png,chat_png,pop-game_png,text-over_png,text-begin_png,back_png,bg-time_png,bg-court_png,bg-court4_png,team-01_jpg,team-02_jpg,bg-avatar_png,bg-textTips_png,btnOn_png,btn_png,gold_png,userimg_png,win_png,gold-items_png,bg-betting_png,bg-user_png,bg-item_png,bg-border_png,gold-items02_png,pop-close_png,pop-02_png,bg-chat_png,bgChatClose_png,bg-court1_png,bg-court2_png,penalty-in_png,penalty-out_png,bg-penalty_png,penalty-mask_png,penalty-win_png,penaltyWrap-mask_png,penalty-time_png,bg-myChat_png,bg-change_jpg,logo-mz_png,logo-fz_png,logo-oz_png,logo-yz_png,pop-rule_png,pop-promotion_png,champion_png,scoreMask_png,noBet_mp3,bet_mp3,proWin_png,logo-sjb_png,bg-toast_png,pop-out_png,pop-btn_png,start_mp3,promotion_mp3,change_mp3",
 			"name": "preload"
 		},
 		{
@@ -139,41 +139,6 @@
 			"url": "assets/bg-item.png",
 			"type": "image",
 			"name": "bg-item_png"
-		},
-		{
-			"url": "assets/bg-betting.png",
-			"type": "image",
-			"name": "bg-betting2_png"
-		},
-		{
-			"url": "assets/bg-item.png",
-			"type": "image",
-			"name": "bg-item2_png"
-		},
-		{
-			"url": "assets/bg-user.png",
-			"type": "image",
-			"name": "bg-user2_png"
-		},
-		{
-			"url": "assets/gold-items.png",
-			"type": "image",
-			"name": "gold-items2_png"
-		},
-		{
-			"url": "assets/gold.png",
-			"type": "image",
-			"name": "gold2_png"
-		},
-		{
-			"url": "assets/userimg.png",
-			"type": "image",
-			"name": "userimg2_png"
-		},
-		{
-			"url": "assets/win.png",
-			"type": "image",
-			"name": "win2_png"
 		},
 		{
 			"url": "assets/bg-border.png",
