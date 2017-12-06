@@ -198,6 +198,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             selection : '1' ,
             roomid : $store['orderObj'].roomid ,
             node : $store['orderObj'].node ,
+            src: $store['env_variable'].src,
         })
 
         await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
@@ -259,6 +260,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             selection : '2' ,
             roomid : $store['orderObj'].roomid ,
             node : $store['orderObj'].node ,
+            src: $store['env_variable'].src,
         })
 
         await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{

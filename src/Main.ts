@@ -217,7 +217,7 @@ class Main extends egret.DisplayObjectContainer {
             })
 
         }
-        await window['getJson']( { type:'get' ,url :  $store['initDomain']+'/api/join?ck='+ $store['env_variable'].ck ,dataType:'json'} ).then(( res )=>{
+        await window['getJson']( { type:'get' ,url :  $store['initDomain']+'/api/join?ck='+ $store['env_variable'].ck +'&src='+ $store['env_variable'].src ,dataType:'json'} ).then(( res )=>{
                 // 申请房间
                 if( res.status && res.status === '100' ){
                     // 保存房间信息
@@ -417,6 +417,9 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                     if( !!this.cnt ){
                                         this.cnt.cnt_upTextTips('正在开奖...');
                                     }
+                                    if( this.start_pop && this.start_pop.parent ){
+                                        this.removeChild( this.start_pop );
+                                    }                                    
                                     if( this.stop_pop && this.stop_pop.parent ){
                                         this.removeChild( this.stop_pop );
                                     }
