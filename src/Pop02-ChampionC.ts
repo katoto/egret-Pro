@@ -47,10 +47,25 @@ class Pop02Cham extends egret.DisplayObjectContainer{
        this.popTitle.textAlign = egret.HorizontalAlign.CENTER;
        popWrap.addChild(this.popTitle);
 
+         //标题容器
+        let tWrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
+        tWrap.y = 83;
+        tWrap.width = 680;
+        tWrap.height = 50;
+        popWrap.addChild(tWrap);
+        let text01 = this.drawTitie("期号",170,0);
+        let text02 = this.drawTitie("赛事",170,170);
+        let text03 = this.drawTitie("冠军",170,510);
+        let text04 = this.drawTitie("冠军球队",170,340);
+        tWrap.addChild(text01);
+        tWrap.addChild(text02);
+        tWrap.addChild(text03);
+        tWrap.addChild(text04);
+
        //以下是冠军记录特有内容
-    //    this.popChamC = new ChampionC();
-    //    this.popChamC.y = 83;
-    //    popWrap.addChild( this.popChamC );
+       this.popChamC = new ChampionC();
+       this.popChamC.y = 130;
+       popWrap.addChild( this.popChamC );
 
 
        //关闭按钮54*80
@@ -71,18 +86,18 @@ class Pop02Cham extends egret.DisplayObjectContainer{
 
     }
 
-    /**
-     *  更新 列表数据
-     */
-    async upPopWrapMsg(){
-        let $store = window['store'] ;
-        //  请求 更新数据
-        await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/matches/result/list' ,dataType:'json'} ).then(( res )=>{
-            console.log( res );
-            if( res && res.status === '100' ){
-                this.popChamC.upPopWrapCMsg(  res.data ) ;
-            }
-        })
+     private drawTitie(t,w,x){ /*标题，宽度，x位置*/
+        let text = new egret.TextField();
+        text.textColor = 0x6f799a;
+        text.size = 28;
+        text.text = t;
+        text.width = w;
+        text.height = 50;
+        text.x = x;
+        text.verticalAlign = egret.VerticalAlign.MIDDLE;
+        text.textAlign = egret.HorizontalAlign.CENTER;
+        return text;
     }
+
 
 }

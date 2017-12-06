@@ -42,13 +42,10 @@ class Top extends egret.DisplayObjectContainer{
         btnPast.touchEnabled = true;
         btnPast.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
             this.getFootballMsg();
-
-            document.querySelector('.Pop02-gj')['style']['display'] = 'block' ;
-            // this.addChild(this.pop02Cham);
+            this.addChild(this.pop02Cham);
             // 更新 数据
-            // this.pop02Cham.upPopWrapMsg();
+            this.pop02Cham.popChamC.upPopWrapMsg();
         },this)
-
         let btnRecharge:egret.Bitmap = new egret.Bitmap(RES.getRes('btn-recharge_png'));
         btnRecharge.x = Width - 76;
         btnRecharge.y = 23;

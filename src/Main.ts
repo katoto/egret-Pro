@@ -26,8 +26,10 @@ class Main extends egret.DisplayObjectContainer {
     private promotion;  
     //离开
     private out;
-    //test
+    
     private penalty02;
+    //test
+    private test;
 
     private textfield:egret.TextField;
     
@@ -147,7 +149,8 @@ class Main extends egret.DisplayObjectContainer {
         if(parseFloat((window['store'].scale))<0.92){
            window['store'].scale = parseFloat((window['store'].scale))+0.08;
         }
-         console.log(window['store'].scale)
+        
+
         /**
          *  声音
          * mchange 登场
@@ -207,6 +210,9 @@ class Main extends egret.DisplayObjectContainer {
         },2000)
 
         this.initStage();
+
+        // this.test = new DataGroupDemo();
+        // this.addChild(this.test)
 
         if( $store['env_variable'].ck === '' || !$store['env_variable'].ck ){
             console.error('请带上ck');

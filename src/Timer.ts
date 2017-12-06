@@ -6,6 +6,7 @@ class Timer extends egret.DisplayObjectContainer{
     }
     private wrapTimer:egret.DisplayObjectContainer;
     private textSS:egret.TextField;
+    private textTimer:egret.TextField;
 
     private timer:egret.Timer ;
 
@@ -20,16 +21,16 @@ class Timer extends egret.DisplayObjectContainer{
         let bgTimer:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-time_png'));
         this.wrapTimer.addChild(bgTimer);
         //倒计时-文字
-        let textTimer:egret.TextField = new egret.TextField();
-        textTimer.text = '倒计时';
-        textTimer.textColor = 0xffffff;
-        textTimer.size = 22;
-        textTimer.x = 36;
-        textTimer.y = 17;
-        this.wrapTimer.addChild(textTimer);
+        this.textTimer = new egret.TextField();
+        this.textTimer.text = '倒计时';
+        this.textTimer.textColor = 0x1c1c1c;
+        this.textTimer.size = 22;
+        this.textTimer.x = 36;
+        this.textTimer.y = 17;
+        this.wrapTimer.addChild(this.textTimer);
          //倒计时-动态文字
         this.textSS = new egret.TextField();
-        this.textSS.textColor = 0xffffff; 
+        this.textSS.textColor = 0x1c1c1c; 
         this.textSS.size = 30;
         this.textSS.x = 114;
         this.textSS.y = 12;
@@ -66,6 +67,10 @@ class Timer extends egret.DisplayObjectContainer{
         // egret.log("timerFunc count" + (<egret.Timer>event.target).currentCount);
 
         this.timerNum--;
+        if(this.timerNum < 4){
+            this.textSS.textColor = 0xcb1f1f;
+            this.textTimer.textColor = 0xcb1f1f;
+        }
         if( this.timerNum < 0 || this.timerNum === 0 ){
             this.textSS.text =  '' ;
         }else{
