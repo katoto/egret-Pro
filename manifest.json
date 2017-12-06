@@ -19,6 +19,7 @@
 		"bin-debug/FootBtn.js",
 		"bin-debug/Gold.js",
 		"bin-debug/Header.js",
+		"bin-debug/LabelRenderer.js",
 		"bin-debug/LoadingUI.js",
 		"bin-debug/Main.js",
 		"bin-debug/Music.js",
