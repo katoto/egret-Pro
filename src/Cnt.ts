@@ -922,7 +922,7 @@ class Cnt extends egret.DisplayObjectContainer{
         }
         for(let i=0; i<len ;i++){
             if( $store['user_info'][i] && $store['user_info'][i].photo === '' ){
-                $store['user_info'][i].photo = 'http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1213.png'
+                $store['user_info'][i].photo = 'http://img.choopaoo.com/esun/upload/be/83/be837ad8049611e797ef.png'
             }
             if( $store['user_info'][i].uid ){
                 $store['userPositionLocal'][$store['user_info'][i].uid] = ( i + 1 ) 
@@ -966,7 +966,7 @@ class Cnt extends egret.DisplayObjectContainer{
         var choseUserImg = 'userImg' + ( userI )
         // console.log( choseUserImg )
         if( photo === '' ){
-            photo = 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=547138142,3998729701&fm=27&gp=0.jpg'
+            photo = 'http://img.choopaoo.com/esun/upload/be/83/be837ad8049611e797ef.png'
         }
 
         if( this[choseUserImg] ){

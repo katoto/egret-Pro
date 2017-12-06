@@ -98,6 +98,4 @@ class Pop02Cham extends egret.DisplayObjectContainer{
         text.textAlign = egret.HorizontalAlign.CENTER;
         return text;
     }
-
-
 }

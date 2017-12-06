@@ -84,8 +84,27 @@ class Pop02Out extends egret.DisplayObjectContainer{
      *   长时间未操作 函数
      */
     private longTime_Fn(){
-        // this.parent.removeChild(this) ;
-        window.location.href = 'https:www.baidu.com' ;
+        let $store = window['store'] ;
+        if( $store['env_variable'].src ){
+            switch ( $store['env_variable'].src ){
+                case '500app':
+                    window.location.href = 'http://crazybet.choopaoo.com/500app/#/h5/home/hot/' ;
+                ;break;
+                case 'off':
+                    window.location.href = 'http://crazybet.choopaoo.com/official?from=off' ;
+                break;
+                case 'off-mipan':
+                    window.location.href = 'http://crazybet.choopaoo.com/official?from=off-mipan' ;                    
+                ;break;
+                case 'qqsd':
+                    window.location.href = 'http://crazybet.choopaoo.com/500qqsd/#/h5/home/hot' ;
+                ;break;
+                case '500bf':
+                    window.location.href = 'https://www.baidu.com' ;                
+                ;break;
+
+            }
+        }
     }
 
     /**
