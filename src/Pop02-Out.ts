@@ -100,6 +100,7 @@ class Pop02Out extends egret.DisplayObjectContainer{
                     window.location.href = 'http://crazybet.choopaoo.com/500qqsd/#/h5/home/hot' ;
                 ;break;
                 case '500bf':
+                    // 这个要特殊处理 ！
                     window.location.href = 'https://www.baidu.com' ;                
                 ;break;
 

@@ -13,10 +13,10 @@ class ChampionC extends eui.Group {
             <e:Label text="{data.leaguename}" textColor.down="0x6f799a" textColor.up="0x6f799a" size="24" verticalAlign="middle" textAlign="center" left="170" width="170" height="100"/> 
             <e:Label text="{data.champion}" textColor.down="0xd9ddff" textColor.up="0xd9ddff" size="30" verticalAlign="middle" textAlign="center" left="340" width="170" height="100"/> 
             <e:Image source="resource/assets/bg-item.png" width="68" height="68" top="16" left="561"/>
-            <e:Image source="{data.homename}" width="68" height="68" top="16" left="561"/>
+            <e:Image source="{data.homelogo}" width="68" height="68" top="16" left="561"/>
         </e:Skin>`;
         this.list = new eui.List();
-        this.list.dataProvider = new eui.ArrayCollection([{expect:"one",leaguename:1,champion:'asd',homename:'http://img.choopaoo.com/esun/proj/53/66/5366ac18da5411e7a91f.png'}]);
+        this.list.dataProvider = new eui.ArrayCollection();
         this.list.itemRendererSkinName = exml;
         this.addChild(this.list);
         this.list.selectedIndex = 1;//设置默认选中项
@@ -40,7 +40,13 @@ class ChampionC extends eui.Group {
         //  请求 更新数据
         await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/matches/result/list' ,dataType:'json'} ).then(( res )=>{
             if( res && res.status === '100' ){
-                this.upPopWrapCMsg(  res.data ) ;
+                for( let i=0,len = res.data.length;i<len;i++ ){
+                    if( res.data[i].champion !== res.data[i].homename ){
+                        res.data[i].homelogo = res.data[i].awaylogo ;
+                    }
+                    this.list.dataProvider.addItem(res.data[i])
+                }           
+
             }
         })
     }
@@ -48,9 +54,10 @@ class ChampionC extends eui.Group {
     /**
      *  更新 列表数据 
      */
-    private upPopWrapCMsg( arr ){
-        for( let i=0,len = arr.length;i<len;i++ ){
-            this.list.dataProvider.addItem(arr[i])
-        }
-    }
+    // private upPopWrapCMsg( arr ){
+    //     for( let i=0,len = arr.length;i<len;i++ ){
+    //         this.list.dataProvider.addItem(arr[i])
+    //     }
+    // }
+
 }

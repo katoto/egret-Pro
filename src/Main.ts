@@ -1,7 +1,6 @@
 /**
  *  虚拟杯
  */
-
 class Main extends egret.DisplayObjectContainer {
     /**
      *  loading
@@ -489,6 +488,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                         this.change.upChangeMsg(  $msgObjBody.matches , $msgObjBody.room_info );
                                         if( !!this.change || !this.change.parent ){
                                             this.mchange.play(0,1);
+                                            this.change.x = 0;
                                             this.addChild( this.change );
                                             setTimeout(()=>{
                                                 egret.Tween.get( this.change ).to( { x : -750 }, 700 ).call(()=>{
@@ -931,11 +931,11 @@ window['store'] = {
         field44_l:{ x:214 ,y:728 },
         field44_r:{ x:458 ,y:728 },
 
-        field21_l:{ x:214 ,y:192 },
-        field21_r:{ x:458 ,y:192 },
+        field21_l:{ x:214 ,y:242 },
+        field21_r:{ x:458 ,y:242 },
 
-        field22_l:{ x:214 ,y:566 },
-        field22_r:{ x:458 ,y:566 },
+        field22_l:{ x:214 ,y:516 },
+        field22_r:{ x:458 ,y:516 },
   
         field1_l:{ x:214 ,y:330 },
         field1_r:{ x:458 ,y:330 }
