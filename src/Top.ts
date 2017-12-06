@@ -30,6 +30,8 @@ class Top extends egret.DisplayObjectContainer{
         this.addChild(this.textDate);
         
         this.pop02Cham = new Pop02Cham();
+        this.pop02Cham.scaleX= window['store'].scale;
+        this.pop02Cham.scaleY= window['store'].scale;
         // 右上角充值与往期
         let btnPast:egret.Bitmap = new egret.Bitmap(RES.getRes('btn-past_png'));
         btnPast.x = Width - 163;

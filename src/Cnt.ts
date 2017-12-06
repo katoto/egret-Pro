@@ -92,7 +92,7 @@ class Cnt extends egret.DisplayObjectContainer{
 
         //倒计时
         this.timer = new Timer();
-        this.timer.anchorOffsetX = 100;
+        this.timer.anchorOffsetX = 90;
         this.timer.x = anWidth;
         this.timer.y = 0;
         this.bgCourtWrap.addChild( this.timer );
@@ -103,7 +103,6 @@ class Cnt extends egret.DisplayObjectContainer{
         this.textT.x = anWidth;
         this.textT.y = 76;
         this.bgCourtWrap.addChild( this.textT );
-
         this.fieldContain = new Field_ball_contain();
         window['store']['$fieldContain'] = this.fieldContain ;
         this.bgCourtWrap.addChild( this.fieldContain );
