@@ -746,8 +746,8 @@ class Cnt extends egret.DisplayObjectContainer{
         let allShowWinNum = 0 ;
 
         let userImgArr = [] ;
-// delIndex = window['store']['userPositionLocal'][uid] ;
-// let choseUserImg = 'userImg'+ ( delIndex ) ;
+        // delIndex = window['store']['userPositionLocal'][uid] ;
+        // let choseUserImg = 'userImg'+ ( delIndex ) ;
         if( settleData ){
             for( let i=0,len = settleData.length ;i<len ; i++ ){
                 choseUser = $store['userPositionLocal'][ settleData[i].uid ] ;

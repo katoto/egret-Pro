@@ -120,7 +120,7 @@ function formateGold(num) {
     } else if (num < 100000000) {
         return Math.round(num / 10000 * 100) / 100 + '万';
     } else {
-        return Math.round(num / 100000000 * 100) / 100 + '亿';
+        return Math.round(num / 100000000 * 10) / 10 + '亿';
     }
 }
 
