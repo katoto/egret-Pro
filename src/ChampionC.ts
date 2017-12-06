@@ -46,8 +46,7 @@ class ChampionC extends eui.Group {
                     }
                     this.list.dataProvider.addItem(res.data[i])
                 }   
-                
-
+                //  this.parent.popWrap.removeChild(this.parent.load)
             }
         })
     }
