@@ -6,6 +6,7 @@ class Pop02Cham extends egret.DisplayObjectContainer{
     }
 
     private popTitle:egret.TextField;
+    private load:egret.TextField;
     private popChamC ;
 
     private drawPop(){
@@ -62,11 +63,27 @@ class Pop02Cham extends egret.DisplayObjectContainer{
         tWrap.addChild(text03);
         tWrap.addChild(text04);
 
+       //背景颜色
+       let bgWhite:egret.Shape = new egret.Shape();
+       bgWhite.graphics.beginFill(0x30313b);
+       bgWhite.graphics.drawRect(0,130,680,805);
+       bgWhite.graphics.endFill();
+       popWrap.addChild(bgWhite);
+       //load
+       this.load = new egret.TextField();
+       this.load.text = "请稍等，用命加载中...";
+       this.load.width = 680;
+       this.load.y = 350;
+       this.load.textColor = 0xd9ddff;
+       this.load.textAlign = egret.HorizontalAlign.CENTER;
+       popWrap.addChild(this.load);
+
+
        //以下是冠军记录特有内容
        this.popChamC = new ChampionC();
        this.popChamC.y = 130;
        popWrap.addChild( this.popChamC );
-
+      
 
        //关闭按钮54*80
        let popClose:egret.Bitmap = new egret.Bitmap(RES.getRes('pop-close_png'));
