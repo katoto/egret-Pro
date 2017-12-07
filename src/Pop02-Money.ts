@@ -65,7 +65,9 @@ class Pop02Money extends egret.DisplayObjectContainer{
        this.popBtn1.y = 320;
        popWrap.addChild(this.popBtn1);
        this.popBtn1.touchEnabled = true;
-        // RES.removeEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
+       this.popBtn1.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=>{
+          this.parent.removeChild(this)
+        }, this);
 
         //充值
        this.popBtn2 = new egret.Bitmap(RES.getRes('pop-btn02_png'));
@@ -73,8 +75,9 @@ class Pop02Money extends egret.DisplayObjectContainer{
        this.popBtn2.y = 320;
        popWrap.addChild(this.popBtn2);
        this.popBtn2.touchEnabled = true;
-        // RES.removeEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
-
+       this.popBtn2.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=>{
+        //   跳充值
+        }, this);
     }
 
 }

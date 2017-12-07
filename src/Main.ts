@@ -461,6 +461,10 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                              $store['coin_Num'] = {} ;
                          }
 
+                        if( this.start_pop && this.start_pop.parent ){
+                            this.removeChild( this.start_pop );
+                        }      
+
                         if( $msgObjBody.room_info ){
                             this.top.setTextDate(  $msgObjBody.room_info.desc )
                             this.top.setTextTitle(  $msgObjBody.room_info.title )
