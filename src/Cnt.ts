@@ -877,8 +877,8 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
             this[choseUserImg].scaleX = this.scale2;
             this[choseUserImg].scaleY = this.scale2;
             if( i === 0 ){
-                this[choseUserImg].anchorOffsetX = this[choseUserImg].width/2;
-                this[choseUserImg].anchorOffsetY = this[choseUserImg].height;
+                this[choseUserImg].anchorOffsetX = 44;
+                this[choseUserImg].anchorOffsetY = 124 ;
                 this[choseUserImg].x = window['store']['stage_anWidth'] ;
                 this[choseUserImg].y = 1035;
                 window['store']['userMySelf'] = this[choseUserImg];

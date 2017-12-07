@@ -809,7 +809,8 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 let gold = new Gold();
                 gold.anchorOffsetX = gold.width/2;
                 gold.anchorOffsetY = gold.height/2;
-                gold.x = window['store']['stage_anWidth'] + gold.width/2 ;
+                // gold.x = window['store']['stage_anWidth'] + gold.width/2 ;
+                gold.x = window['store']['stage_anWidth'];
                 gold.y = 980 - gold.height/2;
                 currArr.push( gold );
                 newGold.push( gold )
