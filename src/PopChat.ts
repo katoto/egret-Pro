@@ -43,7 +43,7 @@ class PopChat extends egret.DisplayObjectContainer{
 
        //聊天列表
        var exml = 
-       `<e:Skin xmlns:e="http://ns.egret.com/eui" states="up,down" height="81"> 
+       `<e:Skin xmlns:e="http://ns.egret.com/eui" states="up,down" height="81" width="750"> 
             <e:Label text="{data}" textColor.down="0xffd02f" textColor.up="0xffffff" size="30" verticalAlign="middle" textAlign="left" left="65" width="750" height="80"/> 
             <e:Label left="0" width="750" height="1" background="0xffffff" top="80"/> 
         </e:Skin>`;
