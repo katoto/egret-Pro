@@ -96,7 +96,7 @@ class Pop02Cham extends egret.DisplayObjectContainer{
             //    this.removeChild(BigWrap);
             if( window['store'].$pop02Cham.parent ){
                 window['store'].$Top.removeChild( window['store'].$pop02Cham ) ;
-                this.popChamC.clearAllWrap() ;
+                // this.popChamC.clearAllWrap() ;
             }
        },this)
 

@@ -40,6 +40,7 @@ class ChampionC extends eui.Group {
         //  请求 更新数据
         await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/matches/result/list' ,dataType:'json'} ).then(( res )=>{
             if( res && res.status === '100' ){
+                // 清除
                 for( let i=0,len = res.data.length;i<len;i++ ){
                     if( res.data[i].champion !== res.data[i].homename ){
                         res.data[i].homelogo = res.data[i].awaylogo ;
