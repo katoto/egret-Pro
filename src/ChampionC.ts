@@ -47,8 +47,8 @@ class ChampionC extends eui.Group {
                         res.data[i].homelogo = res.data[i].awaylogo ;
                     }
                     this.list.dataProvider.addItem(res.data[i])
-                }   
-                //  this.parent.parent.load.text = ""
+                }
+
             }
         })
     }
