@@ -37,6 +37,7 @@ class ChampionC extends eui.Group {
     // }
     async upPopWrapMsg(){
         let $store = window['store'] ;
+        this.list.dataProvider.removeAll()
         //  请求 更新数据
         await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/matches/result/list' ,dataType:'json'} ).then(( res )=>{
             if( res && res.status === '100' ){
@@ -47,7 +48,7 @@ class ChampionC extends eui.Group {
                     }
                     this.list.dataProvider.addItem(res.data[i])
                 }   
-                //  this.parent.popWrap.removeChild(this.parent.load)
+                //  this.parent.parent.load.text = ""
             }
         })
     }
