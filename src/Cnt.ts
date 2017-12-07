@@ -524,7 +524,6 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
                     this.fieldContain.showWinLocation( allResult[i].matchid , '_r', newScore ) ;
                 }
             }
-            // 显示比分处理
         }
 
         // 显示冠军 (快捷)
