@@ -100,7 +100,6 @@ class Pop02Cham extends egret.DisplayObjectContainer{
             }
        },this)
 
-
     }
 
      private drawTitie(t,w,x){ /*标题，宽度，x位置*/
