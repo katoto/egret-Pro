@@ -11,7 +11,7 @@ class Penalty02 extends eui.UILayer {
 
     private drawPenalty02(){
 
-        let bgPenalty:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-penalty_png'));
+        let bgPenalty:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-penalty2_png'));
         this.addChild(bgPenalty);
 
         let textPenalty:egret.TextField = new egret.TextField();
@@ -138,7 +138,7 @@ class Penalty02 extends eui.UILayer {
                         penaltyIn.height = 23;
                         penaltyIn.anchorOffsetX = 11.5;
                         penaltyIn.anchorOffsetY = 11.5;
-                        penaltyIn.x = 123+i*44;     
+                        penaltyIn.x = 134.5+i*44;     
                         penaltyIn.y = 12.5;
                         colectPenalt.push( penaltyIn )
                         await this.wait( )
@@ -154,7 +154,7 @@ class Penalty02 extends eui.UILayer {
                         penaltyOut.height = 0;
                         penaltyOut.anchorOffsetX = 11.5;
                         penaltyOut.anchorOffsetY = 11.5;
-                        penaltyOut.x = 123+i*44;
+                        penaltyOut.x = 134.5+i*44;
                         penaltyOut.y = 12.5;
                         colectPenalt.push( penaltyOut )
                         await this.wait( )
@@ -167,7 +167,7 @@ class Penalty02 extends eui.UILayer {
                         penaltyIn.height = 0;
                         penaltyIn.anchorOffsetX = 11.5;
                         penaltyIn.anchorOffsetY = 11.5;
-                        penaltyIn.x = 123+i*44;     
+                        penaltyIn.x = 134.5+i*44;     
                         penaltyIn.y = 45.5;
                         colectPenalt.push( penaltyIn )
                         await this.wait( )
@@ -183,7 +183,7 @@ class Penalty02 extends eui.UILayer {
                         penaltyOut.height = 0;
                         penaltyOut.anchorOffsetX = 11.5;
                         penaltyOut.anchorOffsetY = 11.5;
-                        penaltyOut.x = 123+i*44;
+                        penaltyOut.x = 134.5+i*44;
                         penaltyOut.y = 45.5;
                         colectPenalt.push( penaltyOut )
                         await this.wait( )
