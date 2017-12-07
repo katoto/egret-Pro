@@ -43,10 +43,11 @@ class Top extends egret.DisplayObjectContainer{
 
         btnPast.touchEnabled = true;
         btnPast.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
-            this.getFootballMsg();
+            // this.getFootballMsg();
             this.addChild(this.pop02Cham);
             // 更新 数据
-            this.pop02Cham.popChamC.upPopWrapMsg();
+            // this.pop02Cham.popChamC.upPopWrapMsg();
+            this.pop02Cham.getList();
         },this)
         let btnRecharge:egret.Bitmap = new egret.Bitmap(RES.getRes('btn-recharge_png'));
         btnRecharge.x = Width - 76;
@@ -69,15 +70,15 @@ class Top extends egret.DisplayObjectContainer{
     /**
      *  取数据
      */
-    async getFootballMsg(){
-        let $store = window['store'] ;
-        //  请求 更新数据
-        await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/matches/result/list' ,dataType:'json'} ).then(( res )=>{
-            if( res && res.status === '100' ){
-                window['upFootballList']( res.data ) ;
-                console.log(res.data)
-            }
-        })
-    }
+    // async getFootballMsg(){
+    //     let $store = window['store'] ;
+    //     //  请求 更新数据
+    //     await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/matches/result/list' ,dataType:'json'} ).then(( res )=>{
+    //         if( res && res.status === '100' ){
+    //             window['upFootballList']( res.data ) ;
+    //             console.log(res.data)
+    //         }
+    //     })
+    // }
 
 }

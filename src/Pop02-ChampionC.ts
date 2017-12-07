@@ -76,7 +76,7 @@ class Pop02Cham extends egret.DisplayObjectContainer{
        this.load.y = 350;
        this.load.textColor = 0xd9ddff;
        this.load.textAlign = egret.HorizontalAlign.CENTER;
-       this.popWrap.addChild(this.load);
+    //    this.popWrap.addChild(this.load);
 
 
        //以下是冠军记录特有内容
@@ -114,5 +114,18 @@ class Pop02Cham extends egret.DisplayObjectContainer{
         text.verticalAlign = egret.VerticalAlign.MIDDLE;
         text.textAlign = egret.HorizontalAlign.CENTER;
         return text;
+    }
+
+    /**
+     *  出现loading & 直接请求
+     */
+    async getList(){
+        if( !!this.load ){
+            this.popWrap.addChild(this.load);
+        }
+        await this.popChamC.upPopWrapMsg();
+        if( !!this.load && this.load.parent ){
+            this.popWrap.removeChild(this.load);
+        }
     }
 }
