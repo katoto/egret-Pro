@@ -5,6 +5,8 @@ class Cnt extends egret.DisplayObjectContainer{
     }
     // 缩放系数
     private scale:number = window['store'].scale;
+    // 反缩放系数 用户头像放大
+    private scale2:number = 1/window['store'].scale;
 
     // 比赛进程 1/4 / 1/2  / 决赛
     private matchPro = '决赛';
@@ -739,11 +741,9 @@ class Cnt extends egret.DisplayObjectContainer{
     async settle_listFn( settleData:any ){
         let choseUser = null ;
         let $store = window['store'] ;
-
         let baseImg = 'userImg' ; 
         let curFindField = '' ;
         let allShowWinNum = 0 ;
-
         let userImgArr = [] ;
         // delIndex = window['store']['userPositionLocal'][uid] ;
         // let choseUserImg = 'userImg'+ ( delIndex ) ;
@@ -751,8 +751,6 @@ class Cnt extends egret.DisplayObjectContainer{
             for( let i=0,len = settleData.length ;i<len ; i++ ){
                 choseUser = $store['userPositionLocal'][ settleData[i].uid ] ;
                 if( settleData[i].prize_info &&  settleData[i].prize_info.length > 0 ){
-                    console.log( baseImg + choseUser ) ;
-                    console.log( '++++++++++' ) ;
                     allShowWinNum = 0 ;
                     // 派金币
                     for( let j = 0;j < settleData[i].prize_info.length ; j++ ){
@@ -873,6 +871,8 @@ class Cnt extends egret.DisplayObjectContainer{
         for( let i=0;i<9;i++ ){
             var choseUserImg = 'userImg'+(i+1)
             this[choseUserImg] = new userImage();
+            this[choseUserImg].scaleX = this.scale2;
+            this[choseUserImg].scaleY = this.scale2;
             if( i === 0 ){
                 this[choseUserImg].anchorOffsetX = 44;
                 this[choseUserImg].anchorOffsetY = 124 ;
