@@ -682,16 +682,22 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     this.cnt.cnt_upTextTips('');
                     this.cnt.cnt_timerRemove();
 
+                    if( this.start_pop && this.start_pop.parent ){
+                        this.removeChild( this.start_pop );
+                    }      
+
                     setTimeout(()=>{
                         // 收集金币
                         this.cnt.cnt_collectCoin();
-                        if( this.stop_pop && this.stop_pop.parent ){
+                        if( this.stop_pop){
                             egret.Tween.get( this.stop_pop ).to({y:227},200).call(()=>{
                                 if( this.stop_pop.parent ){
                                     this.removeChild( this.stop_pop );
                                 }
                             });
                         }
+
+
                         setTimeout(()=>{
                             this.cnt.cnt_upTextTips('等待开奖');
                         },300)
@@ -793,6 +799,12 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     this.cnt.showTips('使用了旧的房间号 error at 2017') ;
                 ;break
             }
+
+
+            // setTimeout(()=>{
+            //     console.log( 123 );
+            // },2000)
+
 
         }
     }

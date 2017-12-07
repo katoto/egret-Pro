@@ -512,17 +512,19 @@ class Cnt extends egret.DisplayObjectContainer{
         for( let i = 0;i < len; i++ ){
             if( allResult[i].is_spotkick === '0' ){
                 if( parseInt ( allResult[i].score[0] ) > parseInt ( allResult[i].score[2] ) ){
-                    this.fieldContain.showWinLocation( allResult[i].matchid , '_l' ) ;
+                    this.fieldContain.showWinLocation( allResult[i].matchid , '_l' , allResult[i].score  ) ;
                 }else{
-                    this.fieldContain.showWinLocation( allResult[i].matchid , '_r' ) ;
+                    this.fieldContain.showWinLocation( allResult[i].matchid , '_r' , allResult[i].score ) ;
                 }
             }else{
+let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotkick[0] )) +':'+ ( parseInt ( allResult[i].score[2] ) +  parseInt( allResult[i].spotkick[2] )) ;
                 if( parseInt( allResult[i].spotkick[0] ) > parseInt( allResult[i].spotkick[2] ) ){
-                    this.fieldContain.showWinLocation( allResult[i].matchid , '_l' ) ;
+                    this.fieldContain.showWinLocation( allResult[i].matchid , '_l' ,newScore ) ;
                 }else{
-                    this.fieldContain.showWinLocation( allResult[i].matchid , '_r' ) ;
+                    this.fieldContain.showWinLocation( allResult[i].matchid , '_r', newScore ) ;
                 }
             }
+            // 显示比分处理
         }
 
         // 显示冠军 (快捷)
