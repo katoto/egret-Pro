@@ -47,8 +47,6 @@ class Top extends egret.DisplayObjectContainer{
             this.addChild(this.pop02Cham);
             // 更新 数据
             this.pop02Cham.popChamC.upPopWrapMsg();
-           
-
         },this)
         let btnRecharge:egret.Bitmap = new egret.Bitmap(RES.getRes('btn-recharge_png'));
         btnRecharge.x = Width - 76;

@@ -50,14 +50,4 @@ class ChampionC extends eui.Group {
             }
         })
     }
-  
-    /**
-     *  更新 列表数据 
-     */
-    // private upPopWrapCMsg( arr ){
-    //     for( let i=0,len = arr.length;i<len;i++ ){
-    //         this.list.dataProvider.addItem(arr[i])
-    //     }
-    // }
-
 }
