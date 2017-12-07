@@ -26,14 +26,14 @@ class Timer extends egret.DisplayObjectContainer{
         this.textTimer.textColor = 0x1c1c1c;
         this.textTimer.size = 22;
         this.textTimer.x = 36;
-        this.textTimer.y = 17;
+        this.textTimer.y = 12;
         this.wrapTimer.addChild(this.textTimer);
          //倒计时-动态文字
         this.textSS = new egret.TextField();
         this.textSS.textColor = 0x1c1c1c; 
         this.textSS.size = 30;
         this.textSS.x = 114;
-        this.textSS.y = 12;
+        this.textSS.y = 8;
         this.textSS.bold = true;
         this.wrapTimer.addChild(this.textSS);
         //计时器
@@ -67,12 +67,14 @@ class Timer extends egret.DisplayObjectContainer{
         // egret.log("timerFunc count" + (<egret.Timer>event.target).currentCount);
 
         this.timerNum--;
-        if(this.timerNum < 4){
+        if(this.timerNum < 6){
             this.textSS.textColor = 0xcb1f1f;
             this.textTimer.textColor = 0xcb1f1f;
         }
         if( this.timerNum < 0 || this.timerNum === 0 ){
             this.textSS.text =  '' ;
+            this.textSS.textColor = 0x1c1c1c;
+            this.textTimer.textColor = 0x1c1c1c;
         }else{
             this.textSS.text = ( this.timerNum ).toString()+ '"';
         }

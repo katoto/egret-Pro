@@ -346,8 +346,9 @@ class Cnt extends egret.DisplayObjectContainer{
      */
     async adjustPenalty( allResult ){
         // 比赛框的位置坐标 
-        let local_4 = [120,290,500,700] ;
-        let local_2 = [210,480] ; // 130 500  210 、480
+
+        let local_4 = [110,300,500,700] ;
+        let local_2 = [210,485] ; // 130 500  210 、480
         let local_1 = [ 295 ] ; // 265  + 30
         let curr_local = null ;
 
