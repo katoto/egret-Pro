@@ -195,7 +195,7 @@ class Penalty02 extends eui.UILayer {
             }
             await this.wait()
             // win xiao 图标 这个坐标还有调整
-            this.penaltyWin.x = 121 + ( len - 1 )  * 50
+            this.penaltyWin.x = 134.5 + ( len - 1 )  * 50
             if( topNum > botNum ){
                 this.penaltyWin.y = 1;
                 leftOrRig = '_l' ;
@@ -204,6 +204,7 @@ class Penalty02 extends eui.UILayer {
                 leftOrRig = '_r' ;
             }
             this.addChild( this.penaltyWin );
+            egret.Tween.get(this.penaltyWin).to({scaleX:1.5,scaleY:1.5},200).to({scaleX:1,scaleY:1},200);
             // 去除 整个背景
 
             //  显示win showWinLocation(res05[i].matchid);  _l left  _r right
