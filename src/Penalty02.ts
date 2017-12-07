@@ -134,8 +134,8 @@ class Penalty02 extends eui.UILayer {
                 if( penaltyArr[i] ){
                     if( penaltyArr[i][0] === '1' ){
                         let penaltyIn = this.drawIn();
-                        penaltyIn.width = 0;
-                        penaltyIn.height = 0;
+                        penaltyIn.width = 23;
+                        penaltyIn.height = 23;
                         penaltyIn.anchorOffsetX = 11.5;
                         penaltyIn.anchorOffsetY = 11.5;
                         penaltyIn.x = 123+i*44;     
@@ -143,7 +143,7 @@ class Penalty02 extends eui.UILayer {
                         colectPenalt.push( penaltyIn )
                         await this.wait( )
                         this.addChild(penaltyIn);
-                         egret.Tween.get(penaltyIn).to({width:25,height:25},200).to({width:23,height:23},200);
+                         egret.Tween.get(penaltyIn).to({scaleX:1.5,scaleY:1.5},200).to({scaleX:1,scaleY:1},200);
                         topNum ++ ;
                         if( currFieldStr ){
                             $store['$fieldContain'][currFieldStr].writeScore(  ( basescore + topNum ) + ':' + ( basescore + botNum)  )
