@@ -12,7 +12,7 @@
     <meta name="x5-fullscreen" content="true" />
     <meta name="360-fullscreen" content="true" />
     <style>
-        /*.hide{
+        .hide{
             display: none !important;
         }
         body,
@@ -53,104 +53,7 @@
             margin: 0;
             height: 100%;
         }
-        .Pop02-gj {
-            position: fixed;
-            left: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 90;
-        }
-        .pop_layer{
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            right: 0;
-            background: rgba(0,0,0,.6);
-        }
-        .popIn{
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            margin-left: -340px;
-            margin-top: -476px;
-            width: 680px;
-            height: 953px;
-            overflow: hidden;
-            background:url(../resource/assets/pop/pop-02.png) center no-repeat;
-        }
-        .popTit{
-            position: relative;
-            height: 60px;
-        }
-        .popTit .title{
-            font-size: 32px;
-            color: #d9ddff;
-            width: 100%;
-            text-align: center;
-            line-height: 60px;
-        }
-        .close{
-            display: block;
-            position: absolute;
-            right: 0;
-            top: 0;
-            width: 54px;
-            height: 80px;
-            background: url(../resource/assets/pop/pop-close.png) center no-repeat;
-        }
-        .popCnt-t{
-            overflow: hidden;
-            font-size: 28px;
-            color: #6f799a; 
-        }
-        .popCnt-t li{
-            width: 170px;
-            float: left;
-            text-align: center;
-            line-height: 50px;
-            margin-top: 22px;
-        }
-        .box{
-            background: #30313b;
-            padding-top: 42px;
-            height: 803px;
-            overflow-y: auto;
-        }
-        .box ul{
-            overflow-y: auto;
-        }
-        .box li{
-            overflow: hidden;
-            margin-bottom: 30px;
-        }
-        .box li span{
-            display: block;
-            float: left;
-            text-align: center;
-            width: 170px;
-            line-height: 68px;
-            font-size: 24px;
-            color: #6f799a;
-        }
-        .cham-icon{
-            display: block;
-            background: url(../resource/assets/pop/bg-item.png) no-repeat center top;
-            background-size:68px;
-        }
-        .cham-icon img{
-            display: blcok;
-            width: 68px;
-            height: 68px;
-        }
-        .box li .cham-name{
-            font-size: 30px;
-            color: #d9ddff;
-        }*/
-           
-        .hide{display:none!important}body,button,dd,dl,dt,fieldset,form,h1,h2,h3,h4,h5,h6,input,legend,li,ol,p,select,table,td,textarea,th,ul{margin:0;padding:0}li{list-style:none}body,html{-ms-touch-action:none;background:#2c253e;padding:0;border:0;margin:0;height:100%}.Pop02-gj{position:fixed;left:0;top:0;right:0;bottom:0;z-index:90}.pop_layer{position:absolute;left:0;top:0;bottom:0;right:0;background:rgba(0,0,0,.6)}.popIn{position:absolute;left:50%;top:50%;margin-left:-4.533333rem;margin-top:-6.346667rem;width:9.066667rem;height:12.706667rem;overflow:hidden;background:url(../resource/assets/pop/pop-02.png) center no-repeat;background-size:9.066667rem}.popTit{position:relative;height:.8rem}.popTit .title{font-size:.426667rem;color:#d9ddff;width:100%;text-align:center;line-height:.8rem}.close{display:block;position:absolute;right:0;top:0;width:.72rem;height:1.066667rem;background:url(../resource/assets/pop/pop-close.png) center no-repeat;background-size:.72rem}.popCnt-t{overflow:hidden;font-size:.373333rem;color:#6f799a}.popCnt-t li{width:2.266667rem;float:left;text-align:center;line-height:.666667rem;margin-top:.293333rem}.box{background:#30313b;padding-top:.56rem;height:10.706667rem;overflow-y:auto}.box ul{overflow-y:auto;-webkit-overflow-scrolling: touch;overflow-scrolling: touch;}.box li{overflow:hidden;margin-bottom:.4rem}.box li span{display:block;float:left;text-align:center;width:2.266667rem;line-height:.906667rem;font-size:.32rem;color:#6f799a}.cham-icon{display:block;background:url(../resource/assets/pop/bg-item.png) no-repeat center top;background-size:.906667rem}.cham-icon img{display:blcok;width:.906667rem;height:.906667rem}.box li .cham-name{font-size:.4rem;color:#d9ddff}
-        .load{display: block;width: 100%;text-align: center;margin-top: 30%;}
+
     </style>
 
 <script type="text/javascript">
@@ -225,37 +128,11 @@
         data-show-fps="false" data-show-log="false"
         data-show-fps-style="x:0,y:0,size:12,textColor:0xffffff,bgAlpha:0.9">
     </div>
-    <!--冠军记录-->
+    <!-- 我的消息 -->
     <div class="Pop02-gj " style="display: none">
-        <div class="pop_layer" onclick="document.querySelector('.Pop02-gj').style.display = 'none' ;"></div>
-        <div class="popIn">
-            <div class="popTit">
-                <h2 class="title">冠军记录</h2>
-                <span class="close" onclick="document.querySelector('.Pop02-gj').style.display = 'none' ;"></span>
-            </div>
-            <div class="popCnt-t">
-                <ul>
-                    <li>期号</li>
-                    <li>赛事</li>
-                    <li>冠军球队</li>
-                    <li>冠军</li>
-                </ul>
-            </div>
-            <div class="box">
-                <ul>
-                    <span class="load" style="color:#d9ddff;"> loading ... </span>
-                    <!--<li>
-                        <span class="cham-date">1234</span>
-                        <span class="cham-race">世界杯</span>
-                        <span class="cham-name">中国</span>
-                        <span class="cham-icon">
-                            <img src="https://crazybet.choopaoo.com/img/esun/proj/d7/a4/d7a4bb44d35811e7a008.png" alt="">
-                        </span>
-                    </li>-->
-                </ul>
-            </div>
-        </div>
+
     </div>
+
      <!--<script src="https://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/vconsole/2.5.2/vconsole.min.js"></script> -->
 <script>
     var loadScript = function (list, callback) {
@@ -305,6 +182,6 @@
     });
     xhr.send(null);
   
-</script>
+</script>   
 </body>
 </html>

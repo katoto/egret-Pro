@@ -88,7 +88,7 @@ class userImage extends eui.UILayer {
 
         // let myChat = new egret.TextField();
         // myChat.x = 20;
-        // myChat.text = '保佑保佑,逢买必中~';
+        // myChat.text = '选啥不中啥，感觉身体被掏空';
         // myChat.textColor = 0x605182;
         // myChat.size = 24;
         // myChat.height = 45;
