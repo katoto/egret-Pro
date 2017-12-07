@@ -18,14 +18,6 @@ class Foot extends egret.DisplayObjectContainer{
     private musicgold:egret.Sound;
     private drawFoot(){
          this.musicgold = RES.getRes("bet_mp3");
-        // //创建 URLLoader 对象
-        // var loader:egret.URLLoader = new egret.URLLoader();
-        // //设置加载方式为声音
-        // loader.dataFormat = egret.URLLoaderDataFormat.SOUND;
-        // //添加加载完成侦听
-        // loader.addEventListener(egret.Event.COMPLETE, this.onLoadComplete, this);
-        // //开始加载
-        // loader.load(new egret.URLRequest("resource/assets/music/bet.mp3"));
         
         // 底部背景与投注按钮
         // 底部背景
@@ -53,45 +45,22 @@ class Foot extends egret.DisplayObjectContainer{
        
 
 
-         // 聊天  暂时隐藏处理
-
-        //  let btnChat:egret.Bitmap = new egret.Bitmap(RES.getRes('chat_png'));
-        //  btnChat.x = 670;
-        //  btnChat.y = 20;
-        //  this.addChild(btnChat);
-        //  btnChat.touchEnabled = true;
-        //  btnChat.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
-        //         //聊天区域
-        //     console.log('聊天');
-        //     //聊天区域实例
-        //     let popChat = new PopChat();
-        //     this.parent.addChild(popChat);
-            
-        //  },this)
-        // this.btn_one = new FootBtn(100);
-        // this.btn_two = new FootBtn(500);
-        // this.btn_three = new FootBtn(1000);
-        // this.addChild(this.btn_one)
+         // 聊天 
+         
+         let btnChat:egret.Bitmap = new egret.Bitmap(RES.getRes('chat_png'));
+         btnChat.x = 640;
+         btnChat.y = 0;
+         this.addChild(btnChat);
+         btnChat.touchEnabled = true;
+         btnChat.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
+            console.log('聊天');
+            //聊天区域实例
+            let popChat = new PopChat();
+            this.parent.addChild(popChat);
+         },this)
        
 
     }
-    // private onLoadComplete(event:egret.Event):void {
-    //     var loader:egret.URLLoader = <egret.URLLoader>event.target;
-    //     //获取加载到的 Sound 对象
-    //     var sound:egret.Sound = <egret.Sound>loader.data;
-    //     this.sound = sound;
-    // }
-    // private sound:egret.Sound;
-    // private soundChannel:egret.SoundChannel;
-    // private onTouch(event:egret.Event){
-    //     var sound = this.sound;
-    //     var channel:egret.SoundChannel = this.soundChannel;
-    //     //使用SoundChannel播放音频
-    //     channel = sound.play(0,1);
-    //     //Egret 3.0.4 新增获取音频长度 length 属性。
-    //     //保存soundChannel对象
-    //     this.soundChannel = channel;
-    // }
     public initBtn(){
         let $store = window['store'] ;
         //三个投注按钮

@@ -4,6 +4,7 @@ class PopChat extends egret.DisplayObjectContainer{
         super();
         this.drawChat();
     }
+    private list;
     private drawChat(){
        //弹窗蒙层
        let popLayer:egret.Shape = new egret.Shape();
@@ -14,7 +15,6 @@ class PopChat extends egret.DisplayObjectContainer{
 
         //背景
         let popBgLayer:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
-
         popBgLayer.width = window['store']['stage_Width'];
         popBgLayer.height = 534;
         popBgLayer.anchorOffsetY = popBgLayer.height;
@@ -37,39 +37,62 @@ class PopChat extends egret.DisplayObjectContainer{
             },200)
             setTimeout(()=>{
                 this.parent.removeChild(this);
-                 console.log('关闭弹窗')
             },100)
        },this)
        
-        let group = new eui.Group();
-        for(let i=0;i<10;i++){
-            let meg = this.message('保佑保佑,逢买必中'+i);
-            meg.y = i*80;
-            group.addChild(meg);
-        }
-        //创建一个Scroller
+
+       //聊天列表
+       var exml = 
+       `<e:Skin xmlns:e="http://ns.egret.com/eui" states="up,down" height="81"> 
+            <e:Label text="{data}" textColor.down="0xffd02f" textColor.up="0xffffff" size="30" verticalAlign="middle" textAlign="left" left="65" width="750" height="80"/> 
+            <e:Label left="0" width="750" height="1" background="0xffffff" top="80"/> 
+        </e:Skin>`;
+       this.list = new eui.List();
+       this.list.dataProvider = new eui.ArrayCollection(['保佑保佑,逢买必中','小手抖一抖,房车到手~','错错错,老是我错~','测试文字','测试文字','测试文字','测试文字','测试文字','测试文字']);
+       this.list.itemRendererSkinName = exml;
+       this.list.addEventListener(eui.ItemTapEvent.ITEM_TAP,this.showMsg,this);
+
+        // 创建一个Scroller
         let myScroller = new eui.Scroller();
-        //注意位置和尺寸的设置是在Scroller上面，而不是容器上面
         myScroller.width = 750;
         myScroller.height = 482;
         myScroller.y = 52;
         //设置viewport
-        myScroller.viewport = group;
+        myScroller.viewport = this.list;
         popBgLayer.addChild(myScroller);
-        // 因为ios 10.3.2 滚动会有bug
-        if(myScroller.viewport.scrollV==0){
-            myScroller.addEventListener(egret.TouchEvent.TOUCH_MOVE,function(){
-               if( myScroller.viewport.scrollV < 0){
-                   myScroller.viewport.scrollV = 0;
-               }
-            },this)
-        }
+
+        // let group = new eui.Group();
+        // for(let i=0;i<10;i++){
+        //     let meg = this.message('保佑保佑,逢买必中'+i);
+        //     meg.y = i*80;
+        //     group.addChild(meg);
+        // }
+        // //创建一个Scroller
+        // let myScroller = new eui.Scroller();
+        // //注意位置和尺寸的设置是在Scroller上面，而不是容器上面
+        // myScroller.width = 750;
+        // myScroller.height = 482;
+        // myScroller.y = 52;
+        // //设置viewport
+        // myScroller.viewport = group;
+        // popBgLayer.addChild(myScroller);
+        // // 因为ios 10.3.2 滚动会有bug
+        // if(myScroller.viewport.scrollV==0){
+        //     myScroller.addEventListener(egret.TouchEvent.TOUCH_MOVE,function(){
+        //        if( myScroller.viewport.scrollV < 0){
+        //            myScroller.viewport.scrollV = 0;
+        //        }
+        //     },this)
+        // }
+    }
+    private showMsg(e:eui.PropertyEvent):void{
+        //获取点击消息 ,this.list.selectedIndex
+        console.log(this.list.selectedItem);
     }
     private message(t){
         let wrap:eui.Group = new eui.Group();
         wrap.width = 750;
         wrap.height = 80;
-
         let text:egret.TextField = new egret.TextField();
         text.textColor = 0xffffff;
         text.size = 30;
