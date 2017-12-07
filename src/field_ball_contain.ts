@@ -1077,12 +1077,13 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
      *  查找 win
      *  @param matchid 比赛id  找到对应场地  winid 找 左右 
      *  @return  _l  left  _r  right   修改 winid  放上一步
-     * 
+     *  scoreNum 1:1
      */
-    private showWinLocation( matchid:string ,findStr:string ){
+    private showWinLocation( matchid:string ,findStr:string , scoreNum:string ){
         let $store = window['store'] ;
 
         if( matchid && $store['matFindField'] && $store['matFindField'][matchid] ){
+            this[ $store['matFindField'][matchid] ].writeScore( scoreNum )
             if( findStr ==='_l' ){
                this[ $store['matFindField'][matchid] ].addwinIcon_l() ;
             }else if( findStr === '_r' ){
