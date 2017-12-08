@@ -52,6 +52,7 @@ class Main extends egret.DisplayObjectContainer {
     }
    
     private onAddToStage(event: egret.Event) {
+
         // egret.lifecycle.addLifecycleListener((context) => {
         //     context.onUpdate = () => {
         //     }
@@ -178,11 +179,6 @@ class Main extends egret.DisplayObjectContainer {
         window['store']['$cnt'] = this.cnt ;
         this.addChild(this.cnt);
 
-         //头部实例2
-        this.top = new Top(this.Width);
-        this.top.x = 0;
-        this.top.y = 0;
-        this.addChild(this.top);
 
         // 底部实例
         this.bottom = new Foot();
@@ -207,16 +203,19 @@ class Main extends egret.DisplayObjectContainer {
         //被踢出房间 的实例
         setTimeout(()=>{
             this.out = new Pop02Out();
-            
         },2000)
+
+         //头部实例2
+        this.top = new Top(this.Width);
+        this.top.x = 0;
+        this.top.y = 0;
+        this.addChild(this.top);
 
         // 金币不足
         this.coinNone = new Pop02Money();
         $store['$coinNone'] = this.coinNone ;
 
-
         this.initStage();
-
 
         if( $store['env_variable'].ck === '' || !$store['env_variable'].ck ){
             console.error('请带上ck');
@@ -367,6 +366,10 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                     if( !!this.cnt ){
                                         this.cnt.cnt_upTextTips('正在派奖...');
                                     }
+                                    if( $msgObjBody.result && $msgObjBody.result ){
+                                        // 直接显示出win的结果 
+                                        this.cnt.showFieldWin( $msgObjBody.result ) ;
+                                    }
                                 ;break;
                                 case '2002':
                                     if( !!this.cnt ){
@@ -499,6 +502,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                             this.mchange.play(0,1);
                                             this.change.x = 0;
                                             this.addChild( this.change );
+                                            this.upTopLev();
                                             setTimeout(()=>{
                                                 egret.Tween.get( this.change ).to( { x : -750 }, 700 ).call(()=>{
                                                     if( this.change.parent ){
@@ -514,6 +518,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                     if( !!this.promotion ){
                                         this.mpromotion.play(0,1);
                                         this.addChild(this.promotion);
+                                        this.upTopLev() ;
                                     }
                                     this.promotion.moveSecond( $msgObjBody.pre_result );
                                     setTimeout(()=>{
@@ -527,6 +532,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                     if( !!this.promotion ){
                                         this.mpromotion.play(0,1);
                                         this.addChild(this.promotion)
+                                        this.upTopLev();
                                     }
                                     this.promotion.moveThree( $msgObjBody.pre_result ) ;
                                     setTimeout(()=>{
@@ -585,6 +591,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         this.start_pop.y = 227;
                         this.addChild( this.start_pop );
                         this.startOver.play(0,1);
+                        this.upTopLev() ;
                         egret.Tween.get( this.start_pop ).to({y:0},200);
                     }
 
@@ -684,6 +691,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         this.stop_pop.y = 227;
                         this.addChild( this.stop_pop );
                         this.startOver.play(0,1);
+                        this.upTopLev();
                         egret.Tween.get( this.stop_pop ).to({y:0},200);
                     }
 
@@ -854,6 +862,35 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
             }
             console.error( 'websock error' ) ;   
         }
+    }
+
+
+    /**
+     *  冠军列表
+     */
+    private upTopLev(){
+
+        let $store = window['store'] ;
+
+        if( this.$children && this.$children.length ){
+            // 处理层级
+            let item = null ;
+            let choseUserImg = 'userImg';
+            let bigIndex = this['getChildIndex']( this.top ) ;
+            let bigUserImg = null ;
+            for( item  in this.$children ){
+                if( this.$children[item] && this.top ){
+                    if( this['getChildIndex']( this.$children[item] ) > bigIndex ){
+                        this.swapChildren( this.top , this.$children[item] ) ;
+                    }
+                }
+            }
+        }
+
+    }
+
+    private upCntLev(){
+
     }
 
 }

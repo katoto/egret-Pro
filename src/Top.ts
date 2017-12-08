@@ -46,6 +46,7 @@ class Top extends egret.DisplayObjectContainer{
             // this.getFootballMsg();
             this.addChild(this.pop02Cham);
             // 更新 数据
+            window['store']['$main'].upTopLev()
             // this.pop02Cham.popChamC.upPopWrapMsg();
             this.pop02Cham.getList();
         },this)
