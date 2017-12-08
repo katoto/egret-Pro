@@ -53,30 +53,31 @@ class Main extends egret.DisplayObjectContainer {
    
     private onAddToStage(event: egret.Event) {
 
-        egret.lifecycle.addLifecycleListener((context) => {
-            context.onUpdate = () => {
-            }
-        })
 
-        egret.lifecycle.onPause = () => {
-            console.log(11111)
-            this.cnt.showTips('11111111') ;
-            // egret.ticker.pause();
-            // console.log(11)
-            // var a = 100;
-            // var b;
-            // b = null;
-            // b = setInterval(()=>{
-            //     console.log(a)
-            //     a = a -1 ;
-            // },1000)
+        // egret.lifecycle.addLifecycleListener((context) => {
+        //     context.onUpdate = () => {
+        //     }
+        // })
 
-        }
+        // egret.lifecycle.onPause = () => {
+        //     console.log(11111)
+        //     this.cnt.showTips('11111111') ;
+        //     // egret.ticker.pause();
+        //     // console.log(11)
+        //     // var a = 100;
+        //     // var b;
+        //     // b = null;
+        //     // b = setInterval(()=>{
+        //     //     console.log(a)
+        //     //     a = a -1 ;
+        //     // },1000)
 
-        egret.lifecycle.onResume = () => {
-            console.log(22)
-            this.cnt.showTips('2222') ;
-        }
+        // }
+
+        // egret.lifecycle.onResume = () => {
+        //     console.log(22)
+        //     this.cnt.showTips('2222') ;
+        // }
 
         // this.loadingView = new LoadingUI(750,1334);
         // this.stage.addChild(this.loadingView);
@@ -894,6 +895,9 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
         }
 
     }
+
+
+
 
     private upCntLev(){
 

@@ -10,6 +10,7 @@ class Timer extends egret.DisplayObjectContainer{
 
     private timer:egret.Timer ;
 
+
     // 核心 this.timerNum
     private timerNum:number = null;
     private drawTimer(){
@@ -45,15 +46,17 @@ class Timer extends egret.DisplayObjectContainer{
         // timer.start();
     }
 
-    async createTimer( setTime:string ){
+    private createTimer( setTime:string ){
         //  ?
         // this.timer.removeEventListener(egret.TimerEvent.TIMER, this.timerFunc, this);
         // this.timer.removeEventListener(egret.TimerEvent.TIMER_COMPLETE, this.timerComFunc, this);
         this.timer = null;
 
         this.timerNum = parseInt( setTime ) ;
-        this.timer = new egret.Timer( 1000, parseInt( setTime ) );
+        this.timer = new egret.Timer( 1000, this.timerNum );
         this.timer.addEventListener(egret.TimerEvent.TIMER, this.timerFunc, this);
+
+
         this.timer.addEventListener(egret.TimerEvent.TIMER_COMPLETE, this.timerRemove, this);
         //竞猜开始提示弹窗弹出，然后开始执行倒计时
         // await this.setStartPop() ;
