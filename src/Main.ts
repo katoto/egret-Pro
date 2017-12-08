@@ -28,7 +28,7 @@ class Main extends egret.DisplayObjectContainer {
     
     private penalty02;
     //test
-    private test;
+    private coinNone;
 
     private textfield:egret.TextField;
     
@@ -149,6 +149,7 @@ class Main extends egret.DisplayObjectContainer {
            window['store'].scale = parseFloat((window['store'].scale))+0.08;
         }
         
+        $store['$main'] = this ;
 
         /**
          *  声音
@@ -206,12 +207,16 @@ class Main extends egret.DisplayObjectContainer {
         //被踢出房间 的实例
         setTimeout(()=>{
             this.out = new Pop02Out();
+            
         },2000)
+
+        // 金币不足
+        this.coinNone = new Pop02Money();
+        $store['$coinNone'] = this.coinNone ;
+
 
         this.initStage();
 
-        // this.test = new Pop02Money();
-        // this.addChild(this.test)
 
         if( $store['env_variable'].ck === '' || !$store['env_variable'].ck ){
             console.error('请带上ck');
@@ -857,6 +862,7 @@ window['store'] = {
     orderDomain:'http://10.0.1.41:9899',
     initDomain:'http://10.0.1.41:2332',
 
+    $main:null,
     $Top:null, // 往期弹窗
     $pop02Cham:null,
     $fieldContain:null ,

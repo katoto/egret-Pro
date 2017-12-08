@@ -81,7 +81,7 @@ class Penalty02 extends eui.UILayer {
     /**
      *  延迟函数
      */
-    private wait (duration = 250) {
+    private wait (duration = 270) {
         return new Promise((resolve) => {
             setTimeout(() => {
                 resolve()
@@ -204,13 +204,16 @@ class Penalty02 extends eui.UILayer {
                 leftOrRig = '_r' ;
             }
             this.addChild( this.penaltyWin );
-            egret.Tween.get(this.penaltyWin).to({scaleX:1.5,scaleY:1.5},200).to({scaleX:1,scaleY:1},200);
+            console.log('win scale');
+            egret.Tween.get( this.penaltyWin ).to({ scaleX:1.5,scaleY:1.5 },200).to({
+                scaleX:1,scaleY:1
+            },200);
             // 去除 整个背景
 
             //  显示win showWinLocation(res05[i].matchid);  _l left  _r right
 
             // movePenalty
-            await this.wait( 350 ) ;
+            await this.wait( 1200 ) ;
             if( !!$store['$fieldContain'] ){
                 $store['$fieldContain'].showWinLocation( matchid , leftOrRig );
             }
@@ -224,6 +227,8 @@ class Penalty02 extends eui.UILayer {
             }
 
             // 显示冠军 
+            console.log( currFieldStr  )
+            console.log( '++++++++++++++++++'  )
             if( currFieldStr &&  $store.matches.length === 1 ){
                 let championName = $store['$fieldContain'][currFieldStr].getFieldImg();
                 if( championName ){
@@ -244,7 +249,7 @@ class Penalty02 extends eui.UILayer {
                 if( this.penaltyWin.parent ){
                     this.removeChild( this.penaltyWin );
                 }
-            },900)
+            },1200)
         }
     }
 

@@ -232,7 +232,13 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
             }else{
                 if( $store['$cnt'] ){
-                    $store['$cnt'].showTips( res.message );
+                    if( res.status && res.status === '505' ){
+                        if(  !!$store['$coinNone'] ){
+                            $store['$main'].addChild( $store['$coinNone'] )
+                        }
+                    }else{
+                        $store['$cnt'].showTips( res.message );
+                    }
                 }
             }
         })
@@ -298,7 +304,13 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
             }else{
                 if( $store['$cnt'] ){
-                    $store['$cnt'].showTips( res.message );
+                    if( res.status && res.status === '505' ){
+                        if( !!$store['$coinNone'] ){
+                            $store['$main'].addChild( $store['$coinNone'] )
+                        }
+                    }else{
+                        $store['$cnt'].showTips( res.message );
+                    }
                 }
             }
         })
@@ -1084,8 +1096,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
         if( matchid && $store['matFindField'] && $store['matFindField'][matchid] ){
             if( scoreNum && scoreNum !== ''  ){
-                console.log( scoreNum )
-                 console.log( '111111111')
                 this[ $store['matFindField'][matchid] ].writeScore( scoreNum )
             }
             if( findStr ==='_l' ){

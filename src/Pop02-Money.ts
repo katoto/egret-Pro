@@ -66,7 +66,8 @@ class Pop02Money extends egret.DisplayObjectContainer{
        popWrap.addChild(this.popBtn1);
        this.popBtn1.touchEnabled = true;
        this.popBtn1.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=>{
-          this.parent.removeChild(this)
+           
+            this.parent.removeChild(this)
         }, this);
 
         //充值
@@ -77,6 +78,25 @@ class Pop02Money extends egret.DisplayObjectContainer{
        this.popBtn2.touchEnabled = true;
        this.popBtn2.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=>{
         //   跳充值
+            let $store = window['store'] ;
+            if( $store['env_variable'].src ){
+                switch ( $store['env_variable'].src ){
+                    case '500app':
+                        window.location.href = 'http://crazybet.choopaoo.com/500app?jumpToPay=true' ;
+                    ;break;
+                    case 'off':
+                        window.location.href = 'http://crazybet.choopaoo.com/official?jumpToPay=true' ;
+                    break;
+                    case 'off-mipan':
+                        window.location.href = 'http://crazybet.choopaoo.com/official?jumpToPay=true' ;                    
+                    ;break;
+                    case 'qqsd':
+                        window.location.href = 'http://crazybet.choopaoo.com/500qqsd/?jumpToPay=true' ;
+                    ;break;
+
+                }
+            }
+
         }, this);
     }
 
