@@ -1085,7 +1085,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         if( matchid && $store['matFindField'] && $store['matFindField'][matchid] ){
             if( scoreNum !== '' ){
                 this[ $store['matFindField'][matchid] ].writeScore( scoreNum )
-
             }
             if( findStr ==='_l' ){
                this[ $store['matFindField'][matchid] ].addwinIcon_l() ;
