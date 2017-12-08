@@ -210,7 +210,7 @@ class Main extends egret.DisplayObjectContainer {
 
         this.initStage();
 
-        // this.test = new DataGroupDemo();
+        // this.test = new Pop02Money();
         // this.addChild(this.test)
 
         if( $store['env_variable'].ck === '' || !$store['env_variable'].ck ){

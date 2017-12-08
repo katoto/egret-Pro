@@ -13,7 +13,7 @@ class userImage extends eui.UILayer {
     private myName:egret.TextField;
     private myChat:egret.TextField;
 
-    private numCoin
+    private numCoin;
 
     private addToStage() {
         let bg:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
