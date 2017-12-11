@@ -85,19 +85,5 @@ class Top extends egret.DisplayObjectContainer{
     public setTextDate( title:string ){
         this.textDate.text = title;
     }
-    
-    /**
-     *  取数据
-     */
-    // async getFootballMsg(){
-    //     let $store = window['store'] ;
-    //     //  请求 更新数据
-    //     await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/matches/result/list' ,dataType:'json'} ).then(( res )=>{
-    //         if( res && res.status === '100' ){
-    //             window['upFootballList']( res.data ) ;
-    //             console.log(res.data)
-    //         }
-    //     })
-    // }
 
 }

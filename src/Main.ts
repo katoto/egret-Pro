@@ -88,7 +88,6 @@ class Main extends egret.DisplayObjectContainer {
 
     /**
      * 配置文件加载完成,开始预加载preload资源组。
-     * configuration file loading is completed, start to pre-load the preload resource group
      */
     private onConfigComplete(event: RES.ResourceEvent): void {
         RES.removeEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
@@ -101,7 +100,6 @@ class Main extends egret.DisplayObjectContainer {
 
     /**
      * preload资源组加载完成
-     * Preload resource group is loaded
      */
     private onResourceLoadComplete(event: RES.ResourceEvent) {
         if (event.groupName == "load") {
@@ -121,7 +119,6 @@ class Main extends egret.DisplayObjectContainer {
 
     /**
      * 资源组加载出错
-     *  The resource group loading failed
      */
     private onItemLoadError(event: RES.ResourceEvent) {
         console.warn("Url:" + event.resItem.url + " has failed to load");

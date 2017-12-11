@@ -479,8 +479,6 @@ class Field_ball extends eui.UILayer {
         
     }
 
-
-
     // findWinLocation  ==> findLocal 
     /**
      *   @return  _l  left  _r  right

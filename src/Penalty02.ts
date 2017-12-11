@@ -38,13 +38,6 @@ class Penalty02 extends eui.UILayer {
         this.addChild(this.topTeam);
         // this.topTeam.mask = bgMask;
 
-
-        //插入遮罩层
-        // let bgMask02:egret.Bitmap = new egret.Bitmap(RES.getRes('penalty-mask_png'));
-        // bgMask02.x = 72;
-        // bgMask02.y = 30;
-        // this.addChild(bgMask02);
-
          // 下边队伍icon
         this.bottomTeam = new eui.Image();
         this.bottomTeam.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
@@ -55,20 +48,6 @@ class Penalty02 extends eui.UILayer {
         this.addChild(this.bottomTeam);
         // this.bottomTeam.mask = bgMask02;
 
-        //上边队伍点球情况
-        // for(var i=0;i<5;i++){
-        //     let penaltyIn = this.drawIn();
-        //     penaltyIn.x = 123+i*44;     //x坐标[123,167,211,255,299,343,387]
-        //     penaltyIn.y = 1;
-        //     this.addChild(penaltyIn);
-        // }
-        // //下边队伍点球情况
-        // for(var i=0;i<5;i++){
-        //     let penaltyOut = this.drawOut();
-        //     penaltyOut.x = 123+i*44;
-        //     penaltyOut.y = 34;
-        //     this.addChild(penaltyOut);
-        // }
 
         // this.penaltyWin = this.drawWin();
         // this.penaltyWin.x = 371;  

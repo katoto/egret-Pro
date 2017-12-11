@@ -757,12 +757,7 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
                     // 派金币
                     for( let j = 0;j < settleData[i].prize_info.length ; j++ ){
                         if( settleData[i].prize_info[j] && settleData[i].prize_info[j].matchid ){
-                            // curFindField = $store['matFindField'][ settleData[i].prize_info[j].matchid ] ;
                             curFindField = $store['fieldLeftOrRight'][settleData[i].prize_info[j].matchid];
-                            // console.log( curFindField )
-                            // curFindField = 'field42_r';
-                            // this.fieldContain[curFindField]   left  or right 动画
-                            // curFindField = curFindField + '_l';
                             allShowWinNum =  allShowWinNum + parseInt( settleData[i].prize_info[j].prize );
                             if( curFindField ){
                                 await this.fieldContain.sendEndCoin( curFindField , settleData[i].uid ) ;
@@ -770,8 +765,7 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
                         }
                     }
                     if( this[ baseImg + choseUser ] && allShowWinNum ){
-                        // console.log('---------');
-                        // console.log( allShowWinNum )
+
                         this[ baseImg + choseUser ].isShowWinGold( allShowWinNum );
                         userImgArr.push( this[ baseImg + choseUser ] )
                     }
@@ -793,10 +787,7 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
             }, 3000 )
 
         }
-        // let startString = 'field41_l';
-        // let uid = '10015140' ;
-        // await this.fieldContain.sendEndCoin( startString , uid.toString() )
-        // 中奖展示 
+
     }
 
     // 他人金币 发出
@@ -811,38 +802,8 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
         let oldCoin ;
         // this.userImg1['setMyGold']('1234')
 
-        // this[ 'userImg'+selOtherCoin ]['setMyGold']('21') 
-        // console.log('---------------------')
-        // console.log( $store['userPosition'] )
-        // console.log( $store['userPositionLocal'][uid] )
-        // console.log(selOtherCoin)
-        // console.log( baseImg + choseOther  )
-        // this.userImg1['getCurGold']()
-        // this.userImg2['getCurGold']()
-        // this.userImg3['getCurGold']()
-        // this.userImg4['getCurGold']()
-        // this.userImg5['getCurGold']()
-
-        // this.userImg6['getCurGold']()
-
-        // this.userImg7['getCurGold']()
-        // this.userImg8['getCurGold']()
-        // this.userImg9['getCurGold']()  
-
-        // console.log('++++++++++++++++++++++++++')
-        // this[ baseImg + choseOther ]['getCurGold']()
-        // this[ baseImg + 1 ]['getCurGold']()
-        // this[ baseImg + 2 ]['getCurGold']()
-        // this[ baseImg + 3 ]['getCurGold']()
-        // this[ baseImg + 4 ]['getCurGold']()
-        // this[ baseImg + 5 ]['getCurGold']()
-        // this[ baseImg + 6 ]['getCurGold']()
-        // this[ baseImg + 7 ]['getCurGold']()
-        // this[ baseImg + 8 ]['getCurGold']()
-        // this[ baseImg + 9 ]['getCurGold']()
-        // console.log('==========================')
         console.log( baseImg + choseOther )
-        if( isNaN( this[ baseImg + choseOther ]['getCurGold']() ) ){
+        if( this[ baseImg + choseOther ] && isNaN( this[ baseImg + choseOther ]['getCurGold']() ) ){
             console.log( 'isNaN 了 cnt.ts' )
         }else{
             oldCoin = parseInt( this[ baseImg + choseOther ]['getCurGold']() ) ;

@@ -22,7 +22,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
          this.musicgold = RES.getRes("bet_mp3");
 
         // 放出舞台是否去除事件绑定提高性能？
-
         this.courtWrap1 = this.courtWrap();
         this.courtWrap2 = this.courtWrap();
         this.courtWrap4 = this.courtWrap();
@@ -76,7 +75,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         this.field44.touchEnabled = true;
         this.field44.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_44Evt ,this)
         this.courtWrap4.addChild(this.field44);
-
 
     }
         // 放入4个场地

@@ -19,7 +19,6 @@ class LoadingUI extends egret.Sprite {
         bg.graphics.drawRect(0,0,width,height);
         this.addChild(bg);
 
-
         this.img_football = new egret.Bitmap(RES.getRes('bg-load_png'));
         this.img_football.anchorOffsetX = this.img_football.width/2;
         this.img_football.x = width/2;
