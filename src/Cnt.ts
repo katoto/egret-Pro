@@ -437,13 +437,16 @@ class Cnt extends egret.DisplayObjectContainer{
             }
         }
 
+        console.log('-----------');
+        console.log( endResult )
+        console.log( $store['matches'].length )
+        console.log('显示冠军')
         // 显示冠军 
         if( endResult && $store['matches'] && $store['matches'].length === 1 ){
             let championName = null;
             await this.wait(300);
             if( $store['matFindField'][ endResult.matchid ] ){
                 championName = this.fieldContain[ $store['matFindField'][ endResult.matchid ] ].getFieldImg();
-                
                 if( parseInt ( endResult.score[0] ) > parseInt ( endResult.score[2] ) ){
                      this.showChampion( championName['l_name'] )
                 }else{
@@ -744,26 +747,24 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
     }
 
     // 他人金币 发出
-    //
     private cnt_Other_Coin( matchid:string , selection:string , uid:string , bet_golds:string ){
         // 处理 他人金币的金币减少 .
         let $store = window['store'] ;
         let choseOther = $store['userPositionLocal'][uid] 
         let selOtherCoin = $store['userPosition'][$store['userPositionLocal'][uid] - 1];
         let baseImg = 'userImg' ; 
-
         let oldCoin ;
-        // this.userImg1['setMyGold']('1234')
 
-        console.log( baseImg + choseOther )
-        if( this[ baseImg + choseOther ] && isNaN( this[ baseImg + choseOther ]['getCurGold']() ) ){
-            console.log( 'isNaN 了 cnt.ts' )
-        }else{
-            oldCoin = parseInt( this[ baseImg + choseOther ]['getCurGold']() ) ;
+        if( this[ baseImg + choseOther ] ){
+            if( isNaN( this[ baseImg + choseOther ]['getCurGold']() ) ){
+                console.log( 'isNaN 了 cnt.ts' )
+            }else{
+                oldCoin = parseInt( this[ baseImg + choseOther ]['getCurGold']() ) ;
+            }
         }
+
         // setMyGold
         this[ 'userImg'+choseOther ]['setMyGold']( oldCoin - parseInt( bet_golds ) );
-
         this.fieldContain.other_Coin( matchid , selection , selOtherCoin - 1 , bet_golds );
 
     }
@@ -903,7 +904,7 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
                     this.bgCourtWrap.swapChildren( this.fieldContain , this[choseUserImg] ) ;
                 }
             }
-        },1000)
+        },300)
 
     }
     // 用户 离开  new
@@ -933,8 +934,5 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
             }
         }
     }
-    //晋级队伍
-    private proTeam(){
-        
-    }
+
 }
