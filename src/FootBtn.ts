@@ -26,11 +26,12 @@ class FootBtn extends egret.DisplayObjectContainer {
         let betMoney:egret.TextField = new egret.TextField();
         betMoney.text = n;
         betMoney.stroke = 3;
+        betMoney.bold=true;
         betMoney.strokeColor = 0xb47300;
         betMoney.width = 157;
         betMoney.height = 70;
         betMoney.textColor = 0xffffff;
-        betMoney.size = 36;
+        betMoney.size = 38;
         betMoney.textAlign = egret.HorizontalAlign.CENTER;
         betMoney.verticalAlign = egret.VerticalAlign.MIDDLE;
         wrap.addChild(betMoney);
