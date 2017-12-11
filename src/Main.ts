@@ -497,11 +497,11 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
 
                         }
                         // pre_result 字段 （用于上一个 状态解析 == 》 matches  当前对阵 ）
-                        if( $msgObjBody.pre_result ){
-                            // 切换场地  用
-                            // this.cnt.proTeam('https://www.google.co.jp/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png');
-                             //晋升
-                        }
+                        // if( $msgObjBody.pre_result ){
+                        //     // 切换场地  用
+                        //     // this.cnt.proTeam('https://www.google.co.jp/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png');
+                        //      //晋升
+                        // }
                         
                         if( $msgObjBody.stageid ){
                             switch( $msgObjBody.stageid  ){
@@ -725,8 +725,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                 }
                             });
                         }
-
-
                         setTimeout(()=>{
                             this.cnt.cnt_upTextTips('等待开奖');
                         },300)
@@ -778,8 +776,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     }else{
                         console.warn( '2007 派奖数据有误' )
                     }
-                    //  去除所有的 进球投注区
-                    // this.cnt.cnt_sendEndCoin( '1002999','' )
+
                 ;break;
 
                 case '2010':
@@ -829,11 +826,9 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 ;break
             }
 
-
             // setTimeout(()=>{
             //     console.log( 123 );
             // },2000)
-
 
         }
     }
