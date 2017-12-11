@@ -13,7 +13,7 @@ class Cnt extends egret.DisplayObjectContainer{
     // 内容舞台 操作头像
     private bgCourtWrap:egret.DisplayObjectContainer ;
 
-    // 可能的头像位置  1 是自己
+    // 头像位置  1 是自己
     private  userImg1:userImage
     private  userImg2:userImage
     private  userImg3:userImage
@@ -109,51 +109,6 @@ class Cnt extends egret.DisplayObjectContainer{
         window['store']['$fieldContain'] = this.fieldContain ;
         this.bgCourtWrap.addChild( this.fieldContain );
 
-    //     //决赛的开奖-点球
-    //     // 插入遮罩层,正常进球和点球要分开两个遮罩
-    //     this.f1_penalty02 = this.bgMask();
-    //     this.f1_penalty02.anchorOffsetX = 245;
-    //     this.f1_penalty02.x = window['store'].stage_anWidth;
-    //     this.f1_penalty02.y = 265;  
-    //     this.bgCourtWrap.addChild( this.f1_penalty02 );
-
-    //     //正常进球
-        // this.penalty0 = new Penalty01();
-        // this.penalty0.anchorOffsetX = 245;
-        // this.penalty0.x = window['store'].stage_anWidth;
-        // this.penalty0.y = 323;  //决赛265   +58  
-        // this.penalty0.mask = this.penalty0 ;
-        // this.bgCourtWrap.addChild(this.penalty0);
-
-    //     // 过一会出现的
-        // setTimeout(()=>{
-        //     egret.Tween.get( this.penalty0 ).to( {y:265 },200 );
-        // },3000)
- 
-    //     //点球
-
-    //     this.bgMask02 = this.bgMask();
-    //     this.bgMask02.anchorOffsetX = 245;
-    //     this.bgMask02.x = window['store'].stage_anWidth;
-    //     this.bgMask02.y = 265;  
-    //     this.bgCourtWrap.addChild(this.bgMask02);
-
-    //     this.penalty02 = new Penalty02();
-    //     this.penalty02.anchorOffsetX = 245;
-    //     this.penalty02.x = window['store'].stage_anWidth;
-    //     this.penalty02.y = 323;  //决赛265   +58  
-    //     this.penalty02.mask = this.bgMask02;
-    //     this.bgCourtWrap.addChild(this.penalty02);
-
-    // // egret.Tween.get( this.penalty02 ).to( {y:265 },200 );
-    //    setTimeout(()=>{
-    //         egret.Tween.get( this.penalty01 ).to( {y:107 },200 );
-    //     },5000)
-    //     setTimeout(()=>{
-    //         egret.Tween.get( this.penalty02 ).to( {y:265 },200 );
-    //     },5000)
-        
-
         //冠军
         this.champion = new egret.DisplayObjectContainer();
         this.champion.width = 241;
@@ -175,7 +130,6 @@ class Cnt extends egret.DisplayObjectContainer{
         this.championText.verticalAlign = egret.VerticalAlign.BOTTOM;
 
         // this.bgCourtWrap.addChild(this.champion);
-       
         // this.champion.addChild(this.championText); 
 
         //toast
@@ -436,7 +390,6 @@ class Cnt extends egret.DisplayObjectContainer{
 
         if( len === 4 ){
             // 处理层级
-            console.log('减低层级 为了 派奖' )
             if( this.bgCourtWrap.getChildIndex( this['userImg1'] ) < this.bgCourtWrap.getChildIndex( this.fieldContain )  ){
                 this.bgCourtWrap.swapChildren( this['userImg1'] , this.fieldContain ) ;
             }
@@ -757,12 +710,7 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
                     // 派金币
                     for( let j = 0;j < settleData[i].prize_info.length ; j++ ){
                         if( settleData[i].prize_info[j] && settleData[i].prize_info[j].matchid ){
-                            // curFindField = $store['matFindField'][ settleData[i].prize_info[j].matchid ] ;
                             curFindField = $store['fieldLeftOrRight'][settleData[i].prize_info[j].matchid];
-                            // console.log( curFindField )
-                            // curFindField = 'field42_r';
-                            // this.fieldContain[curFindField]   left  or right 动画
-                            // curFindField = curFindField + '_l';
                             allShowWinNum =  allShowWinNum + parseInt( settleData[i].prize_info[j].prize );
                             if( curFindField ){
                                 await this.fieldContain.sendEndCoin( curFindField , settleData[i].uid ) ;
@@ -770,8 +718,7 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
                         }
                     }
                     if( this[ baseImg + choseUser ] && allShowWinNum ){
-                        // console.log('---------');
-                        // console.log( allShowWinNum )
+
                         this[ baseImg + choseUser ].isShowWinGold( allShowWinNum );
                         userImgArr.push( this[ baseImg + choseUser ] )
                     }
@@ -793,10 +740,7 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
             }, 3000 )
 
         }
-        // let startString = 'field41_l';
-        // let uid = '10015140' ;
-        // await this.fieldContain.sendEndCoin( startString , uid.toString() )
-        // 中奖展示 
+
     }
 
     // 他人金币 发出
@@ -811,38 +755,8 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
         let oldCoin ;
         // this.userImg1['setMyGold']('1234')
 
-        // this[ 'userImg'+selOtherCoin ]['setMyGold']('21') 
-        // console.log('---------------------')
-        // console.log( $store['userPosition'] )
-        // console.log( $store['userPositionLocal'][uid] )
-        // console.log(selOtherCoin)
-        // console.log( baseImg + choseOther  )
-        // this.userImg1['getCurGold']()
-        // this.userImg2['getCurGold']()
-        // this.userImg3['getCurGold']()
-        // this.userImg4['getCurGold']()
-        // this.userImg5['getCurGold']()
-
-        // this.userImg6['getCurGold']()
-
-        // this.userImg7['getCurGold']()
-        // this.userImg8['getCurGold']()
-        // this.userImg9['getCurGold']()  
-
-        // console.log('++++++++++++++++++++++++++')
-        // this[ baseImg + choseOther ]['getCurGold']()
-        // this[ baseImg + 1 ]['getCurGold']()
-        // this[ baseImg + 2 ]['getCurGold']()
-        // this[ baseImg + 3 ]['getCurGold']()
-        // this[ baseImg + 4 ]['getCurGold']()
-        // this[ baseImg + 5 ]['getCurGold']()
-        // this[ baseImg + 6 ]['getCurGold']()
-        // this[ baseImg + 7 ]['getCurGold']()
-        // this[ baseImg + 8 ]['getCurGold']()
-        // this[ baseImg + 9 ]['getCurGold']()
-        // console.log('==========================')
         console.log( baseImg + choseOther )
-        if( isNaN( this[ baseImg + choseOther ]['getCurGold']() ) ){
+        if( this[ baseImg + choseOther ] && isNaN( this[ baseImg + choseOther ]['getCurGold']() ) ){
             console.log( 'isNaN 了 cnt.ts' )
         }else{
             oldCoin = parseInt( this[ baseImg + choseOther ]['getCurGold']() ) ;

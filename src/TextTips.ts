@@ -16,7 +16,6 @@ class TextTips extends egret.DisplayObjectContainer{
         this.wrap.anchorOffsetX = 115 ;
         this.wrap.x = 0;
         this.wrap.y = 0;
-        //  位置有点问题
         // this.addChild(this.wrap);
         // 背景 
         this.bg = new egret.Bitmap(RES.getRes('bg-textTips_png'));
@@ -29,8 +28,6 @@ class TextTips extends egret.DisplayObjectContainer{
         this.textField.size = 24;
         this.textField.width = 231;
         this.textField.height = 36; 
-        // text.textAlign = hAlign;
-        // text.verticalAlign = vAlign;
         this.textField.textAlign = egret.HorizontalAlign.CENTER;
         this.textField.verticalAlign = egret.VerticalAlign.MIDDLE;
         this.wrap.addChild(this.textField);
@@ -40,13 +37,10 @@ class TextTips extends egret.DisplayObjectContainer{
      * 更新文案  包含显示和隐藏
      */
     private upTextTips( tips:string ){
-        
-        // console.log(tips)
         if(tips === ''){
             if( this.wrap.parent ){
                 this.removeChild(this.wrap);
             }
-
         }else{
             this.textField.text = tips ;
             if( !this.wrap.parent ){

@@ -46,6 +46,7 @@ class Top extends egret.DisplayObjectContainer{
             // this.getFootballMsg();
             this.addChild(this.pop02Cham);
             // 更新 数据
+            window['store']['$main'].upTopLev()
             // this.pop02Cham.popChamC.upPopWrapMsg();
             this.pop02Cham.getList();
         },this)
@@ -55,7 +56,25 @@ class Top extends egret.DisplayObjectContainer{
         this.addChild(btnRecharge);
         btnRecharge.touchEnabled = true;
         btnRecharge.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
-            console.log('充值弹窗')
+            //   跳充值
+            let $store = window['store'] ;
+            if( $store['env_variable'].src ){
+                switch ( $store['env_variable'].src ){
+                    case '500app':
+                        window.location.href = 'http://crazybet.choopaoo.com/500app?jumpToPay=true' ;
+                    ;break;
+                    case 'off':
+                        window.location.href = 'http://crazybet.choopaoo.com/official?jumpToPay=true' ;
+                    break;
+                    case 'off-mipan':
+                        window.location.href = 'http://crazybet.choopaoo.com/official?jumpToPay=true' ;                    
+                    ;break;
+                    case 'qqsd':
+                        window.location.href = 'http://crazybet.choopaoo.com/500qqsd/?jumpToPay=true' ;
+                    ;break;
+                }
+            }
+
         },this)
     }
     /* 更新头部杯赛 */
@@ -66,19 +85,5 @@ class Top extends egret.DisplayObjectContainer{
     public setTextDate( title:string ){
         this.textDate.text = title;
     }
-    
-    /**
-     *  取数据
-     */
-    // async getFootballMsg(){
-    //     let $store = window['store'] ;
-    //     //  请求 更新数据
-    //     await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/matches/result/list' ,dataType:'json'} ).then(( res )=>{
-    //         if( res && res.status === '100' ){
-    //             window['upFootballList']( res.data ) ;
-    //             console.log(res.data)
-    //         }
-    //     })
-    // }
 
 }

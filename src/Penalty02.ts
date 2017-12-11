@@ -38,13 +38,6 @@ class Penalty02 extends eui.UILayer {
         this.addChild(this.topTeam);
         // this.topTeam.mask = bgMask;
 
-
-        //插入遮罩层
-        // let bgMask02:egret.Bitmap = new egret.Bitmap(RES.getRes('penalty-mask_png'));
-        // bgMask02.x = 72;
-        // bgMask02.y = 30;
-        // this.addChild(bgMask02);
-
          // 下边队伍icon
         this.bottomTeam = new eui.Image();
         this.bottomTeam.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
@@ -55,20 +48,6 @@ class Penalty02 extends eui.UILayer {
         this.addChild(this.bottomTeam);
         // this.bottomTeam.mask = bgMask02;
 
-        //上边队伍点球情况
-        // for(var i=0;i<5;i++){
-        //     let penaltyIn = this.drawIn();
-        //     penaltyIn.x = 123+i*44;     //x坐标[123,167,211,255,299,343,387]
-        //     penaltyIn.y = 1;
-        //     this.addChild(penaltyIn);
-        // }
-        // //下边队伍点球情况
-        // for(var i=0;i<5;i++){
-        //     let penaltyOut = this.drawOut();
-        //     penaltyOut.x = 123+i*44;
-        //     penaltyOut.y = 34;
-        //     this.addChild(penaltyOut);
-        // }
 
         // this.penaltyWin = this.drawWin();
         // this.penaltyWin.x = 371;  
@@ -81,7 +60,7 @@ class Penalty02 extends eui.UILayer {
     /**
      *  延迟函数
      */
-    private wait (duration = 250) {
+    private wait (duration = 270) {
         return new Promise((resolve) => {
             setTimeout(() => {
                 resolve()
@@ -204,13 +183,15 @@ class Penalty02 extends eui.UILayer {
                 leftOrRig = '_r' ;
             }
             this.addChild( this.penaltyWin );
-            egret.Tween.get(this.penaltyWin).to({scaleX:1.5,scaleY:1.5},200).to({scaleX:1,scaleY:1},200);
+            egret.Tween.get( this.penaltyWin ).to({ scaleX:1.5,scaleY:1.5 },200).to({
+                scaleX:1,scaleY:1
+            },200);
             // 去除 整个背景
 
             //  显示win showWinLocation(res05[i].matchid);  _l left  _r right
 
             // movePenalty
-            await this.wait( 350 ) ;
+            await this.wait( 1400 ) ;
             if( !!$store['$fieldContain'] ){
                 $store['$fieldContain'].showWinLocation( matchid , leftOrRig );
             }
@@ -224,7 +205,11 @@ class Penalty02 extends eui.UILayer {
             }
 
             // 显示冠军 
-            if( currFieldStr &&  $store.matches.length === 1 ){
+            console.log( currFieldStr  )
+            console.log( '++++++++++++++++++'  )
+            console.log('显示冠军')
+
+            if( currFieldStr && $store.matches.length === 1 ){
                 let championName = $store['$fieldContain'][currFieldStr].getFieldImg();
                 if( championName ){
                     if( leftOrRig === '_l' ){
@@ -244,7 +229,7 @@ class Penalty02 extends eui.UILayer {
                 if( this.penaltyWin.parent ){
                     this.removeChild( this.penaltyWin );
                 }
-            },900)
+            },1200)
         }
     }
 

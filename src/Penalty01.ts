@@ -41,7 +41,6 @@ class Penalty01 extends eui.UILayer {
         // this.addChild(bgMask02);
          // 下边队伍icon
         this.bottomTeam = new eui.Image();
-        // this.bottomTeam.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.bottomTeam.width = 24;
         this.bottomTeam.height = 24;
         this.bottomTeam.x = 38;

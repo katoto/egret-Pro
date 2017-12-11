@@ -13,7 +13,6 @@ class Timer extends egret.DisplayObjectContainer{
     // 核心 this.timerNum
     private timerNum:number = null;
     private drawTimer(){
-        //倒计时
         //倒计时-舞台
         this.wrapTimer = new egret.DisplayObjectContainer();
         
@@ -37,36 +36,29 @@ class Timer extends egret.DisplayObjectContainer{
         this.textSS.bold = true;
         this.wrapTimer.addChild(this.textSS);
         //计时器
-        // var timer: egret.Timer = new egret.Timer(1000, this.timerNum);
-        // timer.addEventListener(egret.TimerEvent.TIMER, this.timerFunc, this);
-        // timer.addEventListener(egret.TimerEvent.TIMER_COMPLETE, this.timerComFunc, this);
-
         // //竞猜开始提示弹窗弹出，然后开始执行倒计时
         // timer.start();
     }
 
-    async createTimer( setTime:string ){
-        //  ?
-        // this.timer.removeEventListener(egret.TimerEvent.TIMER, this.timerFunc, this);
-        // this.timer.removeEventListener(egret.TimerEvent.TIMER_COMPLETE, this.timerComFunc, this);
+    private createTimer( setTime:string ){
         this.timer = null;
-
         this.timerNum = parseInt( setTime ) ;
-        this.timer = new egret.Timer( 1000, parseInt( setTime ) );
+        this.timer = new egret.Timer( 1000, this.timerNum );
         this.timer.addEventListener(egret.TimerEvent.TIMER, this.timerFunc, this);
-        this.timer.addEventListener(egret.TimerEvent.TIMER_COMPLETE, this.timerRemove, this);
-        //竞猜开始提示弹窗弹出，然后开始执行倒计时
-        // await this.setStartPop() ;
 
+        this.timer.addEventListener(egret.TimerEvent.TIMER_COMPLETE, this.timerRemove, this);
         this.timer.start();
         this.addChild(this.wrapTimer);
     }
 
     //  竞猜开始
      private timerFunc(event:egret.TimerEvent) {
-        // egret.log("timerFunc count" + (<egret.Timer>event.target).currentCount);
+        if( window['store']['lock_time'] ){
+            this.timerNum = Math.round( ( window['store']['lock_time'] - new Date().getTime() ) /1000 ) ;
+        }else{
+            this.timerNum--;
+        }
 
-        this.timerNum--;
         if(this.timerNum < 6){
             this.textSS.textColor = 0xcb1f1f;
             this.textTimer.textColor = 0xcb1f1f;
@@ -78,15 +70,12 @@ class Timer extends egret.DisplayObjectContainer{
         }else{
             this.textSS.text = ( this.timerNum ).toString()+ '"';
         }
-        // console.log('------------')
     }
 
     private timerRemove( ) {
-        // 缺一个清除时间
         if( this.wrapTimer.parent ){
             this.removeChild(this.wrapTimer);
         }
     }
-
 
 }

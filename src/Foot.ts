@@ -1,5 +1,4 @@
 class Foot extends egret.DisplayObjectContainer{
-
     //  底部按钮实例
     private  btn_one:FootBtn
     private  btn_two:FootBtn
@@ -26,9 +25,7 @@ class Foot extends egret.DisplayObjectContainer{
         this.bottom.graphics.drawRect(0,0,750,90);
         this.bottom.graphics.endFill();
         // 设置锚点，使背景处于舞台最下方
-       
         this.addChild(this.bottom);
-
          // 规则
          let popRule = new Pop02RuleC();
 
@@ -41,9 +38,6 @@ class Foot extends egret.DisplayObjectContainer{
               this.parent.addChild(popRule);
               popRule.scale();
          },this)
-        
-       
-
 
          // 聊天 
         //  let btnChat:egret.Bitmap = new egret.Bitmap(RES.getRes('chat_png'));
@@ -96,10 +90,6 @@ class Foot extends egret.DisplayObjectContainer{
             this.btn_one.addEventListener( egret.TouchEvent.TOUCH_TAP, this.btn_oneDown ,this )
             this.btn_two.addEventListener( egret.TouchEvent.TOUCH_TAP, this.btn_twoDown ,this )
             this.btn_three.addEventListener( egret.TouchEvent.TOUCH_TAP, this.btn_threeDown ,this )
-            //监听按钮的触摸事件
-            // this.btn_one.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onTouch,this);
-            // this.btn_two.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onTouch,this);
-            // this.btn_three.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onTouch,this);
 
         }else{
             console.error( 'user_info data error  at foot.ts' )
