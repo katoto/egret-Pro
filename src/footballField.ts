@@ -283,7 +283,7 @@ class Field_ball extends eui.UILayer {
             this.winIcon_l.height = 203;
             this.winIcon_l.anchorOffsetY = 101;
             this.winIcon_l.y = this.courtAnHeight;
-            this.winIcon_l.x = -80;
+            this.winIcon_l.x = -60;
             this.addChild(this.winIcon_l);
             egret.Tween.get(this.winIcon_l).to({width:203,height:203},400).to({width:300,height:300},400).to({width:203,height:202},400);
         }
@@ -298,7 +298,7 @@ class Field_ball extends eui.UILayer {
             this.winIcon_r.width = 203;
             this.winIcon_r.height = 203;
             this.winIcon_r.anchorOffsetY = 101;
-            this.winIcon_r.x = 350;
+            this.winIcon_r.x = 330;
             this.winIcon_r.y = this.courtAnHeight;
             this.addChild(this.winIcon_r);
             egret.Tween.get(this.winIcon_r).to({width:203,height:203},400).to({width:300,height:300},400).to({width:203,height:202},400);

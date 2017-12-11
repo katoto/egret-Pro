@@ -56,6 +56,11 @@ class Penalty01 extends eui.UILayer {
         this.addChild(timer);
         // timer.mask = this.lineTime ;
 
+        let timer2:egret.Bitmap = new egret.Bitmap(RES.getRes('penalty-time2_png'));
+        timer2.x = 80;
+        timer2.y = 15;
+        this.addChild(timer2);
+
         //进度条
         // this.lineTime = new egret.Shape();
         // this.lineTime.graphics.lineStyle(7,0xffffff);
