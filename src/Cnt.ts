@@ -755,12 +755,14 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
         let baseImg = 'userImg' ; 
         let oldCoin ;
 
-        console.log( baseImg + choseOther )
-        if( this[ baseImg + choseOther ] && isNaN( this[ baseImg + choseOther ]['getCurGold']() ) ){
-            console.log( 'isNaN 了 cnt.ts' )
-        }else{
-            oldCoin = parseInt( this[ baseImg + choseOther ]['getCurGold']() ) ;
+        if( this[ baseImg + choseOther ] ){
+            if( isNaN( this[ baseImg + choseOther ]['getCurGold']() ) ){
+                console.log( 'isNaN 了 cnt.ts' )
+            }else{
+                oldCoin = parseInt( this[ baseImg + choseOther ]['getCurGold']() ) ;
+            }
         }
+
         // setMyGold
         this[ 'userImg'+choseOther ]['setMyGold']( oldCoin - parseInt( bet_golds ) );
         this.fieldContain.other_Coin( matchid , selection , selOtherCoin - 1 , bet_golds );
