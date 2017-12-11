@@ -57,8 +57,6 @@ class Pop02Money extends egret.DisplayObjectContainer{
        this.cntText01.textAlign = egret.HorizontalAlign.CENTER;
        popWrap.addChild(this.cntText01); 
 
- 
-
        //取消
        this.popBtn1 = new egret.Bitmap(RES.getRes('pop-btn01_png'));
        this.popBtn1.x = 37;
@@ -66,7 +64,6 @@ class Pop02Money extends egret.DisplayObjectContainer{
        popWrap.addChild(this.popBtn1);
        this.popBtn1.touchEnabled = true;
        this.popBtn1.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=>{
-           
             this.parent.removeChild(this)
         }, this);
 
@@ -93,7 +90,6 @@ class Pop02Money extends egret.DisplayObjectContainer{
                     case 'qqsd':
                         window.location.href = 'http://crazybet.choopaoo.com/500qqsd/?jumpToPay=true' ;
                     ;break;
-
                 }
             }
 

@@ -13,7 +13,7 @@ class Cnt extends egret.DisplayObjectContainer{
     // 内容舞台 操作头像
     private bgCourtWrap:egret.DisplayObjectContainer ;
 
-    // 可能的头像位置  1 是自己
+    // 头像位置  1 是自己
     private  userImg1:userImage
     private  userImg2:userImage
     private  userImg3:userImage
@@ -109,51 +109,6 @@ class Cnt extends egret.DisplayObjectContainer{
         window['store']['$fieldContain'] = this.fieldContain ;
         this.bgCourtWrap.addChild( this.fieldContain );
 
-    //     //决赛的开奖-点球
-    //     // 插入遮罩层,正常进球和点球要分开两个遮罩
-    //     this.f1_penalty02 = this.bgMask();
-    //     this.f1_penalty02.anchorOffsetX = 245;
-    //     this.f1_penalty02.x = window['store'].stage_anWidth;
-    //     this.f1_penalty02.y = 265;  
-    //     this.bgCourtWrap.addChild( this.f1_penalty02 );
-
-    //     //正常进球
-        // this.penalty0 = new Penalty01();
-        // this.penalty0.anchorOffsetX = 245;
-        // this.penalty0.x = window['store'].stage_anWidth;
-        // this.penalty0.y = 323;  //决赛265   +58  
-        // this.penalty0.mask = this.penalty0 ;
-        // this.bgCourtWrap.addChild(this.penalty0);
-
-    //     // 过一会出现的
-        // setTimeout(()=>{
-        //     egret.Tween.get( this.penalty0 ).to( {y:265 },200 );
-        // },3000)
- 
-    //     //点球
-
-    //     this.bgMask02 = this.bgMask();
-    //     this.bgMask02.anchorOffsetX = 245;
-    //     this.bgMask02.x = window['store'].stage_anWidth;
-    //     this.bgMask02.y = 265;  
-    //     this.bgCourtWrap.addChild(this.bgMask02);
-
-    //     this.penalty02 = new Penalty02();
-    //     this.penalty02.anchorOffsetX = 245;
-    //     this.penalty02.x = window['store'].stage_anWidth;
-    //     this.penalty02.y = 323;  //决赛265   +58  
-    //     this.penalty02.mask = this.bgMask02;
-    //     this.bgCourtWrap.addChild(this.penalty02);
-
-    // // egret.Tween.get( this.penalty02 ).to( {y:265 },200 );
-    //    setTimeout(()=>{
-    //         egret.Tween.get( this.penalty01 ).to( {y:107 },200 );
-    //     },5000)
-    //     setTimeout(()=>{
-    //         egret.Tween.get( this.penalty02 ).to( {y:265 },200 );
-    //     },5000)
-        
-
         //冠军
         this.champion = new egret.DisplayObjectContainer();
         this.champion.width = 241;
@@ -175,7 +130,6 @@ class Cnt extends egret.DisplayObjectContainer{
         this.championText.verticalAlign = egret.VerticalAlign.BOTTOM;
 
         // this.bgCourtWrap.addChild(this.champion);
-       
         // this.champion.addChild(this.championText); 
 
         //toast
@@ -436,7 +390,6 @@ class Cnt extends egret.DisplayObjectContainer{
 
         if( len === 4 ){
             // 处理层级
-            console.log('减低层级 为了 派奖' )
             if( this.bgCourtWrap.getChildIndex( this['userImg1'] ) < this.bgCourtWrap.getChildIndex( this.fieldContain )  ){
                 this.bgCourtWrap.swapChildren( this['userImg1'] , this.fieldContain ) ;
             }

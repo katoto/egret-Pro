@@ -77,7 +77,6 @@ class Pop02Out extends egret.DisplayObjectContainer{
        popWrap.addChild(this.popClose);
        this.popClose.touchEnabled = true;
         // RES.removeEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
-
     }
 
     /**
@@ -101,7 +100,7 @@ class Pop02Out extends egret.DisplayObjectContainer{
                 ;break;
                 case '500bf':
                     // 这个要特殊处理 ！
-                    window.location.href = 'https://www.baidu.com' ;                
+                    window.location.href = 'https://www.500.com' ;                
                 ;break;
 
             }
@@ -122,8 +121,9 @@ class Pop02Out extends egret.DisplayObjectContainer{
         this.cntText01.text = '您很久未操作了，是不是太累了，';
         this.cntText02.text = '休息一下，再开始游戏吧！';
 
-        this.popClose.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.socketErr_Fn ,this) ;
-
+        if( !!this.popClose ){
+            this.popClose.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.socketErr_Fn ,this) ;
+        }
         this.popClose.addEventListener(egret.TouchEvent.TOUCH_TAP, this.longTime_Fn ,this) ;
 
     }
@@ -133,9 +133,9 @@ class Pop02Out extends egret.DisplayObjectContainer{
     private showSocketErr(){
         this.cntText01.text = '网络连接异常，请重新连接';
         this.cntText02.text = '';
-
-        this.popClose.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.longTime_Fn ,this) ;
-        
+        if( !!this.popClose ){
+            this.popClose.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.longTime_Fn ,this) ;
+        }
         this.popClose.addEventListener(egret.TouchEvent.TOUCH_TAP, this.socketErr_Fn ,this) ;
     }
 }

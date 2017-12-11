@@ -183,7 +183,6 @@ class Penalty02 extends eui.UILayer {
                 leftOrRig = '_r' ;
             }
             this.addChild( this.penaltyWin );
-            console.log('win scale');
             egret.Tween.get( this.penaltyWin ).to({ scaleX:1.5,scaleY:1.5 },200).to({
                 scaleX:1,scaleY:1
             },200);
@@ -208,7 +207,9 @@ class Penalty02 extends eui.UILayer {
             // 显示冠军 
             console.log( currFieldStr  )
             console.log( '++++++++++++++++++'  )
-            if( currFieldStr &&  $store.matches.length === 1 ){
+            console.log('显示冠军')
+
+            if( currFieldStr && $store.matches.length === 1 ){
                 let championName = $store['$fieldContain'][currFieldStr].getFieldImg();
                 if( championName ){
                     if( leftOrRig === '_l' ){
