@@ -77,7 +77,7 @@ class Pop02Money extends egret.DisplayObjectContainer{
        popWrap.addChild(this.popBtn2);
        this.popBtn2.touchEnabled = true;
        this.popBtn2.addEventListener(egret.TouchEvent.TOUCH_TAP, ()=>{
-        //   跳充值
+            //   跳充值
             let $store = window['store'] ;
             if( $store['env_variable'].src ){
                 switch ( $store['env_variable'].src ){

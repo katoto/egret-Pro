@@ -331,10 +331,10 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
             //  后台数据  分发
             let msgObj = JSON.parse( msg );
             let $msgObjBody = msgObj.body;
-            if( msgObj.time ){ //  同步时间
-                msgObj.time = msgObj.time * 1000;
-                $store['ser_time'] = parseInt ( msgObj.time );
-            }
+            // if( msgObj.time ){ //  同步时间
+            //     msgObj.time = msgObj.time * 1000;
+            //     $store['ser_time'] = parseInt ( msgObj.time );
+            // }
             switch ( msgObj.messageid ) {
                     // 进场的数据 2000  （时间进度分析）
                 case '2000':
@@ -848,13 +848,45 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
     /**
      *  onIOError  websock 接收消息
      */
-    private onIOError():void{
-        if( this.out && !this.out.parent ){
-            if( !!this.out ){
-                this.out.showSocketErr();
-                this.addChild(this.out) ;
+    async onIOError(){
+        let $store = window['store'] ;
+        if(  $store &&  $store['isAgainConnect'] &&  $store['isAgainConnect'] === 1  ){
+            // 重连
+        await window['getJson']( { type:'get' ,url :  $store['initDomain']+'/api/join?ck='+ $store['env_variable'].ck +'&src='+ $store['env_variable'].src ,dataType:'json'} ).then(( res )=>{
+                // 申请房间
+                if( res.status && res.status === '100' ){
+                    // 保存房间信息
+                    let roomMsg = res.data;
+                    $store['orderObj']['roomid'] = roomMsg.roomid ;  // 下单 需要
+                    $store['orderObj']['node'] = roomMsg.node ;
+                    // websocket
+                    try{
+                        this.webSocket = new egret.WebSocket();
+                        this.webSocket.addEventListener( egret.ProgressEvent.SOCKET_DATA , this.onReceiveMess ,this );
+                        this.webSocket.addEventListener( egret.Event.CONNECT ,this.onSocketOpen ,this );
+                        this.webSocket.addEventListener( egret.IOErrorEvent.IO_ERROR ,this.onIOError ,this );
+                        this.webSocket.addEventListener( egret.Event.CLOSE ,this.onCloseSock ,this );
+
+this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&roomid='+roomMsg.roomid +'&port='+roomMsg.port+'&node='+roomMsg.node+'&ip='+roomMsg.ip+'&create_time='+roomMsg.create_time );
+
+                    }catch(e){
+                        console.error('websocket error')
+                    }
+                }else{
+                    console.error('申请房间出错')
+                }
+            })
+
+             $store['isAgainConnect'] === 0 ;
+
+        }else{
+            if( this.out && !this.out.parent ){
+                if( !!this.out ){
+                    this.out.showSocketErr();
+                    this.addChild(this.out) ;
+                }
+                console.error('linsten error')
             }
-            console.error('linsten error')
         }
 
     }
@@ -908,6 +940,8 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
 window['store'] = {
     orderDomain:'http://10.0.1.41:9899',
     initDomain:'http://10.0.1.41:2332',
+
+    isAgainConnect: 1 , // 用于sock 重新连
 
     $main:null,
     $Top:null, // 往期弹窗

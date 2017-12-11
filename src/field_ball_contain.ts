@@ -291,9 +291,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         this.tween_Coin(x,y, $store['allCoinObj'][fieldName].coin_right , false ) ;
                     }
 
-
-                    
-
                     if( res.data && res.data.total ){
                         $store['userMySelf'].setMyGold( res.data.total );
                     }else{
