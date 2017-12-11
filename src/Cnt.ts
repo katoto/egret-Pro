@@ -386,7 +386,7 @@ class Cnt extends egret.DisplayObjectContainer{
         }
 
         // 在外面  await  18s   25s  
-        await this.wait( 18000 );  
+        await this.wait( 18550 );  
 
         if( len === 4 ){
             // 处理层级
@@ -614,9 +614,13 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
             penaltyStr_p = 'penalty_point'+i ;
             bgMaskStr_p = 'bgMask_point'+i ;  
 
-            if( this[penaltyStr] && this[penaltyStr].parent ){
-                this.bgCourtWrap.removeChild( this[penaltyStr] );
+            if( this[penaltyStr] ){
+                this[penaltyStr].initLine();
+                if( this[penaltyStr].parent ){
+                    this.bgCourtWrap.removeChild( this[penaltyStr] );
+                }
             }
+
             if( this[bgMaskStr] && this[bgMaskStr].parent ){
                 this.bgCourtWrap.removeChild( this[bgMaskStr] );
             }
@@ -627,6 +631,7 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
                 this.bgCourtWrap.removeChild( this[bgMaskStr_p] );
             }
         }
+
     }
 
     /**
@@ -651,7 +656,7 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
         if( this[penaltyStr_p] ){
             this[penaltyStr_p].upPenaltyballImg(  this.cnt_getFieldImg( matchid ) )
         }
-        await this.wait( 7000 ) ;
+        await this.wait( 6500 ) ;
         //  进球 切 点球
         egret.Tween.get( this[penaltyStr] ).to( {y:curr_local[footIndex] -158 }, 200 ).call(()=>{
             if( this[bgMaskStr].parent ){
@@ -669,6 +674,7 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
                 this[ penaltyStr_p ].movePenalty( penaltyArr , matchid ,score ,footIndex )
             },500)
         });
+
     }
 
     // timer 定时器

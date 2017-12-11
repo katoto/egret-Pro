@@ -935,11 +935,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
 
 
 
-
-    private upCntLev(){
-
-    }
-
 }
 
 window['store'] = {

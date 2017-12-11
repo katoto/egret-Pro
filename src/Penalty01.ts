@@ -15,6 +15,9 @@ class Penalty01 extends eui.UILayer {
     private lineTimeMask:egret.Bitmap ;
     private lineTime:egret.Bitmap ;
 
+    private timer:egret.Bitmap;
+    private timer2:egret.Bitmap ;
+
     private drawPenalty01(){
         let bgPenalty:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-penalty_png'));
         this.addChild(bgPenalty);
@@ -49,17 +52,16 @@ class Penalty01 extends eui.UILayer {
         this.addChild(this.bottomTeam);
 
         // 时间轴
-        let timer:egret.Bitmap = new egret.Bitmap(RES.getRes('penalty-time_png'));
-        timer.x = 80;
-        timer.y = 15;
+        this.timer = new egret.Bitmap(RES.getRes('penalty-time_png'));
+        this.timer.x = 80;
+        this.timer.y = 15;
         // timer.scaleY = 0.98;
-        this.addChild(timer);
-        // timer.mask = this.lineTime ;
+        this.addChild(this.timer);
 
-        let timer2:egret.Bitmap = new egret.Bitmap(RES.getRes('penalty-time2_png'));
-        timer2.x = 80;
-        timer2.y = 15;
-        this.addChild(timer2);
+        this.timer2  = new egret.Bitmap(RES.getRes('penalty-time2_png'));
+        this.timer2.x = 80;
+        this.timer2.y = 15;
+        // this.addChild( this.timer2 );
 
         //进度条
         // this.lineTime = new egret.Shape();
@@ -95,6 +97,26 @@ class Penalty01 extends eui.UILayer {
         
     }
 
+
+    /**
+     * 处理层级
+     */
+
+    private upLineTimeLev(){
+        if( this.timer.parent ){
+            if( this['getChildIndex']( this.lineTime ) < this['getChildIndex']( this.timer ) ){
+                this.swapChildren( this.lineTime , this.timer ) ;
+            }
+        }
+        if( this.timer2.parent ){
+            if( this['getChildIndex']( this.lineTime ) < this['getChildIndex']( this.timer2 ) ){
+                this.swapChildren( this.lineTime , this.timer2 ) ;
+            }
+        }
+
+    }
+
+
     /**
      *  更新 进球头像
      */
@@ -119,11 +141,21 @@ class Penalty01 extends eui.UILayer {
         let r_score = 0 ;
         var self = this;
         if( is_extratime ){  //358  449
+            this.upLineTimeLev();
             if( is_extratime === '0' ){
-                egret.Tween.get( this.lineTime ).to( { width : 273 } , 18000 ).call(()=>{
+                egret.Tween.get( this.lineTime ).to( { width : 273 } , 18750 ).call(()=>{
                     self.lineTime.width = 0;
                 });
             }else if( is_extratime === '1' ){
+
+                setTimeout(()=>{
+                    if( this.timer.parent ){
+                        this.removeChild( this.timer );
+                    }
+                    this.addChild( this.timer2 );
+                    this.upLineTimeLev();
+                    console.log('add bg')
+                },18750 )
                 egret.Tween.get( this.lineTime ).to( { width : 360 } , 25000 ).call(()=>{
                     self.lineTime.width = 0;
                 });
@@ -135,12 +167,14 @@ class Penalty01 extends eui.UILayer {
             $store['$fieldContain'][currFieldStr].writeScore( l_score + ':' + r_score )
         }        
 
+
+
         for( let i = 0 ; i< len ; i++ ){
             if( timeline[i] ){
                 setTimeout(()=>{
                     if( timeline[i].is_team === 'home' ){
                         let penaltyIn = this.drawIn();
-                        penaltyIn.x = 336 * parseInt ( timeline[i].at_time ) / 7200 + 90 ;
+                        penaltyIn.x = 336 * parseInt ( timeline[i].at_time ) / 7200 + 100 ;
                         penaltyIn.y = 1;
                         this.collFootball.push( penaltyIn );
                         this.addChild(penaltyIn);
@@ -150,7 +184,7 @@ class Penalty01 extends eui.UILayer {
                         }
                     }else{
                         let penaltyIn2 = this.drawIn();
-                        penaltyIn2.x = 336 * parseInt ( timeline[i].at_time ) / 7200 + 90 ;
+                        penaltyIn2.x = 336 * parseInt ( timeline[i].at_time ) / 7200 + 100 ;
                         penaltyIn2.y = 34;
                         this.collFootball.push( penaltyIn2 );
                         this.addChild(penaltyIn2);
@@ -183,14 +217,21 @@ class Penalty01 extends eui.UILayer {
                 }
             }
         }
-        
-        // this.lineTime.width = 1;
-        // if( this.lineTime.parent ){
-        //     this.removeChild( this.lineTime );
-        // }
-        // if( this.lineTimeMask.parent ){
-        //     this.removeChild(this.lineTimeMask) ;
-        // }
+
+
+    }
+
+    /**
+     *  初始化 进度条
+     */
+    private initLine(){
+        //初始化點球
+        if( this.timer2.parent ){
+            this.removeChild( this.timer2 );
+        }
+        if( !!this.timer ){
+            this.addChild( this.timer );
+        }
     }
 
     private drawIn(){

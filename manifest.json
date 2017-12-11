@@ -11,10 +11,6 @@
 	],
 	"game": [
 		"bin-debug/Change.js",
-<<<<<<< HEAD
-=======
-		"bin-debug/Penalty02.js",
->>>>>>> 4761590f1d164d89a286d7a531b2fbf2ef7c1967
 		"bin-debug/Penalty02.js",
 		"bin-debug/Cnt.js",
 		"bin-debug/field_ball_contain.js",
