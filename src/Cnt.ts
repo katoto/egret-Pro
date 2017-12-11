@@ -385,7 +385,7 @@ class Cnt extends egret.DisplayObjectContainer{
 
         }
 
-        // 在外面  await 18s  25s  
+        // 在外面  await  18s   25s  
         await this.wait( 18000 );  
 
         if( len === 4 ){
@@ -935,4 +935,24 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
         }
     }
 
+
+    // 处理聊天相关（ html ）
+    private showChat( uid:string ,msg:string ){
+        let $store = window['store'] ;
+        let findLocal = null ;
+        let currDom = null ;
+
+        if( uid ){
+            findLocal = $store['userPosition'][ $store['userPositionLocal'][ uid ] - 1 ];
+            currDom = document.querySelector('.local0'+ findLocal) ;
+            currDom.style.display = 'block' ;
+            currDom['innerHTML'] = msg ;
+            setTimeout(()=>{
+                currDom['innerHTML'] = '' ;
+                currDom.style.display = 'none' ;
+            },1500)
+
+        }
+
+    }
 }

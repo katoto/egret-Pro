@@ -180,7 +180,6 @@ class Penalty01 extends eui.UILayer {
         }
         
         // this.lineTime.width = 1;
-
         // if( this.lineTime.parent ){
         //     this.removeChild( this.lineTime );
         // }

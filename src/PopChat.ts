@@ -5,6 +5,8 @@ class PopChat extends egret.DisplayObjectContainer{
         this.drawChat();
     }
     private list;
+    private chatTime ;
+
     private drawChat(){
        //弹窗蒙层
        let popLayer:egret.Shape = new egret.Shape();
@@ -86,8 +88,18 @@ class PopChat extends egret.DisplayObjectContainer{
         // }
     }
     private showMsg(e:eui.PropertyEvent):void{
+        let currDom = null;
         //获取点击消息 ,this.list.selectedIndex
-        console.log(this.list.selectedItem);
+        currDom = document.querySelector('.local01') ;
+        currDom['style']['display'] = 'block' ;
+        currDom.innerHTML = this.list.selectedItem ;
+        clearTimeout( this.chatTime )
+        this.chatTime = setTimeout(()=>{
+            currDom['innerHTML'] = '' ;
+            currDom.style.display = 'none' ;
+        },1500)
+        this.parent.removeChild(this);
+
     }
     private message(t){
         let wrap:eui.Group = new eui.Group();

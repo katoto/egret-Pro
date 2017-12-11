@@ -446,7 +446,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                         this.removeChild( this.stop_pop );
                                     }
                                     if( $msgObjBody.result && $msgObjBody.result.length > 0 ){
-                                        if( parseInt ( $msgObjBody.process_time ) < 5 ){
+                                        if( parseInt ( $msgObjBody.process_time ) < 4 ){
                                             this.cnt.adjustPenalty( $msgObjBody.result )
                                         }else{
                                             // 直接显示出win的结果 
@@ -821,6 +821,14 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 case '2017':
                     this.cnt.showTips('使用了旧的房间号 error at 2017') ;
                 ;break
+
+                case '2011':
+                    if( $msgObjBody && $msgObjBody.uid && $msgObjBody.phrase_id ){
+                        this.cnt.showChat( $msgObjBody.uid , $msgObjBody.phrase_id )
+                    }
+                break;
+
+
             }
 
             // setTimeout(()=>{
