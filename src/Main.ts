@@ -53,7 +53,6 @@ class Main extends egret.DisplayObjectContainer {
    
     private onAddToStage(event: egret.Event) {
 
-
         // egret.lifecycle.addLifecycleListener((context) => {
         //     context.onUpdate = () => {
         //     }
@@ -400,11 +399,14 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                     switch ( $msgObjBody.stageid ){
                                         case '1':
                                             this.cnt.cnt_timer(( 31 - parseInt( $msgObjBody.process_time )).toString());
+                                            $store['lock_time'] = new Date().getTime() + ( 31 - parseInt( $msgObjBody.process_time) )*1000;
                                         ;break;
                                         case '2':
+                                            $store['lock_time'] = new Date().getTime() + ( 25 - parseInt( $msgObjBody.process_time) )*1000;
                                             this.cnt.cnt_timer(( 25 - parseInt( $msgObjBody.process_time )).toString());
                                         ;break;
                                         case '3':
+                                            $store['lock_time'] = new Date().getTime() + ( 21 - parseInt( $msgObjBody.process_time) )*1000;                                        
                                             this.cnt.cnt_timer(( 21 - parseInt( $msgObjBody.process_time )).toString());
                                         ;break;
                                     }
@@ -670,12 +672,15 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                             this.cnt.cnt_upTextTips('请选择球队下注...');
                             switch ( $msgObjBody.stageid ){
                                 case '1':
+                                    $store['lock_time'] = new Date().getTime() + 31*1000;
                                     this.cnt.cnt_timer('31');
                                 ;break;
                                 case '2':
+                                    $store['lock_time'] = new Date().getTime() + 26*1000;
                                     this.cnt.cnt_timer('26');
                                 ;break;
                                 case '3':
+                                    $store['lock_time'] = new Date().getTime() + 21*1000;
                                     this.cnt.cnt_timer('21');
                                 ;break;
                             }
@@ -922,6 +927,7 @@ window['store'] = {
     stage_anHeight: null ,
 
     ser_time:null,  // 同步服务器的时间
+    lock_time:null, // 定时器时间
     unableClick:true , // 限制投注行为 
 
     env_variable:{ // 查询当前的环境变量

@@ -68,8 +68,12 @@ class Timer extends egret.DisplayObjectContainer{
     //  竞猜开始
      private timerFunc(event:egret.TimerEvent) {
         // egret.log("timerFunc count" + (<egret.Timer>event.target).currentCount);
+        if( window['store']['lock_time'] ){
+            this.timerNum = Math.round( ( window['store']['lock_time'] - new Date().getTime() ) /1000 ) ;
+        }else{
+            this.timerNum--;
+        }
 
-        this.timerNum--;
         if(this.timerNum < 6){
             this.textSS.textColor = 0xcb1f1f;
             this.textTimer.textColor = 0xcb1f1f;
