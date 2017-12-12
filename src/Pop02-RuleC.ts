@@ -61,7 +61,7 @@ class Pop02RuleC extends egret.DisplayObjectContainer{
            this.parent.removeChild(this)
        },this)
     }
-    private scale(){
+    public scale(){
         egret.Tween.get(this.popWrap).to({scaleX:1,scaleY:1},500,egret.Ease.circInOut );
     }
 }

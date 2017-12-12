@@ -55,49 +55,54 @@
         }
 
         .msgBox .msg{
-            color:#fcfcfc ;
             position: absolute;
             z-index: 1;
+            color:#605182 ;
+            height: 0.6rem;
+            padding: 0 0.26667rem;
+            border-radius: 0.3rem;
+            background: rgba(255, 255, 255, 0.8);
+            line-height: 0.6rem;
+            font-size: 0.32rem;
+            display: none;
         }
         .msgBox .local01{
-            bottom:140px;
-            left: 160px ;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom:2.7rem;
         }
-
         .msgBox .local02{
-            top:120px;
-            left: 20px ;
+            top:1.35rem;
+            left:0.8rem;
         }
         .msgBox .local03{
-            top:200px;
-            left: 20px ;
+            top:4rem;
+            left: 0.8rem ;
         }
         .msgBox .local04{
-            bottom:310px;
-            left: 20px ;
+            top:6.6rem;
+            left: 0.8rem ;
         }
         .msgBox .local05{
-            bottom:200px;
-            left: 20px ;
+            top:9.2rem;
+            left: 0.8rem ;
         }
-
         .msgBox .local06{
-            top:120px;
-            right: 20px ;
+            top:1.35rem;
+            right: 0.6rem ;
         }
         .msgBox .local07{
-            top:200px;
-            right: 20px ;
+            top:4rem;
+            right: 0.6rem ;
         }
         .msgBox .local08{
-            bottom:310px;
-            right: 20px ;
+            top:6.6rem;
+            right: 0.6rem ;
         }
         .msgBox .local09{
-            bottom:200px;
-            right: 20px ;
-        }          
-
+            top:9.2rem;
+            right: 0.6rem ;
+        }
     </style>
 
 <script type="text/javascript">
@@ -173,7 +178,7 @@
         data-show-fps-style="x:0,y:0,size:12,textColor:0xffffff,bgAlpha:0.9">
     </div>
     <!-- 我的消息 -->
-    <div class="msgBox" style="display: none;">
+    <div class="msgBox">
         <p class="msg local01">我的消息1</p>
         <p class="msg local02">我的消息2</p>
         <p class="msg local03">我的消3</p>

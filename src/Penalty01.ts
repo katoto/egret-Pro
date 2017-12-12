@@ -58,6 +58,7 @@ class Penalty01 extends eui.UILayer {
         // timer.scaleY = 0.98;
         this.addChild(this.timer);
 
+
         this.timer2  = new egret.Bitmap(RES.getRes('penalty-time2_png'));
         this.timer2.x = 80;
         this.timer2.y = 15;
@@ -195,6 +196,7 @@ class Penalty01 extends eui.UILayer {
                         currFieldStr = $store['matFindField'][ matchid ] ;
                         $store['$fieldContain'][currFieldStr].writeScore( l_score + ':' + r_score )
                     }
+                   
 
                 }, ( parseInt( timeline[i].at_time ) / 7200 * 25000 ))
             }

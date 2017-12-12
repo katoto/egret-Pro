@@ -89,7 +89,7 @@ class PopChat extends egret.DisplayObjectContainer{
     }
     private showMsg(e:eui.PropertyEvent):void{
         let currDom = null;
-        //获取点击消息 ,this.list.selectedIndex
+        // 获取点击消息 ,this.list.selectedIndex
         currDom = document.querySelector('.local01') ;
         currDom['style']['display'] = 'block' ;
         currDom.innerHTML = this.list.selectedItem ;
@@ -99,7 +99,6 @@ class PopChat extends egret.DisplayObjectContainer{
             currDom.style.display = 'none' ;
         },1500)
         this.parent.removeChild(this);
-
     }
     private message(t){
         let wrap:eui.Group = new eui.Group();

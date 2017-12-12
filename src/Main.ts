@@ -370,6 +370,12 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         if( $msgObjBody.curr_messageid ){
                             $store['unableClick'] = true ;
                             switch( $msgObjBody.curr_messageid ){
+                                case '2021':
+                                    if( $msgObjBody.result && $msgObjBody.result ){
+                                        // 直接显示出win的结果 
+                                        this.cnt.showFieldWin( $msgObjBody.result ) ;
+                                    }
+                                ;break;
                                 case '2006':
                                     if( !!this.cnt ){
                                         this.cnt.cnt_upTextTips('正在派奖...');
@@ -395,16 +401,16 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                     // 请下注
                                     switch ( $msgObjBody.stageid ){
                                         case '1':
-                                            this.cnt.cnt_timer(( 31 - parseInt( $msgObjBody.process_time )).toString());
-                                            $store['lock_time'] = new Date().getTime() + ( 31 - parseInt( $msgObjBody.process_time) )*1000;
+                                            this.cnt.cnt_timer(( 30 - parseInt( $msgObjBody.process_time )).toString());
+                                            $store['lock_time'] = Math.floor (( new Date().getTime() / 1000 )) * 1000  + ( 30 - parseInt( $msgObjBody.process_time) )*1000;
                                         ;break;
                                         case '2':
-                                            $store['lock_time'] = new Date().getTime() + ( 25 - parseInt( $msgObjBody.process_time) )*1000;
+                                            $store['lock_time'] = Math.floor (( new Date().getTime() / 1000 )) * 1000 + ( 25 - parseInt( $msgObjBody.process_time) )*1000;
                                             this.cnt.cnt_timer(( 25 - parseInt( $msgObjBody.process_time )).toString());
                                         ;break;
                                         case '3':
-                                            $store['lock_time'] = new Date().getTime() + ( 21 - parseInt( $msgObjBody.process_time) )*1000;                                        
-                                            this.cnt.cnt_timer(( 21 - parseInt( $msgObjBody.process_time )).toString());
+                                            $store['lock_time'] = Math.floor (( new Date().getTime() / 1000 )) * 1000 + ( 20 - parseInt( $msgObjBody.process_time) )*1000;                                        
+                                            this.cnt.cnt_timer(( 20 - parseInt( $msgObjBody.process_time )).toString());
                                         ;break;
                                     }
                                     if( !!this.cnt ){
@@ -666,17 +672,19 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         if( this.start_pop && this.start_pop.parent ){
                             // 请下注
                             this.cnt.cnt_upTextTips('请选择球队下注...');
+                            let newTime = new Date().getTime() ;
+                            
                             switch ( $msgObjBody.stageid ){
                                 case '1':
-                                    $store['lock_time'] = new Date().getTime() + 31*1000;
+                                    $store['lock_time'] = Math.floor ( newTime / 1000 ) * 1000 + 30*1000;
                                     this.cnt.cnt_timer('31');
                                 ;break;
                                 case '2':
-                                    $store['lock_time'] = new Date().getTime() + 26*1000;
+                                    $store['lock_time'] = Math.floor (( newTime / 1000 )) * 1000 + 25*1000;
                                     this.cnt.cnt_timer('26');
                                 ;break;
                                 case '3':
-                                    $store['lock_time'] = new Date().getTime() + 21*1000;
+                                    $store['lock_time'] = Math.floor (( newTime / 1000 )) * 1000 + 20*1000;
                                     this.cnt.cnt_timer('21');
                                 ;break;
                             }
