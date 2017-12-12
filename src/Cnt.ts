@@ -729,7 +729,8 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
                     }
                 }
                 //  更新每个用户的信息 可能要再动画之后
-                if( settleData[i].uid && settleData[i].total ){
+                if( settleData[i].uid && settleData[i].total && this[ baseImg + choseUser ] ){
+                    console.log( this[ baseImg + choseUser ] )
                     this[ baseImg + choseUser ]['setMyGold']( settleData[i].total )
                 }else{
                     // 没找到对应的用户

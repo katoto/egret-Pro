@@ -690,6 +690,8 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let newEndLocal_x = null;
         let newEndLocal_y = null;
 
+        console.log( $store['userPositionLocal'][uid] )
+        console.log( uid )
         if( !uid || !( $store['userPositionLocal'][uid] )){
             console.error('sendEndCoin error  no find uid');
             return false ;
