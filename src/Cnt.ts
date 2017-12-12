@@ -859,7 +859,7 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
                     $store['user_info'][i].total );
             }
 
-            // this.bgCourtWrap.addChild(this[choseUserImg]);
+            this.bgCourtWrap.addChild(this[choseUserImg]);
 
             if( this.bgCourtWrap.getChildIndex( this[choseUserImg] ) > newIndex ){
                 newIndex = this.bgCourtWrap.getChildIndex( this[choseUserImg] ) ;
