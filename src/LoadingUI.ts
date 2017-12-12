@@ -44,12 +44,9 @@ class LoadingUI extends egret.Sprite {
         this.bg_myPro.y = 960;
         this.addChild(this.bg_myPro);
 
-
-
     }
 
     public setProgress(current:number, total:number):void {
-        // this.textField.text = `Loading...${current}/${total}`;
         this.pro = (Math.ceil((current/total)*100))/100; //加载进度百分比
         this.bg_myPro.width = 487*this.pro;
     }

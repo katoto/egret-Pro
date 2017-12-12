@@ -144,7 +144,6 @@ class Change extends eui.UILayer{
         leftUserBox.addChild(this[baseName+'_name_l'])
         wrap.addChild(leftUserBox); 
 
-
         //  右边队伍头像容器
         let rightUserBox:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
         rightUserBox.width = 68;

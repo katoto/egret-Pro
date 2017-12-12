@@ -30,11 +30,6 @@ class ChampionC extends eui.Group {
         myScroller.viewport = this.list;
         this.addChild(myScroller);
     }
-    // private onChange(e:eui.PropertyEvent):void{
-    //     //获取点击消息
-    //     console.log(this.list.selectedItem,this.list.selectedIndex);
-    //     this.upPopWrapMsg();
-    // }
     async upPopWrapMsg(){
         let $store = window['store'] ;
         this.list.dataProvider.removeAll()

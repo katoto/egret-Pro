@@ -283,7 +283,7 @@ class Cnt extends egret.DisplayObjectContainer{
     }
 
     /**
-     *  延迟函数  临时在 adjustPenalty 用一下
+     *  延迟函数
      */
     private wait (duration = 250) {
         return new Promise((resolve) => {
@@ -292,7 +292,6 @@ class Cnt extends egret.DisplayObjectContainer{
             }, duration)
         })
     }
-
 
     /**
      *  传入结算 长度  调整 4 2 1 的位置  
@@ -304,7 +303,6 @@ class Cnt extends egret.DisplayObjectContainer{
         // 比赛框的位置坐标 
         let local_4 = [120,290,500,700] ;
         let local_2 = [210,480] ; // 130 500  210 、480
-
         let local_1 = [ 295 ] ; // 265  + 30
         let curr_local = null ;
 
@@ -502,7 +500,7 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
                             this.showChampion( championName['r_name'] )
                         }
                     }
-                },1800 )
+                }, 1800 )
 
             }
         }
@@ -709,8 +707,6 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
         let curFindField = '' ;
         let allShowWinNum = 0 ;
         let userImgArr = [] ;
-        // delIndex = window['store']['userPositionLocal'][uid] ;
-        // let choseUserImg = 'userImg'+ ( delIndex ) ;
         if( settleData ){
             for( let i=0,len = settleData.length ;i<len ; i++ ){
                 choseUser = $store['userPositionLocal'][ settleData[i].uid ] ;
@@ -897,12 +893,6 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
         }
 
         this.bgCourtWrap.addChild(this[choseUserImg]);
-
-        // console.log( $store['unableClick'] ) ;
-        console.log('================')
-        console.log( this.bgCourtWrap.getChildIndex( this[choseUserImg] )  )
-        console.log( this.bgCourtWrap.getChildIndex( this.fieldContain )  )
-        console.log('*****************');
 
         setTimeout(()=>{
             if( !$store['unableClick'] && !!this.fieldContain && !!this[choseUserImg] && this.fieldContain.parent && this[choseUserImg].parent ){

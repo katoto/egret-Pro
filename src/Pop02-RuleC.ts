@@ -7,10 +7,11 @@ class Pop02RuleC extends egret.DisplayObjectContainer{
     private popWrap;
     private popTitle:egret.TextField;
     private drawPop(){
+        let $store = window['store'] ;
           // 大容器
        let BigWrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
-       BigWrap.width = window['store']['stage_Width'];
-       BigWrap.height = window['store']['stage_Height'];
+       BigWrap.width = $store['stage_Width'];
+       BigWrap.height = $store['stage_Height'];
        BigWrap.x = 0;
        BigWrap.y = 0;
        this.addChild(BigWrap);
@@ -18,7 +19,7 @@ class Pop02RuleC extends egret.DisplayObjectContainer{
        //弹窗蒙层
        let popLayer:egret.Shape = new egret.Shape();
        popLayer.graphics.beginFill(0x000000,0.6);
-       popLayer.graphics.drawRect(0,0,window['store']['stage_Width'],window['store']['stage_Height'])
+       popLayer.graphics.drawRect(0,0,$store['stage_Width'],$store['stage_Height'])
        popLayer.graphics.endFill();
        BigWrap.addChild(popLayer);
 
