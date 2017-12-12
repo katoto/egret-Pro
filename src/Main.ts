@@ -213,6 +213,10 @@ class Main extends egret.DisplayObjectContainer {
             this.out = new Pop02Out();
         },2000)
 
+
+        this.start_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-begin_png');
+        this.stop_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-over_png' );
+
          //头部实例2
         this.top = new Top(this.Width);
         this.top.x = 0;
@@ -595,12 +599,11 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 case '2019':
                     // start_guess   去文案 
                     if( this.out && !this.out.parent ){
-                        this.start_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-begin_png');
                         this.start_pop.y = 227;
                         this.addChild( this.start_pop );
                         this.startOver.play(0,1);
                         this.upTopLev() ;
-                        egret.Tween.get( this.start_pop ).to({y:0},200);
+                        egret.Tween.get( this.start_pop ).to({y:0},250);
                     }
 
                     if( $msgObjBody ){
@@ -696,12 +699,11 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
 
                     // 停止竞猜 直接移除定时器 加入开始
                     if( this.out && !this.out.parent ){
-                        this.stop_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-over_png' );
                         this.stop_pop.y = 227;
                         this.addChild( this.stop_pop );
                         this.startOver.play(0,1);
                         this.upTopLev();
-                        egret.Tween.get( this.stop_pop ).to({y:0},200);
+                        egret.Tween.get( this.stop_pop ).to( { y:0 } , 250 );
                     }
 
                     // 移除文案
@@ -713,15 +715,15 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                     }      
 
                     setTimeout(()=>{
-                        // 收集金币
-                        this.cnt.cnt_collectCoin();
                         if( this.stop_pop){
-                            egret.Tween.get( this.stop_pop ).to({y:227},200).call(()=>{
+                            egret.Tween.get( this.stop_pop ).to({y:227},250).call(()=>{
                                 if( this.stop_pop.parent ){
                                     this.removeChild( this.stop_pop );
                                 }
                             });
                         }
+                        // 收集金币
+                        this.cnt.cnt_collectCoin();
                         setTimeout(()=>{
                             this.cnt.cnt_upTextTips('等待开奖');
                         },300)
@@ -915,7 +917,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
     private upTopLev(){
 
         let $store = window['store'] ;
-
         if( this.$children && this.$children.length ){
             // 处理层级
             let item = null ;
