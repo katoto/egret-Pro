@@ -154,7 +154,6 @@ class Penalty01 extends eui.UILayer {
                     }
                     this.addChild( this.timer2 );
                     this.upLineTimeLev();
-                    console.log('add bg')
                 },18750 )
                 egret.Tween.get( this.lineTime ).to( { width : 360 } , 25000 ).call(()=>{
                     self.lineTime.width = 0;
@@ -166,8 +165,6 @@ class Penalty01 extends eui.UILayer {
             currFieldStr = $store['matFindField'][ matchid ] ;
             $store['$fieldContain'][currFieldStr].writeScore( l_score + ':' + r_score )
         }        
-
-
 
         for( let i = 0 ; i< len ; i++ ){
             if( timeline[i] ){

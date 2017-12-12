@@ -122,6 +122,10 @@ class Main extends egret.DisplayObjectContainer {
      */
     private onItemLoadError(event: RES.ResourceEvent) {
         console.warn("Url:" + event.resItem.url + " has failed to load");
+        if( !!this.out && !this.out.parent ){
+            this.out.showSocketErr();
+            this.addChild(this.out) ;
+        }
     }
 
     /**
@@ -171,9 +175,6 @@ class Main extends egret.DisplayObjectContainer {
         this.mpromotion = RES.getRes("promotion_mp3");
         this.mchange = RES.getRes("change_mp3");
 
-        // let sky = this.createBitmapByName("btn-500_png");
-        // this.addChild(sky)
-
         // 头部实例
         // let header:Header = new Header(Width);
         // header.x = 0;
@@ -186,7 +187,6 @@ class Main extends egret.DisplayObjectContainer {
         this.cnt.y = 0;
         window['store']['$cnt'] = this.cnt ;
         this.addChild(this.cnt);
-
 
         // 底部实例
         this.bottom = new Foot();
@@ -212,7 +212,6 @@ class Main extends egret.DisplayObjectContainer {
         setTimeout(()=>{
             this.out = new Pop02Out();
         },2000)
-
 
         this.start_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-begin_png');
         this.stop_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-over_png' );
@@ -332,10 +331,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
             //  后台数据  分发
             let msgObj = JSON.parse( msg );
             let $msgObjBody = msgObj.body;
-            // if( msgObj.time ){ //  同步时间
-            //     msgObj.time = msgObj.time * 1000;
-            //     $store['ser_time'] = parseInt ( msgObj.time );
-            // }
+
             switch ( msgObj.messageid ) {
                     // 进场的数据 2000  （时间进度分析）
                 case '2000':
@@ -813,7 +809,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 ;break;
                 case '2016':
                     // 被提出
-                    this.cnt.showTips('你已经被踢出') ;
                     if( !!this.out || !this.out.parent ){
                         this.out.showLongTime();
                         this.addChild(this.out) ;
@@ -901,11 +896,9 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
      *  onCloseSock  websock 接收消息
      */
     private onCloseSock():void{
-        if( this.out && !this.out.parent ){
-            if( !!this.out ){
-                this.out.showSocketErr();
-                this.addChild(this.out) ;
-            }
+        if( !!this.out && !this.out.parent ){
+            this.out.showSocketErr();
+            this.addChild(this.out) ;
             console.error( 'websock error' ) ;   
         }
     }
@@ -956,7 +949,6 @@ window['store'] = {
     stage_anWidth: null ,
     stage_anHeight: null ,
 
-    ser_time:null,  // 同步服务器的时间
     lock_time:null, // 定时器时间
     unableClick:true , // 限制投注行为 
 
@@ -986,9 +978,6 @@ window['store'] = {
     fieldLeftOrRight:{ // 找左右 分发金币
 
     },
-    // idFindImg:{ // matchid 找
-
-    // },
     coin_Num:{
         // 112228430:{ // eg 累加金币
         //     home_golds:'0',
@@ -1000,14 +989,8 @@ window['store'] = {
     orderObj:{
         // 下单 有些是非必须字段
         ck:null,
-        golds:null,
-        matchid:null,
         expect:null,
-        odds:null,
-        homeid:null,
-        awayid:null,
         stageid:null,
-        selection:null,
         roomid:null,
         node:null,
     },

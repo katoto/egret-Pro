@@ -30,7 +30,7 @@ class Penalty02 extends eui.UILayer {
         // this.addChild(bgMask);
          // 上边队伍icon
         this.topTeam = new eui.Image();
-        this.topTeam.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
+        // this.topTeam.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.topTeam.width = 24;
         this.topTeam.height = 24;
         this.topTeam.x = 72;
@@ -40,14 +40,13 @@ class Penalty02 extends eui.UILayer {
 
          // 下边队伍icon
         this.bottomTeam = new eui.Image();
-        this.bottomTeam.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
+        // this.bottomTeam.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.bottomTeam.width = 24;
         this.bottomTeam.height = 24;
         this.bottomTeam.x = 72;
         this.bottomTeam.y = 30;
         this.addChild(this.bottomTeam);
         // this.bottomTeam.mask = bgMask02;
-
 
         // this.penaltyWin = this.drawWin();
         // this.penaltyWin.x = 371;  
