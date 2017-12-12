@@ -334,11 +334,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         if( y>150 && y <260 ){
 
             if($store['unableClick']){
-                $store['$cnt'].showTips('unableClick ture');
-                // 不可点击
-                if( $store['$cnt'] ){
-                    $store['$cnt'].showTips('现在不能投注,bug 被我设置了');
-                }
+                // if( $store['$cnt'] ){
+                //     $store['$cnt'].showTips('现在不能投注,bug 被我设置了');
+                // }
                 return false ;
             }
 
@@ -382,12 +380,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
         if( y>350 && y <460 ){
             if($store['unableClick']){
-                $store['$cnt'].showTips('unableClick ture');
                 return false ;
             }
 
             if( !$store['allCoinObj']['field42'] ){
-
                 $store['allCoinObj']['field42'] = {
                     coin_left:[],
                     coin_right:[],
@@ -427,12 +423,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
         if( y>550 && y <660 ){
             if($store['unableClick']){
-                $store['$cnt'].showTips('unableClick ture');
                 return false ;
             }
 
             if( !$store['allCoinObj']['field43'] ){
-
                 $store['allCoinObj']['field43'] = {
                     coin_left:[],
                     coin_right:[],
@@ -472,12 +466,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         let currMatchData = this.field44.getCurrMatchData();
         if( y>750 && y <860 ){
             if($store['unableClick']){
-                $store['$cnt'].showTips('unableClick ture');
-                // 不可点击
                 return false ;
             }
             if( !$store['allCoinObj']['field44'] ){
-
                 $store['allCoinObj']['field44'] = {
                     coin_left:[],
                     coin_right:[],
@@ -518,19 +509,15 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
         if( y>270 && y <445 ){
             if($store['unableClick']){
-                $store['$cnt'].showTips('unableClick ture');
-                // 不可点击
                 return false ;
             }
             if( !$store['allCoinObj']['field21'] ){
-
                 $store['allCoinObj']['field21'] = {
                     coin_left:[],
                     coin_right:[],
                     coin_left_local: $store['coin_local']['field21_l'],
                     coin_right_local: $store['coin_local']['field21_r']
                 }
-
 
             }
 
@@ -562,12 +549,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
         if( y>544 && y <720 ){
             if($store['unableClick']){
-                $store['$cnt'].showTips('unableClick ture');
-                // 不可点击
                 return false ;
             }
             if( !$store['allCoinObj']['field22'] ){
-
                 $store['allCoinObj']['field22'] = {
                     coin_left:[],
                     coin_right:[],
@@ -605,12 +589,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
         if( y>352 && y <650 ){
             if($store['unableClick']){
-                $store['$cnt'].showTips('unableClick ture');
-                // 不可点击
                 return false ;
             }
             if( !$store['allCoinObj']['field1'] ){
-
                 $store['allCoinObj']['field1'] = {
                     coin_left:[],
                     coin_right:[],
@@ -651,12 +632,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         $egret_Tween.get( $store['allCoinObj'][allCoinKeys[i]].coin_left[j] ).to( { 
                             x:$store['allCoinObj'][allCoinKeys[i]].coin_left_local.x,
                             y:$store['allCoinObj'][allCoinKeys[i]].coin_left_local.y 
-                            // x:window['store']['stage_anWidth'] ,
-                            // y: 1000 
-                            // x: 41 ,   //+46    +584
-                            // y: 152   //+72
-                            //  x:584,
-                            //  y:152
                         }, 200)
                     }
                 }
