@@ -409,8 +409,8 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                             this.cnt.cnt_timer(( 25 - parseInt( $msgObjBody.process_time )).toString());
                                         ;break;
                                         case '3':
-                                            $store['lock_time'] = Math.floor (( new Date().getTime() / 1000 )) * 1000 + ( 20 - parseInt( $msgObjBody.process_time) )*1000;                                        
-                                            this.cnt.cnt_timer(( 20 - parseInt( $msgObjBody.process_time )).toString());
+                                            $store['lock_time'] = Math.floor (( new Date().getTime() / 1000 )) * 1000 + ( 21 - parseInt( $msgObjBody.process_time) )*1000;                                        
+                                            this.cnt.cnt_timer(( 21 - parseInt( $msgObjBody.process_time )).toString());
                                         ;break;
                                     }
                                     if( !!this.cnt ){
@@ -677,14 +677,14 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                             switch ( $msgObjBody.stageid ){
                                 case '1':
                                     $store['lock_time'] = Math.floor ( newTime / 1000 ) * 1000 + 30*1000;
-                                    this.cnt.cnt_timer('31');
+                                    this.cnt.cnt_timer('30');
                                 ;break;
                                 case '2':
                                     $store['lock_time'] = Math.floor (( newTime / 1000 )) * 1000 + 25*1000;
                                     this.cnt.cnt_timer('26');
                                 ;break;
                                 case '3':
-                                    $store['lock_time'] = Math.floor (( newTime / 1000 )) * 1000 + 20*1000;
+                                    $store['lock_time'] = Math.floor (( newTime / 1000 )) * 1000 + 21*1000;
                                     this.cnt.cnt_timer('21');
                                 ;break;
                             }
