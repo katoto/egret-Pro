@@ -64,7 +64,7 @@
             background: rgba(255, 255, 255, 0.8);
             line-height: 0.6rem;
             font-size: 0.32rem;
-            display: none;
+            /*display: none;*/
         }
         .msgBox .local01{
             left: 50%;
@@ -102,6 +102,11 @@
         .msgBox .local09{
             top:9.2rem;
             right: 0.6rem ;
+        }
+        /*全屏*/
+        .fullMsg{
+            position: relative;
+            top: -1rem;
         }
     </style>
 
@@ -157,6 +162,7 @@
             return "string" == typeof a && a.match(/px$/) && (b += "rem"), b
         }
     }(window, window.lib || (window.lib = {}));
+
 </script>
 
 <script src="./src/utils/util_build.js"></script>  
@@ -178,7 +184,7 @@
         data-show-fps-style="x:0,y:0,size:12,textColor:0xffffff,bgAlpha:0.9">
     </div>
     <!-- 我的消息 -->
-    <div class="msgBox">
+    <div class="msgBox fullMsg">
         <p class="msg local01">我的消息1</p>
         <p class="msg local02">我的消息2</p>
         <p class="msg local03">我的消3</p>
@@ -238,7 +244,7 @@
         });
     });
     xhr.send(null);
-  
+    
 </script>   
 </body>
 </html>
