@@ -10,8 +10,6 @@
 		"promise/bin/promise.js"
 	],
 	"game": [
-		"bin-debug/Change.js",
-		"bin-debug/Penalty02.js",
 		"bin-debug/Penalty02.js",
 		"bin-debug/ChampionC.js",
 		"bin-debug/Cnt.js",

@@ -7,6 +7,7 @@ class Penalty01 extends eui.UILayer {
     }
     private topTeam:eui.Image;
     private bottomTeam:eui.Image;
+    private timer2:egret.Bitmap;
 
     // 收集球
     private collFootball = [] ;
@@ -56,10 +57,10 @@ class Penalty01 extends eui.UILayer {
         this.addChild(timer);
         // timer.mask = this.lineTime ;
 
-        let timer2:egret.Bitmap = new egret.Bitmap(RES.getRes('penalty-time2_png'));
-        timer2.x = 80;
-        timer2.y = 15;
-        this.addChild(timer2);
+        this.timer2 = new egret.Bitmap(RES.getRes('penalty-time2_png'));
+        this.timer2.x = 80;
+        this.timer2.y = 15;
+        // this.addChild(timer2);
 
         //进度条
         // this.lineTime = new egret.Shape();
@@ -164,6 +165,7 @@ class Penalty01 extends eui.UILayer {
                         currFieldStr = $store['matFindField'][ matchid ] ;
                         $store['$fieldContain'][currFieldStr].writeScore( l_score + ':' + r_score )
                     }
+                   
 
                 }, ( parseInt( timeline[i].at_time ) / 7200 * 25000 ))
             }
