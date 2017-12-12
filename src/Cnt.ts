@@ -839,6 +839,8 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
                 $store['emptyUserPosition'].push( i+1 )
             }
         }
+        let newIndex = 0;
+        let newObj = null ;
         for(let i=0; i<len ;i++){
             if( $store['user_info'][i] && $store['user_info'][i].photo === '' ){
                 $store['user_info'][i].photo = 'http://img.choopaoo.com/esun/upload/be/83/be837ad8049611e797ef.png'
@@ -857,18 +859,43 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
                     $store['user_info'][i].total );
             }
 
-            this.bgCourtWrap.addChild(this[choseUserImg]);
+            // this.bgCourtWrap.addChild(this[choseUserImg]);
 
-            if( !!this.fieldContain && !!this[choseUserImg] && this.fieldContain.parent && this[choseUserImg].parent ){
-                try{
-                    if( this.bgCourtWrap.getChildIndex( this[choseUserImg] ) > bigIndex  ){
-                        this.bgCourtWrap.swapChildren( this.fieldContain , this[choseUserImg] ) ;
-                    }
-                }catch(e){
-                    alert('不支持swapchildren')
+            if( this.bgCourtWrap.getChildIndex( this[choseUserImg] ) > newIndex ){
+                newIndex = this.bgCourtWrap.getChildIndex( this[choseUserImg] ) ;
+                newObj = this[choseUserImg] ;
+            }
+
+        }
+        console.log('===================')
+        console.log( newIndex );
+        console.log(this.bgCourtWrap.getChildIndex( this.fieldContain ))
+        this.bgCourtWrap.swapChildren( this.fieldContain , newObj ) ;
+        console.log(this.bgCourtWrap.getChildIndex( this.fieldContain ))
+
+        for(let i=0; i<len ;i++){
+            var choseUserImg = 'userImg'+(i+1) ;
+            console.log('********')
+            console.log( this.bgCourtWrap.getChildIndex( this[choseUserImg] ) )
+        }
+
+
+        if( this.bgCourtWrap.$children && this.bgCourtWrap.$children.length ){
+            // 处理层级
+            let item = null ;
+            let choseUserImg = 'userImg';
+            let bigUserImg = null ;
+            for( item  in this.bgCourtWrap.$children ){
+                if( this.bgCourtWrap.$children[item] ){
+                    console.log('==*******************==')
+                    console.log(this.bgCourtWrap.getChildIndex( this.bgCourtWrap.$children[item] ))
+                    console.log( this.bgCourtWrap.$children[item] )
                 }
             }
         }
+
+
+
 
     }
 
@@ -896,11 +923,25 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
 
         setTimeout(()=>{
             if( !$store['unableClick'] && !!this.fieldContain && !!this[choseUserImg] && this.fieldContain.parent && this[choseUserImg].parent ){
-                if( this.bgCourtWrap.getChildIndex( this[choseUserImg] ) > this.bgCourtWrap.getChildIndex( this.fieldContain )  ){
-                    this.bgCourtWrap.swapChildren( this.fieldContain , this[choseUserImg] ) ;
+                let item = null ;
+                let choseUserImg = 'userImg';
+                let bigIndex = 0;
+                let bigUserImg = null ;
+                for( item  in $store.userPositionLocal ){
+                    if( $store.userPositionLocal[item] ){
+                        if( this.bgCourtWrap.getChildIndex( this[ choseUserImg +  $store.userPositionLocal[item] ] ) > bigIndex ){
+                            bigIndex = this.bgCourtWrap.getChildIndex( this[ choseUserImg +  $store.userPositionLocal[item] ] ) ;
+                        }
+                    }
+                }
+                if( !!bigIndex ){
+                    if( !!this.fieldContain && this.fieldContain.parent ){
+                        this.bgCourtWrap.setChildIndex( this.fieldContain , bigIndex + 1 ) ;
+                    }
                 }
             }
-        },300)
+
+        },10)
 
     }
     // 用户 离开  new
