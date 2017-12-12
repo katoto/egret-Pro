@@ -723,18 +723,13 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
                         }
                     }
                     if( this[ baseImg + choseUser ] && allShowWinNum ){
-
                         this[ baseImg + choseUser ].isShowWinGold( allShowWinNum );
                         userImgArr.push( this[ baseImg + choseUser ] )
                     }
                 }
-                //  更新每个用户的信息 可能要再动画之后
+                //  更新每个用户的信息 可能要再动画之后  离开的用户 为null 
                 if( settleData[i].uid && settleData[i].total && this[ baseImg + choseUser ] ){
-                    console.log( this[ baseImg + choseUser ] )
                     this[ baseImg + choseUser ]['setMyGold']( settleData[i].total )
-                }else{
-                    // 没找到对应的用户
-                    console.error('没找到对应的用户 at 2007 websock')
                 }
             }
 
@@ -816,6 +811,11 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
         let len = $store['user_info'].length
         let newUserInfo = [];
         let firstUser = null ;
+        let bigIndex = 0;
+
+        if( this.fieldContain && this.bgCourtWrap  ){
+            bigIndex = this.bgCourtWrap.getChildIndex( this.fieldContain ) ;
+        }
 
         if( !len || len === undefined){
             len = 0
@@ -859,18 +859,17 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
 
             this.bgCourtWrap.addChild(this[choseUserImg]);
 
-            setTimeout(()=>{
-                if( !!this.fieldContain && !!this[choseUserImg] && this.fieldContain.parent && this[choseUserImg].parent ){
-                    try{
-                        if( this.bgCourtWrap.getChildIndex( this[choseUserImg] ) > this.bgCourtWrap.getChildIndex( this.fieldContain )  ){
-                            this.bgCourtWrap.swapChildren( this.fieldContain , this[choseUserImg] ) ;
-                        }
-                    }catch(e){
-                        alert('不支持swapchildren')
+            if( !!this.fieldContain && !!this[choseUserImg] && this.fieldContain.parent && this[choseUserImg].parent ){
+                try{
+                    if( this.bgCourtWrap.getChildIndex( this[choseUserImg] ) > bigIndex  ){
+                        this.bgCourtWrap.swapChildren( this.fieldContain , this[choseUserImg] ) ;
                     }
+                }catch(e){
+                    alert('不支持swapchildren')
                 }
-            },1000)
+            }
         }
+
     }
 
     // 用户 进入  new
