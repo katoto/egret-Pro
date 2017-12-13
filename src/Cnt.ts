@@ -864,38 +864,11 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
             if( this.bgCourtWrap.getChildIndex( this[choseUserImg] ) > newIndex ){
                 newIndex = this.bgCourtWrap.getChildIndex( this[choseUserImg] ) ;
                 newObj = this[choseUserImg] ;
+                this.bgCourtWrap.swapChildren( this.fieldContain ,  this[choseUserImg] ) ;
             }
 
         }
-        console.log('===================')
-        console.log( newIndex );
-        console.log(this.bgCourtWrap.getChildIndex( this.fieldContain ))
         this.bgCourtWrap.swapChildren( this.fieldContain , newObj ) ;
-        console.log(this.bgCourtWrap.getChildIndex( this.fieldContain ))
-
-        for(let i=0; i<len ;i++){
-            var choseUserImg = 'userImg'+(i+1) ;
-            console.log('********')
-            console.log( this.bgCourtWrap.getChildIndex( this[choseUserImg] ) )
-        }
-
-
-        if( this.bgCourtWrap.$children && this.bgCourtWrap.$children.length ){
-            // 处理层级
-            let item = null ;
-            let choseUserImg = 'userImg';
-            let bigUserImg = null ;
-            for( item  in this.bgCourtWrap.$children ){
-                if( this.bgCourtWrap.$children[item] ){
-                    console.log('==*******************==')
-                    console.log(this.bgCourtWrap.getChildIndex( this.bgCourtWrap.$children[item] ))
-                    console.log( this.bgCourtWrap.$children[item] )
-                }
-            }
-        }
-
-
-
 
     }
 
@@ -920,7 +893,6 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
         }
 
         this.bgCourtWrap.addChild(this[choseUserImg]);
-
         setTimeout(()=>{
             if( !$store['unableClick'] && !!this.fieldContain && !!this[choseUserImg] && this.fieldContain.parent && this[choseUserImg].parent ){
                 let item = null ;
@@ -931,11 +903,13 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
                     if( $store.userPositionLocal[item] ){
                         if( this.bgCourtWrap.getChildIndex( this[ choseUserImg +  $store.userPositionLocal[item] ] ) > bigIndex ){
                             bigIndex = this.bgCourtWrap.getChildIndex( this[ choseUserImg +  $store.userPositionLocal[item] ] ) ;
+                            bigUserImg = this[ choseUserImg +  $store.userPositionLocal[item] ] ;
                         }
                     }
                 }
                 if( !!bigIndex ){
                     if( !!this.fieldContain && this.fieldContain.parent ){
+                        this.bgCourtWrap.swapChildren( this.fieldContain , bigUserImg  ) ;
                         this.bgCourtWrap.setChildIndex( this.fieldContain , bigIndex + 1 ) ;
                     }
                 }

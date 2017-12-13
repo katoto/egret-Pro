@@ -40,16 +40,16 @@ class Foot extends egret.DisplayObjectContainer{
          },this)
 
          // 聊天 
-         let btnChat:egret.Bitmap = new egret.Bitmap(RES.getRes('chat_png'));
-         btnChat.x = 640;
-         btnChat.y = 0;
-         this.addChild(btnChat);
-         btnChat.touchEnabled = true;
-         btnChat.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
-            //聊天区域实例
-            let popChat = new PopChat();
-            this.parent.addChild(popChat);
-         },this)
+        //  let btnChat:egret.Bitmap = new egret.Bitmap(RES.getRes('chat_png'));
+        //  btnChat.x = 640;
+        //  btnChat.y = 0;
+        //  this.addChild(btnChat);
+        //  btnChat.touchEnabled = true;
+        //  btnChat.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
+        //     //聊天区域实例
+        //     let popChat = new PopChat();
+        //     this.parent.addChild(popChat);
+        //  },this)
        
 
     }
