@@ -453,8 +453,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                             }
                                         }
                                         if( !!bigUserImg ){
-                                            if( !$store['unableClick'] && !!$store['$fieldContain']
-                                                && $store['$fieldContain'].parent && bigUserImg.parent ){
+                                            if( !!$store['$fieldContain'] && $store['$fieldContain'].parent && bigUserImg.parent ){
                                                 $store['$bgCourtWrap'].swapChildren( $store['$fieldContain'] , bigUserImg ) ;
                                             }
                                         }
@@ -519,12 +518,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                             this.cnt.initFieldCon();
 
                         }
-                        // pre_result 字段 （用于上一个 状态解析 == 》 matches  当前对阵 ）
-                        // if( $msgObjBody.pre_result ){
-                        //     // 切换场地  用
-                        //     // this.cnt.proTeam('https://www.google.co.jp/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png');
-                        //      //晋升
-                        // }
                         
                         if( $msgObjBody.stageid ){
                             switch( $msgObjBody.stageid  ){
@@ -673,7 +666,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                             
                             for( item  in $store.userPositionLocal ){
                                 if( $store.userPositionLocal[item] ){
-                                    if( $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) >= bigIndex ){
+                                    if( $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) > bigIndex ){
                                         bigIndex = $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) ;
                                         bigUserImg = this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ;
                                     }
@@ -829,9 +822,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
 
                 ;break;
 
-                case '2025':
-                    // 更新奖池
-                ;break;
                 case '2025':
                     // 提出用户 展现弹窗
                 ;break;

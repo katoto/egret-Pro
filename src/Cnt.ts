@@ -435,10 +435,10 @@ class Cnt extends egret.DisplayObjectContainer{
             }
         }
 
-        console.log('-----------');
-        console.log( endResult )
-        console.log( $store['matches'].length )
-        console.log('显示冠军')
+        // console.log('-----------');
+        // console.log( endResult )
+        // console.log( $store['matches'].length )
+        // console.log('显示冠军')
         // 显示冠军 
         if( endResult && $store['matches'] && $store['matches'].length === 1 ){
             let championName = null;

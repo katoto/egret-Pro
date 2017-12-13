@@ -204,9 +204,9 @@ class Penalty02 extends eui.UILayer {
             }
 
             // 显示冠军 
-            console.log( currFieldStr  )
-            console.log( '++++++++++++++++++'  )
-            console.log('显示冠军')
+            // console.log( currFieldStr  )
+            // console.log( '++++++++++++++++++'  )
+            // console.log('显示冠军')
 
             if( currFieldStr && $store.matches.length === 1 ){
                 let championName = $store['$fieldContain'][currFieldStr].getFieldImg();
