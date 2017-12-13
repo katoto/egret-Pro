@@ -455,6 +455,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                         if( !!bigUserImg ){
                                             if( !!$store['$fieldContain'] && $store['$fieldContain'].parent && bigUserImg.parent ){
                                                 $store['$bgCourtWrap'].swapChildren( $store['$fieldContain'] , bigUserImg ) ;
+                                                $store['$bgCourtWrap'].setChildIndex( $store['$fieldContain'] , bigIndex + 1 ) ;
                                             }
                                         }
                                     }
@@ -590,6 +591,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                 if( !$store['unableClick'] && !!$store['$fieldContain']
                                     && $store['$fieldContain'].parent && bigUserImg.parent ){
                                     $store['$bgCourtWrap'].swapChildren( $store['$fieldContain'] , bigUserImg ) ;
+                                    $store['$bgCourtWrap'].setChildIndex( $store['$fieldContain'] , bigIndex + 1 ) ;
                                 }
                             }
                         }
@@ -645,6 +647,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                             if( !$store['unableClick'] && !!$store['$fieldContain']
                                 && $store['$fieldContain'].parent && bigUserImg.parent ){
                                 $store['$bgCourtWrap'].swapChildren( $store['$fieldContain'] , bigUserImg ) ;
+                                $store['$bgCourtWrap'].setChildIndex( $store['$fieldContain'] , bigIndex + 1 ) ;
                             }
                         }
                     }
@@ -677,30 +680,32 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                 if( !$store['unableClick'] && !!$store['$fieldContain']
                                     && $store['$fieldContain'].parent && bigUserImg.parent ){
                                     $store['$bgCourtWrap'].swapChildren( $store['$fieldContain'] , bigUserImg ) ;
+                                    $store['$bgCourtWrap'].setChildIndex( $store['$fieldContain'] , bigIndex + 1 ) ;
                                 }
                             }
 
                         }
 
+                        // 请下注
+                        this.cnt.cnt_upTextTips('请选择球队下注...');
+                        let newTime = new Date().getTime() ;
+                        
+                        switch ( $msgObjBody.stageid ){
+                            case '1':
+                                $store['lock_time'] = Math.floor ( newTime / 1000 ) * 1000 + 30*1000;
+                                this.cnt.cnt_timer('30');
+                            ;break;
+                            case '2':
+                                $store['lock_time'] = Math.floor (( newTime / 1000 )) * 1000 + 25*1000;
+                                this.cnt.cnt_timer('26');
+                            ;break;
+                            case '3':
+                                $store['lock_time'] = Math.floor (( newTime / 1000 )) * 1000 + 21*1000;
+                                this.cnt.cnt_timer('21');
+                            ;break;
+                        }
+
                         if( this.start_pop && this.start_pop.parent ){
-                            // 请下注
-                            this.cnt.cnt_upTextTips('请选择球队下注...');
-                            let newTime = new Date().getTime() ;
-                            
-                            switch ( $msgObjBody.stageid ){
-                                case '1':
-                                    $store['lock_time'] = Math.floor ( newTime / 1000 ) * 1000 + 30*1000;
-                                    this.cnt.cnt_timer('30');
-                                ;break;
-                                case '2':
-                                    $store['lock_time'] = Math.floor (( newTime / 1000 )) * 1000 + 25*1000;
-                                    this.cnt.cnt_timer('26');
-                                ;break;
-                                case '3':
-                                    $store['lock_time'] = Math.floor (( newTime / 1000 )) * 1000 + 21*1000;
-                                    this.cnt.cnt_timer('21');
-                                ;break;
-                            }
                             egret.Tween.get( this.start_pop ).to({y:227},200).call(()=>{
                                 if( this.start_pop.parent ){
                                     this.removeChild( this.start_pop );
