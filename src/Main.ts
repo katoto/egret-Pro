@@ -394,6 +394,26 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                     if( !!this.cnt ){
                                         this.cnt.cnt_upTextTips('等待开奖');
                                     }
+                                    // 竞猜完毕
+                                    $store['unableClick'] = true ;
+
+                                    // 停止竞猜 直接移除定时器 加入开始
+                                    if( this.out && !this.out.parent ){
+                                        this.stop_pop.y = 227;
+                                        this.addChild( this.stop_pop );
+                                        this.startOver.play(0,1);
+                                        this.upTopLev();
+                                        egret.Tween.get( this.stop_pop ).to( { y:0 } , 250 );
+                                    }
+
+                                    if( this.stop_pop){
+                                        egret.Tween.get( this.stop_pop ).to({y:227},250).call(()=>{
+                                            if( this.stop_pop.parent ){
+                                                this.removeChild( this.stop_pop );
+                                            }
+                                        });
+                                    }
+
                                 ;break;
                                 // 可投注阶段
                                 case '2003': 
@@ -409,8 +429,8 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                             this.cnt.cnt_timer(( 25 - parseInt( $msgObjBody.process_time )).toString());
                                         ;break;
                                         case '3':
-                                            $store['lock_time'] = Math.floor (( new Date().getTime() / 1000 )) * 1000 + ( 20 - parseInt( $msgObjBody.process_time) )*1000;                                        
-                                            this.cnt.cnt_timer(( 20 - parseInt( $msgObjBody.process_time )).toString());
+                                            $store['lock_time'] = Math.floor (( new Date().getTime() / 1000 )) * 1000 + ( 21 - parseInt( $msgObjBody.process_time) )*1000;                                        
+                                            this.cnt.cnt_timer(( 21 - parseInt( $msgObjBody.process_time )).toString());
                                         ;break;
                                     }
                                     if( !!this.cnt ){
@@ -677,14 +697,14 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                             switch ( $msgObjBody.stageid ){
                                 case '1':
                                     $store['lock_time'] = Math.floor ( newTime / 1000 ) * 1000 + 30*1000;
-                                    this.cnt.cnt_timer('31');
+                                    this.cnt.cnt_timer('30');
                                 ;break;
                                 case '2':
                                     $store['lock_time'] = Math.floor (( newTime / 1000 )) * 1000 + 25*1000;
                                     this.cnt.cnt_timer('26');
                                 ;break;
                                 case '3':
-                                    $store['lock_time'] = Math.floor (( newTime / 1000 )) * 1000 + 20*1000;
+                                    $store['lock_time'] = Math.floor (( newTime / 1000 )) * 1000 + 21*1000;
                                     this.cnt.cnt_timer('21');
                                 ;break;
                             }
@@ -825,6 +845,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 ;break;
                 case '2017':
                     this.cnt.showTips('使用了旧的房间号 error at 2017') ;
+                    window.location.reload() ;
                 ;break
 
                 case '2011':
@@ -832,7 +853,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         this.cnt.showChat( $msgObjBody.uid , $msgObjBody.phrase_id )
                     }
                 break;
-
 
             }
 

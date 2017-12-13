@@ -723,17 +723,13 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
                         }
                     }
                     if( this[ baseImg + choseUser ] && allShowWinNum ){
-
                         this[ baseImg + choseUser ].isShowWinGold( allShowWinNum );
                         userImgArr.push( this[ baseImg + choseUser ] )
                     }
                 }
-                //  更新每个用户的信息 可能要再动画之后
-                if( settleData[i].uid && settleData[i].total ){
+                //  更新每个用户的信息 可能要再动画之后  离开的用户 为null 
+                if( settleData[i].uid && settleData[i].total && this[ baseImg + choseUser ] ){
                     this[ baseImg + choseUser ]['setMyGold']( settleData[i].total )
-                }else{
-                    // 没找到对应的用户
-                    console.error('没找到对应的用户 at 2007 websock')
                 }
             }
 
@@ -815,6 +811,11 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
         let len = $store['user_info'].length
         let newUserInfo = [];
         let firstUser = null ;
+        let bigIndex = 0;
+
+        if( this.fieldContain && this.bgCourtWrap  ){
+            bigIndex = this.bgCourtWrap.getChildIndex( this.fieldContain ) ;
+        }
 
         if( !len || len === undefined){
             len = 0
@@ -838,6 +839,8 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
                 $store['emptyUserPosition'].push( i+1 )
             }
         }
+        let newIndex = 0;
+        let newObj = null ;
         for(let i=0; i<len ;i++){
             if( $store['user_info'][i] && $store['user_info'][i].photo === '' ){
                 $store['user_info'][i].photo = 'http://img.choopaoo.com/esun/upload/be/83/be837ad8049611e797ef.png'
@@ -858,18 +861,15 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
 
             this.bgCourtWrap.addChild(this[choseUserImg]);
 
-            setTimeout(()=>{
-                if( !!this.fieldContain && !!this[choseUserImg] && this.fieldContain.parent && this[choseUserImg].parent ){
-                    try{
-                        if( this.bgCourtWrap.getChildIndex( this[choseUserImg] ) > this.bgCourtWrap.getChildIndex( this.fieldContain )  ){
-                            this.bgCourtWrap.swapChildren( this.fieldContain , this[choseUserImg] ) ;
-                        }
-                    }catch(e){
-                        alert('不支持swapchildren')
-                    }
-                }
-            },1000)
+            if( this.bgCourtWrap.getChildIndex( this[choseUserImg] ) > newIndex ){
+                newIndex = this.bgCourtWrap.getChildIndex( this[choseUserImg] ) ;
+                newObj = this[choseUserImg] ;
+                this.bgCourtWrap.swapChildren( this.fieldContain ,  this[choseUserImg] ) ;
+            }
+
         }
+        this.bgCourtWrap.swapChildren( this.fieldContain , newObj ) ;
+
     }
 
     // 用户 进入  new
@@ -893,14 +893,29 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
         }
 
         this.bgCourtWrap.addChild(this[choseUserImg]);
-
         setTimeout(()=>{
             if( !$store['unableClick'] && !!this.fieldContain && !!this[choseUserImg] && this.fieldContain.parent && this[choseUserImg].parent ){
-                if( this.bgCourtWrap.getChildIndex( this[choseUserImg] ) > this.bgCourtWrap.getChildIndex( this.fieldContain )  ){
-                    this.bgCourtWrap.swapChildren( this.fieldContain , this[choseUserImg] ) ;
+                let item = null ;
+                let choseUserImg = 'userImg';
+                let bigIndex = 0;
+                let bigUserImg = null ;
+                for( item  in $store.userPositionLocal ){
+                    if( $store.userPositionLocal[item] ){
+                        if( this.bgCourtWrap.getChildIndex( this[ choseUserImg +  $store.userPositionLocal[item] ] ) > bigIndex ){
+                            bigIndex = this.bgCourtWrap.getChildIndex( this[ choseUserImg +  $store.userPositionLocal[item] ] ) ;
+                            bigUserImg = this[ choseUserImg +  $store.userPositionLocal[item] ] ;
+                        }
+                    }
+                }
+                if( !!bigIndex ){
+                    if( !!this.fieldContain && this.fieldContain.parent ){
+                        this.bgCourtWrap.swapChildren( this.fieldContain , bigUserImg  ) ;
+                        this.bgCourtWrap.setChildIndex( this.fieldContain , bigIndex + 1 ) ;
+                    }
                 }
             }
-        },300)
+
+        },10)
 
     }
     // 用户 离开  new
