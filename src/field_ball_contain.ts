@@ -199,6 +199,13 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             src: $store['env_variable'].src,
         })
 
+        if($store['userMySelf'] ){
+            if( parseInt ( $store['userMySelf'].getCurGold() ) <  parseInt ( $store['curr_btn_coin'] ) ){
+                $store['$main'].addChild( $store['$coinNone'] )
+                return false ;
+            }
+        }
+
         await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
             // 更新 自己头像 金币   下单之后
             if( res && res.status === '100' ){
@@ -267,6 +274,13 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             src: $store['env_variable'].src,
         })
 
+        if($store['userMySelf'] ){
+            if( parseInt ( $store['userMySelf'].getCurGold() ) <  parseInt ( $store['curr_btn_coin'] ) ){
+                $store['$main'].addChild( $store['$coinNone'] )
+                return false ;
+            }
+        }
+        
         await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
             if( res && res.status === '100' ){
 

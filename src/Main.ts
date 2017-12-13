@@ -394,6 +394,26 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                     if( !!this.cnt ){
                                         this.cnt.cnt_upTextTips('等待开奖');
                                     }
+                                    // 竞猜完毕
+                                    $store['unableClick'] = true ;
+
+                                    // 停止竞猜 直接移除定时器 加入开始
+                                    if( this.out && !this.out.parent ){
+                                        this.stop_pop.y = 227;
+                                        this.addChild( this.stop_pop );
+                                        this.startOver.play(0,1);
+                                        this.upTopLev();
+                                        egret.Tween.get( this.stop_pop ).to( { y:0 } , 250 );
+                                    }
+
+                                    if( this.stop_pop){
+                                        egret.Tween.get( this.stop_pop ).to({y:227},250).call(()=>{
+                                            if( this.stop_pop.parent ){
+                                                this.removeChild( this.stop_pop );
+                                            }
+                                        });
+                                    }
+
                                 ;break;
                                 // 可投注阶段
                                 case '2003': 
