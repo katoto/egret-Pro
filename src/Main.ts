@@ -222,6 +222,7 @@ class Main extends egret.DisplayObjectContainer {
         this.top.y = 0;
         this.addChild(this.top);
 
+
         // 金币不足
         this.coinNone = new Pop02Money();
         $store['$coinNone'] = this.coinNone ;
@@ -548,6 +549,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                         this.mpromotion.play(0,1);
                                         this.addChild(this.promotion);
                                         this.upTopLev() ;
+                                        this.swapChildren( this.promotion , this.top )
                                     }
                                     this.promotion.moveSecond( $msgObjBody.pre_result );
                                     setTimeout(()=>{
@@ -562,6 +564,8 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                         this.mpromotion.play(0,1);
                                         this.addChild(this.promotion)
                                         this.upTopLev();
+                                        this.swapChildren( this.promotion , this.top )
+                                        
                                     }
                                     this.promotion.moveThree( $msgObjBody.pre_result ) ;
                                     setTimeout(()=>{
