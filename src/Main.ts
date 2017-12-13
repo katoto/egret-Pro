@@ -825,6 +825,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                 ;break;
                 case '2017':
                     this.cnt.showTips('使用了旧的房间号 error at 2017') ;
+                    window.location.reload() ;
                 ;break
 
                 case '2011':
@@ -832,7 +833,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         this.cnt.showChat( $msgObjBody.uid , $msgObjBody.phrase_id )
                     }
                 break;
-
 
             }
 
