@@ -8,16 +8,27 @@ class Top extends egret.DisplayObjectContainer{
     private pop02Cham;
     private textTitle:egret.TextField;
     private textDate:egret.TextField;
+    private btnBack:egret.Bitmap;
 
     private drawTop(Width){
 
         window['store'].$Top = this ;
+
+        this.btnBack = new egret.Bitmap(RES.getRes('btn-back_png'));
+        this.btnBack.x = 10;
+        this.btnBack.y = 14;
+        this.addChild(this.btnBack);
+        this.btnBack.touchEnabled = true;
+        this.btnBack.addEventListener(egret.TouchEvent.TOUCH_TAP,()=>{
+            window.history.back()
+        },this)
+
         //    左上角标题
         this.textTitle = new egret.TextField();
         this.textTitle.text = '欧洲杯1/4决赛';
         this.textTitle.textColor = 0xffffff;
         this.textTitle.size = 30;
-        this.textTitle.x = 20;
+        this.textTitle.x = 100;   // +80,原本20
         this.textTitle.y = 14;
         this.addChild(this.textTitle);
 
@@ -25,7 +36,7 @@ class Top extends egret.DisplayObjectContainer{
         this.textDate.text = '当日第55期';
         this.textDate.textColor = 0xffffff;
         this.textDate.size = 18;
-        this.textDate.x = 20;
+        this.textDate.x = 100;   // +80,原本20
         this.textDate.y = 54;
         this.addChild(this.textDate);
         

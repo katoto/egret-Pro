@@ -71,7 +71,7 @@ class Pop02Cham extends egret.DisplayObjectContainer{
        this.popWrap.addChild(bgWhite);
        //load
        this.load = new egret.TextField();
-       this.load.text = "请稍等，用命加载中...";
+       this.load.text = "请稍等，玩命加载中...";
        this.load.width = 680;
        this.load.y = 350;
        this.load.textColor = 0xd9ddff;
