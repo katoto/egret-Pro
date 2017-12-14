@@ -10,6 +10,10 @@
 		"promise/bin/promise.js"
 	],
 	"game": [
+<<<<<<< HEAD
+=======
+		"bin-debug/Change.js",
+>>>>>>> 82afc5cca3eab001cacb00b312fe69aa92634304
 		"bin-debug/Penalty01.js",
 		"bin-debug/ChampionC.js",
 		"bin-debug/Cnt.js",
@@ -23,7 +27,11 @@
 		"bin-debug/LoadingUI.js",
 		"bin-debug/Main.js",
 		"bin-debug/Music.js",
+<<<<<<< HEAD
 		"bin-debug/Change.js",
+=======
+		"bin-debug/ChampionC.js",
+>>>>>>> 82afc5cca3eab001cacb00b312fe69aa92634304
 		"bin-debug/Penalty02.js",
 		"bin-debug/Pop.js",
 		"bin-debug/Pop02-ChampionC.js",

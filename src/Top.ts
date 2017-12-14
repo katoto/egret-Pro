@@ -45,7 +45,7 @@ class Top extends egret.DisplayObjectContainer{
         this.pop02Cham.scaleY= window['store'].scale;
         // 右上角充值与往期
         let btnPast:egret.Bitmap = new egret.Bitmap(RES.getRes('btn-past_png'));
-        btnPast.x = Width - 163;
+        btnPast.x = Width-200;
         btnPast.y = 21;
         this.addChild(btnPast);
         this.pop02Cham = new Pop02Cham();
@@ -62,8 +62,8 @@ class Top extends egret.DisplayObjectContainer{
             this.pop02Cham.getList();
         },this)
         let btnRecharge:egret.Bitmap = new egret.Bitmap(RES.getRes('btn-recharge_png'));
-        btnRecharge.x = Width - 76;
-        btnRecharge.y = 23;
+        btnRecharge.x = Width - 100;
+        btnRecharge.y = 21;
         this.addChild(btnRecharge);
         btnRecharge.touchEnabled = true;
         btnRecharge.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
