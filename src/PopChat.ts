@@ -8,19 +8,20 @@ class PopChat extends egret.DisplayObjectContainer{
     private chatTime ;
 
     private drawChat(){
+        let $store = window['store'] ;
        //弹窗蒙层
        let popLayer:egret.Shape = new egret.Shape();
        popLayer.graphics.beginFill(0x000000,0);
-       popLayer.graphics.drawRect(0,0,window['store']['stage_Width'],window['store']['stage_Height'])
+       popLayer.graphics.drawRect(0,0,$store['stage_Width'],$store['stage_Height'])
        popLayer.graphics.endFill();
        this.addChild(popLayer);
 
         //背景
         let popBgLayer:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
-        popBgLayer.width = window['store']['stage_Width'];
+        popBgLayer.width = $store['stage_Width'];
         popBgLayer.height = 534;
         popBgLayer.anchorOffsetY = popBgLayer.height;
-        popBgLayer.y = window['store']['stage_Height'];
+        popBgLayer.y = $store['stage_Height'];
         this.addChild(popBgLayer);
 
         let popBg:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-chat_png'));

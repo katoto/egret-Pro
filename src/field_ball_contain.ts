@@ -227,7 +227,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     this[fieldName].upLeftMyMoney( window['formateGold'] ( $store_coinNum[currMatchData.matchid]['my_golds_l']) )  
                     this[fieldName].addLeftAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['home_golds']) ); 
 
-                    if( parseInt ( $store['curr_btn_coin'] ) >= 1000  ){
+                    if( parseInt ( $store['curr_btn_coin'] ) >= 10000  ){
                         this.tween_Coin( x , y , $store['allCoinObj'][fieldName].coin_left , true )
                     }else{
                         this.tween_Coin( x , y , $store['allCoinObj'][fieldName].coin_left , false )
@@ -299,7 +299,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                     this[fieldName].upRightMyMoney( window['formateGold']( $store_coinNum[currMatchData.matchid]['my_golds_r'] ))  // 个人金额
                     this[fieldName].addRightAllCoin( window['formateGold']( $store_coinNum[currMatchData.matchid]['away_golds']) ); //  总的金额 
 
-                    if( parseInt ( $store['curr_btn_coin'] ) >= 1000  ){
+                    if( parseInt ( $store['curr_btn_coin'] ) >= 10000  ){
                         this.tween_Coin(x,y, $store['allCoinObj'][fieldName].coin_right , true ) ;
                     }else{
                         this.tween_Coin(x,y, $store['allCoinObj'][fieldName].coin_right , false ) ;
@@ -851,15 +851,15 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
      */
     private create_other_Coin( start_x:any , start_y:any , end_x:any , end_y:any ,currArr:any , moreCoin:Boolean){
         let goldArr = [] ;
-        if( !moreCoin ){
+        if( !moreCoin || 1 ){
             let gold = new Gold();
             gold.anchorOffsetX = gold.width/2;
             gold.anchorOffsetY = gold.height/2;
             gold.x = start_x ;
             gold.y = start_y ;
-            currArr.push( gold )
             this.addChild(gold);
-            egret.Tween.get( gold ).to( { x: end_x,y: end_y },500  );
+            currArr.push( gold ) ;
+            egret.Tween.get( gold ).to( { x: end_x,y: end_y }, 300 );
         }else{
             // more  飞金币
             for( let i=0;i<3; i++ ){
@@ -915,15 +915,12 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
         let moreCoin = false;   
 
-        if( parseInt ( bet_golds ) > 10000 ){
+        if( parseInt ( bet_golds ) >= 100000 ){
             moreCoin = true ;  // 是否按等级投注更多金币
         }
         // 飞向  场地  位置
         if( $store['matFindField'][ matchid ] ){
             currFieldStr = $store['matFindField'][ matchid ] ;
-
-        }else{
-            console.error('not find matchid at field_ball_contain' );
         }
 
         if( !$store_coinNum[matchid] ){
@@ -1021,8 +1018,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         coin_left_local: $store['coin_local']['field43_l'],
                         coin_right_local: $store['coin_local']['field43_r']
                     }
-
-
                 }
                
             ;break;
@@ -1038,7 +1033,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         coin_left_local: $store['coin_local']['field44_l'],
                         coin_right_local: $store['coin_local']['field44_r']
                     }
-
                 }
             
             ;break;
@@ -1055,8 +1049,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         // 更新金额
         if( selection ){
             if( selection === '1' ){
-                // 150<x && x<350
-                // newField_x = Math.random() * 200 + 150;
                 newField_x = Math.random() * 100 + 200;
                 this.create_other_Coin( newUser_x , newUser_y , newField_x , newField_y , $store['allCoinObj'][currFieldStr].coin_left , moreCoin )
                 this[currFieldStr].addLeftAllCoin( window['formateGold']( $store_coinNum[matchid]['home_golds'] ) ); //  总的金额  
@@ -1064,8 +1056,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 // 410<x && x<600
                 // newField_x = Math.random() * 200 + 410;
                 newField_x = Math.random() * 100 + 460;
+                this.create_other_Coin( newUser_x , newUser_y , newField_x , newField_y , $store['allCoinObj'][currFieldStr].coin_right , moreCoin ) ;
                 this[currFieldStr].addRightAllCoin( window['formateGold']( $store_coinNum[matchid]['away_golds'] ) ); //  总的金额  
-                this.create_other_Coin( newUser_x , newUser_y , newField_x , newField_y , $store['allCoinObj'][currFieldStr].coin_right , moreCoin )
+                
             }
         }
 
@@ -1090,9 +1083,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 this[ $store['matFindField'][matchid] ].addwinIcon_r() ;
             }
             return ;
-        }else{
-            // 没找到 赢的比赛
-            console.warn( '没找到 赢的Icon' )
         }
     }
 
@@ -1163,8 +1153,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             this.field44.cleanAllCoinText();
         }                             
     }
-
-
 
     private courtWrap(){
         let wrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();

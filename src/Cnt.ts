@@ -751,26 +751,25 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
         // 处理 他人金币的金币减少 .
         let $store = window['store'] ;
         let choseOther = $store['userPositionLocal'][uid] 
-        let selOtherCoin = $store['userPosition'][$store['userPositionLocal'][uid] - 1];
-        let baseImg = 'userImg' ; 
+        let selOtherCoin = $store['userPosition'][$store['userPositionLocal'][uid] - 1] -1 ;
+        let baseImgStr = 'userImg' + choseOther ; 
         let oldCoin = 0 ;
 
-        if( this[ baseImg + choseOther ] ){
-            if( isNaN( this[ baseImg + choseOther ]['getCurGold']() ) ){
+        if( this[ baseImgStr] ){
+            if( isNaN( this[ baseImgStr ]['getCurGold']() ) ){
                 console.log( 'isNaN 了 cnt.ts' )
             }else{
-                oldCoin = parseInt( this[ baseImg + choseOther ]['getCurGold']() ) ;
+                oldCoin = parseInt( this[ baseImgStr ]['getCurGold']() ) ;
             }
         }
 
         // setMyGold
         if( oldCoin - parseInt( bet_golds ) < 0 ){
-            this[ baseImg + choseOther ]['setMyGold']( 0 );
+            this[ baseImgStr ]['setMyGold']( 0 );
         }else{
-            this[ baseImg + choseOther ]['setMyGold']( oldCoin - parseInt( bet_golds ) );
+            this[ baseImgStr ]['setMyGold']( oldCoin - parseInt( bet_golds ) );
         }
-
-        this.fieldContain.other_Coin( matchid , selection , selOtherCoin - 1 , bet_golds );
+        this.fieldContain.other_Coin( matchid , selection , selOtherCoin , bet_golds );
 
     }
 
@@ -969,5 +968,5 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
             },1500)
         }
     }
-    
+
 }

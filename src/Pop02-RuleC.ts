@@ -31,8 +31,8 @@ class Pop02RuleC extends egret.DisplayObjectContainer{
        this.popWrap.scaleY = 0;
        this.popWrap.anchorOffsetX = this.popWrap.width/2;
        this.popWrap.anchorOffsetY = this.popWrap.height/2;
-       this.popWrap.x = window['store']['stage_anWidth'];
-       this.popWrap.y = window['store']['stage_anHeight'];
+       this.popWrap.x = $store['stage_anWidth'];
+       this.popWrap.y = $store['stage_anHeight'];
        BigWrap.addChild(this.popWrap);
        
         //背景

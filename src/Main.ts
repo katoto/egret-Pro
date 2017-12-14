@@ -232,7 +232,7 @@ class Main extends egret.DisplayObjectContainer {
         }
 
         this.addChild(this.top);
-        
+
         if( $store['env_variable'].ck === '' || !$store['env_variable'].ck ){
             console.error('请带上ck');
             // 临时ck
@@ -906,6 +906,7 @@ this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid 
 this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid +'&roomid='+roomMsg.roomid +'&port='+roomMsg.port+'&node='+roomMsg.node+'&ip='+roomMsg.ip+'&create_time='+roomMsg.create_time );
 
                     }catch(e){
+                        alert('websocket error')
                         console.error('websocket error')
                     }
                 }else{
