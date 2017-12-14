@@ -82,14 +82,18 @@ class Pop02Money extends egret.DisplayObjectContainer{
                         window.location.href = 'http://crazybet.choopaoo.com/500app?jumpToPay=true' ;
                     ;break;
                     case 'off':
-                        window.location.href = 'http://crazybet.choopaoo.com/official?jumpToPay=true' ;
+                        window.location.href = 'http://crazybet.choopaoo.com/official?jumpToPay=true&from=off' ;
                     break;
                     case 'off-mipan':
-                        window.location.href = 'http://crazybet.choopaoo.com/official?jumpToPay=true' ;                    
+                        window.location.href = 'http://crazybet.choopaoo.com/official?jumpToPay=true&from=off-mipan' ;                    
                     ;break;
                     case 'qqsd':
                         window.location.href = 'http://crazybet.choopaoo.com/500qqsd/?jumpToPay=true' ;
                     ;break;
+                    case '500touch':
+                        window.location.href = 'http://crazybet.choopaoo.com/fkcqH5/?jumpToPay=true' ;
+                    ;break;
+
                 }
             }
 

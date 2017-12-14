@@ -102,6 +102,9 @@ class Pop02Out extends egret.DisplayObjectContainer{
                     // 这个要特殊处理 ！
                     window.location.href = 'https://www.500.com' ;                
                 ;break;
+                case '500touch':
+                    window.location.href = 'http://crazybet.choopaoo.com/fkcqH5/#/h5/home/hot' ;
+                ;break;
 
             }
         }

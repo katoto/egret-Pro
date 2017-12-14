@@ -77,7 +77,7 @@ class Cnt extends egret.DisplayObjectContainer{
         this.bgCourtWrap.anchorOffsetX = this.bgCourtWrap.width/2;
         this.bgCourtWrap.anchorOffsetY = this.bgCourtWrap.height/2;
         this.bgCourtWrap.x = anWidth;
-        this.bgCourtWrap.y = anHeight-16;
+        this.bgCourtWrap.y = anHeight -16 ;
 
         window['store']['$bgCourtWrap'] = this.bgCourtWrap ;
         //问题，测试屏幕大小进行缩放

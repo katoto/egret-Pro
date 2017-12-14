@@ -10,8 +10,8 @@
 		"promise/bin/promise.js"
 	],
 	"game": [
-		"bin-debug/ChampionC.js",
-		"bin-debug/Change.js",
+		"bin-debug/Penalty01.js",
+		"bin-debug/Penalty02.js",
 		"bin-debug/Cnt.js",
 		"bin-debug/field_ball_contain.js",
 		"bin-debug/Foot.js",
@@ -23,8 +23,8 @@
 		"bin-debug/LoadingUI.js",
 		"bin-debug/Main.js",
 		"bin-debug/Music.js",
-		"bin-debug/Penalty01.js",
-		"bin-debug/Penalty02.js",
+		"bin-debug/ChampionC.js",
+		"bin-debug/Change.js",
 		"bin-debug/Pop.js",
 		"bin-debug/Pop02-ChampionC.js",
 		"bin-debug/Pop02-Money.js",
@@ -35,8 +35,6 @@
 		"bin-debug/TextTips.js",
 		"bin-debug/Timer.js",
 		"bin-debug/Top.js",
-		"bin-debug/userImage.js",
-		"bin-debug/adapter/AssetAdapter.js",
-		"bin-debug/adapter/ThemeAdapter.js"
+		"bin-debug/userImage.js"
 	]
 }

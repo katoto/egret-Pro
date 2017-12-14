@@ -204,6 +204,7 @@ class Main extends egret.DisplayObjectContainer {
         this.change.x = 0;
 
         // this.addChild( this.change );
+        
         // setTimeout(()=>{
         //     egret.Tween.get( this.change ).to({x:-750},200);  
         // },2000)
@@ -219,7 +220,7 @@ class Main extends egret.DisplayObjectContainer {
          //头部实例2
         this.top = new Top(this.Width);
         this.top.x = 0;
-        this.top.y = 0;
+
         this.addChild(this.top);
 
 
@@ -229,10 +230,20 @@ class Main extends egret.DisplayObjectContainer {
 
         this.initStage();
 
+
+        if( $store['env_variable'].src === 'qqsd' && window['platform'] === 'ios' ){
+             this.top.y = 45;
+        }else{
+            this.top.y = 0;
+        }
+
+
+
+
         if( $store['env_variable'].ck === '' || !$store['env_variable'].ck ){
             console.error('请带上ck');
             // 临时ck
-            await window['getJson']( { type:'get' ,url :'http://10.0.1.41:9899/login/guest?deviceid=1238815' ,dataType:'json'} ).then(( res )=>{
+            await window['getJson']( { type:'get' ,url :'http://crazybet.choopaoo.com:7899/login/guest?deviceid=1238815' ,dataType:'json'} ).then(( res )=>{
                 $store['env_variable'].ck = res.data.ck;
                 $store['orderObj'].ck = res.data.ck;
             })
@@ -253,7 +264,7 @@ class Main extends egret.DisplayObjectContainer {
                         this.webSocket.addEventListener( egret.IOErrorEvent.IO_ERROR ,this.onIOError ,this );
                         this.webSocket.addEventListener( egret.Event.CLOSE ,this.onCloseSock ,this );
 
-this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&roomid='+roomMsg.roomid +'&port='+roomMsg.port+'&node='+roomMsg.node+'&ip='+roomMsg.ip+'&create_time='+roomMsg.create_time );
+this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid +'&roomid='+roomMsg.roomid +'&port='+roomMsg.port+'&node='+roomMsg.node+'&ip='+roomMsg.ip+'&create_time='+roomMsg.create_time );
 
                     }catch(e){
                         alert('websock error')
@@ -533,6 +544,9 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                             this.change.x = 0;
                                             this.addChild( this.change );
                                             this.upTopLev();
+
+                                            this.swapChildren( this.change , this.top )
+
                                             setTimeout(()=>{
                                                 egret.Tween.get( this.change ).to( { x : -750 }, 700 ).call(()=>{
                                                     if( this.change.parent ){
@@ -896,7 +910,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                         this.webSocket.addEventListener( egret.IOErrorEvent.IO_ERROR ,this.onIOError ,this );
                         this.webSocket.addEventListener( egret.Event.CLOSE ,this.onCloseSock ,this );
 
-this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&roomid='+roomMsg.roomid +'&port='+roomMsg.port+'&node='+roomMsg.node+'&ip='+roomMsg.ip+'&create_time='+roomMsg.create_time );
+this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid +'&roomid='+roomMsg.roomid +'&port='+roomMsg.port+'&node='+roomMsg.node+'&ip='+roomMsg.ip+'&create_time='+roomMsg.create_time );
 
                     }catch(e){
                         console.error('websocket error')
@@ -958,10 +972,26 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
 
 }
 
-window['store'] = {
-    orderDomain:'http://10.0.1.41:9899',
-    initDomain:'http://10.0.1.41:2332',
+/**
+ *  线下走 41 的虚拟杯   （ 端口号 ）
+ *  10.0.1.41 
+ *  9000  websock 
+ *  9899  下单
+ *  申请房间 2332
+ * 
+ * 
+ *  线上 端口 数据
+ *  7899  下单
+ *  7799 申请房间  https 走 47799
+ *   7699  ws  websock
+ *   106.75.167.151  
+ */
 
+
+window['store'] = {
+    orderDomain:'http://106.75.167.151:7899',
+    initDomain:'http://106.75.167.151:7799',
+    // initDomain:'http://10.0.1.41:2332',
     isAgainConnect: 1 , // 用于sock 重新连
 
     $main:null,

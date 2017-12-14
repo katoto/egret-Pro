@@ -83,6 +83,11 @@ class Top extends egret.DisplayObjectContainer{
                     case 'qqsd':
                         window.location.href = 'http://crazybet.choopaoo.com/500qqsd/?jumpToPay=true' ;
                     ;break;
+
+                    case '500touch':
+                        window.location.href = 'http://crazybet.choopaoo.com/fkcqH5/?jumpToPay=true' ;
+                    ;break;
+
                 }
             }
 
