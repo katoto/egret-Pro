@@ -846,7 +846,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
     }
 
     /**
-     *  创建 他人 投注的金币
+     *  创建 他人 投注的金币  ,egret.Ease.circInOut
      *  地址 start_x  start_y  end_x end_y  arr 
      */
     private create_other_Coin( start_x:any , start_y:any , end_x:any , end_y:any ,currArr:any , moreCoin:Boolean){
@@ -859,7 +859,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             gold.y = start_y ;
             currArr.push( gold )
             this.addChild(gold);
-            egret.Tween.get( gold ).to( { x: end_x,y: end_y },800 ,egret.Ease.circInOut );
+            egret.Tween.get( gold ).to( { x: end_x,y: end_y },500  );
         }else{
             // more  飞金币
             for( let i=0;i<3; i++ ){
@@ -876,20 +876,18 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 egret.Tween.get( goldArr[0] ).to({
                     x: parseInt( end_x ) + 2 ,
                     y: parseInt( end_y ) + 3 ,
-                }, 800,egret.Ease.circInOut )
-                
+                }, 500 )
                 setTimeout(()=>{
                     egret.Tween.get( goldArr[1] ).to({
                         x: parseInt( end_x ) + 6 ,
                         y: parseInt( end_y ) + 8 ,
-                    }, 800,egret.Ease.circInOut )
-
+                    }, 500)
                 },80)
                 setTimeout(()=>{
                     egret.Tween.get( goldArr[2] ).to({
                         x: parseInt( end_x ) - 6 ,
                         y: parseInt( end_y ) - 8 ,
-                    }, 800,egret.Ease.circInOut )
+                    }, 500 )
                 },180 )
             },0)
 
