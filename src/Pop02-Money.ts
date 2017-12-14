@@ -10,11 +10,11 @@ class Pop02Money extends egret.DisplayObjectContainer{
     private popBtn2:egret.Bitmap ;
 
     private drawPop(){
-    
+        let $store = window['store'] ;
        //弹窗蒙层
        let popLayer:egret.Shape = new egret.Shape();
        popLayer.graphics.beginFill(0x000000,0.6);
-       popLayer.graphics.drawRect(0,0,window['store']['stage_Width'],window['store']['stage_Height'])
+       popLayer.graphics.drawRect(0,0,$store['stage_Width'],$store['stage_Height'])
        popLayer.graphics.endFill();
        this.addChild(popLayer);
 
@@ -24,8 +24,8 @@ class Pop02Money extends egret.DisplayObjectContainer{
        popWrap.height = 440;
        popWrap.anchorOffsetX = popWrap.width/2;
        popWrap.anchorOffsetY = popWrap.height/2;
-       popWrap.x = window['store']['stage_anWidth'];
-       popWrap.y = window['store']['stage_anHeight'];
+       popWrap.x = $store['stage_anWidth'];
+       popWrap.y = $store['stage_anHeight'];
        this.addChild(popWrap);
     //    egret.Tween.get( popWrap ).to({width:680,height:440},2000);  
 

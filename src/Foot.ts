@@ -90,10 +90,7 @@ class Foot extends egret.DisplayObjectContainer{
             this.btn_two.addEventListener( egret.TouchEvent.TOUCH_TAP, this.btn_twoDown ,this )
             this.btn_three.addEventListener( egret.TouchEvent.TOUCH_TAP, this.btn_threeDown ,this )
 
-        }else{
-            console.error( 'user_info data error  at foot.ts' )
         }
-
     }
     private btn_oneDown( e:egret.Event){
         this.btn_two['init_scale']( 0.9 )

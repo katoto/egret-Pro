@@ -27,7 +27,6 @@ class Main extends egret.DisplayObjectContainer {
     private out;
     
     private penalty02;
-    //test
     private coinNone;
 
     private textfield:egret.TextField;
@@ -59,18 +58,8 @@ class Main extends egret.DisplayObjectContainer {
         // })
 
         // egret.lifecycle.onPause = () => {
-        //     console.log(11111)
         //     this.cnt.showTips('11111111') ;
         //     // egret.ticker.pause();
-        //     // console.log(11)
-        //     // var a = 100;
-        //     // var b;
-        //     // b = null;
-        //     // b = setInterval(()=>{
-        //     //     console.log(a)
-        //     //     a = a -1 ;
-        //     // },1000)
-
         // }
 
         // egret.lifecycle.onResume = () => {
@@ -162,18 +151,6 @@ class Main extends egret.DisplayObjectContainer {
         }
         
         $store['$main'] = this ;
-
-        /**
-         *  声音
-         * mchange 登场
-         * startOver 比赛开始or结束
-         * mpromotion  晋级
-         * 
-         */
-        this.startOver = RES.getRes("start_mp3");
-        this.mpromotion = RES.getRes("promotion_mp3");
-        this.mchange = RES.getRes("change_mp3");
-
         // 头部实例
         // let header:Header = new Header(Width);
         // header.x = 0;
@@ -224,6 +201,17 @@ class Main extends egret.DisplayObjectContainer {
         $store['$coinNone'] = this.coinNone ;
 
         this.initStage();
+
+        /**
+         *  声音
+         * mchange 登场
+         * startOver 比赛开始or结束
+         * mpromotion  晋级
+         * 
+         */
+        this.startOver = RES.getRes("start_mp3");
+        this.mpromotion = RES.getRes("promotion_mp3");
+        this.mchange = RES.getRes("change_mp3");
 
         if( $store['env_variable'].src === 'qqsd' && window['platform'] === 'ios' ){
              this.top.y = 45;
@@ -326,7 +314,7 @@ this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid 
      *  onReceiveMess  websock 接收消息
      */
     private onReceiveMess(e:egret.Event):void{
-        var self = this;
+        let self = this;
         let $store = window['store'];
         // event.updateAfterEvent();  //  什么时候进行强制刷新 ??????手机上用户立场 舞台不刷新 
         let msg = this.webSocket.readUTF();

@@ -27,10 +27,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         this.courtWrap4 = this.courtWrap();
         // this.courtWrap1.touchEnabled = true;
         // this.courtWrap1.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onTouch,this);
-        // this.courtWrap2.touchEnabled = true;
-        // this.courtWrap2.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onTouch,this);
-        // this.courtWrap4.touchEnabled = true;
-        // this.courtWrap4.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onTouch,this);
         // 三选一插入
 
         this.field1 = new Field_ball('bg-court1_png');
@@ -127,8 +123,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         this.addcourtWrap1()
                         // 记录位置  切换
                         $store['matFindField'][$store['matches'][0].matchid] = 'field1';
-                    }else{
-                        console.error( '场地1数据不对' )
                     }
                 break;
                 case 2 :
@@ -141,9 +135,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                                  )
                                 // 记录位置
                                 $store['matFindField'][$store['matches'][i].matchid] = 'field2' +( i+1 );
-                        } else {
-                            console.error( '场地1/2数据不对' )
-                        }
+                        } 
                     }
                     this.addcourtWrap2()
 
@@ -158,9 +150,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                                  )
                                 // 记录位置
                                 $store['matFindField'][$store['matches'][i].matchid] = 'field4' +( i+1 );
-                        } else {
-                            console.error( '场地1/4数据不对' )
-                        }
+                        } 
                     }
                     this.addcourtWrap4()
 
@@ -220,8 +210,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
                     if( res.data && res.data.total ){
                         $store['userMySelf'].setMyGold( res.data.total );
-                    }else{
-                        console.error( 'field_ball_contain userMySelf Gold error' )
                     }
 
                     this[fieldName].upLeftMyMoney( window['formateGold'] ( $store_coinNum[currMatchData.matchid]['my_golds_l']) )  
@@ -307,8 +295,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
                     if( res.data && res.data.total ){
                         $store['userMySelf'].setMyGold( res.data.total );
-                    }else{
-                        console.error( 'field_ball_contain userMySelf Gold error' )
                     }
 
                 }
@@ -331,7 +317,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
     }
 
     // 场地点击处理 new 
-    async field_41Evt( e:egret.TouchEvent ){
+    private field_41Evt( e:egret.TouchEvent ){
         //  执行动画  213 154 left   496 156 right
         //  field41  为了方便处理
         // field41:{
@@ -385,7 +371,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         }
     }
 
-    async field_42Evt( e:egret.TouchEvent ){
+    private field_42Evt( e:egret.TouchEvent ){
         //  执行动画  213 154 left   496 156 right  
         let x = e.localX + 133;
         let y = e.localY + 320;
@@ -428,7 +414,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         }
     }
 
-    async field_43Evt( e:egret.TouchEvent ){
+    private field_43Evt( e:egret.TouchEvent ){
         //  执行动画  213 154 left   496 156 right  
         let x = e.localX + 133;
         let y = e.localY + 520;
@@ -472,7 +458,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         }
     }
 
-    async field_44Evt( e:egret.TouchEvent ){
+    private field_44Evt( e:egret.TouchEvent ){
         //  执行动画  213 154 left   496 156 right  
         let x = e.localX + 133;
         let y = e.localY + 720;
@@ -515,7 +501,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
     }
 
 
-    async field_21Evt( e:egret.TouchEvent ){
+    private field_21Evt( e:egret.TouchEvent ){
         let x = e.localX + 133;
         let y = e.localY + 234;
         let $store = window['store'];
@@ -555,7 +541,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             }
         }
     }
-    async field_22Evt( e:egret.TouchEvent ){
+    private field_22Evt( e:egret.TouchEvent ){
         let x = e.localX + 133;
         let y = e.localY + 508;
         let $store = window['store'];
@@ -595,7 +581,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             }
         }
     }
-    async field_1Evt( e:egret.TouchEvent ){
+    private field_1Evt( e:egret.TouchEvent ){
         let x = e.localX + 133;
         let y = e.localY + 322;
         let $store = window['store'];
@@ -802,15 +788,14 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
      *  金币的场次id 比赛id 金币的额度， 金币的来源。。。。。好像很多
      */
     private tween_Coin( stage_x:any ,stage_y:any ,currArr:any , isMore ){
-
+        let $stage_anWidth = window['store']['stage_anWidth'] ;
         if( isMore ){
             let newGold = [];
             for( let i=0;i<4;i++ ){
                 let gold = new Gold();
                 gold.anchorOffsetX = gold.width/2;
                 gold.anchorOffsetY = gold.height/2;
-                // gold.x = window['store']['stage_anWidth'] + gold.width/2 ;
-                gold.x = window['store']['stage_anWidth'];
+                gold.x = $stage_anWidth ;
                 gold.y = 980 - gold.height/2;
                 currArr.push( gold );
                 newGold.push( gold )
@@ -836,7 +821,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
             let gold = new Gold();
             gold.anchorOffsetX = gold.width/2;
             gold.anchorOffsetY = gold.height/2;
-            gold.x = window['store']['stage_anWidth'] + gold.width/2;
+            gold.x = $stage_anWidth + gold.width/2;
             gold.y = 980 - gold.height/2;
             currArr.push( gold )
             this.addChild(gold);

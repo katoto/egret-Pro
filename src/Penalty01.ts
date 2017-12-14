@@ -207,9 +207,8 @@ class Penalty01 extends eui.UILayer {
      *  清除 所有的球
      */
     private clearAllball(){
-        let len = null ;
         if( this.collFootball ){
-            len = this.collFootball.length ;
+            let len = this.collFootball.length ;
             for( let i = 0;i < len ; i++ ){
                 if( this.collFootball[i] && this.collFootball[i].parent ){
                     this.removeChild( this.collFootball[i] );

@@ -93,9 +93,10 @@ class Pop02Cham extends egret.DisplayObjectContainer{
        this.popWrap.addChild(popClose);
        popClose.touchEnabled = true;
        popClose.addEventListener(egret.TouchEvent.TOUCH_TAP,()=>{
+           let $store = window['store'] ;
             //    this.removeChild(BigWrap);
-            if( window['store'].$pop02Cham.parent ){
-                window['store'].$Top.removeChild( window['store'].$pop02Cham ) ;
+            if( $store.$pop02Cham.parent ){
+                $store.$Top.removeChild( $store.$pop02Cham ) ;
                 // this.popChamC.clearAllWrap() ;
             }
        },this)
