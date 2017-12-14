@@ -130,7 +130,6 @@ class Main extends egret.DisplayObjectContainer {
 
     /**
      * 资源组加载出错
-     *  The resource group loading failed
      */
     private onResourceLoadError(event: RES.ResourceEvent) {
         //TODO
@@ -157,9 +156,9 @@ class Main extends egret.DisplayObjectContainer {
         this.Height = $store['stage_Height'] = this.stage.stageHeight;
         this.anWidth = $store['stage_anWidth'] = this.Width/2;
         const anHeight =  $store['stage_anHeight'] = this.Height/2;
-        window['store'].scale = ( this.Height / 1334 ).toFixed(2);
-        if(parseFloat((window['store'].scale))<0.92){
-           window['store'].scale = parseFloat((window['store'].scale))+0.08;
+        $store.scale = ( this.Height / 1334 ).toFixed(2);
+        if(parseFloat(($store.scale))<0.92){
+           $store.scale = parseFloat(($store.scale))+0.08;
         }
         
         $store['$main'] = this ;
@@ -185,8 +184,8 @@ class Main extends egret.DisplayObjectContainer {
         this.cnt = new Cnt(this.Width,this.Height,this.anWidth,anHeight);
         this.cnt.x = 0;
         this.cnt.y = 0;
-        window['store']['$cnt'] = this.cnt ;
         this.addChild(this.cnt);
+        $store['$cnt'] = this.cnt ;
 
         // 底部实例
         this.bottom = new Foot();
@@ -204,7 +203,6 @@ class Main extends egret.DisplayObjectContainer {
         this.change.x = 0;
 
         // this.addChild( this.change );
-        
         // setTimeout(()=>{
         //     egret.Tween.get( this.change ).to({x:-750},200);  
         // },2000)
@@ -212,17 +210,14 @@ class Main extends egret.DisplayObjectContainer {
         //被踢出房间 的实例
         setTimeout(()=>{
             this.out = new Pop02Out();
-        },2000)
+        },5000)
 
-        this.start_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-begin_png');
-        this.stop_pop = new Pop( window['store']['stage_Width'] , window['store']['stage_Height'] ,'text-over_png' );
+        this.start_pop = new Pop( $store['stage_Width'] , $store['stage_Height'] ,'text-begin_png');
+        this.stop_pop = new Pop( $store['stage_Width'] , $store['stage_Height'] ,'text-over_png' );
 
          //头部实例2
         this.top = new Top(this.Width);
         this.top.x = 0;
-
-        this.addChild(this.top);
-
 
         // 金币不足
         this.coinNone = new Pop02Money();
@@ -230,16 +225,14 @@ class Main extends egret.DisplayObjectContainer {
 
         this.initStage();
 
-
         if( $store['env_variable'].src === 'qqsd' && window['platform'] === 'ios' ){
              this.top.y = 45;
         }else{
             this.top.y = 0;
         }
 
-
-
-
+        this.addChild(this.top);
+        
         if( $store['env_variable'].ck === '' || !$store['env_variable'].ck ){
             console.error('请带上ck');
             // 临时ck

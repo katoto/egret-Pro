@@ -751,7 +751,7 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
         let choseOther = $store['userPositionLocal'][uid] 
         let selOtherCoin = $store['userPosition'][$store['userPositionLocal'][uid] - 1];
         let baseImg = 'userImg' ; 
-        let oldCoin ;
+        let oldCoin = 0 ;
 
         if( this[ baseImg + choseOther ] ){
             if( isNaN( this[ baseImg + choseOther ]['getCurGold']() ) ){
@@ -762,7 +762,12 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
         }
 
         // setMyGold
-        this[ 'userImg'+choseOther ]['setMyGold']( oldCoin - parseInt( bet_golds ) );
+        if( oldCoin - parseInt( bet_golds ) < 0 ){
+            this[ baseImg + choseOther ]['setMyGold']( 0 );
+        }else{
+            this[ baseImg + choseOther ]['setMyGold']( oldCoin - parseInt( bet_golds ) );
+        }
+        
         this.fieldContain.other_Coin( matchid , selection , selOtherCoin - 1 , bet_golds );
 
     }
