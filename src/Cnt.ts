@@ -55,6 +55,7 @@ class Cnt extends egret.DisplayObjectContainer{
     private toastBg:egret.Bitmap ;
 
     private drawCnt(Width,Height,anWidth,anHeight){
+        let $store = window['store'] ;
         // 内容区
         let wrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
         wrap.width = Width;
@@ -79,7 +80,7 @@ class Cnt extends egret.DisplayObjectContainer{
         this.bgCourtWrap.x = anWidth;
         this.bgCourtWrap.y = anHeight -16 ;
 
-        window['store']['$bgCourtWrap'] = this.bgCourtWrap ;
+        $store['$bgCourtWrap'] = this.bgCourtWrap ;
         //问题，测试屏幕大小进行缩放
         this.bgCourtWrap.scaleX=this.scale;
         this.bgCourtWrap.scaleY=this.scale;
@@ -106,7 +107,7 @@ class Cnt extends egret.DisplayObjectContainer{
         this.textT.y = 76;
         this.bgCourtWrap.addChild( this.textT );
         this.fieldContain = new Field_ball_contain();
-        window['store']['$fieldContain'] = this.fieldContain ;
+        $store['$fieldContain'] = this.fieldContain ;
         this.bgCourtWrap.addChild( this.fieldContain );
 
         //冠军
@@ -138,8 +139,8 @@ class Cnt extends egret.DisplayObjectContainer{
         this.toast.height = 90; 
         this.toast.anchorOffsetX = 215;
         this.toast.anchorOffsetY = 45;
-        this.toast.x =  window['store']['stage_anWidth'] ;
-        this.toast.y =  window['store']['stage_anHeight'] ;
+        this.toast.x =  $store['stage_anWidth'] ;
+        this.toast.y =  $store['stage_anHeight'] ;
  
         this.toastBg = new egret.Bitmap(RES.getRes('bg-toast_png'));
         this.toastText = new egret.TextField();
@@ -225,6 +226,7 @@ class Cnt extends egret.DisplayObjectContainer{
      *  4个进球的实例的初始化
      */
     private initAllPenalty(){
+        let $store = window['store'] ;
         let penaltyStr = 'penalty' ;
         let bgMaskStr = 'bgMask' ;
         let penaltyStr_p = 'penalty_point' ;
@@ -240,13 +242,13 @@ class Cnt extends egret.DisplayObjectContainer{
             // 插入遮罩层,正常进球和点球要分开两个遮罩 mark
             this[bgMaskStr] = this.bgMask();
             this[bgMaskStr].anchorOffsetX = 245;
-            this[bgMaskStr].x = window['store'].stage_anWidth;
+            this[bgMaskStr].x = $store.stage_anWidth;
             // this[bgMaskStr].y = 265;  
             // this.bgCourtWrap.addChild( this[bgMaskStr] );
             //正常进球
             this[penaltyStr] = new Penalty01();
             this[penaltyStr].anchorOffsetX = 245;
-            this[penaltyStr].x = window['store'].stage_anWidth;
+            this[penaltyStr].x = $store.stage_anWidth;
 
             // this[penaltyStr].y = 323;  //决赛265   +58  
             // this[penaltyStr].mask = this[bgMaskStr] ;
@@ -260,13 +262,13 @@ class Cnt extends egret.DisplayObjectContainer{
             //点球
             this[bgMaskStr_p] = this.bgMask();
             this[bgMaskStr_p].anchorOffsetX = 245;
-            this[bgMaskStr_p].x = window['store'].stage_anWidth;
+            this[bgMaskStr_p].x = $store.stage_anWidth;
             // this[bgMaskStr_p].y = 265;  
             // this.bgCourtWrap.addChild( this[bgMaskStr_p] );
 
             this[penaltyStr_p] = new Penalty02();
             this[penaltyStr_p].anchorOffsetX = 245;
-            this[penaltyStr_p].x = window['store'].stage_anWidth;
+            this[penaltyStr_p].x = $store.stage_anWidth;
 
             // this[penaltyStr_p].y = 323;  //决赛265   +58  
             // this[penaltyStr_p].mask = this[bgMaskStr_p] ;
@@ -767,7 +769,7 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
         }else{
             this[ baseImg + choseOther ]['setMyGold']( oldCoin - parseInt( bet_golds ) );
         }
-        
+
         this.fieldContain.other_Coin( matchid , selection , selOtherCoin - 1 , bet_golds );
 
     }
@@ -788,6 +790,7 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
 
     //  容器 new
     private initUserImg(){
+        let $store = window['store'] ;
         for( let i=0;i<9;i++ ){
             var choseUserImg = 'userImg'+(i+1)
             this[choseUserImg] = new userImage();
@@ -796,15 +799,15 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
             if( i === 0 ){
                 this[choseUserImg].anchorOffsetX = 44;
                 this[choseUserImg].anchorOffsetY = 124 ;
-                this[choseUserImg].x = window['store']['stage_anWidth'] ;
+                this[choseUserImg].x = $store['stage_anWidth'] ;
                 this[choseUserImg].y = 1035;
-                window['store']['userMySelf'] = this[choseUserImg];
-            }else if( ( window['store']['userPosition'][i] - 1 ) < 5 ){
-                this[choseUserImg].x = window['store']['userPositionObj'][window['store']['userPosition'][i] - 1].x;
-                this[choseUserImg].y = window['store']['userPositionObj'][window['store']['userPosition'][i] - 1].y;
+                $store['userMySelf'] = this[choseUserImg];
+            }else if( ( $store['userPosition'][i] - 1 ) < 5 ){
+                this[choseUserImg].x = $store['userPositionObj'][$store['userPosition'][i] - 1].x;
+                this[choseUserImg].y = $store['userPositionObj'][$store['userPosition'][i] - 1].y;
             }else{
-                this[choseUserImg].x = window['store']['stage_Width'] - window['store']['userPositionObj'][window['store']['userPosition'][i] - 1].x;
-                this[choseUserImg].y = window['store']['userPositionObj'][window['store']['userPosition'][i] - 1].y;
+                this[choseUserImg].x = $store['stage_Width'] - $store['userPositionObj'][$store['userPosition'][i] - 1].x;
+                this[choseUserImg].y = $store['userPositionObj'][$store['userPosition'][i] - 1].y;
             }
         }
     }
@@ -852,9 +855,6 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
             }
             if( $store['user_info'][i].uid ){
                 $store['userPositionLocal'][$store['user_info'][i].uid] = ( i + 1 ) 
-
-            }else{
-                console.error( 'websock 无uid' )
             }
 
             var choseUserImg = 'userImg'+(i+1) ;
@@ -925,10 +925,10 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
     }
     // 用户 离开  new
     private removeUserImage( uid:string ){
-        var delIndex = 0;
-
-        if( window['store']['userPositionLocal'][uid] ){
-            delIndex = window['store']['userPositionLocal'][uid] ;
+        let delIndex = 0;
+        let $store = window['store'] ;
+        if( $store['userPositionLocal'][uid] ){
+            delIndex = $store['userPositionLocal'][uid] ;
         }
 
         if( delIndex === 0 ){
@@ -939,11 +939,11 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
         if( delIndex ){
             let choseUserImg = 'userImg'+ ( delIndex ) ;
             // 更新数组
-            if( window['store']['userPositionLocal'][uid] ){
-                window['store']['userPositionLocal'][uid] = null ;
+            if( $store['userPositionLocal'][uid] ){
+                $store['userPositionLocal'][uid] = null ;
             }
 
-            window['store']['emptyUserPosition'].push( delIndex );
+            $store['emptyUserPosition'].push( delIndex );
 
             if( this.bgCourtWrap && this[choseUserImg] && this[choseUserImg].parent ){
                 this.bgCourtWrap.removeChild(this[choseUserImg]);
@@ -967,7 +967,6 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
                 currDom['innerHTML'] = '' ;
                 currDom.style.display = 'none' ;
             },1500)
-
         }
 
     }
