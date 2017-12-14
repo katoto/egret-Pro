@@ -220,7 +220,7 @@ class Main extends egret.DisplayObjectContainer {
          //头部实例2
         this.top = new Top(this.Width);
         this.top.x = 0;
-        this.top.y = 0;
+
         this.addChild(this.top);
 
 
@@ -229,6 +229,16 @@ class Main extends egret.DisplayObjectContainer {
         $store['$coinNone'] = this.coinNone ;
 
         this.initStage();
+
+
+        if( $store['env_variable'].src === 'qqsd' && window['platform'] === 'ios' ){
+             this.top.y = 45;
+        }else{
+            this.top.y = 0;
+        }
+
+
+
 
         if( $store['env_variable'].ck === '' || !$store['env_variable'].ck ){
             console.error('请带上ck');
