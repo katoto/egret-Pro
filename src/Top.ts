@@ -11,9 +11,10 @@ class Top extends egret.DisplayObjectContainer{
     private btnBack:egret.Bitmap;
 
     private drawTop(Width){
+        let $store = window['store'] ;
 
-        window['store'].$Top = this ;
-
+        $store.$Top = this ;
+        
         this.btnBack = new egret.Bitmap(RES.getRes('btn-back_png'));
         this.btnBack.x = 10;
         this.btnBack.y = 14;
@@ -41,8 +42,8 @@ class Top extends egret.DisplayObjectContainer{
         this.addChild(this.textDate);
         
         this.pop02Cham = new Pop02Cham();
-        this.pop02Cham.scaleX= window['store'].scale;
-        this.pop02Cham.scaleY= window['store'].scale;
+        this.pop02Cham.scaleX= $store.scale;
+        this.pop02Cham.scaleY= $store.scale;
         // 右上角充值与往期
         let btnPast:egret.Bitmap = new egret.Bitmap(RES.getRes('btn-past_png'));
         btnPast.x = Width-200;
@@ -50,14 +51,14 @@ class Top extends egret.DisplayObjectContainer{
         this.addChild(btnPast);
         this.pop02Cham = new Pop02Cham();
         
-        window['store'].$pop02Cham = this.pop02Cham ;
+        $store.$pop02Cham = this.pop02Cham ;
 
         btnPast.touchEnabled = true;
         btnPast.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
             // this.getFootballMsg();
             this.addChild(this.pop02Cham);
             // 更新 数据
-            window['store']['$main'].upTopLev()
+            $store['$main'].upTopLev()
             // this.pop02Cham.popChamC.upPopWrapMsg();
             this.pop02Cham.getList();
         },this)
@@ -68,7 +69,6 @@ class Top extends egret.DisplayObjectContainer{
         btnRecharge.touchEnabled = true;
         btnRecharge.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
             //   跳充值
-            let $store = window['store'] ;
             if( $store['env_variable'].src ){
                 switch ( $store['env_variable'].src ){
                     case '500app':
@@ -87,7 +87,6 @@ class Top extends egret.DisplayObjectContainer{
                     case '500touch':
                         window.location.href = 'http://crazybet.choopaoo.com/fkcqH5/?jumpToPay=true' ;
                     ;break;
-
                 }
             }
 

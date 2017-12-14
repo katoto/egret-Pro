@@ -38,6 +38,7 @@ class Change extends eui.UILayer{
 
 
     private drawChange(){
+        let $store = window['store'] ;
         let bg:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-change_jpg'));
         this.addChild(bg);
 
@@ -64,7 +65,7 @@ class Change extends eui.UILayer{
 
         let teamWrap01 = this.teamWrap( 'teamImg01' );
         teamWrap01.anchorOffsetX = 283;
-        teamWrap01.x = window['store']['stage_anWidth'];
+        teamWrap01.x = $store['stage_anWidth'];
         teamWrap01.y = 630;
         this.addChild(teamWrap01);
         // setTimeout(function(){  //动画过多发热
@@ -73,19 +74,19 @@ class Change extends eui.UILayer{
 
         let teamWrap02 = this.teamWrap( 'teamImg02' );
         teamWrap02.anchorOffsetX = 283;
-        teamWrap02.x = window['store']['stage_anWidth'];
+        teamWrap02.x = $store['stage_anWidth'];
         teamWrap02.y = 750;
         this.addChild(teamWrap02);
 
         let teamWrap03 = this.teamWrap( 'teamImg03' );
         teamWrap03.anchorOffsetX = 283;
-        teamWrap03.x = window['store']['stage_anWidth'];
+        teamWrap03.x = $store['stage_anWidth'];
         teamWrap03.y = 870;
         this.addChild(teamWrap03);
 
         let teamWrap04 = this.teamWrap( 'teamImg04' );
         teamWrap04.anchorOffsetX = 283;
-        teamWrap04.x = window['store']['stage_anWidth'];
+        teamWrap04.x = $store['stage_anWidth'];
         teamWrap04.y = 990;
         this.addChild(teamWrap04);
 

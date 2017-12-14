@@ -593,16 +593,13 @@ this.localObj['rightTeam41'] = {
 
                         if( pre_result.first[i].awaylogo ){
                             this['rightTeam4'+( i+1 )].source = pre_result.first[i].awaylogo;
+                            this['rightTeam4'+( i+1 ) + '_copy'].source = pre_result.first[i].awaylogo;
+                            
                         }
                         if( pre_result.first[i].homelogo ){
                             this['leftTeam4'+( i+1 )].source = pre_result.first[i].homelogo;
-                        }
-
-                        if( pre_result.first[i].awaylogo ){
-                            this['rightTeam4'+( i+1 ) + '_copy'].source = pre_result.first[i].awaylogo;
-                        }
-                        if( pre_result.first[i].homelogo ){
                             this['leftTeam4'+( i+1 )  + '_copy'].source = pre_result.first[i].homelogo;
+                            
                         }
 
                         score_num = parseInt( pre_result.first[i].score[0] ) ;
@@ -648,16 +645,13 @@ this.localObj['rightTeam41'] = {
                     if( pre_result.second[i] ){
                         if( pre_result.second[i].awaylogo ){
                             this['rightTeam2'+( i+1 )].source = pre_result.second[i].awaylogo;
+                            this['rightTeam2'+( i+1 ) + '_copy' ].source = pre_result.second[i].awaylogo;
+                            
                         }
                         if( pre_result.second[i].homelogo ){
                             this['leftTeam2'+( i+1 )].source = pre_result.second[i].homelogo;
-                        }
-
-                        if( pre_result.second[i].awaylogo ){
-                            this['rightTeam2'+( i+1 ) + '_copy' ].source = pre_result.second[i].awaylogo;
-                        }
-                        if( pre_result.second[i].homelogo ){
                             this['leftTeam2'+( i+1 ) + '_copy' ].source = pre_result.second[i].homelogo;
+                            
                         }
 
                         score_num = parseInt( pre_result.second[i].score[0] ) ;

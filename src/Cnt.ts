@@ -968,6 +968,6 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
                 currDom.style.display = 'none' ;
             },1500)
         }
-
     }
+    
 }
