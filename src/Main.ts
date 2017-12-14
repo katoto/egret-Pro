@@ -222,6 +222,7 @@ class Main extends egret.DisplayObjectContainer {
         this.top.y = 0;
         this.addChild(this.top);
 
+
         // 金币不足
         this.coinNone = new Pop02Money();
         $store['$coinNone'] = this.coinNone ;
@@ -453,9 +454,9 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                             }
                                         }
                                         if( !!bigUserImg ){
-                                            if( !$store['unableClick'] && !!$store['$fieldContain']
-                                                && $store['$fieldContain'].parent && bigUserImg.parent ){
+                                            if( !!$store['$fieldContain'] && $store['$fieldContain'].parent && bigUserImg.parent ){
                                                 $store['$bgCourtWrap'].swapChildren( $store['$fieldContain'] , bigUserImg ) ;
+                                                $store['$bgCourtWrap'].setChildIndex( $store['$fieldContain'] , bigIndex + 1 ) ;
                                             }
                                         }
                                     }
@@ -519,12 +520,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                             this.cnt.initFieldCon();
 
                         }
-                        // pre_result 字段 （用于上一个 状态解析 == 》 matches  当前对阵 ）
-                        // if( $msgObjBody.pre_result ){
-                        //     // 切换场地  用
-                        //     // this.cnt.proTeam('https://www.google.co.jp/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png');
-                        //      //晋升
-                        // }
                         
                         if( $msgObjBody.stageid ){
                             switch( $msgObjBody.stageid  ){
@@ -554,6 +549,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                         this.mpromotion.play(0,1);
                                         this.addChild(this.promotion);
                                         this.upTopLev() ;
+                                        this.swapChildren( this.promotion , this.top )
                                     }
                                     this.promotion.moveSecond( $msgObjBody.pre_result );
                                     setTimeout(()=>{
@@ -568,6 +564,8 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                         this.mpromotion.play(0,1);
                                         this.addChild(this.promotion)
                                         this.upTopLev();
+                                        this.swapChildren( this.promotion , this.top )
+                                        
                                     }
                                     this.promotion.moveThree( $msgObjBody.pre_result ) ;
                                     setTimeout(()=>{
@@ -597,6 +595,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                 if( !$store['unableClick'] && !!$store['$fieldContain']
                                     && $store['$fieldContain'].parent && bigUserImg.parent ){
                                     $store['$bgCourtWrap'].swapChildren( $store['$fieldContain'] , bigUserImg ) ;
+                                    $store['$bgCourtWrap'].setChildIndex( $store['$fieldContain'] , bigIndex + 1 ) ;
                                 }
                             }
                         }
@@ -652,6 +651,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                             if( !$store['unableClick'] && !!$store['$fieldContain']
                                 && $store['$fieldContain'].parent && bigUserImg.parent ){
                                 $store['$bgCourtWrap'].swapChildren( $store['$fieldContain'] , bigUserImg ) ;
+                                $store['$bgCourtWrap'].setChildIndex( $store['$fieldContain'] , bigIndex + 1 ) ;
                             }
                         }
                     }
@@ -673,7 +673,7 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                             
                             for( item  in $store.userPositionLocal ){
                                 if( $store.userPositionLocal[item] ){
-                                    if( $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) >= bigIndex ){
+                                    if( $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) > bigIndex ){
                                         bigIndex = $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) ;
                                         bigUserImg = this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ;
                                     }
@@ -684,30 +684,32 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
                                 if( !$store['unableClick'] && !!$store['$fieldContain']
                                     && $store['$fieldContain'].parent && bigUserImg.parent ){
                                     $store['$bgCourtWrap'].swapChildren( $store['$fieldContain'] , bigUserImg ) ;
+                                    $store['$bgCourtWrap'].setChildIndex( $store['$fieldContain'] , bigIndex + 1 ) ;
                                 }
                             }
 
                         }
 
+                        // 请下注
+                        this.cnt.cnt_upTextTips('请选择球队下注...');
+                        let newTime = new Date().getTime() ;
+                        
+                        switch ( $msgObjBody.stageid ){
+                            case '1':
+                                $store['lock_time'] = Math.floor ( newTime / 1000 ) * 1000 + 30*1000;
+                                this.cnt.cnt_timer('30');
+                            ;break;
+                            case '2':
+                                $store['lock_time'] = Math.floor (( newTime / 1000 )) * 1000 + 25*1000;
+                                this.cnt.cnt_timer('26');
+                            ;break;
+                            case '3':
+                                $store['lock_time'] = Math.floor (( newTime / 1000 )) * 1000 + 21*1000;
+                                this.cnt.cnt_timer('21');
+                            ;break;
+                        }
+
                         if( this.start_pop && this.start_pop.parent ){
-                            // 请下注
-                            this.cnt.cnt_upTextTips('请选择球队下注...');
-                            let newTime = new Date().getTime() ;
-                            
-                            switch ( $msgObjBody.stageid ){
-                                case '1':
-                                    $store['lock_time'] = Math.floor ( newTime / 1000 ) * 1000 + 30*1000;
-                                    this.cnt.cnt_timer('30');
-                                ;break;
-                                case '2':
-                                    $store['lock_time'] = Math.floor (( newTime / 1000 )) * 1000 + 25*1000;
-                                    this.cnt.cnt_timer('26');
-                                ;break;
-                                case '3':
-                                    $store['lock_time'] = Math.floor (( newTime / 1000 )) * 1000 + 21*1000;
-                                    this.cnt.cnt_timer('21');
-                                ;break;
-                            }
                             egret.Tween.get( this.start_pop ).to({y:227},200).call(()=>{
                                 if( this.start_pop.parent ){
                                     this.removeChild( this.start_pop );
@@ -829,9 +831,6 @@ this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&ro
 
                 ;break;
 
-                case '2025':
-                    // 更新奖池
-                ;break;
                 case '2025':
                     // 提出用户 展现弹窗
                 ;break;

@@ -301,7 +301,7 @@ class Cnt extends egret.DisplayObjectContainer{
      */
     async adjustPenalty( allResult ){
         // 比赛框的位置坐标 
-        let local_4 = [120,290,500,700] ;
+        let local_4 = [120,300,505,700] ;
         let local_2 = [210,480] ; // 130 500  210 、480
         let local_1 = [ 295 ] ; // 265  + 30
         let curr_local = null ;
@@ -435,10 +435,10 @@ class Cnt extends egret.DisplayObjectContainer{
             }
         }
 
-        console.log('-----------');
-        console.log( endResult )
-        console.log( $store['matches'].length )
-        console.log('显示冠军')
+        // console.log('-----------');
+        // console.log( endResult )
+        // console.log( $store['matches'].length )
+        // console.log('显示冠军')
         // 显示冠军 
         if( endResult && $store['matches'] && $store['matches'].length === 1 ){
             let championName = null;

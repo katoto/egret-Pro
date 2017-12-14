@@ -241,8 +241,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         if(  !!$store['$coinNone'] ){
                             $store['$main'].addChild( $store['$coinNone'] )
                         }
-                    }else{
-                        $store['$cnt'].showTips( res.message );
+                    } else{
+                        if( res.status !== '503' ){
+                            $store['$cnt'].showTips( res.message );
+                        }
                     }
                 }
             }
@@ -280,7 +282,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                 return false ;
             }
         }
-        
+
         await window['getJson']( { type:'get' ,url : $store['orderDomain']+'/vguess/place/order?'+currQueryStr ,dataType:'json'} ).then(( res )=>{
             if( res && res.status === '100' ){
 
@@ -317,8 +319,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         if( !!$store['$coinNone'] ){
                             $store['$main'].addChild( $store['$coinNone'] )
                         }
-                    }else{
-                        $store['$cnt'].showTips( res.message );
+                    } else{
+                        if( res.status !== '503' ){
+                            $store['$cnt'].showTips( res.message );
+                        }
                     }
                 }
             }

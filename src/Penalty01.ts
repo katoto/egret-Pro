@@ -225,12 +225,14 @@ class Penalty01 extends eui.UILayer {
      */
     private initLine(){
         //初始化點球
-        if( this.timer2.parent ){
-            this.removeChild( this.timer2 );
-        }
-        if( !!this.timer ){
-            this.addChild( this.timer );
-        }
+        setTimeout(()=>{
+            if( this.timer2.parent ){
+                this.removeChild( this.timer2 );
+            }
+            if( !!this.timer ){
+                this.addChild( this.timer );
+            }
+        },300)
     }
 
     private drawIn(){
