@@ -761,15 +761,15 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
             }else{
                 oldCoin = parseInt( this[ baseImgStr ]['getCurGold']() ) ;
             }
-        }
+            // setMyGold
+            if( oldCoin - parseInt( bet_golds ) < 0 ){
+                this[ baseImgStr ]['setMyGold']( 0 );
+            }else{
+                this[ baseImgStr ]['setMyGold']( oldCoin - parseInt( bet_golds ) );
+            }
+            this.fieldContain.other_Coin( matchid , selection , selOtherCoin , bet_golds );
 
-        // setMyGold
-        if( oldCoin - parseInt( bet_golds ) < 0 ){
-            this[ baseImgStr ]['setMyGold']( 0 );
-        }else{
-            this[ baseImgStr ]['setMyGold']( oldCoin - parseInt( bet_golds ) );
         }
-        this.fieldContain.other_Coin( matchid , selection , selOtherCoin , bet_golds );
 
     }
 
