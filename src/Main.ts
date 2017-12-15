@@ -122,6 +122,7 @@ class Main extends egret.DisplayObjectContainer {
         console.warn("Group:" + event.groupName + " has failed to load");
         //忽略加载失败的项目
         this.onResourceLoadComplete(event);
+        
     }
 
     /**
