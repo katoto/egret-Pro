@@ -300,6 +300,7 @@ this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid 
     }
 
     // 函数：生成图片
+
     // private createBitmapByName(name: string): egret.Bitmap {
     //     let result = new egret.Bitmap();
     //     let texture: egret.Texture = RES.getRes(name);
@@ -388,19 +389,30 @@ this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid 
 
                                     // 停止竞猜 直接移除定时器 加入开始
                                     if( this.out && !this.out.parent ){
-                                        this.stop_pop.y = 227;
+                                        this.stop_pop.y = 0;
                                         this.addChild( this.stop_pop );
-                                        this.startOver.play(0,1);
                                         this.upTopLev();
-                                        egret.Tween.get( this.stop_pop ).to( { y:0 } , 250 );
+                                        if( !( ( $store['env_variable'].src === 'qqsd' || $store['env_variable'].src === '500app' ) && window['platform'] === 'android' ) ){
+                                            this.stop_pop.y = 227;
+                                            egret.Tween.get( this.stop_pop ).to( { y:0 } , 250 );
+                                            this.startOver.play(0,1);
+                                        }
+
                                     }
 
                                     if( this.stop_pop){
-                                        egret.Tween.get( this.stop_pop ).to({y:227},250).call(()=>{
+                                        if( !( ( $store['env_variable'].src === 'qqsd' || $store['env_variable'].src === '500app' ) && window['platform'] === 'android' ) ){
+                                            egret.Tween.get( this.stop_pop ).to({y:227},250).call(()=>{
+                                                if( this.stop_pop.parent ){
+                                                    this.removeChild( this.stop_pop );
+                                                }
+                                            });
+                                        }else{
                                             if( this.stop_pop.parent ){
                                                 this.removeChild( this.stop_pop );
                                             }
-                                        });
+                                        }
+
                                     }
 
                                 ;break;
@@ -421,7 +433,6 @@ this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid 
                                             $store['lock_time'] = Math.floor (( new Date().getTime() / 1000 )) * 1000 + ( 21 - parseInt( $msgObjBody.process_time) )*1000;                                        
                                             this.cnt.cnt_timer(( 21 - parseInt( $msgObjBody.process_time ))+ '' );
                                         ;break;
-                                        
                                     }
                                     if( !!this.cnt ){
                                         this.cnt.cnt_upTextTips('请选择球队下注...');
@@ -612,11 +623,15 @@ this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid 
                 case '2019':
                     // start_guess   去文案 
                     if( this.out && !this.out.parent ){
-                        this.start_pop.y = 227;
+                        this.start_pop.y = 0;
                         this.addChild( this.start_pop );
-                        this.startOver.play(0,1);
                         this.upTopLev() ;
-                        egret.Tween.get( this.start_pop ).to({y:0},250);
+                        if( !( ( $store['env_variable'].src === 'qqsd' || $store['env_variable'].src === '500app' ) && window['platform'] === 'android' ) ){
+                            this.start_pop.y = 227;
+                            egret.Tween.get( this.start_pop ).to({y:0},250);
+                            this.startOver.play(0,1);
+                        }
+
                     }
 
                     if( $msgObjBody ){
@@ -702,11 +717,19 @@ this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid 
                         }
 
                         if( this.start_pop && this.start_pop.parent ){
-                            egret.Tween.get( this.start_pop ).to({y:227},200).call(()=>{
+                            
+                            if( !( ( $store['env_variable'].src === 'qqsd' || $store['env_variable'].src === '500app' ) && window['platform'] === 'android' ) ){
+                                egret.Tween.get( this.start_pop ).to({y:227},200).call(()=>{
+                                    if( this.start_pop.parent ){
+                                        this.removeChild( this.start_pop );
+                                    }
+                                });
+                            }else{
                                 if( this.start_pop.parent ){
                                     this.removeChild( this.start_pop );
                                 }
-                            });
+                            }
+
                         }
                     }
 
