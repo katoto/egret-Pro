@@ -334,7 +334,6 @@ this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid 
                             this.top.setTextDate( $msgObjBody.room_info.desc )
                             this.top.setTextTitle(  $msgObjBody.room_info.title )
                             $store['cur_room_info'] = $msgObjBody.room_info;
-
                             // 下单需要的期号
                             $store['orderObj']['expect'] = $msgObjBody.room_info.expect ;
                             $store['orderObj']['stageid'] = $msgObjBody.room_info.stageid ;
@@ -768,8 +767,6 @@ this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid 
                         // 模拟显示中奖
                         if( $msgObjBody.result &&  $msgObjBody.result.length > 0 ){
                             this.cnt.adjustPenalty( $msgObjBody.result )
-                        }else{
-                            console.warn('2005 data error not find result');
                         }
 
                     }
@@ -793,10 +790,7 @@ this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid 
                         // settle_list = window['convertArrToObj']( $msgObjBody.settle_list , 'uid' )
                         $store['settle_list'] = $msgObjBody.settle_list ;
                         this.cnt.settle_listFn(  $msgObjBody.settle_list ) ;
-                    }else{
-                        console.warn( '2007 派奖数据有误' )
                     }
-
                 ;break;
 
                 case '2010':

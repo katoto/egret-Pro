@@ -12,6 +12,8 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
     private field43;
     private field44;
 
+    private coinArr = [];
+
     public constructor(){
         super();
         this.drawField();
@@ -19,7 +21,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
     //声音
     private musicgold:egret.Sound;
     private drawField(){
-         this.musicgold = RES.getRes("bet_mp3");
+        this.musicgold = RES.getRes("bet_mp3");
 
         // 放出舞台是否去除事件绑定提高性能？
         this.courtWrap1 = this.courtWrap();
@@ -72,6 +74,16 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         this.field44.addEventListener( egret.TouchEvent.TOUCH_TAP ,this.field_44Evt ,this)
         this.courtWrap4.addChild(this.field44);
 
+
+        for( let i=0;i<50;i++ ){
+            let gold = new Gold();
+            gold.anchorOffsetX = gold.width/2;
+            gold.anchorOffsetY = gold.height/2;
+            this.coinArr.push( gold );
+        }
+        console.log('=============')
+        console.log( this.coinArr )
+        console.log('=------------------=')
     }
         // 放入4个场地
     private addcourtWrap4(){
@@ -500,7 +512,6 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         }
     }
 
-
     private field_21Evt( e:egret.TouchEvent ){
         let x = e.localX + 133;
         let y = e.localY + 234;
@@ -836,7 +847,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
      */
     private create_other_Coin( start_x:any , start_y:any , end_x:any , end_y:any ,currArr:any , moreCoin:Boolean){
         let goldArr = [] ;
-        if( !moreCoin || 1 ){
+        if( !moreCoin ){
             let gold = new Gold();
             gold.anchorOffsetX = gold.width/2;
             gold.anchorOffsetY = gold.height/2;
