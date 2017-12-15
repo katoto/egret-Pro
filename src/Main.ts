@@ -717,7 +717,7 @@ this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid 
                         }
 
                         if( this.start_pop && this.start_pop.parent ){
-                            
+
                             if( !( ( $store['env_variable'].src === 'qqsd' || $store['env_variable'].src === '500app' ) && window['platform'] === 'android' ) ){
                                 egret.Tween.get( this.start_pop ).to({y:227},200).call(()=>{
                                     if( this.start_pop.parent ){
@@ -740,11 +740,16 @@ this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid 
 
                     // 停止竞猜 直接移除定时器 加入开始
                     if( this.out && !this.out.parent ){
-                        this.stop_pop.y = 227;
+                        this.stop_pop.y = 0;
                         this.addChild( this.stop_pop );
-                        this.startOver.play(0,1);
                         this.upTopLev();
-                        egret.Tween.get( this.stop_pop ).to( { y:0 } , 250 );
+
+                        if( !( ( $store['env_variable'].src === 'qqsd' || $store['env_variable'].src === '500app' ) && window['platform'] === 'android' ) ){
+                            this.stop_pop.y = 227;
+                            egret.Tween.get( this.stop_pop ).to( { y:0 } , 250 );
+                            this.startOver.play(0,1);
+                        }
+
                     }
 
                     // 移除文案
@@ -757,11 +762,18 @@ this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid 
 
                     setTimeout(()=>{
                         if( this.stop_pop){
-                            egret.Tween.get( this.stop_pop ).to({y:227},250).call(()=>{
+                            if( !( ( $store['env_variable'].src === 'qqsd' || $store['env_variable'].src === '500app' ) && window['platform'] === 'android' ) ){
+                                egret.Tween.get( this.stop_pop ).to({y:227},250).call(()=>{
+                                    if( this.stop_pop.parent ){
+                                        this.removeChild( this.stop_pop );
+                                    }
+                                });
+                            }else{
                                 if( this.stop_pop.parent ){
                                     this.removeChild( this.stop_pop );
                                 }
-                            });
+                            }
+
                         }
                         // 收集金币
                         this.cnt.cnt_collectCoin();
