@@ -56,17 +56,14 @@ class Main extends egret.DisplayObjectContainer {
         //     context.onUpdate = () => {
         //     }
         // })
-
         // egret.lifecycle.onPause = () => {
         //     this.cnt.showTips('11111111') ;
         //     // egret.ticker.pause();
         // }
-
         // egret.lifecycle.onResume = () => {
         //     console.log(22)
         //     this.cnt.showTips('2222') ;
         // }
-
         // this.loadingView = new LoadingUI(750,1334);
         // this.stage.addChild(this.loadingView);
  

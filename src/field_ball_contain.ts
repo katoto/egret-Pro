@@ -75,13 +75,12 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         this.courtWrap4.addChild(this.field44);
 
 
-        for( let i=0;i<50;i++ ){
-            let gold = new Gold();
-            gold.anchorOffsetX = gold.width/2;
-            gold.anchorOffsetY = gold.height/2;
-            this.coinArr.push( gold );
-        }
-
+        // for( let i=0;i<50;i++ ){
+        //     let gold = new Gold();
+        //     gold.anchorOffsetX = gold.width/2;
+        //     gold.anchorOffsetY = gold.height/2;
+        //     this.coinArr.push( gold );
+        // }
         console.log('=============')
         console.log( this.coinArr )
         console.log('=------------------=')
