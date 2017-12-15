@@ -765,7 +765,6 @@ this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid 
                         if( $msgObjBody.result &&  $msgObjBody.result.length > 0 ){
                             this.cnt.adjustPenalty( $msgObjBody.result )
                         }
-
                     }
                     // again 收集金币
                     if( this.cnt ){
