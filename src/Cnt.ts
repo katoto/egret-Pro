@@ -711,7 +711,7 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
         let userImgArr = [] ;
         if( settleData ){
             for( let i=0,len = settleData.length ;i<len ; i++ ){
-                choseUser = $store['userPositionLocal'][ settleData[i].uid ] ;
+                choseUser = baseImg + $store['userPositionLocal'][ settleData[i].uid ] ;
                 if( settleData[i].prize_info &&  settleData[i].prize_info.length > 0 ){
                     allShowWinNum = 0 ;
                     // 派金币
@@ -724,14 +724,14 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
                             }
                         }
                     }
-                    if( this[ baseImg + choseUser ] && allShowWinNum ){
-                        this[ baseImg + choseUser ].isShowWinGold( allShowWinNum );
-                        userImgArr.push( this[ baseImg + choseUser ] )
+                    if( this[ choseUser ] && allShowWinNum ){
+                        this[ choseUser ].isShowWinGold( allShowWinNum );
+                        userImgArr.push( this[ choseUser ] )
                     }
                 }
                 //  更新每个用户的信息 可能要再动画之后  离开的用户 为null 
-                if( settleData[i].uid && settleData[i].total && this[ baseImg + choseUser ] ){
-                    this[ baseImg + choseUser ]['setMyGold']( settleData[i].total )
+                if( settleData[i].uid && settleData[i].total && this[ choseUser ] ){
+                    this[ choseUser ]['setMyGold']( settleData[i].total )
                 }
             }
 

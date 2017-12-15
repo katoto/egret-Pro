@@ -590,24 +590,24 @@ this.localObj['rightTeam41'] = {
             if( pre_result.first ){
                 for( let i=0;i<4;i++ ){
                     if( pre_result.first[i] ){
-
-                        if( pre_result.first[i].awaylogo ){
-                            this['rightTeam4'+( i+1 )].source = pre_result.first[i].awaylogo;
-                            this['rightTeam4'+( i+1 ) + '_copy'].source = pre_result.first[i].awaylogo;
+                        let $pre_resultFir = pre_result.first[i] ;
+                        if( $pre_resultFir.awaylogo ){
+                            this['rightTeam4'+( i+1 )].source = $pre_resultFir.awaylogo;
+                            this['rightTeam4'+( i+1 ) + '_copy'].source = $pre_resultFir.awaylogo;
                             
                         }
-                        if( pre_result.first[i].homelogo ){
-                            this['leftTeam4'+( i+1 )].source = pre_result.first[i].homelogo;
-                            this['leftTeam4'+( i+1 )  + '_copy'].source = pre_result.first[i].homelogo;
+                        if( $pre_resultFir.homelogo ){
+                            this['leftTeam4'+( i+1 )].source = $pre_resultFir.homelogo;
+                            this['leftTeam4'+( i+1 )  + '_copy'].source = $pre_resultFir.homelogo;
                             
                         }
 
-                        score_num = parseInt( pre_result.first[i].score[0] ) ;
+                        score_num = parseInt( $pre_resultFir.score[0] ) ;
                         
-                        if( pre_result.first[i].is_spotkick === '0' ){
-                            this[ 'teamF4'+( i + 1 ) ].text = pre_result.first[i].score ;
+                        if( $pre_resultFir.is_spotkick === '0' ){
+                            this[ 'teamF4'+( i + 1 ) ].text = $pre_resultFir.score ;
                             // 显示冠军标志
-                            if( parseInt( pre_result.first[i].score[0] ) > parseInt( pre_result.first[i].score[2] ) ){
+                            if( parseInt( $pre_resultFir.score[0] ) > parseInt( $pre_resultFir.score[2] ) ){
                                 if( !!this['proWin4'+ ( i+1 ) +'_l'] ){
                                     this.wrap.addChild( this['proWin4'+ ( i+1 ) +'_l'] ) ;
                                     firstWinName.push( 'leftTeam4'+( i+1 ) ) ;
@@ -619,8 +619,8 @@ this.localObj['rightTeam41'] = {
                                 }
                             }
                         }else{
-                            this[ 'teamF4'+( i + 1 ) ].text = parseInt( pre_result.first[i].spotkick[0] )+score_num + ':' + ( parseInt( pre_result.first[i].spotkick[2] ) + score_num );
-                            if( parseInt( pre_result.first[i].spotkick[0] ) > parseInt( pre_result.first[i].spotkick[2] ) ){
+                            this[ 'teamF4'+( i + 1 ) ].text = parseInt( $pre_resultFir.spotkick[0] )+score_num + ':' + ( parseInt( $pre_resultFir.spotkick[2] ) + score_num );
+                            if( parseInt( $pre_resultFir.spotkick[0] ) > parseInt( $pre_resultFir.spotkick[2] ) ){
                                 if( !!this['proWin4'+ ( i+1 ) +'_l'] ){
                                     this.wrap.addChild( this['proWin4'+ ( i+1 ) +'_l'] ) ;
                                     firstWinName.push( 'leftTeam4'+( i+1 ) ) ;
@@ -643,23 +643,24 @@ this.localObj['rightTeam41'] = {
             if( pre_result.second ){
                 for( let i=0;i<2;i++ ){
                     if( pre_result.second[i] ){
-                        if( pre_result.second[i].awaylogo ){
-                            this['rightTeam2'+( i+1 )].source = pre_result.second[i].awaylogo;
-                            this['rightTeam2'+( i+1 ) + '_copy' ].source = pre_result.second[i].awaylogo;
+                        let $pre_resultSec = pre_result.second[i] ;
+                        if( $pre_resultSec.awaylogo ){
+                            this['rightTeam2'+( i+1 )].source = $pre_resultSec.awaylogo;
+                            this['rightTeam2'+( i+1 ) + '_copy' ].source = $pre_resultSec.awaylogo;
                             
                         }
-                        if( pre_result.second[i].homelogo ){
-                            this['leftTeam2'+( i+1 )].source = pre_result.second[i].homelogo;
-                            this['leftTeam2'+( i+1 ) + '_copy' ].source = pre_result.second[i].homelogo;
+                        if( $pre_resultSec.homelogo ){
+                            this['leftTeam2'+( i+1 )].source = $pre_resultSec.homelogo;
+                            this['leftTeam2'+( i+1 ) + '_copy' ].source = $pre_resultSec.homelogo;
                             
                         }
 
-                        score_num = parseInt( pre_result.second[i].score[0] ) ;
+                        score_num = parseInt( $pre_resultSec.score[0] ) ;
                         
-                        if( pre_result.second[i].is_spotkick === '0' ){
-                            this[ 'teamF2'+( i + 1 ) ].text = pre_result.second[i].score ;
+                        if( $pre_resultSec.is_spotkick === '0' ){
+                            this[ 'teamF2'+( i + 1 ) ].text = $pre_resultSec.score ;
                             // 显示冠军标志
-                            if( parseInt( pre_result.second[i].score[0] ) > parseInt( pre_result.second[i].score[2] ) ){
+                            if( parseInt( $pre_resultSec.score[0] ) > parseInt( $pre_resultSec.score[2] ) ){
                                 if( !!this['proWin2'+ ( i+1 ) +'_l'] ){
                                     this.wrap.addChild( this['proWin2'+ ( i+1 ) +'_l'] ) ;
                                     secondWinName.push( 'leftTeam2'+( i+1 ) ) ;
@@ -671,8 +672,8 @@ this.localObj['rightTeam41'] = {
                                 }
                             }
                         }else{
-                            this[ 'teamF2'+( i + 1 ) ].text = parseInt( pre_result.second[i].spotkick[0] )+score_num + ':' + ( parseInt( pre_result.second[i].spotkick[2] ) + score_num );
-                            if( parseInt( pre_result.second[i].spotkick[0] ) > parseInt( pre_result.second[i].spotkick[2] ) ){
+                            this[ 'teamF2'+( i + 1 ) ].text = parseInt( $pre_resultSec.spotkick[0] )+score_num + ':' + ( parseInt( $pre_resultSec.spotkick[2] ) + score_num );
+                            if( parseInt( $pre_resultSec.spotkick[0] ) > parseInt( $pre_resultSec.spotkick[2] ) ){
                                 if( !!this['proWin2'+ ( i+1 ) +'_l'] ){
                                     this.wrap.addChild( this['proWin2'+ ( i+1 ) +'_l'] );
                                     secondWinName.push( 'leftTeam2'+( i+1 ) ) ;

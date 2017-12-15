@@ -300,12 +300,12 @@ this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid 
     }
 
     // 函数：生成图片
-    private createBitmapByName(name: string): egret.Bitmap {
-        let result = new egret.Bitmap();
-        let texture: egret.Texture = RES.getRes(name);
-        result.texture = texture;
-        return result;
-    }
+    // private createBitmapByName(name: string): egret.Bitmap {
+    //     let result = new egret.Bitmap();
+    //     let texture: egret.Texture = RES.getRes(name);
+    //     result.texture = texture;
+    //     return result;
+    // }
 
     /**
      *  onReceiveMess  websock 接收消息
@@ -410,17 +410,18 @@ this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid 
                                     // 请下注
                                     switch ( $msgObjBody.stageid ){
                                         case '1':
-                                            this.cnt.cnt_timer(( 30 - parseInt( $msgObjBody.process_time )).toString());
+                                            this.cnt.cnt_timer(( 30 - parseInt( $msgObjBody.process_time ))+ '' );
                                             $store['lock_time'] = Math.floor (( new Date().getTime() / 1000 )) * 1000  + ( 30 - parseInt( $msgObjBody.process_time) )*1000;
                                         ;break;
                                         case '2':
                                             $store['lock_time'] = Math.floor (( new Date().getTime() / 1000 )) * 1000 + ( 25 - parseInt( $msgObjBody.process_time) )*1000;
-                                            this.cnt.cnt_timer(( 25 - parseInt( $msgObjBody.process_time )).toString());
+                                            this.cnt.cnt_timer(( 25 - parseInt( $msgObjBody.process_time ))+ '' );
                                         ;break;
                                         case '3':
                                             $store['lock_time'] = Math.floor (( new Date().getTime() / 1000 )) * 1000 + ( 21 - parseInt( $msgObjBody.process_time) )*1000;                                        
-                                            this.cnt.cnt_timer(( 21 - parseInt( $msgObjBody.process_time )).toString());
+                                            this.cnt.cnt_timer(( 21 - parseInt( $msgObjBody.process_time ))+ '' );
                                         ;break;
+                                        
                                     }
                                     if( !!this.cnt ){
                                         this.cnt.cnt_upTextTips('请选择球队下注...');

@@ -68,7 +68,7 @@ class Timer extends egret.DisplayObjectContainer{
             this.textSS.textColor = 0x1c1c1c;
             this.textTimer.textColor = 0x1c1c1c;
         }else{
-            this.textSS.text = ( this.timerNum ).toString()+ '"';
+            this.textSS.text =this.timerNum + '"';
         }
     }
 
