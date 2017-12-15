@@ -12,7 +12,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
     private field43;
     private field44;
 
-    private coinArr = [];
+    // private coinArr = [];
 
     public constructor(){
         super();
@@ -81,9 +81,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         //     gold.anchorOffsetY = gold.height/2;
         //     this.coinArr.push( gold );
         // }
-        console.log('=============')
-        console.log( this.coinArr )
-        console.log('=------------------=')
+        // console.log('=============')
+        // console.log( this.coinArr )
+        // console.log('=------------------=')
     
     }
         // 放入4个场地

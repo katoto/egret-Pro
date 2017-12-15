@@ -122,7 +122,7 @@ class Main extends egret.DisplayObjectContainer {
         console.warn("Group:" + event.groupName + " has failed to load");
         //忽略加载失败的项目
         this.onResourceLoadComplete(event);
-        
+
     }
 
     /**
@@ -243,7 +243,7 @@ class Main extends egret.DisplayObjectContainer {
                         this.webSocket.addEventListener( egret.IOErrorEvent.IO_ERROR ,this.onIOError ,this );
                         this.webSocket.addEventListener( egret.Event.CLOSE ,this.onCloseSock ,this );
 
-this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid +'&roomid='+roomMsg.roomid +'&port='+roomMsg.port+'&node='+roomMsg.node+'&ip='+roomMsg.ip+'&create_time='+roomMsg.create_time );
+this.webSocket.connectByUrl("ws://crazybet.choopaoo.com:7699/vguess?uid="+ roomMsg.uid +'&roomid='+roomMsg.roomid +'&port='+roomMsg.port+'&node='+roomMsg.node+'&ip='+roomMsg.ip+'&create_time='+roomMsg.create_time );
 
                     }catch(e){
                         alert('websock error')
@@ -848,7 +848,7 @@ this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid 
                         }
                         //  执行金币动画  
                         //  matchid:string , selection:string , uid:string , bet_golds:string
-                        this.cnt.cnt_Other_Coin( $msgObjBody.matchid , $msgObjBody.selection ,$msgObjBody.uid, $msgObjBody.bet_golds );
+                        this.cnt.cnt_Other_Coin( $msgObjBody.matchid , $msgObjBody.selection ,$msgObjBody.uid, $msgObjBody.bet_golds , $msgObjBody.total );
                     }
 
                 ;break;
@@ -918,7 +918,7 @@ this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid 
                         this.webSocket.addEventListener( egret.IOErrorEvent.IO_ERROR ,this.onIOError ,this );
                         this.webSocket.addEventListener( egret.Event.CLOSE ,this.onCloseSock ,this );
 
-this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid +'&roomid='+roomMsg.roomid +'&port='+roomMsg.port+'&node='+roomMsg.node+'&ip='+roomMsg.ip+'&create_time='+roomMsg.create_time );
+this.webSocket.connectByUrl("ws://crazybet.choopaoo.com:7699/vguess?uid="+ roomMsg.uid +'&roomid='+roomMsg.roomid +'&port='+roomMsg.port+'&node='+roomMsg.node+'&ip='+roomMsg.ip+'&create_time='+roomMsg.create_time );
 
                     }catch(e){
                         alert('websocket error')
@@ -998,8 +998,8 @@ this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid 
 
 
 window['store'] = {
-    orderDomain:'http://106.75.167.151:7899',
-    initDomain:'http://106.75.167.151:7799',
+    orderDomain:'http://crazybet.choopaoo.com:7899',
+    initDomain:'http://crazybet.choopaoo.com:7799',
     // initDomain:'http://10.0.1.41:2332',
     isAgainConnect: 1 , // 用于sock 重新连
 
