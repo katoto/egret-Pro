@@ -55,7 +55,6 @@ class Top extends egret.DisplayObjectContainer{
 
         btnPast.touchEnabled = true;
         btnPast.addEventListener(egret.TouchEvent.TOUCH_TAP,function(){
-            // this.getFootballMsg();
             this.addChild(this.pop02Cham);
             // 更新 数据
             $store['$main'].upTopLev()

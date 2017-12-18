@@ -53,8 +53,9 @@ class Timer extends egret.DisplayObjectContainer{
 
     //  竞猜开始
      private timerFunc(event:egret.TimerEvent) {
-        if( window['store']['lock_time'] ){
-            this.timerNum = Math.floor( window['store']['lock_time'] - ( Math.floor( new Date().getTime()  / 1000 ) * 1000) ) / 1000 ;
+         let $lock_time = window['store']['lock_time'] ;
+        if( $lock_time ){
+            this.timerNum = Math.floor( $lock_time - ( Math.floor( new Date().getTime()  / 1000 ) * 1000) ) / 1000 ;
         }else{
             this.timerNum--;
         }

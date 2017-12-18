@@ -36,7 +36,6 @@ class Change extends eui.UILayer{
     private teamImg03_name_r ;
     private teamImg04_name_r ;
 
-
     private drawChange(){
         let $store = window['store'] ;
         let bg:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-change_jpg'));
@@ -47,7 +46,6 @@ class Change extends eui.UILayer{
         this.logo_fz = this.createLogoBitmap( 'logo-fz_png' ) ;
         this.logo_yz = this.createLogoBitmap( 'logo-yz_png' ) ;
         this.logo_sj = this.createLogoBitmap( 'logo-sjb_png' ) ;
-
         // this.addChild( this.logo_mz );
         // setTimeout(()=>{
         //     egret.Tween.get( this.logo_mz ).to({x:window['store']['stage_anWidth'],y:206},200);
@@ -227,7 +225,14 @@ class Change extends eui.UILayer{
                 this.addChild( this[logoName] );
             }
             setTimeout(()=>{
-                egret.Tween.get( this[logoName] ).to({x:window['store']['stage_anWidth'],y:206},200);
+                let $store = window['store'] ;
+                if( !( ( $store['env_variable'].src === 'qqsd' || $store['env_variable'].src === '500app' ) && window['platform'] === 'android' ) ){
+                    egret.Tween.get( this[logoName] ).to({x:window['store']['stage_anWidth'],y:206},200);
+                } else{
+                    this[logoName].x =  window['store']['stage_anWidth'] ;
+                    this[logoName].y =  206 ;
+                }  
+                
             },400 )
 
         }

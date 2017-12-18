@@ -76,7 +76,6 @@ class Pop02Out extends egret.DisplayObjectContainer{
        this.popClose.y = 320;
        popWrap.addChild(this.popClose);
        this.popClose.touchEnabled = true;
-        // RES.removeEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
     }
 
     /**

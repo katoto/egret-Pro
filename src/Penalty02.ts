@@ -30,7 +30,6 @@ class Penalty02 extends eui.UILayer {
         // this.addChild(bgMask);
          // 上边队伍icon
         this.topTeam = new eui.Image();
-        // this.topTeam.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.topTeam.width = 24;
         this.topTeam.height = 24;
         this.topTeam.x = 72;
@@ -125,7 +124,6 @@ class Penalty02 extends eui.UILayer {
                         if( !( ( $store['env_variable'].src === 'qqsd' || $store['env_variable'].src === '500app' ) && window['platform'] === 'android' ) ){
                             egret.Tween.get(penaltyIn).to({scaleX:1.5,scaleY:1.5},200).to({scaleX:1,scaleY:1},200);
                         }                        
-                        
                         topNum ++ ;
                         if( currFieldStr ){
                             $store['$fieldContain'][currFieldStr].writeScore(  ( basescore + topNum ) + ':' + ( basescore + botNum)  )
@@ -181,7 +179,6 @@ class Penalty02 extends eui.UILayer {
                         }                           
 
                     }
-                    
                 }
             }
             await this.wait()
@@ -203,7 +200,6 @@ class Penalty02 extends eui.UILayer {
             }      
             // 去除 整个背景
             //  显示win showWinLocation(res05[i].matchid);  _l left  _r right
-
             // movePenalty
             await this.wait( 1400 ) ;
             if( !!$store['$fieldContain'] ){
@@ -245,7 +241,7 @@ class Penalty02 extends eui.UILayer {
                     this.removeChild( this.penaltyWin );
                     this.penaltyWin = null ;
                 }
-            },1200)
+            },1500)
         }
     }
 

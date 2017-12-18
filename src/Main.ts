@@ -51,7 +51,6 @@ class Main extends egret.DisplayObjectContainer {
     }
    
     private onAddToStage(event: egret.Event) {
-        alert(3) ;
         // egret.lifecycle.addLifecycleListener((context) => {
         //     context.onUpdate = () => {
         //     }

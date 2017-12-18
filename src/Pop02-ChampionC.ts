@@ -78,13 +78,11 @@ class Pop02Cham extends egret.DisplayObjectContainer{
        this.load.textAlign = egret.HorizontalAlign.CENTER;
     //    this.popWrap.addChild(this.load);
 
-
        //以下是冠军记录特有内容
        this.popChamC = new ChampionC();
        this.popChamC.y = 130;
        this.popWrap.addChild( this.popChamC );
       
-
        //关闭按钮54*80
        let popClose:egret.Bitmap = new egret.Bitmap(RES.getRes('pop-close_png'));
        popClose.anchorOffsetX = 54;
@@ -94,10 +92,8 @@ class Pop02Cham extends egret.DisplayObjectContainer{
        popClose.touchEnabled = true;
        popClose.addEventListener(egret.TouchEvent.TOUCH_TAP,()=>{
            let $store = window['store'] ;
-            //    this.removeChild(BigWrap);
             if( $store.$pop02Cham.parent ){
                 $store.$Top.removeChild( $store.$pop02Cham ) ;
-                // this.popChamC.clearAllWrap() ;
             }
        },this)
 

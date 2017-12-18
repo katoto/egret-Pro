@@ -1,4 +1,3 @@
-
 // 正常进球
 class Penalty01 extends eui.UILayer {
     public constructor(){
@@ -29,7 +28,6 @@ class Penalty01 extends eui.UILayer {
         // this.addChild(bgMask);
          // 上边队伍icon
         this.topTeam = new eui.Image();
-        // this.topTeam.source = 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png';
         this.topTeam.width = 24;
         this.topTeam.height = 24;
         this.topTeam.x = 38;
@@ -55,9 +53,7 @@ class Penalty01 extends eui.UILayer {
         this.timer = new egret.Bitmap(RES.getRes('penalty-time_png'));
         this.timer.x = 80;
         this.timer.y = 15;
-        // timer.scaleY = 0.98;
         this.addChild(this.timer);
-
 
         this.timer2  = new egret.Bitmap(RES.getRes('penalty-time2_png'));
         this.timer2.x = 80;
@@ -114,7 +110,6 @@ class Penalty01 extends eui.UILayer {
                 this.swapChildren( this.lineTime , this.timer2 ) ;
             }
         }
-
     }
 
 
@@ -176,7 +171,11 @@ class Penalty01 extends eui.UILayer {
                         penaltyIn.y = 1;
                         this.collFootball.push( penaltyIn );
                         this.addChild(penaltyIn);
-                        egret.Tween.get(penaltyIn).to({y:10},100).to({y:-10},100).to({y:1},100)
+
+                        if( !( ( $store['env_variable'].src === 'qqsd' || $store['env_variable'].src === '500app' ) && window['platform'] === 'android' ) ){
+                            egret.Tween.get(penaltyIn).to({y:10},100).to({y:-10},100).to({y:1},100) ;
+                        }
+
                         if( matchid ){
                             l_score++ ;
                         }
@@ -186,7 +185,11 @@ class Penalty01 extends eui.UILayer {
                         penaltyIn2.y = 34;
                         this.collFootball.push( penaltyIn2 );
                         this.addChild(penaltyIn2);
-                        egret.Tween.get(penaltyIn2).to({y:44},100).to({y:24},100).to({y:34},100)
+
+                        if( !( ( $store['env_variable'].src === 'qqsd' || $store['env_variable'].src === '500app' ) && window['platform'] === 'android' ) ){
+                            egret.Tween.get(penaltyIn2).to({y:44},100).to({y:24},100).to({y:34},100) ;
+                        }
+
                         if( matchid ){
                             r_score++ ;
                         }
@@ -196,7 +199,6 @@ class Penalty01 extends eui.UILayer {
                         currFieldStr = $store['matFindField'][ matchid ] ;
                         $store['$fieldContain'][currFieldStr].writeScore( l_score + ':' + r_score )
                     }
-                   
 
                 }, ( parseInt( timeline[i].at_time ) / 7200 * 25000 ))
             }
@@ -217,7 +219,6 @@ class Penalty01 extends eui.UILayer {
             }
         }
 
-
     }
 
     /**
@@ -232,7 +233,7 @@ class Penalty01 extends eui.UILayer {
             if( !!this.timer ){
                 this.addChild( this.timer );
             }
-        },300)
+        },400)
     }
 
     private drawIn(){
