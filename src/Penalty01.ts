@@ -212,6 +212,7 @@ class Penalty01 extends eui.UILayer {
             for( let i = 0;i < len ; i++ ){
                 if( this.collFootball[i] && this.collFootball[i].parent ){
                     this.removeChild( this.collFootball[i] );
+                    this.collFootball[i] = null ;
                 }
             }
         }

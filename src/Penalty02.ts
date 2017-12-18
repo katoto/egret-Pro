@@ -121,7 +121,11 @@ class Penalty02 extends eui.UILayer {
                         colectPenalt.push( penaltyIn )
                         await this.wait( )
                         this.addChild(penaltyIn);
-                         egret.Tween.get(penaltyIn).to({scaleX:1.5,scaleY:1.5},200).to({scaleX:1,scaleY:1},200);
+
+                        if( !( ( $store['env_variable'].src === 'qqsd' || $store['env_variable'].src === '500app' ) && window['platform'] === 'android' ) ){
+                            egret.Tween.get(penaltyIn).to({scaleX:1.5,scaleY:1.5},200).to({scaleX:1,scaleY:1},200);
+                        }                        
+                        
                         topNum ++ ;
                         if( currFieldStr ){
                             $store['$fieldContain'][currFieldStr].writeScore(  ( basescore + topNum ) + ':' + ( basescore + botNum)  )
@@ -137,7 +141,10 @@ class Penalty02 extends eui.UILayer {
                         colectPenalt.push( penaltyOut )
                         await this.wait( )
                         this.addChild(penaltyOut);
-                         egret.Tween.get(penaltyOut).to({scaleX:1.5,scaleY:1.5},200).to({scaleX:1,scaleY:1},200);
+                        if( !( ( $store['env_variable'].src === 'qqsd' || $store['env_variable'].src === '500app' ) && window['platform'] === 'android' ) ){
+                            egret.Tween.get(penaltyOut).to({scaleX:1.5,scaleY:1.5},200).to({scaleX:1,scaleY:1},200);
+                        }
+
                     }
                     if( penaltyArr[i][1] === '1' ){
                         let penaltyIn = this.drawIn();
@@ -150,7 +157,10 @@ class Penalty02 extends eui.UILayer {
                         colectPenalt.push( penaltyIn )
                         await this.wait( )
                         this.addChild(penaltyIn);
-                         egret.Tween.get(penaltyIn).to({scaleX:1.5,scaleY:1.5},200).to({scaleX:1,scaleY:1},200);
+
+                        if( !( ( $store['env_variable'].src === 'qqsd' || $store['env_variable'].src === '500app' ) && window['platform'] === 'android' ) ){
+                            egret.Tween.get(penaltyIn).to({scaleX:1.5,scaleY:1.5},200).to({scaleX:1,scaleY:1},200);
+                        }                        
                         botNum ++ ;
                         if( currFieldStr ){
                             $store['$fieldContain'][currFieldStr].writeScore(  ( basescore + topNum ) + ':' + ( basescore + botNum)  )
@@ -166,7 +176,10 @@ class Penalty02 extends eui.UILayer {
                         colectPenalt.push( penaltyOut )
                         await this.wait( )
                         this.addChild(penaltyOut);
-                         egret.Tween.get(penaltyOut).to({scaleX:1.5,scaleY:1.5},200).to({scaleX:1,scaleY:1},200);
+                        if( !( ( $store['env_variable'].src === 'qqsd' || $store['env_variable'].src === '500app' ) && window['platform'] === 'android' ) ){
+                            egret.Tween.get(penaltyOut).to({scaleX:1.5,scaleY:1.5},200).to({scaleX:1,scaleY:1},200);
+                        }                           
+
                     }
                     
                 }
@@ -182,11 +195,13 @@ class Penalty02 extends eui.UILayer {
                 leftOrRig = '_r' ;
             }
             this.addChild( this.penaltyWin );
-            egret.Tween.get( this.penaltyWin ).to({ scaleX:1.5,scaleY:1.5 },200).to({
-                scaleX:1,scaleY:1
-            },200);
-            // 去除 整个背景
 
+            if( !( ( $store['env_variable'].src === 'qqsd' || $store['env_variable'].src === '500app' ) && window['platform'] === 'android' ) ){
+                egret.Tween.get( this.penaltyWin ).to({ scaleX:1.5,scaleY:1.5 },200).to({
+                    scaleX:1,scaleY:1
+                },200);
+            }      
+            // 去除 整个背景
             //  显示win showWinLocation(res05[i].matchid);  _l left  _r right
 
             // movePenalty
@@ -223,10 +238,12 @@ class Penalty02 extends eui.UILayer {
                 for( let i=0 ,len = colectPenalt.length ;i< len ; i++ ){
                     if( colectPenalt[i] && colectPenalt[i].parent ){
                         this.removeChild( colectPenalt[i] );
+                        colectPenalt[i] = null ;
                     }
                 }
                 if( this.penaltyWin.parent ){
                     this.removeChild( this.penaltyWin );
+                    this.penaltyWin = null ;
                 }
             },1200)
         }

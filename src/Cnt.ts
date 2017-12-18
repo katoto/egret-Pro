@@ -199,14 +199,20 @@ class Cnt extends egret.DisplayObjectContainer{
      *  champion 冠军
      */
     private showChampion( name:string ){
+        let $store = window['store'] ;
         if( !!this.champion ){
             this.bgCourtWrap.addChild( this.champion ) ;
-            egret.Tween.get(this.champion).to({x:254.5},200)
+            if( !( ( $store['env_variable'].src === 'qqsd' || $store['env_variable'].src === '500app' ) && window['platform'] === 'android' ) ){
+                egret.Tween.get(this.champion).to({x:254.5},200)
+            }
         }
         if( !!this.championText ){
             this.championText.text = name ;
             this.champion.addChild(this.championText) ; 
-            egret.Tween.get(this.championText).to({alpha:1},200)
+            if( !( ( $store['env_variable'].src === 'qqsd' || $store['env_variable'].src === '500app' ) && window['platform'] === 'android' ) ){
+                egret.Tween.get(this.championText).to({alpha:1},200)
+            }           
+            
         }
     }
 
@@ -753,31 +759,13 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
         let choseOther = $store['userPositionLocal'][uid] 
         let selOtherCoin = $store['userPosition'][$store['userPositionLocal'][uid] - 1] -1 ;
         let baseImgStr = 'userImg' + choseOther ; 
-        let oldCoin = 0 ;
-
         if( this[ baseImgStr] ){
-
-            // console.log('+++++++++++++++') ;
-            // console.log( baseImgStr ) ;
-            // console.log('----------------')
-            // if( isNaN( this[ baseImgStr ]['getCurGold']() ) ){
-            //     console.log( 'isNaN 了 cnt.ts' )
-            // }else{
-            //     oldCoin = parseInt( this[ baseImgStr ]['getCurGold']() ) ;
-            // }
-            // // setMyGold
-            // if( oldCoin - parseInt( bet_golds ) < 0 ){
-            //     this[ baseImgStr ]['setMyGold']( 0 );
-            // }else{
-            //     this[ baseImgStr ]['setMyGold']( oldCoin - parseInt( bet_golds ) );
-            // }
 
             if( total_coin ){
                 this[ baseImgStr ]['setMyGold']( total_coin );
             }
 
             this.fieldContain.other_Coin( matchid , selection , selOtherCoin , bet_golds );
-
         }
 
     }

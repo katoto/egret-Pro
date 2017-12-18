@@ -213,9 +213,12 @@ var Field_ball = (function (_super) {
     };
     //  left add icon win   胜利图标
     Field_ball.prototype.addwinIcon_l = function () {
+        var $store = window['store'];
         if (!!this.winIcon_l) {
             this.addChild(this.winIcon_l);
-            egret.Tween.get(this.winIcon_l).to({ width: 203, height: 203 }, 400).to({ width: 300, height: 300 }, 400).to({ width: 203, height: 202 }, 400);
+            if (!(($store['env_variable'].src === 'qqsd' || $store['env_variable'].src === '500app') && window['platform'] === 'android')) {
+                egret.Tween.get(this.winIcon_l).to({ width: 203, height: 203 }, 400).to({ width: 300, height: 300 }, 400).to({ width: 203, height: 202 }, 400);
+            }
         }
         else {
             this.winIcon_l = new egret.Bitmap(RES.getRes('win_png'));
@@ -225,14 +228,19 @@ var Field_ball = (function (_super) {
             this.winIcon_l.y = this.courtAnHeight;
             this.winIcon_l.x = -60;
             this.addChild(this.winIcon_l);
-            egret.Tween.get(this.winIcon_l).to({ width: 203, height: 203 }, 400).to({ width: 300, height: 300 }, 400).to({ width: 203, height: 202 }, 400);
+            if (!(($store['env_variable'].src === 'qqsd' || $store['env_variable'].src === '500app') && window['platform'] === 'android')) {
+                egret.Tween.get(this.winIcon_l).to({ width: 203, height: 203 }, 400).to({ width: 300, height: 300 }, 400).to({ width: 203, height: 202 }, 400);
+            }
         }
     };
     // right add icon
     Field_ball.prototype.addwinIcon_r = function () {
+        var $store = window['store'];
         if (!!this.winIcon_r) {
             this.addChild(this.winIcon_r);
-            egret.Tween.get(this.winIcon_r).to({ width: 203, height: 203 }, 400).to({ width: 300, height: 300 }, 400).to({ width: 203, height: 202 }, 400);
+            if (!(($store['env_variable'].src === 'qqsd' || $store['env_variable'].src === '500app') && window['platform'] === 'android')) {
+                egret.Tween.get(this.winIcon_r).to({ width: 203, height: 203 }, 400).to({ width: 300, height: 300 }, 400).to({ width: 203, height: 202 }, 400);
+            }
         }
         else {
             this.winIcon_r = new egret.Bitmap(RES.getRes('win_png'));
@@ -242,7 +250,9 @@ var Field_ball = (function (_super) {
             this.winIcon_r.x = 330;
             this.winIcon_r.y = this.courtAnHeight;
             this.addChild(this.winIcon_r);
-            egret.Tween.get(this.winIcon_r).to({ width: 203, height: 203 }, 400).to({ width: 300, height: 300 }, 400).to({ width: 203, height: 202 }, 400);
+            if (!(($store['env_variable'].src === 'qqsd' || $store['env_variable'].src === '500app') && window['platform'] === 'android')) {
+                egret.Tween.get(this.winIcon_r).to({ width: 203, height: 203 }, 400).to({ width: 300, height: 300 }, 400).to({ width: 203, height: 202 }, 400);
+            }
         }
     };
     // 更新左边总金币的背景
