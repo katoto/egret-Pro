@@ -204,6 +204,8 @@ class Cnt extends egret.DisplayObjectContainer{
             this.bgCourtWrap.addChild( this.champion ) ;
             if( !( ( $store['env_variable'].src === 'qqsd' || $store['env_variable'].src === '500app' ) && window['platform'] === 'android' ) ){
                 egret.Tween.get(this.champion).to({x:254.5},200)
+            }else{
+                this.champion.x = 254.5 ;
             }
         }
         if( !!this.championText ){
@@ -211,6 +213,8 @@ class Cnt extends egret.DisplayObjectContainer{
             this.champion.addChild(this.championText) ; 
             if( !( ( $store['env_variable'].src === 'qqsd' || $store['env_variable'].src === '500app' ) && window['platform'] === 'android' ) ){
                 egret.Tween.get(this.championText).to({alpha:1},200)
+            }else{
+                this.championText.alpha = 1 ;
             }           
             
         }
@@ -232,11 +236,11 @@ class Cnt extends egret.DisplayObjectContainer{
      *  4个进球的实例的初始化
      */
     private initAllPenalty(){
-        let $store = window['store'] ;
-        let penaltyStr = 'penalty' ;
-        let bgMaskStr = 'bgMask' ;
-        let penaltyStr_p = 'penalty_point' ;
-        let bgMaskStr_p = 'bgMask_point' ;   
+        let $store = window['store'] ,
+            penaltyStr = 'penalty' ,
+            bgMaskStr = 'bgMask' ,
+            penaltyStr_p = 'penalty_point' ,
+            bgMaskStr_p = 'bgMask_point' ;   
 
         for( let i = 0; i < 4 ; i++ ){
             penaltyStr = 'penalty'+i ;
@@ -309,21 +313,21 @@ class Cnt extends egret.DisplayObjectContainer{
      */
     async adjustPenalty( allResult ){
         // 比赛框的位置坐标 
-        let local_4 = [120,300,505,700] ;
-        let local_2 = [210,480] ; // 130 500  210 、480
-        let local_1 = [ 295 ] ; // 265  + 30
-        let curr_local = null ;
+        let local_4 = [120,300,505,700] ,
+            local_2 = [210,480] , // 130 500  210 、480
+            local_1 = [ 295 ] , // 265  + 30
+            curr_local = null ,
 
-        let penaltyStr = 'penalty' ;
-        let bgMaskStr = 'bgMask' ;
-        let penaltyStr_p = 'penalty_point' ;
-        let bgMaskStr_p = 'bgMask_point' ;   
+            penaltyStr = 'penalty' ,
+            bgMaskStr = 'bgMask' ,
+            penaltyStr_p = 'penalty_point' ,
+            bgMaskStr_p = 'bgMask_point' ,   
 
-        let len = allResult.length;  // 数据长度
+            len = allResult.length ,  // 数据长度
+            findIndex = null ,
+            endResult = null ,
+            $store = window['store'] ;
 
-        let findIndex = null ;
-        let endResult = null ;
-        let $store = window['store'] ;
         // 确保 在调用之前已经清除
         switch (len){
             case 4:
@@ -468,8 +472,8 @@ class Cnt extends egret.DisplayObjectContainer{
      *  allResult
      */
     private showFieldWin( allResult ){
-        let len = allResult.length ;
-        let $store = window['store'] ;
+        let len = allResult.length ,
+            $store = window['store'] ;
 
         for( let i = 0;i < len; i++ ){
             if( allResult[i].is_spotkick === '0' ){
@@ -556,8 +560,8 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
      *  @param matchid
      */
     private cnt_getFieldImg( matchid:string ){
-        let $store = window['store'] ;
-        let currFieldStr = '';
+        let $store = window['store'] ,
+            currFieldStr = '';
         if( matchid ){
             currFieldStr = $store['matFindField'][ matchid ] ;
             if( currFieldStr ){
@@ -574,8 +578,8 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
      *  @param matchid
      */
     private  findPenaltyStr( matchid:string ){
-        let $store = window['store'] ;
-        let currFieldStr = '';
+        let $store = window['store'] ,
+            currFieldStr = '';
         if( matchid ){
             //  matchid  找 位置
             if( $store['matFindField'][ matchid ] ){
@@ -609,10 +613,10 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
      */
     private cleanAllPenalty(){
 
-        let penaltyStr = 'penalty' ;
-        let bgMaskStr = 'bgMask' ;
-        let penaltyStr_p = 'penalty_point' ;
-        let bgMaskStr_p = 'bgMask_point' ;  
+        let penaltyStr = 'penalty' ,
+            bgMaskStr = 'bgMask' ,
+            penaltyStr_p = 'penalty_point' ,
+            bgMaskStr_p = 'bgMask_point' ;  
 
         for( let i = 0;i<4;i++ ){
             penaltyStr = 'penalty'+i ;
@@ -621,10 +625,11 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
             bgMaskStr_p = 'bgMask_point'+i ;  
 
             if( this[penaltyStr] ){
-                this[penaltyStr].initLine();
                 if( this[penaltyStr].parent ){
                     this.bgCourtWrap.removeChild( this[penaltyStr] );
                 }
+                this[penaltyStr].initLine();
+                
             }
 
             if( this[bgMaskStr] && this[bgMaskStr].parent ){
@@ -648,10 +653,10 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
      *  @param mathcid 为了 显示最终的win
      */
     async showPenalty( penaltyArr  , curr_local , footIndex ,matchid:string ,score:string ){
-        let penaltyStr = 'penalty' ;
-        let bgMaskStr = 'bgMask' ;
-        let penaltyStr_p = 'penalty_point' ;
-        let bgMaskStr_p = 'bgMask_point' ;  
+        let penaltyStr = 'penalty' ,
+            bgMaskStr = 'bgMask' ,
+            penaltyStr_p = 'penalty_point' ,
+            bgMaskStr_p = 'bgMask_point' ;  
 
         penaltyStr = 'penalty'+footIndex ;
         bgMaskStr = 'bgMask'+footIndex ;
@@ -664,22 +669,34 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
         }
         await this.wait( 6500 ) ;
         //  进球 切 点球
-        egret.Tween.get( this[penaltyStr] ).to( {y:curr_local[footIndex] -158 }, 200 ).call(()=>{
+        egret.Tween.get( this[penaltyStr] ).to( {y:curr_local[footIndex] -158 }, 200 )
+        
+        // egret.Tween.get( this[penaltyStr] ).to( {y:curr_local[footIndex] -158 }, 200 ).call(()=>{
+        //     if( this[bgMaskStr].parent ){
+        //         this.bgCourtWrap.removeChild( this[bgMaskStr] );
+        //     }
+        //     if( this[penaltyStr].parent ){
+        //         this.bgCourtWrap.removeChild( this[penaltyStr] );
+        //     }
+
+        // });
+        // egret.Tween.get( this[ penaltyStr_p ]  ).to( {y: curr_local[footIndex] }, 200 ).call(()=>{
+        //     // 对应点球动画
+        //     setTimeout(()=>{
+        //         this[ penaltyStr_p ].movePenalty( penaltyArr , matchid ,score ,footIndex )
+        //     },500)
+        // });
+        egret.Tween.get( this[ penaltyStr_p ]  ).to( {y: curr_local[footIndex] }, 200 )       
+
+        setTimeout(()=>{
             if( this[bgMaskStr].parent ){
                 this.bgCourtWrap.removeChild( this[bgMaskStr] );
             }
             if( this[penaltyStr].parent ){
                 this.bgCourtWrap.removeChild( this[penaltyStr] );
             }
-
-        });
-        
-        egret.Tween.get( this[ penaltyStr_p ]  ).to( {y: curr_local[footIndex] }, 200 ).call(()=>{
-            // 对应点球动画
-            setTimeout(()=>{
-                this[ penaltyStr_p ].movePenalty( penaltyArr , matchid ,score ,footIndex )
-            },500)
-        });
+            this[ penaltyStr_p ].movePenalty( penaltyArr , matchid ,score ,footIndex )
+        },700)
 
     }
 
@@ -709,12 +726,12 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
     //  通过matchid 找到 开始位置 通过uid 找到头像位置
     // 
     async settle_listFn( settleData:any ){
-        let choseUser = null ;
-        let $store = window['store'] ;
-        let baseImg = 'userImg' ; 
-        let curFindField = '' ;
-        let allShowWinNum = 0 ;
-        let userImgArr = [] ;
+        let choseUser = null ,
+            $store = window['store'] ,
+            baseImg = 'userImg' ,
+            curFindField = '' ,
+            allShowWinNum = 0 ,
+            userImgArr = [] ;
         if( settleData ){
             for( let i=0,len = settleData.length ;i<len ; i++ ){
                 choseUser = baseImg + $store['userPositionLocal'][ settleData[i].uid ] ;
@@ -755,16 +772,14 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
     // 他人金币 发出
     private cnt_Other_Coin( matchid:string , selection:string , uid:string , bet_golds:string , total_coin:string ){
         // 处理 他人金币的金币减少 .
-        let $store = window['store'] ;
-        let choseOther = $store['userPositionLocal'][uid] 
-        let selOtherCoin = $store['userPosition'][$store['userPositionLocal'][uid] - 1] -1 ;
-        let baseImgStr = 'userImg' + choseOther ; 
+        let $store = window['store'] ,
+            choseOther = $store['userPositionLocal'][uid] ,
+            selOtherCoin = $store['userPosition'][$store['userPositionLocal'][uid] - 1] -1 ,
+            baseImgStr = 'userImg' + choseOther ; 
         if( this[ baseImgStr] ){
-
             if( total_coin ){
                 this[ baseImgStr ]['setMyGold']( total_coin );
             }
-
             this.fieldContain.other_Coin( matchid , selection , selOtherCoin , bet_golds );
         }
 
@@ -811,11 +826,11 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
     //  初始的用户信息  new
     public initUserMsg(){
         // 调整原数组
-        let $store = window['store'] ;
-        let len = $store['user_info'].length
-        let newUserInfo = [];
-        let firstUser = null ;
-        let bigIndex = 0;
+        let $store = window['store'] ,
+            len = $store['user_info'].length ,
+            newUserInfo = [] ,
+            firstUser = null ,
+            bigIndex = 0 ;
 
         if( this.fieldContain && this.bgCourtWrap  ){
             bigIndex = this.bgCourtWrap.getChildIndex( this.fieldContain ) ;
@@ -843,8 +858,8 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
                 $store['emptyUserPosition'].push( i+1 )
             }
         }
-        let newIndex = 0;
-        let newObj = null ;
+        let newIndex = 0 ,
+            newObj = null ;
         for(let i=0; i<len ;i++){
             if( $store['user_info'][i] && $store['user_info'][i].photo === '' ){
                 $store['user_info'][i].photo = 'http://img.choopaoo.com/esun/upload/be/83/be837ad8049611e797ef.png'
@@ -896,10 +911,10 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
         this.bgCourtWrap.addChild(this[choseUserImg]);
         setTimeout(()=>{
             if( !$store['unableClick'] && !!this.fieldContain && !!this[choseUserImg] && this.fieldContain.parent && this[choseUserImg].parent ){
-                let item = null ;
-                let choseUserImg = 'userImg';
-                let bigIndex = 0;
-                let bigUserImg = null ;
+                let item = null ,
+                    choseUserImg = 'userImg' ,
+                    bigIndex = 0 ,
+                    bigUserImg = null ;
                 for( item  in $store.userPositionLocal ){
                     if( $store.userPositionLocal[item] ){
                         if( this.bgCourtWrap.getChildIndex( this[ choseUserImg +  $store.userPositionLocal[item] ] ) > bigIndex ){
@@ -921,8 +936,8 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
     }
     // 用户 离开  new
     private removeUserImage( uid:string ){
-        let delIndex = 0;
-        let $store = window['store'] ;
+        let delIndex = 0 ,
+            $store = window['store'] ;
         if( $store['userPositionLocal'][uid] ){
             delIndex = $store['userPositionLocal'][uid] ;
         }
@@ -950,9 +965,9 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
 
     // 处理聊天相关（ html ）
     private showChat( uid:string ,msg:string ){
-        let $store = window['store'] ;
-        let findLocal = null ;
-        let currDom = null ;
+        let $store = window['store'] ,
+            findLocal = null ,
+            currDom = null ;
 
         if( uid ){
             findLocal = $store['userPosition'][ $store['userPositionLocal'][ uid ] - 1 ];

@@ -130,12 +130,12 @@ class Penalty01 extends eui.UILayer {
      *    matchid 为了修改 点球
      */
     private createFootball( timeline:any , is_extratime:any ,matchid:any ){
-        let len = timeline.length ;
-        let $store = window['store'] ;
-        let currFieldStr = '';
-        let l_score = 0 ;
-        let r_score = 0 ;
-        var self = this;
+        let len = timeline.length ,
+            $store = window['store'] ,
+            currFieldStr = '' ,
+            l_score = 0 ,
+            r_score = 0 ,
+            self = this;
         if( is_extratime ){  //358  449
             this.upLineTimeLev();
             if( is_extratime === '0' ){
@@ -233,7 +233,7 @@ class Penalty01 extends eui.UILayer {
             if( !!this.timer ){
                 this.addChild( this.timer );
             }
-        },400)
+        },900)
     }
 
     private drawIn(){

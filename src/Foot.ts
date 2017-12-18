@@ -27,9 +27,9 @@ class Foot extends egret.DisplayObjectContainer{
         // 设置锚点，使背景处于舞台最下方
         this.addChild(this.bottom);
          // 规则
-         let popRule = new Pop02RuleC();
-
-         let btnRule:egret.Bitmap = new egret.Bitmap(RES.getRes('rule_png'));
+         let popRule = new Pop02RuleC() ,
+            btnRule:egret.Bitmap = new egret.Bitmap(RES.getRes('rule_png'));
+            
          btnRule.x = 0;
          btnRule.y = 0;
          this.addChild(btnRule);

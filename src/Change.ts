@@ -37,8 +37,8 @@ class Change extends eui.UILayer{
     private teamImg04_name_r ;
 
     private drawChange(){
-        let $store = window['store'] ;
-        let bg:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-change_jpg'));
+        let $store = window['store'] ,
+            bg:egret.Bitmap = new egret.Bitmap(RES.getRes('bg-change_jpg'));
         this.addChild(bg);
 
         this.logo_mz = this.createLogoBitmap( 'logo-mz_png' ) ;
@@ -195,8 +195,8 @@ class Change extends eui.UILayer{
      *  更新对应的数据
      */
     private upChangeMsg( matches:any , room_info:any ){
-        let logoName = ''; 
-        let baselogoStr = 'teamImg0' ;
+        let logoName = '' ,
+            baselogoStr = 'teamImg0' ;
         if( room_info ){
             // 清除所有的 logo
             this.clearAllLogo();

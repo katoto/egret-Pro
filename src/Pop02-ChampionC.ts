@@ -54,10 +54,10 @@ class Pop02Cham extends egret.DisplayObjectContainer{
         tWrap.width = 680;
         tWrap.height = 50;
         this.popWrap.addChild(tWrap);
-        let text01 = this.drawTitie("期号",170,0);
-        let text02 = this.drawTitie("赛事",170,170);
-        let text03 = this.drawTitie("冠军",170,510);
-        let text04 = this.drawTitie("冠军球队",170,340);
+        let text01 = this.drawTitie("期号",170,0) ,
+            text02 = this.drawTitie("赛事",170,170) ,
+            text03 = this.drawTitie("冠军",170,510) ,
+            text04 = this.drawTitie("冠军球队",170,340);
         tWrap.addChild(text01);
         tWrap.addChild(text02);
         tWrap.addChild(text03);

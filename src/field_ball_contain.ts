@@ -12,7 +12,8 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
     private field43;
     private field44;
 
-    // private coinArr = [];
+    private OthercoinArr = [];
+    private currIndex = 0 ;
 
     public constructor(){
         super();
@@ -75,12 +76,12 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         this.courtWrap4.addChild(this.field44);
 
 
-        // for( let i=0;i<50;i++ ){
-        //     let gold = new Gold();
-        //     gold.anchorOffsetX = gold.width/2;
-        //     gold.anchorOffsetY = gold.height/2;
-        //     this.coinArr.push( gold );
-        // }
+        for( let i=0;i< 60 ;i++ ){
+            let gold = new Gold();
+            gold.anchorOffsetX = gold.width/2;
+            gold.anchorOffsetY = gold.height/2;
+            this.OthercoinArr.push( gold );
+        }
         // console.log('=============')
         // console.log( this.coinArr )
         // console.log('=------------------=')
@@ -120,9 +121,9 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
     //  初始化 场地 （记录位置）
     private initFieldMsg(){
-        let fieldStr = 'field';
-        let $store = window['store']
-        let matchLen = $store['matches'].length
+        let fieldStr = 'field' ,
+            $store = window['store'] ,
+            matchLen = $store['matches'].length ;
         $store['matFindField'] = {};  // 切换场地 清空数据
         if( $store['matches'] && matchLen ){
             switch( matchLen ){
@@ -180,12 +181,11 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
      *  抽出左右事件
      */
     async leftSend_evt( fieldName:string  , x:any , y:any ){
-        let $store = window['store'];
-        let $store_coinNum = $store['coin_Num'];
-        let currBtnNumber = $store['curr_btn_coin'];
-        let currQueryStr = '';
-
-        let currMatchData = this[fieldName].getCurrMatchData()
+        let $store = window['store'] ,
+            $store_coinNum = $store['coin_Num'] ,
+            currBtnNumber = $store['curr_btn_coin'] ,
+            currQueryStr = '' ,
+            currMatchData = this[fieldName].getCurrMatchData()
 
         currQueryStr = window['convertToQueryString']({
             ck : $store['orderObj'].ck,
@@ -256,12 +256,11 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
      *  抽出左右事件
      */
     async rightSend_evt( fieldName:string  , x:any , y:any ){
-        let $store = window['store'];
-        let $store_coinNum = $store['coin_Num'];
-        let currBtnNumber = $store['curr_btn_coin'];
-        let currQueryStr = '';
-
-        let currMatchData = this[fieldName].getCurrMatchData()
+        let $store = window['store'] ,
+            $store_coinNum = $store['coin_Num'] ,
+            currBtnNumber = $store['curr_btn_coin'] ,
+            currQueryStr = '' ,
+            currMatchData = this[fieldName].getCurrMatchData() ;
         currQueryStr = window['convertToQueryString']({
             ck : $store['orderObj'].ck,
             golds : $store['curr_btn_coin'] ,
@@ -339,17 +338,15 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         //     coin_left_local:{ x:null ,y:null },
         //     coin_right_local:{ x:null ,y:null }
         // }
-        let x = e.localX + 133;
-        let y = e.localY + 120;
-        let $store = window['store'];
-        let $store_coinNum = $store['coin_Num'];
-        let currBtnNumber = $store['curr_btn_coin'];
-        let currQueryStr = '';
-
-        let currMatchData = this.field41.getCurrMatchData()
+        let x = e.localX + 133 ,
+            y = e.localY + 120 ,
+            $store = window['store'] ,
+            $store_coinNum = $store['coin_Num'] ,
+            currBtnNumber = $store['curr_btn_coin'] ,
+            currQueryStr = '',
+            currMatchData = this.field41.getCurrMatchData() ;
 
         if( y>150 && y <260 ){
-
             if($store['unableClick']){
                 // if( $store['$cnt'] ){
                 //     $store['$cnt'].showTips('现在不能投注,bug 被我设置了');
@@ -386,14 +383,14 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
     private field_42Evt( e:egret.TouchEvent ){
         //  执行动画  213 154 left   496 156 right  
-        let x = e.localX + 133;
-        let y = e.localY + 320;
-        let $store = window['store'];
-        let $store_coinNum = $store['coin_Num'];
-        let currBtnNumber = $store['curr_btn_coin'];
+        let x = e.localX + 133 ,
+            y = e.localY + 320 ,
+            $store = window['store'] ,
+            $store_coinNum = $store['coin_Num'] ,
+            currBtnNumber = $store['curr_btn_coin'],
 
-        let currQueryStr = '';
-        let currMatchData = this.field42.getCurrMatchData()
+            currQueryStr = '' ,
+            currMatchData = this.field42.getCurrMatchData() ;
 
         if( y>350 && y <460 ){
             if($store['unableClick']){
@@ -429,14 +426,14 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
     private field_43Evt( e:egret.TouchEvent ){
         //  执行动画  213 154 left   496 156 right  
-        let x = e.localX + 133;
-        let y = e.localY + 520;
-        let $store = window['store'];
-        let $store_coinNum = $store['coin_Num'];
-        let currBtnNumber = $store['curr_btn_coin'] ;
+        let x = e.localX + 133 ,
+            y = e.localY + 520 ,
+            $store = window['store'] ,
+            $store_coinNum = $store['coin_Num'] ,
+            currBtnNumber = $store['curr_btn_coin'] ,
 
-        let currQueryStr = '';
-        let currMatchData = this.field43.getCurrMatchData();
+            currQueryStr = '',
+            currMatchData = this.field43.getCurrMatchData();
 
         if( y>550 && y <660 ){
             if($store['unableClick']){
@@ -473,14 +470,15 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
 
     private field_44Evt( e:egret.TouchEvent ){
         //  执行动画  213 154 left   496 156 right  
-        let x = e.localX + 133;
-        let y = e.localY + 720;
-        let $store = window['store'];
-        let $store_coinNum = $store['coin_Num'];
-        let currBtnNumber = $store['curr_btn_coin'];
+        let x = e.localX + 133 ,
+            y = e.localY + 720 ,
+            $store = window['store'],
+            $store_coinNum = $store['coin_Num'],
+            currBtnNumber = $store['curr_btn_coin'],
 
-        let currQueryStr = '';
-        let currMatchData = this.field44.getCurrMatchData();
+            currQueryStr = '',
+            currMatchData = this.field44.getCurrMatchData();
+
         if( y>750 && y <860 ){
             if($store['unableClick']){
                 return false ;
@@ -514,14 +512,14 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
     }
 
     private field_21Evt( e:egret.TouchEvent ){
-        let x = e.localX + 133;
-        let y = e.localY + 234;
-        let $store = window['store'];
-        let $store_coinNum = $store['coin_Num'];
-        let currBtnNumber = $store['curr_btn_coin'];
+        let x = e.localX + 133 ,
+            y = e.localY + 234 ,
+            $store = window['store'] ,
+            $store_coinNum = $store['coin_Num'] ,
+            currBtnNumber = $store['curr_btn_coin'] ,
 
-        let currQueryStr = '';
-        let currMatchData = this.field21.getCurrMatchData();
+            currQueryStr = '',
+            currMatchData = this.field21.getCurrMatchData();
 
         if( y>270 && y <445 ){
             if($store['unableClick']){
@@ -554,14 +552,14 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         }
     }
     private field_22Evt( e:egret.TouchEvent ){
-        let x = e.localX + 133;
-        let y = e.localY + 508;
-        let $store = window['store'];
-        let $store_coinNum = $store['coin_Num'];
-        let currBtnNumber = $store['curr_btn_coin'];
+        let x = e.localX + 133 ,
+            y = e.localY + 508 ,
+            $store = window['store'] ,
+            $store_coinNum = $store['coin_Num'] ,
+            currBtnNumber = $store['curr_btn_coin'] ,
 
-        let currQueryStr = '';
-        let currMatchData = this.field22.getCurrMatchData();
+            currQueryStr = '' ,
+            currMatchData = this.field22.getCurrMatchData();
 
         if( y>544 && y <720 ){
             if($store['unableClick']){
@@ -594,14 +592,14 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         }
     }
     private field_1Evt( e:egret.TouchEvent ){
-        let x = e.localX + 133;
-        let y = e.localY + 322;
-        let $store = window['store'];
-        let $store_coinNum = $store['coin_Num'];        
-        let currBtnNumber = $store['curr_btn_coin'];
+        let x = e.localX + 133 ,
+            y = e.localY + 322 ,
+            $store = window['store'] ,
+            $store_coinNum = $store['coin_Num'] ,        
+            currBtnNumber = $store['curr_btn_coin'] ,
 
-        let currQueryStr = '';
-        let currMatchData = this.field1.getCurrMatchData();
+            currQueryStr = '',
+            currMatchData = this.field1.getCurrMatchData();
 
         if( y>352 && y <650 ){
             if($store['unableClick']){
@@ -637,10 +635,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
      *  收起对应的 金币 ！
      */
     private collectCoin(){
-        let $store = window['store'];
-        let allCoinKeys = window['Object'].keys( $store['allCoinObj'] );
-        let objLen = allCoinKeys.length;
-        let $egret_Tween = egret.Tween ;
+        let $store = window['store'] ,
+            allCoinKeys = window['Object'].keys( $store['allCoinObj'] ) ,
+            objLen = allCoinKeys.length ,
+            $egret_Tween = egret.Tween ;
         if( objLen > 0){
             for( let i=0;i<objLen;i++ ){
                 if( $store['allCoinObj'][allCoinKeys[i]] && $store['allCoinObj'][allCoinKeys[i]].coin_left ){
@@ -670,6 +668,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         for( let j=0,len = $store['allCoinObj'][allCoinKeys[i]].coin_left.length ;j<len;j++ ){
                             if( $store['allCoinObj'][allCoinKeys[i]].coin_left[j].parent ){
                                 this.removeChild( $store['allCoinObj'][allCoinKeys[i]].coin_left[j] )
+                                $store['allCoinObj'][allCoinKeys[i]].coin_left[j] = null ;
                             }
                         }
                         // 全局修改left收起背景
@@ -681,6 +680,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         for( let j=0,len = $store['allCoinObj'][allCoinKeys[i]].coin_right.length ;j<len;j++ ){
                             if( $store['allCoinObj'][allCoinKeys[i]].coin_right[j].parent ){
                                 this.removeChild( $store['allCoinObj'][allCoinKeys[i]].coin_right[j] )
+                                $store['allCoinObj'][allCoinKeys[i]].coin_right[j] = null ;
                             }
                         }
                         // 全局修改right收起背景
@@ -688,7 +688,7 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
                         $store['allCoinObj'][allCoinKeys[i]].coin_right = [] ; // 回收
                     }
                 }
-            },200)
+            },0)
         }
     }
 
@@ -700,11 +700,11 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
      * 标识
      */
     private sendEndCoin( start:string , uid:string ){
-        let goldArr = [];
-        let $store = window['store'];
-        let newEndNum = null;
-        let newEndLocal_x = null;
-        let newEndLocal_y = null;
+        let goldArr = [] ,
+            $store = window['store'] ,
+            newEndNum = null ,
+            newEndLocal_x = null,
+            newEndLocal_y = null;
 
         if( !uid || !( $store['userPositionLocal'][uid] )){
             // 离开用户为undefined
@@ -715,9 +715,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         }
 
         for( let i=0;i<5; i++ ){
-            let gold = new Gold();
-            gold.anchorOffsetX = gold.width/2;
-            gold.anchorOffsetY = gold.height/2;
+            let gold = this.OthercoinArr[i] ;
+            // let gold = new Gold();
+            // gold.anchorOffsetX = gold.width/2;
+            // gold.anchorOffsetY = gold.height/2;
             gold.x = $store['coin_local'][start].x ;
             gold.y = $store['coin_local'][start].y ;
             goldArr.push( gold );
@@ -741,57 +742,95 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         }
         newEndLocal_y =  $store['userPositionObj'][newEndNum].y + 72;
 
+        egret.Tween.get( goldArr[0] ).to({
+            x: newEndLocal_x ,
+            y: newEndLocal_y ,
+        }, 300 )
         setTimeout(()=>{
-            egret.Tween.get( goldArr[0] ).to({
+            egret.Tween.get( goldArr[1] ).to({
                 x: newEndLocal_x ,
                 y: newEndLocal_y ,
-            }, 300 ).call(()=>{
-                if( goldArr[0] && goldArr[0].parent ){
-                    this.removeChild( goldArr[0] )
+            }, 350 )
+        },80)
+        setTimeout(()=>{
+            this.cleanAllText() ;
+            egret.Tween.get( goldArr[2] ).to({
+                x: newEndLocal_x ,
+                y: newEndLocal_y ,
+            }, 400 )
+        },130)            
+        setTimeout(()=>{
+            egret.Tween.get( goldArr[3] ).to({
+                x: newEndLocal_x ,
+                y: newEndLocal_y ,
+            }, 500 )
+        },200)
+        setTimeout(()=>{
+            egret.Tween.get( goldArr[4] ).to({
+                x: newEndLocal_x ,
+                y: newEndLocal_y ,
+            }, 500 ).call(()=>{
+                for( let i = 0;i<5;i++  ){
+                    if( goldArr[i] && goldArr[i].parent ){
+                        this.removeChild( goldArr[i] )
+                        goldArr[i] = null ;
+                    }
                 }
             })
-            setTimeout(()=>{
-                egret.Tween.get( goldArr[1] ).to({
-                    x: newEndLocal_x ,
-                    y: newEndLocal_y ,
-                }, 350 ).call(()=>{
-                    if( goldArr[1] && goldArr[1].parent ){
-                        this.removeChild( goldArr[1] )
-                    }
-                })
-            },80)
-            setTimeout(()=>{
-                this.cleanAllText() ;
-                egret.Tween.get( goldArr[2] ).to({
-                    x: newEndLocal_x ,
-                    y: newEndLocal_y ,
-                }, 400 ).call(()=>{
-                    if( goldArr[2] && goldArr[2].parent ){
-                        this.removeChild( goldArr[2] )
-                    }
-                })
-            },130)            
-            setTimeout(()=>{
-                egret.Tween.get( goldArr[3] ).to({
-                    x: newEndLocal_x ,
-                    y: newEndLocal_y ,
-                }, 500 ).call(()=>{
-                    if( goldArr[3] && goldArr[3].parent ){
-                        this.removeChild( goldArr[3] )
-                    }
-                })
-            },200)
-            setTimeout(()=>{
-                egret.Tween.get( goldArr[4] ).to({
-                    x: newEndLocal_x ,
-                    y: newEndLocal_y ,
-                }, 500 ).call(()=>{
-                    if( goldArr[4] && goldArr[4].parent ){
-                        this.removeChild( goldArr[4] )
-                    }
-                })
-            },250)            
-        },0)
+        },250)            
+
+
+        // setTimeout(()=>{
+        //     egret.Tween.get( goldArr[0] ).to({
+        //         x: newEndLocal_x ,
+        //         y: newEndLocal_y ,
+        //     }, 300 ).call(()=>{
+        //         if( goldArr[0] && goldArr[0].parent ){
+        //             this.removeChild( goldArr[0] )
+        //         }
+        //     })
+        //     setTimeout(()=>{
+        //         egret.Tween.get( goldArr[1] ).to({
+        //             x: newEndLocal_x ,
+        //             y: newEndLocal_y ,
+        //         }, 350 ).call(()=>{
+        //             if( goldArr[1] && goldArr[1].parent ){
+        //                 this.removeChild( goldArr[1] )
+        //             }
+        //         })
+        //     },80)
+        //     setTimeout(()=>{
+        //         this.cleanAllText() ;
+        //         egret.Tween.get( goldArr[2] ).to({
+        //             x: newEndLocal_x ,
+        //             y: newEndLocal_y ,
+        //         }, 400 ).call(()=>{
+        //             if( goldArr[2] && goldArr[2].parent ){
+        //                 this.removeChild( goldArr[2] )
+        //             }
+        //         })
+        //     },130)            
+        //     setTimeout(()=>{
+        //         egret.Tween.get( goldArr[3] ).to({
+        //             x: newEndLocal_x ,
+        //             y: newEndLocal_y ,
+        //         }, 500 ).call(()=>{
+        //             if( goldArr[3] && goldArr[3].parent ){
+        //                 this.removeChild( goldArr[3] )
+        //             }
+        //         })
+        //     },200)
+        //     setTimeout(()=>{
+        //         egret.Tween.get( goldArr[4] ).to({
+        //             x: newEndLocal_x ,
+        //             y: newEndLocal_y ,
+        //         }, 500 ).call(()=>{
+        //             if( goldArr[4] && goldArr[4].parent ){
+        //                 this.removeChild( goldArr[4] )
+        //             }
+        //         })
+        //     },250)            
+        // },0)
     }
 
     /**
@@ -849,44 +888,50 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
     private create_other_Coin( start_x:any , start_y:any , end_x:any , end_y:any ,currArr:any , moreCoin:Boolean){
         let goldArr = [] ;
         if( !moreCoin ){
-            let gold = new Gold();
-            gold.anchorOffsetX = gold.width/2;
-            gold.anchorOffsetY = gold.height/2;
+            // let gold = new Gold();
+            // gold.anchorOffsetX = gold.width/2;
+            // gold.anchorOffsetY = gold.height/2;
+            let gold = this.OthercoinArr[ this.currIndex ] ;
             gold.x = start_x ;
             gold.y = start_y ;
             this.addChild(gold);
             currArr.push( gold ) ;
             egret.Tween.get( gold ).to( { x: end_x,y: end_y }, 300 );
+            if( this.currIndex >= 59 ){
+                this.currIndex = 0;
+            }else{
+                this.currIndex++ ;
+            }
         }else{
             // more  飞金币
             for( let i=0;i<3; i++ ){
-                let gold = new Gold();
-                gold.anchorOffsetX = gold.width/2;
-                gold.anchorOffsetY = gold.height/2;
+                let gold = this.OthercoinArr[i] ;
+                // let gold = new Gold();
+                // gold.anchorOffsetX = gold.width/2;
+                // gold.anchorOffsetY = gold.height/2;
                 gold.x = start_x ;
                 gold.y = start_y ;
                 currArr.push( gold );
                 goldArr.push( gold );
                 this.addChild(gold);
             }
+
+            egret.Tween.get( goldArr[0] ).to({
+                x: parseInt( end_x ) + 2 ,
+                y: parseInt( end_y ) + 3 ,
+            }, 500 )
             setTimeout(()=>{
-                egret.Tween.get( goldArr[0] ).to({
-                    x: parseInt( end_x ) + 2 ,
-                    y: parseInt( end_y ) + 3 ,
+                egret.Tween.get( goldArr[1] ).to({
+                    x: parseInt( end_x ) + 6 ,
+                    y: parseInt( end_y ) + 8 ,
+                }, 500)
+            },80)
+            setTimeout(()=>{
+                egret.Tween.get( goldArr[2] ).to({
+                    x: parseInt( end_x ) - 6 ,
+                    y: parseInt( end_y ) - 8 ,
                 }, 500 )
-                setTimeout(()=>{
-                    egret.Tween.get( goldArr[1] ).to({
-                        x: parseInt( end_x ) + 6 ,
-                        y: parseInt( end_y ) + 8 ,
-                    }, 500)
-                },80)
-                setTimeout(()=>{
-                    egret.Tween.get( goldArr[2] ).to({
-                        x: parseInt( end_x ) - 6 ,
-                        y: parseInt( end_y ) - 8 ,
-                    }, 500 )
-                },180 )
-            },0)
+            },180 )
 
         }
     }
@@ -898,19 +943,19 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
      */
     private other_Coin( matchid:string , selection:string , uidLocal:string , bet_golds:string ){
 
-        let $store = window['store'];
-        let currFieldStr = '';
-        let currFieldLocalStr = '';
+        let $store = window['store'] ,
+            currFieldStr = '' ,
+            currFieldLocalStr = '',
 
-        let newUser_x = null ;
-        let newUser_y = null ;
+            newUser_x = null ,
+            newUser_y = null ,
 
-        let newField_x = null ;
-        let newField_y = null ;
+            newField_x = null ,
+            newField_y = null ,
 
-        let $store_coinNum = $store['coin_Num'];  
+            $store_coinNum = $store['coin_Num'] ,
 
-        let moreCoin = false;   
+            moreCoin = false;   
 
         if( parseInt ( bet_golds ) >= 100000 ){
             moreCoin = true ;  // 是否按等级投注更多金币

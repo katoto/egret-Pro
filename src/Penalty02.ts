@@ -84,18 +84,18 @@ class Penalty02 extends eui.UILayer {
      */
 
     async movePenalty( penaltyArr:any , matchid:string, score:string ,footIndex ){
-        let len = penaltyArr.length ;
-        let $store = window['store'] ;
+        let len = penaltyArr.length  ,
+            $store = window['store'] ,
 
-        let penaltyStr_p = 'penalty_point' ;
-        let bgMaskStr_p = 'bgMask_point' ;  
+            penaltyStr_p = 'penalty_point' ,
+            bgMaskStr_p = 'bgMask_point' ,
 
-        let currFieldStr = '' ;
-        let topNum = 0 ;
-        let botNum = 0 ;
-        let colectPenalt = [] // 收集 点球 ，为了remove 
-        let leftOrRig = '' ;
-        let basescore = parseInt( score.slice(0,1));
+            currFieldStr = '' ,
+            topNum = 0 ,
+            botNum = 0 ,
+            colectPenalt = [] , // 收集 点球 ，为了remove 
+            leftOrRig = '' ,
+            basescore = parseInt( score.slice(0,1));
 
         penaltyStr_p = 'penalty_point'+footIndex;
         bgMaskStr_p = 'bgMask_point'+footIndex  ; 

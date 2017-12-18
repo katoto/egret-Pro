@@ -580,9 +580,9 @@ this.localObj['rightTeam41'] = {
      *  @param 1 移动 4-2  2  2-1 
      */
     private upPromotionMsg( pre_result:any ,move:string ){
-        let score_num = 0 ;
-        let firstWinName = [] ;
-        let secondWinName = [] ;
+        let score_num = 0 ,
+            firstWinName = [] ,
+            secondWinName = [] ;
 
         if( pre_result ){
             // 清除之前的数据
@@ -786,15 +786,15 @@ this.localObj['rightTeam41'] = {
      * 
      */
     private clearPromoMsg(){
-        let baseLeftTeam = 'leftTeam4' ;
-        let baseRightTeam = 'rightTeam4' ;
-        let baseTeamF = 'teamF4' ;
-        let baseProWin = 'proWin4' ;
+        let baseLeftTeam = 'leftTeam4' ,
+            baseRightTeam = 'rightTeam4' ,
+            baseTeamF = 'teamF4' ,
+            baseProWin = 'proWin4' ,
 
-        let baseTeamF2 = 'teamF2' ;
-        let baseProWin2 = 'proWin2' ;
-        let baseLeftTeam2 = 'leftTeam2' ;
-        let baseRightTeam2 = 'rightTeam2' ;
+            baseTeamF2 = 'teamF2' ,
+            baseProWin2 = 'proWin2' ,
+            baseLeftTeam2 = 'leftTeam2' ,
+            baseRightTeam2 = 'rightTeam2' ;
 
         for( let i=1;i<=4;i++ ){
             if( this[ baseLeftTeam + i ] ){

@@ -259,8 +259,8 @@ this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid 
      */
     private initStage(){
         // uid  还得有个uid ..
-        let $store = window['store'];
-        let $urlData = window['urlData'];
+        let $store = window['store'] ,
+            $urlData = window['urlData'];
         // 桌子缩放计算 
         // $store.scale = 0.91;
         // 取ck 按src+ck 的形式，防止串号 = 替换 $
@@ -312,16 +312,16 @@ this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid 
      *  onReceiveMess  websock 接收消息
      */
     private onReceiveMess(e:egret.Event):void{
-        let self = this;
-        let $store = window['store'];
+        let self = this ,
+            $store = window['store'] ,
         // event.updateAfterEvent();  //  什么时候进行强制刷新 ??????手机上用户立场 舞台不刷新 
-        let msg = this.webSocket.readUTF();
+            msg = this.webSocket.readUTF();
         if(~msg.indexOf('You said')|| !~msg.indexOf('{')){
             // console.log(msg)
         }else{
             //  后台数据  分发
-            let msgObj = JSON.parse( msg );
-            let $msgObjBody = msgObj.body;
+            let msgObj = JSON.parse( msg ),
+                $msgObjBody = msgObj.body;
 
             switch ( msgObj.messageid ) {
                     // 进场的数据 2000  （时间进度分析）
@@ -440,10 +440,10 @@ this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid 
 
                                     // 处理层级
                                     if( $store.userPositionLocal ){
-                                        let item = null ;
-                                        let choseUserImg = 'userImg';
-                                        let bigIndex = 0;
-                                        let bigUserImg = null ;
+                                        let item = null ,
+                                            choseUserImg = 'userImg',
+                                            bigIndex = 0 ,
+                                            bigUserImg = null ;
 
                                         for( item  in $store.userPositionLocal ){
                                             if( $store.userPositionLocal[item] ){
@@ -582,10 +582,10 @@ this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid 
 
                         // 处理层级
                         if( $store.userPositionLocal ){
-                            let item = null ;
-                            let choseUserImg = 'userImg';
-                            let bigIndex = 0;
-                            let bigUserImg = null ;
+                            let item = null ,
+                                choseUserImg = 'userImg',
+                                bigIndex = 0 ,
+                                bigUserImg = null ;
                             for( item  in $store.userPositionLocal ){
                                 if( $store.userPositionLocal[item] ){
                                     if( $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) > bigIndex ){
@@ -642,10 +642,10 @@ this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid 
 
                     // 处理层级
                     if( $store.userPositionLocal ){
-                        let item = null ;
-                        let choseUserImg = 'userImg';
-                        let bigIndex = 0;
-                        let bigUserImg = null ;
+                        let item = null ,
+                            choseUserImg = 'userImg',
+                            bigIndex = 0,
+                            bigUserImg = null ;
                         for( item  in $store.userPositionLocal ){
                             if( $store.userPositionLocal[item] ){
                                 if( $store['$bgCourtWrap']['getChildIndex']( this.cnt[ choseUserImg +  $store.userPositionLocal[item] ] ) > bigIndex ){
@@ -673,10 +673,10 @@ this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid 
                         $store['unableClick'] = false ;
                         // 处理层级
                         if( $store.userPositionLocal ){
-                            let item = null ;
-                            let choseUserImg = 'userImg';
-                            let bigIndex = 0;
-                            let bigUserImg = null ;
+                            let item = null ,
+                                choseUserImg = 'userImg',
+                                bigIndex = 0 ,
+                                bigUserImg = null ;
                             
                             for( item  in $store.userPositionLocal ){
                                 if( $store.userPositionLocal[item] ){
@@ -960,10 +960,10 @@ this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid 
         let $store = window['store'] ;
         if( this.$children && this.$children.length ){
             // 处理层级
-            let item = null ;
-            let choseUserImg = 'userImg';
-            let bigIndex = this['getChildIndex']( this.top ) ;
-            let bigUserImg = null ;
+            let item = null ,
+                choseUserImg = 'userImg',
+                bigIndex = this['getChildIndex']( this.top ) ,
+                bigUserImg = null ;
             for( item  in this.$children ){
                 if( this.$children[item] && this.top ){
                     if( this['getChildIndex']( this.$children[item] ) > bigIndex ){
