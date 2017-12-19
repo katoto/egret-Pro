@@ -218,6 +218,7 @@ class Cnt extends egret.DisplayObjectContainer{
             }           
             
         }
+        
     }
 
     /**

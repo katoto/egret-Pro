@@ -612,7 +612,7 @@ this.webSocket.connectByUrl("ws://106.75.167.151:7699/vguess?uid="+ roomMsg.uid 
                 break;
                 case '2002':
                     // 准备 prepare_bet   出现开始竞猜  
-
+                    this.cnt.cnt_removeAllWinIcon();
                     if( $msgObjBody ){
                         $store['orderObj']['expect'] = $msgObjBody.expect ;
                         $store['orderObj']['stageid'] = $msgObjBody.stageid ;
