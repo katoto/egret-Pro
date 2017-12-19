@@ -55,9 +55,9 @@ class Cnt extends egret.DisplayObjectContainer{
     private toastBg:egret.Bitmap ;
 
     private drawCnt(Width,Height,anWidth,anHeight){
-        let $store = window['store'] ;
+        let $store = window['store'] ,
         // 内容区
-        let wrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
+            wrap:egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
         wrap.width = Width;
         wrap.height = Height; 
         wrap.x = 0;
@@ -830,7 +830,8 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
             len = $store['user_info'].length ,
             newUserInfo = [] ,
             firstUser = null ,
-            bigIndex = 0 ;
+            bigIndex = 0 ,
+            i ;
 
         if( this.fieldContain && this.bgCourtWrap  ){
             bigIndex = this.bgCourtWrap.getChildIndex( this.fieldContain ) ;
@@ -840,7 +841,7 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
             len = 0
         }
 
-        for( let i =0 ;i< len ;i++ ){
+        for( i =0 ;i< len ;i++ ){
             if(  $store['user_info'][i].uid === $store['env_variable']['uid'] ){
                 firstUser = $store['user_info'][i];
             }else{
@@ -853,14 +854,14 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
         $store['user_info'] = newUserInfo ;
 
         $store['emptyUserPosition'] = [];
-        for( let i=0;i<9 ; i++ ){
+        for( i=0;i<9 ; i++ ){
             if( i >=len ){
                 $store['emptyUserPosition'].push( i+1 )
             }
         }
         let newIndex = 0 ,
             newObj = null ;
-        for(let i=0; i<len ;i++){
+        for( i=0; i<len ;i++){
             if( $store['user_info'][i] && $store['user_info'][i].photo === '' ){
                 $store['user_info'][i].photo = 'http://img.choopaoo.com/esun/upload/be/83/be837ad8049611e797ef.png'
             }
@@ -890,14 +891,15 @@ let newScore = (parseInt( allResult[i].score[0] ) + parseInt( allResult[i].spotk
 
     // 用户 进入  new
     private addUserImage( username:string , photo:string , total:string , uid:string ){
-        let $store = window['store'] ;
-        var userI = $store['emptyUserPosition'].shift() ;
+        let $store = window['store'] ,
+            userI = $store['emptyUserPosition'].shift() ,
+            choseUserImg = 'userImg' + ( userI ) ;
+            
         if( !userI ){
             console.error('无空闲房间')
             return false;
         }
         $store['userPositionLocal'][uid] = userI
-        var choseUserImg = 'userImg' + ( userI )
         // console.log( choseUserImg )
         if( photo === '' ){
             photo = 'http://img.choopaoo.com/esun/upload/be/83/be837ad8049611e797ef.png'
