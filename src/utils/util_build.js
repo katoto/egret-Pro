@@ -132,8 +132,8 @@ function formateGold(num) {
  */
 function formateName(name) {
     if (typeof name === 'string') {
-        if (name.length >= 5) {
-            return name.slice(0, 5) + '...';
+        if (name.length >= 4) {
+            return name.slice(0, 4) + '...';
         }
         return name;
     }

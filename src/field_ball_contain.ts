@@ -715,10 +715,10 @@ class Field_ball_contain extends egret.DisplayObjectContainer{
         }
 
         for( let i=0;i<5; i++ ){
-            let gold = this.OthercoinArr[i] ;
-            // let gold = new Gold();
-            // gold.anchorOffsetX = gold.width/2;
-            // gold.anchorOffsetY = gold.height/2;
+            // let gold = this.OthercoinArr[i] ;
+            let gold = new Gold();
+            gold.anchorOffsetX = gold.width/2;
+            gold.anchorOffsetY = gold.height/2;
             gold.x = $store['coin_local'][start].x ;
             gold.y = $store['coin_local'][start].y ;
             goldArr.push( gold );
