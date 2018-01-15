@@ -21,7 +21,12 @@ class Top extends egret.DisplayObjectContainer{
         this.addChild(this.btnBack);
         this.btnBack.touchEnabled = true;
         this.btnBack.addEventListener(egret.TouchEvent.TOUCH_TAP,()=>{
-            window.history.back()
+            if( $store['env_variable'].backUrl ){
+                window.location.href = document.referrer ;
+            }else{
+                window.history.back();
+            }
+
         },this)
 
         //    左上角标题

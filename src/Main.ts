@@ -243,6 +243,8 @@ class Main extends egret.DisplayObjectContainer {
                         this.webSocket.addEventListener( egret.Event.CLOSE ,this.onCloseSock ,this );
 
 this.webSocket.connectByUrl("ws://crazybet.choopaoo.com:7699/vguess?uid="+ roomMsg.uid +'&roomid='+roomMsg.roomid +'&port='+roomMsg.port+'&node='+roomMsg.node+'&ip='+roomMsg.ip+'&create_time='+roomMsg.create_time );
+// this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&roomid='+roomMsg.roomid +'&port='+roomMsg.port+'&node='+roomMsg.node+'&ip='+roomMsg.ip+'&create_time='+roomMsg.create_time );
+
 
                     }catch(e){
                         alert('websock error')
@@ -261,6 +263,7 @@ this.webSocket.connectByUrl("ws://crazybet.choopaoo.com:7699/vguess?uid="+ roomM
         // uid  还得有个uid ..
         let $store = window['store'] ,
             $urlData = window['urlData'];
+
         // 桌子缩放计算 
         // $store.scale = 0.91;
         // 取ck 按src+ck 的形式，防止串号 = 替换 $
@@ -279,6 +282,9 @@ this.webSocket.connectByUrl("ws://crazybet.choopaoo.com:7699/vguess?uid="+ roomM
             }
             if( $urlData.uid ){
                 $store['env_variable'].uid = $urlData.uid ;
+            }
+            if( $urlData.backUrl ){
+                 $store['env_variable'].backUrl = $urlData.backUrl ;
             }
         }
 
@@ -919,6 +925,7 @@ this.webSocket.connectByUrl("ws://crazybet.choopaoo.com:7699/vguess?uid="+ roomM
 
 this.webSocket.connectByUrl("ws://crazybet.choopaoo.com:7699/vguess?uid="+ roomMsg.uid +'&roomid='+roomMsg.roomid +'&port='+roomMsg.port+'&node='+roomMsg.node+'&ip='+roomMsg.ip+'&create_time='+roomMsg.create_time );
 
+// this.webSocket.connectByUrl("ws://10.0.1.41:9000/vguess?uid="+ roomMsg.uid +'&roomid='+roomMsg.roomid +'&port='+roomMsg.port+'&node='+roomMsg.node+'&ip='+roomMsg.ip+'&create_time='+roomMsg.create_time );
                     }catch(e){
                         alert('websocket error')
                         console.error('websocket error')
@@ -1001,7 +1008,10 @@ this.webSocket.connectByUrl("ws://crazybet.choopaoo.com:7699/vguess?uid="+ roomM
 window['store'] = {
     orderDomain:'http://crazybet.choopaoo.com:7899',
     initDomain:'http://crazybet.choopaoo.com:7799',
+
+    // orderDomain:'http://10.0.1.41:9899',
     // initDomain:'http://10.0.1.41:2332',
+
     isAgainConnect: 1 , // 用于sock 重新连
 
     $main:null,
@@ -1024,6 +1034,7 @@ window['store'] = {
         ck : null ,
         uid : null ,
         platform : null ,
+        backUrl: null,
     },
     scale: 1,  // 桌子缩放
     userPosition:[],  //  随机数组
