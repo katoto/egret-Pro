@@ -1,26 +1,17 @@
 // class Field_ball extends egret.DisplayObjectContainer{
-var __reflect = (this && this.__reflect) || function (p, c, t) {
-    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var Field_ball = (function (_super) {
     __extends(Field_ball, _super);
     // 设置锚点和x值  头像 队名 赔率 （  感觉得设置成 修改类的方式  ） ，这里加了一个参数bgUrl，用来控制不同赛场的背景
     function Field_ball(bgUrl) {
-        var _this = _super.call(this) || this;
-        _this.anchorOffsetX = 242.5;
-        _this.x = window['store']['stage_Width'] / 2;
-        _this.drawField(bgUrl);
-        return _this;
+        _super.call(this);
+        this.anchorOffsetX = 242.5;
+        this.x = window['store']['stage_Width'] / 2;
+        this.drawField(bgUrl);
     }
     Field_ball.prototype.drawField = function (bgUrl) {
         var court = new egret.Bitmap(RES.getRes(bgUrl));
@@ -301,7 +292,6 @@ var Field_ball = (function (_super) {
             this.allLeftCoin.textAlign = egret.HorizontalAlign.CENTER;
             this.addChild(this.goldItems_left02);
             this.addChild(this.allLeftCoin);
-            // this.setChildIndex( this.allLeftCoin , this.getChildIndex( this.goldItems_left ))
         }
     };
     //  创建 右边 收起的类
@@ -328,7 +318,6 @@ var Field_ball = (function (_super) {
             this.allRightCoin.textAlign = egret.HorizontalAlign.CENTER;
             this.addChild(this.goldItems_right02);
             this.addChild(this.allRightCoin);
-            // this.setChildIndex( this.allLeftCoin , this.getChildIndex( this.goldItems_left ))
         }
     };
     // 更新 自己投注的数值 (判断是否有该事物 left)
@@ -438,5 +427,3 @@ var Field_ball = (function (_super) {
     };
     return Field_ball;
 }(eui.UILayer));
-__reflect(Field_ball.prototype, "Field_ball");
-//# sourceMappingURL=footballField.js.map

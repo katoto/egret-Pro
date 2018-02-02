@@ -22,7 +22,15 @@ class Top extends egret.DisplayObjectContainer{
         this.btnBack.touchEnabled = true;
         this.btnBack.addEventListener(egret.TouchEvent.TOUCH_TAP,()=>{
             if( $store['env_variable'].backUrl ){
-                window.location.href = document.referrer ;
+                try{
+                    if( $store['env_variable'].src === 'qqsd' ){
+                        window.history.back();
+                    }else{
+                        window.location.href = document.referrer ;
+                    }
+                }catch(e){
+                    window.history.back();
+                }
             }else{
                 window.history.back();
             }

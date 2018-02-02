@@ -113,7 +113,12 @@ class Pop02Out extends egret.DisplayObjectContainer{
      *  websocket error 函数
      */
     private socketErr_Fn(){
-        window.location.reload() ;
+        try{
+            window.location.reload() ;
+        }catch(e){
+            window.location.reload() ;
+            alert('reload error');
+        }
     }
 
     /**
