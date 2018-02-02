@@ -11,9 +11,9 @@
 
 ![Image text](https://raw.githubusercontent.com/katoto/crazyOfficial/master/projectImg/9.png)
 ![Image text](https://raw.githubusercontent.com/katoto/crazyOfficial/master/projectImg/10.png)
-![Image text](https://raw.githubusercontent.com/katoto/egret-Pro/master/proImg/1.jpg)
-![Image text](https://raw.githubusercontent.com/katoto/egret-Pro/master/proImg/2.jpg)
-![Image text](https://raw.githubusercontent.com/katoto/egret-Pro/master/proImg/3.jpg)
+![Image text](https://raw.githubusercontent.com/katoto/egret-Pro/master/ProImg/1.jpg)
+![Image text](https://raw.githubusercontent.com/katoto/egret-Pro/master/ProImg/2.jpg)
+![Image text](https://raw.githubusercontent.com/katoto/egret-Pro/master/ProImg/3.jpg)
 ![Image text](https://raw.githubusercontent.com/katoto/crazyOfficial/master/projectImg/8.png)
 
 
